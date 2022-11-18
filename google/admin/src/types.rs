@@ -183,8 +183,8 @@ pub struct Asps {
 }
 
 /**
- * Message severity
- */
+* Message severity
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Severity {
     #[serde(rename = "SEVERITY_ERROR")]
@@ -203,7 +203,7 @@ pub enum Severity {
 
 impl std::fmt::Display for Severity {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Severity::SeverityError => "SEVERITY_ERROR",
             Severity::SeverityInfo => "SEVERITY_INFO",
             Severity::SeverityUnspecified => "SEVERITY_UNSPECIFIED",
@@ -1695,8 +1695,8 @@ pub struct CustomerPostalAddress {
 }
 
 /**
- * Indicates the command state.
- */
+* Indicates the command state.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum State {
     #[serde(rename = "ACKED_BY_CLIENT")]
@@ -1721,7 +1721,7 @@ pub enum State {
 
 impl std::fmt::Display for State {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             State::AckedByClient => "ACKED_BY_CLIENT",
             State::Cancelled => "CANCELLED",
             State::ExecutedByClient => "EXECUTED_BY_CLIENT",
@@ -1748,8 +1748,8 @@ impl State {
 }
 
 /**
- * The type of the command.
- */
+* The type of the command.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "COMMAND_TYPE_UNSPECIFIED")]
@@ -1772,7 +1772,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::CommandTypeUnspecified => "COMMAND_TYPE_UNSPECIFIED",
             Type::Reboot => "REBOOT",
             Type::RemotePowerwash => "REMOTE_POWERWASH",
@@ -1861,8 +1861,8 @@ pub struct DirectoryChromeosdevicesCommand {
 }
 
 /**
- * The result of the command.
- */
+* The result of the command.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Result {
     #[serde(rename = "COMMAND_RESULT_TYPE_UNSPECIFIED")]
@@ -1881,7 +1881,7 @@ pub enum Result {
 
 impl std::fmt::Display for Result {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Result::CommandResultTypeUnspecified => "COMMAND_RESULT_TYPE_UNSPECIFIED",
             Result::Failure => "FAILURE",
             Result::Ignored => "IGNORED",
@@ -2136,8 +2136,8 @@ pub struct Domains2 {
 pub struct Empty {}
 
 /**
- * Canonical code for why the update failed to apply.
- */
+* Canonical code for why the update failed to apply.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ErrorCode {
     #[serde(rename = "ABORTED")]
@@ -2182,7 +2182,7 @@ pub enum ErrorCode {
 
 impl std::fmt::Display for ErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ErrorCode::Aborted => "ABORTED",
             ErrorCode::AlreadyExists => "ALREADY_EXISTS",
             ErrorCode::Cancelled => "CANCELLED",
@@ -5468,8 +5468,8 @@ pub struct VerificationCodes {
 }
 
 /**
- * V1 error format.
- */
+* V1 error format.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Xgafv {
     #[serde(rename = "1")]
@@ -5484,7 +5484,7 @@ pub enum Xgafv {
 
 impl std::fmt::Display for Xgafv {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Xgafv::One => "1",
             Xgafv::Two => "2",
             Xgafv::Noop => "",
@@ -5506,8 +5506,8 @@ impl Xgafv {
 }
 
 /**
- * Data format for response.
- */
+* Data format for response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
@@ -5524,7 +5524,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Media => "media",
             Alt::Proto => "proto",
@@ -5547,8 +5547,8 @@ impl Alt {
 }
 
 /**
- * Device property to use for sorting results.
- */
+* Device property to use for sorting results.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderBy {
     #[serde(rename = "annotatedLocation")]
@@ -5573,7 +5573,7 @@ pub enum OrderBy {
 
 impl std::fmt::Display for OrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderBy::AnnotatedLocation => "annotatedLocation",
             OrderBy::AnnotatedUser => "annotatedUser",
             OrderBy::LastSync => "lastSync",
@@ -5600,8 +5600,8 @@ impl OrderBy {
 }
 
 /**
- * Restrict information returned to a set of selected fields.
- */
+* Restrict information returned to a set of selected fields.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Projection {
     #[serde(rename = "BASIC")]
@@ -5616,7 +5616,7 @@ pub enum Projection {
 
 impl std::fmt::Display for Projection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Projection::Basic => "BASIC",
             Projection::Full => "FULL",
             Projection::Noop => "",
@@ -5638,8 +5638,8 @@ impl Projection {
 }
 
 /**
- * Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
- */
+* Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortOrder {
     #[serde(rename = "ASCENDING")]
@@ -5654,7 +5654,7 @@ pub enum SortOrder {
 
 impl std::fmt::Display for SortOrder {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortOrder::Ascending => "ASCENDING",
             SortOrder::Descending => "DESCENDING",
             SortOrder::Noop => "",
@@ -5676,8 +5676,8 @@ impl SortOrder {
 }
 
 /**
- * Device property to use for sorting results.
- */
+* Device property to use for sorting results.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryMobiledevicesListOrderBy {
     #[serde(rename = "deviceId")]
@@ -5704,7 +5704,7 @@ pub enum DirectoryMobiledevicesListOrderBy {
 
 impl std::fmt::Display for DirectoryMobiledevicesListOrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryMobiledevicesListOrderBy::DeviceId => "deviceId",
             DirectoryMobiledevicesListOrderBy::Email => "email",
             DirectoryMobiledevicesListOrderBy::LastSync => "lastSync",
@@ -5732,8 +5732,8 @@ impl DirectoryMobiledevicesListOrderBy {
 }
 
 /**
- * Whether to return all sub-organizations or just immediate children.
- */
+* Whether to return all sub-organizations or just immediate children.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryOrgunitsListType {
     #[serde(rename = "all")]
@@ -5748,7 +5748,7 @@ pub enum DirectoryOrgunitsListType {
 
 impl std::fmt::Display for DirectoryOrgunitsListType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryOrgunitsListType::All => "all",
             DirectoryOrgunitsListType::Children => "children",
             DirectoryOrgunitsListType::Noop => "",
@@ -5770,8 +5770,8 @@ impl DirectoryOrgunitsListType {
 }
 
 /**
- * Source from which Building.coordinates are derived.
- */
+* Source from which Building.coordinates are derived.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CoordinatesSource {
     #[serde(rename = "CLIENT_SPECIFIED")]
@@ -5788,7 +5788,7 @@ pub enum CoordinatesSource {
 
 impl std::fmt::Display for CoordinatesSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CoordinatesSource::ClientSpecified => "CLIENT_SPECIFIED",
             CoordinatesSource::ResolvedFromAddress => "RESOLVED_FROM_ADDRESS",
             CoordinatesSource::SourceUnspecified => "SOURCE_UNSPECIFIED",
@@ -5811,8 +5811,8 @@ impl CoordinatesSource {
 }
 
 /**
- * Column to use for sorting results
- */
+* Column to use for sorting results
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryGroupsListOrderBy {
     #[serde(rename = "email")]
@@ -5825,7 +5825,7 @@ pub enum DirectoryGroupsListOrderBy {
 
 impl std::fmt::Display for DirectoryGroupsListOrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryGroupsListOrderBy::Email => "email",
             DirectoryGroupsListOrderBy::Noop => "",
             DirectoryGroupsListOrderBy::FallthroughString => "*",
@@ -5846,8 +5846,8 @@ impl DirectoryGroupsListOrderBy {
 }
 
 /**
- * Event on which subscription is intended (if subscribing)
- */
+* Event on which subscription is intended (if subscribing)
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Event {
     #[serde(rename = "add")]
@@ -5868,7 +5868,7 @@ pub enum Event {
 
 impl std::fmt::Display for Event {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Event::Add => "add",
             Event::Delete => "delete",
             Event::MakeAdmin => "makeAdmin",
@@ -5893,8 +5893,8 @@ impl Event {
 }
 
 /**
- * Property to use for sorting results.
- */
+* Property to use for sorting results.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryUsersListOrderBy {
     #[serde(rename = "email")]
@@ -5911,7 +5911,7 @@ pub enum DirectoryUsersListOrderBy {
 
 impl std::fmt::Display for DirectoryUsersListOrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryUsersListOrderBy::Email => "email",
             DirectoryUsersListOrderBy::FamilyName => "familyName",
             DirectoryUsersListOrderBy::GivenName => "givenName",
@@ -5934,8 +5934,8 @@ impl DirectoryUsersListOrderBy {
 }
 
 /**
- * What subset of fields to fetch for this user.
- */
+* What subset of fields to fetch for this user.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryUsersListProjection {
     #[serde(rename = "basic")]
@@ -5952,7 +5952,7 @@ pub enum DirectoryUsersListProjection {
 
 impl std::fmt::Display for DirectoryUsersListProjection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryUsersListProjection::Basic => "basic",
             DirectoryUsersListProjection::Custom => "custom",
             DirectoryUsersListProjection::Full => "full",
@@ -5975,8 +5975,8 @@ impl DirectoryUsersListProjection {
 }
 
 /**
- * Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
- */
+* Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ViewType {
     #[serde(rename = "admin_view")]
@@ -5991,7 +5991,7 @@ pub enum ViewType {
 
 impl std::fmt::Display for ViewType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ViewType::AdminView => "admin_view",
             ViewType::DomainPublic => "domain_public",
             ViewType::Noop => "",
@@ -6013,8 +6013,8 @@ impl ViewType {
 }
 
 /**
- * Events to watch for.
- */
+* Events to watch for.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DirectoryUsersAliasesListEvent {
     #[serde(rename = "add")]
@@ -6029,7 +6029,7 @@ pub enum DirectoryUsersAliasesListEvent {
 
 impl std::fmt::Display for DirectoryUsersAliasesListEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DirectoryUsersAliasesListEvent::Add => "add",
             DirectoryUsersAliasesListEvent::Delete => "delete",
             DirectoryUsersAliasesListEvent::Noop => "",

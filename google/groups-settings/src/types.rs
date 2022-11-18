@@ -623,8 +623,8 @@ pub struct Groups {
 }
 
 /**
- * Data format for the response.
- */
+* Data format for the response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "atom")]
@@ -639,7 +639,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Atom => "atom",
             Alt::Json => "json",
             Alt::Noop => "",

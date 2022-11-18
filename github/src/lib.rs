@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.2.0"
+//! octorust = "0.2.1"
 //! ```
 //!
 //! ## Basic example
@@ -47,13 +47,15 @@
 //! use octorust::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
-//!     String::from("user-agent-name"),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!   String::from("user-agent-name"),
+//!   Credentials::Token(
+//!     String::from("personal-access-token")
+//!   ),
 //! );
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.2.0/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.2.1/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -67,7 +69,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.2.0", features = ["httpcache"] }
+//! octorust = { version = "0.2.1", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -75,9 +77,9 @@
 //! Here is an example:
 //!
 //! ```
+//! use octorust::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::HttpCache;
-//! use octorust::{auth::Credentials, Client};
 //!
 //! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
@@ -86,7 +88,9 @@
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!     Credentials::Token(
+//!       String::from("personal-access-token")
+//!     ),
 //!     reqwest::Client::builder().build().unwrap(),
 //! );
 //!
@@ -94,9 +98,11 @@
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!     Credentials::Token(
+//!       String::from("personal-access-token")
+//!     ),
 //!     reqwest::Client::builder().build().unwrap(),
-//!     http_cache,
+//!     http_cache
 //! );
 //! ```
 //! ## Authenticating GitHub apps
@@ -108,12 +114,9 @@
 //! ```rust
 //! use std::env;
 //!
+//! use octorust::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::FileBasedCache;
-//! use octorust::{
-//!     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
-//!     Client,
-//! };
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -164,6 +167,8 @@
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
+//!
+#![allow(clippy::derive_partial_eq_without_eq)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -384,10 +389,9 @@ impl Client {
                 crate::auth::AuthenticationConstraint::JWT,
                 Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
             ) => Some(apptoken.jwt()),
-            (crate::auth::AuthenticationConstraint::JWT, creds) => {
+            (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
-                    "Request needs JWT authentication but only {:?} available",
-                    creds
+                    "Request needs JWT authentication but only a mismatched method is available"
                 );
                 None
             }
@@ -492,10 +496,6 @@ impl Client {
         }
 
         if let Some(body) = body {
-            log::debug!(
-                "body: {:?}",
-                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-            );
             req = req.body(body);
         }
         let response = req.send().await?;
@@ -522,10 +522,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {

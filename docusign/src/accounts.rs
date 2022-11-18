@@ -75,6 +75,7 @@ impl Accounts {
      * 		}
      * 	]
      * }
+     *
      * ```
      * If the request succeeds,
      * it returns a

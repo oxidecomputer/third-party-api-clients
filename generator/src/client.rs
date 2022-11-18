@@ -110,10 +110,9 @@ impl Client {
                 crate::auth::AuthenticationConstraint::JWT,
                 Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
             ) => Some(apptoken.jwt()),
-            (crate::auth::AuthenticationConstraint::JWT, creds) => {
+            (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
-                    "Request needs JWT authentication but only {:?} available",
-                    creds
+                    "Request needs JWT authentication but only a mismatched method is available"
                 );
                 None
             }
@@ -210,7 +209,6 @@ impl Client {
         }
 
         if let Some(body) = body {
-            log::debug!("body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
             req = req.body(body);
         }
         let response = req.send().await?;
@@ -237,7 +235,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!("Received successful response. Read payload.");
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
@@ -967,7 +965,7 @@ async fn request<Out>(
     let response_body = response.bytes().await?;
 
     if status.is_success() {{
-        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
         }} else {{
@@ -1010,7 +1008,7 @@ where
     let response_body = response.bytes().await?;
 
     if status.is_success() {{
-        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        log::debug!("Received successful response. Read payload.");
 
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
@@ -1063,7 +1061,6 @@ async fn post_form<Out>(
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
 
-    log::debug!("form: {{:?}}", form);
     req = req.multipart(form);
 
     let response = req.send().await?;
@@ -1073,7 +1070,7 @@ async fn post_form<Out>(
     let response_body = response.bytes().await?;
 
     if status.is_success() {{
-        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
         }} else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {{
@@ -1137,7 +1134,7 @@ async fn request_with_accept_mime<Out>(
     let response_body = response.bytes().await?;
 
     if status.is_success() {{
-        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
         }} else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {{
@@ -1221,7 +1218,7 @@ async fn request_with_mime<Out>(
     let response_body = response.bytes().await?;
 
     if status.is_success() {{
-        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
         }} else {{
@@ -1421,7 +1418,6 @@ async fn request_raw(
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
     if let Some(body) = body {{
-        log::debug!("body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
         req = req.body(body);
     }}
     Ok(req.send().await?)
@@ -1477,11 +1473,6 @@ async fn make_request(
     }}
 
     if let Some(body) = body {{
-        log::debug!(
-            "body: {{:?}}",
-            String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-        );
-
         req = req.body(body);
     }}
 

@@ -665,6 +665,7 @@ pub struct AccountSealProviders {
 }
 
 /// This resource provides information on the Standards Based Signature providers that have been provisioned for an account.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProviders {
     /**
@@ -1875,6 +1876,7 @@ pub struct Accounts {
 pub struct ApplianceInfo {}
 
 /// The `EmailArchive` resource provides methods for managing your email archive configuration, which consists of the BCC email address or addresses that you want to use to archive DocuSign emails. Each account can use up to five BCC email addresses for archiving purposes.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchive {
     /**
@@ -4736,6 +4738,7 @@ pub struct EnvelopeLocks {
 }
 
 /// All of the tabs associated with a recipient. Each property is a list of a type of tab.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeRecipientTabs {
     /**
@@ -6585,6 +6588,7 @@ pub struct Invoices {
 /// Use DocuSign eNotary to notarize documents digitally.
 /// Check the [DocuSign eNotary support documentation](https://support.docusign.com/en/guides/ndse-user-guide-enotary-resources)
 /// to see which jurisdictions are supported.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notary {
     /**
@@ -19222,6 +19226,7 @@ pub struct AccountSignatureDefinition {
 
 /// Contains information abotu the signature provider associated with the Identity Verification workflow.
 /// If empty, then this specific workflow is not intended for signers.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProvider {
     /**
@@ -20608,6 +20613,7 @@ pub struct AppStoreReceipt {
 /// A tab that allows the recipient to approve documents
 /// without placing a signature or initials on the
 /// document.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Approve {
     /**
@@ -26855,6 +26861,7 @@ pub struct CertifiedDelivery {
 }
 
 /// A tab that allows the recipient to select a yes/no (on/off) option.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Checkbox {
     /**
@@ -32899,6 +32906,7 @@ pub struct CommissionState {
 }
 
 /// A tab that displays the recipient's company name.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Company {
     /**
@@ -37264,6 +37272,7 @@ pub struct CustomSettingsInformation {
 /// particular date format enforced, DocuSign recommends using a
 /// Text tab with a validation pattern and a validation message
 /// to enforce the format.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Date {
     /**
@@ -39198,6 +39207,7 @@ pub struct Date {
 
 /// A tab that displays the date that the recipient signed the
 /// document.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateSigned {
     /**
@@ -40274,6 +40284,7 @@ pub struct DateStampProperties {
 /// A tab that allows the recipient the option of declining an
 /// envelope. If the recipient clicks the tab during the signing
 /// process, the envelope is voided.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Decline {
     /**
@@ -44057,6 +44068,7 @@ pub struct Editor {
 /// When getting information that includes
 /// this tab type, the original value of the tab when the
 /// associated envelope was sent is included in the response.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Email {
     /**
@@ -46102,6 +46114,7 @@ pub struct Email {
 
 /// A tab that displays the recipient's email as entered in the
 /// recipient information.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailAddress {
     /**
@@ -49215,6 +49228,7 @@ pub struct EnvelopeFormDataType {
 
 /// A tab that displays the envelope ID. Recipients cannot enter
 /// or change the information in this tab.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeId {
     /**
@@ -52847,6 +52861,7 @@ pub struct Filter {
 /// takes the recipient's name as entered in the recipient
 /// information, splits it into sections based on spaces and
 /// uses the first section as the first name.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FirstName {
     /**
@@ -54888,6 +54903,7 @@ pub struct FormDataItem {
 ///
 /// [calculatedfields]: https://support.docusign.com/en/guides/ndse-user-guide-calculated-fields
 /// [paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FormulaTab {
     /**
@@ -58624,6 +58640,7 @@ pub struct FormulaTab {
 }
 
 /// A tab that displays the recipient's full name.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullName {
     /**
@@ -59810,6 +59827,7 @@ pub struct IdCheckSecurityStep {
 /// see the [EnvelopeRecipients resource][resource].
 ///
 /// [resource]: https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipients#in-person-signer-recipient
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InPersonSigner {
     /**
@@ -61417,6 +61435,7 @@ pub struct InPersonSigner {
 
 /// A tab that allows the recipient to initial the document. May
 /// be optional.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InitialHere {
     /**
@@ -63201,6 +63220,7 @@ pub struct Jurisdiction {
 /// takes the recipient's name as entered in the recipient
 /// information, splits it into sections based on spaces and
 /// uses the last section as the last name.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LastName {
     /**
@@ -64373,6 +64393,7 @@ pub struct LastName {
 /// property contains a list of
 /// [`listItem`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/create/)
 /// objects to specify the selectable options.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct List {
     /**
@@ -67094,6 +67115,7 @@ pub struct MobileNotifierConfigurationInformation {
 
 /// Describes information
 /// about the `total` of a payment.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Money {
     /**
@@ -68402,6 +68424,7 @@ pub struct NotaryData {
 /// * `name`: Specifies the notary's full legal name.
 /// * `email`: Specifies the notary's email address.
 /// * `recipientId`: A unique ID number for the notary signing host.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryHost {
     /**
@@ -71549,6 +71572,7 @@ pub struct NotarySeal {
 
 /// A tab that displays additional information, in the form of a
 /// note, for the recipient.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Note {
     /**
@@ -72637,6 +72661,7 @@ pub struct NotificationDefaultsData {
 
 /// A tab that allows the recipient to enter numbers and decimal
 /// (.) points.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Number {
     /**
@@ -74251,6 +74276,7 @@ pub struct PayPalLegacySettings {
 /// to learn more about payments.
 ///
 /// [paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentDetails {
     /**
@@ -74769,6 +74795,8 @@ pub struct PaymentGatewayAccountsInfo {
 /// A line item describes details
 /// about an individual line item
 /// in a payment request.
+///
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentLineItem {
     /**
@@ -77682,6 +77710,7 @@ pub struct PurchasedEnvelopesInformation {
 /// One of the selectable radio buttons
 /// in the `radios` property
 /// of a [`radioGroup`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/) tab.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Radio {
     /**
@@ -78345,6 +78374,7 @@ pub struct Radio {
 /// [`radio`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/)
 /// objects  associated with the group. Only one radio button can
 /// be selected in a group.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RadioGroup {
     /**
@@ -79681,6 +79711,7 @@ pub struct RecipientSignatureInformation {
 }
 
 /// An Electronic or Standards Based Signature (digital signature) provider for the signer to use. [More information](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures).
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientSignatureProvider {
     /**
@@ -82860,6 +82891,7 @@ pub struct SealIdentifier {
 ///     .
 /// ```
 /// For more information about Electronic Seals, see [Apply Electronic Seals to Your Documents](https://support.docusign.com/en/guides/ndse-user-guide-apply-electronic-seals).
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SealSign {
     /**
@@ -85045,6 +85077,7 @@ pub struct SharedItem {
 
 /// A tab that allows the recipient to sign a document. May be
 /// optional.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignHere {
     /**
@@ -87027,6 +87060,7 @@ pub struct Signer {
 
 /// A tab that allows the recipient to attach supporting
 /// documents to an envelope.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignerAttachment {
     /**
@@ -89363,6 +89397,7 @@ pub struct SocialAuthentication {
 /// Security Number. The SSN can be typed with or without
 /// dashes. It uses the same parameters as a Text tab, with the
 /// validation message and pattern set for SSN information.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ssn {
     /**
@@ -94172,6 +94207,7 @@ pub struct TemplateUpdateSummary {
 }
 
 /// A tab that allows the recipient to enter any type of text.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Text {
     /**
@@ -95418,6 +95454,7 @@ pub struct TextCustomField {
 }
 
 /// A tab that displays the recipient's title.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Title {
     /**
@@ -102360,6 +102397,7 @@ pub struct WorkspaceUserAuthorization {
 /// The zip code can be typed with or without dashes. It uses
 /// the same parameters as a Text tab, with the validation
 /// message and pattern set for ZIP code information.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Zip {
     /**

@@ -143,7 +143,7 @@ impl HttpCache for FileBasedCache {
 ///     ),
 ///     PathBuf::from(
 ///         "/home/.github/cache/v1/https/api.github.com/users/dwijnand/repos/6dd58bde8abb0869.\
-///              json"
+///          json"
 ///     ),
 /// );
 /// assert_eq!(
@@ -154,7 +154,7 @@ impl HttpCache for FileBasedCache {
 ///     ),
 ///     PathBuf::from(
 ///         "/home/.github/cache/v1/https/api.github.com/users/dwijnand/repos/d862dcd2d85cebca.\
-///              json"
+///          json"
 ///     ),
 /// );
 /// ```

@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.2.0"
+//! shipbob = "0.2.1"
 //! ```
 //!
 //! ## Basic example
@@ -38,7 +38,9 @@
 //! ```
 //! use shipbob::Client;
 //!
-//! let shipbob = Client::new(String::from("api-key"));
+//! let shipbob = Client::new(
+//!     String::from("api-key"),
+//! );
 //! ```
 //!
 //! Alternatively, the library can search for most of the variables required for
@@ -53,6 +55,8 @@
 //!
 //! let shipbob = Client::new_from_env();
 //! ```
+//!
+#![allow(clippy::derive_partial_eq_without_eq)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -277,10 +281,6 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
         if let Some(body) = body {
-            log::debug!(
-                "body: {:?}",
-                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-            );
             req = req.body(body);
         }
         Ok(req.send().await?)
@@ -302,10 +302,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -350,10 +347,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
 
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
@@ -404,7 +398,6 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        log::debug!("form: {:?}", form);
         req = req.multipart(form);
 
         let response = req.send().await?;
@@ -414,10 +407,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -485,10 +475,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -577,10 +564,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            log::debug!(
-                "response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            log::debug!("Received successful response. Read payload.");
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {

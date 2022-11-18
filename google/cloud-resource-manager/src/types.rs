@@ -27,8 +27,8 @@ pub struct AuditConfig {
 }
 
 /**
- * The log type that this config enables.
- */
+* The log type that this config enables.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LogType {
     #[serde(rename = "ADMIN_READ")]
@@ -47,7 +47,7 @@ pub enum LogType {
 
 impl std::fmt::Display for LogType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LogType::AdminRead => "ADMIN_READ",
             LogType::DataRead => "DATA_READ",
             LogType::DataWrite => "DATA_WRITE",
@@ -119,8 +119,8 @@ pub struct Binding {
 }
 
 /**
- * The type of this operation.
- */
+* The type of this operation.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OperationType {
     #[serde(rename = "CREATE")]
@@ -137,7 +137,7 @@ pub enum OperationType {
 
 impl std::fmt::Display for OperationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OperationType::Create => "CREATE",
             OperationType::Move => "MOVE",
             OperationType::OperationTypeUnspecified => "OPERATION_TYPE_UNSPECIFIED",
@@ -304,8 +304,8 @@ pub struct Expr {
 }
 
 /**
- * Output only. The lifecycle state of the folder. Updates to the lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
- */
+* Output only. The lifecycle state of the folder. Updates to the lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LifecycleState {
     #[serde(rename = "ACTIVE")]
@@ -322,7 +322,7 @@ pub enum LifecycleState {
 
 impl std::fmt::Display for LifecycleState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LifecycleState::Active => "ACTIVE",
             LifecycleState::DeleteRequested => "DELETE_REQUESTED",
             LifecycleState::LifecycleStateUnspecified => "LIFECYCLE_STATE_UNSPECIFIED",
@@ -397,8 +397,8 @@ pub struct Folder {
 }
 
 /**
- * The type of operation error experienced.
- */
+* The type of operation error experienced.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ErrorMessageId {
     #[serde(rename = "ACTIVE_FOLDER_HEIGHT_VIOLATION")]
@@ -429,7 +429,7 @@ pub enum ErrorMessageId {
 
 impl std::fmt::Display for ErrorMessageId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ErrorMessageId::ActiveFolderHeightViolation => "ACTIVE_FOLDER_HEIGHT_VIOLATION",
             ErrorMessageId::CycleIntroducedViolation => "CYCLE_INTRODUCED_VIOLATION",
             ErrorMessageId::DeletedFolderHeightViolation => "DELETED_FOLDER_HEIGHT_VIOLATION",
@@ -787,8 +787,8 @@ pub struct TestIamPermissionsResponse {
 }
 
 /**
- * V1 error format.
- */
+* V1 error format.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Xgafv {
     #[serde(rename = "1")]
@@ -803,7 +803,7 @@ pub enum Xgafv {
 
 impl std::fmt::Display for Xgafv {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Xgafv::One => "1",
             Xgafv::Two => "2",
             Xgafv::Noop => "",
@@ -825,8 +825,8 @@ impl Xgafv {
 }
 
 /**
- * Data format for response.
- */
+* Data format for response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
@@ -843,7 +843,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Media => "media",
             Alt::Proto => "proto",

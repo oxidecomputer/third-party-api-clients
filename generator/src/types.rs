@@ -102,10 +102,8 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                              JsonSchema)]",
                         );
                     } else {
-                        a(
-                            "#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
-                             JsonSchema)]",
-                        );
+                        a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
+                             JsonSchema)]");
                     }
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {

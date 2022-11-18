@@ -164,6 +164,7 @@ pub struct CampaignResponse {
 ///
 /// - `CampaignsRequest`
 /// - `CampaignResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignResponseAllOf {
     #[serde(flatten)]
@@ -192,7 +193,7 @@ pub enum Operator {
 
 impl std::fmt::Display for Operator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Operator::Contains => "contains",
             Operator::Eq => "eq",
             Operator::Gt => "gt",
@@ -230,7 +231,7 @@ pub enum AndOr {
 
 impl std::fmt::Display for AndOr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AndOr::And => "and",
             AndOr::Or => "or",
             AndOr::Noop => "",
@@ -557,6 +558,7 @@ pub struct SenderId {
 /// - `Help`
 /// - `SenderRequest`
 /// - `SenderId`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SenderAllOf {
     /**
@@ -571,8 +573,8 @@ pub struct SenderAllOf {
 }
 
 /**
- * The type of the field.
- */
+* The type of the field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "date")]
@@ -589,7 +591,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Date => "date",
             Type::Number => "number",
             Type::Text => "text",
@@ -678,8 +680,8 @@ pub struct MailSettingsAddressWhitelabel {
 }
 
 /**
- * The type of DNS record that was generated.
- */
+* The type of DNS record that was generated.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LinkBranding200ResponseDnsDomainCnameType {
     #[serde(rename = "cname")]
@@ -696,7 +698,7 @@ pub enum LinkBranding200ResponseDnsDomainCnameType {
 
 impl std::fmt::Display for LinkBranding200ResponseDnsDomainCnameType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LinkBranding200ResponseDnsDomainCnameType::Cname => "cname",
             LinkBranding200ResponseDnsDomainCnameType::Mx => "mx",
             LinkBranding200ResponseDnsDomainCnameType::Txt => "txt",
@@ -914,6 +916,7 @@ pub struct ApiKeyNameScopes {
 ///
 /// - `ApiKeyNameScopes`
 /// - `ApiKeyNameId`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiKeyNameScopesAllOf {
     #[serde(flatten)]
@@ -1175,6 +1178,7 @@ pub struct AdvancedStatsMailboxProvider {
 ///
 /// - `AdvancedStatsClicksOpensAllOf`
 /// - `AdvancedStatsMailboxProvider`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsMailboxProviderAllOf {
     #[serde(flatten)]
@@ -1203,6 +1207,7 @@ pub struct ContactdbCustomFieldWithId {
 ///
 /// - `ContactdbCustomField`
 /// - `ContactdbCustomFieldWithId`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbCustomFieldWithAllOf {
     #[serde(flatten)]
@@ -1656,6 +1661,7 @@ pub struct TransactionalTemplate {
 ///
 /// - `TransactionalTemplatesTemplateLean`
 /// - `TransactionalTemplate`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TransactionalTemplateAllOf {
     #[serde(flatten)]
@@ -1769,6 +1775,7 @@ pub struct TransactionalTemplateVersionOutput {
 /// - `TransactionalTemplateVersionOutput`
 /// - `TransactionalTemplateVersionCreate`
 /// - `TransactionalTemplatesVersionOutputLean`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TransactionalTemplateVersionOutputAllOf {
     #[serde(flatten)]
@@ -1838,8 +1845,8 @@ pub struct MailSettingsForwardSpam {
 }
 
 /**
- * The editor used in the UI.
- */
+* The editor used in the UI.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Editor {
     #[serde(rename = "code")]
@@ -1854,7 +1861,7 @@ pub enum Editor {
 
 impl std::fmt::Display for Editor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Editor::Code => "code",
             Editor::Design => "design",
             Editor::Noop => "",
@@ -2116,8 +2123,8 @@ pub struct SubuserStatsData {
 }
 
 /**
- * The status of the scheduled send.
- */
+* The status of the scheduled send.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "cancel")]
@@ -2132,7 +2139,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Cancel => "cancel",
             Status::Pause => "pause",
             Status::Noop => "",
@@ -2167,6 +2174,7 @@ pub struct UserScheduledSendStatus {
 ///
 /// - `MailBatchId`
 /// - `UserScheduledSendStatus`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserScheduledSendStatusAllOf {
     #[serde(flatten)]
@@ -2182,6 +2190,7 @@ pub struct UserScheduledSendStatusAllOf {
 ///
 /// - `AdvancedStatsOpens`
 /// - `AdvancedStatsClicks`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdvancedStatsClicksOpensAllOf {
     /**
@@ -2213,6 +2222,7 @@ pub struct ContactdbSegmentsWithId {
 ///
 /// - `ContactdbSegments`
 /// - `ContactdbSegmentsWithId`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbSegmentsWithAllOf {
     #[serde(flatten)]
@@ -2480,6 +2490,7 @@ pub struct ContactdbCustomFieldWithValue {
 ///
 /// - `ContactdbCustomFieldWithAllOf`
 /// - `ContactdbCustomFieldWithValue`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbCustomFieldWithValueAllOf {
     #[serde(flatten)]
@@ -2595,8 +2606,8 @@ pub struct TransactionalTemplatesVersionOutputLean {
 }
 
 /**
- * Defines the generation of the template.
- */
+* Defines the generation of the template.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Generation {
     #[serde(rename = "dynamic")]
@@ -2611,7 +2622,7 @@ pub enum Generation {
 
 impl std::fmt::Display for Generation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Generation::Dynamic => "dynamic",
             Generation::Legacy => "legacy",
             Generation::Noop => "",
@@ -3007,8 +3018,8 @@ pub struct SingleContactRequest {
 }
 
 /**
- * The export job's status. Allowed values: `pending`, `ready`, or `failure`.
- */
+* The export job's status. Allowed values: `pending`, `ready`, or `failure`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ContactExportStatus {
     #[serde(rename = "failure")]
@@ -3025,7 +3036,7 @@ pub enum ContactExportStatus {
 
 impl std::fmt::Display for ContactExportStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ContactExportStatus::Failure => "failure",
             ContactExportStatus::Pending => "pending",
             ContactExportStatus::Ready => "ready",
@@ -3530,7 +3541,7 @@ pub enum FieldType {
 
 impl std::fmt::Display for FieldType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FieldType::Date => "Date",
             FieldType::Number => "Number",
             FieldType::Text => "Text",
@@ -4047,6 +4058,7 @@ pub struct TneSenderData {
 /// - `TneSenderId`
 /// - `SendersRequestBody`
 /// - `TneSenderData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TneSenderAllOf {
     #[serde(flatten)]
@@ -4154,6 +4166,7 @@ pub struct DesignInput {
 /// - `DesignDuplicateInput`
 /// - `DesignCommonFieldsAllOf`
 /// - `DesignInput`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignInputAllOf {
     #[serde(flatten)]
@@ -4168,6 +4181,7 @@ pub struct DesignInputAllOf {
 ///
 /// - `DesignInputAllOf`
 /// - `DesignOutputSummaryAllOf`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignOutputAllOf {
     #[serde(flatten)]
@@ -4215,6 +4229,7 @@ pub struct DesignOutputSummary {
 /// - `DesignDuplicateInput`
 /// - `DesignCommonFieldsAllOf`
 /// - `DesignOutputSummary`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignOutputSummaryAllOf {
     #[serde(flatten)]
@@ -4433,8 +4448,8 @@ pub struct ErrorsDataType {
 }
 
 /**
- * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
- */
+* This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AbPhase {
     #[serde(rename = "all")]
@@ -4449,7 +4464,7 @@ pub enum AbPhase {
 
 impl std::fmt::Display for AbPhase {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AbPhase::All => "all",
             AbPhase::Send => "send",
             AbPhase::Test => "test",
@@ -4652,7 +4667,7 @@ pub enum SinglesendSearchStatus {
 
 impl std::fmt::Display for SinglesendSearchStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SinglesendSearchStatus::Draft => "draft",
             SinglesendSearchStatus::Scheduled => "scheduled",
             SinglesendSearchStatus::Triggered => "triggered",
@@ -5291,6 +5306,7 @@ pub struct DomainAuthentication200Response {
 ///
 /// - `AuthenticationDomain`
 /// - `DomainAuthentication200Response`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DomainAuthentication200ResponseAllOf {
     #[serde(flatten)]
@@ -5300,8 +5316,8 @@ pub struct DomainAuthentication200ResponseAllOf {
 }
 
 /**
- * What differs between the A/B tests
- */
+* What differs between the A/B tests
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AbTestSummaryType {
     #[serde(rename = "content")]
@@ -5316,7 +5332,7 @@ pub enum AbTestSummaryType {
 
 impl std::fmt::Display for AbTestSummaryType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AbTestSummaryType::Content => "content",
             AbTestSummaryType::Subject => "subject",
             AbTestSummaryType::Noop => "",
@@ -5338,8 +5354,8 @@ impl AbTestSummaryType {
 }
 
 /**
- * How the winner will be decided
- */
+* How the winner will be decided
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WinnerCriteria {
     #[serde(rename = "click")]
@@ -5356,7 +5372,7 @@ pub enum WinnerCriteria {
 
 impl std::fmt::Display for WinnerCriteria {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WinnerCriteria::Click => "click",
             WinnerCriteria::Manual => "manual",
             WinnerCriteria::Open => "open",
@@ -5806,6 +5822,7 @@ pub struct StatsAdvancedGlobal {
 ///
 /// - `AdvancedStatsClicksOpensAllOf`
 /// - `StatsAdvancedGlobal`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StatsAdvancedGlobalAllOf {
     #[serde(flatten)]
@@ -5865,6 +5882,7 @@ pub struct FullSegment {
 /// - `SegmentSummary`
 /// - `FullSegment`
 /// - `SegmentWriteV2`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullSegmentAllOf {
     #[serde(flatten)]
@@ -6010,6 +6028,7 @@ pub struct SinglesendResponse {
 ///
 /// - `SinglesendRequest`
 /// - `SinglesendResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendResponseAllOf {
     #[serde(flatten)]
@@ -6052,6 +6071,7 @@ pub struct DesignCommonFields {
 ///
 /// - `DesignDuplicateInput`
 /// - `DesignCommonFields`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DesignCommonFieldsAllOf {
     #[serde(flatten)]
@@ -6083,8 +6103,8 @@ pub struct InvalidEmail {
 }
 
 /**
- * The message's status.
- */
+* The message's status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailActivityResponseCommonFieldsStatus {
     #[serde(rename = "delivered")]
@@ -6101,7 +6121,7 @@ pub enum EmailActivityResponseCommonFieldsStatus {
 
 impl std::fmt::Display for EmailActivityResponseCommonFieldsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailActivityResponseCommonFieldsStatus::Delivered => "delivered",
             EmailActivityResponseCommonFieldsStatus::NotDelivered => "not delivered",
             EmailActivityResponseCommonFieldsStatus::Processed => "processed",
@@ -6265,6 +6285,7 @@ pub struct SsoIntegration {
 ///
 /// - `CreateIntegrationRequest`
 /// - `SsoIntegration`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoIntegrationAllOf {
     #[serde(flatten)]
@@ -6345,6 +6366,7 @@ pub struct SsoTeammateResponse {
 ///
 /// - `SsoTeammateCommonFields`
 /// - `SsoTeammateResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammateResponseAllOf {
     #[serde(flatten)]
@@ -6370,6 +6392,7 @@ pub struct GetScopesResponse {
 ///
 /// - `SsoTeammateCommonFields`
 /// - `GetScopesResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammateRequestAllOf {
     #[serde(flatten)]
@@ -6379,8 +6402,8 @@ pub struct SsoTeammateRequestAllOf {
 }
 
 /**
- * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
- */
+* A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UserType {
     #[serde(rename = "admin")]
@@ -6397,7 +6420,7 @@ pub enum UserType {
 
 impl std::fmt::Display for UserType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserType::Admin => "admin",
             UserType::Owner => "owner",
             UserType::Teammate => "teammate",
@@ -6532,6 +6555,7 @@ pub struct SsoTeammatesPatchResponse {
 ///
 /// - `SsoTeammateResponseAllOf`
 /// - `SsoTeammatesPatchResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SsoTeammatesPatchResponseAllOf {
     #[serde(flatten)]
@@ -7100,7 +7124,7 @@ pub enum AbbvMessageStatus {
 
 impl std::fmt::Display for AbbvMessageStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AbbvMessageStatus::Delivered => "delivered",
             AbbvMessageStatus::NotDelivered => "not_delivered",
             AbbvMessageStatus::Processed => "processed",
@@ -7186,8 +7210,8 @@ pub struct Messages {
 }
 
 /**
- * Name of event
- */
+* Name of event
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EventName {
     #[serde(rename = "bounced")]
@@ -7220,7 +7244,7 @@ pub enum EventName {
 
 impl std::fmt::Display for EventName {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EventName::Bounced => "bounced",
             EventName::Clicked => "clicked",
             EventName::Deferred => "deferred",
@@ -7251,8 +7275,8 @@ impl EventName {
 }
 
 /**
- * Use to distinguish between types of bounces
- */
+* Use to distinguish between types of bounces
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BounceType {
     #[serde(rename = "blocked")]
@@ -7269,7 +7293,7 @@ pub enum BounceType {
 
 impl std::fmt::Display for BounceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BounceType::Blocked => "blocked",
             BounceType::Bounced => "bounced",
             BounceType::Expired => "expired",
@@ -7354,8 +7378,8 @@ pub struct Event {
 }
 
 /**
- * Whether or not the outbound IP is dedicated vs shared
- */
+* Whether or not the outbound IP is dedicated vs shared
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OutboundIpType {
     #[serde(rename = "dedicated")]
@@ -7370,7 +7394,7 @@ pub enum OutboundIpType {
 
 impl std::fmt::Display for OutboundIpType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OutboundIpType::Dedicated => "dedicated",
             OutboundIpType::Shared => "shared",
             OutboundIpType::Noop => "",
@@ -7757,8 +7781,8 @@ pub struct AuthenticationDomain {
 }
 
 /**
- * Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
- */
+* Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AggregatedBy {
     #[serde(rename = "day")]
@@ -7771,7 +7795,7 @@ pub enum AggregatedBy {
 
 impl std::fmt::Display for AggregatedBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AggregatedBy::Day => "day",
             AggregatedBy::Total => "total",
             AggregatedBy::FallthroughString => "*",
@@ -7800,7 +7824,7 @@ pub enum GroupBy {
 
 impl std::fmt::Display for GroupBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GroupBy::AbPhase => "ab_phase",
             GroupBy::AbVariation => "ab_variation",
             GroupBy::Noop => "",
@@ -7833,7 +7857,7 @@ pub enum TraitAutomationQueryParamsGroupBy {
 
 impl std::fmt::Display for TraitAutomationQueryParamsGroupBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TraitAutomationQueryParamsGroupBy::StepId => "step_id",
             TraitAutomationQueryParamsGroupBy::Noop => "",
             TraitAutomationQueryParamsGroupBy::FallthroughString => "*",
@@ -7867,7 +7891,7 @@ pub enum AbPhaseId {
 
 impl std::fmt::Display for AbPhaseId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AbPhaseId::Send => "send",
             AbPhaseId::Test => "test",
             AbPhaseId::Noop => "",
@@ -7889,8 +7913,8 @@ impl AbPhaseId {
 }
 
 /**
- * How to group the statistics. Must be either "day", "week", or "month".
- */
+* How to group the statistics. Must be either "day", "week", or "month".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     #[serde(rename = "day")]
@@ -7907,7 +7931,7 @@ pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
 
 impl std::fmt::Display for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Day => "day",
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Month => "month",
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Week => "week",
@@ -8143,8 +8167,8 @@ pub struct Content {
 }
 
 /**
- * The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
- */
+* The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Disposition {
     #[serde(rename = "attachment")]
@@ -8157,7 +8181,7 @@ pub enum Disposition {
 
 impl std::fmt::Display for Disposition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Disposition::Attachment => "attachment",
             Disposition::Inline => "inline",
             Disposition::FallthroughString => "*",
@@ -9572,8 +9596,8 @@ pub struct PatchScopesRequestsApproveResponse {
 }
 
 /**
- * The type of alert.
- */
+* The type of alert.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAlertsResponseType {
     #[serde(rename = "stats_notification")]
@@ -9588,7 +9612,7 @@ pub enum GetAlertsResponseType {
 
 impl std::fmt::Display for GetAlertsResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAlertsResponseType::StatsNotification => "stats_notification",
             GetAlertsResponseType::UsageLimit => "usage_limit",
             GetAlertsResponseType::Noop => "",
@@ -9755,8 +9779,8 @@ pub struct PostAlertsResponse {
 }
 
 /**
- * The type of alert.
- */
+* The type of alert.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAlertsAlertResponseType {
     #[serde(rename = "stats_notification")]
@@ -9771,7 +9795,7 @@ pub enum GetAlertsAlertResponseType {
 
 impl std::fmt::Display for GetAlertsAlertResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAlertsAlertResponseType::StatsNotification => "stats_notification",
             GetAlertsAlertResponseType::UsageAlert => "usage_alert",
             GetAlertsAlertResponseType::Noop => "",
@@ -9971,8 +9995,8 @@ pub struct GetUserProfileResponse {
 }
 
 /**
- * The type of account for this user.
- */
+* The type of account for this user.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetUserAccountResponseType {
     #[serde(rename = "free")]
@@ -9987,7 +10011,7 @@ pub enum GetUserAccountResponseType {
 
 impl std::fmt::Display for GetUserAccountResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetUserAccountResponseType::Free => "free",
             GetUserAccountResponseType::Paid => "paid",
             GetUserAccountResponseType::Noop => "",
@@ -10235,8 +10259,8 @@ pub struct PutSubusersSubuserNameIpsResponse {
 }
 
 /**
- * The direction you want to sort.
- */
+* The direction you want to sort.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortByDirection {
     #[serde(rename = "asc")]
@@ -10249,7 +10273,7 @@ pub enum SortByDirection {
 
 impl std::fmt::Display for SortByDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortByDirection::Asc => "asc",
             SortByDirection::Desc => "desc",
             SortByDirection::FallthroughString => "*",
@@ -10265,8 +10289,8 @@ impl Default for SortByDirection {
 }
 
 /**
- * The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
- */
+* The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortByMetric {
     #[serde(rename = "blocks")]
@@ -10293,7 +10317,7 @@ pub enum SortByMetric {
 
 impl std::fmt::Display for SortByMetric {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortByMetric::Blocks => "blocks",
             SortByMetric::Bounces => "bounces",
             SortByMetric::Clicks => "clicks",
@@ -10557,8 +10581,8 @@ pub struct PostValidationsEmailRequest {
 }
 
 /**
- * A generic classification of whether or not the email address is valid.
- */
+* A generic classification of whether or not the email address is valid.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Verdict {
     #[serde(rename = "Invalid")]
@@ -10575,7 +10599,7 @@ pub enum Verdict {
 
 impl std::fmt::Display for Verdict {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Verdict::Invalid => "Invalid",
             Verdict::Risky => "Risky",
             Verdict::Valid => "Valid",
@@ -11840,8 +11864,8 @@ pub struct Notifications {
 }
 
 /**
- * File type for export file. Choose from `json` or `csv`.
- */
+* File type for export file. Choose from `json` or `csv`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FileType {
     #[serde(rename = "csv")]
@@ -11854,7 +11878,7 @@ pub enum FileType {
 
 impl std::fmt::Display for FileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FileType::Csv => "csv",
             FileType::Json => "json",
             FileType::FallthroughString => "*",
@@ -11954,8 +11978,8 @@ pub struct PostMcContactsSearchResponse {
 }
 
 /**
- * Upload file type.
- */
+* Upload file type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PutMcContactsImportsRequestFileType {
     #[serde(rename = "csv")]
@@ -11968,7 +11992,7 @@ pub enum PutMcContactsImportsRequestFileType {
 
 impl std::fmt::Display for PutMcContactsImportsRequestFileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PutMcContactsImportsRequestFileType::Csv => "csv",
             PutMcContactsImportsRequestFileType::Noop => "",
             PutMcContactsImportsRequestFileType::FallthroughString => "*",
@@ -11992,6 +12016,7 @@ impl PutMcContactsImportsRequestFileType {
 ///
 /// - `String`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FieldMappingsAnyOf {
     /**
@@ -12249,6 +12274,7 @@ pub struct GetMcListsResponseData {
 ///
 /// - `List`
 /// - `GetMcListsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMcListsResponseAllOf {
     #[serde(flatten)]
@@ -12338,6 +12364,7 @@ pub struct PostMcFieldDefinitionsResponse {
 ///
 /// - `CustomFieldDefinitionsResponse`
 /// - `PostMcFieldDefinitionsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMcFieldDefinitionsResponseAllOf {
     #[serde(flatten)]
@@ -12373,6 +12400,7 @@ pub struct PostMarketingSegmentsRequest {
 ///
 /// - `SegmentWriteV2`
 /// - `PostMarketingSegmentsRequest`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsRequestAllOf {
     #[serde(flatten)]
@@ -12488,8 +12516,8 @@ pub struct PostMarketingSinglesendsRequest {
 }
 
 /**
- * This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
- */
+* This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SendAt {
     #[serde(rename = "now")]
@@ -12502,7 +12530,7 @@ pub enum SendAt {
 
 impl std::fmt::Display for SendAt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SendAt::Now => "now",
             SendAt::Noop => "",
             SendAt::FallthroughString => "*",
@@ -12543,7 +12571,7 @@ pub enum PutMarketingSinglesendsScheduleResponseStatus {
 
 impl std::fmt::Display for PutMarketingSinglesendsScheduleResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PutMarketingSinglesendsScheduleResponseStatus::Scheduled => "scheduled",
             PutMarketingSinglesendsScheduleResponseStatus::Noop => "",
             PutMarketingSinglesendsScheduleResponseStatus::FallthroughString => "*",
@@ -12668,6 +12696,7 @@ pub struct PostSendersRequest {
 ///
 /// - `SenderRequest`
 /// - `PostSendersRequest`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSendersRequestAllOf {
     #[serde(flatten)]
@@ -12864,6 +12893,7 @@ pub struct PostContactdbRecipientsSearchRequest {
 ///
 /// - `String`
 /// - `i64`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ValueAnyOf {
     /**
@@ -13318,8 +13348,8 @@ pub struct ScheduleACampaignRequest {
 }
 
 /**
- * The status of your campaign.
- */
+* The status of your campaign.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ScheduleACampaignResponseStatus {
     #[serde(rename = "Scheduled")]
@@ -13332,7 +13362,7 @@ pub enum ScheduleACampaignResponseStatus {
 
 impl std::fmt::Display for ScheduleACampaignResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ScheduleACampaignResponseStatus::Scheduled => "Scheduled",
             ScheduleACampaignResponseStatus::Noop => "",
             ScheduleACampaignResponseStatus::FallthroughString => "*",
@@ -13415,8 +13445,8 @@ pub struct SendATestCampaignRequest {
 }
 
 /**
- * Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
- */
+* Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Generations {
     #[serde(rename = "dynamic")]
@@ -13431,7 +13461,7 @@ pub enum Generations {
 
 impl std::fmt::Display for Generations {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Generations::Dynamic => "dynamic",
             Generations::Legacy => "legacy",
             Generations::LegacyDynamic => "legacy,dynamic",
@@ -13690,7 +13720,7 @@ pub enum PostMessagesDownloadResponseStatus {
 
 impl std::fmt::Display for PostMessagesDownloadResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PostMessagesDownloadResponseStatus::Pending => "pending",
             PostMessagesDownloadResponseStatus::Noop => "",
             PostMessagesDownloadResponseStatus::FallthroughString => "*",
@@ -13834,8 +13864,8 @@ pub struct GetStatsResponseData {
 }
 
 /**
- * The country you would like to see statistics for. Currently only supported for US and CA.
- */
+* The country you would like to see statistics for. Currently only supported for US and CA.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Country {
     #[serde(rename = "CA")]
@@ -13850,7 +13880,7 @@ pub enum Country {
 
 impl std::fmt::Display for Country {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Country::Ca => "CA",
             Country::Us => "US",
             Country::Noop => "",
@@ -13969,8 +13999,8 @@ pub struct GetClientsStatsResponse {
 }
 
 /**
- * Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
- */
+* Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ClientType {
     #[serde(rename = "desktop")]
@@ -13989,7 +14019,7 @@ pub enum ClientType {
 
 impl std::fmt::Display for ClientType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ClientType::Desktop => "desktop",
             ClientType::Phone => "phone",
             ClientType::Tablet => "tablet",
@@ -14230,6 +14260,7 @@ pub struct GetAsmGroupsGroupResponse {
 ///
 /// - `SuppressionGroupRequestBase`
 /// - `GetAsmGroupsGroupResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetAsmGroupsGroupResponseAllOf {
     #[serde(flatten)]

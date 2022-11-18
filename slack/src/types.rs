@@ -83,6 +83,7 @@ pub struct ObjsBotProfile {
 ///
 /// - `ObjsMessage`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LatestAnyOf {
     #[serde(flatten)]
@@ -372,6 +373,7 @@ pub struct DisplayCounts {
 ///
 /// - `String`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ParentConversationAnyOf {
     #[serde(flatten)]
@@ -1131,6 +1133,7 @@ pub struct ConversationImChannelObjectFromConversationsMethods {
 /// - `ObjsConversation`
 /// - `ConversationMpimObject`
 /// - `ConversationImChannelObjectFromConversationsMethods`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsConversationAnyOf {
     #[serde(flatten)]
@@ -1722,6 +1725,7 @@ pub struct Attachments {
 ///
 /// - `String`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BotAnyOf {
     #[serde(flatten)]
@@ -2137,7 +2141,7 @@ pub enum Warnings {
 
 impl std::fmt::Display for Warnings {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Warnings::MethodDeprecated => "method_deprecated",
             Warnings::Noop => "",
             Warnings::FallthroughString => "*",
@@ -2200,6 +2204,7 @@ pub struct ObjsResponseMetadata {
 /// - `NewPagingStyle`
 /// - `DeprecationWarning`
 /// - `ObjsResponseMetadata`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsResponseMetadataAnyOf {
     #[serde(flatten)]
@@ -2224,7 +2229,7 @@ pub enum AutoType {
 
 impl std::fmt::Display for AutoType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AutoType::Admin => "admin",
             AutoType::Owner => "owner",
             AutoType::Noop => "",
@@ -2249,6 +2254,7 @@ impl AutoType {
 ///
 /// - `serde_json::Value`
 /// - `AutoType`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutoTypeAnyOf {
     #[serde(flatten)]
@@ -2261,6 +2267,7 @@ pub struct AutoTypeAnyOf {
 ///
 /// - `String`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeletedByAnyOf {
     #[serde(flatten)]
@@ -2411,6 +2418,7 @@ pub struct ObjsSubteam {
 ///
 /// - `String`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TzAnyOf {
     #[serde(flatten)]
@@ -2437,7 +2445,7 @@ pub enum Plan {
 
 impl std::fmt::Display for Plan {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Plan::Compliance => "compliance",
             Plan::Enterprise => "enterprise",
             Plan::Plus => "plus",
@@ -2638,6 +2646,7 @@ pub struct ObjsTeam {
 ///
 /// - `serde_json::Value`
 /// - `ObjsTeamProfileFieldOption`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OptionsAnyOf {
     #[serde(flatten)]
@@ -2668,7 +2677,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Date => "date",
             Type::Link => "link",
             Type::Mailto => "mailto",
@@ -3222,6 +3231,7 @@ pub struct ObjsUserData {
 ///
 /// - `ObjsUser`
 /// - `ObjsUserData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUserAnyOf {
     /**
@@ -3242,6 +3252,7 @@ pub struct ObjsUserAnyOf {
 /// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum FieldsOneOf {
@@ -4331,6 +4342,7 @@ pub struct ConversationsInfoSuccessSchema {
 ///
 /// - `i64`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChannelActionsTsAnyOf {
     #[serde(flatten)]
@@ -4531,6 +4543,7 @@ pub struct ChannelData {
 ///
 /// - `Vec<ObjsConversationAnyOf>`
 /// - `ChannelData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChannelAnyOf {
     #[serde(flatten)]
@@ -4828,7 +4841,7 @@ pub enum ItemsType {
 
 impl std::fmt::Display for ItemsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ItemsType::File => "file",
             ItemsType::Noop => "",
             ItemsType::FallthroughString => "*",
@@ -4880,7 +4893,7 @@ pub enum MessagePinType {
 
 impl std::fmt::Display for MessagePinType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MessagePinType::Message => "message",
             MessagePinType::Noop => "",
             MessagePinType::FallthroughString => "*",
@@ -4930,6 +4943,7 @@ pub struct MessagePin {
 ///
 /// - `Items`
 /// - `MessagePin`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ItemsAnyOf {
     #[serde(flatten)]
@@ -4972,6 +4986,7 @@ pub struct PinsListResponseData {
 ///
 /// - `PinsListResponse`
 /// - `PinsListResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PinsListResponseAnyOf {
     #[serde(flatten)]
@@ -5649,6 +5664,7 @@ pub struct UsersIdentityResponseDataTypeLinks {
 /// - `UsersIdentityResponseData`
 /// - `UsersIdentityResponseDataType`
 /// - `UsersIdentityResponseDataTypeLinks`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersIdentityResponseAnyOf {
     /**

@@ -3254,8 +3254,8 @@ pub struct User {
 }
 
 /**
- * Data format for the response.
- */
+* Data format for the response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
@@ -3268,7 +3268,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Noop => "",
             Alt::FallthroughString => "*",
@@ -3289,8 +3289,8 @@ impl Alt {
 }
 
 /**
- * The source of files to list. Deprecated: use 'corpora' instead.
- */
+* The source of files to list. Deprecated: use 'corpora' instead.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Corpus {
     #[serde(rename = "domain")]
@@ -3305,7 +3305,7 @@ pub enum Corpus {
 
 impl std::fmt::Display for Corpus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Corpus::Domain => "domain",
             Corpus::User => "user",
             Corpus::Noop => "",

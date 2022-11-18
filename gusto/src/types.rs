@@ -589,8 +589,8 @@ pub struct Termination {
 }
 
 /**
- * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
- */
+* The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentUnit {
     #[serde(rename = "Hour")]
@@ -611,7 +611,7 @@ pub enum PaymentUnit {
 
 impl std::fmt::Display for PaymentUnit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentUnit::Hour => "Hour",
             PaymentUnit::Month => "Month",
             PaymentUnit::Paycheck => "Paycheck",
@@ -636,8 +636,8 @@ impl PaymentUnit {
 }
 
 /**
- * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
- */
+* The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FlsaStatus {
     #[serde(rename = "Exempt")]
@@ -656,7 +656,7 @@ pub enum FlsaStatus {
 
 impl std::fmt::Display for FlsaStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FlsaStatus::Exempt => "Exempt",
             FlsaStatus::Nonexempt => "Nonexempt",
             FlsaStatus::Owner => "Owner",
@@ -949,8 +949,8 @@ pub struct Admin {
 }
 
 /**
- * The tax payer type of the company.
- */
+* The tax payer type of the company.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EntityType {
     #[serde(rename = "Association")]
@@ -985,7 +985,7 @@ pub enum EntityType {
 
 impl std::fmt::Display for EntityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EntityType::Association => "Association",
             EntityType::CCorporation => "C-Corporation",
             EntityType::CoOwnership => "Co-ownership",
@@ -1017,8 +1017,8 @@ impl EntityType {
 }
 
 /**
- * The Gusto product tier of the company.
- */
+* The Gusto product tier of the company.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Tier {
     #[serde(rename = "basic")]
@@ -1039,7 +1039,7 @@ pub enum Tier {
 
 impl std::fmt::Display for Tier {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Tier::Basic => "basic",
             Tier::Complete => "complete",
             Tier::Concierge => "concierge",
@@ -1064,8 +1064,8 @@ impl Tier {
 }
 
 /**
- * The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
- */
+* The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CompanyStatus {
     #[serde(rename = "Approved")]
@@ -1082,7 +1082,7 @@ pub enum CompanyStatus {
 
 impl std::fmt::Display for CompanyStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CompanyStatus::Approved => "Approved",
             CompanyStatus::NotApproved => "Not Approved",
             CompanyStatus::Suspended => "Suspended",
@@ -1396,8 +1396,8 @@ pub struct Company {
 }
 
 /**
- * The contractor's wage type, either "Fixed" or "Hourly".
- */
+* The contractor's wage type, either "Fixed" or "Hourly".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WageType {
     #[serde(rename = "Fixed")]
@@ -1412,7 +1412,7 @@ pub enum WageType {
 
 impl std::fmt::Display for WageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WageType::Fixed => "Fixed",
             WageType::Hourly => "Hourly",
             WageType::Noop => "",
@@ -1434,8 +1434,8 @@ impl WageType {
 }
 
 /**
- * The contractor's type, either "Individual" or "Business".
- */
+* The contractor's type, either "Individual" or "Business".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "Business")]
@@ -1450,7 +1450,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Business => "Business",
             Type::Individual => "Individual",
             Type::Noop => "",
@@ -1649,8 +1649,8 @@ pub struct Contractor {
 }
 
 /**
- * The payment method.
- */
+* The payment method.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethod {
     #[serde(rename = "Check")]
@@ -1669,7 +1669,7 @@ pub enum PaymentMethod {
 
 impl std::fmt::Display for PaymentMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethod::Check => "Check",
             PaymentMethod::CorrectionPayment => "Correction Payment",
             PaymentMethod::DirectDeposit => "Direct Deposit",
@@ -1872,8 +1872,8 @@ pub struct ContractorPaymentSummary {
 }
 
 /**
- * The status of the time off request.
- */
+* The status of the time off request.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "approved")]
@@ -1890,7 +1890,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Approved => "approved",
             Status::Denied => "denied",
             Status::Pending => "pending",
@@ -1913,8 +1913,8 @@ impl Status {
 }
 
 /**
- * The type of time off request.
- */
+* The type of time off request.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RequestType {
     #[serde(rename = "sick")]
@@ -1929,7 +1929,7 @@ pub enum RequestType {
 
 impl std::fmt::Display for RequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RequestType::Sick => "sick",
             RequestType::Vacation => "vacation",
             RequestType::Noop => "",
@@ -2179,7 +2179,7 @@ pub enum Frequency {
 
 impl std::fmt::Display for Frequency {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Frequency::EveryOtherWeek => "Every other week",
             Frequency::EveryWeek => "Every week",
             Frequency::Monthly => "Monthly",
@@ -2272,8 +2272,8 @@ pub struct PaySchedule {
 }
 
 /**
- * Bank account type
- */
+* Bank account type
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountType {
     #[serde(rename = "Checking")]
@@ -2288,7 +2288,7 @@ pub enum AccountType {
 
 impl std::fmt::Display for AccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountType::Checking => "Checking",
             AccountType::Savings => "Savings",
             AccountType::Noop => "",
@@ -2310,12 +2310,12 @@ impl AccountType {
 }
 
 /**
- * The verification status of the bank account.
- *   
- *   'awaiting_deposits' means the bank account is just created and money is being transferred.
- *   'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
- *   'verified' means the bank account is verified.
- */
+* The verification status of the bank account.
+*   
+*   'awaiting_deposits' means the bank account is just created and money is being transferred.
+*   'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
+*   'verified' means the bank account is verified.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum VerificationStatus {
     #[serde(rename = "awaiting_deposits")]
@@ -2332,7 +2332,7 @@ pub enum VerificationStatus {
 
 impl std::fmt::Display for VerificationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VerificationStatus::AwaitingDeposits => "awaiting_deposits",
             VerificationStatus::ReadyForVerification => "ready_for_verification",
             VerificationStatus::Verified => "verified",
@@ -2592,8 +2592,8 @@ pub struct EarningType {
 }
 
 /**
- * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
- */
+* Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeductionReducesTaxableIncome {
     #[serde(rename = "does_not_reduce_taxable_income")]
@@ -2608,7 +2608,7 @@ pub enum DeductionReducesTaxableIncome {
 
 impl std::fmt::Display for DeductionReducesTaxableIncome {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeductionReducesTaxableIncome::DoesNotReduceTaxableIncome => {
                 "does_not_reduce_taxable_income"
             }
@@ -3068,8 +3068,8 @@ pub struct Totals {
 }
 
 /**
- * The employee's compensation payment method. This value is only available for processed payrolls.
- */
+* The employee's compensation payment method. This value is only available for processed payrolls.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PayrollEmployeeCompensationsPaymentMethod {
     #[serde(rename = "Check")]
@@ -3084,7 +3084,7 @@ pub enum PayrollEmployeeCompensationsPaymentMethod {
 
 impl std::fmt::Display for PayrollEmployeeCompensationsPaymentMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PayrollEmployeeCompensationsPaymentMethod::Check => "Check",
             PayrollEmployeeCompensationsPaymentMethod::DirectDeposit => "Direct Deposit",
             PayrollEmployeeCompensationsPaymentMethod::Noop => "",
@@ -3488,7 +3488,7 @@ pub enum CustomFieldType {
 
 impl std::fmt::Display for CustomFieldType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomFieldType::Currency => "currency",
             CustomFieldType::Date => "date",
             CustomFieldType::Number => "number",
@@ -3632,7 +3632,7 @@ pub enum GustoPersonType {
 
 impl std::fmt::Display for GustoPersonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GustoPersonType::Candidate => "Candidate",
             GustoPersonType::Contractor => "Contractor",
             GustoPersonType::Employee => "Employee",
@@ -3882,7 +3882,7 @@ pub enum Include {
 
 impl std::fmt::Display for Include {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Include::CustomFields => "custom_fields",
             Include::Noop => "",
             Include::FallthroughString => "*",
@@ -5081,7 +5081,7 @@ pub enum GetCompanyPayrollsInclude {
 
 impl std::fmt::Display for GetCompanyPayrollsInclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetCompanyPayrollsInclude::Benefits => "benefits",
             GetCompanyPayrollsInclude::Deductions => "deductions",
             GetCompanyPayrollsInclude::Taxes => "taxes",
@@ -5117,7 +5117,7 @@ pub enum OffCycleReason {
 
 impl std::fmt::Display for OffCycleReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OffCycleReason::Bonus => "Bonus",
             OffCycleReason::Correction => "Correction",
             OffCycleReason::Noop => "",
@@ -5592,8 +5592,8 @@ pub struct GetCompanyCustomFieldsResponse {
 }
 
 /**
- * Must be "Employee" if send_offer is set to true.
- */
+* Must be "Employee" if send_offer is set to true.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OnboardingPersonType {
     #[serde(rename = "Contractor")]
@@ -5608,7 +5608,7 @@ pub enum OnboardingPersonType {
 
 impl std::fmt::Display for OnboardingPersonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OnboardingPersonType::Contractor => "Contractor",
             OnboardingPersonType::Employee => "Employee",
             OnboardingPersonType::Noop => "",

@@ -121,7 +121,7 @@ pub enum Language {
 
 impl std::fmt::Display for Language {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Language::Ar => "ar",
             Language::Bg => "bg",
             Language::Ca => "ca",
@@ -232,6 +232,7 @@ pub struct DescriptionlessJobOptionsDataType {
 /// - `DescriptionlessJobOptions`
 /// - `DescriptionlessJobOptionsData`
 /// - `DescriptionlessJobOptionsDataType`
+///
 #[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsAllOf {
     #[serde(flatten)]
@@ -243,8 +244,8 @@ pub struct DescriptionlessJobOptionsAllOf {
 }
 
 /**
- * Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
- */
+* Simple reason of why the transcription job failed. Check `failure_detail` for specific details and solutions
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Failure {
     #[serde(rename = "download_failure")]
@@ -273,7 +274,7 @@ pub enum Failure {
 
 impl std::fmt::Display for Failure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Failure::DownloadFailure => "download_failure",
             Failure::DurationExceeded => "duration_exceeded",
             Failure::DurationTooShort => "duration_too_short",
@@ -302,8 +303,8 @@ impl Failure {
 }
 
 /**
- * Current status of the job
- */
+* Current status of the job
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "failed")]
@@ -320,7 +321,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Failed => "failed",
             Status::InProgress => "in_progress",
             Status::Transcribed => "transcribed",
@@ -343,8 +344,8 @@ impl Status {
 }
 
 /**
- * Type of speech recognition performed. Currently the only supported values are 'async' for asynchronous jobs and `stream` for streaming jobs
- */
+* Type of speech recognition performed. Currently the only supported values are 'async' for asynchronous jobs and `stream` for streaming jobs
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "async")]
@@ -357,7 +358,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Async => "async",
             Type::Noop => "",
             Type::FallthroughString => "*",
@@ -380,6 +381,7 @@ impl Type {
 /// Rev.ai Transcription Job
 /// ***
 /// Note: properties are not displayed in the returned object if they are null
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Job {
     /**
@@ -560,6 +562,7 @@ pub struct Job {
 ///
 /// - `DescriptionlessJobOptionsAllOf`
 /// - `Job`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct JobAllOf {
     #[serde(flatten)]
@@ -591,6 +594,7 @@ pub struct SubmitJobMediaUrlOptions {
 ///
 /// - `SubmitJobMediaUrlOptions`
 /// - `SubmitJobOptionsAllOf`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobMediaUrlOptionsAllOf {
     #[serde(flatten)]
@@ -688,6 +692,7 @@ pub struct SubmitJobOptionsData {
 /// - `DescriptionlessJobOptionsAllOf`
 /// - `SubmitJobOptions`
 /// - `SubmitJobOptionsData`
+///
 #[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptionsAllOf {
     #[serde(flatten)]
@@ -702,8 +707,8 @@ pub struct SubmitJobOptionsAllOf {
 }
 
 /**
- * Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
- */
+* Type of transcript element. If Rev.ai was unable to determine the spoken word, the `type` will be `unknown`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TranscriptMonologuesElementsType {
     #[serde(rename = "punct")]
@@ -720,7 +725,7 @@ pub enum TranscriptMonologuesElementsType {
 
 impl std::fmt::Display for TranscriptMonologuesElementsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TranscriptMonologuesElementsType::Punct => "punct",
             TranscriptMonologuesElementsType::Text => "text",
             TranscriptMonologuesElementsType::Unknown => "unknown",
@@ -814,6 +819,7 @@ pub struct Monologues {
 /// Note: properties are not displayed in the returned object if they are null
 ///
 /// Jobs with skip_diarization set to true will only show a single speaker for the entire duration of the transcript.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Transcript {
     /**
@@ -833,8 +839,8 @@ pub struct Transcript {
 }
 
 /**
- * MIME type specifying the caption output format
- */
+* MIME type specifying the caption output format
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Accept {
     #[serde(rename = "application/x-subrip")]
@@ -849,7 +855,7 @@ pub enum Accept {
 
 impl std::fmt::Display for Accept {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Accept::ApplicationXSubrip => "application/x-subrip",
             Accept::TextVtt => "text/vtt",
             Accept::Noop => "",
@@ -871,8 +877,8 @@ impl Accept {
 }
 
 /**
- * MIME type specifying the transcription output format
- */
+* MIME type specifying the transcription output format
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AcceptTranscript {
     #[serde(rename = "application/vnd.rev.transcript.v1.0+json")]
@@ -887,7 +893,7 @@ pub enum AcceptTranscript {
 
 impl std::fmt::Display for AcceptTranscript {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AcceptTranscript::ApplicationVndRevTranscript0Json => {
                 "application/vnd.rev.transcript.v1.0+json"
             }

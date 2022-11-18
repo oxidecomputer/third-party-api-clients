@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-mailchimp-api = "0.3.0"
+mailchimp-api = "0.3.1"
 ```
 
 ## Basic example

@@ -2551,8 +2551,7 @@ fn clean_name(t: &str) -> String {
             .replace(" is ", " ")
             .replace(" and ", " ")
             .replace(" the ", " ")
-            .replace('/', " ")
-            .replace('-', " "),
+            .replace(['/', '-'], " "),
     )
     .replace("_i_ds", "_ids")
     .replace("v_1_", "")
@@ -2730,7 +2729,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     }
 
     f = f
-        .replace(&tag, "")
+        .replace(tag, "")
         .replace(&format!("_{}", tag.trim_end_matches('s')), "")
         .replace("_apps_app", "_app")
         .replace("__", "_")
@@ -3344,7 +3343,10 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Create the Rust source file containing the generated client:
              */
-            let lib = format!("{}\n{}", docs, out);
+            let lib = format!(
+                "{}\n#![allow(clippy::derive_partial_eq_without_eq)]\n{}",
+                docs, out
+            );
             let mut librs = src.clone();
             librs.push("lib.rs");
             save(librs, lib.as_str())?;
@@ -3368,7 +3370,8 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Create the Rust source files for each of the tags functions:
              */
-            let fail = match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
+
+            match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
                 Ok(files) => {
                     // We have a map of our files, let's write to them.
                     for (f, content) in files {
@@ -3409,9 +3412,7 @@ impl {} {{
                     println!("generate_files fail: {:?}", e);
                     true
                 }
-            };
-
-            fail
+            }
         }
         Err(e) => {
             println!("gen fail: {:?}", e);

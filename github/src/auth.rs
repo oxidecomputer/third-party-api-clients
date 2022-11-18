@@ -16,7 +16,7 @@ const MAX_JWT_TOKEN_LIFE: time::Duration = time::Duration::from_secs(60 * 9);
 const JWT_TOKEN_REFRESH_PERIOD: time::Duration = time::Duration::from_secs(60 * 8);
 
 /// Controls what sort of authentication is required for this request.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AuthenticationConstraint {
     /// No constraint
     Unconstrained,
@@ -197,7 +197,7 @@ impl InstallationTokenGenerator {
     }
 
     pub fn jwt(&self) -> &Credentials {
-        &*self.jwt_credential
+        &self.jwt_credential
     }
 }
 

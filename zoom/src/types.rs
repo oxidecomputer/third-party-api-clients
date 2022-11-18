@@ -3,8 +3,8 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /**
- * Payee:<br>`master` - master account holder pays.<br>`sub` - Sub account holder pays.
- */
+* Payee:<br>`master` - master account holder pays.<br>`sub` - Sub account holder pays.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PayMode {
     #[serde(rename = "master")]
@@ -17,7 +17,7 @@ pub enum PayMode {
 
 impl std::fmt::Display for PayMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PayMode::Master => "master",
             PayMode::Sub => "sub",
             PayMode::FallthroughString => "*",
@@ -473,8 +473,8 @@ pub struct AccountPlans {
 }
 
 /**
- * Determine how participants can join the audio portion of the meeting.<br>`both` - Telephony and VoIP.<br>`telephony` - Audio PSTN telephony only.<br>`voip` - VoIP only.<br>`thirdParty` - 3rd party audio conference.
- */
+* Determine how participants can join the audio portion of the meeting.<br>`both` - Telephony and VoIP.<br>`telephony` - Audio PSTN telephony only.<br>`voip` - VoIP only.<br>`thirdParty` - 3rd party audio conference.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AudioType {
     #[serde(rename = "both")]
@@ -491,7 +491,7 @@ pub enum AudioType {
 
 impl std::fmt::Display for AudioType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AudioType::Both => "both",
             AudioType::Telephony => "telephony",
             AudioType::ThirdParty => "thirdParty",
@@ -509,9 +509,9 @@ impl Default for AudioType {
 }
 
 /**
- * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
- *   
- */
+* Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RequirePasswordPmiMeetings {
     #[serde(rename = "all")]
@@ -528,7 +528,7 @@ pub enum RequirePasswordPmiMeetings {
 
 impl std::fmt::Display for RequirePasswordPmiMeetings {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RequirePasswordPmiMeetings::All => "all",
             RequirePasswordPmiMeetings::JbhOnly => "jbh_only",
             RequirePasswordPmiMeetings::None => "none",
@@ -764,8 +764,8 @@ pub struct ScheduleMeeting {
 }
 
 /**
- * Play sound when participants join or leave.<br>`host` - Heard by host only.<br>`all` - Heard by host and all attendees.<br>`none` - Disable.
- */
+* Play sound when participants join or leave.<br>`host` - Heard by host only.<br>`all` - Heard by host and all attendees.<br>`none` - Disable.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EntryExitChime {
     #[serde(rename = "all")]
@@ -782,7 +782,7 @@ pub enum EntryExitChime {
 
 impl std::fmt::Display for EntryExitChime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EntryExitChime::All => "all",
             EntryExitChime::Host => "host",
             EntryExitChime::None => "none",
@@ -892,11 +892,11 @@ pub struct VirtualBackgroundSettings {
 }
 
 /**
- * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
- *   `host`: Only host can share the screen.<br>
- *   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
- *   
- */
+* Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
+*   `host`: Only host can share the screen.<br>
+*   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WhoCanShareScreen {
     #[serde(rename = "all")]
@@ -911,7 +911,7 @@ pub enum WhoCanShareScreen {
 
 impl std::fmt::Display for WhoCanShareScreen {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WhoCanShareScreen::All => "all",
             WhoCanShareScreen::Host => "host",
             WhoCanShareScreen::Noop => "",
@@ -1535,14 +1535,14 @@ pub struct PasswordRequirement {
 }
 
 /**
- * Settings for 2FA( [two factor authentication](https://support.zoom.us/hc/en-us/articles/360038247071) ). The value can be one of the following:
- *   `all`: Two factor authentication will be enabled for all users in the account.<br>
- *   `none`: Two factor authentication is disabled.<br>
- *   `group`: Two factor authentication will be enabled for users belonging to specific groups. If 2FA is enabled for certain groups, the group IDs of the group(s) will be provided in the `sign_in_with_two_factor_auth_groups` field.<br>
- *   `role`: Two factor authentication will be enabled only for users assigned with specific roles in the account. If 2FA is enabled for specific roles, the role IDs will be provided in the
- *   `sign_in_with_two_factor_auth_roles` field.
- *   
- */
+* Settings for 2FA( [two factor authentication](https://support.zoom.us/hc/en-us/articles/360038247071) ). The value can be one of the following:
+*   `all`: Two factor authentication will be enabled for all users in the account.<br>
+*   `none`: Two factor authentication is disabled.<br>
+*   `group`: Two factor authentication will be enabled for users belonging to specific groups. If 2FA is enabled for certain groups, the group IDs of the group(s) will be provided in the `sign_in_with_two_factor_auth_groups` field.<br>
+*   `role`: Two factor authentication will be enabled only for users assigned with specific roles in the account. If 2FA is enabled for specific roles, the role IDs will be provided in the
+*   `sign_in_with_two_factor_auth_roles` field.
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SignInWithTwoFactorAuth {
     #[serde(rename = "all")]
@@ -1561,7 +1561,7 @@ pub enum SignInWithTwoFactorAuth {
 
 impl std::fmt::Display for SignInWithTwoFactorAuth {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SignInWithTwoFactorAuth::All => "all",
             SignInWithTwoFactorAuth::Group => "group",
             SignInWithTwoFactorAuth::None => "none",
@@ -1660,8 +1660,8 @@ pub struct Security {
 }
 
 /**
- * Automatic recording:<br>`local` - Record on local.<br>`cloud` -  Record on cloud.<br>`none` - Disabled.
- */
+* Automatic recording:<br>`local` - Record on local.<br>`cloud` -  Record on cloud.<br>`none` - Disabled.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AutoRecording {
     #[serde(rename = "cloud")]
@@ -1678,7 +1678,7 @@ pub enum AutoRecording {
 
 impl std::fmt::Display for AutoRecording {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AutoRecording::Cloud => "cloud",
             AutoRecording::Local => "local",
             AutoRecording::None => "none",
@@ -1747,6 +1747,7 @@ pub struct RecordingPasswordRequirement {
 }
 
 /// Setting to allow cloud recording access only from specific IP address ranges.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IpAddressAccessControl {
     /**
@@ -2560,8 +2561,8 @@ pub struct DateTime {
 }
 
 /**
- * Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
- */
+* Device protocol:<br>`H.323` - H.323.<br>`SIP` - SIP.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Protocol {
     #[serde(rename = "H.323")]
@@ -2576,7 +2577,7 @@ pub enum Protocol {
 
 impl std::fmt::Display for Protocol {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Protocol::H323 => "H.323",
             Protocol::Sip => "SIP",
             Protocol::Noop => "",
@@ -2598,8 +2599,8 @@ impl Protocol {
 }
 
 /**
- * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
- */
+* Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Encryption {
     #[serde(rename = "auto")]
@@ -2616,7 +2617,7 @@ pub enum Encryption {
 
 impl std::fmt::Display for Encryption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Encryption::Auto => "auto",
             Encryption::No => "no",
             Encryption::Yes => "yes",
@@ -2711,6 +2712,7 @@ pub struct Groups {
 ///
 /// - `Group`
 /// - `Groups`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupsAllOf {
     /**
@@ -2868,8 +2870,8 @@ pub struct Occurrence {
 }
 
 /**
- * Determine how participants can join the audio portion of the meeting.<br>`both` - Both Telephony and VoIP.<br>`telephony` - Telephony only.<br>`voip` - VoIP only.
- */
+* Determine how participants can join the audio portion of the meeting.<br>`both` - Both Telephony and VoIP.<br>`telephony` - Telephony only.<br>`voip` - VoIP only.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Audio {
     #[serde(rename = "both")]
@@ -2884,7 +2886,7 @@ pub enum Audio {
 
 impl std::fmt::Display for Audio {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Audio::Both => "both",
             Audio::Telephony => "telephony",
             Audio::Voip => "voip",
@@ -2901,8 +2903,8 @@ impl Default for Audio {
 }
 
 /**
- * Type of number.
- */
+* Type of number.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "toll")]
@@ -2917,7 +2919,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Toll => "toll",
             Type::Tollfree => "tollfree",
             Type::Noop => "",
@@ -2984,11 +2986,11 @@ pub struct GlobalDialInNumbers {
 }
 
 /**
- * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be **automatically disabled**. <br><br>The value of this field can be one of the following:<br>
- *   `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
- *   
- *   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
- */
+* Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be **automatically disabled**. <br><br>The value of this field can be one of the following:<br>
+*   `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
+*   
+*   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EncryptionType {
     #[serde(rename = "e2ee")]
@@ -3003,7 +3005,7 @@ pub enum EncryptionType {
 
 impl std::fmt::Display for EncryptionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EncryptionType::E2Ee => "e2ee",
             EncryptionType::EnhancedEncryption => "enhanced_encryption",
             EncryptionType::Noop => "",
@@ -3025,10 +3027,10 @@ impl EncryptionType {
 }
 
 /**
- * Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
- *   `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
- *   `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
- */
+* Specify whether to allow users from specific regions to join this meeting; or block users from specific regions from joining this meeting. <br><br>
+*   `approve`: Allow users from specific regions/countries to join this meeting. If this setting is selected, the approved regions/countries must be included in the `approved_list`.<br><br>
+*   `deny`: Block users from specific regions/countries from joining this meeting. If this setting is selected, the approved regions/countries must be included in the `denied_list`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Method {
     #[serde(rename = "approve")]
@@ -3043,7 +3045,7 @@ pub enum Method {
 
 impl std::fmt::Display for Method {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Method::Approve => "approve",
             Method::Deny => "deny",
             Method::Noop => "",
@@ -3065,6 +3067,7 @@ impl Method {
 }
 
 /// Approve or block users from specific regions/countries from joining this meeting.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApprovedDeniedCountriesRegions {
     /**
@@ -3536,10 +3539,10 @@ pub struct MeetingSettings {
 }
 
 /**
- * This field is required **if you're scheduling a recurring meeting of type** `2` to state which day(s) of the week the meeting should repeat. <br> <br> The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `"1"` as the value of this field.<br><br> **Note:** If you would like the meeting to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays provide `"1,3"` as the value of this field.
- *   
- *    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
- */
+* This field is required **if you're scheduling a recurring meeting of type** `2` to state which day(s) of the week the meeting should repeat. <br> <br> The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `"1"` as the value of this field.<br><br> **Note:** If you would like the meeting to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays provide `"1,3"` as the value of this field.
+*   
+*    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WeeklyDays {
     #[serde(rename = "1")]
@@ -3562,7 +3565,7 @@ pub enum WeeklyDays {
 
 impl std::fmt::Display for WeeklyDays {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WeeklyDays::One => "1",
             WeeklyDays::Two => "2",
             WeeklyDays::Three => "3",
@@ -3808,8 +3811,8 @@ pub struct MeetingInfo {
 }
 
 /**
- * Meeting status
- */
+* Meeting status
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "started")]
@@ -3824,7 +3827,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Started => "started",
             Status::Waiting => "waiting",
             Status::Noop => "",
@@ -4235,12 +4238,12 @@ pub struct MeetingLiveStream {
 }
 
 /**
- * Update the status of a livestream.
- *   
- *   The value can be one of the following:<br>
- *   `start`: Start a live stream. <br>
- *   `stop`: Stop an ongoing live stream.
- */
+* Update the status of a livestream.
+*   
+*   The value can be one of the following:<br>
+*   `start`: Start a live stream. <br>
+*   `stop`: Stop an ongoing live stream.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Action {
     #[serde(rename = "start")]
@@ -4255,7 +4258,7 @@ pub enum Action {
 
 impl std::fmt::Display for Action {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Action::Start => "start",
             Action::Stop => "stop",
             Action::Noop => "",
@@ -4505,6 +4508,7 @@ pub struct Panelists {
 /// - `Groups`
 /// - `Panelist`
 /// - `Panelists`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PanelistsAllOf {
     #[serde(flatten)]
@@ -4592,8 +4596,8 @@ pub struct QosAudio {
 }
 
 /**
- * The recording status.
- */
+* The recording status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingStatus {
     #[serde(rename = "completed")]
@@ -4606,7 +4610,7 @@ pub enum RecordingStatus {
 
 impl std::fmt::Display for RecordingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingStatus::Completed => "completed",
             RecordingStatus::Noop => "",
             RecordingStatus::FallthroughString => "*",
@@ -4809,8 +4813,8 @@ pub struct RecordingSeparateAudio {
 }
 
 /**
- * Determine how the meeting recording is shared.
- */
+* Determine how the meeting recording is shared.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ShareRecording {
     #[serde(rename = "internally")]
@@ -4827,7 +4831,7 @@ pub enum ShareRecording {
 
 impl std::fmt::Display for ShareRecording {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ShareRecording::Internally => "internally",
             ShareRecording::None => "none",
             ShareRecording::Publicly => "publicly",
@@ -5090,8 +5094,8 @@ pub struct Registrant {
 }
 
 /**
- * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
- */
+* Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RegistrantStatusAction {
     #[serde(rename = "approve")]
@@ -5108,7 +5112,7 @@ pub enum RegistrantStatusAction {
 
 impl std::fmt::Display for RegistrantStatusAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RegistrantStatusAction::Approve => "approve",
             RegistrantStatusAction::Cancel => "cancel",
             RegistrantStatusAction::Deny => "deny",
@@ -5369,6 +5373,7 @@ pub struct SettingsData {
 ///
 /// - `MeetingSettings`
 /// - `SettingsData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SettingsAllOf {
     /**
@@ -5564,12 +5569,12 @@ pub struct RecurrenceWebinar {
 }
 
 /**
- * Indicate whether you want attendees to be able to view answered questions only or view all questions.
- *   
- *   * `only`: Attendees are able to view answered questions only.
- *   
- *   *  `all`: Attendees are able to view all questions submitted in the Q&A.
- */
+* Indicate whether you want attendees to be able to view answered questions only or view all questions.
+*   
+*   * `only`: Attendees are able to view answered questions only.
+*   
+*   *  `all`: Attendees are able to view all questions submitted in the Q&A.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AnswerQuestions {
     #[serde(rename = "all")]
@@ -5584,7 +5589,7 @@ pub enum AnswerQuestions {
 
 impl std::fmt::Display for AnswerQuestions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AnswerQuestions::All => "all",
             AnswerQuestions::Only => "only",
             AnswerQuestions::Noop => "",
@@ -6081,6 +6086,7 @@ pub struct SessionWebinar {
 ///
 /// - `SettingsData`
 /// - `WebinarSettings`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SessionWebinarUpdateSettingsAllOf {
     #[serde(flatten)]
@@ -6181,9 +6187,9 @@ pub struct SessionWebinarUpdate {
 }
 
 /**
- * Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
- *   `media_link` - Media link.
- */
+* Dial-in number types:<br>`toll` - Toll number.<br>`tollfree` -Toll free number.<br>
+*   `media_link` - Media link.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TspAccountsListDialInNumbersType {
     #[serde(rename = "media_link")]
@@ -6200,7 +6206,7 @@ pub enum TspAccountsListDialInNumbersType {
 
 impl std::fmt::Display for TspAccountsListDialInNumbersType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TspAccountsListDialInNumbersType::MediaLink => "media_link",
             TspAccountsListDialInNumbersType::Toll => "toll",
             TspAccountsListDialInNumbersType::Tollfree => "tollfree",
@@ -6260,8 +6266,8 @@ pub struct DialInNumbers {
 }
 
 /**
- * Telephony bridge
- */
+* Telephony bridge
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TspBridge {
     #[serde(rename = "EU_TSP_TB")]
@@ -6276,7 +6282,7 @@ pub enum TspBridge {
 
 impl std::fmt::Display for TspBridge {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TspBridge::EuTspTb => "EU_TSP_TB",
             TspBridge::UsTspTb => "US_TSP_TB",
             TspBridge::Noop => "",
@@ -6552,13 +6558,13 @@ pub struct CustomAttributes {
 }
 
 /**
- * The label to add to the user's phone number. You can only add one label to the user's phone number:
- *   
- *   * `Mobile`
- *   * `Office`
- *   * `Home`
- *   * `Fax`
- */
+* The label to add to the user's phone number. You can only add one label to the user's phone number:
+*   
+*   * `Mobile`
+*   * `Office`
+*   * `Home`
+*   * `Fax`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Label {
     #[serde(rename = "Fax")]
@@ -6577,7 +6583,7 @@ pub enum Label {
 
 impl std::fmt::Display for Label {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Label::Fax => "Fax",
             Label::Home => "Home",
             Label::Mobile => "Mobile",
@@ -8327,8 +8333,8 @@ pub struct ZoomRoom {
 }
 
 /**
- * Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
- */
+* Poll Question & Answer type:<br>`single` - Single choice<br>`mutliple` - Multiple choice
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PollQuestionsType {
     #[serde(rename = "multiple")]
@@ -8343,7 +8349,7 @@ pub enum PollQuestionsType {
 
 impl std::fmt::Display for PollQuestionsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PollQuestionsType::Multiple => "multiple",
             PollQuestionsType::Single => "single",
             PollQuestionsType::Noop => "",
@@ -8418,8 +8424,8 @@ pub struct Poll {
 }
 
 /**
- * Field name of the question.
- */
+* Field name of the question.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FieldName {
     #[serde(rename = "address")]
@@ -8456,7 +8462,7 @@ pub enum FieldName {
 
 impl std::fmt::Display for FieldName {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FieldName::Address => "address",
             FieldName::City => "city",
             FieldName::Comments => "comments",
@@ -8506,8 +8512,8 @@ pub struct MeetingRegistrantQuestions {
 }
 
 /**
- * Type of the question being asked.
- */
+* Type of the question being asked.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MeetingRegistrantQuestionsCustomType {
     #[serde(rename = "short")]
@@ -8522,7 +8528,7 @@ pub enum MeetingRegistrantQuestionsCustomType {
 
 impl std::fmt::Display for MeetingRegistrantQuestionsCustomType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MeetingRegistrantQuestionsCustomType::Short => "short",
             MeetingRegistrantQuestionsCustomType::Single => "single",
             MeetingRegistrantQuestionsCustomType::Noop => "",
@@ -8628,8 +8634,8 @@ pub struct WebinarRegistrantQuestions {
 }
 
 /**
- * Field name.
- */
+* Field name.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingRegistrantQuestionsFieldName {
     #[serde(rename = "address")]
@@ -8668,7 +8674,7 @@ pub enum RecordingRegistrantQuestionsFieldName {
 
 impl std::fmt::Display for RecordingRegistrantQuestionsFieldName {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingRegistrantQuestionsFieldName::Address => "address",
             RecordingRegistrantQuestionsFieldName::City => "city",
             RecordingRegistrantQuestionsFieldName::Comments => "comments",
@@ -8721,8 +8727,8 @@ pub struct RecordingRegistrantQuestions {
 }
 
 /**
- * The type of registration question and answers.
- */
+* The type of registration question and answers.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingRegistrantQuestionsCustomType {
     #[serde(rename = "multiple")]
@@ -8739,7 +8745,7 @@ pub enum RecordingRegistrantQuestionsCustomType {
 
 impl std::fmt::Display for RecordingRegistrantQuestionsCustomType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingRegistrantQuestionsCustomType::Multiple => "multiple",
             RecordingRegistrantQuestionsCustomType::Short => "short",
             RecordingRegistrantQuestionsCustomType::Single => "single",
@@ -10257,7 +10263,7 @@ pub enum AccountSettingsRecordingAuthenticationUpdateOptionType {
 
 impl std::fmt::Display for AccountSettingsRecordingAuthenticationUpdateOptionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountSettingsRecordingAuthenticationUpdateOptionType::EnforceLogin => "enforce_login",
             AccountSettingsRecordingAuthenticationUpdateOptionType::EnforceLoginWithDomains => {
                 "enforce_login_with_domains"
@@ -10300,7 +10306,7 @@ pub enum AccountSettingsRecordingAuthenticationUpdateOptionAction {
 
 impl std::fmt::Display for AccountSettingsRecordingAuthenticationUpdateOptionAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountSettingsRecordingAuthenticationUpdateOptionAction::Add => "add",
             AccountSettingsRecordingAuthenticationUpdateOptionAction::Delete => "delete",
             AccountSettingsRecordingAuthenticationUpdateOptionAction::Update => "update",
@@ -10867,16 +10873,16 @@ pub struct Metrics {
 }
 
 /**
- * The archived file's file type:
- *   * `MP4` — Video file.
- *   * `M4A` — Audio-only file.
- *   * `TRANSCRIPT` — A transcript file of the recording, in VTT file format.
- *   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
- *   * `CC` — A file containing the recording's closed captions, in VTT file format.
- *   * `CSV` — A file containing polling data in, in CSV format.
- *   
- *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
- */
+* The archived file's file type:
+*   * `MP4` — Video file.
+*   * `M4A` — Audio-only file.
+*   * `TRANSCRIPT` — A transcript file of the recording, in VTT file format.
+*   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
+*   * `CC` — A file containing the recording's closed captions, in VTT file format.
+*   * `CSV` — A file containing polling data in, in CSV format.
+*   
+*   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FileType {
     #[serde(rename = "CC")]
@@ -10899,7 +10905,7 @@ pub enum FileType {
 
 impl std::fmt::Display for FileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FileType::Cc => "CC",
             FileType::Chat => "CHAT",
             FileType::Csv => "CSV",
@@ -10925,21 +10931,21 @@ impl FileType {
 }
 
 /**
- * The archived file's recording type:
- *   * `shared_screen_with_speaker_view(CC)`
- *   * `shared_screen_with_speaker_view`
- *   * `shared_screen_with_gallery_view`
- *   * `speaker_view`
- *   * `gallery_view`
- *   * `shared_screen`
- *   * `audio_only`
- *   * `audio_transcript`
- *   * `chat_file`
- *   * `active_speaker`
- *   * `host_video`
- *   
- *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
- */
+* The archived file's recording type:
+*   * `shared_screen_with_speaker_view(CC)`
+*   * `shared_screen_with_speaker_view`
+*   * `shared_screen_with_gallery_view`
+*   * `speaker_view`
+*   * `gallery_view`
+*   * `shared_screen`
+*   * `audio_only`
+*   * `audio_transcript`
+*   * `chat_file`
+*   * `active_speaker`
+*   * `host_video`
+*   
+*   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingType {
     #[serde(rename = "active_speaker")]
@@ -10972,7 +10978,7 @@ pub enum RecordingType {
 
 impl std::fmt::Display for RecordingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingType::ActiveSpeaker => "active_speaker",
             RecordingType::AudioOnly => "audio_only",
             RecordingType::AudioTranscript => "audio_transcript",
@@ -11270,7 +11276,7 @@ pub enum RecordingStatusUpdateBodyRequestAction {
 
 impl std::fmt::Display for RecordingStatusUpdateBodyRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingStatusUpdateBodyRequestAction::Recover => "recover",
             RecordingStatusUpdateBodyRequestAction::Noop => "",
             RecordingStatusUpdateBodyRequestAction::FallthroughString => "*",
@@ -11389,12 +11395,12 @@ pub struct SetUpAccountRequest {
 }
 
 /**
- * Query response by number assignment. The value can be one of the following:
- *   <br>
- *   `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
- *   `all`: Include both assigned and unassigned numbers in the response.<br>
- *   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
- */
+* Query response by number assignment. The value can be one of the following:
+*   <br>
+*   `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
+*   `all`: Include both assigned and unassigned numbers in the response.<br>
+*   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListAccountPhoneNumbersType {
     #[serde(rename = "all")]
@@ -11411,7 +11417,7 @@ pub enum ListAccountPhoneNumbersType {
 
 impl std::fmt::Display for ListAccountPhoneNumbersType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListAccountPhoneNumbersType::All => "all",
             ListAccountPhoneNumbersType::Assigned => "assigned",
             ListAccountPhoneNumbersType::Unassigned => "unassigned",
@@ -11434,10 +11440,10 @@ impl ListAccountPhoneNumbersType {
 }
 
 /**
- * The type of assignee to whom the number is assigned. The value can be one of the following:<br>
- *   `user`<br> `callQueue`<br> `autoReceptionist`<br>
- *   `commonAreaPhone`
- */
+* The type of assignee to whom the number is assigned. The value can be one of the following:<br>
+*   `user`<br> `callQueue`<br> `autoReceptionist`<br>
+*   `commonAreaPhone`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ExtensionType {
     #[serde(rename = "autoReceptionist")]
@@ -11456,7 +11462,7 @@ pub enum ExtensionType {
 
 impl std::fmt::Display for ExtensionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ExtensionType::AutoReceptionist => "autoReceptionist",
             ExtensionType::CallQueue => "callQueue",
             ExtensionType::CommonAreaPhone => "commonAreaPhone",
@@ -11480,8 +11486,8 @@ impl ExtensionType {
 }
 
 /**
- * Source of phone number.
- */
+* Source of phone number.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Source {
     #[serde(rename = "external")]
@@ -11496,7 +11502,7 @@ pub enum Source {
 
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Source::External => "external",
             Source::Internal => "internal",
             Source::Noop => "",
@@ -11518,8 +11524,8 @@ impl Source {
 }
 
 /**
- * Status of the number.
- */
+* Status of the number.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListAccountPhoneNumbersResponseStatus {
     #[serde(rename = "available")]
@@ -11534,7 +11540,7 @@ pub enum ListAccountPhoneNumbersResponseStatus {
 
 impl std::fmt::Display for ListAccountPhoneNumbersResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListAccountPhoneNumbersResponseStatus::Available => "available",
             ListAccountPhoneNumbersResponseStatus::Pending => "pending",
             ListAccountPhoneNumbersResponseStatus::Noop => "",
@@ -11780,8 +11786,8 @@ pub struct ListAccountPhoneNumbersResponseData {
 }
 
 /**
- * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
- */
+* Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TransportProtocol {
     #[serde(rename = "AUTO")]
@@ -11800,7 +11806,7 @@ pub enum TransportProtocol {
 
 impl std::fmt::Display for TransportProtocol {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TransportProtocol::Auto => "AUTO",
             TransportProtocol::Tcp => "TCP",
             TransportProtocol::Tls => "TLS",
@@ -12326,8 +12332,8 @@ pub struct UpdateSipPhoneRequest {
 }
 
 /**
- * The status of the Zoom Room.
- */
+* The status of the Zoom Room.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListZoomRoomsStatus {
     #[serde(rename = "Available")]
@@ -12346,7 +12352,7 @@ pub enum ListZoomRoomsStatus {
 
 impl std::fmt::Display for ListZoomRoomsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListZoomRoomsStatus::Available => "Available",
             ListZoomRoomsStatus::InMeeting => "InMeeting",
             ListZoomRoomsStatus::Offline => "Offline",
@@ -12370,8 +12376,8 @@ impl ListZoomRoomsStatus {
 }
 
 /**
- * Type of the Zoom Rooms.
- */
+* Type of the Zoom Rooms.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListZoomRoomsType {
     #[serde(rename = "DigitalSignageOnly")]
@@ -12388,7 +12394,7 @@ pub enum ListZoomRoomsType {
 
 impl std::fmt::Display for ListZoomRoomsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListZoomRoomsType::DigitalSignageOnly => "DigitalSignageOnly",
             ListZoomRoomsType::SchedulingDisplayOnly => "SchedulingDisplayOnly",
             ListZoomRoomsType::ZoomRoom => "ZoomRoom",
@@ -12938,9 +12944,9 @@ pub struct UpdateSiteDetailsRequest {
 }
 
 /**
- * Presence status of the contact in Zoom Client. The value of this field can be one of the following:
- *   `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
- */
+* Presence status of the contact in Zoom Client. The value of this field can be one of the following:
+*   `Do_Not_Disturb`<br> `away`<br> `Available`<br> `Offline`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PresenceStatus {
     #[serde(rename = "Available")]
@@ -12959,7 +12965,7 @@ pub enum PresenceStatus {
 
 impl std::fmt::Display for PresenceStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PresenceStatus::Available => "Available",
             PresenceStatus::Away => "Away",
             PresenceStatus::DoNotDisturb => "Do_Not_Disturb",
@@ -13141,10 +13147,10 @@ pub struct SearchCompanyContactsResponse {
 }
 
 /**
- * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
- *   
- *   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
- */
+* This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
+*   
+*   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetChatMessagesResponseStatus {
     #[serde(rename = "Deleted")]
@@ -13161,7 +13167,7 @@ pub enum GetChatMessagesResponseStatus {
 
 impl std::fmt::Display for GetChatMessagesResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetChatMessagesResponseStatus::Deleted => "Deleted",
             GetChatMessagesResponseStatus::Edited => "Edited",
             GetChatMessagesResponseStatus::Normal => "Normal",
@@ -13457,10 +13463,10 @@ pub struct MarkMessageRequest {
 }
 
 /**
- * The action to perform with the message:
- *   * `add` — Add an emoji reaction.
- *   * `remove` — Remove an emoji reaction.
- */
+* The action to perform with the message:
+*   * `add` — Add an emoji reaction.
+*   * `remove` — Remove an emoji reaction.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReactMessageRequestAction {
     #[serde(rename = "add")]
@@ -13475,7 +13481,7 @@ pub enum ReactMessageRequestAction {
 
 impl std::fmt::Display for ReactMessageRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReactMessageRequestAction::Add => "add",
             ReactMessageRequestAction::Remove => "remove",
             ReactMessageRequestAction::Noop => "",
@@ -14013,8 +14019,8 @@ pub struct GetUserContactResponse {
 }
 
 /**
- * The role of the member. The value can be one of these: `owner`, `admin`, `member`.
- */
+* The role of the member. The value can be one of these: `owner`, `admin`, `member`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Role {
     #[serde(rename = "admin")]
@@ -14031,7 +14037,7 @@ pub enum Role {
 
 impl std::fmt::Display for Role {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Role::Admin => "admin",
             Role::Member => "member",
             Role::Owner => "owner",
@@ -14357,12 +14363,12 @@ pub struct AccountResponse {
 }
 
 /**
- * Use the following options to filter the results of the account's information:
- *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
- *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
- *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
- *   * `meeting_security` — View the account's meeting security settings.
- */
+* Use the following options to filter the results of the account's information:
+*   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+*   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+*   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+*   * `meeting_security` — View the account's meeting security settings.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OptionData {
     #[serde(rename = "meeting_authentication")]
@@ -14377,7 +14383,7 @@ pub enum OptionData {
 
 impl std::fmt::Display for OptionData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OptionData::MeetingAuthentication => "meeting_authentication",
             OptionData::RecordingAuthentication => "recording_authentication",
             OptionData::Noop => "",
@@ -14406,6 +14412,7 @@ impl OptionData {
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountSettingsResponseOneOf {
@@ -14455,6 +14462,7 @@ impl AccountSettingsResponseOneOf {
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountSettingsUpdateRequestOneOf {
@@ -14504,7 +14512,7 @@ pub enum AccountSettingsUpdateOption {
 
 impl std::fmt::Display for AccountSettingsUpdateOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountSettingsUpdateOption::MeetingAuthentication => "meeting_authentication",
             AccountSettingsUpdateOption::MeetingSecurity => "meeting_security",
             AccountSettingsUpdateOption::RecordingAuthentication => "recording_authentication",
@@ -14544,8 +14552,8 @@ pub struct AccountTrustedDomainResponse {
 }
 
 /**
- * Status of the plan.
- */
+* Status of the plan.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountPlansResponsePlanBaseStatus {
     #[serde(rename = "active")]
@@ -14562,7 +14570,7 @@ pub enum AccountPlansResponsePlanBaseStatus {
 
 impl std::fmt::Display for AccountPlansResponsePlanBaseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountPlansResponsePlanBaseStatus::Active => "active",
             AccountPlansResponsePlanBaseStatus::Cancel => "cancel",
             AccountPlansResponsePlanBaseStatus::Expired => "expired",
@@ -14678,8 +14686,8 @@ pub struct PlanWebinar {
 }
 
 /**
- * Status of additional Cloud Recording plan.
- */
+* Status of additional Cloud Recording plan.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PlanRecordingStatus {
     #[serde(rename = "Active")]
@@ -14694,7 +14702,7 @@ pub enum PlanRecordingStatus {
 
 impl std::fmt::Display for PlanRecordingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlanRecordingStatus::Active => "Active",
             PlanRecordingStatus::Cancelled => "Cancelled",
             PlanRecordingStatus::Noop => "",
@@ -14941,6 +14949,7 @@ pub struct AccountPlanCreateRequest {
 ///
 /// - `AccountPlans`
 /// - `AccountPlanCreateRequest`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPlanCreateRequestAllOf {
     /**
@@ -14978,6 +14987,7 @@ pub struct AccountPlanAddonCreateRequest {
 /// - `AccountPlanAddonCreateRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountPlanAddonCreateRequestOneOf {
@@ -15192,10 +15202,10 @@ pub struct GroupMembersCreateResponse {
 }
 
 /**
- * The action to perform:
- *   * `move` — Remove the group member from one group and move them to a different group.
- *   * `set_primary` — Set the user's primary group.
- */
+* The action to perform:
+*   * `move` — Remove the group member from one group and move them to a different group.
+*   * `set_primary` — Set the user's primary group.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UpdateGroupMemberRequestAction {
     #[serde(rename = "move")]
@@ -15210,7 +15220,7 @@ pub enum UpdateGroupMemberRequestAction {
 
 impl std::fmt::Display for UpdateGroupMemberRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UpdateGroupMemberRequestAction::Move => "move",
             UpdateGroupMemberRequestAction::SetPrimary => "set_primary",
             UpdateGroupMemberRequestAction::Noop => "",
@@ -15258,6 +15268,7 @@ pub struct UpdateGroupMemberRequest {
 ///
 /// - `Device`
 /// - `Groups`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeviceCreateResponseAllOf {
     /**
@@ -15273,6 +15284,7 @@ pub struct DeviceCreateResponseAllOf {
 ///
 /// - `Groups`
 /// - `TrackingField`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrackingfieldGetResponseAllOf {
     #[serde(flatten)]
@@ -15285,8 +15297,8 @@ pub struct TrackingfieldGetResponseAllOf {
 }
 
 /**
- * IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
- */
+* IM Group types:<br>`normal` - Only members can see automatically see the other members of this group. Other people can search for members within this group. <br>`shared` - Everyone under an account can see the group members automatically.<br>`restricted` - Nobody can see the group or search for members except the members in the group.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ImGroupCreateRequestType {
     #[serde(rename = "normal")]
@@ -15301,7 +15313,7 @@ pub enum ImGroupCreateRequestType {
 
 impl std::fmt::Display for ImGroupCreateRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ImGroupCreateRequestType::Normal => "normal",
             ImGroupCreateRequestType::Restricted => "restricted",
             ImGroupCreateRequestType::Shared => "shared",
@@ -15409,6 +15421,7 @@ pub struct ImGroupCreateResponse {
 ///
 /// - `Domains`
 /// - `Groups`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImGroupResponseAllOf {
     #[serde(flatten)]
@@ -15440,8 +15453,8 @@ pub struct DashboardImResponse {
 }
 
 /**
- * IM chat session type.
- */
+* IM chat session type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ImChatSessionsResponseType {
     #[serde(rename = "1:1")]
@@ -15456,7 +15469,7 @@ pub enum ImChatSessionsResponseType {
 
 impl std::fmt::Display for ImChatSessionsResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ImChatSessionsResponseType::One => "1:1",
             ImChatSessionsResponseType::Group => "Group",
             ImChatSessionsResponseType::Noop => "",
@@ -15531,6 +15544,7 @@ pub struct ImChatSessionsResponseData {
 /// - `PaginationToken4ImChat`
 /// - `DashboardImResponse`
 /// - `ImChatSessionsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatSessionsResponseAllOf {
     /**
@@ -15642,6 +15656,7 @@ pub struct ImChatMessagesResponseDataType {
 /// - `PaginationToken4ImChat`
 /// - `ImChatMessagesResponse`
 /// - `ImChatMessagesResponseDataType`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponseAllOf {
     /**
@@ -15656,8 +15671,8 @@ pub struct ImChatMessagesResponseAllOf {
 }
 
 /**
- * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
- */
+* The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MeetingsType {
     #[serde(rename = "live")]
@@ -15672,7 +15687,7 @@ pub enum MeetingsType {
 
 impl std::fmt::Display for MeetingsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MeetingsType::Live => "live",
             MeetingsType::Scheduled => "scheduled",
             MeetingsType::Upcoming => "upcoming",
@@ -15732,6 +15747,7 @@ pub struct MeetingCreateResponse {
 ///
 /// - `MeetingInfo`
 /// - `MeetingCreateResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateResponseAllOf {
     /**
@@ -15796,6 +15812,7 @@ pub struct MeetingResponse {
 ///
 /// - `MeetingInfoGet`
 /// - `MeetingResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingResponseAllOf {
     /**
@@ -15824,6 +15841,7 @@ pub struct MeetingUpdateRequest {
 ///
 /// - `Domains`
 /// - `MeetingUpdateRequest`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingUpdateRequestAllOf {
     #[serde(flatten)]
@@ -15833,10 +15851,10 @@ pub struct MeetingUpdateRequestAllOf {
 }
 
 /**
- * `end` - End a meeting.<br>
- *   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
- *   
- */
+* `end` - End a meeting.<br>
+*   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MeetingStatusRequestAction {
     #[serde(rename = "end")]
@@ -15851,7 +15869,7 @@ pub enum MeetingStatusRequestAction {
 
 impl std::fmt::Display for MeetingStatusRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MeetingStatusRequestAction::End => "end",
             MeetingStatusRequestAction::Recover => "recover",
             MeetingStatusRequestAction::Noop => "",
@@ -15884,8 +15902,8 @@ pub struct MeetingStatusRequest {
 }
 
 /**
- * The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
- */
+* The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MeetingRegistrantsStatus {
     #[serde(rename = "approved")]
@@ -15900,7 +15918,7 @@ pub enum MeetingRegistrantsStatus {
 
 impl std::fmt::Display for MeetingRegistrantsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MeetingRegistrantsStatus::Approved => "approved",
             MeetingRegistrantsStatus::Denied => "denied",
             MeetingRegistrantsStatus::Pending => "pending",
@@ -16126,6 +16144,7 @@ pub struct PastMeetingParticipantsResponse {
 ///
 /// - `PaginationToken`
 /// - `PastMeetingParticipantsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PastMeetingParticipantsResponseAllOf {
     /**
@@ -16138,8 +16157,8 @@ pub struct PastMeetingParticipantsResponseAllOf {
 }
 
 /**
- * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
- */
+* Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MeetingPollCreateResponseStatus {
     #[serde(rename = "ended")]
@@ -16158,7 +16177,7 @@ pub enum MeetingPollCreateResponseStatus {
 
 impl std::fmt::Display for MeetingPollCreateResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MeetingPollCreateResponseStatus::Ended => "ended",
             MeetingPollCreateResponseStatus::Notstart => "notstart",
             MeetingPollCreateResponseStatus::Sharing => "sharing",
@@ -16203,6 +16222,7 @@ pub struct MeetingPollGetResponse {
 ///
 /// - `Poll`
 /// - `MeetingPollGetResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingPollGetResponseAllOf {
     /**
@@ -16240,6 +16260,7 @@ pub struct RecordingGetResponse {
 ///
 /// - `Domains`
 /// - `RecordingGetResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecordingGetResponseAllOf {
     #[serde(flatten)]
@@ -16249,8 +16270,8 @@ pub struct RecordingGetResponseAllOf {
 }
 
 /**
- * The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
- */
+* The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingDeleteAction {
     #[serde(rename = "delete")]
@@ -16263,7 +16284,7 @@ pub enum RecordingDeleteAction {
 
 impl std::fmt::Display for RecordingDeleteAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingDeleteAction::Delete => "delete",
             RecordingDeleteAction::Trash => "trash",
             RecordingDeleteAction::FallthroughString => "*",
@@ -16319,10 +16340,10 @@ pub struct MeetingRecordingRegistrantCreateResponse {
 }
 
 /**
- * Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
- *   
- *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
- */
+* Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+*   
+*   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DashboardMeetingsType {
     #[serde(rename = "live")]
@@ -16337,7 +16358,7 @@ pub enum DashboardMeetingsType {
 
 impl std::fmt::Display for DashboardMeetingsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DashboardMeetingsType::Live => "live",
             DashboardMeetingsType::Past => "past",
             DashboardMeetingsType::PastOne => "pastOne",
@@ -16354,8 +16375,8 @@ impl Default for DashboardMeetingsType {
 }
 
 /**
- * Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
- */
+* Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IncludeFields {
     #[serde(rename = "tracking_fields")]
@@ -16368,7 +16389,7 @@ pub enum IncludeFields {
 
 impl std::fmt::Display for IncludeFields {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IncludeFields::TrackingFields => "tracking_fields",
             IncludeFields::Noop => "",
             IncludeFields::FallthroughString => "*",
@@ -16406,6 +16427,7 @@ pub struct DashboardMeetingsResponse {
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardMeetingsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingsResponseAllOf {
     /**
@@ -16420,8 +16442,8 @@ pub struct DashboardMeetingsResponseAllOf {
 }
 
 /**
- * Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
- */
+* Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DashboardMeetingParticipantsIncludeFields {
     #[serde(rename = "registrant_id")]
@@ -16434,7 +16456,7 @@ pub enum DashboardMeetingParticipantsIncludeFields {
 
 impl std::fmt::Display for DashboardMeetingParticipantsIncludeFields {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DashboardMeetingParticipantsIncludeFields::RegistrantId => "registrant_id",
             DashboardMeetingParticipantsIncludeFields::Noop => "",
             DashboardMeetingParticipantsIncludeFields::FallthroughString => "*",
@@ -16455,16 +16477,16 @@ impl DashboardMeetingParticipantsIncludeFields {
 }
 
 /**
- * The type of device the participant used to join the meeting:
- *   * `Phone` — Participant joined via PSTN.
- *   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
- *   * `Windows` — Participant joined via VoIP using a Windows device.
- *   * `Mac` — Participant joined via VoIP using a Mac device.
- *   * `iOS` — Participant joined via VoIP using an iOS device.
- *   * `Android` — Participant joined via VoIP using an Android device.
- *   
- *   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
- */
+* The type of device the participant used to join the meeting:
+*   * `Phone` — Participant joined via PSTN.
+*   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
+*   * `Windows` — Participant joined via VoIP using a Windows device.
+*   * `Mac` — Participant joined via VoIP using a Mac device.
+*   * `iOS` — Participant joined via VoIP using an iOS device.
+*   * `Android` — Participant joined via VoIP using an Android device.
+*   
+*   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DashboardMeetingParticipantsResponseDevice {
     #[serde(rename = "Android")]
@@ -16487,7 +16509,7 @@ pub enum DashboardMeetingParticipantsResponseDevice {
 
 impl std::fmt::Display for DashboardMeetingParticipantsResponseDevice {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DashboardMeetingParticipantsResponseDevice::Android => "Android",
             DashboardMeetingParticipantsResponseDevice::H323Sip => "H.323/SIP",
             DashboardMeetingParticipantsResponseDevice::Mac => "Mac",
@@ -16513,14 +16535,14 @@ impl DashboardMeetingParticipantsResponseDevice {
 }
 
 /**
- * The participant's network type:
- *   
- *   * `Wired`
- *   * `Wifi`
- *   * `PPP` — Point-to-Point.
- *   * `Cellular` — 3G, 4G, and 5G cellular.
- *   * `Others` — An unknown device.
- */
+* The participant's network type:
+*   
+*   * `Wired`
+*   * `Wifi`
+*   * `PPP` — Point-to-Point.
+*   * `Cellular` — 3G, 4G, and 5G cellular.
+*   * `Others` — An unknown device.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NetworkType {
     #[serde(rename = "Cellular")]
@@ -16541,7 +16563,7 @@ pub enum NetworkType {
 
 impl std::fmt::Display for NetworkType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NetworkType::Cellular => "Cellular",
             NetworkType::Others => "Others",
             NetworkType::Ppp => "PPP",
@@ -16566,8 +16588,8 @@ impl NetworkType {
 }
 
 /**
- * Audio quality of the participant.
- */
+* Audio quality of the participant.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AudioQuality {
     #[serde(rename = "bad")]
@@ -16586,7 +16608,7 @@ pub enum AudioQuality {
 
 impl std::fmt::Display for AudioQuality {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AudioQuality::Bad => "bad",
             AudioQuality::Fair => "fair",
             AudioQuality::Good => "good",
@@ -16610,10 +16632,10 @@ impl AudioQuality {
 }
 
 /**
- * Indicates whether the participant is in the waiting room or in the meeting.
- *   
- *   The value of this field can be `in_meeting` or `in_waiting_room`.
- */
+* Indicates whether the participant is in the waiting room or in the meeting.
+*   
+*   The value of this field can be `in_meeting` or `in_waiting_room`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DashboardMeetingParticipantsResponseStatus {
     #[serde(rename = "in_meeting")]
@@ -16628,7 +16650,7 @@ pub enum DashboardMeetingParticipantsResponseStatus {
 
 impl std::fmt::Display for DashboardMeetingParticipantsResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DashboardMeetingParticipantsResponseStatus::InMeeting => "in_meeting",
             DashboardMeetingParticipantsResponseStatus::InWaitingRoom => "in_waiting_room",
             DashboardMeetingParticipantsResponseStatus::Noop => "",
@@ -16948,6 +16970,7 @@ pub struct DashboardMeetingParticipantsResponseData {
 ///
 /// - `PaginationToken`
 /// - `DashboardMeetingParticipantsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantsResponseAllOf {
     /**
@@ -17047,6 +17070,7 @@ pub struct DashboardMeetingParticipantShareResponse {
 ///
 /// - `PaginationToken`
 /// - `DashboardMeetingParticipantShareResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingParticipantShareResponseAllOf {
     /**
@@ -17059,8 +17083,8 @@ pub struct DashboardMeetingParticipantShareResponseAllOf {
 }
 
 /**
- * The webinar type.
- */
+* The webinar type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DashboardWebinarsType {
     #[serde(rename = "live")]
@@ -17073,7 +17097,7 @@ pub enum DashboardWebinarsType {
 
 impl std::fmt::Display for DashboardWebinarsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DashboardWebinarsType::Live => "live",
             DashboardWebinarsType::Past => "past",
             DashboardWebinarsType::FallthroughString => "*",
@@ -17106,6 +17130,7 @@ pub struct DashboardWebinarsResponse {
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardWebinarsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarsResponseAllOf {
     /**
@@ -17391,6 +17416,7 @@ pub struct DashboardWebinarParticipantsResponseData {
 ///
 /// - `PaginationToken`
 /// - `DashboardWebinarParticipantsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardWebinarParticipantsResponseAllOf {
     /**
@@ -17592,6 +17618,7 @@ pub struct DashboardImResponseData {
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardImResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponseAllOf {
     /**
@@ -17781,6 +17808,7 @@ pub struct DashboardChatResponseData {
 ///
 /// - `DashboardChatResponse`
 /// - `DashboardChatResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponseAllOf {
     #[serde(flatten)]
@@ -17908,6 +17936,7 @@ pub struct DashboardIssueZoomRoomResponseData {
 ///
 /// - `DashboardIssueZoomRoomResponse`
 /// - `DashboardIssueZoomRoomResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueZoomRoomResponseAllOf {
     #[serde(flatten)]
@@ -17953,6 +17982,7 @@ pub struct DashboardIssueDetailZoomRoomResponse {
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardIssueDetailZoomRoomResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueDetailZoomRoomResponseAllOf {
     /**
@@ -18047,8 +18077,8 @@ pub struct ReportDailyResponse {
 }
 
 /**
- * Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
- */
+* Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReportUsersType {
     #[serde(rename = "active")]
@@ -18063,7 +18093,7 @@ pub enum ReportUsersType {
 
 impl std::fmt::Display for ReportUsersType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReportUsersType::Active => "active",
             ReportUsersType::Inactive => "inactive",
             ReportUsersType::Noop => "",
@@ -18085,8 +18115,8 @@ impl ReportUsersType {
 }
 
 /**
- * The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
- */
+* The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReportMeetingsType {
     #[serde(rename = "past")]
@@ -18099,7 +18129,7 @@ pub enum ReportMeetingsType {
 
 impl std::fmt::Display for ReportMeetingsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReportMeetingsType::Past => "past",
             ReportMeetingsType::PastOne => "pastOne",
             ReportMeetingsType::FallthroughString => "*",
@@ -18280,6 +18310,7 @@ pub struct ReportMeetingsResponse {
 ///
 /// - `Pagination`
 /// - `ReportMeetingsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingsResponseAllOf {
     /**
@@ -18534,6 +18565,7 @@ pub struct ReportMeetingParticipantsResponseData {
 ///
 /// - `PaginationToken`
 /// - `ReportMeetingParticipantsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingParticipantsResponseAllOf {
     /**
@@ -18759,6 +18791,7 @@ pub struct ReportWebinarParticipantsResponseData {
 ///
 /// - `PaginationToken`
 /// - `ReportWebinarParticipantsResponseData`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarParticipantsResponseAllOf {
     /**
@@ -18864,8 +18897,8 @@ pub struct ReportWebinarQaResponse {
 }
 
 /**
- * Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
- */
+* Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum QueryDateType {
     #[serde(rename = "end_time")]
@@ -18878,7 +18911,7 @@ pub enum QueryDateType {
 
 impl std::fmt::Display for QueryDateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             QueryDateType::EndTime => "end_time",
             QueryDateType::StartTime => "start_time",
             QueryDateType::FallthroughString => "*",
@@ -18913,6 +18946,7 @@ pub struct ReportCloudRecordingResponse {
 ///
 /// - `DashboardImResponse`
 /// - `ReportCloudRecordingResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportCloudRecordingResponseAllOf {
     #[serde(flatten)]
@@ -18922,10 +18956,10 @@ pub struct ReportCloudRecordingResponseAllOf {
 }
 
 /**
- * **Optional**<br>
- *   Filter your response by a category type to see reports for a specific category.
- *   The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`
- */
+* **Optional**<br>
+*   Filter your response by a category type to see reports for a specific category.
+*   The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CategoryType {
     #[serde(rename = "account")]
@@ -18960,7 +18994,7 @@ pub enum CategoryType {
 
 impl std::fmt::Display for CategoryType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CategoryType::Account => "account",
             CategoryType::All => "all",
             CategoryType::Billing => "billing",
@@ -19057,6 +19091,7 @@ pub struct ReportOperationLogsResponse {
 ///
 /// - `PaginationToken4ImChat`
 /// - `ReportOperationLogsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportOperationLogsResponseAllOf {
     /**
@@ -19316,13 +19351,13 @@ pub struct TspUpdateRequest {
 }
 
 /**
- * The user's status:
- *   * `active` — An active user.
- *   * `inactive` — A deactivated user.
- *   * `pending` — A pending user.
- *   
- *   This value defaults to `active`.
- */
+* The user's status:
+*   * `active` — An active user.
+*   * `inactive` — A deactivated user.
+*   * `pending` — A pending user.
+*   
+*   This value defaults to `active`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsersStatus {
     #[serde(rename = "active")]
@@ -19337,7 +19372,7 @@ pub enum UsersStatus {
 
 impl std::fmt::Display for UsersStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsersStatus::Active => "active",
             UsersStatus::Inactive => "inactive",
             UsersStatus::Pending => "pending",
@@ -19354,10 +19389,10 @@ impl Default for UsersStatus {
 }
 
 /**
- * Use this parameter to display one of the following attributes in the API call's response:
- *   * `custom_attributes` — Return the user's custom attributes.
- *   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
- */
+* Use this parameter to display one of the following attributes in the API call's response:
+*   * `custom_attributes` — Return the user's custom attributes.
+*   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsersIncludeFields {
     #[serde(rename = "custom_attributes")]
@@ -19372,7 +19407,7 @@ pub enum UsersIncludeFields {
 
 impl std::fmt::Display for UsersIncludeFields {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsersIncludeFields::CustomAttributes => "custom_attributes",
             UsersIncludeFields::HostKey => "host_key",
             UsersIncludeFields::Noop => "",
@@ -19668,8 +19703,8 @@ pub struct UsersResponseData {
 }
 
 /**
- * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
- */
+* Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UserCreateRequestAction {
     #[serde(rename = "autoCreate")]
@@ -19688,7 +19723,7 @@ pub enum UserCreateRequestAction {
 
 impl std::fmt::Display for UserCreateRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserCreateRequestAction::AutoCreate => "autoCreate",
             UserCreateRequestAction::Create => "create",
             UserCreateRequestAction::CustCreate => "custCreate",
@@ -19773,14 +19808,14 @@ pub struct UserCreateRequest {
 }
 
 /**
- * The user's login method:
- *   
- *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
- *   
- *   The following login methods are only available in China:
- *   
- *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
- */
+* The user's login method:
+*   
+*   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+*   
+*   The following login methods are only available in China:
+*   
+*   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LoginType {
     #[serde(rename = "0")]
@@ -19815,7 +19850,7 @@ pub enum LoginType {
 
 impl std::fmt::Display for LoginType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LoginType::Zero => "0",
             LoginType::One => "1",
             LoginType::OneHundred => "100",
@@ -20156,6 +20191,7 @@ pub struct UserResponse {
 /// - `Groups`
 /// - `User`
 /// - `UserResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserResponseAllOf {
     #[serde(flatten)]
@@ -20170,8 +20206,8 @@ pub struct UserResponseAllOf {
 }
 
 /**
- * Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
- */
+* Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UserDeleteAction {
     #[serde(rename = "delete")]
@@ -20184,7 +20220,7 @@ pub enum UserDeleteAction {
 
 impl std::fmt::Display for UserDeleteAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserDeleteAction::Delete => "delete",
             UserDeleteAction::Disassociate => "disassociate",
             UserDeleteAction::FallthroughString => "*",
@@ -20219,6 +20255,7 @@ pub struct UserZakResponse {
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UserSettingsResponseOneOf {
@@ -20257,6 +20294,7 @@ impl UserSettingsResponseOneOf {
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UserSettingsUpdateRequestOneOf {
@@ -20304,7 +20342,7 @@ pub enum UserSettingsUpdateOption {
 
 impl std::fmt::Display for UserSettingsUpdateOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserSettingsUpdateOption::MeetingAuthentication => "meeting_authentication",
             UserSettingsUpdateOption::MeetingSecuirty => "meeting_secuirty",
             UserSettingsUpdateOption::RecordingAuthentication => "recording_authentication",
@@ -20327,8 +20365,8 @@ impl UserSettingsUpdateOption {
 }
 
 /**
- * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
- */
+* The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UserStatusRequestAction {
     #[serde(rename = "activate")]
@@ -20343,7 +20381,7 @@ pub enum UserStatusRequestAction {
 
 impl std::fmt::Display for UserStatusRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserStatusRequestAction::Activate => "activate",
             UserStatusRequestAction::Deactivate => "deactivate",
             UserStatusRequestAction::Noop => "",
@@ -20586,8 +20624,8 @@ pub struct TspAccountData {
 }
 
 /**
- * User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
- */
+* User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UserTokenType {
     #[serde(rename = "token")]
@@ -20602,7 +20640,7 @@ pub enum UserTokenType {
 
 impl std::fmt::Display for UserTokenType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserTokenType::Token => "token",
             UserTokenType::Zak => "zak",
             UserTokenType::Noop => "",
@@ -20708,6 +20746,7 @@ pub struct WebinarCreateResponse {
 ///
 /// - `WebinarInfo`
 /// - `WebinarCreateResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarCreateResponseAllOf {
     /**
@@ -20763,6 +20802,7 @@ pub struct WebinarResponse {
 ///
 /// - `WebinarInfo`
 /// - `WebinarResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebinarResponseAllOf {
     /**
@@ -20835,7 +20875,7 @@ pub enum WebinarStatusRequestAction {
 
 impl std::fmt::Display for WebinarStatusRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WebinarStatusRequestAction::End => "end",
             WebinarStatusRequestAction::Noop => "",
             WebinarStatusRequestAction::FallthroughString => "*",
@@ -21328,6 +21368,7 @@ pub struct DashboardClientFeedbackDetailResponse {
 /// - `PaginationToken4ImChat`
 /// - `DashboardImResponse`
 /// - `DashboardClientFeedbackDetailResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardClientFeedbackDetailResponseAllOf {
     /**
@@ -21951,15 +21992,15 @@ pub struct PhoneUserSettingsResponse {
 }
 
 /**
- * Template type.<br>
- *   The value of this field can be one of the following:<br>
- *   * `user`<br>
- *   * `group`<br>
- *   * `autReceptionist`<br>
- *   * `commonArea`<br>
- *   * `zr`<br>
- *   * `interop`<br>
- */
+* Template type.<br>
+*   The value of this field can be one of the following:<br>
+*   * `user`<br>
+*   * `group`<br>
+*   * `autReceptionist`<br>
+*   * `commonArea`<br>
+*   * `zr`<br>
+*   * `interop`<br>
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListSettingTemplatesResponseType {
     #[serde(rename = "autReceptionist")]
@@ -21982,7 +22023,7 @@ pub enum ListSettingTemplatesResponseType {
 
 impl std::fmt::Display for ListSettingTemplatesResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListSettingTemplatesResponseType::AutReceptionist => "autReceptionist",
             ListSettingTemplatesResponseType::CommonArea => "commonArea",
             ListSettingTemplatesResponseType::Group => "group",
@@ -22088,8 +22129,8 @@ pub struct ListSettingTemplatesResponse {
 }
 
 /**
- * The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
- */
+* The type of template. Values include `user`, `group`, `autoReceptionist`, `commonarea`, or `interop`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AddSettingTemplateRequestType {
     #[serde(rename = "autoReceptionist")]
@@ -22110,7 +22151,7 @@ pub enum AddSettingTemplateRequestType {
 
 impl std::fmt::Display for AddSettingTemplateRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AddSettingTemplateRequestType::AutoReceptionist => "autoReceptionist",
             AddSettingTemplateRequestType::Commonarea => "commonarea",
             AddSettingTemplateRequestType::Group => "group",
@@ -23126,8 +23167,8 @@ pub struct ListSipGroupsResponse {
 }
 
 /**
- * The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
- */
+* The type of template being queried. Values: `user`, `group`, `auto receptionist` `common area`,`zr`, `interop`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetSettingTemplateResponseType {
     #[serde(rename = "autoReceptionist")]
@@ -23150,7 +23191,7 @@ pub enum GetSettingTemplateResponseType {
 
 impl std::fmt::Display for GetSettingTemplateResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetSettingTemplateResponseType::AutoReceptionist => "autoReceptionist",
             GetSettingTemplateResponseType::CommonArea => "commonArea",
             GetSettingTemplateResponseType::Group => "group",
@@ -23350,14 +23391,14 @@ pub struct CustomHours {
 }
 
 /**
- * Values:<br>
- *   1-user,<br>
- *   2-callQueue, <br>
- *   3-autoReceptionist,<br>
- *   4-commonAreaPhone,<br>
- *   5-zoomRoom, <br>
- *   7-sharedLineGroup
- */
+* Values:<br>
+*   1-user,<br>
+*   2-callQueue, <br>
+*   3-autoReceptionist,<br>
+*   4-commonAreaPhone,<br>
+*   5-zoomRoom, <br>
+*   7-sharedLineGroup
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType {
     #[serde(rename = "autoReceptionist")]
@@ -23382,7 +23423,7 @@ impl std::fmt::Display
     for GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
 GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType::AutoReceptionist => "autoReceptionist",
 GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType::CallQueue => "callQueue",
 GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType::CommonAreaPhone => "commonAreaPhone",
@@ -23530,12 +23571,12 @@ pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
 }
 
 /**
- * The value of this field can be either `default` or `disable`.
- *   
- *   * `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
- *   
- *   * `disable`: This means that the hold music is disabled.
- */
+* The value of this field can be either `default` or `disable`.
+*   
+*   * `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
+*   
+*   * `disable`: This means that the hold music is disabled.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HoldMusic {
     #[serde(rename = "default")]
@@ -23550,7 +23591,7 @@ pub enum HoldMusic {
 
 impl std::fmt::Display for HoldMusic {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HoldMusic::Default => "default",
             HoldMusic::Disable => "disable",
             HoldMusic::Noop => "",
@@ -23648,8 +23689,8 @@ pub struct GetSettingTemplateResponse {
 }
 
 /**
- * Values: inbound, outbound, both.
- */
+* Values: inbound, outbound, both.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RecordingCalls {
     #[serde(rename = "both")]
@@ -23666,7 +23707,7 @@ pub enum RecordingCalls {
 
 impl std::fmt::Display for RecordingCalls {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RecordingCalls::Both => "both",
             RecordingCalls::Inbound => "inbound",
             RecordingCalls::Outbound => "outbound",
@@ -23775,7 +23816,7 @@ pub enum PhoneUserCallLogsType {
 
 impl std::fmt::Display for PhoneUserCallLogsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PhoneUserCallLogsType::All => "all",
             PhoneUserCallLogsType::Missed => "missed",
             PhoneUserCallLogsType::Noop => "",
@@ -23797,8 +23838,8 @@ impl PhoneUserCallLogsType {
 }
 
 /**
- * Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
- */
+* Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TimeType {
     #[serde(rename = "endTime")]
@@ -23811,7 +23852,7 @@ pub enum TimeType {
 
 impl std::fmt::Display for TimeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TimeType::EndTime => "endTime",
             TimeType::StartTime => "startTime",
             TimeType::FallthroughString => "*",
@@ -23896,7 +23937,7 @@ pub enum PhoneUserCallLogsResponseForwardedByExtensionType {
 
 impl std::fmt::Display for PhoneUserCallLogsResponseForwardedByExtensionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PhoneUserCallLogsResponseForwardedByExtensionType::AutoReceptionist => {
                 "autoReceptionist"
             }
@@ -24562,8 +24603,8 @@ pub struct PhoneUserRecordingsResponse {
 }
 
 /**
- * Status of the voice mail
- */
+* Status of the voice mail
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PhoneUserVoiceMailsStatus {
     #[serde(rename = "all")]
@@ -24578,7 +24619,7 @@ pub enum PhoneUserVoiceMailsStatus {
 
 impl std::fmt::Display for PhoneUserVoiceMailsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PhoneUserVoiceMailsStatus::All => "all",
             PhoneUserVoiceMailsStatus::Read => "read",
             PhoneUserVoiceMailsStatus::Unread => "unread",
@@ -24595,8 +24636,8 @@ impl Default for PhoneUserVoiceMailsStatus {
 }
 
 /**
- * Status of the voice mail. Can be either 'read' or 'unread'
- */
+* Status of the voice mail. Can be either 'read' or 'unread'
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PhoneUserVoiceMailsResponseStatus {
     #[serde(rename = "read")]
@@ -24611,7 +24652,7 @@ pub enum PhoneUserVoiceMailsResponseStatus {
 
 impl std::fmt::Display for PhoneUserVoiceMailsResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PhoneUserVoiceMailsResponseStatus::Read => "read",
             PhoneUserVoiceMailsResponseStatus::Unread => "unread",
             PhoneUserVoiceMailsResponseStatus::Noop => "",
@@ -24931,13 +24972,13 @@ pub struct UpdateUserSettingRequest {
 }
 
 /**
- * The type of call:
- *   *`voip` (Voice over IP)
- *   *`pstn` (Public Switched Telephone Network)
- *   *`tollfree`
- *   *`international`
- *   *`contactCenter`
- */
+* The type of call:
+*   *`voip` (Voice over IP)
+*   *`pstn` (Public Switched Telephone Network)
+*   *`tollfree`
+*   *`international`
+*   *`contactCenter`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CallType {
     #[serde(rename = "contactCenter")]
@@ -24958,7 +24999,7 @@ pub enum CallType {
 
 impl std::fmt::Display for CallType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CallType::ContactCenter => "contactCenter",
             CallType::International => "international",
             CallType::Pstn => "pstn",
@@ -25337,8 +25378,8 @@ pub struct AssignCallingPlanRequest {
 }
 
 /**
- * The owner type: `user` or `call queue`.
- */
+* The owner type: `user` or `call queue`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetPhoneRecordingsResponseOwnerType {
     #[serde(rename = "call queue")]
@@ -25353,7 +25394,7 @@ pub enum GetPhoneRecordingsResponseOwnerType {
 
 impl std::fmt::Display for GetPhoneRecordingsResponseOwnerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetPhoneRecordingsResponseOwnerType::CallQueue => "call queue",
             GetPhoneRecordingsResponseOwnerType::User => "user",
             GetPhoneRecordingsResponseOwnerType::Noop => "",
@@ -25412,8 +25453,8 @@ pub struct GetPhoneRecordingsResponseOwner {
 }
 
 /**
- * The direction of the call. Values: `inbound` or `outbound`.
- */
+* The direction of the call. Values: `inbound` or `outbound`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Direction {
     #[serde(rename = "inbound")]
@@ -25428,7 +25469,7 @@ pub enum Direction {
 
 impl std::fmt::Display for Direction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Direction::Inbound => "inbound",
             Direction::Outbound => "outbound",
             Direction::Noop => "",
@@ -25806,8 +25847,8 @@ pub struct AccountPlanBaseDeleteRequest {
 }
 
 /**
- * The action that needs to be taken for this sub account. Value must be set to "cancel".
- */
+* The action that needs to be taken for this sub account. Value must be set to "cancel".
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountPlanAddonCancelRequestAction {
     #[serde(rename = "cancel")]
@@ -25820,7 +25861,7 @@ pub enum AccountPlanAddonCancelRequestAction {
 
 impl std::fmt::Display for AccountPlanAddonCancelRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountPlanAddonCancelRequestAction::Cancel => "cancel",
             AccountPlanAddonCancelRequestAction::Noop => "",
             AccountPlanAddonCancelRequestAction::FallthroughString => "*",
@@ -26734,6 +26775,7 @@ pub struct GetGroupSettingsResponse {
 /// - `GetGroupSettingsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetGroupSettingsResponseOneOf {
@@ -27278,6 +27320,7 @@ pub struct UpdateGroupSettingsRequest {
 /// - `UpdateGroupSettingsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UpdateGroupSettingsRequestOneOf {
@@ -27325,7 +27368,7 @@ pub enum UpdateGroupSettingsOption {
 
 impl std::fmt::Display for UpdateGroupSettingsOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UpdateGroupSettingsOption::MeetingAuthentication => "meeting_authentication",
             UpdateGroupSettingsOption::MeetingSecurity => "meeting_security",
             UpdateGroupSettingsOption::RecordingAuthentication => "recording_authentication",
@@ -27864,6 +27907,7 @@ pub struct GetGroupLockSettingsResponse {
 /// - `GetGroupLockSettingsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetGroupLockSettingsResponseOneOf {
@@ -28099,6 +28143,7 @@ pub struct GroupLockedSettingsRequest {
 /// - `GroupLockedSettingsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GroupLockedSettingsRequestOneOf {
@@ -28462,18 +28507,18 @@ pub struct SwitchUserAccountRequest {
 }
 
 /**
- * The recording file type. The value of this field could be one of the following:<br>
- *   * `MP4`: Video file of the recording.<br>
- *   * `M4A` Audio-only file of the recording.<br>
- *   * `TB`: Timestamp file of the recording in JSON format.<br>
- *   * `TRANSCRIPT`: Transcription file of the recording in VTT format.<br>
- *   * `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
- *   * `CC`: File containing closed captions of the recording in VTT file format.<br>
- *   * `CSV`: File containing polling data in csv format.
- *   
- *   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
- *   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
- */
+* The recording file type. The value of this field could be one of the following:<br>
+*   * `MP4`: Video file of the recording.<br>
+*   * `M4A` Audio-only file of the recording.<br>
+*   * `TB`: Timestamp file of the recording in JSON format.<br>
+*   * `TRANSCRIPT`: Transcription file of the recording in VTT format.<br>
+*   * `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
+*   * `CC`: File containing closed captions of the recording in VTT file format.<br>
+*   * `CSV`: File containing polling data in csv format.
+*   
+*   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
+*   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesFileType {
     #[serde(rename = "CC")]
@@ -28498,7 +28543,7 @@ pub enum GetAccountCloudRecordingResponseMeetingsFilesFileType {
 
 impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesFileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAccountCloudRecordingResponseMeetingsFilesFileType::Cc => "CC",
             GetAccountCloudRecordingResponseMeetingsFilesFileType::Chat => "CHAT",
             GetAccountCloudRecordingResponseMeetingsFilesFileType::Csv => "CSV",
@@ -28528,8 +28573,8 @@ impl GetAccountCloudRecordingResponseMeetingsFilesFileType {
 }
 
 /**
- * The status of the recording, either `completed` or `processing`.
- */
+* The status of the recording, either `completed` or `processing`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesStatus {
     #[serde(rename = "completed")]
@@ -28544,7 +28589,7 @@ pub enum GetAccountCloudRecordingResponseMeetingsFilesStatus {
 
 impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAccountCloudRecordingResponseMeetingsFilesStatus::Completed => "completed",
             GetAccountCloudRecordingResponseMeetingsFilesStatus::Processing => "processing",
             GetAccountCloudRecordingResponseMeetingsFilesStatus::Noop => "",
@@ -28569,23 +28614,23 @@ impl GetAccountCloudRecordingResponseMeetingsFilesStatus {
 }
 
 /**
- * The recording type. The value of this field can be one of the following:<br>
- *   * `shared_screen_with_speaker_view(CC)`
- *   * `shared_screen_with_speaker_view`
- *   * `shared_screen_with_gallery_view`
- *   * `shared_screen`
- *   * `active_speaker`
- *   * `gallery_view`
- *   * `audio_only`
- *   * `audio_transcript`
- *   * `chat_file`
- *   * `host_video`
- *   * `closed_caption`
- *   * `poll`
- *   * `timeline`
- *   * `thumbnail`
- *   
- */
+* The recording type. The value of this field can be one of the following:<br>
+*   * `shared_screen_with_speaker_view(CC)`
+*   * `shared_screen_with_speaker_view`
+*   * `shared_screen_with_gallery_view`
+*   * `shared_screen`
+*   * `active_speaker`
+*   * `gallery_view`
+*   * `audio_only`
+*   * `audio_transcript`
+*   * `chat_file`
+*   * `host_video`
+*   * `closed_caption`
+*   * `poll`
+*   * `timeline`
+*   * `thumbnail`
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAccountCloudRecordingResponseMeetingsFilesType {
     #[serde(rename = "active_speaker")]
@@ -28624,7 +28669,7 @@ pub enum GetAccountCloudRecordingResponseMeetingsFilesType {
 
 impl std::fmt::Display for GetAccountCloudRecordingResponseMeetingsFilesType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAccountCloudRecordingResponseMeetingsFilesType::ActiveSpeaker => "active_speaker",
             GetAccountCloudRecordingResponseMeetingsFilesType::AudioOnly => "audio_only",
             GetAccountCloudRecordingResponseMeetingsFilesType::AudioTranscript => {
@@ -29035,10 +29080,10 @@ pub struct UpdateZrAccProfileRequest {
 }
 
 /**
- * The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
- *   `meeting`: Meeting settings of the Zoom Rooms Account. <br>
- *   `signage`: View digital signage settings of the Zoom Rooms Account.
- */
+* The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
+*   `meeting`: Meeting settings of the Zoom Rooms Account. <br>
+*   `signage`: View digital signage settings of the Zoom Rooms Account.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SettingType {
     #[serde(rename = "alert")]
@@ -29051,7 +29096,7 @@ pub enum SettingType {
 
 impl std::fmt::Display for SettingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SettingType::Alert => "alert",
             SettingType::Meeting => "meeting",
             SettingType::FallthroughString => "*",
@@ -29067,9 +29112,9 @@ impl Default for SettingType {
 }
 
 /**
- * The type of location. The value can be one of the following:
- *   `country`, `states`, `city`, `campus`, `building`, `floor`.
- */
+* The type of location. The value can be one of the following:
+*   `country`, `states`, `city`, `campus`, `building`, `floor`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListZrLocationsResponseType {
     #[serde(rename = "building")]
@@ -29092,7 +29137,7 @@ pub enum ListZrLocationsResponseType {
 
 impl std::fmt::Display for ListZrLocationsResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListZrLocationsResponseType::Building => "building",
             ListZrLocationsResponseType::Campus => "campus",
             ListZrLocationsResponseType::City => "city",
@@ -29436,8 +29481,8 @@ pub struct UpdateRoomProfileRequest {
 }
 
 /**
- * Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
- */
+* Type of the device. The value of this field can be one of the following:<br>`Zoom Rooms Computer`,<br> `Controller`, `Scheduling Display`, `Zoom Rooms Control System`, `Companion Whiteboard`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeviceType {
     #[serde(rename = "Companion Whiteboard")]
@@ -29458,7 +29503,7 @@ pub enum DeviceType {
 
 impl std::fmt::Display for DeviceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeviceType::CompanionWhiteboard => "Companion Whiteboard",
             DeviceType::Controller => "Controller",
             DeviceType::SchedulingDisplay => "Scheduling Display",
@@ -29483,8 +29528,8 @@ impl DeviceType {
 }
 
 /**
- * Status of the device. The value can be either `Online` or `Offline`.
- */
+* Status of the device. The value can be either `Online` or `Offline`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListZrDevicesResponseStatus {
     #[serde(rename = "Offline")]
@@ -29499,7 +29544,7 @@ pub enum ListZrDevicesResponseStatus {
 
 impl std::fmt::Display for ListZrDevicesResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListZrDevicesResponseStatus::Offline => "Offline",
             ListZrDevicesResponseStatus::Online => "Online",
             ListZrDevicesResponseStatus::Noop => "",
@@ -29787,8 +29832,8 @@ pub struct ListMeetingSatisfactionResponse {
 }
 
 /**
- * State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
- */
+* State of the device. The value should be either `assigned` to list devices that have been assigned to user(s) or `unassigned` to list devices that have not yet been assigned to any user in the Zoom account.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListPhoneDevicesType {
     #[serde(rename = "assigned")]
@@ -29803,7 +29848,7 @@ pub enum ListPhoneDevicesType {
 
 impl std::fmt::Display for ListPhoneDevicesType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListPhoneDevicesType::Assigned => "assigned",
             ListPhoneDevicesType::Unassigned => "unassigned",
             ListPhoneDevicesType::Noop => "",
@@ -29856,8 +29901,8 @@ pub struct AddAutoReceptionistResponse {
 }
 
 /**
- * Status of the device. The value is either `online` or `offline`.
- */
+* Status of the device. The value is either `online` or `offline`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListPhoneDevicesResponseStatus {
     #[serde(rename = "offline")]
@@ -29872,7 +29917,7 @@ pub enum ListPhoneDevicesResponseStatus {
 
 impl std::fmt::Display for ListPhoneDevicesResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListPhoneDevicesResponseStatus::Offline => "offline",
             ListPhoneDevicesResponseStatus::Online => "online",
             ListPhoneDevicesResponseStatus::Noop => "",
@@ -30062,14 +30107,14 @@ pub struct GetDeviceResponseAssignee {
 }
 
 /**
- * [Provisioning type](https://support.zoom.us/hc/en-us/articles/360033223411). The value can be one of the following:
- *   
- *   * `ztp` : Zero touch provisioning.
- *   * `assisted`: Assisted provisioning.
- *   * `manual`: Manual provisioning.
- *   
- *   
- */
+* [Provisioning type](https://support.zoom.us/hc/en-us/articles/360033223411). The value can be one of the following:
+*   
+*   * `ztp` : Zero touch provisioning.
+*   * `assisted`: Assisted provisioning.
+*   * `manual`: Manual provisioning.
+*   
+*   
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetDeviceResponseProvisionType {
     #[serde(rename = "assisted")]
@@ -30086,7 +30131,7 @@ pub enum GetDeviceResponseProvisionType {
 
 impl std::fmt::Display for GetDeviceResponseProvisionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetDeviceResponseProvisionType::Assisted => "assisted",
             GetDeviceResponseProvisionType::Manual => "manual",
             GetDeviceResponseProvisionType::Ztp => "ztp",
@@ -30834,10 +30879,10 @@ pub struct CreateCallQueueResponse {
 }
 
 /**
- * Level of the user. The value can be one of the following:<br>
- *   `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
- *   `user`: Regular user without the privileges of a manager.
- */
+* Level of the user. The value can be one of the following:<br>
+*   `manager`: A call queue manager has the privilege to change call queue settings, policy settings and manage recordings and voicemail inbox. There can only be one manager for each call queue.<br><br>
+*   `user`: Regular user without the privileges of a manager.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Level {
     #[serde(rename = "manager")]
@@ -30852,7 +30897,7 @@ pub enum Level {
 
 impl std::fmt::Display for Level {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Level::Manager => "manager",
             Level::User => "user",
             Level::Noop => "",
@@ -31803,8 +31848,8 @@ pub struct InternationalCall {
 }
 
 /**
- * Allow Hot Desking feature to current device.
- */
+* Allow Hot Desking feature to current device.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     #[serde(rename = "off")]
@@ -31821,7 +31866,7 @@ pub enum GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
 
 impl std::fmt::Display for GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetCommonAreaPhoneResponsePolicyHotDeskingStatus::Off => "off",
             GetCommonAreaPhoneResponsePolicyHotDeskingStatus::On => "on",
             GetCommonAreaPhoneResponsePolicyHotDeskingStatus::Unsupported => "unsupported",
@@ -32108,10 +32153,10 @@ pub struct AssignCallingPlansCommonAreaPhoneResponseData {
 }
 
 /**
- * Indicates the match type for the blocked list. The values can be one of the following:<br>
- *   `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
- *   `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
- */
+* Indicates the match type for the blocked list. The values can be one of the following:<br>
+*   `phoneNumber`: Indicates that only a specific phone number that is shown in the `phone_number` field is blocked.<br><br>
+*   `prefix`: Indicates that all numbers starting with prefix that is shown in the `phone_number` field are blocked.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MatchType {
     #[serde(rename = "phoneNumber")]
@@ -32126,7 +32171,7 @@ pub enum MatchType {
 
 impl std::fmt::Display for MatchType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MatchType::PhoneNumber => "phoneNumber",
             MatchType::Prefix => "prefix",
             MatchType::Noop => "",
@@ -33313,8 +33358,8 @@ pub struct AddCalloutCountriesResponse {
 }
 
 /**
- * Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
- */
+* Specify the language in which this phone number should be displayed. Currently, the only supported languages are `en-GB`, `en-US`, `de-DE`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Languages {
     #[serde(rename = "de-DE")]
@@ -33331,7 +33376,7 @@ pub enum Languages {
 
 impl std::fmt::Display for Languages {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Languages::De => "de-DE",
             Languages::EnGb => "en-GB",
             Languages::EnUs => "en-US",
@@ -33578,12 +33623,12 @@ pub struct AddInternalNumbersResponseData {
 }
 
 /**
- * Specify one of the following values for this field:
- *   
- *   `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
- *   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
- *   `cancel`: Cancel an ongoing upgrade or downgrade process.
- */
+* Specify one of the following values for this field:
+*   
+*   `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
+*   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
+*   `cancel`: Cancel an ongoing upgrade or downgrade process.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ChangeZoomRoomsAppVersionRequestAction {
     #[serde(rename = "cancel")]
@@ -33600,7 +33645,7 @@ pub enum ChangeZoomRoomsAppVersionRequestAction {
 
 impl std::fmt::Display for ChangeZoomRoomsAppVersionRequestAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ChangeZoomRoomsAppVersionRequestAction::Cancel => "cancel",
             ChangeZoomRoomsAppVersionRequestAction::Downgrade => "downgrade",
             ChangeZoomRoomsAppVersionRequestAction::Upgrade => "upgrade",
@@ -33683,25 +33728,25 @@ pub struct ListWebinarTemplatesResponse {
 }
 
 /**
- * Presence status of the user. The value can be set to one of the following:<br>
- *   * `Away`
- *   * `Do_Not_Disturb`
- *   * `Available`
- *   * `In_Calendar_Event`
- *   * `Presenting`
- *   * `In_A_Zoom_Meeting`
- *   * `On_A_Call`
- *   
- *   Users who are on Zoom Client with a version **lower than 5.3.0** can update the status from:
- *   * `Away` to `Do_Not_Disturb`
- *   * `Available` to `Do_Not_Disturb`
- *   
- *   Users who are on **Zoom Client 5.3.0** or higher can update the status from:
- *   * `Do_Not_Disturb` to `Away`
- *   * `Do_Not_Disturb` to `Available`
- *   * `Available` to `Away`
- *   * `Away` to `Available`
- */
+* Presence status of the user. The value can be set to one of the following:<br>
+*   * `Away`
+*   * `Do_Not_Disturb`
+*   * `Available`
+*   * `In_Calendar_Event`
+*   * `Presenting`
+*   * `In_A_Zoom_Meeting`
+*   * `On_A_Call`
+*   
+*   Users who are on Zoom Client with a version **lower than 5.3.0** can update the status from:
+*   * `Away` to `Do_Not_Disturb`
+*   * `Available` to `Do_Not_Disturb`
+*   
+*   Users who are on **Zoom Client 5.3.0** or higher can update the status from:
+*   * `Do_Not_Disturb` to `Away`
+*   * `Do_Not_Disturb` to `Available`
+*   * `Available` to `Away`
+*   * `Away` to `Available`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UpdatePresenceStatusRequest {
     #[serde(rename = "Available")]
@@ -33726,7 +33771,7 @@ pub enum UpdatePresenceStatusRequest {
 
 impl std::fmt::Display for UpdatePresenceStatusRequest {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UpdatePresenceStatusRequest::Available => "Available",
             UpdatePresenceStatusRequest::Away => "Away",
             UpdatePresenceStatusRequest::DoNoDisturb => "Do_No_Disturb",
@@ -34630,11 +34675,11 @@ pub struct GetAccountBillingInvoiceResponse {
 }
 
 /**
- * Feedback submitted by the participant.
- *   
- *   * `GOOD`: Thumbs up.
- *   * `NOT GOOD`: Thumbs down.
- */
+* Feedback submitted by the participant.
+*   
+*   * `GOOD`: Thumbs up.
+*   * `NOT GOOD`: Thumbs down.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Quality {
     #[serde(rename = "GOOD")]
@@ -34649,7 +34694,7 @@ pub enum Quality {
 
 impl std::fmt::Display for Quality {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Quality::Good => "GOOD",
             Quality::NotGood => "NOT GOOD",
             Quality::Noop => "",
@@ -34738,8 +34783,8 @@ pub struct ParticipantFeedbackResponse {
 }
 
 /**
- * Result of the call: `call_connected` | `recorded` | `no_answer`.
- */
+* Result of the call: `call_connected` | `recorded` | `no_answer`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Result {
     #[serde(rename = "call_connected")]
@@ -34756,7 +34801,7 @@ pub enum Result {
 
 impl std::fmt::Display for Result {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Result::CallConnected => "call_connected",
             Result::NoAnswer => "no_answer",
             Result::Recorded => "recorded",
@@ -35144,8 +35189,8 @@ pub struct ListMeetingTemplatesResponseData {
 }
 
 /**
- * The query date type for the `from` and `to` parameters.
- */
+* The query date type for the `from` and `to` parameters.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListArchivedFilesQueryDateType {
     #[serde(rename = "archive_complete_time")]
@@ -35158,7 +35203,7 @@ pub enum ListArchivedFilesQueryDateType {
 
 impl std::fmt::Display for ListArchivedFilesQueryDateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListArchivedFilesQueryDateType::ArchiveCompleteTime => "archive_complete_time",
             ListArchivedFilesQueryDateType::MeetingStartTime => "meeting_start_time",
             ListArchivedFilesQueryDateType::FallthroughString => "*",

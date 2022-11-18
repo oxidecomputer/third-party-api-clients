@@ -2060,8 +2060,8 @@ pub struct TimePeriod {
 }
 
 /**
- * Data format for the response.
- */
+* Data format for the response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
@@ -2074,7 +2074,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Noop => "",
             Alt::FallthroughString => "*",
@@ -2095,8 +2095,8 @@ impl Alt {
 }
 
 /**
- * The order of the events returned in the result. Optional. The default is an unspecified, stable order.
- */
+* The order of the events returned in the result. Optional. The default is an unspecified, stable order.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderBy {
     #[serde(rename = "startTime")]
@@ -2111,7 +2111,7 @@ pub enum OrderBy {
 
 impl std::fmt::Display for OrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderBy::StartTime => "startTime",
             OrderBy::Updated => "updated",
             OrderBy::Noop => "",
@@ -2133,8 +2133,8 @@ impl OrderBy {
 }
 
 /**
- * Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
- */
+* Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SendUpdates {
     #[serde(rename = "all")]
@@ -2151,7 +2151,7 @@ pub enum SendUpdates {
 
 impl std::fmt::Display for SendUpdates {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SendUpdates::All => "all",
             SendUpdates::ExternalOnly => "externalOnly",
             SendUpdates::None => "none",
@@ -2174,8 +2174,8 @@ impl SendUpdates {
 }
 
 /**
- * The minimum access role for the user in the returned entries. Optional. The default is no restriction.
- */
+* The minimum access role for the user in the returned entries. Optional. The default is no restriction.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MinAccessRole {
     #[serde(rename = "freeBusyReader")]
@@ -2194,7 +2194,7 @@ pub enum MinAccessRole {
 
 impl std::fmt::Display for MinAccessRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MinAccessRole::FreeBusyReader => "freeBusyReader",
             MinAccessRole::Owner => "owner",
             MinAccessRole::Reader => "reader",

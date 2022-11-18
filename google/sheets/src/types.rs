@@ -281,8 +281,8 @@ pub struct AppendCellsRequest {
 }
 
 /**
- * Whether rows or columns should be appended.
- */
+* Whether rows or columns should be appended.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Dimension {
     #[serde(rename = "COLUMNS")]
@@ -299,7 +299,7 @@ pub enum Dimension {
 
 impl std::fmt::Display for Dimension {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Dimension::Columns => "COLUMNS",
             Dimension::DimensionUnspecified => "DIMENSION_UNSPECIFIED",
             Dimension::Rows => "ROWS",
@@ -543,8 +543,8 @@ pub struct BandingProperties {
 }
 
 /**
- * The comparison type of key value with baseline value.
- */
+* The comparison type of key value with baseline value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ComparisonType {
     #[serde(rename = "ABSOLUTE_DIFFERENCE")]
@@ -561,7 +561,7 @@ pub enum ComparisonType {
 
 impl std::fmt::Display for ComparisonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ComparisonType::AbsoluteDifference => "ABSOLUTE_DIFFERENCE",
             ComparisonType::ComparisonTypeUndefined => "COMPARISON_TYPE_UNDEFINED",
             ComparisonType::PercentageDifference => "PERCENTAGE_DIFFERENCE",
@@ -657,8 +657,8 @@ pub struct BaselineValueFormat {
 }
 
 /**
- * The position of this axis.
- */
+* The position of this axis.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Position {
     #[serde(rename = "BASIC_CHART_AXIS_POSITION_UNSPECIFIED")]
@@ -677,7 +677,7 @@ pub enum Position {
 
 impl std::fmt::Display for Position {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Position::BasicChartAxisPositionUnspecified => "BASIC_CHART_AXIS_POSITION_UNSPECIFIED",
             Position::BottomAxis => "BOTTOM_AXIS",
             Position::LeftAxis => "LEFT_AXIS",
@@ -761,8 +761,8 @@ pub struct BasicChartDomain {
 }
 
 /**
- * The type of this series. Valid only if the chartType is COMBO. Different types will change the way the series is visualized. Only LINE, AREA, and COLUMN are supported.
- */
+* The type of this series. Valid only if the chartType is COMBO. Different types will change the way the series is visualized. Only LINE, AREA, and COLUMN are supported.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "AREA")]
@@ -789,7 +789,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Area => "AREA",
             Type::Bar => "BAR",
             Type::BasicChartTypeUnspecified => "BASIC_CHART_TYPE_UNSPECIFIED",
@@ -884,8 +884,8 @@ pub struct BasicChartSeries {
 }
 
 /**
- * The behavior of tooltips and data highlighting when hovering on data and chart area.
- */
+* The behavior of tooltips and data highlighting when hovering on data and chart area.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CompareMode {
     #[serde(rename = "BASIC_CHART_COMPARE_MODE_UNSPECIFIED")]
@@ -902,7 +902,7 @@ pub enum CompareMode {
 
 impl std::fmt::Display for CompareMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CompareMode::BasicChartCompareModeUnspecified => "BASIC_CHART_COMPARE_MODE_UNSPECIFIED",
             CompareMode::Category => "CATEGORY",
             CompareMode::Datum => "DATUM",
@@ -925,8 +925,8 @@ impl CompareMode {
 }
 
 /**
- * The position of the chart legend.
- */
+* The position of the chart legend.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LegendPosition {
     #[serde(rename = "BASIC_CHART_LEGEND_POSITION_UNSPECIFIED")]
@@ -949,7 +949,7 @@ pub enum LegendPosition {
 
 impl std::fmt::Display for LegendPosition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LegendPosition::BasicChartLegendPositionUnspecified => {
                 "BASIC_CHART_LEGEND_POSITION_UNSPECIFIED"
             }
@@ -977,8 +977,8 @@ impl LegendPosition {
 }
 
 /**
- * The stacked type for charts that support vertical stacking. Applies to Area, Bar, Column, Combo, and Stepped Area charts.
- */
+* The stacked type for charts that support vertical stacking. Applies to Area, Bar, Column, Combo, and Stepped Area charts.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum StackedType {
     #[serde(rename = "BASIC_CHART_STACKED_TYPE_UNSPECIFIED")]
@@ -997,7 +997,7 @@ pub enum StackedType {
 
 impl std::fmt::Display for StackedType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             StackedType::BasicChartStackedTypeUnspecified => "BASIC_CHART_STACKED_TYPE_UNSPECIFIED",
             StackedType::NotStacked => "NOT_STACKED",
             StackedType::PercentStacked => "PERCENT_STACKED",
@@ -1282,8 +1282,8 @@ pub struct BatchClearValuesResponse {
 }
 
 /**
- * How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
- */
+* How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DateTimeRenderOption {
     #[serde(rename = "FORMATTED_STRING")]
@@ -1298,7 +1298,7 @@ pub enum DateTimeRenderOption {
 
 impl std::fmt::Display for DateTimeRenderOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateTimeRenderOption::FormattedString => "FORMATTED_STRING",
             DateTimeRenderOption::SerialNumber => "SERIAL_NUMBER",
             DateTimeRenderOption::Noop => "",
@@ -1320,8 +1320,8 @@ impl DateTimeRenderOption {
 }
 
 /**
- * How values should be represented in the output. The default render option is FORMATTED_VALUE.
- */
+* How values should be represented in the output. The default render option is FORMATTED_VALUE.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ValueRenderOption {
     #[serde(rename = "FORMATTED_VALUE")]
@@ -1338,7 +1338,7 @@ pub enum ValueRenderOption {
 
 impl std::fmt::Display for ValueRenderOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ValueRenderOption::FormattedValue => "FORMATTED_VALUE",
             ValueRenderOption::Formula => "FORMULA",
             ValueRenderOption::UnformattedValue => "UNFORMATTED_VALUE",
@@ -1528,8 +1528,8 @@ pub struct BatchUpdateSpreadsheetResponse {
 }
 
 /**
- * How the input data should be interpreted.
- */
+* How the input data should be interpreted.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ValueInputOption {
     #[serde(rename = "INPUT_VALUE_OPTION_UNSPECIFIED")]
@@ -1546,7 +1546,7 @@ pub enum ValueInputOption {
 
 impl std::fmt::Display for ValueInputOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ValueInputOption::InputValueOptionUnspecified => "INPUT_VALUE_OPTION_UNSPECIFIED",
             ValueInputOption::Raw => "RAW",
             ValueInputOption::UserEntered => "USER_ENTERED",
@@ -1872,8 +1872,8 @@ pub struct BigQueryTableSpec {
 }
 
 /**
- * The type of condition.
- */
+* The type of condition.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BooleanConditionType {
     #[serde(rename = "BLANK")]
@@ -1948,7 +1948,7 @@ pub enum BooleanConditionType {
 
 impl std::fmt::Display for BooleanConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BooleanConditionType::Blank => "BLANK",
             BooleanConditionType::Boolean => "BOOLEAN",
             BooleanConditionType::ConditionTypeUnspecified => "CONDITION_TYPE_UNSPECIFIED",
@@ -2034,8 +2034,8 @@ pub struct BooleanRule {
 }
 
 /**
- * The style of the border.
- */
+* The style of the border.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Style {
     #[serde(rename = "DASHED")]
@@ -2062,7 +2062,7 @@ pub enum Style {
 
 impl std::fmt::Display for Style {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Style::Dashed => "DASHED",
             Style::Dotted => "DOTTED",
             Style::Double => "DOUBLE",
@@ -2148,8 +2148,8 @@ pub struct Borders {
 }
 
 /**
- * Where the legend of the chart should be drawn.
- */
+* Where the legend of the chart should be drawn.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BubbleChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
@@ -2174,7 +2174,7 @@ pub enum BubbleChartSpecLegendPosition {
 
 impl std::fmt::Display for BubbleChartSpecLegendPosition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BubbleChartSpecLegendPosition::BottomLegend => "BOTTOM_LEGEND",
             BubbleChartSpecLegendPosition::BubbleChartLegendPositionUnspecified => {
                 "BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED"
@@ -2506,8 +2506,8 @@ pub struct CellData {
 }
 
 /**
- * The horizontal alignment of the value in the cell.
- */
+* The horizontal alignment of the value in the cell.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HorizontalAlignment {
     #[serde(rename = "CENTER")]
@@ -2526,7 +2526,7 @@ pub enum HorizontalAlignment {
 
 impl std::fmt::Display for HorizontalAlignment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HorizontalAlignment::Center => "CENTER",
             HorizontalAlignment::HorizontalAlignUnspecified => "HORIZONTAL_ALIGN_UNSPECIFIED",
             HorizontalAlignment::Left => "LEFT",
@@ -2550,8 +2550,8 @@ impl HorizontalAlignment {
 }
 
 /**
- * How a hyperlink, if it exists, should be displayed in the cell.
- */
+* How a hyperlink, if it exists, should be displayed in the cell.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HyperlinkDisplayType {
     #[serde(rename = "HYPERLINK_DISPLAY_TYPE_UNSPECIFIED")]
@@ -2568,7 +2568,7 @@ pub enum HyperlinkDisplayType {
 
 impl std::fmt::Display for HyperlinkDisplayType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HyperlinkDisplayType::HyperlinkDisplayTypeUnspecified => {
                 "HYPERLINK_DISPLAY_TYPE_UNSPECIFIED"
             }
@@ -2593,8 +2593,8 @@ impl HyperlinkDisplayType {
 }
 
 /**
- * The direction of the text in the cell.
- */
+* The direction of the text in the cell.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TextDirection {
     #[serde(rename = "LEFT_TO_RIGHT")]
@@ -2611,7 +2611,7 @@ pub enum TextDirection {
 
 impl std::fmt::Display for TextDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TextDirection::LeftToRight => "LEFT_TO_RIGHT",
             TextDirection::RightToLeft => "RIGHT_TO_LEFT",
             TextDirection::TextDirectionUnspecified => "TEXT_DIRECTION_UNSPECIFIED",
@@ -2634,8 +2634,8 @@ impl TextDirection {
 }
 
 /**
- * The vertical alignment of the value in the cell.
- */
+* The vertical alignment of the value in the cell.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum VerticalAlignment {
     #[serde(rename = "BOTTOM")]
@@ -2654,7 +2654,7 @@ pub enum VerticalAlignment {
 
 impl std::fmt::Display for VerticalAlignment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VerticalAlignment::Bottom => "BOTTOM",
             VerticalAlignment::Middle => "MIDDLE",
             VerticalAlignment::Top => "TOP",
@@ -2678,8 +2678,8 @@ impl VerticalAlignment {
 }
 
 /**
- * The wrap strategy for the value in the cell.
- */
+* The wrap strategy for the value in the cell.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WrapStrategy {
     #[serde(rename = "CLIP")]
@@ -2700,7 +2700,7 @@ pub enum WrapStrategy {
 
 impl std::fmt::Display for WrapStrategy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WrapStrategy::Clip => "CLIP",
             WrapStrategy::LegacyWrap => "LEGACY_WRAP",
             WrapStrategy::OverflowCell => "OVERFLOW_CELL",
@@ -2830,8 +2830,8 @@ pub struct CellFormat {
 }
 
 /**
- * The view window's mode.
- */
+* The view window's mode.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ViewWindowMode {
     #[serde(rename = "DEFAULT_VIEW_WINDOW_MODE")]
@@ -2850,7 +2850,7 @@ pub enum ViewWindowMode {
 
 impl std::fmt::Display for ViewWindowMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ViewWindowMode::DefaultViewWindowMode => "DEFAULT_VIEW_WINDOW_MODE",
             ViewWindowMode::Explicit => "EXPLICIT",
             ViewWindowMode::Pretty => "PRETTY",
@@ -2931,8 +2931,8 @@ pub struct ChartCustomNumberFormatOptions {
 }
 
 /**
- * The aggregation type for the series of a data source chart. Only supported for data source charts.
- */
+* The aggregation type for the series of a data source chart. Only supported for data source charts.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AggregateType {
     #[serde(rename = "AVERAGE")]
@@ -2957,7 +2957,7 @@ pub enum AggregateType {
 
 impl std::fmt::Display for AggregateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AggregateType::Average => "AVERAGE",
             AggregateType::ChartAggregateTypeUnspecified => "CHART_AGGREGATE_TYPE_UNSPECIFIED",
             AggregateType::Count => "COUNT",
@@ -3021,8 +3021,8 @@ pub struct ChartData {
 }
 
 /**
- * The type of date-time grouping to apply.
- */
+* The type of date-time grouping to apply.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ChartDateTimeRuleType {
     #[serde(rename = "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED")]
@@ -3065,7 +3065,7 @@ pub enum ChartDateTimeRuleType {
 
 impl std::fmt::Display for ChartDateTimeRuleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ChartDateTimeRuleType::ChartDateTimeRuleTypeUnspecified => {
                 "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED"
             }
@@ -3185,8 +3185,8 @@ pub struct ChartSourceRange {
 }
 
 /**
- * Determines how the charts will use hidden rows or columns.
- */
+* Determines how the charts will use hidden rows or columns.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HiddenDimensionStrategy {
     #[serde(rename = "CHART_HIDDEN_DIMENSION_STRATEGY_UNSPECIFIED")]
@@ -3207,7 +3207,7 @@ pub enum HiddenDimensionStrategy {
 
 impl std::fmt::Display for HiddenDimensionStrategy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HiddenDimensionStrategy::ChartHiddenDimensionStrategyUnspecified => {
                 "CHART_HIDDEN_DIMENSION_STRATEGY_UNSPECIFIED"
             }
@@ -3535,8 +3535,8 @@ pub struct Color {
 }
 
 /**
- * The type of the spreadsheet theme color.
- */
+* The type of the spreadsheet theme color.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ColorType {
     #[serde(rename = "ACCENT1")]
@@ -3567,7 +3567,7 @@ pub enum ColorType {
 
 impl std::fmt::Display for ColorType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ColorType::Accent1 => "ACCENT1",
             ColorType::Accent2 => "ACCENT2",
             ColorType::Accent3 => "ACCENT3",
@@ -3616,8 +3616,8 @@ pub struct ColorStyle {
 }
 
 /**
- * A relative date (based on the current date). Valid only if the type is DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative dates are not supported in data validation. They are supported only in conditional formatting and conditional filters.
- */
+* A relative date (based on the current date). Valid only if the type is DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative dates are not supported in data validation. They are supported only in conditional formatting and conditional filters.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RelativeDate {
     #[serde(rename = "PAST_MONTH")]
@@ -3642,7 +3642,7 @@ pub enum RelativeDate {
 
 impl std::fmt::Display for RelativeDate {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RelativeDate::PastMonth => "PAST_MONTH",
             RelativeDate::PastWeek => "PAST_WEEK",
             RelativeDate::PastYear => "PAST_YEAR",
@@ -3725,8 +3725,8 @@ pub struct ConditionalFormatRule {
 }
 
 /**
- * How that data should be oriented when pasting.
- */
+* How that data should be oriented when pasting.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PasteOrientation {
     #[serde(rename = "NORMAL")]
@@ -3741,7 +3741,7 @@ pub enum PasteOrientation {
 
 impl std::fmt::Display for PasteOrientation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PasteOrientation::Normal => "NORMAL",
             PasteOrientation::Transpose => "TRANSPOSE",
             PasteOrientation::Noop => "",
@@ -3763,8 +3763,8 @@ impl PasteOrientation {
 }
 
 /**
- * What kind of data to paste.
- */
+* What kind of data to paste.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PasteType {
     #[serde(rename = "PASTE_CONDITIONAL_FORMATTING")]
@@ -3789,7 +3789,7 @@ pub enum PasteType {
 
 impl std::fmt::Display for PasteType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PasteType::PasteConditionalFormatting => "PASTE_CONDITIONAL_FORMATTING",
             PasteType::PasteDataValidation => "PASTE_DATA_VALIDATION",
             PasteType::PasteFormat => "PASTE_FORMAT",
@@ -3908,8 +3908,8 @@ pub struct CutPasteRequest {
 }
 
 /**
- * The error code.
- */
+* The error code.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ErrorCode {
     #[serde(rename = "CONCURRENT_QUERY")]
@@ -3956,7 +3956,7 @@ pub enum ErrorCode {
 
 impl std::fmt::Display for ErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ErrorCode::ConcurrentQuery => "CONCURRENT_QUERY",
             ErrorCode::DataExecutionErrorCodeUnspecified => "DATA_EXECUTION_ERROR_CODE_UNSPECIFIED",
             ErrorCode::DataNotFound => "DATA_NOT_FOUND",
@@ -3994,8 +3994,8 @@ impl ErrorCode {
 }
 
 /**
- * The state of the data execution.
- */
+* The state of the data execution.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum State {
     #[serde(rename = "DATA_EXECUTION_STATE_UNSPECIFIED")]
@@ -4016,7 +4016,7 @@ pub enum State {
 
 impl std::fmt::Display for State {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             State::DataExecutionStateUnspecified => "DATA_EXECUTION_STATE_UNSPECIFIED",
             State::Failed => "FAILED",
             State::NotStarted => "NOT_STARTED",
@@ -4137,8 +4137,8 @@ pub struct DataFilterValueRange {
 }
 
 /**
- * The placement of the data label relative to the labeled data.
- */
+* The placement of the data label relative to the labeled data.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Placement {
     #[serde(rename = "ABOVE")]
@@ -4167,7 +4167,7 @@ pub enum Placement {
 
 impl std::fmt::Display for Placement {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Placement::Above => "ABOVE",
             Placement::Below => "BELOW",
             Placement::Center => "CENTER",
@@ -4196,8 +4196,8 @@ impl Placement {
 }
 
 /**
- * The type of the data label.
- */
+* The type of the data label.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DataLabelType {
     #[serde(rename = "CUSTOM")]
@@ -4216,7 +4216,7 @@ pub enum DataLabelType {
 
 impl std::fmt::Display for DataLabelType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DataLabelType::Custom => "CUSTOM",
             DataLabelType::Data => "DATA",
             DataLabelType::DataLabelTypeUnspecified => "DATA_LABEL_TYPE_UNSPECIFIED",
@@ -4519,8 +4519,8 @@ pub struct DataSourceRefreshMonthlySchedule {
 }
 
 /**
- * The scope of the refresh. Must be ALL_DATA_SOURCES.
- */
+* The scope of the refresh. Must be ALL_DATA_SOURCES.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RefreshScope {
     #[serde(rename = "ALL_DATA_SOURCES")]
@@ -4535,7 +4535,7 @@ pub enum RefreshScope {
 
 impl std::fmt::Display for RefreshScope {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RefreshScope::AllDataSources => "ALL_DATA_SOURCES",
             RefreshScope::DataSourceRefreshScopeUnspecified => {
                 "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED"
@@ -4638,7 +4638,7 @@ pub enum DaysOfWeek {
 
 impl std::fmt::Display for DaysOfWeek {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DaysOfWeek::DayOfWeekUnspecified => "DAY_OF_WEEK_UNSPECIFIED",
             DaysOfWeek::Friday => "FRIDAY",
             DaysOfWeek::Monday => "MONDAY",
@@ -4763,8 +4763,8 @@ pub struct DataSourceSpec {
 }
 
 /**
- * The type to select columns for the data source table. Defaults to SELECTED.
- */
+* The type to select columns for the data source table. Defaults to SELECTED.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ColumnSelectionType {
     #[serde(rename = "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED")]
@@ -4781,7 +4781,7 @@ pub enum ColumnSelectionType {
 
 impl std::fmt::Display for ColumnSelectionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ColumnSelectionType::DataSourceTableColumnSelectionTypeUnspecified => {
                 "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED"
             }
@@ -4915,8 +4915,8 @@ pub struct DataValidationRule {
 }
 
 /**
- * The type of date-time grouping to apply.
- */
+* The type of date-time grouping to apply.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DateTimeRuleType {
     #[serde(rename = "DATE_TIME_RULE_TYPE_UNSPECIFIED")]
@@ -4959,7 +4959,7 @@ pub enum DateTimeRuleType {
 
 impl std::fmt::Display for DateTimeRuleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateTimeRuleType::DateTimeRuleTypeUnspecified => "DATE_TIME_RULE_TYPE_UNSPECIFIED",
             DateTimeRuleType::DayMonth => "DAY_MONTH",
             DateTimeRuleType::DayOfMonth => "DAY_OF_MONTH",
@@ -5262,8 +5262,8 @@ pub struct DeleteSheetRequest {
 }
 
 /**
- * The metadata visibility. Developer metadata must always have a visibility specified.
- */
+* The metadata visibility. Developer metadata must always have a visibility specified.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Visibility {
     #[serde(rename = "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED")]
@@ -5280,7 +5280,7 @@ pub enum Visibility {
 
 impl std::fmt::Display for Visibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Visibility::DeveloperMetadataVisibilityUnspecified => {
                 "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED"
             }
@@ -5350,8 +5350,8 @@ pub struct DeveloperMetadata {
 }
 
 /**
- * The type of location this object represents. This field is read-only.
- */
+* The type of location this object represents. This field is read-only.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LocationType {
     #[serde(rename = "COLUMN")]
@@ -5372,7 +5372,7 @@ pub enum LocationType {
 
 impl std::fmt::Display for LocationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LocationType::Column => "COLUMN",
             LocationType::DeveloperMetadataLocationTypeUnspecified => {
                 "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED"
@@ -5440,8 +5440,8 @@ pub struct DeveloperMetadataLocation {
 }
 
 /**
- * Determines how this lookup matches the location. If this field is specified as EXACT, only developer metadata associated on the exact location specified is matched. If this field is specified to INTERSECTING, developer metadata associated on intersecting locations is also matched. If left unspecified, this field assumes a default value of INTERSECTING. If this field is specified, a metadataLocation must also be specified.
- */
+* Determines how this lookup matches the location. If this field is specified as EXACT, only developer metadata associated on the exact location specified is matched. If this field is specified to INTERSECTING, developer metadata associated on intersecting locations is also matched. If left unspecified, this field assumes a default value of INTERSECTING. If this field is specified, a metadataLocation must also be specified.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LocationMatchingStrategy {
     #[serde(rename = "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED")]
@@ -5458,7 +5458,7 @@ pub enum LocationMatchingStrategy {
 
 impl std::fmt::Display for LocationMatchingStrategy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LocationMatchingStrategy::DeveloperMetadataLocationMatchingStrategyUnspecified => {
                 "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED"
             }
@@ -5863,8 +5863,8 @@ pub struct EmbeddedObjectPosition {
 }
 
 /**
- * The type of error.
- */
+* The type of error.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ErrorValueType {
     #[serde(rename = "DIVIDE_BY_ZERO")]
@@ -5895,7 +5895,7 @@ pub enum ErrorValueType {
 
 impl std::fmt::Display for ErrorValueType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ErrorValueType::DivideByZero => "DIVIDE_BY_ZERO",
             ErrorValueType::Error => "ERROR",
             ErrorValueType::ErrorTypeUnspecified => "ERROR_TYPE_UNSPECIFIED",
@@ -6541,8 +6541,8 @@ pub struct GridRange {
 }
 
 /**
- * The position of the chart legend.
- */
+* The position of the chart legend.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HistogramChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
@@ -6567,7 +6567,7 @@ pub enum HistogramChartSpecLegendPosition {
 
 impl std::fmt::Display for HistogramChartSpecLegendPosition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HistogramChartSpecLegendPosition::BottomLegend => "BOTTOM_LEGEND",
             HistogramChartSpecLegendPosition::HistogramChartLegendPositionUnspecified => {
                 "HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED"
@@ -6742,8 +6742,8 @@ pub struct InsertRangeRequest {
 }
 
 /**
- * How the value should be interpreted.
- */
+* How the value should be interpreted.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InterpolationPointType {
     #[serde(rename = "INTERPOLATION_POINT_TYPE_UNSPECIFIED")]
@@ -6766,7 +6766,7 @@ pub enum InterpolationPointType {
 
 impl std::fmt::Display for InterpolationPointType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InterpolationPointType::InterpolationPointTypeUnspecified => {
                 "INTERPOLATION_POINT_TYPE_UNSPECIFIED"
             }
@@ -6896,8 +6896,8 @@ pub struct KeyValueFormat {
 }
 
 /**
- * The dash type of the line.
- */
+* The dash type of the line.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LineStyleType {
     #[serde(rename = "CUSTOM")]
@@ -6926,7 +6926,7 @@ pub enum LineStyleType {
 
 impl std::fmt::Display for LineStyleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LineStyleType::Custom => "CUSTOM",
             LineStyleType::Dotted => "DOTTED",
             LineStyleType::Invisible => "INVISIBLE",
@@ -7069,8 +7069,8 @@ pub struct MatchedValueRange {
 }
 
 /**
- * How the cells should be merged.
- */
+* How the cells should be merged.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MergeType {
     #[serde(rename = "MERGE_ALL")]
@@ -7087,7 +7087,7 @@ pub enum MergeType {
 
 impl std::fmt::Display for MergeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MergeType::MergeAll => "MERGE_ALL",
             MergeType::MergeColumns => "MERGE_COLUMNS",
             MergeType::MergeRows => "MERGE_ROWS",
@@ -7174,8 +7174,8 @@ pub struct NamedRange {
 }
 
 /**
- * The type of the number format. When writing, this field must be set.
- */
+* The type of the number format. When writing, this field must be set.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NumberFormatType {
     #[serde(rename = "CURRENCY")]
@@ -7204,7 +7204,7 @@ pub enum NumberFormatType {
 
 impl std::fmt::Display for NumberFormatType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NumberFormatType::Currency => "CURRENCY",
             NumberFormatType::Date => "DATE",
             NumberFormatType::DateTime => "DATE_TIME",
@@ -7252,8 +7252,8 @@ pub struct NumberFormat {
 }
 
 /**
- * The size of the org chart nodes.
- */
+* The size of the org chart nodes.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NodeSize {
     #[serde(rename = "LARGE")]
@@ -7272,7 +7272,7 @@ pub enum NodeSize {
 
 impl std::fmt::Display for NodeSize {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NodeSize::Large => "LARGE",
             NodeSize::Medium => "MEDIUM",
             NodeSize::OrgChartLabelSizeUnspecified => "ORG_CHART_LABEL_SIZE_UNSPECIFIED",
@@ -7490,8 +7490,8 @@ pub struct PasteDataRequest {
 }
 
 /**
- * Where the legend of the pie chart should be drawn.
- */
+* Where the legend of the pie chart should be drawn.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PieChartSpecLegendPosition {
     #[serde(rename = "BOTTOM_LEGEND")]
@@ -7516,7 +7516,7 @@ pub enum PieChartSpecLegendPosition {
 
 impl std::fmt::Display for PieChartSpecLegendPosition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PieChartSpecLegendPosition::BottomLegend => "BOTTOM_LEGEND",
             PieChartSpecLegendPosition::LabeledLegend => "LABELED_LEGEND",
             PieChartSpecLegendPosition::LeftLegend => "LEFT_LEGEND",
@@ -7650,8 +7650,8 @@ pub struct PivotFilterSpec {
 }
 
 /**
- * The order the values in this group should be sorted.
- */
+* The order the values in this group should be sorted.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortOrder {
     #[serde(rename = "ASCENDING")]
@@ -7668,7 +7668,7 @@ pub enum SortOrder {
 
 impl std::fmt::Display for SortOrder {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortOrder::Ascending => "ASCENDING",
             SortOrder::Descending => "DESCENDING",
             SortOrder::SortOrderUnspecified => "SORT_ORDER_UNSPECIFIED",
@@ -7879,8 +7879,8 @@ pub struct PivotGroupValueMetadata {
 }
 
 /**
- * Whether values should be listed horizontally (as columns) or vertically (as rows).
- */
+* Whether values should be listed horizontally (as columns) or vertically (as rows).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ValueLayout {
     #[serde(rename = "HORIZONTAL")]
@@ -7895,7 +7895,7 @@ pub enum ValueLayout {
 
 impl std::fmt::Display for ValueLayout {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ValueLayout::Horizontal => "HORIZONTAL",
             ValueLayout::Vertical => "VERTICAL",
             ValueLayout::Noop => "",
@@ -7997,8 +7997,8 @@ pub struct PivotTable {
 }
 
 /**
- * If specified, indicates that pivot values should be displayed as the result of a calculation with another pivot value. For example, if calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the pivot values are displayed as the percentage of the grand total. In the Sheets editor, this is referred to as "Show As" in the value section of a pivot table.
- */
+* If specified, indicates that pivot values should be displayed as the result of a calculation with another pivot value. For example, if calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the pivot values are displayed as the percentage of the grand total. In the Sheets editor, this is referred to as "Show As" in the value section of a pivot table.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CalculatedDisplayType {
     #[serde(rename = "PERCENT_OF_COLUMN_TOTAL")]
@@ -8017,7 +8017,7 @@ pub enum CalculatedDisplayType {
 
 impl std::fmt::Display for CalculatedDisplayType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CalculatedDisplayType::PercentOfColumnTotal => "PERCENT_OF_COLUMN_TOTAL",
             CalculatedDisplayType::PercentOfGrandTotal => "PERCENT_OF_GRAND_TOTAL",
             CalculatedDisplayType::PercentOfRowTotal => "PERCENT_OF_ROW_TOTAL",
@@ -8043,8 +8043,8 @@ impl CalculatedDisplayType {
 }
 
 /**
- * A function to summarize the value. If formula is set, the only supported values are SUM and CUSTOM. If sourceColumnOffset is set, then `CUSTOM` is not supported.
- */
+* A function to summarize the value. If formula is set, the only supported values are SUM and CUSTOM. If sourceColumnOffset is set, then `CUSTOM` is not supported.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SummarizeFunction {
     #[serde(rename = "AVERAGE")]
@@ -8085,7 +8085,7 @@ pub enum SummarizeFunction {
 
 impl std::fmt::Display for SummarizeFunction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SummarizeFunction::Average => "AVERAGE",
             SummarizeFunction::Count => "COUNT",
             SummarizeFunction::Counta => "COUNTA",
@@ -8182,8 +8182,8 @@ pub struct PivotValue {
 }
 
 /**
- * The point shape. If empty or unspecified, a default shape is used.
- */
+* The point shape. If empty or unspecified, a default shape is used.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Shape {
     #[serde(rename = "CIRCLE")]
@@ -8212,7 +8212,7 @@ pub enum Shape {
 
 impl std::fmt::Display for Shape {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Shape::Circle => "CIRCLE",
             Shape::Diamond => "DIAMOND",
             Shape::Hexagon => "HEXAGON",
@@ -9201,8 +9201,8 @@ pub struct RowData {
 }
 
 /**
- * The number format source used in the scorecard chart. This field is optional.
- */
+* The number format source used in the scorecard chart. This field is optional.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NumberFormatSource {
     #[serde(rename = "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED")]
@@ -9219,7 +9219,7 @@ pub enum NumberFormatSource {
 
 impl std::fmt::Display for NumberFormatSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NumberFormatSource::ChartNumberFormatSourceUndefined => {
                 "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED"
             }
@@ -9502,8 +9502,8 @@ pub struct Sheet {
 }
 
 /**
- * The type of sheet. Defaults to GRID. This field cannot be changed once set.
- */
+* The type of sheet. Defaults to GRID. This field cannot be changed once set.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SheetType {
     #[serde(rename = "DATA_SOURCE")]
@@ -9522,7 +9522,7 @@ pub enum SheetType {
 
 impl std::fmt::Display for SheetType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SheetType::DataSource => "DATA_SOURCE",
             SheetType::Grid => "GRID",
             SheetType::Object => "OBJECT",
@@ -9930,8 +9930,8 @@ pub struct Spreadsheet {
 }
 
 /**
- * The amount of time to wait before volatile functions are recalculated.
- */
+* The amount of time to wait before volatile functions are recalculated.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AutoRecalc {
     #[serde(rename = "HOUR")]
@@ -9950,7 +9950,7 @@ pub enum AutoRecalc {
 
 impl std::fmt::Display for AutoRecalc {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AutoRecalc::Hour => "HOUR",
             AutoRecalc::Minute => "MINUTE",
             AutoRecalc::OnChange => "ON_CHANGE",
@@ -10204,8 +10204,8 @@ pub struct TextRotation {
 }
 
 /**
- * The delimiter type to use.
- */
+* The delimiter type to use.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DelimiterType {
     #[serde(rename = "AUTODETECT")]
@@ -10230,7 +10230,7 @@ pub enum DelimiterType {
 
 impl std::fmt::Display for DelimiterType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DelimiterType::Autodetect => "AUTODETECT",
             DelimiterType::Comma => "COMMA",
             DelimiterType::Custom => "CUSTOM",
@@ -11417,8 +11417,8 @@ pub struct WaterfallChartSeries {
 }
 
 /**
- * The stacked type.
- */
+* The stacked type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WaterfallChartSpecStackedType {
     #[serde(rename = "SEQUENTIAL")]
@@ -11435,7 +11435,7 @@ pub enum WaterfallChartSpecStackedType {
 
 impl std::fmt::Display for WaterfallChartSpecStackedType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WaterfallChartSpecStackedType::Sequential => "SEQUENTIAL",
             WaterfallChartSpecStackedType::Stacked => "STACKED",
             WaterfallChartSpecStackedType::WaterfallStackedTypeUnspecified => {
@@ -11524,8 +11524,8 @@ pub struct WaterfallChartSpec {
 }
 
 /**
- * V1 error format.
- */
+* V1 error format.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Xgafv {
     #[serde(rename = "1")]
@@ -11540,7 +11540,7 @@ pub enum Xgafv {
 
 impl std::fmt::Display for Xgafv {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Xgafv::One => "1",
             Xgafv::Two => "2",
             Xgafv::Noop => "",
@@ -11562,8 +11562,8 @@ impl Xgafv {
 }
 
 /**
- * Data format for response.
- */
+* Data format for response.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
@@ -11580,7 +11580,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Media => "media",
             Alt::Proto => "proto",
@@ -11603,8 +11603,8 @@ impl Alt {
 }
 
 /**
- * How the input data should be inserted.
- */
+* How the input data should be inserted.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InsertDataOption {
     #[serde(rename = "INSERT_ROWS")]
@@ -11619,7 +11619,7 @@ pub enum InsertDataOption {
 
 impl std::fmt::Display for InsertDataOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InsertDataOption::InsertRows => "INSERT_ROWS",
             InsertDataOption::Overwrite => "OVERWRITE",
             InsertDataOption::Noop => "",

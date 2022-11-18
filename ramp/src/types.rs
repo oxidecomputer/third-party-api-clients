@@ -61,7 +61,7 @@ pub enum Role {
 
 impl std::fmt::Display for Role {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Role::BusinessAdmin => "BUSINESS_ADMIN",
             Role::BusinessBookkeeper => "BUSINESS_BOOKKEEPER",
             Role::BusinessOwner => "BUSINESS_OWNER",
@@ -321,7 +321,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::PolicyViolationFromAdmin => "POLICY_VIOLATION_FROM_ADMIN",
             Type::PolicyViolationFromUser => "POLICY_VIOLATION_FROM_USER",
             Type::Noop => "",
@@ -390,7 +390,7 @@ pub enum GetTransactionResponseDataDisputesType {
 
 impl std::fmt::Display for GetTransactionResponseDataDisputesType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetTransactionResponseDataDisputesType::DisputeCancelled => "DISPUTE_CANCELLED",
             GetTransactionResponseDataDisputesType::MerchantError => "MERCHANT_ERROR",
             GetTransactionResponseDataDisputesType::Unknown => "UNKNOWN",
@@ -767,8 +767,8 @@ pub struct Fulfillment {
 }
 
 /**
- * Time interval to apply limit to.
- */
+* Time interval to apply limit to.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Interval {
     #[serde(rename = "DAILY")]
@@ -787,7 +787,7 @@ pub enum Interval {
 
 impl std::fmt::Display for Interval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Interval::Daily => "DAILY",
             Interval::Monthly => "MONTHLY",
             Interval::Total => "TOTAL",
@@ -1287,7 +1287,7 @@ pub enum TokenType {
 
 impl std::fmt::Display for TokenType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TokenType::Bearer => "Bearer",
             TokenType::Noop => "",
             TokenType::FallthroughString => "*",
@@ -1506,7 +1506,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Error => "ERROR",
             Status::InProgress => "IN_PROGRESS",
             Status::Started => "STARTED",
@@ -1576,7 +1576,7 @@ pub enum Icon {
 
 impl std::fmt::Display for Icon {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Icon::AdvertisingIcon => "AdvertisingIcon",
             Icon::CardIcon => "CardIcon",
             Icon::EducationStipendIcon => "EducationStipendIcon",

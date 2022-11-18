@@ -229,8 +229,8 @@ pub struct InventoryLotQuantity {
 }
 
 /**
- * Attribute influencing the packaging requirements of this inventory item
- */
+* Attribute influencing the packaging requirements of this inventory item
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PackagingAttribute {
     #[serde(rename = "Book")]
@@ -259,7 +259,7 @@ pub enum PackagingAttribute {
 
 impl std::fmt::Display for PackagingAttribute {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PackagingAttribute::Book => "Book",
             PackagingAttribute::CustomDunnage => "CustomDunnage",
             PackagingAttribute::CustomPackaging => "CustomPackaging",
@@ -653,10 +653,10 @@ pub struct OrdersChannelInfo {
 }
 
 /**
- * Specifies the type of address:
- *   ShipFrom
- *   MarkFor
- */
+* Specifies the type of address:
+*   ShipFrom
+*   MarkFor
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "MarkFor")]
@@ -671,7 +671,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::MarkFor => "MarkFor",
             Type::ShipFrom => "ShipFrom",
             Type::Noop => "",
@@ -1163,8 +1163,8 @@ pub struct OrdersMeasurements {
 }
 
 /**
- * The shipment status
- */
+* The shipment status
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "Cancelled")]
@@ -1195,7 +1195,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Cancelled => "Cancelled",
             Status::CleanSweeped => "CleanSweeped",
             Status::Completed => "Completed",
@@ -1225,8 +1225,8 @@ impl Status {
 }
 
 /**
- * Container type for the shipment
- */
+* Container type for the shipment
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PackageMaterialType {
     #[serde(rename = "Bookfold")]
@@ -1257,7 +1257,7 @@ pub enum PackageMaterialType {
 
 impl std::fmt::Display for PackageMaterialType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PackageMaterialType::Bookfold => "Bookfold",
             PackageMaterialType::Box => "Box",
             PackageMaterialType::BubbleMailer => "BubbleMailer",
@@ -1287,8 +1287,8 @@ impl PackageMaterialType {
 }
 
 /**
- * Status of ShipBob’s completion of the fulfillment operation.
- */
+* Status of ShipBob’s completion of the fulfillment operation.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EstimatedFulfillmentDateStatus {
     #[serde(rename = "AwaitingInventoryAllocation")]
@@ -1313,7 +1313,7 @@ pub enum EstimatedFulfillmentDateStatus {
 
 impl std::fmt::Display for EstimatedFulfillmentDateStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EstimatedFulfillmentDateStatus::AwaitingInventoryAllocation => {
                 "AwaitingInventoryAllocation"
             }
@@ -1515,12 +1515,12 @@ pub struct OrdersShipment {
 }
 
 /**
- * Identifies whether to ship parcel or freight.
- *   
- *   Parcel: Smaller, light weight boxes.
- *   
- *   Freight: Larger boxes, usually transported by truckload.
- */
+* Identifies whether to ship parcel or freight.
+*   
+*   Parcel: Smaller, light weight boxes.
+*   
+*   Freight: Larger boxes, usually transported by truckload.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CarrierType {
     #[serde(rename = "Freight")]
@@ -1535,7 +1535,7 @@ pub enum CarrierType {
 
 impl std::fmt::Display for CarrierType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CarrierType::Freight => "Freight",
             CarrierType::Parcel => "Parcel",
             CarrierType::Noop => "",
@@ -1557,14 +1557,14 @@ impl CarrierType {
 }
 
 /**
- * Identifies the party responsible for shipping charges.
- *   
- *   Collect: The person/entity receiving the product pays the shipping charges [freight only].
- *   
- *   ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].
- *   
- *   Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
- */
+* Identifies the party responsible for shipping charges.
+*   
+*   Collect: The person/entity receiving the product pays the shipping charges [freight only].
+*   
+*   ThirdParty: Another party pays for the shipping charges (not Shipbob) [parcel only].
+*   
+*   Prepaid: The shipper pays the shipping charges (Shipbob or merchant).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentTerm {
     #[serde(rename = "Collect")]
@@ -1581,7 +1581,7 @@ pub enum PaymentTerm {
 
 impl std::fmt::Display for PaymentTerm {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentTerm::Collect => "Collect",
             PaymentTerm::Prepaid => "Prepaid",
             PaymentTerm::ThirdParty => "ThirdParty",
@@ -1679,8 +1679,8 @@ pub struct OrdersRetailerProgramData {
 }
 
 /**
- * The order status
- */
+* The order status
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderStatus {
     #[serde(rename = "Cancelled")]
@@ -1703,7 +1703,7 @@ pub enum OrderStatus {
 
 impl std::fmt::Display for OrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderStatus::Cancelled => "Cancelled",
             OrderStatus::Exception => "Exception",
             OrderStatus::Fulfilled => "Fulfilled",
@@ -1729,8 +1729,8 @@ impl OrderStatus {
 }
 
 /**
- * Shipment type of the order
- */
+* Shipment type of the order
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderType {
     #[serde(rename = "B2B")]
@@ -1747,7 +1747,7 @@ pub enum OrderType {
 
 impl std::fmt::Display for OrderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderType::B2B => "B2B",
             OrderType::Dtc => "DTC",
             OrderType::DropShip => "DropShip",
@@ -1952,6 +1952,7 @@ pub struct OrdersAddProductOrderByReferenceModel {
 /// - `OrdersAddProductOrderByReferenceModel`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrdersAddProductOrderModelOneOf {
@@ -2085,7 +2086,7 @@ pub enum Action {
 
 impl std::fmt::Display for Action {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Action::Cancel => "Cancel",
             Action::Noop => "",
             Action::FallthroughString => "*",
@@ -2142,8 +2143,8 @@ pub struct OrdersCanceledShipment {
 }
 
 /**
- * The overall result of canceling the shipments associated with the order
- */
+* The overall result of canceling the shipments associated with the order
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrdersCanceledOrderStatus {
     #[serde(rename = "Failure")]
@@ -2160,7 +2161,7 @@ pub enum OrdersCanceledOrderStatus {
 
 impl std::fmt::Display for OrdersCanceledOrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrdersCanceledOrderStatus::Failure => "Failure",
             OrdersCanceledOrderStatus::PartialSuccess => "PartialSuccess",
             OrdersCanceledOrderStatus::Success => "Success",
@@ -2384,7 +2385,7 @@ pub enum ProductActiveStatus {
 
 impl std::fmt::Display for ProductActiveStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProductActiveStatus::Active => "Active",
             ProductActiveStatus::Any => "Any",
             ProductActiveStatus::Inactive => "Inactive",
@@ -2422,7 +2423,7 @@ pub enum ProductBundleStatus {
 
 impl std::fmt::Display for ProductBundleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProductBundleStatus::Any => "Any",
             ProductBundleStatus::Bundle => "Bundle",
             ProductBundleStatus::NotBundle => "NotBundle",
@@ -2943,7 +2944,7 @@ pub enum ReceivingStatus {
 
 impl std::fmt::Display for ReceivingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReceivingStatus::Arrived => "Arrived",
             ReceivingStatus::Awaiting => "Awaiting",
             ReceivingStatus::Cancelled => "Cancelled",
@@ -2985,7 +2986,7 @@ pub enum ReceivingPackageType {
 
 impl std::fmt::Display for ReceivingPackageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReceivingPackageType::FloorLoadedContainer => "FloorLoadedContainer",
             ReceivingPackageType::Package => "Package",
             ReceivingPackageType::Pallet => "Pallet",
@@ -3023,7 +3024,7 @@ pub enum ReceivingPackingType {
 
 impl std::fmt::Display for ReceivingPackingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReceivingPackingType::EverythingInOneBox => "EverythingInOneBox",
             ReceivingPackingType::MultipleSkuPerBox => "MultipleSkuPerBox",
             ReceivingPackingType::OneSkuPerBox => "OneSkuPerBox",
@@ -3067,7 +3068,7 @@ pub enum ReceivingBoxStatus {
 
 impl std::fmt::Display for ReceivingBoxStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReceivingBoxStatus::Arrived => "Arrived",
             ReceivingBoxStatus::Awaiting => "Awaiting",
             ReceivingBoxStatus::Cancelled => "Cancelled",
@@ -3476,7 +3477,7 @@ pub enum ReturnStatus {
 
 impl std::fmt::Display for ReturnStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnStatus::Arrived => "Arrived",
             ReturnStatus::AwaitingArrival => "AwaitingArrival",
             ReturnStatus::Cancelled => "Cancelled",
@@ -3516,7 +3517,7 @@ pub enum ReturnsTransactionLogSource {
 
 impl std::fmt::Display for ReturnsTransactionLogSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnsTransactionLogSource::ReturnLabelInvoice => "ReturnLabelInvoice",
             ReturnsTransactionLogSource::ReturnProcessingFee => "ReturnProcessingFee",
             ReturnsTransactionLogSource::ReturnToSenderFee => "ReturnToSenderFee",
@@ -3594,7 +3595,7 @@ pub enum ReturnAction {
 
 impl std::fmt::Display for ReturnAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnAction::Default => "Default",
             ReturnAction::Dispose => "Dispose",
             ReturnAction::Quarantine => "Quarantine",
@@ -3631,7 +3632,7 @@ pub enum ReturnActionSource {
 
 impl std::fmt::Display for ReturnActionSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnActionSource::InventoryDefault => "InventoryDefault",
             ReturnActionSource::Override => "Override",
             ReturnActionSource::Noop => "",
@@ -3749,7 +3750,7 @@ pub enum ReturnType {
 
 impl std::fmt::Display for ReturnType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnType::Regular => "Regular",
             ReturnType::ReturnToSender => "ReturnToSender",
             ReturnType::Noop => "",
@@ -3930,8 +3931,8 @@ pub struct ReturnsCreateReturn {
 }
 
 /**
- * Order to sort results in
- */
+* Order to sort results in
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortOrder {
     #[serde(rename = "Newest")]
@@ -3946,7 +3947,7 @@ pub enum SortOrder {
 
 impl std::fmt::Display for SortOrder {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortOrder::Newest => "Newest",
             SortOrder::Oldest => "Oldest",
             SortOrder::Noop => "",
@@ -4000,7 +4001,7 @@ pub enum WebhooksTopics {
 
 impl std::fmt::Display for WebhooksTopics {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WebhooksTopics::OrderShipped => "order_shipped",
             WebhooksTopics::ShipmentDelivered => "shipment_delivered",
             WebhooksTopics::ShipmentException => "shipment_exception",
@@ -4144,7 +4145,7 @@ pub enum IntegrationsLocationServiceTypeEnum {
 
 impl std::fmt::Display for IntegrationsLocationServiceTypeEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IntegrationsLocationServiceTypeEnum::Receiving => "Receiving",
             IntegrationsLocationServiceTypeEnum::Returns => "Returns",
             IntegrationsLocationServiceTypeEnum::Noop => "",
@@ -4375,6 +4376,7 @@ pub struct IntegrationsLocationInternal {
 ///
 /// - `IntegrationsLocation`
 /// - `IntegrationsLocationInternal`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegrationsLocationInternalAllOf {
     #[serde(flatten)]

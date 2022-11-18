@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// - `Image`
 /// - `serde_json::Value`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LoopingAllOf {
     #[serde(flatten)]
@@ -123,8 +124,8 @@ pub struct Images {
 }
 
 /**
- * Type of the gif. By default, this is almost always gif
- */
+* Type of the gif. By default, this is almost always gif
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "gif")]
@@ -135,7 +136,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Gif => "gif",
             Type::FallthroughString => "*",
         }
@@ -411,6 +412,7 @@ pub struct Image {
 }
 
 /// The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Meta {
     /**
@@ -446,6 +448,7 @@ pub struct Meta {
 }
 
 /// The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Pagination {
     /**

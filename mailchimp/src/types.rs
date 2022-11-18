@@ -86,8 +86,8 @@ pub struct Interest {
 }
 
 /**
- * Determines how this category’s interests appear on signup forms.
- */
+* Determines how this category’s interests appear on signup forms.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "checkboxes")]
@@ -106,7 +106,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Checkboxes => "checkboxes",
             Type::Dropdown => "dropdown",
             Type::Hidden => "hidden",
@@ -364,8 +364,8 @@ pub struct ECommerceProductVariant {
 }
 
 /**
- * The type of pricing plan the account is on.
- */
+* The type of pricing plan the account is on.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PricingPlanType {
     #[serde(rename = "forever_free")]
@@ -382,7 +382,7 @@ pub enum PricingPlanType {
 
 impl std::fmt::Display for PricingPlanType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PricingPlanType::ForeverFree => "forever_free",
             PricingPlanType::Monthly => "monthly",
             PricingPlanType::PayAsYouGo => "pay_as_you_go",
@@ -507,8 +507,8 @@ pub struct IndustryStats {
 }
 
 /**
- * The HTTP method that should be used when accessing the URL defined in 'href'.
- */
+* The HTTP method that should be used when accessing the URL defined in 'href'.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Method {
     #[serde(rename = "DELETE")]
@@ -533,7 +533,7 @@ pub enum Method {
 
 impl std::fmt::Display for Method {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Method::Delete => "DELETE",
             Method::Get => "GET",
             Method::Head => "HEAD",
@@ -780,8 +780,8 @@ pub struct ApiRoot {
 }
 
 /**
- * The type of activity
- */
+* The type of activity
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetActivityFeedChimpChatterResponseType {
     #[serde(rename = "campaigns:facebook-likes")]
@@ -804,7 +804,7 @@ pub enum GetActivityFeedChimpChatterResponseType {
 
 impl std::fmt::Display for GetActivityFeedChimpChatterResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetActivityFeedChimpChatterResponseType::CampaignsFacebookLikes => {
                 "campaigns:facebook-likes"
             }
@@ -1015,8 +1015,8 @@ pub struct GetAuthorizedAppsResponse {
 }
 
 /**
- * Restrict the results to automations with the specified status.
- */
+* Restrict the results to automations with the specified status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "paused")]
@@ -1033,7 +1033,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Paused => "paused",
             Status::Save => "save",
             Status::Sending => "sending",
@@ -1056,8 +1056,8 @@ impl Status {
 }
 
 /**
- * Segment match type.
- */
+* Segment match type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Match {
     #[serde(rename = "all")]
@@ -1072,7 +1072,7 @@ pub enum Match {
 
 impl std::fmt::Display for Match {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Match::All => "all",
             Match::Any => "any",
             Match::Noop => "",
@@ -1105,7 +1105,7 @@ pub enum ConditionType {
 
 impl std::fmt::Display for ConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ConditionType::Aim => "Aim",
             ConditionType::Noop => "",
             ConditionType::FallthroughString => "*",
@@ -1126,8 +1126,8 @@ impl ConditionType {
 }
 
 /**
- * Segment by interaction with a specific campaign.
- */
+* Segment by interaction with a specific campaign.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Field {
     #[serde(rename = "aim")]
@@ -1140,7 +1140,7 @@ pub enum Field {
 
 impl std::fmt::Display for Field {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Field::Aim => "aim",
             Field::Noop => "",
             Field::FallthroughString => "*",
@@ -1161,8 +1161,8 @@ impl Field {
 }
 
 /**
- * The status of the member with regard to their campaign interaction. One of the following: opened, clicked, was sent, didn't open, didn't click, or was not sent.
- */
+* The status of the member with regard to their campaign interaction. One of the following: opened, clicked, was sent, didn't open, didn't click, or was not sent.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Op {
     #[serde(rename = "click")]
@@ -1185,7 +1185,7 @@ pub enum Op {
 
 impl std::fmt::Display for Op {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Op::Click => "click",
             Op::Noclick => "noclick",
             Op::Noopen => "noopen",
@@ -1251,7 +1251,7 @@ pub enum AutomationSegmentConditionType {
 
 impl std::fmt::Display for AutomationSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AutomationSegmentConditionType::Automation => "Automation",
             AutomationSegmentConditionType::Noop => "",
             AutomationSegmentConditionType::FallthroughString => "*",
@@ -1272,8 +1272,8 @@ impl AutomationSegmentConditionType {
 }
 
 /**
- * Segment by interaction with an Automation workflow.
- */
+* Segment by interaction with an Automation workflow.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SegmentField {
     #[serde(rename = "automation")]
@@ -1286,7 +1286,7 @@ pub enum SegmentField {
 
 impl std::fmt::Display for SegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SegmentField::Automation => "automation",
             SegmentField::Noop => "",
             SegmentField::FallthroughString => "*",
@@ -1307,8 +1307,8 @@ impl SegmentField {
 }
 
 /**
- * The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
- */
+* The status of the member with regard to the automation workflow. One of the following: has started the workflow, has completed the workflow, has not started the workflow, or has not completed the workflow.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SegmentOperator {
     #[serde(rename = "completed")]
@@ -1327,7 +1327,7 @@ pub enum SegmentOperator {
 
 impl std::fmt::Display for SegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SegmentOperator::Completed => "completed",
             SegmentOperator::NotCompleted => "not_completed",
             SegmentOperator::NotStarted => "not_started",
@@ -1391,7 +1391,7 @@ pub enum PollActivitySegmentConditionType {
 
 impl std::fmt::Display for PollActivitySegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PollActivitySegmentConditionType::CampaignPoll => "CampaignPoll",
             PollActivitySegmentConditionType::Noop => "",
             PollActivitySegmentConditionType::FallthroughString => "*",
@@ -1412,8 +1412,8 @@ impl PollActivitySegmentConditionType {
 }
 
 /**
- * Segment by poll activity.
- */
+* Segment by poll activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PollActivitySegmentField {
     #[serde(rename = "poll")]
@@ -1426,7 +1426,7 @@ pub enum PollActivitySegmentField {
 
 impl std::fmt::Display for PollActivitySegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PollActivitySegmentField::Poll => "poll",
             PollActivitySegmentField::Noop => "",
             PollActivitySegmentField::FallthroughString => "*",
@@ -1447,8 +1447,8 @@ impl PollActivitySegmentField {
 }
 
 /**
- * Members have/have not interacted with a specific poll in a Mailchimp email.
- */
+* Members have/have not interacted with a specific poll in a Mailchimp email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PollActivitySegmentOperator {
     #[serde(rename = "member")]
@@ -1463,7 +1463,7 @@ pub enum PollActivitySegmentOperator {
 
 impl std::fmt::Display for PollActivitySegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PollActivitySegmentOperator::Member => "member",
             PollActivitySegmentOperator::Notmember => "notmember",
             PollActivitySegmentOperator::Noop => "",
@@ -1525,7 +1525,7 @@ pub enum ConversationSegmentConditionType {
 
 impl std::fmt::Display for ConversationSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ConversationSegmentConditionType::Conversation => "Conversation",
             ConversationSegmentConditionType::Noop => "",
             ConversationSegmentConditionType::FallthroughString => "*",
@@ -1546,8 +1546,8 @@ impl ConversationSegmentConditionType {
 }
 
 /**
- * Segment by interaction with a campaign via Conversations.
- */
+* Segment by interaction with a campaign via Conversations.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ConversationSegmentField {
     #[serde(rename = "conversation")]
@@ -1560,7 +1560,7 @@ pub enum ConversationSegmentField {
 
 impl std::fmt::Display for ConversationSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ConversationSegmentField::Conversation => "conversation",
             ConversationSegmentField::Noop => "",
             ConversationSegmentField::FallthroughString => "*",
@@ -1621,7 +1621,7 @@ pub enum DateSegmentConditionType {
 
 impl std::fmt::Display for DateSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateSegmentConditionType::Date => "Date",
             DateSegmentConditionType::Noop => "",
             DateSegmentConditionType::FallthroughString => "*",
@@ -1642,8 +1642,8 @@ impl DateSegmentConditionType {
 }
 
 /**
- * The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
- */
+* The type of date field to segment on: The opt-in time for a signup, the date the subscriber was last updated, or the date of their last ecomm purchase.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DateSegmentField {
     #[serde(rename = "ecomm_date")]
@@ -1660,7 +1660,7 @@ pub enum DateSegmentField {
 
 impl std::fmt::Display for DateSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateSegmentField::EcommDate => "ecomm_date",
             DateSegmentField::InfoChanged => "info_changed",
             DateSegmentField::TimestampOpt => "timestamp_opt",
@@ -1683,8 +1683,8 @@ impl DateSegmentField {
 }
 
 /**
- * When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
- */
+* When the event took place:  Before, after, is a specific date, is not a specific date, is blank, or is not blank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DateSegmentOperator {
     #[serde(rename = "blank")]
@@ -1711,7 +1711,7 @@ pub enum DateSegmentOperator {
 
 impl std::fmt::Display for DateSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateSegmentOperator::Blank => "blank",
             DateSegmentOperator::BlankNot => "blank_not",
             DateSegmentOperator::Greater => "greater",
@@ -1788,7 +1788,7 @@ pub enum EmailClientSegmentConditionType {
 
 impl std::fmt::Display for EmailClientSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailClientSegmentConditionType::EmailClient => "EmailClient",
             EmailClientSegmentConditionType::Noop => "",
             EmailClientSegmentConditionType::FallthroughString => "*",
@@ -1809,8 +1809,8 @@ impl EmailClientSegmentConditionType {
 }
 
 /**
- * Segment by use of a particular email client.
- */
+* Segment by use of a particular email client.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailClientSegmentField {
     #[serde(rename = "email_client")]
@@ -1823,7 +1823,7 @@ pub enum EmailClientSegmentField {
 
 impl std::fmt::Display for EmailClientSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailClientSegmentField::EmailClient => "email_client",
             EmailClientSegmentField::Noop => "",
             EmailClientSegmentField::FallthroughString => "*",
@@ -1844,8 +1844,8 @@ impl EmailClientSegmentField {
 }
 
 /**
- * The operation to determine whether we select clients that match the value, or clients that do not match the value.
- */
+* The operation to determine whether we select clients that match the value, or clients that do not match the value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailClientSegmentOperator {
     #[serde(rename = "client_is")]
@@ -1860,7 +1860,7 @@ pub enum EmailClientSegmentOperator {
 
 impl std::fmt::Display for EmailClientSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailClientSegmentOperator::ClientIs => "client_is",
             EmailClientSegmentOperator::ClientNot => "client_not",
             EmailClientSegmentOperator::Noop => "",
@@ -1922,7 +1922,7 @@ pub enum LanguageSegmentConditionType {
 
 impl std::fmt::Display for LanguageSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LanguageSegmentConditionType::Language => "Language",
             LanguageSegmentConditionType::Noop => "",
             LanguageSegmentConditionType::FallthroughString => "*",
@@ -1943,8 +1943,8 @@ impl LanguageSegmentConditionType {
 }
 
 /**
- * Segmenting based off of a subscriber's language.
- */
+* Segmenting based off of a subscriber's language.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LanguageSegmentField {
     #[serde(rename = "language")]
@@ -1957,7 +1957,7 @@ pub enum LanguageSegmentField {
 
 impl std::fmt::Display for LanguageSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LanguageSegmentField::Language => "language",
             LanguageSegmentField::Noop => "",
             LanguageSegmentField::FallthroughString => "*",
@@ -1978,8 +1978,8 @@ impl LanguageSegmentField {
 }
 
 /**
- * Whether the member's language is or is not set to a specific language.
- */
+* Whether the member's language is or is not set to a specific language.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LanguageSegmentOperator {
     #[serde(rename = "is")]
@@ -1994,7 +1994,7 @@ pub enum LanguageSegmentOperator {
 
 impl std::fmt::Display for LanguageSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LanguageSegmentOperator::Is => "is",
             LanguageSegmentOperator::Not => "not",
             LanguageSegmentOperator::Noop => "",
@@ -2056,7 +2056,7 @@ pub enum MemberRatingSegmentConditionType {
 
 impl std::fmt::Display for MemberRatingSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MemberRatingSegmentConditionType::MemberRating => "MemberRating",
             MemberRatingSegmentConditionType::Noop => "",
             MemberRatingSegmentConditionType::FallthroughString => "*",
@@ -2077,8 +2077,8 @@ impl MemberRatingSegmentConditionType {
 }
 
 /**
- * Segment by member rating.
- */
+* Segment by member rating.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MemberRatingSegmentField {
     #[serde(rename = "rating")]
@@ -2091,7 +2091,7 @@ pub enum MemberRatingSegmentField {
 
 impl std::fmt::Display for MemberRatingSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MemberRatingSegmentField::Rating => "rating",
             MemberRatingSegmentField::Noop => "",
             MemberRatingSegmentField::FallthroughString => "*",
@@ -2112,8 +2112,8 @@ impl MemberRatingSegmentField {
 }
 
 /**
- * Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
- */
+* Members who have have a rating that is/not exactly a given number or members who have a rating greater/less than a given number.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MemberRatingSegmentOperator {
     #[serde(rename = "greater")]
@@ -2132,7 +2132,7 @@ pub enum MemberRatingSegmentOperator {
 
 impl std::fmt::Display for MemberRatingSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MemberRatingSegmentOperator::Greater => "greater",
             MemberRatingSegmentOperator::Is => "is",
             MemberRatingSegmentOperator::Less => "less",
@@ -2196,7 +2196,7 @@ pub enum SignupSourceSegmentType {
 
 impl std::fmt::Display for SignupSourceSegmentType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SignupSourceSegmentType::SignupSource => "SignupSource",
             SignupSourceSegmentType::Noop => "",
             SignupSourceSegmentType::FallthroughString => "*",
@@ -2228,7 +2228,7 @@ pub enum SignupSourceSegmentField {
 
 impl std::fmt::Display for SignupSourceSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SignupSourceSegmentField::Source => "source",
             SignupSourceSegmentField::Noop => "",
             SignupSourceSegmentField::FallthroughString => "*",
@@ -2249,8 +2249,8 @@ impl SignupSourceSegmentField {
 }
 
 /**
- * Whether the member's signup source was/was not a particular value.
- */
+* Whether the member's signup source was/was not a particular value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SignupSourceSegmentOperator {
     #[serde(rename = "source_is")]
@@ -2265,7 +2265,7 @@ pub enum SignupSourceSegmentOperator {
 
 impl std::fmt::Display for SignupSourceSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SignupSourceSegmentOperator::SourceIs => "source_is",
             SignupSourceSegmentOperator::SourceNot => "source_not",
             SignupSourceSegmentOperator::Noop => "",
@@ -2321,7 +2321,7 @@ pub enum SurveyMonkeySegmentConditionType {
 
 impl std::fmt::Display for SurveyMonkeySegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SurveyMonkeySegmentConditionType::SurveyMonkey => "SurveyMonkey",
             SurveyMonkeySegmentConditionType::Noop => "",
             SurveyMonkeySegmentConditionType::FallthroughString => "*",
@@ -2342,8 +2342,8 @@ impl SurveyMonkeySegmentConditionType {
 }
 
 /**
- * Segment by interaction with a SurveyMonkey survey.
- */
+* Segment by interaction with a SurveyMonkey survey.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SurveyMonkeySegmentField {
     #[serde(rename = "survey_monkey")]
@@ -2356,7 +2356,7 @@ pub enum SurveyMonkeySegmentField {
 
 impl std::fmt::Display for SurveyMonkeySegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SurveyMonkeySegmentField::SurveyMonkey => "survey_monkey",
             SurveyMonkeySegmentField::Noop => "",
             SurveyMonkeySegmentField::FallthroughString => "*",
@@ -2417,7 +2417,7 @@ pub enum VipSegmentConditionType {
 
 impl std::fmt::Display for VipSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VipSegmentConditionType::Vip => "VIP",
             VipSegmentConditionType::Noop => "",
             VipSegmentConditionType::FallthroughString => "*",
@@ -2438,8 +2438,8 @@ impl VipSegmentConditionType {
 }
 
 /**
- * Segment by VIP status.
- */
+* Segment by VIP status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum VipSegmentField {
     #[serde(rename = "gmonkey")]
@@ -2452,7 +2452,7 @@ pub enum VipSegmentField {
 
 impl std::fmt::Display for VipSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VipSegmentField::Gmonkey => "gmonkey",
             VipSegmentField::Noop => "",
             VipSegmentField::FallthroughString => "*",
@@ -2504,7 +2504,7 @@ pub enum InterestsSegmentConditionType {
 
 impl std::fmt::Display for InterestsSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InterestsSegmentConditionType::Interests => "Interests",
             InterestsSegmentConditionType::Noop => "",
             InterestsSegmentConditionType::FallthroughString => "*",
@@ -2525,8 +2525,8 @@ impl InterestsSegmentConditionType {
 }
 
 /**
- * Whether the member is a part of one, all, or none of the groups.
- */
+* Whether the member is a part of one, all, or none of the groups.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InterestsSegmentOperator {
     #[serde(rename = "interestcontains")]
@@ -2543,7 +2543,7 @@ pub enum InterestsSegmentOperator {
 
 impl std::fmt::Display for InterestsSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InterestsSegmentOperator::Interestcontains => "interestcontains",
             InterestsSegmentOperator::Interestcontainsall => "interestcontainsall",
             InterestsSegmentOperator::Interestnotcontains => "interestnotcontains",
@@ -2610,7 +2610,7 @@ pub enum EcommerceCategorySegmentConditionType {
 
 impl std::fmt::Display for EcommerceCategorySegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceCategorySegmentConditionType::EcommCategory => "EcommCategory",
             EcommerceCategorySegmentConditionType::Noop => "",
             EcommerceCategorySegmentConditionType::FallthroughString => "*",
@@ -2631,8 +2631,8 @@ impl EcommerceCategorySegmentConditionType {
 }
 
 /**
- * Segment by purchases in specific items or categories.
- */
+* Segment by purchases in specific items or categories.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceCategorySegmentField {
     #[serde(rename = "ecomm_cat")]
@@ -2647,7 +2647,7 @@ pub enum EcommerceCategorySegmentField {
 
 impl std::fmt::Display for EcommerceCategorySegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceCategorySegmentField::EcommCat => "ecomm_cat",
             EcommerceCategorySegmentField::EcommProd => "ecomm_prod",
             EcommerceCategorySegmentField::Noop => "",
@@ -2669,8 +2669,8 @@ impl EcommerceCategorySegmentField {
 }
 
 /**
- * A member who has purchased from a category/specific item that is/is not a specific name, where the category/item name contains/doesn't contain a specific phrase or string, or a category/item name that starts/ends with a string.
- */
+* A member who has purchased from a category/specific item that is/is not a specific name, where the category/item name contains/doesn't contain a specific phrase or string, or a category/item name that starts/ends with a string.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceCategorySegmentOperator {
     #[serde(rename = "contains")]
@@ -2693,7 +2693,7 @@ pub enum EcommerceCategorySegmentOperator {
 
 impl std::fmt::Display for EcommerceCategorySegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceCategorySegmentOperator::Contains => "contains",
             EcommerceCategorySegmentOperator::Ends => "ends",
             EcommerceCategorySegmentOperator::Is => "is",
@@ -2759,7 +2759,7 @@ pub enum EcommerceNumberSegmentConditionType {
 
 impl std::fmt::Display for EcommerceNumberSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceNumberSegmentConditionType::EcommNumber => "EcommNumber",
             EcommerceNumberSegmentConditionType::Noop => "",
             EcommerceNumberSegmentConditionType::FallthroughString => "*",
@@ -2780,8 +2780,8 @@ impl EcommerceNumberSegmentConditionType {
 }
 
 /**
- * Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
- */
+* Segment by average spent total, number of orders, total number of products purchased, or average number of products per order.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceNumberSegmentField {
     #[serde(rename = "ecomm_avg_ord")]
@@ -2800,7 +2800,7 @@ pub enum EcommerceNumberSegmentField {
 
 impl std::fmt::Display for EcommerceNumberSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceNumberSegmentField::EcommAvgOrd => "ecomm_avg_ord",
             EcommerceNumberSegmentField::EcommOrders => "ecomm_orders",
             EcommerceNumberSegmentField::EcommProdAll => "ecomm_prod_all",
@@ -2864,7 +2864,7 @@ pub enum EcommercePurchasedSegmentConditionType {
 
 impl std::fmt::Display for EcommercePurchasedSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommercePurchasedSegmentConditionType::EcommPurchased => "EcommPurchased",
             EcommercePurchasedSegmentConditionType::Noop => "",
             EcommercePurchasedSegmentConditionType::FallthroughString => "*",
@@ -2885,8 +2885,8 @@ impl EcommercePurchasedSegmentConditionType {
 }
 
 /**
- * Segment by whether someone has purchased anything.
- */
+* Segment by whether someone has purchased anything.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommercePurchasedSegmentField {
     #[serde(rename = "ecomm_purchased")]
@@ -2899,7 +2899,7 @@ pub enum EcommercePurchasedSegmentField {
 
 impl std::fmt::Display for EcommercePurchasedSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommercePurchasedSegmentField::EcommPurchased => "ecomm_purchased",
             EcommercePurchasedSegmentField::Noop => "",
             EcommercePurchasedSegmentField::FallthroughString => "*",
@@ -2951,7 +2951,7 @@ pub enum EcommerceSpentSegmentConditionType {
 
 impl std::fmt::Display for EcommerceSpentSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceSpentSegmentConditionType::EcommSpent => "EcommSpent",
             EcommerceSpentSegmentConditionType::Noop => "",
             EcommerceSpentSegmentConditionType::FallthroughString => "*",
@@ -2972,8 +2972,8 @@ impl EcommerceSpentSegmentConditionType {
 }
 
 /**
- * Segment by amount spent on a single order or across all orders.
- */
+* Segment by amount spent on a single order or across all orders.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceSpentSegmentField {
     #[serde(rename = "ecomm_spent_all")]
@@ -2988,7 +2988,7 @@ pub enum EcommerceSpentSegmentField {
 
 impl std::fmt::Display for EcommerceSpentSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceSpentSegmentField::EcommSpentAll => "ecomm_spent_all",
             EcommerceSpentSegmentField::EcommSpentOne => "ecomm_spent_one",
             EcommerceSpentSegmentField::Noop => "",
@@ -3010,8 +3010,8 @@ impl EcommerceSpentSegmentField {
 }
 
 /**
- * Members who have spent 'more' or 'less' than then specified value.
- */
+* Members who have spent 'more' or 'less' than then specified value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceSpentSegmentOperator {
     #[serde(rename = "greater")]
@@ -3026,7 +3026,7 @@ pub enum EcommerceSpentSegmentOperator {
 
 impl std::fmt::Display for EcommerceSpentSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceSpentSegmentOperator::Greater => "greater",
             EcommerceSpentSegmentOperator::Less => "less",
             EcommerceSpentSegmentOperator::Noop => "",
@@ -3088,7 +3088,7 @@ pub enum EcommercePurchasedStoreSegmentConditionType {
 
 impl std::fmt::Display for EcommercePurchasedStoreSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommercePurchasedStoreSegmentConditionType::EcommStore => "EcommStore",
             EcommercePurchasedStoreSegmentConditionType::Noop => "",
             EcommercePurchasedStoreSegmentConditionType::FallthroughString => "*",
@@ -3109,8 +3109,8 @@ impl EcommercePurchasedStoreSegmentConditionType {
 }
 
 /**
- * Segment by purchases from a specific store.
- */
+* Segment by purchases from a specific store.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommercePurchasedStoreSegmentField {
     #[serde(rename = "ecomm_store")]
@@ -3123,7 +3123,7 @@ pub enum EcommercePurchasedStoreSegmentField {
 
 impl std::fmt::Display for EcommercePurchasedStoreSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommercePurchasedStoreSegmentField::EcommStore => "ecomm_store",
             EcommercePurchasedStoreSegmentField::Noop => "",
             EcommercePurchasedStoreSegmentField::FallthroughString => "*",
@@ -3184,7 +3184,7 @@ pub enum GoalActivitySegmentConditionType {
 
 impl std::fmt::Display for GoalActivitySegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalActivitySegmentConditionType::GoalActivity => "GoalActivity",
             GoalActivitySegmentConditionType::Noop => "",
             GoalActivitySegmentConditionType::FallthroughString => "*",
@@ -3205,8 +3205,8 @@ impl GoalActivitySegmentConditionType {
 }
 
 /**
- * Segment by Goal activity.
- */
+* Segment by Goal activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GoalActivitySegmentField {
     #[serde(rename = "goal")]
@@ -3219,7 +3219,7 @@ pub enum GoalActivitySegmentField {
 
 impl std::fmt::Display for GoalActivitySegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalActivitySegmentField::Goal => "goal",
             GoalActivitySegmentField::Noop => "",
             GoalActivitySegmentField::FallthroughString => "*",
@@ -3240,8 +3240,8 @@ impl GoalActivitySegmentField {
 }
 
 /**
- * Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
- */
+* Whether the website URL is/not exactly, contains/doesn't contain, starts with/ends with a string.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GoalActivitySegmentOperator {
     #[serde(rename = "contains")]
@@ -3264,7 +3264,7 @@ pub enum GoalActivitySegmentOperator {
 
 impl std::fmt::Display for GoalActivitySegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalActivitySegmentOperator::Contains => "contains",
             GoalActivitySegmentOperator::Ends => "ends",
             GoalActivitySegmentOperator::GoalNot => "goal_not",
@@ -3330,7 +3330,7 @@ pub enum GoalTimestampSegmentConditionType {
 
 impl std::fmt::Display for GoalTimestampSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalTimestampSegmentConditionType::GoalTimestamp => "GoalTimestamp",
             GoalTimestampSegmentConditionType::Noop => "",
             GoalTimestampSegmentConditionType::FallthroughString => "*",
@@ -3351,8 +3351,8 @@ impl GoalTimestampSegmentConditionType {
 }
 
 /**
- * Segment by most recent interaction with a website.
- */
+* Segment by most recent interaction with a website.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GoalTimestampSegmentField {
     #[serde(rename = "goal_last_visited")]
@@ -3365,7 +3365,7 @@ pub enum GoalTimestampSegmentField {
 
 impl std::fmt::Display for GoalTimestampSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalTimestampSegmentField::GoalLastVisited => "goal_last_visited",
             GoalTimestampSegmentField::Noop => "",
             GoalTimestampSegmentField::FallthroughString => "*",
@@ -3386,8 +3386,8 @@ impl GoalTimestampSegmentField {
 }
 
 /**
- * Whether the website activity happened after, before, or at a given timestamp.
- */
+* Whether the website activity happened after, before, or at a given timestamp.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GoalTimestampSegmentOperator {
     #[serde(rename = "greater")]
@@ -3404,7 +3404,7 @@ pub enum GoalTimestampSegmentOperator {
 
 impl std::fmt::Display for GoalTimestampSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GoalTimestampSegmentOperator::Greater => "greater",
             GoalTimestampSegmentOperator::Is => "is",
             GoalTimestampSegmentOperator::Less => "less",
@@ -3467,7 +3467,7 @@ pub enum SimilarSubscribersSegmentMemberConditionType {
 
 impl std::fmt::Display for SimilarSubscribersSegmentMemberConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SimilarSubscribersSegmentMemberConditionType::FuzzySegment => "FuzzySegment",
             SimilarSubscribersSegmentMemberConditionType::Noop => "",
             SimilarSubscribersSegmentMemberConditionType::FallthroughString => "*",
@@ -3488,8 +3488,8 @@ impl SimilarSubscribersSegmentMemberConditionType {
 }
 
 /**
- * Segment by similar subscribers.
- */
+* Segment by similar subscribers.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SimilarSubscribersSegmentMemberField {
     #[serde(rename = "fuzzy_segment")]
@@ -3502,7 +3502,7 @@ pub enum SimilarSubscribersSegmentMemberField {
 
 impl std::fmt::Display for SimilarSubscribersSegmentMemberField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SimilarSubscribersSegmentMemberField::FuzzySegment => "fuzzy_segment",
             SimilarSubscribersSegmentMemberField::Noop => "",
             SimilarSubscribersSegmentMemberField::FallthroughString => "*",
@@ -3523,8 +3523,8 @@ impl SimilarSubscribersSegmentMemberField {
 }
 
 /**
- * Members who are/are not apart of a 'similar subscribers' segment.
- */
+* Members who are/are not apart of a 'similar subscribers' segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SimilarSubscribersSegmentMemberOperator {
     #[serde(rename = "fuzzy_is")]
@@ -3539,7 +3539,7 @@ pub enum SimilarSubscribersSegmentMemberOperator {
 
 impl std::fmt::Display for SimilarSubscribersSegmentMemberOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SimilarSubscribersSegmentMemberOperator::FuzzyIs => "fuzzy_is",
             SimilarSubscribersSegmentMemberOperator::FuzzyNot => "fuzzy_not",
             SimilarSubscribersSegmentMemberOperator::Noop => "",
@@ -3607,7 +3607,7 @@ pub enum StaticSegmentMemberConditionType {
 
 impl std::fmt::Display for StaticSegmentMemberConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             StaticSegmentMemberConditionType::StaticSegment => "StaticSegment",
             StaticSegmentMemberConditionType::Noop => "",
             StaticSegmentMemberConditionType::FallthroughString => "*",
@@ -3628,8 +3628,8 @@ impl StaticSegmentMemberConditionType {
 }
 
 /**
- * Segment by a given static segment.
- */
+* Segment by a given static segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum StaticSegmentMemberField {
     #[serde(rename = "static_segment")]
@@ -3642,7 +3642,7 @@ pub enum StaticSegmentMemberField {
 
 impl std::fmt::Display for StaticSegmentMemberField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             StaticSegmentMemberField::StaticSegment => "static_segment",
             StaticSegmentMemberField::Noop => "",
             StaticSegmentMemberField::FallthroughString => "*",
@@ -3663,8 +3663,8 @@ impl StaticSegmentMemberField {
 }
 
 /**
- * Members who are/are not apart of a static segment.
- */
+* Members who are/are not apart of a static segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum StaticSegmentMemberOperator {
     #[serde(rename = "static_is")]
@@ -3679,7 +3679,7 @@ pub enum StaticSegmentMemberOperator {
 
 impl std::fmt::Display for StaticSegmentMemberOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             StaticSegmentMemberOperator::StaticIs => "static_is",
             StaticSegmentMemberOperator::StaticNot => "static_not",
             StaticSegmentMemberOperator::Noop => "",
@@ -3741,7 +3741,7 @@ pub enum LocationBasedSegmentConditionType {
 
 impl std::fmt::Display for LocationBasedSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LocationBasedSegmentConditionType::IpGeoCountryState => "IPGeoCountryState",
             LocationBasedSegmentConditionType::Noop => "",
             LocationBasedSegmentConditionType::FallthroughString => "*",
@@ -3762,8 +3762,8 @@ impl LocationBasedSegmentConditionType {
 }
 
 /**
- * Segmenting subscribers who are within a specific location.
- */
+* Segmenting subscribers who are within a specific location.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LocationBasedSegmentField {
     #[serde(rename = "ipgeo")]
@@ -3776,7 +3776,7 @@ pub enum LocationBasedSegmentField {
 
 impl std::fmt::Display for LocationBasedSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LocationBasedSegmentField::Ipgeo => "ipgeo",
             LocationBasedSegmentField::Noop => "",
             LocationBasedSegmentField::FallthroughString => "*",
@@ -3797,8 +3797,8 @@ impl LocationBasedSegmentField {
 }
 
 /**
- * Segment members who are within a specific country or US state.
- */
+* Segment members who are within a specific country or US state.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LocationBasedSegmentOperator {
     #[serde(rename = "ipgeocountry")]
@@ -3817,7 +3817,7 @@ pub enum LocationBasedSegmentOperator {
 
 impl std::fmt::Display for LocationBasedSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LocationBasedSegmentOperator::Ipgeocountry => "ipgeocountry",
             LocationBasedSegmentOperator::Ipgeonotcountry => "ipgeonotcountry",
             LocationBasedSegmentOperator::Ipgeonotstate => "ipgeonotstate",
@@ -3881,7 +3881,7 @@ pub enum GeolocationSegmentConditionType {
 
 impl std::fmt::Display for GeolocationSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GeolocationSegmentConditionType::IpGeoIn => "IPGeoIn",
             GeolocationSegmentConditionType::Noop => "",
             GeolocationSegmentConditionType::FallthroughString => "*",
@@ -3902,8 +3902,8 @@ impl GeolocationSegmentConditionType {
 }
 
 /**
- * Segment members who are within a specific geographic region.
- */
+* Segment members who are within a specific geographic region.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GeolocationSegmentOperator {
     #[serde(rename = "ipgeoin")]
@@ -3918,7 +3918,7 @@ pub enum GeolocationSegmentOperator {
 
 impl std::fmt::Display for GeolocationSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GeolocationSegmentOperator::Ipgeoin => "ipgeoin",
             GeolocationSegmentOperator::Ipgeonotin => "ipgeonotin",
             GeolocationSegmentOperator::Noop => "",
@@ -4007,7 +4007,7 @@ pub enum UsZipCodeSegmentConditionType {
 
 impl std::fmt::Display for UsZipCodeSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsZipCodeSegmentConditionType::IpGeoInZip => "IPGeoInZip",
             UsZipCodeSegmentConditionType::Noop => "",
             UsZipCodeSegmentConditionType::FallthroughString => "*",
@@ -4028,8 +4028,8 @@ impl UsZipCodeSegmentConditionType {
 }
 
 /**
- * Segment members who are within a specific US zip code.
- */
+* Segment members who are within a specific US zip code.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsZipCodeSegmentOperator {
     #[serde(rename = "ipgeoinzip")]
@@ -4042,7 +4042,7 @@ pub enum UsZipCodeSegmentOperator {
 
 impl std::fmt::Display for UsZipCodeSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsZipCodeSegmentOperator::Ipgeoinzip => "ipgeoinzip",
             UsZipCodeSegmentOperator::Noop => "",
             UsZipCodeSegmentOperator::FallthroughString => "*",
@@ -4112,7 +4112,7 @@ pub enum UnknownLocationBasedSegmentConditionType {
 
 impl std::fmt::Display for UnknownLocationBasedSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UnknownLocationBasedSegmentConditionType::IpGeoUnknown => "IPGeoUnknown",
             UnknownLocationBasedSegmentConditionType::Noop => "",
             UnknownLocationBasedSegmentConditionType::FallthroughString => "*",
@@ -4133,8 +4133,8 @@ impl UnknownLocationBasedSegmentConditionType {
 }
 
 /**
- * Segment members for which location information is unknown.
- */
+* Segment members for which location information is unknown.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UnknownLocationBasedSegmentOperator {
     #[serde(rename = "ipgeounknown")]
@@ -4147,7 +4147,7 @@ pub enum UnknownLocationBasedSegmentOperator {
 
 impl std::fmt::Display for UnknownLocationBasedSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UnknownLocationBasedSegmentOperator::Ipgeounknown => "ipgeounknown",
             UnknownLocationBasedSegmentOperator::Noop => "",
             UnknownLocationBasedSegmentOperator::FallthroughString => "*",
@@ -4202,7 +4202,7 @@ pub enum ZipCodeLocationBasedSegmentConditionType {
 
 impl std::fmt::Display for ZipCodeLocationBasedSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ZipCodeLocationBasedSegmentConditionType::IpGeoZip => "IPGeoZip",
             ZipCodeLocationBasedSegmentConditionType::Noop => "",
             ZipCodeLocationBasedSegmentConditionType::FallthroughString => "*",
@@ -4223,8 +4223,8 @@ impl ZipCodeLocationBasedSegmentConditionType {
 }
 
 /**
- * Segment members who are/are not within a specific US zip code.
- */
+* Segment members who are/are not within a specific US zip code.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ZipCodeLocationBasedSegmentOperator {
     #[serde(rename = "ipgeoiszip")]
@@ -4239,7 +4239,7 @@ pub enum ZipCodeLocationBasedSegmentOperator {
 
 impl std::fmt::Display for ZipCodeLocationBasedSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ZipCodeLocationBasedSegmentOperator::Ipgeoiszip => "ipgeoiszip",
             ZipCodeLocationBasedSegmentOperator::Ipgeonotzip => "ipgeonotzip",
             ZipCodeLocationBasedSegmentOperator::Noop => "",
@@ -4304,7 +4304,7 @@ pub enum SocialProfilesAgeSegmentConditionType {
 
 impl std::fmt::Display for SocialProfilesAgeSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesAgeSegmentConditionType::SocialAge => "SocialAge",
             SocialProfilesAgeSegmentConditionType::Noop => "",
             SocialProfilesAgeSegmentConditionType::FallthroughString => "*",
@@ -4325,8 +4325,8 @@ impl SocialProfilesAgeSegmentConditionType {
 }
 
 /**
- * Segment by age ranges in Social Profiles data.
- */
+* Segment by age ranges in Social Profiles data.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesAgeSegmentField {
     #[serde(rename = "social_age")]
@@ -4339,7 +4339,7 @@ pub enum SocialProfilesAgeSegmentField {
 
 impl std::fmt::Display for SocialProfilesAgeSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesAgeSegmentField::SocialAge => "social_age",
             SocialProfilesAgeSegmentField::Noop => "",
             SocialProfilesAgeSegmentField::FallthroughString => "*",
@@ -4360,8 +4360,8 @@ impl SocialProfilesAgeSegmentField {
 }
 
 /**
- * The age range to segment.
- */
+* The age range to segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Value {
     #[serde(rename = "18-24")]
@@ -4380,7 +4380,7 @@ pub enum Value {
 
 impl std::fmt::Display for Value {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Value::OneThousandEightHundredAndTwentyFour => "18-24",
             Value::TwoThousandFiveHundredAndThirtyFour => "25-34",
             Value::ThreeThousandFiveHundredAndFiftyFour => "35-54",
@@ -4443,7 +4443,7 @@ pub enum SocialProfilesGenderSegmentConditionType {
 
 impl std::fmt::Display for SocialProfilesGenderSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesGenderSegmentConditionType::SocialGender => "SocialGender",
             SocialProfilesGenderSegmentConditionType::Noop => "",
             SocialProfilesGenderSegmentConditionType::FallthroughString => "*",
@@ -4464,8 +4464,8 @@ impl SocialProfilesGenderSegmentConditionType {
 }
 
 /**
- * Segment by listed gender in Social Profiles data.
- */
+* Segment by listed gender in Social Profiles data.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesGenderSegmentField {
     #[serde(rename = "social_gender")]
@@ -4478,7 +4478,7 @@ pub enum SocialProfilesGenderSegmentField {
 
 impl std::fmt::Display for SocialProfilesGenderSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesGenderSegmentField::SocialGender => "social_gender",
             SocialProfilesGenderSegmentField::Noop => "",
             SocialProfilesGenderSegmentField::FallthroughString => "*",
@@ -4499,8 +4499,8 @@ impl SocialProfilesGenderSegmentField {
 }
 
 /**
- * The Social Profiles gender to segment.
- */
+* The Social Profiles gender to segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesGenderSegmentOperator {
     #[serde(rename = "female")]
@@ -4515,7 +4515,7 @@ pub enum SocialProfilesGenderSegmentOperator {
 
 impl std::fmt::Display for SocialProfilesGenderSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesGenderSegmentOperator::Female => "female",
             SocialProfilesGenderSegmentOperator::Male => "male",
             SocialProfilesGenderSegmentOperator::Noop => "",
@@ -4579,7 +4579,7 @@ pub enum SocialProfilesInfluenceSegmentConditionType {
 
 impl std::fmt::Display for SocialProfilesInfluenceSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesInfluenceSegmentConditionType::SocialInfluence => "SocialInfluence",
             SocialProfilesInfluenceSegmentConditionType::Noop => "",
             SocialProfilesInfluenceSegmentConditionType::FallthroughString => "*",
@@ -4600,8 +4600,8 @@ impl SocialProfilesInfluenceSegmentConditionType {
 }
 
 /**
- * Segment by influence rating in Social Profiles data.
- */
+* Segment by influence rating in Social Profiles data.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesInfluenceSegmentField {
     #[serde(rename = "social_influence")]
@@ -4614,7 +4614,7 @@ pub enum SocialProfilesInfluenceSegmentField {
 
 impl std::fmt::Display for SocialProfilesInfluenceSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesInfluenceSegmentField::SocialInfluence => "social_influence",
             SocialProfilesInfluenceSegmentField::Noop => "",
             SocialProfilesInfluenceSegmentField::FallthroughString => "*",
@@ -4678,7 +4678,7 @@ pub enum SocialProfilesNetworkSegmentConditionType {
 
 impl std::fmt::Display for SocialProfilesNetworkSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkSegmentConditionType::SocialNetworkMember => "SocialNetworkMember",
             SocialProfilesNetworkSegmentConditionType::Noop => "",
             SocialProfilesNetworkSegmentConditionType::FallthroughString => "*",
@@ -4699,8 +4699,8 @@ impl SocialProfilesNetworkSegmentConditionType {
 }
 
 /**
- * Segment by social network in Social Profiles data.
- */
+* Segment by social network in Social Profiles data.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesNetworkSegmentField {
     #[serde(rename = "social_network")]
@@ -4713,7 +4713,7 @@ pub enum SocialProfilesNetworkSegmentField {
 
 impl std::fmt::Display for SocialProfilesNetworkSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkSegmentField::SocialNetwork => "social_network",
             SocialProfilesNetworkSegmentField::Noop => "",
             SocialProfilesNetworkSegmentField::FallthroughString => "*",
@@ -4734,8 +4734,8 @@ impl SocialProfilesNetworkSegmentField {
 }
 
 /**
- * The social network to segment against.
- */
+* The social network to segment against.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesNetworkSegmentOperator {
     #[serde(rename = "facebook")]
@@ -4768,7 +4768,7 @@ pub enum SocialProfilesNetworkSegmentOperator {
 
 impl std::fmt::Display for SocialProfilesNetworkSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkSegmentOperator::Facebook => "facebook",
             SocialProfilesNetworkSegmentOperator::Flickr => "flickr",
             SocialProfilesNetworkSegmentOperator::Foursquare => "foursquare",
@@ -4841,7 +4841,7 @@ pub enum SocialProfilesNetworkFollowSegmentConditionType {
 
 impl std::fmt::Display for SocialProfilesNetworkFollowSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkFollowSegmentConditionType::SocialNetworkFollow => {
                 "SocialNetworkFollow"
             }
@@ -4864,8 +4864,8 @@ impl SocialProfilesNetworkFollowSegmentConditionType {
 }
 
 /**
- * Members who are/not following a linked account on a given social network.
- */
+* Members who are/not following a linked account on a given social network.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesNetworkFollowSegmentOperator {
     #[serde(rename = "follow")]
@@ -4880,7 +4880,7 @@ pub enum SocialProfilesNetworkFollowSegmentOperator {
 
 impl std::fmt::Display for SocialProfilesNetworkFollowSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkFollowSegmentOperator::Follow => "follow",
             SocialProfilesNetworkFollowSegmentOperator::Notfollow => "notfollow",
             SocialProfilesNetworkFollowSegmentOperator::Noop => "",
@@ -4902,8 +4902,8 @@ impl SocialProfilesNetworkFollowSegmentOperator {
 }
 
 /**
- * The social network to segment against.
- */
+* The social network to segment against.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SocialProfilesNetworkFollowSegmentOperatorData {
     #[serde(rename = "twitter_follow")]
@@ -4916,7 +4916,7 @@ pub enum SocialProfilesNetworkFollowSegmentOperatorData {
 
 impl std::fmt::Display for SocialProfilesNetworkFollowSegmentOperatorData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SocialProfilesNetworkFollowSegmentOperatorData::TwitterFollow => "twitter_follow",
             SocialProfilesNetworkFollowSegmentOperatorData::Noop => "",
             SocialProfilesNetworkFollowSegmentOperatorData::FallthroughString => "*",
@@ -4982,7 +4982,7 @@ pub enum AddressMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for AddressMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AddressMergeFieldSegmentConditionType::AddressMerge => "AddressMerge",
             AddressMergeFieldSegmentConditionType::Noop => "",
             AddressMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5003,8 +5003,8 @@ impl AddressMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's address merge field contains/does not contain a value or is/is not blank.
- */
+* Whether the member's address merge field contains/does not contain a value or is/is not blank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AddressMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
@@ -5023,7 +5023,7 @@ pub enum AddressMergeFieldSegmentOperator {
 
 impl std::fmt::Display for AddressMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AddressMergeFieldSegmentOperator::Blank => "blank",
             AddressMergeFieldSegmentOperator::BlankNot => "blank_not",
             AddressMergeFieldSegmentOperator::Contains => "contains",
@@ -5094,7 +5094,7 @@ pub enum AddressZipMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for AddressZipMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AddressZipMergeFieldSegmentConditionType::ZipMerge => "ZipMerge",
             AddressZipMergeFieldSegmentConditionType::Noop => "",
             AddressZipMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5115,8 +5115,8 @@ impl AddressZipMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's address merge field is within a given distance from a city or zip.
- */
+* Whether the member's address merge field is within a given distance from a city or zip.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AddressZipMergeFieldSegmentOperator {
     #[serde(rename = "geoin")]
@@ -5129,7 +5129,7 @@ pub enum AddressZipMergeFieldSegmentOperator {
 
 impl std::fmt::Display for AddressZipMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AddressZipMergeFieldSegmentOperator::Geoin => "geoin",
             AddressZipMergeFieldSegmentOperator::Noop => "",
             AddressZipMergeFieldSegmentOperator::FallthroughString => "*",
@@ -5206,7 +5206,7 @@ pub enum BirthdayMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for BirthdayMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BirthdayMergeFieldSegmentConditionType::BirthdayMerge => "BirthdayMerge",
             BirthdayMergeFieldSegmentConditionType::Noop => "",
             BirthdayMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5227,8 +5227,8 @@ impl BirthdayMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's birthday merge information is/is not a certain date or is/is not blank.
- */
+* Whether the member's birthday merge information is/is not a certain date or is/is not blank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BirthdayMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
@@ -5247,7 +5247,7 @@ pub enum BirthdayMergeFieldSegmentOperator {
 
 impl std::fmt::Display for BirthdayMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BirthdayMergeFieldSegmentOperator::Blank => "blank",
             BirthdayMergeFieldSegmentOperator::BlankNot => "blank_not",
             BirthdayMergeFieldSegmentOperator::Is => "is",
@@ -5318,7 +5318,7 @@ pub enum DateMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for DateMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateMergeFieldSegmentConditionType::DateMerge => "DateMerge",
             DateMergeFieldSegmentConditionType::Noop => "",
             DateMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5339,8 +5339,8 @@ impl DateMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
- */
+* Whether the member's merge information is/is not, is greater/less than a value or is/is not blank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DateMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
@@ -5363,7 +5363,7 @@ pub enum DateMergeFieldSegmentOperator {
 
 impl std::fmt::Display for DateMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DateMergeFieldSegmentOperator::Blank => "blank",
             DateMergeFieldSegmentOperator::BlankNot => "blank_not",
             DateMergeFieldSegmentOperator::Greater => "greater",
@@ -5436,7 +5436,7 @@ pub enum DropdownRadioMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for DropdownRadioMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DropdownRadioMergeFieldSegmentConditionType::SelectMerge => "SelectMerge",
             DropdownRadioMergeFieldSegmentConditionType::Noop => "",
             DropdownRadioMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5457,8 +5457,8 @@ impl DropdownRadioMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's merge information is/is not a value or is/is not blank.
- */
+* Whether the member's merge information is/is not a value or is/is not blank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DropdownRadioMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
@@ -5481,7 +5481,7 @@ pub enum DropdownRadioMergeFieldSegmentOperator {
 
 impl std::fmt::Display for DropdownRadioMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DropdownRadioMergeFieldSegmentOperator::Blank => "blank",
             DropdownRadioMergeFieldSegmentOperator::BlankNot => "blank_not",
             DropdownRadioMergeFieldSegmentOperator::Contains => "contains",
@@ -5554,7 +5554,7 @@ pub enum TextNumberMergeFieldSegmentConditionType {
 
 impl std::fmt::Display for TextNumberMergeFieldSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TextNumberMergeFieldSegmentConditionType::TextMerge => "TextMerge",
             TextNumberMergeFieldSegmentConditionType::Noop => "",
             TextNumberMergeFieldSegmentConditionType::FallthroughString => "*",
@@ -5575,8 +5575,8 @@ impl TextNumberMergeFieldSegmentConditionType {
 }
 
 /**
- * Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
- */
+* Whether the member's merge information is/is not, contains/does not contain, starts/ends with, or is greater/less than a value
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TextNumberMergeFieldSegmentOperator {
     #[serde(rename = "blank")]
@@ -5607,7 +5607,7 @@ pub enum TextNumberMergeFieldSegmentOperator {
 
 impl std::fmt::Display for TextNumberMergeFieldSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TextNumberMergeFieldSegmentOperator::Blank => "blank",
             TextNumberMergeFieldSegmentOperator::BlankNot => "blank_not",
             TextNumberMergeFieldSegmentOperator::Contains => "contains",
@@ -5684,7 +5684,7 @@ pub enum EmailSegmentConditionType {
 
 impl std::fmt::Display for EmailSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailSegmentConditionType::EmailAddress => "EmailAddress",
             EmailSegmentConditionType::Noop => "",
             EmailSegmentConditionType::FallthroughString => "*",
@@ -5705,8 +5705,8 @@ impl EmailSegmentConditionType {
 }
 
 /**
- * Segmenting based off of a subscriber's email address.
- */
+* Segmenting based off of a subscriber's email address.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailSegmentField {
     #[serde(rename = "EMAIL")]
@@ -5721,7 +5721,7 @@ pub enum EmailSegmentField {
 
 impl std::fmt::Display for EmailSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailSegmentField::Email => "EMAIL",
             EmailSegmentField::Merge0 => "merge0",
             EmailSegmentField::Noop => "",
@@ -5743,8 +5743,8 @@ impl EmailSegmentField {
 }
 
 /**
- * Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
- */
+* Whether the email address is/not exactly, contains/doesn't contain, starts/ends with a string.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailSegmentOperator {
     #[serde(rename = "contains")]
@@ -5771,7 +5771,7 @@ pub enum EmailSegmentOperator {
 
 impl std::fmt::Display for EmailSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailSegmentOperator::Contains => "contains",
             EmailSegmentOperator::Ends => "ends",
             EmailSegmentOperator::Greater => "greater",
@@ -5839,7 +5839,7 @@ pub enum PredictedGenderSegmentConditionType {
 
 impl std::fmt::Display for PredictedGenderSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedGenderSegmentConditionType::PredictedGender => "PredictedGender",
             PredictedGenderSegmentConditionType::Noop => "",
             PredictedGenderSegmentConditionType::FallthroughString => "*",
@@ -5860,8 +5860,8 @@ impl PredictedGenderSegmentConditionType {
 }
 
 /**
- * Segment by predicted gender.
- */
+* Segment by predicted gender.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PredictedGenderSegmentField {
     #[serde(rename = "predicted_gender")]
@@ -5874,7 +5874,7 @@ pub enum PredictedGenderSegmentField {
 
 impl std::fmt::Display for PredictedGenderSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedGenderSegmentField::PredictedGender => "predicted_gender",
             PredictedGenderSegmentField::Noop => "",
             PredictedGenderSegmentField::FallthroughString => "*",
@@ -5934,7 +5934,7 @@ pub enum PredictedAgeSegmentConditionType {
 
 impl std::fmt::Display for PredictedAgeSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedAgeSegmentConditionType::PredictedAge => "PredictedAge",
             PredictedAgeSegmentConditionType::Noop => "",
             PredictedAgeSegmentConditionType::FallthroughString => "*",
@@ -5955,8 +5955,8 @@ impl PredictedAgeSegmentConditionType {
 }
 
 /**
- * Segment by predicted age.
- */
+* Segment by predicted age.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PredictedAgeSegmentField {
     #[serde(rename = "predicted_age_range")]
@@ -5969,7 +5969,7 @@ pub enum PredictedAgeSegmentField {
 
 impl std::fmt::Display for PredictedAgeSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedAgeSegmentField::PredictedAgeRange => "predicted_age_range",
             PredictedAgeSegmentField::Noop => "",
             PredictedAgeSegmentField::FallthroughString => "*",
@@ -5990,8 +5990,8 @@ impl PredictedAgeSegmentField {
 }
 
 /**
- * Members who are/not the exact criteria listed.
- */
+* Members who are/not the exact criteria listed.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PredictedAgeSegmentOperator {
     #[serde(rename = "is")]
@@ -6004,7 +6004,7 @@ pub enum PredictedAgeSegmentOperator {
 
 impl std::fmt::Display for PredictedAgeSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedAgeSegmentOperator::Is => "is",
             PredictedAgeSegmentOperator::Noop => "",
             PredictedAgeSegmentOperator::FallthroughString => "*",
@@ -6025,8 +6025,8 @@ impl PredictedAgeSegmentOperator {
 }
 
 /**
- * The predicted age to segment.
- */
+* The predicted age to segment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PredictedAgeSegmentOperatorData {
     #[serde(rename = "18-24")]
@@ -6049,7 +6049,7 @@ pub enum PredictedAgeSegmentOperatorData {
 
 impl std::fmt::Display for PredictedAgeSegmentOperatorData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PredictedAgeSegmentOperatorData::OneThousandEightHundredAndTwentyFour => "18-24",
             PredictedAgeSegmentOperatorData::TwoThousandFiveHundredAndThirtyFour => "25-34",
             PredictedAgeSegmentOperatorData::ThreeThousandFiveHundredAndFortyFour => "35-44",
@@ -6114,7 +6114,7 @@ pub enum NewSubscribersPrebuiltSegmentConditionType {
 
 impl std::fmt::Display for NewSubscribersPrebuiltSegmentConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NewSubscribersPrebuiltSegmentConditionType::NewSubscribers => "NewSubscribers",
             NewSubscribersPrebuiltSegmentConditionType::Noop => "",
             NewSubscribersPrebuiltSegmentConditionType::FallthroughString => "*",
@@ -6135,8 +6135,8 @@ impl NewSubscribersPrebuiltSegmentConditionType {
 }
 
 /**
- * Segment by when people subscribed.
- */
+* Segment by when people subscribed.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NewSubscribersPrebuiltSegmentField {
     #[serde(rename = "timestamp_opt")]
@@ -6149,7 +6149,7 @@ pub enum NewSubscribersPrebuiltSegmentField {
 
 impl std::fmt::Display for NewSubscribersPrebuiltSegmentField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NewSubscribersPrebuiltSegmentField::TimestampOpt => "timestamp_opt",
             NewSubscribersPrebuiltSegmentField::Noop => "",
             NewSubscribersPrebuiltSegmentField::FallthroughString => "*",
@@ -6170,8 +6170,8 @@ impl NewSubscribersPrebuiltSegmentField {
 }
 
 /**
- * Whe the event took place, namely within a time frame.
- */
+* Whe the event took place, namely within a time frame.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NewSubscribersPrebuiltSegmentOperator {
     #[serde(rename = "date_within")]
@@ -6184,7 +6184,7 @@ pub enum NewSubscribersPrebuiltSegmentOperator {
 
 impl std::fmt::Display for NewSubscribersPrebuiltSegmentOperator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NewSubscribersPrebuiltSegmentOperator::DateWithin => "date_within",
             NewSubscribersPrebuiltSegmentOperator::Noop => "",
             NewSubscribersPrebuiltSegmentOperator::FallthroughString => "*",
@@ -6278,6 +6278,7 @@ pub struct NewSubscribersPrebuiltSegment {
 /// - `NewSubscribersPrebuiltSegment`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ConditionsOneOf {
@@ -6993,8 +6994,8 @@ pub struct Tracking {
 }
 
 /**
- * The type of Automation workflow.
- */
+* The type of Automation workflow.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WorkflowType {
     #[serde(rename = "abandonedBrowse")]
@@ -7039,7 +7040,7 @@ pub enum WorkflowType {
 
 impl std::fmt::Display for WorkflowType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WorkflowType::AbandonedBrowse => "abandonedBrowse",
             WorkflowType::AbandonedCart => "abandonedCart",
             WorkflowType::Api => "api",
@@ -7099,7 +7100,7 @@ pub enum Days {
 
 impl std::fmt::Display for Days {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Days::Friday => "friday",
             Days::Monday => "monday",
             Days::Saturday => "saturday",
@@ -7126,8 +7127,8 @@ impl Days {
 }
 
 /**
- * When to send the Automation email.
- */
+* When to send the Automation email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailSendTimeSettings {
     #[serde(rename = "send_asap")]
@@ -7144,7 +7145,7 @@ pub enum EmailSendTimeSettings {
 
 impl std::fmt::Display for EmailSendTimeSettings {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailSendTimeSettings::SendAsap => "send_asap",
             EmailSendTimeSettings::SendAt => "send_at",
             EmailSendTimeSettings::SendBetween => "send_between",
@@ -7486,8 +7487,8 @@ pub struct AutomationWorkflow {
 }
 
 /**
- * The type of delay for an Automation email.
- */
+* The type of delay for an Automation email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DelayType {
     #[serde(rename = "day")]
@@ -7506,7 +7507,7 @@ pub enum DelayType {
 
 impl std::fmt::Display for DelayType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DelayType::Day => "day",
             DelayType::Hour => "hour",
             DelayType::Now => "now",
@@ -7530,8 +7531,8 @@ impl DelayType {
 }
 
 /**
- * Whether the delay settings describe before or after the delay action of an Automation email.
- */
+* Whether the delay settings describe before or after the delay action of an Automation email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Direction {
     #[serde(rename = "after")]
@@ -7546,7 +7547,7 @@ pub enum Direction {
 
 impl std::fmt::Display for Direction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Direction::After => "after",
             Direction::Before => "before",
             Direction::Noop => "",
@@ -7568,8 +7569,8 @@ impl Direction {
 }
 
 /**
- * The action that triggers the delay of an Automation email.
- */
+* The action that triggers the delay of an Automation email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Action {
     #[serde(rename = "annual")]
@@ -7646,7 +7647,7 @@ pub enum Action {
 
 impl std::fmt::Display for Action {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Action::Annual => "annual",
             Action::Api => "api",
             Action::Birthday => "birthday",
@@ -8362,8 +8363,8 @@ pub struct UpdateInformationAboutASpecificWorkflowEmailCampaignSettings {
 }
 
 /**
- * Whether the delay settings describe before or after the delay action of an automation email.
- */
+* Whether the delay settings describe before or after the delay action of an automation email.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DelayDirection {
     #[serde(rename = "after")]
@@ -8376,7 +8377,7 @@ pub enum DelayDirection {
 
 impl std::fmt::Display for DelayDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DelayDirection::After => "after",
             DelayDirection::Noop => "",
             DelayDirection::FallthroughString => "*",
@@ -8397,8 +8398,8 @@ impl DelayDirection {
 }
 
 /**
- * The action that triggers the delay of an automation emails.
- */
+* The action that triggers the delay of an automation emails.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DelayAction {
     #[serde(rename = "ecomm_abandoned_browse")]
@@ -8415,7 +8416,7 @@ pub enum DelayAction {
 
 impl std::fmt::Display for DelayAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DelayAction::EcommAbandonedBrowse => "ecomm_abandoned_browse",
             DelayAction::EcommAbandonedCart => "ecomm_abandoned_cart",
             DelayAction::Signup => "signup",
@@ -8772,8 +8773,8 @@ pub struct RemovedSubscribers {
 }
 
 /**
- * The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status.
- */
+* The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BatchOperationsStatus {
     #[serde(rename = "finalizing")]
@@ -8794,7 +8795,7 @@ pub enum BatchOperationsStatus {
 
 impl std::fmt::Display for BatchOperationsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BatchOperationsStatus::Finalizing => "finalizing",
             BatchOperationsStatus::Finished => "finished",
             BatchOperationsStatus::Pending => "pending",
@@ -8935,8 +8936,8 @@ pub struct BatchOperations {
 }
 
 /**
- * The HTTP method to use for the operation.
- */
+* The HTTP method to use for the operation.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum HttpMethod {
     #[serde(rename = "DELETE")]
@@ -8957,7 +8958,7 @@ pub enum HttpMethod {
 
 impl std::fmt::Display for HttpMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             HttpMethod::Delete => "DELETE",
             HttpMethod::Get => "GET",
             HttpMethod::Patch => "PATCH",
@@ -9261,8 +9262,8 @@ pub struct CampaignFolders {
 }
 
 /**
- * There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
- */
+* There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CampaignType {
     #[serde(rename = "absplit")]
@@ -9283,7 +9284,7 @@ pub enum CampaignType {
 
 impl std::fmt::Display for CampaignType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CampaignType::Absplit => "absplit",
             CampaignType::Plaintext => "plaintext",
             CampaignType::Regular => "regular",
@@ -9308,8 +9309,8 @@ impl CampaignType {
 }
 
 /**
- * The status of the campaign.
- */
+* The status of the campaign.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetCampaignsStatus {
     #[serde(rename = "paused")]
@@ -9330,7 +9331,7 @@ pub enum GetCampaignsStatus {
 
 impl std::fmt::Display for GetCampaignsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetCampaignsStatus::Paused => "paused",
             GetCampaignsStatus::Save => "save",
             GetCampaignsStatus::Schedule => "schedule",
@@ -9355,8 +9356,8 @@ impl GetCampaignsStatus {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortField {
     #[serde(rename = "create_time")]
@@ -9371,7 +9372,7 @@ pub enum SortField {
 
 impl std::fmt::Display for SortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortField::CreateTime => "create_time",
             SortField::SendTime => "send_time",
             SortField::Noop => "",
@@ -9393,8 +9394,8 @@ impl SortField {
 }
 
 /**
- * Determines the order direction for sorted results.
- */
+* Determines the order direction for sorted results.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SortDir {
     #[serde(rename = "ASC")]
@@ -9409,7 +9410,7 @@ pub enum SortDir {
 
 impl std::fmt::Display for SortDir {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SortDir::Asc => "ASC",
             SortDir::Desc => "DESC",
             SortDir::Noop => "",
@@ -9431,8 +9432,8 @@ impl SortDir {
 }
 
 /**
- * The current status of the campaign.
- */
+* The current status of the campaign.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CampaignStatus {
     #[serde(rename = "archived")]
@@ -9459,7 +9460,7 @@ pub enum CampaignStatus {
 
 impl std::fmt::Display for CampaignStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CampaignStatus::Archived => "archived",
             CampaignStatus::Canceled => "canceled",
             CampaignStatus::Canceling => "canceling",
@@ -9487,8 +9488,8 @@ impl CampaignStatus {
 }
 
 /**
- * How the campaign's content is put together.
- */
+* How the campaign's content is put together.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ContentType {
     #[serde(rename = "html")]
@@ -9507,7 +9508,7 @@ pub enum ContentType {
 
 impl std::fmt::Display for ContentType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ContentType::Html => "html",
             ContentType::Multichannel => "multichannel",
             ContentType::Template => "template",
@@ -9681,8 +9682,8 @@ pub struct GetCampaignsResponseCampaignSettings {
 }
 
 /**
- * The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
- */
+* The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WinnerCriteria {
     #[serde(rename = "clicks")]
@@ -9701,7 +9702,7 @@ pub enum WinnerCriteria {
 
 impl std::fmt::Display for WinnerCriteria {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WinnerCriteria::Clicks => "clicks",
             WinnerCriteria::Manual => "manual",
             WinnerCriteria::Opens => "opens",
@@ -9892,8 +9893,8 @@ pub struct ABTestOptions {
 }
 
 /**
- * The frequency of the RSS Campaign.
- */
+* The frequency of the RSS Campaign.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Frequency {
     #[serde(rename = "daily")]
@@ -9910,7 +9911,7 @@ pub enum Frequency {
 
 impl std::fmt::Display for Frequency {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Frequency::Daily => "daily",
             Frequency::Monthly => "monthly",
             Frequency::Weekly => "weekly",
@@ -10068,8 +10069,8 @@ pub struct RssOpts {
 }
 
 /**
- * The type of AB split to run.
- */
+* The type of AB split to run.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SplitTest {
     #[serde(rename = "from_name")]
@@ -10086,7 +10087,7 @@ pub enum SplitTest {
 
 impl std::fmt::Display for SplitTest {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SplitTest::FromName => "from_name",
             SplitTest::Schedule => "schedule",
             SplitTest::Subject => "subject",
@@ -10109,8 +10110,8 @@ impl SplitTest {
 }
 
 /**
- * How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'.
- */
+* How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PickWinner {
     #[serde(rename = "clicks")]
@@ -10127,7 +10128,7 @@ pub enum PickWinner {
 
 impl std::fmt::Display for PickWinner {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PickWinner::Clicks => "clicks",
             PickWinner::Manual => "manual",
             PickWinner::Opens => "opens",
@@ -10150,8 +10151,8 @@ impl PickWinner {
 }
 
 /**
- * How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent.
- */
+* How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WaitTime {
     #[serde(rename = "days")]
@@ -10166,7 +10167,7 @@ pub enum WaitTime {
 
 impl std::fmt::Display for WaitTime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WaitTime::Days => "days",
             WaitTime::Hours => "hours",
             WaitTime::Noop => "",
@@ -10403,8 +10404,8 @@ pub struct GetCampaignsResponseCampaignReportSummary {
 }
 
 /**
- * The current state of a campaign delivery.
- */
+* The current state of a campaign delivery.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CampaignDeliveryStatus {
     #[serde(rename = "canceled")]
@@ -10423,7 +10424,7 @@ pub enum CampaignDeliveryStatus {
 
 impl std::fmt::Display for CampaignDeliveryStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CampaignDeliveryStatus::Canceled => "canceled",
             CampaignDeliveryStatus::Canceling => "canceling",
             CampaignDeliveryStatus::Delivered => "delivered",
@@ -10964,8 +10965,8 @@ pub struct RssOptions {
 }
 
 /**
- * How the campaign's content is put together. The old drag and drop editor uses 'template' while the new editor uses 'multichannel'. Defaults to template.
- */
+* How the campaign's content is put together. The old drag and drop editor uses 'template' while the new editor uses 'multichannel'. Defaults to template.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreatedCampaignContentType {
     #[serde(rename = "multichannel")]
@@ -10980,7 +10981,7 @@ pub enum CreatedCampaignContentType {
 
 impl std::fmt::Display for CreatedCampaignContentType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreatedCampaignContentType::Multichannel => "multichannel",
             CreatedCampaignContentType::Template => "template",
             CreatedCampaignContentType::Noop => "",
@@ -11739,8 +11740,8 @@ pub struct PostCampaignsActionsScheduleRequest {
 }
 
 /**
- * Choose the type of test email to send.
- */
+* Choose the type of test email to send.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SendType {
     #[serde(rename = "html")]
@@ -11755,7 +11756,7 @@ pub enum SendType {
 
 impl std::fmt::Display for SendType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SendType::Html => "html",
             SendType::Plaintext => "plaintext",
             SendType::Noop => "",
@@ -11896,8 +11897,8 @@ pub struct Template {
 }
 
 /**
- * The type of encoded file. Defaults to zip.
- */
+* The type of encoded file. Defaults to zip.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ArchiveType {
     #[serde(rename = "tar")]
@@ -11920,7 +11921,7 @@ pub enum ArchiveType {
 
 impl std::fmt::Display for ArchiveType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ArchiveType::Tar => "tar",
             ArchiveType::TarBz2 => "tar.bz2",
             ArchiveType::TarGz => "tar.gz",
@@ -12085,8 +12086,8 @@ pub struct CampaignContentData {
 }
 
 /**
- * The source of the feedback.
- */
+* The source of the feedback.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Source {
     #[serde(rename = "android")]
@@ -12109,7 +12110,7 @@ pub enum Source {
 
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Source::Android => "android",
             Source::Api => "api",
             Source::Email => "email",
@@ -12439,8 +12440,8 @@ pub struct CampaignFeedbackDataType {
 }
 
 /**
- * The item type.
- */
+* The item type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SendChecklistItemsType {
     #[serde(rename = "error")]
@@ -12457,7 +12458,7 @@ pub enum SendChecklistItemsType {
 
 impl std::fmt::Display for SendChecklistItemsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SendChecklistItemsType::Error => "error",
             SendChecklistItemsType::Success => "success",
             SendChecklistItemsType::Warning => "warning",
@@ -12701,8 +12702,8 @@ pub struct ConnectedSite {
 }
 
 /**
- * Whether a conversation message has been marked as read.
- */
+* Whether a conversation message has been marked as read.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IsRead {
     #[serde(rename = "false")]
@@ -12717,7 +12718,7 @@ pub enum IsRead {
 
 impl std::fmt::Display for IsRead {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IsRead::False => "false",
             IsRead::True => "true",
             IsRead::Noop => "",
@@ -13059,8 +13060,8 @@ pub struct CollectionOfConversationMessages {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetFileManagerFilesSortField {
     #[serde(rename = "added_date")]
@@ -13073,7 +13074,7 @@ pub enum GetFileManagerFilesSortField {
 
 impl std::fmt::Display for GetFileManagerFilesSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetFileManagerFilesSortField::AddedDate => "added_date",
             GetFileManagerFilesSortField::Noop => "",
             GetFileManagerFilesSortField::FallthroughString => "*",
@@ -13094,8 +13095,8 @@ impl GetFileManagerFilesSortField {
 }
 
 /**
- * The type of file in the File Manager.
- */
+* The type of file in the File Manager.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FileType {
     #[serde(rename = "file")]
@@ -13110,7 +13111,7 @@ pub enum FileType {
 
 impl std::fmt::Display for FileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FileType::File => "file",
             FileType::Image => "image",
             FileType::Noop => "",
@@ -13432,8 +13433,8 @@ pub struct FileManagerFolders {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetListsSortField {
     #[serde(rename = "date_created")]
@@ -13446,7 +13447,7 @@ pub enum GetListsSortField {
 
 impl std::fmt::Display for GetListsSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetListsSortField::DateCreated => "date_created",
             GetListsSortField::Noop => "",
             GetListsSortField::FallthroughString => "*",
@@ -13587,8 +13588,8 @@ pub struct CampaignDefaults {
 }
 
 /**
- * Legacy - visibility settings are no longer used
- */
+* Legacy - visibility settings are no longer used
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Visibility {
     #[serde(rename = "prv")]
@@ -13603,7 +13604,7 @@ pub enum Visibility {
 
 impl std::fmt::Display for Visibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Visibility::Prv => "prv",
             Visibility::Pub => "pub",
             Visibility::Noop => "",
@@ -14238,8 +14239,8 @@ pub struct SubscriberList {
 }
 
 /**
- * Subscriber's current status.
- */
+* Subscriber's current status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MembersSubscribeUnsubscribeFromAListInBatchStatus {
     #[serde(rename = "cleaned")]
@@ -14258,7 +14259,7 @@ pub enum MembersSubscribeUnsubscribeFromAListInBatchStatus {
 
 impl std::fmt::Display for MembersSubscribeUnsubscribeFromAListInBatchStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MembersSubscribeUnsubscribeFromAListInBatchStatus::Cleaned => "cleaned",
             MembersSubscribeUnsubscribeFromAListInBatchStatus::Pending => "pending",
             MembersSubscribeUnsubscribeFromAListInBatchStatus::Subscribed => "subscribed",
@@ -14429,8 +14430,8 @@ pub struct MembersSubscribeUnsubscribeFromAListInBatch {
 }
 
 /**
- * Subscriber's status. This value is required only if the email address is not already present on the list.
- */
+* Subscriber's status. This value is required only if the email address is not already present on the list.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum StatusIfNew {
     #[serde(rename = "cleaned")]
@@ -14451,7 +14452,7 @@ pub enum StatusIfNew {
 
 impl std::fmt::Display for StatusIfNew {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             StatusIfNew::Cleaned => "cleaned",
             StatusIfNew::Pending => "pending",
             StatusIfNew::Subscribed => "subscribed",
@@ -14812,8 +14813,8 @@ pub struct NewMembers {
 }
 
 /**
- * A unique code that identifies this specifc error.
- */
+* A unique code that identifies this specifc error.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ErrorCode {
     #[serde(rename = "ERROR_CONTACT_EXISTS")]
@@ -14828,7 +14829,7 @@ pub enum ErrorCode {
 
 impl std::fmt::Display for ErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ErrorCode::ErrorContactExists => "ERROR_CONTACT_EXISTS",
             ErrorCode::ErrorGeneric => "ERROR_GENERIC",
             ErrorCode::Noop => "",
@@ -15444,8 +15445,8 @@ pub struct EmailClients {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetListsGrowthHistorySortField {
     #[serde(rename = "month")]
@@ -15458,7 +15459,7 @@ pub enum GetListsGrowthHistorySortField {
 
 impl std::fmt::Display for GetListsGrowthHistorySortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetListsGrowthHistorySortField::Month => "month",
             GetListsGrowthHistorySortField::Noop => "",
             GetListsGrowthHistorySortField::FallthroughString => "*",
@@ -15862,8 +15863,8 @@ pub struct InterestsData {
 }
 
 /**
- * The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs).
- */
+* The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CollectionOfSegmentsType {
     #[serde(rename = "fuzzy")]
@@ -15880,7 +15881,7 @@ pub enum CollectionOfSegmentsType {
 
 impl std::fmt::Display for CollectionOfSegmentsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CollectionOfSegmentsType::Fuzzy => "fuzzy",
             CollectionOfSegmentsType::Saved => "saved",
             CollectionOfSegmentsType::Static => "static",
@@ -16480,8 +16481,8 @@ pub struct TagSearchResults {
 }
 
 /**
- * The subscriber's status.
- */
+* The subscriber's status.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetListsMembersStatus {
     #[serde(rename = "archived")]
@@ -16504,7 +16505,7 @@ pub enum GetListsMembersStatus {
 
 impl std::fmt::Display for GetListsMembersStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetListsMembersStatus::Archived => "archived",
             GetListsMembersStatus::Cleaned => "cleaned",
             GetListsMembersStatus::Pending => "pending",
@@ -16530,8 +16531,8 @@ impl GetListsMembersStatus {
 }
 
 /**
- * Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
- */
+* Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InterestMatch {
     #[serde(rename = "all")]
@@ -16548,7 +16549,7 @@ pub enum InterestMatch {
 
 impl std::fmt::Display for InterestMatch {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InterestMatch::All => "all",
             InterestMatch::Any => "any",
             InterestMatch::None => "none",
@@ -16571,8 +16572,8 @@ impl InterestMatch {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetListsMembersSortField {
     #[serde(rename = "last_changed")]
@@ -16589,7 +16590,7 @@ pub enum GetListsMembersSortField {
 
 impl std::fmt::Display for GetListsMembersSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetListsMembersSortField::LastChanged => "last_changed",
             GetListsMembersSortField::TimestampOpt => "timestamp_opt",
             GetListsMembersSortField::TimestampSignup => "timestamp_signup",
@@ -17461,8 +17462,8 @@ pub struct MemberActivityEvents {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ActivityType {
     #[serde(rename = "open")]
@@ -17475,7 +17476,7 @@ pub enum ActivityType {
 
 impl std::fmt::Display for ActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ActivityType::Open => "open",
             ActivityType::Noop => "",
             ActivityType::FallthroughString => "*",
@@ -17533,8 +17534,8 @@ pub struct EmailOpens {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailClicksActivityType {
     #[serde(rename = "click")]
@@ -17547,7 +17548,7 @@ pub enum EmailClicksActivityType {
 
 impl std::fmt::Display for EmailClicksActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailClicksActivityType::Click => "click",
             EmailClicksActivityType::Noop => "",
             EmailClicksActivityType::FallthroughString => "*",
@@ -17614,8 +17615,8 @@ pub struct EmailClicks {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailBouncedActivityType {
     #[serde(rename = "bounce")]
@@ -17628,7 +17629,7 @@ pub enum EmailBouncedActivityType {
 
 impl std::fmt::Display for EmailBouncedActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailBouncedActivityType::Bounce => "bounce",
             EmailBouncedActivityType::Noop => "",
             EmailBouncedActivityType::FallthroughString => "*",
@@ -17649,8 +17650,8 @@ impl EmailBouncedActivityType {
 }
 
 /**
- * The type of bounce.
- */
+* The type of bounce.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BounceType {
     #[serde(rename = "hard")]
@@ -17665,7 +17666,7 @@ pub enum BounceType {
 
 impl std::fmt::Display for BounceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BounceType::Hard => "hard",
             BounceType::Soft => "soft",
             BounceType::Noop => "",
@@ -17737,8 +17738,8 @@ pub struct EmailBounced {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ListUnsubscribedActivityType {
     #[serde(rename = "unsub")]
@@ -17751,7 +17752,7 @@ pub enum ListUnsubscribedActivityType {
 
 impl std::fmt::Display for ListUnsubscribedActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ListUnsubscribedActivityType::Unsub => "unsub",
             ListUnsubscribedActivityType::Noop => "",
             ListUnsubscribedActivityType::FallthroughString => "*",
@@ -17826,8 +17827,8 @@ pub struct ListUnsubscribed {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EmailSentActivityType {
     #[serde(rename = "sent")]
@@ -17840,7 +17841,7 @@ pub enum EmailSentActivityType {
 
 impl std::fmt::Display for EmailSentActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EmailSentActivityType::Sent => "sent",
             EmailSentActivityType::Noop => "",
             EmailSentActivityType::FallthroughString => "*",
@@ -17996,8 +17997,8 @@ pub struct EmailConversation {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NoteActivityType {
     #[serde(rename = "note")]
@@ -18010,7 +18011,7 @@ pub enum NoteActivityType {
 
 impl std::fmt::Display for NoteActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NoteActivityType::Note => "note",
             NoteActivityType::Noop => "",
             NoteActivityType::FallthroughString => "*",
@@ -18095,8 +18096,8 @@ pub struct Note {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MarketingPermissionActivityType {
     #[serde(rename = "marketing_permission")]
@@ -18109,7 +18110,7 @@ pub enum MarketingPermissionActivityType {
 
 impl std::fmt::Display for MarketingPermissionActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MarketingPermissionActivityType::MarketingPermission => "marketing_permission",
             MarketingPermissionActivityType::Noop => "",
             MarketingPermissionActivityType::FallthroughString => "*",
@@ -18175,8 +18176,8 @@ pub struct MarketingPermissionData {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PostcardSentActivityType {
     #[serde(rename = "postcard_sent")]
@@ -18189,7 +18190,7 @@ pub enum PostcardSentActivityType {
 
 impl std::fmt::Display for PostcardSentActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PostcardSentActivityType::PostcardSent => "postcard_sent",
             PostcardSentActivityType::Noop => "",
             PostcardSentActivityType::FallthroughString => "*",
@@ -18247,8 +18248,8 @@ pub struct PostcardSent {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SquatterSignupActivityType {
     #[serde(rename = "squatter_signup")]
@@ -18261,7 +18262,7 @@ pub enum SquatterSignupActivityType {
 
 impl std::fmt::Display for SquatterSignupActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SquatterSignupActivityType::SquatterSignup => "squatter_signup",
             SquatterSignupActivityType::Noop => "",
             SquatterSignupActivityType::FallthroughString => "*",
@@ -18319,8 +18320,8 @@ pub struct SquatterSignup {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum WebsiteSignupActivityType {
     #[serde(rename = "website_signup")]
@@ -18333,7 +18334,7 @@ pub enum WebsiteSignupActivityType {
 
 impl std::fmt::Display for WebsiteSignupActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             WebsiteSignupActivityType::WebsiteSignup => "website_signup",
             WebsiteSignupActivityType::Noop => "",
             WebsiteSignupActivityType::FallthroughString => "*",
@@ -18391,8 +18392,8 @@ pub struct WebsiteSignup {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LandingPageSignupActivityType {
     #[serde(rename = "landing_page_signup")]
@@ -18405,7 +18406,7 @@ pub enum LandingPageSignupActivityType {
 
 impl std::fmt::Display for LandingPageSignupActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LandingPageSignupActivityType::LandingPageSignup => "landing_page_signup",
             LandingPageSignupActivityType::Noop => "",
             LandingPageSignupActivityType::FallthroughString => "*",
@@ -18463,8 +18464,8 @@ pub struct LandingPageSignup {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceSignupActivityType {
     #[serde(rename = "ecommerce_signup")]
@@ -18477,7 +18478,7 @@ pub enum EcommerceSignupActivityType {
 
 impl std::fmt::Display for EcommerceSignupActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceSignupActivityType::EcommerceSignup => "ecommerce_signup",
             EcommerceSignupActivityType::Noop => "",
             EcommerceSignupActivityType::FallthroughString => "*",
@@ -18526,8 +18527,8 @@ pub struct EcommerceSignup {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GenericSignupActivityType {
     #[serde(rename = "generic_signup")]
@@ -18540,7 +18541,7 @@ pub enum GenericSignupActivityType {
 
 impl std::fmt::Display for GenericSignupActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GenericSignupActivityType::GenericSignup => "generic_signup",
             GenericSignupActivityType::Noop => "",
             GenericSignupActivityType::FallthroughString => "*",
@@ -18589,8 +18590,8 @@ pub struct GenericSignup {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EcommerceOrderActivityType {
     #[serde(rename = "order")]
@@ -18603,7 +18604,7 @@ pub enum EcommerceOrderActivityType {
 
 impl std::fmt::Display for EcommerceOrderActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EcommerceOrderActivityType::Order => "order",
             EcommerceOrderActivityType::Noop => "",
             EcommerceOrderActivityType::FallthroughString => "*",
@@ -18811,8 +18812,8 @@ pub struct EcommerceOrder {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ContactActivityEventType {
     #[serde(rename = "event")]
@@ -18825,7 +18826,7 @@ pub enum ContactActivityEventType {
 
 impl std::fmt::Display for ContactActivityEventType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ContactActivityEventType::Event => "event",
             ContactActivityEventType::Noop => "",
             ContactActivityEventType::FallthroughString => "*",
@@ -18883,8 +18884,8 @@ pub struct ContactActivityEvent {
 }
 
 /**
- * The type of event activity.
- */
+* The type of event activity.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SurveyResponseActivityType {
     #[serde(rename = "survey_response")]
@@ -18897,7 +18898,7 @@ pub enum SurveyResponseActivityType {
 
 impl std::fmt::Display for SurveyResponseActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SurveyResponseActivityType::SurveyResponse => "survey_response",
             SurveyResponseActivityType::Noop => "",
             SurveyResponseActivityType::FallthroughString => "*",
@@ -18975,6 +18976,7 @@ pub struct SurveyResponse {
 /// - `SurveyResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ActivityOneOf {
@@ -19245,8 +19247,8 @@ pub struct CollectionOfTags {
 }
 
 /**
- * The status for the tag on the member, pass in active to add a tag or inactive to remove it.
- */
+* The status for the tag on the member, pass in active to add a tag or inactive to remove it.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MemberTagsTagStatus {
     #[serde(rename = "active")]
@@ -19261,7 +19263,7 @@ pub enum MemberTagsTagStatus {
 
 impl std::fmt::Display for MemberTagsTagStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MemberTagsTagStatus::Active => "active",
             MemberTagsTagStatus::Inactive => "inactive",
             MemberTagsTagStatus::Noop => "",
@@ -19521,8 +19523,8 @@ pub struct CollectionOfMemberActivityEvents {
 }
 
 /**
- * Returns notes sorted by the specified field.
- */
+* Returns notes sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetListsMembersNotesSortField {
     #[serde(rename = "created_at")]
@@ -19539,7 +19541,7 @@ pub enum GetListsMembersNotesSortField {
 
 impl std::fmt::Display for GetListsMembersNotesSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetListsMembersNotesSortField::CreatedAt => "created_at",
             GetListsMembersNotesSortField::NoteId => "note_id",
             GetListsMembersNotesSortField::UpdatedAt => "updated_at",
@@ -19691,8 +19693,8 @@ pub struct CollectionOfNotes {
 }
 
 /**
- * The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
- */
+* The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MergeFieldType {
     #[serde(rename = "address")]
@@ -19725,7 +19727,7 @@ pub enum MergeFieldType {
 
 impl std::fmt::Display for MergeFieldType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MergeFieldType::Address => "address",
             MergeFieldType::Birthday => "birthday",
             MergeFieldType::Date => "date",
@@ -20320,8 +20322,8 @@ pub struct ListWebhooksData {
 }
 
 /**
- * Image alignment.
- */
+* Image alignment.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ImageAlign {
     #[serde(rename = "center")]
@@ -20340,7 +20342,7 @@ pub enum ImageAlign {
 
 impl std::fmt::Display for ImageAlign {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ImageAlign::Center => "center",
             ImageAlign::Left => "left",
             ImageAlign::None => "none",
@@ -20364,8 +20366,8 @@ impl ImageAlign {
 }
 
 /**
- * Image border style.
- */
+* Image border style.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ImageBorderStyle {
     #[serde(rename = "dashed")]
@@ -20394,7 +20396,7 @@ pub enum ImageBorderStyle {
 
 impl std::fmt::Display for ImageBorderStyle {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ImageBorderStyle::Dashed => "dashed",
             ImageBorderStyle::Dotted => "dotted",
             ImageBorderStyle::Double => "double",
@@ -20423,8 +20425,8 @@ impl ImageBorderStyle {
 }
 
 /**
- * Image link target.
- */
+* Image link target.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ImageTarget {
     #[serde(rename = "_blank")]
@@ -20439,7 +20441,7 @@ pub enum ImageTarget {
 
 impl std::fmt::Display for ImageTarget {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ImageTarget::Blank => "_blank",
             ImageTarget::Null => "null",
             ImageTarget::Noop => "",
@@ -20553,8 +20555,8 @@ pub struct Header {
 }
 
 /**
- * The content section name.
- */
+* The content section name.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Section {
     #[serde(rename = "signup_message")]
@@ -20571,7 +20573,7 @@ pub enum Section {
 
 impl std::fmt::Display for Section {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Section::SignupMessage => "signup_message",
             Section::SignupThankYouTitle => "signup_thank_you_title",
             Section::UnsubMessage => "unsub_message",
@@ -20613,8 +20615,8 @@ pub struct Contents {
 }
 
 /**
- * A string that identifies the element selector.
- */
+* A string that identifies the element selector.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Selector {
     #[serde(rename = "body_background")]
@@ -20653,7 +20655,7 @@ pub enum Selector {
 
 impl std::fmt::Display for Selector {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Selector::BodyBackground => "body_background",
             Selector::BodyLinkStyle => "body_link_style",
             Selector::FormsButtons => "forms_buttons",
@@ -20925,8 +20927,8 @@ pub struct ListLocations {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAllLandingPagesSortField {
     #[serde(rename = "created_at")]
@@ -20941,7 +20943,7 @@ pub enum GetAllLandingPagesSortField {
 
 impl std::fmt::Display for GetAllLandingPagesSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAllLandingPagesSortField::CreatedAt => "created_at",
             GetAllLandingPagesSortField::UpdatedAt => "updated_at",
             GetAllLandingPagesSortField::Noop => "",
@@ -20963,8 +20965,8 @@ impl GetAllLandingPagesSortField {
 }
 
 /**
- * The status of this landing page.
- */
+* The status of this landing page.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LandingPageStatus {
     #[serde(rename = "draft")]
@@ -20981,7 +20983,7 @@ pub enum LandingPageStatus {
 
 impl std::fmt::Display for LandingPageStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LandingPageStatus::Draft => "draft",
             LandingPageStatus::Published => "published",
             LandingPageStatus::Unpublished => "unpublished",
@@ -21209,8 +21211,8 @@ pub struct GetAllLandingPagesResponse {
 }
 
 /**
- * The type of template the landing page has.
- */
+* The type of template the landing page has.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LandingPageTemplateType {
     #[serde(rename = "product")]
@@ -21225,7 +21227,7 @@ pub enum LandingPageTemplateType {
 
 impl std::fmt::Display for LandingPageTemplateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LandingPageTemplateType::Product => "product",
             LandingPageTemplateType::Signup => "signup",
             LandingPageTemplateType::Noop => "",
@@ -22429,8 +22431,8 @@ pub struct AbuseComplaintsData {
 }
 
 /**
- * The sentiment type for a feedback message.
- */
+* The sentiment type for a feedback message.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AdviceType {
     #[serde(rename = "negative")]
@@ -22447,7 +22449,7 @@ pub enum AdviceType {
 
 impl std::fmt::Display for AdviceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AdviceType::Negative => "negative",
             AdviceType::Neutral => "neutral",
             AdviceType::Positive => "positive",
@@ -24082,8 +24084,8 @@ pub struct UnsubscribesData {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetReportsEcommerceProductActivitySortField {
     #[serde(rename = "title")]
@@ -24100,7 +24102,7 @@ pub enum GetReportsEcommerceProductActivitySortField {
 
 impl std::fmt::Display for GetReportsEcommerceProductActivitySortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetReportsEcommerceProductActivitySortField::Title => "title",
             GetReportsEcommerceProductActivitySortField::TotalPurchased => "total_purchased",
             GetReportsEcommerceProductActivitySortField::TotalRevenue => "total_revenue",
@@ -24232,8 +24234,8 @@ pub struct GetReportsEcommerceProductActivityResponse {
 }
 
 /**
- * Returns user templates sorted by the specified field.
- */
+* Returns user templates sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetTemplatesSortField {
     #[serde(rename = "date_created")]
@@ -24250,7 +24252,7 @@ pub enum GetTemplatesSortField {
 
 impl std::fmt::Display for GetTemplatesSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetTemplatesSortField::DateCreated => "date_created",
             GetTemplatesSortField::DateEdited => "date_edited",
             GetTemplatesSortField::Name => "name",
@@ -24653,8 +24655,8 @@ pub struct Customer {
 }
 
 /**
- * The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs.
- */
+* The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TrackingCode {
     #[serde(rename = "prec")]
@@ -24667,7 +24669,7 @@ pub enum TrackingCode {
 
 impl std::fmt::Display for TrackingCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TrackingCode::Prec => "prec",
             TrackingCode::Noop => "",
             TrackingCode::FallthroughString => "*",
@@ -24936,8 +24938,8 @@ pub struct BillingAddress {
 }
 
 /**
- * Type of discount. For free shipping set type to fixed
- */
+* Type of discount. For free shipping set type to fixed
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrdersPromosType {
     #[serde(rename = "fixed")]
@@ -24952,7 +24954,7 @@ pub enum OrdersPromosType {
 
 impl std::fmt::Display for OrdersPromosType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrdersPromosType::Fixed => "fixed",
             OrdersPromosType::Percentage => "percentage",
             OrdersPromosType::Noop => "",
@@ -26642,8 +26644,8 @@ pub struct ECommerceCustomerDataType {
 }
 
 /**
- * The target that the discount applies to.
- */
+* The target that the discount applies to.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Target {
     #[serde(rename = "per_item")]
@@ -26660,7 +26662,7 @@ pub enum Target {
 
 impl std::fmt::Display for Target {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Target::PerItem => "per_item",
             Target::Shipping => "shipping",
             Target::Total => "total",
@@ -28747,8 +28749,8 @@ pub struct ApiHealthStatus {
 }
 
 /**
- * Returns files sorted by the specified field.
- */
+* Returns files sorted by the specified field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetAllFacebookAdsSortField {
     #[serde(rename = "created_at")]
@@ -28765,7 +28767,7 @@ pub enum GetAllFacebookAdsSortField {
 
 impl std::fmt::Display for GetAllFacebookAdsSortField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetAllFacebookAdsSortField::CreatedAt => "created_at",
             GetAllFacebookAdsSortField::EndTime => "end_time",
             GetAllFacebookAdsSortField::UpdatedAt => "updated_at",
@@ -28788,8 +28790,8 @@ impl GetAllFacebookAdsSortField {
 }
 
 /**
- * Supported Campaign, Ad, Page type
- */
+* Supported Campaign, Ad, Page type
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OutreachType {
     #[serde(rename = "absplit")]
@@ -28828,7 +28830,7 @@ pub enum OutreachType {
 
 impl std::fmt::Display for OutreachType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OutreachType::Absplit => "absplit",
             OutreachType::Automation => "automation",
             OutreachType::Autoresponder => "autoresponder",
@@ -28862,8 +28864,8 @@ impl OutreachType {
 }
 
 /**
- * Campaign, Ad, or Page status
- */
+* Campaign, Ad, or Page status
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OutreachStatus {
     #[serde(rename = "active")]
@@ -28908,7 +28910,7 @@ pub enum OutreachStatus {
 
 impl std::fmt::Display for OutreachStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OutreachStatus::Active => "active",
             OutreachStatus::Canceled => "canceled",
             OutreachStatus::Canceling => "canceling",
@@ -29429,8 +29431,8 @@ pub struct Site {
 }
 
 /**
- * Type of the audience
- */
+* Type of the audience
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FacebookAdsAudienceType {
     #[serde(rename = "Custom Audience")]
@@ -29447,7 +29449,7 @@ pub enum FacebookAdsAudienceType {
 
 impl std::fmt::Display for FacebookAdsAudienceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FacebookAdsAudienceType::CustomAudience => "Custom Audience",
             FacebookAdsAudienceType::InterestBasedAudience => "Interest-based Audience",
             FacebookAdsAudienceType::LookalikeAudience => "Lookalike Audience",
@@ -29470,8 +29472,8 @@ impl FacebookAdsAudienceType {
 }
 
 /**
- * List or Facebook based audience
- */
+* List or Facebook based audience
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceType {
     #[serde(rename = "facebook")]
@@ -29486,7 +29488,7 @@ pub enum SourceType {
 
 impl std::fmt::Display for SourceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceType::Facebook => "facebook",
             SourceType::List => "list",
             SourceType::Noop => "",
@@ -29913,6 +29915,7 @@ pub struct GetFacebookAdsResponse {
 /// - `FacebookAdsData`
 /// - `FacebookAdsDataType`
 /// - `GetFacebookAdsResponse`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FacebookAdsAllOf {
     #[serde(flatten)]
@@ -30290,6 +30293,7 @@ pub struct FacebookAdsDataTypeLinksObject {
 /// - `FacebookAdsData`
 /// - `GetFacebookAdsResponse`
 /// - `FacebookAdsDataTypeLinksObject`
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReportingFacebookAdsResponseAllOf {
     #[serde(flatten)]

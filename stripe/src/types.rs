@@ -3,8 +3,8 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /**
- * The business type.
- */
+* The business type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BusinessType {
     #[serde(rename = "company")]
@@ -23,7 +23,7 @@ pub enum BusinessType {
 
 impl std::fmt::Display for BusinessType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BusinessType::Company => "company",
             BusinessType::GovernmentEntity => "government_entity",
             BusinessType::Individual => "individual",
@@ -52,6 +52,7 @@ impl BusinessType {
 /// - `Card`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DataAnyOf {
@@ -92,8 +93,8 @@ impl DataAnyOf {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
- */
+* String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Object {
     #[serde(rename = "list")]
@@ -106,7 +107,7 @@ pub enum Object {
 
 impl std::fmt::Display for Object {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Object::List => "list",
             Object::Noop => "",
             Object::FallthroughString => "*",
@@ -159,8 +160,8 @@ pub struct ExternalAccounts {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountObject {
     #[serde(rename = "account")]
@@ -173,7 +174,7 @@ pub enum AccountObject {
 
 impl std::fmt::Display for AccountObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountObject::Account => "account",
             AccountObject::Noop => "",
             AccountObject::FallthroughString => "*",
@@ -194,8 +195,8 @@ impl AccountObject {
 }
 
 /**
- * The Stripe account type. Can be `standard`, `express`, or `custom`.
- */
+* The Stripe account type. Can be `standard`, `express`, or `custom`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "custom")]
@@ -212,7 +213,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Custom => "custom",
             Type::Express => "express",
             Type::Standard => "standard",
@@ -492,6 +493,7 @@ pub struct AccountBacsDebitPaymentsSettings {
 /// - `File`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IconAnyOf {
@@ -646,8 +648,8 @@ pub struct AccountBusinessProfile {
 }
 
 /**
- * The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
- */
+* The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Transfers {
     #[serde(rename = "active")]
@@ -664,7 +666,7 @@ pub enum Transfers {
 
 impl std::fmt::Display for Transfers {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Transfers::Active => "active",
             Transfers::Inactive => "inactive",
             Transfers::Pending => "pending",
@@ -1140,8 +1142,8 @@ pub struct AccountFutureRequirements {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountLinkObject {
     #[serde(rename = "account_link")]
@@ -1154,7 +1156,7 @@ pub enum AccountLinkObject {
 
 impl std::fmt::Display for AccountLinkObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountLinkObject::AccountLink => "account_link",
             AccountLinkObject::Noop => "",
             AccountLinkObject::FallthroughString => "*",
@@ -1374,8 +1376,8 @@ pub struct AccountRequirementsAlternative {
 }
 
 /**
- * The code for the type of error.
- */
+* The code for the type of error.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Code {
     #[serde(rename = "invalid_address_city_state_postal_code")]
@@ -1476,7 +1478,7 @@ pub enum Code {
 
 impl std::fmt::Display for Code {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Code::InvalidAddressCityStatePostalCode => "invalid_address_city_state_postal_code",
             Code::InvalidStreetAddress => "invalid_street_address",
             Code::InvalidValueOther => "invalid_value_other",
@@ -1679,8 +1681,8 @@ pub struct AccountTosAcceptance {
 }
 
 /**
- * The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
- */
+* The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountUnificationControllerType {
     #[serde(rename = "account")]
@@ -1695,7 +1697,7 @@ pub enum AccountUnificationControllerType {
 
 impl std::fmt::Display for AccountUnificationControllerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountUnificationControllerType::Account => "account",
             AccountUnificationControllerType::Application => "application",
             AccountUnificationControllerType::Noop => "",
@@ -1806,6 +1808,7 @@ pub struct Address {
 /// - `DeletedCustomer`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CustomerAnyOf {
@@ -1861,8 +1864,8 @@ impl std::convert::From<CustomerAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AlipayAccountObject {
     #[serde(rename = "alipay_account")]
@@ -1875,7 +1878,7 @@ pub enum AlipayAccountObject {
 
 impl std::fmt::Display for AlipayAccountObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AlipayAccountObject::AlipayAccount => "alipay_account",
             AlipayAccountObject::Noop => "",
             AlipayAccountObject::FallthroughString => "*",
@@ -2004,6 +2007,7 @@ pub struct AlipayAccount {
 /// - `SourceData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SourceAnyOf {
@@ -2060,8 +2064,8 @@ impl SourceAnyOf {
 }
 
 /**
- * The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
- */
+* The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ApiErrorsType {
     #[serde(rename = "api_error")]
@@ -2080,7 +2084,7 @@ pub enum ApiErrorsType {
 
 impl std::fmt::Display for ApiErrorsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ApiErrorsType::ApiError => "api_error",
             ApiErrorsType::CardError => "card_error",
             ApiErrorsType::IdempotencyError => "idempotency_error",
@@ -2201,8 +2205,8 @@ pub struct ApiErrors {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ApplePayDomainObject {
     #[serde(rename = "apple_pay_domain")]
@@ -2215,7 +2219,7 @@ pub enum ApplePayDomainObject {
 
 impl std::fmt::Display for ApplePayDomainObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ApplePayDomainObject::ApplePayDomain => "apple_pay_domain",
             ApplePayDomainObject::Noop => "",
             ApplePayDomainObject::FallthroughString => "*",
@@ -2281,8 +2285,8 @@ pub struct ApplePayDomain {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ApplicationObject {
     #[serde(rename = "application")]
@@ -2295,7 +2299,7 @@ pub enum ApplicationObject {
 
 impl std::fmt::Display for ApplicationObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ApplicationObject::Application => "application",
             ApplicationObject::Noop => "",
             ApplicationObject::FallthroughString => "*",
@@ -2349,6 +2353,7 @@ pub struct Application {
 /// - `Account`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountAnyOf {
@@ -2401,6 +2406,7 @@ impl std::convert::From<AccountAnyOf> for String {
 /// - `Application`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ApplicationAnyOf {
@@ -2448,6 +2454,7 @@ impl std::convert::From<ApplicationAnyOf> for String {
 /// - `BalanceTransaction`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BalanceTransactionAnyOf {
@@ -2498,6 +2505,7 @@ impl std::convert::From<BalanceTransactionAnyOf> for String {
 /// - `Charge`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ChargeAnyOf {
@@ -2544,8 +2552,8 @@ impl std::convert::From<ChargeAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PlatformFeeObject {
     #[serde(rename = "application_fee")]
@@ -2558,7 +2566,7 @@ pub enum PlatformFeeObject {
 
 impl std::fmt::Display for PlatformFeeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlatformFeeObject::ApplicationFee => "application_fee",
             PlatformFeeObject::Noop => "",
             PlatformFeeObject::FallthroughString => "*",
@@ -2707,8 +2715,8 @@ pub struct PlatformFee {
 }
 
 /**
- * The status of the most recent automated tax calculation for this invoice.
- */
+* The status of the most recent automated tax calculation for this invoice.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "complete")]
@@ -2725,7 +2733,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Complete => "complete",
             Status::Failed => "failed",
             Status::RequiresLocationInputs => "requires_location_inputs",
@@ -2766,8 +2774,8 @@ pub struct AutomaticTax {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BalanceObject {
     #[serde(rename = "balance")]
@@ -2780,7 +2788,7 @@ pub enum BalanceObject {
 
 impl std::fmt::Display for BalanceObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BalanceObject::Balance => "balance",
             BalanceObject::Noop => "",
             BalanceObject::FallthroughString => "*",
@@ -2974,8 +2982,8 @@ pub struct BalanceDetail {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BalanceTransactionObject {
     #[serde(rename = "balance_transaction")]
@@ -2988,7 +2996,7 @@ pub enum BalanceTransactionObject {
 
 impl std::fmt::Display for BalanceTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BalanceTransactionObject::BalanceTransaction => "balance_transaction",
             BalanceTransactionObject::Noop => "",
             BalanceTransactionObject::FallthroughString => "*",
@@ -3029,6 +3037,7 @@ impl BalanceTransactionObject {
 /// - `TransferReversal`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BalanceTransactionSourceAnyOf {
@@ -3296,8 +3305,8 @@ impl std::convert::From<BalanceTransactionSourceAnyOf> for String {
 }
 
 /**
- * Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction types and what they represent. If you are looking to classify transactions for accounting purposes, you might want to consider `reporting_category` instead.
- */
+* Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction types and what they represent. If you are looking to classify transactions for accounting purposes, you might want to consider `reporting_category` instead.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BalanceTransactionType {
     #[serde(rename = "adjustment")]
@@ -3372,7 +3381,7 @@ pub enum BalanceTransactionType {
 
 impl std::fmt::Display for BalanceTransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BalanceTransactionType::Adjustment => "adjustment",
             BalanceTransactionType::Advance => "advance",
             BalanceTransactionType::AdvanceFunding => "advance_funding",
@@ -3578,7 +3587,7 @@ pub enum AvailablePayoutMethods {
 
 impl std::fmt::Display for AvailablePayoutMethods {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AvailablePayoutMethods::Instant => "instant",
             AvailablePayoutMethods::Standard => "standard",
             AvailablePayoutMethods::Noop => "",
@@ -3600,8 +3609,8 @@ impl AvailablePayoutMethods {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BankAccountObject {
     #[serde(rename = "bank_account")]
@@ -3614,7 +3623,7 @@ pub enum BankAccountObject {
 
 impl std::fmt::Display for BankAccountObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BankAccountObject::BankAccount => "bank_account",
             BankAccountObject::Noop => "",
             BankAccountObject::FallthroughString => "*",
@@ -3884,8 +3893,8 @@ pub struct BillingDetails {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PortalConfigurationObject {
     #[serde(rename = "billing_portal.configuration")]
@@ -3898,7 +3907,7 @@ pub enum PortalConfigurationObject {
 
 impl std::fmt::Display for PortalConfigurationObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PortalConfigurationObject::BillingPortalConfiguration => "billing_portal.configuration",
             PortalConfigurationObject::Noop => "",
             PortalConfigurationObject::FallthroughString => "*",
@@ -4022,6 +4031,7 @@ pub struct PortalConfiguration {
 /// - `PortalConfiguration`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ConfigurationAnyOf {
@@ -4064,8 +4074,8 @@ impl std::convert::From<ConfigurationAnyOf> for String {
 }
 
 /**
- * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
- */
+* The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Locale {
     #[serde(rename = "auto")]
@@ -4170,7 +4180,7 @@ pub enum Locale {
 
 impl std::fmt::Display for Locale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Locale::Auto => "auto",
             Locale::Bg => "bg",
             Locale::Cs => "cs",
@@ -4237,8 +4247,8 @@ impl Locale {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PortalSessionObject {
     #[serde(rename = "billing_portal.session")]
@@ -4251,7 +4261,7 @@ pub enum PortalSessionObject {
 
 impl std::fmt::Display for PortalSessionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PortalSessionObject::BillingPortalSession => "billing_portal.session",
             PortalSessionObject::Noop => "",
             PortalSessionObject::FallthroughString => "*",
@@ -4377,8 +4387,8 @@ pub struct PortalSession {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BitcoinReceiverObject {
     #[serde(rename = "bitcoin_receiver")]
@@ -4391,7 +4401,7 @@ pub enum BitcoinReceiverObject {
 
 impl std::fmt::Display for BitcoinReceiverObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BitcoinReceiverObject::BitcoinReceiver => "bitcoin_receiver",
             BitcoinReceiverObject::Noop => "",
             BitcoinReceiverObject::FallthroughString => "*",
@@ -4638,8 +4648,8 @@ pub struct BitcoinReceiver {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BitcoinTransactionObject {
     #[serde(rename = "bitcoin_transaction")]
@@ -4652,7 +4662,7 @@ pub enum BitcoinTransactionObject {
 
 impl std::fmt::Display for BitcoinTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BitcoinTransactionObject::BitcoinTransaction => "bitcoin_transaction",
             BitcoinTransactionObject::Noop => "",
             BitcoinTransactionObject::FallthroughString => "*",
@@ -4737,8 +4747,8 @@ pub struct BitcoinTransaction {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CapabilityObject {
     #[serde(rename = "capability")]
@@ -4751,7 +4761,7 @@ pub enum CapabilityObject {
 
 impl std::fmt::Display for CapabilityObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CapabilityObject::Capability => "capability",
             CapabilityObject::Noop => "",
             CapabilityObject::FallthroughString => "*",
@@ -4772,8 +4782,8 @@ impl CapabilityObject {
 }
 
 /**
- * The status of the capability. Can be `active`, `inactive`, `pending`, or `unrequested`.
- */
+* The status of the capability. Can be `active`, `inactive`, `pending`, or `unrequested`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CapabilityStatus {
     #[serde(rename = "active")]
@@ -4794,7 +4804,7 @@ pub enum CapabilityStatus {
 
 impl std::fmt::Display for CapabilityStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CapabilityStatus::Active => "active",
             CapabilityStatus::Disabled => "disabled",
             CapabilityStatus::Inactive => "inactive",
@@ -4880,8 +4890,8 @@ pub struct Capability {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CardObject {
     #[serde(rename = "card")]
@@ -4894,7 +4904,7 @@ pub enum CardObject {
 
 impl std::fmt::Display for CardObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CardObject::Card => "card",
             CardObject::Noop => "",
             CardObject::FallthroughString => "*",
@@ -4920,6 +4930,7 @@ impl CardObject {
 /// - `Recipient`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum RecipientAnyOf {
@@ -5374,6 +5385,7 @@ pub struct UseStripeSdk {}
 /// - `PlatformFee`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum FeeAnyOf {
@@ -5421,6 +5433,7 @@ impl std::convert::From<FeeAnyOf> for String {
 /// - `Invoice`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum InvoiceAnyOf {
@@ -5494,8 +5507,8 @@ impl std::convert::From<InvoiceAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ChargeObject {
     #[serde(rename = "charge")]
@@ -5508,7 +5521,7 @@ pub enum ChargeObject {
 
 impl std::fmt::Display for ChargeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ChargeObject::Charge => "charge",
             ChargeObject::Noop => "",
             ChargeObject::FallthroughString => "*",
@@ -5534,6 +5547,7 @@ impl ChargeObject {
 /// - `Order`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrderAnyOf {
@@ -5585,6 +5599,7 @@ impl std::convert::From<OrderAnyOf> for String {
 /// - `PaymentIntent`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaymentIntentAnyOf {
@@ -5678,6 +5693,7 @@ pub struct RefundList {
 /// - `Review`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReviewAnyOf {
@@ -5728,6 +5744,7 @@ impl std::convert::From<ReviewAnyOf> for String {
 /// - `Transfer`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TransferAnyOf {
@@ -5779,8 +5796,8 @@ impl std::convert::From<TransferAnyOf> for String {
 }
 
 /**
- * The status of the payment is either `succeeded`, `pending`, or `failed`.
- */
+* The status of the payment is either `succeeded`, `pending`, or `failed`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ChargeStatus {
     #[serde(rename = "failed")]
@@ -5797,7 +5814,7 @@ pub enum ChargeStatus {
 
 impl std::fmt::Display for ChargeStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ChargeStatus::Failed => "failed",
             ChargeStatus::Pending => "pending",
             ChargeStatus::Succeeded => "succeeded",
@@ -6269,6 +6286,7 @@ pub struct ChargeFraudDetails {
 /// - `Rule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum RuleAnyOf {
@@ -6392,8 +6410,8 @@ pub struct ChargeTransferData {
 }
 
 /**
- * Describes whether Checkout should collect the customer's billing address.
- */
+* Describes whether Checkout should collect the customer's billing address.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BillingAddressCollection {
     #[serde(rename = "auto")]
@@ -6408,7 +6426,7 @@ pub enum BillingAddressCollection {
 
 impl std::fmt::Display for BillingAddressCollection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BillingAddressCollection::Auto => "auto",
             BillingAddressCollection::Required => "required",
             BillingAddressCollection::Noop => "",
@@ -6430,8 +6448,8 @@ impl BillingAddressCollection {
 }
 
 /**
- * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
- */
+* Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerCreation {
     #[serde(rename = "always")]
@@ -6446,7 +6464,7 @@ pub enum CustomerCreation {
 
 impl std::fmt::Display for CustomerCreation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerCreation::Always => "always",
             CustomerCreation::IfRequired => "if_required",
             CustomerCreation::Noop => "",
@@ -6504,8 +6522,8 @@ pub struct LineItems {
 }
 
 /**
- * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
- */
+* The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SessionLocale {
     #[serde(rename = "auto")]
@@ -6598,7 +6616,7 @@ pub enum SessionLocale {
 
 impl std::fmt::Display for SessionLocale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionLocale::Auto => "auto",
             SessionLocale::Bg => "bg",
             SessionLocale::Cs => "cs",
@@ -6659,8 +6677,8 @@ impl SessionLocale {
 }
 
 /**
- * The mode of the Checkout Session.
- */
+* The mode of the Checkout Session.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Mode {
     #[serde(rename = "payment")]
@@ -6677,7 +6695,7 @@ pub enum Mode {
 
 impl std::fmt::Display for Mode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Mode::Payment => "payment",
             Mode::Setup => "setup",
             Mode::Subscription => "subscription",
@@ -6700,8 +6718,8 @@ impl Mode {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SessionObject {
     #[serde(rename = "checkout.session")]
@@ -6714,7 +6732,7 @@ pub enum SessionObject {
 
 impl std::fmt::Display for SessionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionObject::CheckoutSession => "checkout.session",
             SessionObject::Noop => "",
             SessionObject::FallthroughString => "*",
@@ -6740,6 +6758,7 @@ impl SessionObject {
 /// - `PaymentLink`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaymentLinkAnyOf {
@@ -6786,9 +6805,9 @@ impl std::convert::From<PaymentLinkAnyOf> for String {
 }
 
 /**
- * The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.
- *   You can use this value to decide when to fulfill your customer's order.
- */
+* The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.
+*   You can use this value to decide when to fulfill your customer's order.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentStatus {
     #[serde(rename = "no_payment_required")]
@@ -6805,7 +6824,7 @@ pub enum PaymentStatus {
 
 impl std::fmt::Display for PaymentStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentStatus::NoPaymentRequired => "no_payment_required",
             PaymentStatus::Paid => "paid",
             PaymentStatus::Unpaid => "unpaid",
@@ -6833,6 +6852,7 @@ impl PaymentStatus {
 /// - `SetupIntent`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SetupIntentAnyOf {
@@ -6901,6 +6921,7 @@ impl std::convert::From<SetupIntentAnyOf> for String {
 /// - `ShippingRate`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ShippingRateAnyOf {
@@ -6944,8 +6965,8 @@ impl std::convert::From<ShippingRateAnyOf> for String {
 }
 
 /**
- * The status of the Checkout Session, one of `open`, `complete`, or `expired`.
- */
+* The status of the Checkout Session, one of `open`, `complete`, or `expired`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SessionStatus {
     #[serde(rename = "complete")]
@@ -6962,7 +6983,7 @@ pub enum SessionStatus {
 
 impl std::fmt::Display for SessionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionStatus::Complete => "complete",
             SessionStatus::Expired => "expired",
             SessionStatus::Open => "open",
@@ -6985,11 +7006,11 @@ impl SessionStatus {
 }
 
 /**
- * Describes the type of transaction being performed by Checkout in order to customize
- *   relevant text on the page, such as the submit button. `submit_type` can only be
- *   specified on Checkout Sessions in `payment` mode, but not Checkout Sessions
- *   in `subscription` or `setup` mode.
- */
+* Describes the type of transaction being performed by Checkout in order to customize
+*   relevant text on the page, such as the submit button. `submit_type` can only be
+*   specified on Checkout Sessions in `payment` mode, but not Checkout Sessions
+*   in `subscription` or `setup` mode.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubmitType {
     #[serde(rename = "auto")]
@@ -7008,7 +7029,7 @@ pub enum SubmitType {
 
 impl std::fmt::Display for SubmitType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubmitType::Auto => "auto",
             SubmitType::Book => "book",
             SubmitType::Donate => "donate",
@@ -7037,6 +7058,7 @@ impl SubmitType {
 /// - `Subscription`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SubscriptionAnyOf {
@@ -7622,7 +7644,7 @@ pub enum DefaultFor {
 
 impl std::fmt::Display for DefaultFor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DefaultFor::Invoice => "invoice",
             DefaultFor::Subscription => "subscription",
             DefaultFor::Noop => "",
@@ -7644,8 +7666,8 @@ impl DefaultFor {
 }
 
 /**
- * Payment schedule for the mandate.
- */
+* Payment schedule for the mandate.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentSchedule {
     #[serde(rename = "combined")]
@@ -7662,7 +7684,7 @@ pub enum PaymentSchedule {
 
 impl std::fmt::Display for PaymentSchedule {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentSchedule::Combined => "combined",
             PaymentSchedule::Interval => "interval",
             PaymentSchedule::Sporadic => "sporadic",
@@ -7685,8 +7707,8 @@ impl PaymentSchedule {
 }
 
 /**
- * Transaction type of the mandate.
- */
+* Transaction type of the mandate.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TransactionType {
     #[serde(rename = "business")]
@@ -7701,7 +7723,7 @@ pub enum TransactionType {
 
 impl std::fmt::Display for TransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TransactionType::Business => "business",
             TransactionType::Personal => "personal",
             TransactionType::Noop => "",
@@ -7765,8 +7787,8 @@ pub struct CheckoutAcssDebitMandateOptions {
 }
 
 /**
- * Currency supported by the bank account. Returned when the Session is in `setup` mode.
- */
+* Currency supported by the bank account. Returned when the Session is in `setup` mode.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Currency {
     #[serde(rename = "cad")]
@@ -7781,7 +7803,7 @@ pub enum Currency {
 
 impl std::fmt::Display for Currency {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Currency::Cad => "cad",
             Currency::Usd => "usd",
             Currency::Noop => "",
@@ -7803,8 +7825,8 @@ impl Currency {
 }
 
 /**
- * Bank account verification method.
- */
+* Bank account verification method.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum VerificationMethod {
     #[serde(rename = "automatic")]
@@ -7821,7 +7843,7 @@ pub enum VerificationMethod {
 
 impl std::fmt::Display for VerificationMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VerificationMethod::Automatic => "automatic",
             VerificationMethod::Instant => "instant",
             VerificationMethod::Microdeposits => "microdeposits",
@@ -7922,8 +7944,8 @@ pub struct CheckoutSessionPaymentMethodOptions {
 }
 
 /**
- * Bank account verification method.
- */
+* Bank account verification method.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CheckoutUsBankAccountPaymentMethodOptionsVerification {
     #[serde(rename = "automatic")]
@@ -7938,7 +7960,7 @@ pub enum CheckoutUsBankAccountPaymentMethodOptionsVerification {
 
 impl std::fmt::Display for CheckoutUsBankAccountPaymentMethodOptionsVerification {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CheckoutUsBankAccountPaymentMethodOptionsVerification::Automatic => "automatic",
             CheckoutUsBankAccountPaymentMethodOptionsVerification::Instant => "instant",
             CheckoutUsBankAccountPaymentMethodOptionsVerification::Noop => "",
@@ -7973,8 +7995,8 @@ pub struct CheckoutUsBankAccountPaymentMethodOptions {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ConnectCollectionTransferObject {
     #[serde(rename = "connect_collection_transfer")]
@@ -7987,7 +8009,7 @@ pub enum ConnectCollectionTransferObject {
 
 impl std::fmt::Display for ConnectCollectionTransferObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ConnectCollectionTransferObject::ConnectCollectionTransfer => {
                 "connect_collection_transfer"
             }
@@ -8060,8 +8082,8 @@ pub struct ConnectCollectionTransfer {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CountrySpecObject {
     #[serde(rename = "country_spec")]
@@ -8074,7 +8096,7 @@ pub enum CountrySpecObject {
 
 impl std::fmt::Display for CountrySpecObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CountrySpecObject::CountrySpec => "country_spec",
             CountrySpecObject::Noop => "",
             CountrySpecObject::FallthroughString => "*",
@@ -8207,8 +8229,8 @@ pub struct CountrySpecVerificationFields {
 }
 
 /**
- * One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.
- */
+* One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Duration {
     #[serde(rename = "forever")]
@@ -8225,7 +8247,7 @@ pub enum Duration {
 
 impl std::fmt::Display for Duration {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Duration::Forever => "forever",
             Duration::Once => "once",
             Duration::Repeating => "repeating",
@@ -8248,8 +8270,8 @@ impl Duration {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CouponObject {
     #[serde(rename = "coupon")]
@@ -8262,7 +8284,7 @@ pub enum CouponObject {
 
 impl std::fmt::Display for CouponObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CouponObject::Coupon => "coupon",
             CouponObject::Noop => "",
             CouponObject::FallthroughString => "*",
@@ -8455,6 +8477,7 @@ pub struct CouponAppliesTo {
 /// - `CustomerBalanceTransaction`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CustomerBalanceTransactionAnyOf {
@@ -8538,8 +8561,8 @@ pub struct Lines {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreditNoteObject {
     #[serde(rename = "credit_note")]
@@ -8552,7 +8575,7 @@ pub enum CreditNoteObject {
 
 impl std::fmt::Display for CreditNoteObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreditNoteObject::CreditNote => "credit_note",
             CreditNoteObject::Noop => "",
             CreditNoteObject::FallthroughString => "*",
@@ -8573,8 +8596,8 @@ impl CreditNoteObject {
 }
 
 /**
- * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
- */
+* Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Reason {
     #[serde(rename = "duplicate")]
@@ -8593,7 +8616,7 @@ pub enum Reason {
 
 impl std::fmt::Display for Reason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Reason::Duplicate => "duplicate",
             Reason::Fraudulent => "fraudulent",
             Reason::OrderChange => "order_change",
@@ -8622,6 +8645,7 @@ impl Reason {
 /// - `Refund`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum RefundAnyOf {
@@ -8668,8 +8692,8 @@ impl std::convert::From<RefundAnyOf> for String {
 }
 
 /**
- * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
- */
+* Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreditNoteStatus {
     #[serde(rename = "issued")]
@@ -8684,7 +8708,7 @@ pub enum CreditNoteStatus {
 
 impl std::fmt::Display for CreditNoteStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreditNoteStatus::Issued => "issued",
             CreditNoteStatus::Void => "void",
             CreditNoteStatus::Noop => "",
@@ -8706,8 +8730,8 @@ impl CreditNoteStatus {
 }
 
 /**
- * Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
- */
+* Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreditNoteType {
     #[serde(rename = "post_payment")]
@@ -8722,7 +8746,7 @@ pub enum CreditNoteType {
 
 impl std::fmt::Display for CreditNoteType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreditNoteType::PostPayment => "post_payment",
             CreditNoteType::PrePayment => "pre_payment",
             CreditNoteType::Noop => "",
@@ -8949,8 +8973,8 @@ pub struct CreditNote {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreditNoteLineItemObject {
     #[serde(rename = "credit_note_line_item")]
@@ -8963,7 +8987,7 @@ pub enum CreditNoteLineItemObject {
 
 impl std::fmt::Display for CreditNoteLineItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreditNoteLineItemObject::CreditNoteLineItem => "credit_note_line_item",
             CreditNoteLineItemObject::Noop => "",
             CreditNoteLineItemObject::FallthroughString => "*",
@@ -8984,8 +9008,8 @@ impl CreditNoteLineItemObject {
 }
 
 /**
- * The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
- */
+* The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CreditNoteLineItemType {
     #[serde(rename = "custom_line_item")]
@@ -9000,7 +9024,7 @@ pub enum CreditNoteLineItemType {
 
 impl std::fmt::Display for CreditNoteLineItemType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CreditNoteLineItemType::CustomLineItem => "custom_line_item",
             CreditNoteLineItemType::InvoiceLineItem => "invoice_line_item",
             CreditNoteLineItemType::Noop => "",
@@ -9153,6 +9177,7 @@ pub struct CreditNoteLineItem {
 /// - `TaxRate`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TaxRateAnyOf {
@@ -9230,6 +9255,7 @@ pub struct InvoiceTaxAmount {
 /// - `BitcoinReceiver`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DefaultSourceAnyOf {
@@ -9331,8 +9357,8 @@ impl std::convert::From<DefaultSourceAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerObject {
     #[serde(rename = "customer")]
@@ -9345,7 +9371,7 @@ pub enum CustomerObject {
 
 impl std::fmt::Display for CustomerObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerObject::Customer => "customer",
             CustomerObject::Noop => "",
             CustomerObject::FallthroughString => "*",
@@ -9374,6 +9400,7 @@ impl CustomerObject {
 /// - `BitcoinReceiver`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CustomerSourcesDataAnyOf {
@@ -9520,8 +9547,8 @@ pub struct Subscriptions {
 }
 
 /**
- * Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. When set to `reverse`, invoice and receipt PDFs include the text **"Reverse charge"**.
- */
+* Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. When set to `reverse`, invoice and receipt PDFs include the text **"Reverse charge"**.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxExempt {
     #[serde(rename = "exempt")]
@@ -9538,7 +9565,7 @@ pub enum TaxExempt {
 
 impl std::fmt::Display for TaxExempt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxExempt::Exempt => "exempt",
             TaxExempt::None => "none",
             TaxExempt::Reverse => "reverse",
@@ -9602,6 +9629,7 @@ pub struct TaxIds {
 /// - `TestClock`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TestClockAnyOf {
@@ -9873,8 +9901,8 @@ pub struct Customer {
 }
 
 /**
- * The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
- */
+* The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerAcceptanceType {
     #[serde(rename = "offline")]
@@ -9889,7 +9917,7 @@ pub enum CustomerAcceptanceType {
 
 impl std::fmt::Display for CustomerAcceptanceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerAcceptanceType::Offline => "offline",
             CustomerAcceptanceType::Online => "online",
             CustomerAcceptanceType::Noop => "",
@@ -9949,6 +9977,7 @@ pub struct CustomerAcceptance {
 /// - `CreditNote`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CreditNoteAnyOf {
@@ -9998,6 +10027,7 @@ impl std::convert::From<CreditNoteAnyOf> for String {
 /// - `Customer`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CustomerAnyOfData {
@@ -10042,8 +10072,8 @@ impl std::convert::From<CustomerAnyOfData> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerBalanceTransactionObject {
     #[serde(rename = "customer_balance_transaction")]
@@ -10056,7 +10086,7 @@ pub enum CustomerBalanceTransactionObject {
 
 impl std::fmt::Display for CustomerBalanceTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerBalanceTransactionObject::CustomerBalanceTransaction => {
                 "customer_balance_transaction"
             }
@@ -10079,8 +10109,8 @@ impl CustomerBalanceTransactionObject {
 }
 
 /**
- * Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or `unapplied_from_invoice`. See the [Customer Balance page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction types.
- */
+* Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or `unapplied_from_invoice`. See the [Customer Balance page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction types.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerBalanceTransactionType {
     #[serde(rename = "adjustment")]
@@ -10109,7 +10139,7 @@ pub enum CustomerBalanceTransactionType {
 
 impl std::fmt::Display for CustomerBalanceTransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerBalanceTransactionType::Adjustment => "adjustment",
             CustomerBalanceTransactionType::AppliedToInvoice => "applied_to_invoice",
             CustomerBalanceTransactionType::CreditNote => "credit_note",
@@ -10268,8 +10298,8 @@ pub struct CustomerBalanceTransaction {
 }
 
 /**
- * Surfaces if automatic tax computation is possible given the current customer location information.
- */
+* Surfaces if automatic tax computation is possible given the current customer location information.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CustomerTaxAutomatic {
     #[serde(rename = "failed")]
@@ -10288,7 +10318,7 @@ pub enum CustomerTaxAutomatic {
 
 impl std::fmt::Display for CustomerTaxAutomatic {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CustomerTaxAutomatic::Failed => "failed",
             CustomerTaxAutomatic::NotCollecting => "not_collecting",
             CustomerTaxAutomatic::Supported => "supported",
@@ -10336,8 +10366,8 @@ pub struct CustomerTax {
 }
 
 /**
- * The data source used to infer the customer's location.
- */
+* The data source used to infer the customer's location.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Source {
     #[serde(rename = "billing_address")]
@@ -10356,7 +10386,7 @@ pub enum Source {
 
 impl std::fmt::Display for Source {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Source::BillingAddress => "billing_address",
             Source::IpAddress => "ip_address",
             Source::PaymentMethod => "payment_method",
@@ -10642,8 +10672,8 @@ pub struct DeletedCustomer {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedDiscountObject {
     #[serde(rename = "discount")]
@@ -10656,7 +10686,7 @@ pub enum DeletedDiscountObject {
 
 impl std::fmt::Display for DeletedDiscountObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedDiscountObject::Discount => "discount",
             DeletedDiscountObject::Noop => "",
             DeletedDiscountObject::FallthroughString => "*",
@@ -10682,6 +10712,7 @@ impl DeletedDiscountObject {
 /// - `PromotionCode`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PromotionCodeAnyOf {
@@ -10819,6 +10850,7 @@ pub struct DeletedDiscount {
 /// - `DeletedCard`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DeletedExternalAccountAnyOf {
@@ -10849,8 +10881,8 @@ impl DeletedExternalAccountAnyOf {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedInvoiceObject {
     #[serde(rename = "invoice")]
@@ -10863,7 +10895,7 @@ pub enum DeletedInvoiceObject {
 
 impl std::fmt::Display for DeletedInvoiceObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedInvoiceObject::Invoice => "invoice",
             DeletedInvoiceObject::Noop => "",
             DeletedInvoiceObject::FallthroughString => "*",
@@ -10911,8 +10943,8 @@ pub struct DeletedInvoice {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedInvoiceItemObject {
     #[serde(rename = "invoiceitem")]
@@ -10925,7 +10957,7 @@ pub enum DeletedInvoiceItemObject {
 
 impl std::fmt::Display for DeletedInvoiceItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedInvoiceItemObject::Invoiceitem => "invoiceitem",
             DeletedInvoiceItemObject::Noop => "",
             DeletedInvoiceItemObject::FallthroughString => "*",
@@ -10980,6 +11012,7 @@ pub struct DeletedInvoiceItem {
 /// - `DeletedCard`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DeletedPaymentSourceAnyOf {
@@ -11032,8 +11065,8 @@ impl DeletedPaymentSourceAnyOf {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedPersonObject {
     #[serde(rename = "person")]
@@ -11046,7 +11079,7 @@ pub enum DeletedPersonObject {
 
 impl std::fmt::Display for DeletedPersonObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedPersonObject::Person => "person",
             DeletedPersonObject::Noop => "",
             DeletedPersonObject::FallthroughString => "*",
@@ -11094,8 +11127,8 @@ pub struct DeletedPerson {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedPlanObject {
     #[serde(rename = "plan")]
@@ -11108,7 +11141,7 @@ pub enum DeletedPlanObject {
 
 impl std::fmt::Display for DeletedPlanObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedPlanObject::Plan => "plan",
             DeletedPlanObject::Noop => "",
             DeletedPlanObject::FallthroughString => "*",
@@ -11156,8 +11189,8 @@ pub struct DeletedPlan {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedPriceObject {
     #[serde(rename = "price")]
@@ -11170,7 +11203,7 @@ pub enum DeletedPriceObject {
 
 impl std::fmt::Display for DeletedPriceObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedPriceObject::Price => "price",
             DeletedPriceObject::Noop => "",
             DeletedPriceObject::FallthroughString => "*",
@@ -11218,8 +11251,8 @@ pub struct DeletedPrice {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedProductObject {
     #[serde(rename = "product")]
@@ -11232,7 +11265,7 @@ pub enum DeletedProductObject {
 
 impl std::fmt::Display for DeletedProductObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedProductObject::Product => "product",
             DeletedProductObject::Noop => "",
             DeletedProductObject::FallthroughString => "*",
@@ -11280,8 +11313,8 @@ pub struct DeletedProduct {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RadarListDeletedObject {
     #[serde(rename = "radar.value_list")]
@@ -11294,7 +11327,7 @@ pub enum RadarListDeletedObject {
 
 impl std::fmt::Display for RadarListDeletedObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RadarListDeletedObject::RadarValueList => "radar.value_list",
             RadarListDeletedObject::Noop => "",
             RadarListDeletedObject::FallthroughString => "*",
@@ -11342,8 +11375,8 @@ pub struct RadarListDeleted {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RadarListDeletedItemObject {
     #[serde(rename = "radar.value_list_item")]
@@ -11356,7 +11389,7 @@ pub enum RadarListDeletedItemObject {
 
 impl std::fmt::Display for RadarListDeletedItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RadarListDeletedItemObject::RadarValueListItem => "radar.value_list_item",
             RadarListDeletedItemObject::Noop => "",
             RadarListDeletedItemObject::FallthroughString => "*",
@@ -11404,8 +11437,8 @@ pub struct RadarListDeletedItem {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedRecipientObject {
     #[serde(rename = "recipient")]
@@ -11418,7 +11451,7 @@ pub enum DeletedRecipientObject {
 
 impl std::fmt::Display for DeletedRecipientObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedRecipientObject::Recipient => "recipient",
             DeletedRecipientObject::Noop => "",
             DeletedRecipientObject::FallthroughString => "*",
@@ -11466,8 +11499,8 @@ pub struct DeletedRecipient {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedSkuObject {
     #[serde(rename = "sku")]
@@ -11480,7 +11513,7 @@ pub enum DeletedSkuObject {
 
 impl std::fmt::Display for DeletedSkuObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedSkuObject::Sku => "sku",
             DeletedSkuObject::Noop => "",
             DeletedSkuObject::FallthroughString => "*",
@@ -11528,8 +11561,8 @@ pub struct DeletedSku {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedSubscriptionItemObject {
     #[serde(rename = "subscription_item")]
@@ -11542,7 +11575,7 @@ pub enum DeletedSubscriptionItemObject {
 
 impl std::fmt::Display for DeletedSubscriptionItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedSubscriptionItemObject::SubscriptionItem => "subscription_item",
             DeletedSubscriptionItemObject::Noop => "",
             DeletedSubscriptionItemObject::FallthroughString => "*",
@@ -11593,8 +11626,8 @@ pub struct DeletedSubscriptionItem {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedTaxObject {
     #[serde(rename = "tax_id")]
@@ -11607,7 +11640,7 @@ pub enum DeletedTaxObject {
 
 impl std::fmt::Display for DeletedTaxObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedTaxObject::TaxId => "tax_id",
             DeletedTaxObject::Noop => "",
             DeletedTaxObject::FallthroughString => "*",
@@ -11655,8 +11688,8 @@ pub struct DeletedTaxId {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedTerminalLocationObject {
     #[serde(rename = "terminal.location")]
@@ -11669,7 +11702,7 @@ pub enum DeletedTerminalLocationObject {
 
 impl std::fmt::Display for DeletedTerminalLocationObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedTerminalLocationObject::TerminalLocation => "terminal.location",
             DeletedTerminalLocationObject::Noop => "",
             DeletedTerminalLocationObject::FallthroughString => "*",
@@ -11720,8 +11753,8 @@ pub struct DeletedTerminalLocation {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedTerminalReaderObject {
     #[serde(rename = "terminal.reader")]
@@ -11734,7 +11767,7 @@ pub enum DeletedTerminalReaderObject {
 
 impl std::fmt::Display for DeletedTerminalReaderObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedTerminalReaderObject::TerminalReader => "terminal.reader",
             DeletedTerminalReaderObject::Noop => "",
             DeletedTerminalReaderObject::FallthroughString => "*",
@@ -11782,8 +11815,8 @@ pub struct DeletedTerminalReader {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedTestClockObject {
     #[serde(rename = "test_helpers.test_clock")]
@@ -11796,7 +11829,7 @@ pub enum DeletedTestClockObject {
 
 impl std::fmt::Display for DeletedTestClockObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedTestClockObject::TestHelpersClock => "test_helpers.test_clock",
             DeletedTestClockObject::Noop => "",
             DeletedTestClockObject::FallthroughString => "*",
@@ -11844,8 +11877,8 @@ pub struct DeletedTestClock {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeletedWebhookEndpointObject {
     #[serde(rename = "webhook_endpoint")]
@@ -11858,7 +11891,7 @@ pub enum DeletedWebhookEndpointObject {
 
 impl std::fmt::Display for DeletedWebhookEndpointObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeletedWebhookEndpointObject::WebhookEndpoint => "webhook_endpoint",
             DeletedWebhookEndpointObject::Noop => "",
             DeletedWebhookEndpointObject::FallthroughString => "*",
@@ -12076,6 +12109,7 @@ pub struct DiscountData {
 /// - `DeletedDiscount`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DiscountAnyOf {
@@ -12149,8 +12183,8 @@ pub struct DiscountsResourceDiscountAmount {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DisputeObject {
     #[serde(rename = "dispute")]
@@ -12163,7 +12197,7 @@ pub enum DisputeObject {
 
 impl std::fmt::Display for DisputeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DisputeObject::Dispute => "dispute",
             DisputeObject::Noop => "",
             DisputeObject::FallthroughString => "*",
@@ -12184,8 +12218,8 @@ impl DisputeObject {
 }
 
 /**
- * Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.
- */
+* Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DisputeStatus {
     #[serde(rename = "charge_refunded")]
@@ -12212,7 +12246,7 @@ pub enum DisputeStatus {
 
 impl std::fmt::Display for DisputeStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DisputeStatus::ChargeRefunded => "charge_refunded",
             DisputeStatus::Lost => "lost",
             DisputeStatus::NeedsResponse => "needs_response",
@@ -12637,8 +12671,8 @@ pub struct EmailSent {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EphemeralKeyObject {
     #[serde(rename = "ephemeral_key")]
@@ -12651,7 +12685,7 @@ pub enum EphemeralKeyObject {
 
 impl std::fmt::Display for EphemeralKeyObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EphemeralKeyObject::EphemeralKey => "ephemeral_key",
             EphemeralKeyObject::Noop => "",
             EphemeralKeyObject::FallthroughString => "*",
@@ -12736,8 +12770,8 @@ pub struct Error {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EventObject {
     #[serde(rename = "event")]
@@ -12750,7 +12784,7 @@ pub enum EventObject {
 
 impl std::fmt::Display for EventObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EventObject::Event => "event",
             EventObject::Noop => "",
             EventObject::FallthroughString => "*",
@@ -12938,8 +12972,8 @@ pub struct Event {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ExchangeRateObject {
     #[serde(rename = "exchange_rate")]
@@ -12952,7 +12986,7 @@ pub enum ExchangeRateObject {
 
 impl std::fmt::Display for ExchangeRateObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ExchangeRateObject::ExchangeRate => "exchange_rate",
             ExchangeRateObject::Noop => "",
             ExchangeRateObject::FallthroughString => "*",
@@ -13062,8 +13096,8 @@ pub struct Fee {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FeeRefundObject {
     #[serde(rename = "fee_refund")]
@@ -13076,7 +13110,7 @@ pub enum FeeRefundObject {
 
 impl std::fmt::Display for FeeRefundObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FeeRefundObject::FeeRefund => "fee_refund",
             FeeRefundObject::Noop => "",
             FeeRefundObject::FallthroughString => "*",
@@ -13207,8 +13241,8 @@ pub struct Links {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FileObject {
     #[serde(rename = "file")]
@@ -13221,7 +13255,7 @@ pub enum FileObject {
 
 impl std::fmt::Display for FileObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FileObject::File => "file",
             FileObject::Noop => "",
             FileObject::FallthroughString => "*",
@@ -13242,8 +13276,8 @@ impl FileObject {
 }
 
 /**
- * The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
- */
+* The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Purpose {
     #[serde(rename = "account_requirement")]
@@ -13282,7 +13316,7 @@ pub enum Purpose {
 
 impl std::fmt::Display for Purpose {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Purpose::AccountRequirement => "account_requirement",
             Purpose::AdditionalVerification => "additional_verification",
             Purpose::BusinessIcon => "business_icon",
@@ -13445,8 +13479,8 @@ pub struct File {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FileLinkObject {
     #[serde(rename = "file_link")]
@@ -13459,7 +13493,7 @@ pub enum FileLinkObject {
 
 impl std::fmt::Display for FileLinkObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FileLinkObject::FileLink => "file_link",
             FileLinkObject::Noop => "",
             FileLinkObject::FallthroughString => "*",
@@ -13796,8 +13830,8 @@ pub struct GelatoDataVerifiedOutputsDate {
 }
 
 /**
- * Status of this `document` check.
- */
+* Status of this `document` check.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoDocumentReportStatus {
     #[serde(rename = "unverified")]
@@ -13812,7 +13846,7 @@ pub enum GelatoDocumentReportStatus {
 
 impl std::fmt::Display for GelatoDocumentReportStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoDocumentReportStatus::Unverified => "unverified",
             GelatoDocumentReportStatus::Verified => "verified",
             GelatoDocumentReportStatus::Noop => "",
@@ -13849,7 +13883,7 @@ pub enum AllowedTypes {
 
 impl std::fmt::Display for AllowedTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AllowedTypes::DrivingLicense => "driving_license",
             AllowedTypes::IdCard => "id_card",
             AllowedTypes::Passport => "passport",
@@ -13957,8 +13991,8 @@ pub struct GelatoDocumentReport {
 }
 
 /**
- * A short machine-readable string giving the reason for the verification failure.
- */
+* A short machine-readable string giving the reason for the verification failure.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoDocumentReportErrorCode {
     #[serde(rename = "document_expired")]
@@ -13975,7 +14009,7 @@ pub enum GelatoDocumentReportErrorCode {
 
 impl std::fmt::Display for GelatoDocumentReportErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoDocumentReportErrorCode::DocumentExpired => "document_expired",
             GelatoDocumentReportErrorCode::DocumentTypeNotSupported => {
                 "document_type_not_supported"
@@ -14019,8 +14053,8 @@ pub struct GelatoDocumentReportErrorData {
 }
 
 /**
- * Type of ID number.
- */
+* Type of ID number.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IdNumberType {
     #[serde(rename = "br_cpf")]
@@ -14037,7 +14071,7 @@ pub enum IdNumberType {
 
 impl std::fmt::Display for IdNumberType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IdNumberType::BrCpf => "br_cpf",
             IdNumberType::SgNric => "sg_nric",
             IdNumberType::UsSsn => "us_ssn",
@@ -14112,8 +14146,8 @@ pub struct GelatoNumberReport {
 }
 
 /**
- * A short machine-readable string giving the reason for the verification failure.
- */
+* A short machine-readable string giving the reason for the verification failure.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoNumberReportErrorCode {
     #[serde(rename = "id_number_insufficient_document_data")]
@@ -14130,7 +14164,7 @@ pub enum GelatoNumberReportErrorCode {
 
 impl std::fmt::Display for GelatoNumberReportErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoNumberReportErrorCode::IdNumberInsufficientDocumentData => {
                 "id_number_insufficient_document_data"
             }
@@ -14245,8 +14279,8 @@ pub struct GelatoSelfieReport {
 }
 
 /**
- * A short machine-readable string giving the reason for the verification failure.
- */
+* A short machine-readable string giving the reason for the verification failure.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoSelfieReportErrorCode {
     #[serde(rename = "selfie_document_missing_photo")]
@@ -14265,7 +14299,7 @@ pub enum GelatoSelfieReportErrorCode {
 
 impl std::fmt::Display for GelatoSelfieReportErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoSelfieReportErrorCode::SelfieDocumentMissingPhoto => {
                 "selfie_document_missing_photo"
             }
@@ -14348,8 +14382,8 @@ pub struct GelatoSessionDocumentOptions {
 }
 
 /**
- * A short machine-readable string giving the reason for the verification or user-session failure.
- */
+* A short machine-readable string giving the reason for the verification or user-session failure.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoSessionLastErrorCode {
     #[serde(rename = "abandoned")]
@@ -14390,7 +14424,7 @@ pub enum GelatoSessionLastErrorCode {
 
 impl std::fmt::Display for GelatoSessionLastErrorCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoSessionLastErrorCode::Abandoned => "abandoned",
             GelatoSessionLastErrorCode::ConsentDeclined => "consent_declined",
             GelatoSessionLastErrorCode::CountryNotSupported => "country_not_supported",
@@ -14525,8 +14559,8 @@ pub struct GelatoVerifiedOutputs {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoVerificationReportObject {
     #[serde(rename = "identity.verification_report")]
@@ -14539,7 +14573,7 @@ pub enum GelatoVerificationReportObject {
 
 impl std::fmt::Display for GelatoVerificationReportObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoVerificationReportObject::IdentityVerificationReport => {
                 "identity.verification_report"
             }
@@ -14562,8 +14596,8 @@ impl GelatoVerificationReportObject {
 }
 
 /**
- * Type of report.
- */
+* Type of report.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoVerificationReportType {
     #[serde(rename = "document")]
@@ -14578,7 +14612,7 @@ pub enum GelatoVerificationReportType {
 
 impl std::fmt::Display for GelatoVerificationReportType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoVerificationReportType::Document => "document",
             GelatoVerificationReportType::IdNumber => "id_number",
             GelatoVerificationReportType::Noop => "",
@@ -14732,6 +14766,7 @@ pub struct GelatoVerificationReport {
 /// - `GelatoVerificationReport`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LastVerificationReportAnyOf {
@@ -14784,8 +14819,8 @@ impl std::convert::From<LastVerificationReportAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoVerificationSessionObject {
     #[serde(rename = "identity.verification_session")]
@@ -14798,7 +14833,7 @@ pub enum GelatoVerificationSessionObject {
 
 impl std::fmt::Display for GelatoVerificationSessionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoVerificationSessionObject::IdentityVerificationSession => {
                 "identity.verification_session"
             }
@@ -14821,8 +14856,8 @@ impl GelatoVerificationSessionObject {
 }
 
 /**
- * Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
- */
+* Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GelatoVerificationSessionStatus {
     #[serde(rename = "canceled")]
@@ -14841,7 +14876,7 @@ pub enum GelatoVerificationSessionStatus {
 
 impl std::fmt::Display for GelatoVerificationSessionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GelatoVerificationSessionStatus::Canceled => "canceled",
             GelatoVerificationSessionStatus::Processing => "processing",
             GelatoVerificationSessionStatus::RequiresInput => "requires_input",
@@ -15019,6 +15054,7 @@ pub struct GelatoVerificationSession {
 /// - `DeletedTaxId`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountTaxIdsAnyOf {
@@ -15075,8 +15111,8 @@ impl std::convert::From<AccountTaxIdsAnyOf> for String {
 }
 
 /**
- * Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
- */
+* Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BillingReason {
     #[serde(rename = "automatic_pending_invoice_item_invoice")]
@@ -15105,7 +15141,7 @@ pub enum BillingReason {
 
 impl std::fmt::Display for BillingReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BillingReason::AutomaticPendingInvoiceItem => "automatic_pending_invoice_item_invoice",
             BillingReason::Manual => "manual",
             BillingReason::QuoteAccept => "quote_accept",
@@ -15134,8 +15170,8 @@ impl BillingReason {
 }
 
 /**
- * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
- */
+* Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CollectionMethod {
     #[serde(rename = "charge_automatically")]
@@ -15150,7 +15186,7 @@ pub enum CollectionMethod {
 
 impl std::fmt::Display for CollectionMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CollectionMethod::ChargeAutomatically => "charge_automatically",
             CollectionMethod::SendInvoice => "send_invoice",
             CollectionMethod::Noop => "",
@@ -15177,6 +15213,7 @@ impl CollectionMethod {
 /// - `PaymentMethod`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaymentMethodAnyOf {
@@ -15264,6 +15301,7 @@ pub struct InvoiceLinesList {
 /// - `Quote`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum QuoteAnyOf {
@@ -15307,8 +15345,8 @@ impl std::convert::From<QuoteAnyOf> for String {
 }
 
 /**
- * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
- */
+* The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InvoiceStatus {
     #[serde(rename = "deleted")]
@@ -15331,7 +15369,7 @@ pub enum InvoiceStatus {
 
 impl std::fmt::Display for InvoiceStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InvoiceStatus::Deleted => "deleted",
             InvoiceStatus::Draft => "draft",
             InvoiceStatus::Open => "open",
@@ -16983,8 +17021,8 @@ pub struct InvoiceLineItemPeriod {
 }
 
 /**
- * One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
- */
+* One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AmountType {
     #[serde(rename = "fixed")]
@@ -16999,7 +17037,7 @@ pub enum AmountType {
 
 impl std::fmt::Display for AmountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AmountType::Fixed => "fixed",
             AmountType::Maximum => "maximum",
             AmountType::Noop => "",
@@ -17074,8 +17112,8 @@ pub struct InvoicePaymentMethodOptionsAcssDebitMandate {
 }
 
 /**
- * Preferred language of the Bancontact authorization page that the customer is redirected to.
- */
+* Preferred language of the Bancontact authorization page that the customer is redirected to.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PreferredLanguage {
     #[serde(rename = "de")]
@@ -17094,7 +17132,7 @@ pub enum PreferredLanguage {
 
 impl std::fmt::Display for PreferredLanguage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PreferredLanguage::De => "de",
             PreferredLanguage::En => "en",
             PreferredLanguage::Fr => "fr",
@@ -17128,8 +17166,8 @@ pub struct InvoicePaymentMethodOptionsBancontact {
 }
 
 /**
- * We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
- */
+* We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RequestThreeDSecure {
     #[serde(rename = "any")]
@@ -17144,7 +17182,7 @@ pub enum RequestThreeDSecure {
 
 impl std::fmt::Display for RequestThreeDSecure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RequestThreeDSecure::Any => "any",
             RequestThreeDSecure::Automatic => "automatic",
             RequestThreeDSecure::Noop => "",
@@ -17176,8 +17214,8 @@ pub struct InvoicePaymentMethodOptionsCard {
 }
 
 /**
- * The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
- */
+* The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum FundingType {
     #[serde(rename = "bank_transfer")]
@@ -17190,7 +17228,7 @@ pub enum FundingType {
 
 impl std::fmt::Display for FundingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FundingType::BankTransfer => "bank_transfer",
             FundingType::Noop => "",
             FundingType::FallthroughString => "*",
@@ -17374,6 +17412,7 @@ pub struct InvoiceTransferDataType {
 /// - `DiscountData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DiscountsAnyOf {
@@ -17754,7 +17793,7 @@ pub enum PaymentMethodTypes {
 
 impl std::fmt::Display for PaymentMethodTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodTypes::AchCreditTransfer => "ach_credit_transfer",
             PaymentMethodTypes::AchDebit => "ach_debit",
             PaymentMethodTypes::AcssDebit => "acss_debit",
@@ -17812,8 +17851,8 @@ pub struct InvoicesPaymentSettings {
 }
 
 /**
- * The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, or `unknown`
- */
+* The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, or `unknown`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum InvoicesResourceInvoiceTaxType {
     #[serde(rename = "ae_trn")]
@@ -17916,7 +17955,7 @@ pub enum InvoicesResourceInvoiceTaxType {
 
 impl std::fmt::Display for InvoicesResourceInvoiceTaxType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InvoicesResourceInvoiceTaxType::AeTrn => "ae_trn",
             InvoicesResourceInvoiceTaxType::AuAbn => "au_abn",
             InvoicesResourceInvoiceTaxType::AuArn => "au_arn",
@@ -18046,8 +18085,8 @@ pub struct InvoicesStatusTransitions {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuerFraudRecordObject {
     #[serde(rename = "issuer_fraud_record")]
@@ -18060,7 +18099,7 @@ pub enum IssuerFraudRecordObject {
 
 impl std::fmt::Display for IssuerFraudRecordObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuerFraudRecordObject::IssuerFraudRecord => "issuer_fraud_record",
             IssuerFraudRecordObject::Noop => "",
             IssuerFraudRecordObject::FallthroughString => "*",
@@ -18155,8 +18194,8 @@ pub struct IssuerFraudRecord {
 }
 
 /**
- * How the card details were provided.
- */
+* How the card details were provided.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AuthorizationMethod {
     #[serde(rename = "chip")]
@@ -18177,7 +18216,7 @@ pub enum AuthorizationMethod {
 
 impl std::fmt::Display for AuthorizationMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthorizationMethod::Chip => "chip",
             AuthorizationMethod::Contactless => "contactless",
             AuthorizationMethod::KeyedIn => "keyed_in",
@@ -18207,6 +18246,7 @@ impl AuthorizationMethod {
 /// - `IssuingCardholder`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CardholderAnyOf {
@@ -18251,8 +18291,8 @@ impl std::convert::From<CardholderAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingAuthorizationObject {
     #[serde(rename = "issuing.authorization")]
@@ -18265,7 +18305,7 @@ pub enum IssuingAuthorizationObject {
 
 impl std::fmt::Display for IssuingAuthorizationObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingAuthorizationObject::IssuingAuthorization => "issuing.authorization",
             IssuingAuthorizationObject::Noop => "",
             IssuingAuthorizationObject::FallthroughString => "*",
@@ -18286,8 +18326,8 @@ impl IssuingAuthorizationObject {
 }
 
 /**
- * The current status of the authorization in its lifecycle.
- */
+* The current status of the authorization in its lifecycle.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingAuthorizationStatus {
     #[serde(rename = "closed")]
@@ -18304,7 +18344,7 @@ pub enum IssuingAuthorizationStatus {
 
 impl std::fmt::Display for IssuingAuthorizationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingAuthorizationStatus::Closed => "closed",
             IssuingAuthorizationStatus::Pending => "pending",
             IssuingAuthorizationStatus::Reversed => "reversed",
@@ -18504,8 +18544,8 @@ pub struct IssuingAuthorization {
 }
 
 /**
- * The reason why the card was canceled.
- */
+* The reason why the card was canceled.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CancellationReason {
     #[serde(rename = "lost")]
@@ -18520,7 +18560,7 @@ pub enum CancellationReason {
 
 impl std::fmt::Display for CancellationReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CancellationReason::Lost => "lost",
             CancellationReason::Stolen => "stolen",
             CancellationReason::Noop => "",
@@ -18542,8 +18582,8 @@ impl CancellationReason {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardObject {
     #[serde(rename = "issuing.card")]
@@ -18556,7 +18596,7 @@ pub enum IssuingCardObject {
 
 impl std::fmt::Display for IssuingCardObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardObject::IssuingCard => "issuing.card",
             IssuingCardObject::Noop => "",
             IssuingCardObject::FallthroughString => "*",
@@ -18582,6 +18622,7 @@ impl IssuingCardObject {
 /// - `IssuingCard`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CardAnyOf {
@@ -18624,8 +18665,8 @@ impl std::convert::From<CardAnyOf> for String {
 }
 
 /**
- * The reason why the previous card needed to be replaced.
- */
+* The reason why the previous card needed to be replaced.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReplacementReason {
     #[serde(rename = "damaged")]
@@ -18644,7 +18685,7 @@ pub enum ReplacementReason {
 
 impl std::fmt::Display for ReplacementReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReplacementReason::Damaged => "damaged",
             ReplacementReason::Expired => "expired",
             ReplacementReason::Lost => "lost",
@@ -18668,8 +18709,8 @@ impl ReplacementReason {
 }
 
 /**
- * Whether authorizations can be approved on this card.
- */
+* Whether authorizations can be approved on this card.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardStatus {
     #[serde(rename = "active")]
@@ -18686,7 +18727,7 @@ pub enum IssuingCardStatus {
 
 impl std::fmt::Display for IssuingCardStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardStatus::Active => "active",
             IssuingCardStatus::Canceled => "canceled",
             IssuingCardStatus::Inactive => "inactive",
@@ -18709,8 +18750,8 @@ impl IssuingCardStatus {
 }
 
 /**
- * The type of the card.
- */
+* The type of the card.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardType {
     #[serde(rename = "physical")]
@@ -18725,7 +18766,7 @@ pub enum IssuingCardType {
 
 impl std::fmt::Display for IssuingCardType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardType::Physical => "physical",
             IssuingCardType::Virtual => "virtual",
             IssuingCardType::Noop => "",
@@ -18912,8 +18953,8 @@ pub struct IssuingCard {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardholderObject {
     #[serde(rename = "issuing.cardholder")]
@@ -18926,7 +18967,7 @@ pub enum IssuingCardholderObject {
 
 impl std::fmt::Display for IssuingCardholderObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardholderObject::IssuingCardholder => "issuing.cardholder",
             IssuingCardholderObject::Noop => "",
             IssuingCardholderObject::FallthroughString => "*",
@@ -18947,8 +18988,8 @@ impl IssuingCardholderObject {
 }
 
 /**
- * Specifies whether to permit authorizations on this cardholder's cards.
- */
+* Specifies whether to permit authorizations on this cardholder's cards.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardholderStatus {
     #[serde(rename = "active")]
@@ -18965,7 +19006,7 @@ pub enum IssuingCardholderStatus {
 
 impl std::fmt::Display for IssuingCardholderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardholderStatus::Active => "active",
             IssuingCardholderStatus::Blocked => "blocked",
             IssuingCardholderStatus::Inactive => "inactive",
@@ -18988,8 +19029,8 @@ impl IssuingCardholderStatus {
 }
 
 /**
- * Type of entity that holds the account. This can be either `individual` or `company`.
- */
+* Type of entity that holds the account. This can be either `individual` or `company`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountHolderType {
     #[serde(rename = "company")]
@@ -19004,7 +19045,7 @@ pub enum AccountHolderType {
 
 impl std::fmt::Display for AccountHolderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountHolderType::Company => "company",
             AccountHolderType::Individual => "individual",
             AccountHolderType::Noop => "",
@@ -19143,8 +19184,8 @@ pub struct IssuingCardholder {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingDisputeObject {
     #[serde(rename = "issuing.dispute")]
@@ -19157,7 +19198,7 @@ pub enum IssuingDisputeObject {
 
 impl std::fmt::Display for IssuingDisputeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingDisputeObject::IssuingDispute => "issuing.dispute",
             IssuingDisputeObject::Noop => "",
             IssuingDisputeObject::FallthroughString => "*",
@@ -19178,8 +19219,8 @@ impl IssuingDisputeObject {
 }
 
 /**
- * Current status of the dispute.
- */
+* Current status of the dispute.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingDisputeStatus {
     #[serde(rename = "expired")]
@@ -19200,7 +19241,7 @@ pub enum IssuingDisputeStatus {
 
 impl std::fmt::Display for IssuingDisputeStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingDisputeStatus::Expired => "expired",
             IssuingDisputeStatus::Lost => "lost",
             IssuingDisputeStatus::Submitted => "submitted",
@@ -19230,6 +19271,7 @@ impl IssuingDisputeStatus {
 /// - `IssuingTransaction`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TransactionAnyOf {
@@ -19364,8 +19406,8 @@ pub struct IssuingDispute {
 }
 
 /**
- * The card network for this settlement report. One of ["visa"]
- */
+* The card network for this settlement report. One of ["visa"]
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Network {
     #[serde(rename = "visa")]
@@ -19378,7 +19420,7 @@ pub enum Network {
 
 impl std::fmt::Display for Network {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Network::Visa => "visa",
             Network::Noop => "",
             Network::FallthroughString => "*",
@@ -19399,8 +19441,8 @@ impl Network {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingSettlementObject {
     #[serde(rename = "issuing.settlement")]
@@ -19413,7 +19455,7 @@ pub enum IssuingSettlementObject {
 
 impl std::fmt::Display for IssuingSettlementObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingSettlementObject::IssuingSettlement => "issuing.settlement",
             IssuingSettlementObject::Noop => "",
             IssuingSettlementObject::FallthroughString => "*",
@@ -19579,6 +19621,7 @@ pub struct IssuingSettlement {
 /// - `IssuingAuthorization`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AuthorizationAnyOf {
@@ -19630,6 +19673,7 @@ impl std::convert::From<AuthorizationAnyOf> for String {
 /// - `IssuingDispute`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DisputeAnyOf {
@@ -19674,8 +19718,8 @@ impl std::convert::From<DisputeAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingTransactionObject {
     #[serde(rename = "issuing.transaction")]
@@ -19688,7 +19732,7 @@ pub enum IssuingTransactionObject {
 
 impl std::fmt::Display for IssuingTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingTransactionObject::IssuingTransaction => "issuing.transaction",
             IssuingTransactionObject::Noop => "",
             IssuingTransactionObject::FallthroughString => "*",
@@ -19709,8 +19753,8 @@ impl IssuingTransactionObject {
 }
 
 /**
- * The nature of the transaction.
- */
+* The nature of the transaction.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingTransactionType {
     #[serde(rename = "capture")]
@@ -19725,7 +19769,7 @@ pub enum IssuingTransactionType {
 
 impl std::fmt::Display for IssuingTransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingTransactionType::Capture => "capture",
             IssuingTransactionType::Refund => "refund",
             IssuingTransactionType::Noop => "",
@@ -19747,8 +19791,8 @@ impl IssuingTransactionType {
 }
 
 /**
- * The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
- */
+* The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Wallet {
     #[serde(rename = "apple_pay")]
@@ -19765,7 +19809,7 @@ pub enum Wallet {
 
 impl std::fmt::Display for Wallet {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Wallet::ApplePay => "apple_pay",
             Wallet::GooglePay => "google_pay",
             Wallet::SamsungPay => "samsung_pay",
@@ -20082,8 +20126,8 @@ pub struct IssuingAuthorizationPendingRequest {
 }
 
 /**
- * The reason for the approval or decline.
- */
+* The reason for the approval or decline.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingAuthorizationRequestReason {
     #[serde(rename = "account_disabled")]
@@ -20120,7 +20164,7 @@ pub enum IssuingAuthorizationRequestReason {
 
 impl std::fmt::Display for IssuingAuthorizationRequestReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingAuthorizationRequestReason::AccountDisabled => "account_disabled",
             IssuingAuthorizationRequestReason::CardActive => "card_active",
             IssuingAuthorizationRequestReason::CardInactive => "card_inactive",
@@ -20223,8 +20267,8 @@ pub struct IssuingAuthorizationRequest {
 }
 
 /**
- * Whether the cardholder provided a CVC and if it matched Stripe’s record.
- */
+* Whether the cardholder provided a CVC and if it matched Stripe’s record.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CvcCheck {
     #[serde(rename = "match")]
@@ -20241,7 +20285,7 @@ pub enum CvcCheck {
 
 impl std::fmt::Display for CvcCheck {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CvcCheck::Match => "match",
             CvcCheck::Mismatch => "mismatch",
             CvcCheck::NotProvided => "not_provided",
@@ -20293,8 +20337,8 @@ pub struct IssuingAuthorizationVerificationData {
 }
 
 /**
- * Reason the card is ineligible for Apple Pay
- */
+* Reason the card is ineligible for Apple Pay
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IneligibleReason {
     #[serde(rename = "missing_agreement")]
@@ -20311,7 +20355,7 @@ pub enum IneligibleReason {
 
 impl std::fmt::Display for IneligibleReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IneligibleReason::MissingAgreement => "missing_agreement",
             IneligibleReason::MissingCardholderContact => "missing_cardholder_contact",
             IneligibleReason::UnsupportedRegion => "unsupported_region",
@@ -20937,7 +20981,7 @@ pub enum Categories {
 
 impl std::fmt::Display for Categories {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Categories::AcRefrigerationRepair => "ac_refrigeration_repair",
             Categories::AccountingBookkeepingServices => "accounting_bookkeeping_services",
             Categories::AdvertisingServices => "advertising_services",
@@ -21354,8 +21398,8 @@ pub struct IssuingCardAuthorizationControls {
 }
 
 /**
- * The delivery company that shipped a card.
- */
+* The delivery company that shipped a card.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Carrier {
     #[serde(rename = "dhl")]
@@ -21374,7 +21418,7 @@ pub enum Carrier {
 
 impl std::fmt::Display for Carrier {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Carrier::Dhl => "dhl",
             Carrier::Fedex => "fedex",
             Carrier::RoyalMail => "royal_mail",
@@ -21398,8 +21442,8 @@ impl Carrier {
 }
 
 /**
- * Shipment service, such as `standard` or `express`.
- */
+* Shipment service, such as `standard` or `express`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Service {
     #[serde(rename = "express")]
@@ -21416,7 +21460,7 @@ pub enum Service {
 
 impl std::fmt::Display for Service {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Service::Express => "express",
             Service::Priority => "priority",
             Service::Standard => "standard",
@@ -21439,8 +21483,8 @@ impl Service {
 }
 
 /**
- * The delivery status of the card.
- */
+* The delivery status of the card.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardShippingStatus {
     #[serde(rename = "canceled")]
@@ -21463,7 +21507,7 @@ pub enum IssuingCardShippingStatus {
 
 impl std::fmt::Display for IssuingCardShippingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardShippingStatus::Canceled => "canceled",
             IssuingCardShippingStatus::Delivered => "delivered",
             IssuingCardShippingStatus::Failure => "failure",
@@ -21489,8 +21533,8 @@ impl IssuingCardShippingStatus {
 }
 
 /**
- * Packaging options.
- */
+* Packaging options.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingCardShippingType {
     #[serde(rename = "bulk")]
@@ -21505,7 +21549,7 @@ pub enum IssuingCardShippingType {
 
 impl std::fmt::Display for IssuingCardShippingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingCardShippingType::Bulk => "bulk",
             IssuingCardShippingType::Individual => "individual",
             IssuingCardShippingType::Noop => "",
@@ -21597,8 +21641,8 @@ pub struct IssuingCardShippingData {
 }
 
 /**
- * Interval (or event) to which the amount applies.
- */
+* Interval (or event) to which the amount applies.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Interval {
     #[serde(rename = "all_time")]
@@ -21621,7 +21665,7 @@ pub enum Interval {
 
 impl std::fmt::Display for Interval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Interval::AllTime => "all_time",
             Interval::Daily => "daily",
             Interval::Monthly => "monthly",
@@ -21843,8 +21887,8 @@ pub struct IssuingCardholderIndividualDobData {
 }
 
 /**
- * If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
- */
+* If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DisabledReason {
     #[serde(rename = "listed")]
@@ -21861,7 +21905,7 @@ pub enum DisabledReason {
 
 impl std::fmt::Display for DisabledReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DisabledReason::Listed => "listed",
             DisabledReason::RejectedListed => "rejected.listed",
             DisabledReason::UnderReview => "under_review",
@@ -21907,7 +21951,7 @@ pub enum PastDue {
 
 impl std::fmt::Display for PastDue {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PastDue::CompanyTaxId => "company.tax_id",
             PastDue::IndividualDobDay => "individual.dob.day",
             PastDue::IndividualDobMonth => "individual.dob.month",
@@ -21963,8 +22007,8 @@ pub struct IssuingCardholderVerification {
 }
 
 /**
- * Whether the product was a merchandise or service.
- */
+* Whether the product was a merchandise or service.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ProductType {
     #[serde(rename = "merchandise")]
@@ -21979,7 +22023,7 @@ pub enum ProductType {
 
 impl std::fmt::Display for ProductType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProductType::Merchandise => "merchandise",
             ProductType::Service => "service",
             ProductType::Noop => "",
@@ -22001,8 +22045,8 @@ impl ProductType {
 }
 
 /**
- * Result of cardholder's attempt to return the product.
- */
+* Result of cardholder's attempt to return the product.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReturnStatus {
     #[serde(rename = "merchant_rejected")]
@@ -22017,7 +22061,7 @@ pub enum ReturnStatus {
 
 impl std::fmt::Display for ReturnStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReturnStatus::MerchantRejected => "merchant_rejected",
             ReturnStatus::Successful => "successful",
             ReturnStatus::Noop => "",
@@ -22164,8 +22208,8 @@ pub struct IssuingDisputeDuplicateEvidence {
 }
 
 /**
- * The reason for filing the dispute. Its value will match the field containing the evidence.
- */
+* The reason for filing the dispute. Its value will match the field containing the evidence.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum IssuingDisputeEvidenceReason {
     #[serde(rename = "canceled")]
@@ -22190,7 +22234,7 @@ pub enum IssuingDisputeEvidenceReason {
 
 impl std::fmt::Display for IssuingDisputeEvidenceReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuingDisputeEvidenceReason::Canceled => "canceled",
             IssuingDisputeEvidenceReason::Duplicate => "duplicate",
             IssuingDisputeEvidenceReason::Fraudulent => "fraudulent",
@@ -22720,8 +22764,8 @@ pub struct IssuingTransactionReceiptData {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ItemObject {
     #[serde(rename = "item")]
@@ -22734,7 +22778,7 @@ pub enum ItemObject {
 
 impl std::fmt::Display for ItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ItemObject::Item => "item",
             ItemObject::Noop => "",
             ItemObject::FallthroughString => "*",
@@ -22842,8 +22886,8 @@ pub struct Item {
 }
 
 /**
- * The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.
- */
+* The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Structure {
     #[serde(rename = "free_zone_establishment")]
@@ -22894,7 +22938,7 @@ pub enum Structure {
 
 impl std::fmt::Display for Structure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Structure::FreeZoneEstablishment => "free_zone_establishment",
             Structure::FreeZoneLlc => "free_zone_llc",
             Structure::GovernmentInstrumentality => "government_instrumentality",
@@ -23308,8 +23352,8 @@ pub struct LegalEntityUboDeclaration {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LineItemObject {
     #[serde(rename = "line_item")]
@@ -23322,7 +23366,7 @@ pub enum LineItemObject {
 
 impl std::fmt::Display for LineItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LineItemObject::LineItem => "line_item",
             LineItemObject::Noop => "",
             LineItemObject::FallthroughString => "*",
@@ -23343,8 +23387,8 @@ impl LineItemObject {
 }
 
 /**
- * A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
- */
+* A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LineItemType {
     #[serde(rename = "invoiceitem")]
@@ -23359,7 +23403,7 @@ pub enum LineItemType {
 
 impl std::fmt::Display for LineItemType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LineItemType::Invoiceitem => "invoiceitem",
             LineItemType::Subscription => "subscription",
             LineItemType::Noop => "",
@@ -23596,8 +23640,8 @@ pub struct LineItemsTaxAmount {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum LoginLinkObject {
     #[serde(rename = "login_link")]
@@ -23610,7 +23654,7 @@ pub enum LoginLinkObject {
 
 impl std::fmt::Display for LoginLinkObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LoginLinkObject::LoginLink => "login_link",
             LoginLinkObject::Noop => "",
             LoginLinkObject::FallthroughString => "*",
@@ -23659,8 +23703,8 @@ pub struct LoginLink {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MandateObject {
     #[serde(rename = "mandate")]
@@ -23673,7 +23717,7 @@ pub enum MandateObject {
 
 impl std::fmt::Display for MandateObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MandateObject::Mandate => "mandate",
             MandateObject::Noop => "",
             MandateObject::FallthroughString => "*",
@@ -23694,8 +23738,8 @@ impl MandateObject {
 }
 
 /**
- * The type of the mandate.
- */
+* The type of the mandate.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MandateType {
     #[serde(rename = "multi_use")]
@@ -23710,7 +23754,7 @@ pub enum MandateType {
 
 impl std::fmt::Display for MandateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MandateType::MultiUse => "multi_use",
             MandateType::SingleUse => "single_use",
             MandateType::Noop => "",
@@ -23838,8 +23882,8 @@ pub struct MandateAuBecsDebit {
 }
 
 /**
- * The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
- */
+* The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum NetworkStatus {
     #[serde(rename = "accepted")]
@@ -23858,7 +23902,7 @@ pub enum NetworkStatus {
 
 impl std::fmt::Display for NetworkStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NetworkStatus::Accepted => "accepted",
             NetworkStatus::Pending => "pending",
             NetworkStatus::Refused => "refused",
@@ -24085,8 +24129,8 @@ pub struct OnlineAcceptance {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderObject {
     #[serde(rename = "order")]
@@ -24099,7 +24143,7 @@ pub enum OrderObject {
 
 impl std::fmt::Display for OrderObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderObject::Order => "order",
             OrderObject::Noop => "",
             OrderObject::FallthroughString => "*",
@@ -24391,8 +24435,8 @@ pub struct Order {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderItemObject {
     #[serde(rename = "order_item")]
@@ -24405,7 +24449,7 @@ pub enum OrderItemObject {
 
 impl std::fmt::Display for OrderItemObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderItemObject::OrderItem => "order_item",
             OrderItemObject::Noop => "",
             OrderItemObject::FallthroughString => "*",
@@ -24431,6 +24475,7 @@ impl OrderItemObject {
 /// - `Sku`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ParentAnyOf {
@@ -24548,8 +24593,8 @@ pub struct OrderItem {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderReturnObject {
     #[serde(rename = "order_return")]
@@ -24562,7 +24607,7 @@ pub enum OrderReturnObject {
 
 impl std::fmt::Display for OrderReturnObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderReturnObject::OrderReturn => "order_return",
             OrderReturnObject::Noop => "",
             OrderReturnObject::FallthroughString => "*",
@@ -24783,8 +24828,8 @@ pub struct PaymentFlowsPrivateMethodsKlarnaDob {
 }
 
 /**
- * Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, or `automatic`).
- */
+* Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, or `automatic`).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentCancellationReason {
     #[serde(rename = "abandoned")]
@@ -24809,7 +24854,7 @@ pub enum PaymentIntentCancellationReason {
 
 impl std::fmt::Display for PaymentIntentCancellationReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentCancellationReason::Abandoned => "abandoned",
             PaymentIntentCancellationReason::Automatic => "automatic",
             PaymentIntentCancellationReason::Duplicate => "duplicate",
@@ -24836,8 +24881,8 @@ impl PaymentIntentCancellationReason {
 }
 
 /**
- * Controls when the funds will be captured from the customer's account.
- */
+* Controls when the funds will be captured from the customer's account.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum CaptureMethod {
     #[serde(rename = "automatic")]
@@ -24852,7 +24897,7 @@ pub enum CaptureMethod {
 
 impl std::fmt::Display for CaptureMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             CaptureMethod::Automatic => "automatic",
             CaptureMethod::Manual => "manual",
             CaptureMethod::Noop => "",
@@ -24910,8 +24955,8 @@ pub struct Charges {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentObject {
     #[serde(rename = "payment_intent")]
@@ -24924,7 +24969,7 @@ pub enum PaymentIntentObject {
 
 impl std::fmt::Display for PaymentIntentObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentObject::PaymentIntent => "payment_intent",
             PaymentIntentObject::Noop => "",
             PaymentIntentObject::FallthroughString => "*",
@@ -24945,12 +24990,12 @@ impl PaymentIntentObject {
 }
 
 /**
- * Indicates that you intend to make future payments with this PaymentIntent's payment method.
- *   
- *   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
- *   
- *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
- */
+* Indicates that you intend to make future payments with this PaymentIntent's payment method.
+*   
+*   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+*   
+*   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SetupFutureUsage {
     #[serde(rename = "off_session")]
@@ -24965,7 +25010,7 @@ pub enum SetupFutureUsage {
 
 impl std::fmt::Display for SetupFutureUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SetupFutureUsage::OffSession => "off_session",
             SetupFutureUsage::OnSession => "on_session",
             SetupFutureUsage::Noop => "",
@@ -24987,8 +25032,8 @@ impl SetupFutureUsage {
 }
 
 /**
- * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
- */
+* Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentStatus {
     #[serde(rename = "canceled")]
@@ -25013,7 +25058,7 @@ pub enum PaymentIntentStatus {
 
 impl std::fmt::Display for PaymentIntentStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentStatus::Canceled => "canceled",
             PaymentIntentStatus::Processing => "processing",
             PaymentIntentStatus::RequiresAction => "requires_action",
@@ -25913,8 +25958,8 @@ pub struct PaymentIntentNextActionRedirectUrl {
 }
 
 /**
- * The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
- */
+* The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MicrodepositType {
     #[serde(rename = "amounts")]
@@ -25929,7 +25974,7 @@ pub enum MicrodepositType {
 
 impl std::fmt::Display for MicrodepositType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MicrodepositType::Amounts => "amounts",
             MicrodepositType::DescriptorCode => "descriptor_code",
             MicrodepositType::Noop => "",
@@ -26107,6 +26152,7 @@ pub struct PaymentIntentNextActionWechatPayRedirectIosApp {
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AcssDebitAnyOf {
@@ -26146,6 +26192,7 @@ impl AcssDebitAnyOf {
 /// - `PaymentMethodOptionsAfterpayClearpay`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AfterpayClearpayAnyOf {
@@ -26185,6 +26232,7 @@ impl AfterpayClearpayAnyOf {
 /// - `PaymentMethodOptionsAlipay`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AlipayAnyOf {
@@ -26222,6 +26270,7 @@ impl AlipayAnyOf {
 /// - `PaymentIntentMethodOptionsAuBecsDebit`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AuBecsDebitAnyOf {
@@ -26261,6 +26310,7 @@ impl AuBecsDebitAnyOf {
 /// - `PaymentMethodOptionsBacsDebit`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BacsDebitAnyOf {
@@ -26298,6 +26348,7 @@ impl BacsDebitAnyOf {
 /// - `PaymentMethodOptionsBancontact`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BancontactAnyOf {
@@ -26335,6 +26386,7 @@ impl BancontactAnyOf {
 /// - `PaymentMethodOptionsBoleto`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BoletoAnyOf {
@@ -26372,6 +26424,7 @@ impl BoletoAnyOf {
 /// - `PaymentIntentMethodOptionsCard`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaymentIntentMethodOptionsCardAnyOf {
@@ -26412,6 +26465,7 @@ impl PaymentIntentMethodOptionsCardAnyOf {
 /// - `PaymentMethodOptionsCardPresent`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CardPresentAnyOf {
@@ -26449,6 +26503,7 @@ impl CardPresentAnyOf {
 /// - `PaymentIntentMethodOptionsEps`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum EpsAnyOf {
@@ -26486,6 +26541,7 @@ impl EpsAnyOf {
 /// - `PaymentMethodOptionsFpx`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum FpxAnyOf {
@@ -26523,6 +26579,7 @@ impl FpxAnyOf {
 /// - `PaymentMethodOptionsGiropay`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GiropayAnyOf {
@@ -26560,6 +26617,7 @@ impl GiropayAnyOf {
 /// - `PaymentMethodOptionsGrabpay`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GrabpayAnyOf {
@@ -26597,6 +26655,7 @@ impl GrabpayAnyOf {
 /// - `PaymentMethodOptionsIdeal`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IdealAnyOf {
@@ -26634,6 +26693,7 @@ impl IdealAnyOf {
 /// - `UseStripeSdk`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum InteracPresentAnyOf {
@@ -26671,6 +26731,7 @@ impl InteracPresentAnyOf {
 /// - `PaymentMethodOptionsKlarna`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum KlarnaAnyOf {
@@ -26708,6 +26769,7 @@ impl KlarnaAnyOf {
 /// - `PaymentMethodOptionsKonbini`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum KonbiniAnyOf {
@@ -26745,6 +26807,7 @@ impl KonbiniAnyOf {
 /// - `PaymentMethodOptionsOxxo`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OxxoAnyOf {
@@ -26782,6 +26845,7 @@ impl OxxoAnyOf {
 /// - `PaymentMethodOptionsP24`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum P24AnyOf {
@@ -26819,6 +26883,7 @@ impl P24AnyOf {
 /// - `PaymentMethodOptionsPaynow`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaynowAnyOf {
@@ -26856,6 +26921,7 @@ impl PaynowAnyOf {
 /// - `PaymentIntentMethodOptionsSepaDebit`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SepaDebitAnyOf {
@@ -26895,6 +26961,7 @@ impl SepaDebitAnyOf {
 /// - `PaymentMethodOptionsSofort`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SofortAnyOf {
@@ -26932,6 +26999,7 @@ impl SofortAnyOf {
 /// - `PaymentIntentMethodOptionsUsBankAccount`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsBankAccountAnyOf {
@@ -26971,6 +27039,7 @@ impl UsBankAccountAnyOf {
 /// - `PaymentMethodOptionsWechatPay`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WechatPayAnyOf {
@@ -27128,12 +27197,12 @@ pub struct PaymentIntentMethodOptionsData {
 }
 
 /**
- * Indicates that you intend to make future payments with this PaymentIntent's payment method.
- *   
- *   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
- *   
- *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
- */
+* Indicates that you intend to make future payments with this PaymentIntent's payment method.
+*   
+*   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+*   
+*   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     #[serde(rename = "none")]
@@ -27150,7 +27219,7 @@ pub enum PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
 
 impl std::fmt::Display for PaymentIntentMethodOptionsAcssDebitSetupFutureUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentMethodOptionsAcssDebitSetupFutureUsage::None => "none",
             PaymentIntentMethodOptionsAcssDebitSetupFutureUsage::OffSession => "off_session",
             PaymentIntentMethodOptionsAcssDebitSetupFutureUsage::OnSession => "on_session",
@@ -27206,8 +27275,8 @@ pub struct PaymentIntentMethodOptionsAuBecsDebit {
 }
 
 /**
- * Controls when the funds will be captured from the customer's account.
- */
+* Controls when the funds will be captured from the customer's account.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentMethodOptionsCardCapture {
     #[serde(rename = "manual")]
@@ -27220,7 +27289,7 @@ pub enum PaymentIntentMethodOptionsCardCapture {
 
 impl std::fmt::Display for PaymentIntentMethodOptionsCardCapture {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentMethodOptionsCardCapture::Manual => "manual",
             PaymentIntentMethodOptionsCardCapture::Noop => "",
             PaymentIntentMethodOptionsCardCapture::FallthroughString => "*",
@@ -27241,8 +27310,8 @@ impl PaymentIntentMethodOptionsCardCapture {
 }
 
 /**
- * Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.
- */
+* Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentMethodOptionsCardNetwork {
     #[serde(rename = "amex")]
@@ -27273,7 +27342,7 @@ pub enum PaymentIntentMethodOptionsCardNetwork {
 
 impl std::fmt::Display for PaymentIntentMethodOptionsCardNetwork {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentMethodOptionsCardNetwork::Amex => "amex",
             PaymentIntentMethodOptionsCardNetwork::CartesBancaires => "cartes_bancaires",
             PaymentIntentMethodOptionsCardNetwork::Diners => "diners",
@@ -27303,8 +27372,8 @@ impl PaymentIntentMethodOptionsCardNetwork {
 }
 
 /**
- * We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
- */
+* We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentMethodOptionsCardRequestThreeDSecure {
     #[serde(rename = "any")]
@@ -27321,7 +27390,7 @@ pub enum PaymentIntentMethodOptionsCardRequestThreeDSecure {
 
 impl std::fmt::Display for PaymentIntentMethodOptionsCardRequestThreeDSecure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentMethodOptionsCardRequestThreeDSecure::Any => "any",
             PaymentIntentMethodOptionsCardRequestThreeDSecure::Automatic => "automatic",
             PaymentIntentMethodOptionsCardRequestThreeDSecure::ChallengeOnly => "challenge_only",
@@ -27384,12 +27453,12 @@ pub struct PaymentIntentMethodOptionsCard {
 }
 
 /**
- * Indicates that you intend to make future payments with this PaymentIntent's payment method.
- *   
- *   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
- *   
- *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
- */
+* Indicates that you intend to make future payments with this PaymentIntent's payment method.
+*   
+*   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+*   
+*   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentIntentMethodOptionsEpsSetupFutureUsage {
     #[serde(rename = "none")]
@@ -27402,7 +27471,7 @@ pub enum PaymentIntentMethodOptionsEpsSetupFutureUsage {
 
 impl std::fmt::Display for PaymentIntentMethodOptionsEpsSetupFutureUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentIntentMethodOptionsEpsSetupFutureUsage::None => "none",
             PaymentIntentMethodOptionsEpsSetupFutureUsage::Noop => "",
             PaymentIntentMethodOptionsEpsSetupFutureUsage::FallthroughString => "*",
@@ -27553,8 +27622,8 @@ pub struct PaymentIntentTypeSpecificMethodOptionsClient {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentLinkObject {
     #[serde(rename = "payment_link")]
@@ -27567,7 +27636,7 @@ pub enum PaymentLinkObject {
 
 impl std::fmt::Display for PaymentLinkObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentLinkObject::PaymentLink => "payment_link",
             PaymentLinkObject::Noop => "",
             PaymentLinkObject::FallthroughString => "*",
@@ -27737,8 +27806,8 @@ pub struct PaymentLink {
 }
 
 /**
- * The specified behavior after the purchase is complete.
- */
+* The specified behavior after the purchase is complete.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentLinksResourceAfterCompletionType {
     #[serde(rename = "hosted_confirmation")]
@@ -27753,7 +27822,7 @@ pub enum PaymentLinksResourceAfterCompletionType {
 
 impl std::fmt::Display for PaymentLinksResourceAfterCompletionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentLinksResourceAfterCompletionType::HostedConfirmation => "hosted_confirmation",
             PaymentLinksResourceAfterCompletionType::Redirect => "redirect",
             PaymentLinksResourceAfterCompletionType::Noop => "",
@@ -28296,7 +28365,7 @@ pub enum AllowedCountries {
 
 impl std::fmt::Display for AllowedCountries {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AllowedCountries::Ac => "AC",
             AllowedCountries::Ad => "AD",
             AllowedCountries::Ae => "AE",
@@ -28597,8 +28666,8 @@ pub struct PaymentLinksResourceTransferData {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodObject {
     #[serde(rename = "payment_method")]
@@ -28611,7 +28680,7 @@ pub enum PaymentMethodObject {
 
 impl std::fmt::Display for PaymentMethodObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodObject::PaymentMethod => "payment_method",
             PaymentMethodObject::Noop => "",
             PaymentMethodObject::FallthroughString => "*",
@@ -28632,8 +28701,8 @@ impl PaymentMethodObject {
 }
 
 /**
- * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
- */
+* The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodType {
     #[serde(rename = "acss_debit")]
@@ -28692,7 +28761,7 @@ pub enum PaymentMethodType {
 
 impl std::fmt::Display for PaymentMethodType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodType::AcssDebit => "acss_debit",
             PaymentMethodType::AfterpayClearpay => "afterpay_clearpay",
             PaymentMethodType::Alipay => "alipay",
@@ -29291,6 +29360,7 @@ pub struct PaymentMethodCardChecks {
 /// - `SetupAttempt`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SetupAttemptAnyOf {
@@ -29360,8 +29430,8 @@ pub struct PaymentMethodCardGenerated {
 }
 
 /**
- * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
- */
+* The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodCardWalletType {
     #[serde(rename = "amex_express_checkout")]
@@ -29384,7 +29454,7 @@ pub enum PaymentMethodCardWalletType {
 
 impl std::fmt::Display for PaymentMethodCardWalletType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodCardWalletType::AmexExpressCheckout => "amex_express_checkout",
             PaymentMethodCardWalletType::ApplePay => "apple_pay",
             PaymentMethodCardWalletType::GooglePay => "google_pay",
@@ -29950,6 +30020,7 @@ pub struct PaymentMethodDetailsBacsDebit {
 /// - `Mandate`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MandateAnyOf {
@@ -30210,9 +30281,9 @@ pub struct PaymentMethodDetailsCardInstallmentsData {
 }
 
 /**
- * For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.
- *   One of `month`.
- */
+* For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.
+*   One of `month`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsCardInstallmentsPlanInterval {
     #[serde(rename = "month")]
@@ -30225,7 +30296,7 @@ pub enum PaymentMethodDetailsCardInstallmentsPlanInterval {
 
 impl std::fmt::Display for PaymentMethodDetailsCardInstallmentsPlanInterval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsCardInstallmentsPlanInterval::Month => "month",
             PaymentMethodDetailsCardInstallmentsPlanInterval::Noop => "",
             PaymentMethodDetailsCardInstallmentsPlanInterval::FallthroughString => "*",
@@ -30246,8 +30317,8 @@ impl PaymentMethodDetailsCardInstallmentsPlanInterval {
 }
 
 /**
- * Type of installment plan, one of `fixed_count`.
- */
+* Type of installment plan, one of `fixed_count`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsCardInstallmentsPlanType {
     #[serde(rename = "fixed_count")]
@@ -30260,7 +30331,7 @@ pub enum PaymentMethodDetailsCardInstallmentsPlanType {
 
 impl std::fmt::Display for PaymentMethodDetailsCardInstallmentsPlanType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsCardInstallmentsPlanType::FixedCount => "fixed_count",
             PaymentMethodDetailsCardInstallmentsPlanType::Noop => "",
             PaymentMethodDetailsCardInstallmentsPlanType::FallthroughString => "*",
@@ -30310,8 +30381,8 @@ pub struct PaymentMethodDetailsCardInstallmentsPlan {
 }
 
 /**
- * How card details were read in this transaction.
- */
+* How card details were read in this transaction.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReadMethod {
     #[serde(rename = "contact_emv")]
@@ -30332,7 +30403,7 @@ pub enum ReadMethod {
 
 impl std::fmt::Display for ReadMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReadMethod::ContactEmv => "contact_emv",
             ReadMethod::ContactlessEmv => "contactless_emv",
             ReadMethod::ContactlessMagstripeMode => "contactless_magstripe_mode",
@@ -30498,8 +30569,8 @@ pub struct PaymentMethodDetailsCardPresent {
 }
 
 /**
- * The type of account being debited or credited
- */
+* The type of account being debited or credited
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AccountType {
     #[serde(rename = "checking")]
@@ -30518,7 +30589,7 @@ pub enum AccountType {
 
 impl std::fmt::Display for AccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AccountType::Checking => "checking",
             AccountType::Credit => "credit",
             AccountType::Prepaid => "prepaid",
@@ -30744,8 +30815,8 @@ pub struct PaymentMethodDetailsCardWalletVisaCheckout {
 }
 
 /**
- * The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
- */
+* The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Bank {
     #[serde(rename = "arzte_und_apotheker_bank")]
@@ -30810,7 +30881,7 @@ pub enum Bank {
 
 impl std::fmt::Display for Bank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Bank::ArzteUndApothekerBank => "arzte_und_apotheker_bank",
             Bank::AustrianAnadiBankAg => "austrian_anadi_bank_ag",
             Bank::BankAustria => "bank_austria",
@@ -30876,8 +30947,8 @@ pub struct PaymentMethodDetailsEps {
 }
 
 /**
- * The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.
- */
+* The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsFpxBank {
     #[serde(rename = "affin_bank")]
@@ -30930,7 +31001,7 @@ pub enum PaymentMethodDetailsFpxBank {
 
 impl std::fmt::Display for PaymentMethodDetailsFpxBank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsFpxBank::AffinBank => "affin_bank",
             PaymentMethodDetailsFpxBank::Agrobank => "agrobank",
             PaymentMethodDetailsFpxBank::AllianceBank => "alliance_bank",
@@ -31045,8 +31116,8 @@ pub struct PaymentMethodDetailsGrabpay {
 }
 
 /**
- * The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
- */
+* The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsIdealBank {
     #[serde(rename = "abn_amro")]
@@ -31083,7 +31154,7 @@ pub enum PaymentMethodDetailsIdealBank {
 
 impl std::fmt::Display for PaymentMethodDetailsIdealBank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsIdealBank::AbnAmro => "abn_amro",
             PaymentMethodDetailsIdealBank::AsnBank => "asn_bank",
             PaymentMethodDetailsIdealBank::Bunq => "bunq",
@@ -31116,8 +31187,8 @@ impl PaymentMethodDetailsIdealBank {
 }
 
 /**
- * The Bank Identifier Code of the customer's bank.
- */
+* The Bank Identifier Code of the customer's bank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Bic {
     #[serde(rename = "ABNANL2A")]
@@ -31154,7 +31225,7 @@ pub enum Bic {
 
 impl std::fmt::Display for Bic {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Bic::Abnanl2A => "ABNANL2A",
             Bic::Asnbnl21 => "ASNBNL21",
             Bic::Bunqnl2A => "BUNQNL2A",
@@ -31355,8 +31426,8 @@ pub struct PaymentMethodDetailsInteracPresent {
 }
 
 /**
- * The type of account being debited or credited
- */
+* The type of account being debited or credited
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsInteracPresentReceiptAccountType {
     #[serde(rename = "checking")]
@@ -31373,7 +31444,7 @@ pub enum PaymentMethodDetailsInteracPresentReceiptAccountType {
 
 impl std::fmt::Display for PaymentMethodDetailsInteracPresentReceiptAccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsInteracPresentReceiptAccountType::Checking => "checking",
             PaymentMethodDetailsInteracPresentReceiptAccountType::Savings => "savings",
             PaymentMethodDetailsInteracPresentReceiptAccountType::Unknown => "unknown",
@@ -31514,8 +31585,8 @@ pub struct PaymentMethodDetailsKonbini {
 }
 
 /**
- * The name of the convenience store chain where the payment was completed.
- */
+* The name of the convenience store chain where the payment was completed.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Chain {
     #[serde(rename = "familymart")]
@@ -31534,7 +31605,7 @@ pub enum Chain {
 
 impl std::fmt::Display for Chain {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Chain::Familymart => "familymart",
             Chain::Lawson => "lawson",
             Chain::Ministop => "ministop",
@@ -31605,8 +31676,8 @@ pub struct PaymentMethodDetailsOxxo {
 }
 
 /**
- * The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
- */
+* The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsP24Bank {
     #[serde(rename = "alior_bank")]
@@ -31667,7 +31738,7 @@ pub enum PaymentMethodDetailsP24Bank {
 
 impl std::fmt::Display for PaymentMethodDetailsP24Bank {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsP24Bank::AliorBank => "alior_bank",
             PaymentMethodDetailsP24Bank::BankMillennium => "bank_millennium",
             PaymentMethodDetailsP24Bank::BankNowyBfgSa => "bank_nowy_bfg_sa",
@@ -31814,9 +31885,9 @@ pub struct PaymentMethodDetailsSepaDebit {
 }
 
 /**
- * Preferred language of the SOFORT authorization page that the customer is redirected to.
- *   Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
- */
+* Preferred language of the SOFORT authorization page that the customer is redirected to.
+*   Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsSofortPreferredLanguage {
     #[serde(rename = "de")]
@@ -31841,7 +31912,7 @@ pub enum PaymentMethodDetailsSofortPreferredLanguage {
 
 impl std::fmt::Display for PaymentMethodDetailsSofortPreferredLanguage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsSofortPreferredLanguage::De => "de",
             PaymentMethodDetailsSofortPreferredLanguage::En => "en",
             PaymentMethodDetailsSofortPreferredLanguage::Es => "es",
@@ -31944,8 +32015,8 @@ pub struct PaymentMethodDetailsSofort {
 }
 
 /**
- * Account type: checkings or savings. Defaults to checking if omitted.
- */
+* Account type: checkings or savings. Defaults to checking if omitted.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodDetailsUsBankAccountType {
     #[serde(rename = "checking")]
@@ -31960,7 +32031,7 @@ pub enum PaymentMethodDetailsUsBankAccountType {
 
 impl std::fmt::Display for PaymentMethodDetailsUsBankAccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodDetailsUsBankAccountType::Checking => "checking",
             PaymentMethodDetailsUsBankAccountType::Savings => "savings",
             PaymentMethodDetailsUsBankAccountType::Noop => "",
@@ -32126,12 +32197,12 @@ pub struct PaymentMethodOptionsAfterpayClearpay {
 }
 
 /**
- * Indicates that you intend to make future payments with this PaymentIntent's payment method.
- *   
- *   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
- *   
- *   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
- */
+* Indicates that you intend to make future payments with this PaymentIntent's payment method.
+*   
+*   Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+*   
+*   When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodOptionsAlipaySetupFutureUsage {
     #[serde(rename = "none")]
@@ -32146,7 +32217,7 @@ pub enum PaymentMethodOptionsAlipaySetupFutureUsage {
 
 impl std::fmt::Display for PaymentMethodOptionsAlipaySetupFutureUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodOptionsAlipaySetupFutureUsage::None => "none",
             PaymentMethodOptionsAlipaySetupFutureUsage::OffSession => "off_session",
             PaymentMethodOptionsAlipaySetupFutureUsage::Noop => "",
@@ -32249,8 +32320,8 @@ pub struct PaymentMethodOptionsCardInstallments {
 }
 
 /**
- * Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
- */
+* Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentMethodOptionsCardMandateInterval {
     #[serde(rename = "day")]
@@ -32271,7 +32342,7 @@ pub enum PaymentMethodOptionsCardMandateInterval {
 
 impl std::fmt::Display for PaymentMethodOptionsCardMandateInterval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentMethodOptionsCardMandateInterval::Day => "day",
             PaymentMethodOptionsCardMandateInterval::Month => "month",
             PaymentMethodOptionsCardMandateInterval::Sporadic => "sporadic",
@@ -32307,7 +32378,7 @@ pub enum SupportedTypes {
 
 impl std::fmt::Display for SupportedTypes {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SupportedTypes::India => "india",
             SupportedTypes::Noop => "",
             SupportedTypes::FallthroughString => "*",
@@ -32587,8 +32658,8 @@ pub struct PaymentMethodOptionsSofort {
 }
 
 /**
- * The client type that the end customer will pay from
- */
+* The client type that the end customer will pay from
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Client {
     #[serde(rename = "android")]
@@ -32605,7 +32676,7 @@ pub enum Client {
 
 impl std::fmt::Display for Client {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Client::Android => "android",
             Client::Ios => "ios",
             Client::Web => "web",
@@ -32833,9 +32904,9 @@ pub struct PaymentPagesCheckoutSessionAfterExpirationRecovery {
 }
 
 /**
- * If `opt_in`, the customer consents to receiving promotional communications
- *   from the merchant about this Checkout Session.
- */
+* If `opt_in`, the customer consents to receiving promotional communications
+*   from the merchant about this Checkout Session.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Promotions {
     #[serde(rename = "opt_in")]
@@ -32850,7 +32921,7 @@ pub enum Promotions {
 
 impl std::fmt::Display for Promotions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Promotions::OptIn => "opt_in",
             Promotions::OptOut => "opt_out",
             Promotions::Noop => "",
@@ -32883,10 +32954,10 @@ pub struct PaymentPagesCheckoutSessionConsent {
 }
 
 /**
- * If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout
- *   Session will determine whether to display an option to opt into promotional communication
- *   from the merchant depending on the customer's locale. Only available to US merchants.
- */
+* If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout
+*   Session will determine whether to display an option to opt into promotional communication
+*   from the merchant depending on the customer's locale. Only available to US merchants.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PaymentPagesCheckoutSessionConsentCollectionPromotions {
     #[serde(rename = "auto")]
@@ -32899,7 +32970,7 @@ pub enum PaymentPagesCheckoutSessionConsentCollectionPromotions {
 
 impl std::fmt::Display for PaymentPagesCheckoutSessionConsentCollectionPromotions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentPagesCheckoutSessionConsentCollectionPromotions::Auto => "auto",
             PaymentPagesCheckoutSessionConsentCollectionPromotions::Noop => "",
             PaymentPagesCheckoutSessionConsentCollectionPromotions::FallthroughString => "*",
@@ -33094,6 +33165,7 @@ pub struct QuotesResourceTotalDetailsBreakdown {
 /// - `BitcoinReceiver`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaymentSourceAnyOf {
@@ -33196,6 +33268,7 @@ impl PaymentSourceAnyOf {
 /// - `DeletedCard`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DestinationAnyOf {
@@ -33281,8 +33354,8 @@ impl std::convert::From<DestinationAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PayoutObject {
     #[serde(rename = "payout")]
@@ -33295,7 +33368,7 @@ pub enum PayoutObject {
 
 impl std::fmt::Display for PayoutObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PayoutObject::Payout => "payout",
             PayoutObject::Noop => "",
             PayoutObject::FallthroughString => "*",
@@ -33321,6 +33394,7 @@ impl PayoutObject {
 /// - `Payout`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReversedByAnyOf {
@@ -33370,8 +33444,8 @@ impl std::convert::From<ReversedByAnyOf> for String {
 }
 
 /**
- * Can be `bank_account` or `card`.
- */
+* Can be `bank_account` or `card`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PayoutType {
     #[serde(rename = "bank_account")]
@@ -33386,7 +33460,7 @@ pub enum PayoutType {
 
 impl std::fmt::Display for PayoutType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PayoutType::BankAccount => "bank_account",
             PayoutType::Card => "card",
             PayoutType::Noop => "",
@@ -33681,8 +33755,8 @@ pub struct Period {
 }
 
 /**
- * Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
- */
+* Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PoliticalExposure {
     #[serde(rename = "existing")]
@@ -33697,7 +33771,7 @@ pub enum PoliticalExposure {
 
 impl std::fmt::Display for PoliticalExposure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PoliticalExposure::Existing => "existing",
             PoliticalExposure::None => "none",
             PoliticalExposure::Noop => "",
@@ -34147,8 +34221,8 @@ pub struct PersonRelationship {
 }
 
 /**
- * Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
- */
+* Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AggregateUsage {
     #[serde(rename = "last_during_period")]
@@ -34167,7 +34241,7 @@ pub enum AggregateUsage {
 
 impl std::fmt::Display for AggregateUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AggregateUsage::LastDuringPeriod => "last_during_period",
             AggregateUsage::LastEver => "last_ever",
             AggregateUsage::Max => "max",
@@ -34191,8 +34265,8 @@ impl AggregateUsage {
 }
 
 /**
- * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity` (for plans with `usage_type=licensed`), or per unit of total usage (for plans with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
- */
+* Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity` (for plans with `usage_type=licensed`), or per unit of total usage (for plans with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BillingScheme {
     #[serde(rename = "per_unit")]
@@ -34207,7 +34281,7 @@ pub enum BillingScheme {
 
 impl std::fmt::Display for BillingScheme {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BillingScheme::PerUnit => "per_unit",
             BillingScheme::Tiered => "tiered",
             BillingScheme::Noop => "",
@@ -34229,8 +34303,8 @@ impl BillingScheme {
 }
 
 /**
- * The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
- */
+* The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PlanInterval {
     #[serde(rename = "day")]
@@ -34249,7 +34323,7 @@ pub enum PlanInterval {
 
 impl std::fmt::Display for PlanInterval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlanInterval::Day => "day",
             PlanInterval::Month => "month",
             PlanInterval::Week => "week",
@@ -34279,6 +34353,7 @@ impl PlanInterval {
 /// - `Product`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ProductAnyOf {
@@ -34339,8 +34414,8 @@ impl std::convert::From<ProductAnyOf> for String {
 }
 
 /**
- * Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
- */
+* Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TiersMode {
     #[serde(rename = "graduated")]
@@ -34355,7 +34430,7 @@ pub enum TiersMode {
 
 impl std::fmt::Display for TiersMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TiersMode::Graduated => "graduated",
             TiersMode::Volume => "volume",
             TiersMode::Noop => "",
@@ -34377,8 +34452,8 @@ impl TiersMode {
 }
 
 /**
- * Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
- */
+* Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsageType {
     #[serde(rename = "licensed")]
@@ -34393,7 +34468,7 @@ pub enum UsageType {
 
 impl std::fmt::Display for UsageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsageType::Licensed => "licensed",
             UsageType::Metered => "metered",
             UsageType::Noop => "",
@@ -34665,8 +34740,8 @@ pub struct PlanTier {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PlatformTaxObject {
     #[serde(rename = "platform_tax_fee")]
@@ -34679,7 +34754,7 @@ pub enum PlatformTaxObject {
 
 impl std::fmt::Display for PlatformTaxObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlatformTaxObject::PlatformTaxFee => "platform_tax_fee",
             PlatformTaxObject::Noop => "",
             PlatformTaxObject::FallthroughString => "*",
@@ -34798,7 +34873,7 @@ pub enum AllowedUpdates {
 
 impl std::fmt::Display for AllowedUpdates {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AllowedUpdates::Address => "address",
             AllowedUpdates::Email => "email",
             AllowedUpdates::Phone => "phone",
@@ -34880,8 +34955,8 @@ pub struct PortalFeatures {
 }
 
 /**
- * Whether to cancel subscriptions immediately or at the end of the billing period.
- */
+* Whether to cancel subscriptions immediately or at the end of the billing period.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PortalSubscriptionCancelMode {
     #[serde(rename = "at_period_end")]
@@ -34896,7 +34971,7 @@ pub enum PortalSubscriptionCancelMode {
 
 impl std::fmt::Display for PortalSubscriptionCancelMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PortalSubscriptionCancelMode::AtPeriodEnd => "at_period_end",
             PortalSubscriptionCancelMode::Immediately => "immediately",
             PortalSubscriptionCancelMode::Noop => "",
@@ -34918,8 +34993,8 @@ impl PortalSubscriptionCancelMode {
 }
 
 /**
- * Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
- */
+* Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ProrationBehavior {
     #[serde(rename = "always_invoice")]
@@ -34936,7 +35011,7 @@ pub enum ProrationBehavior {
 
 impl std::fmt::Display for ProrationBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProrationBehavior::AlwaysInvoice => "always_invoice",
             ProrationBehavior::CreateProrations => "create_prorations",
             ProrationBehavior::None => "none",
@@ -35012,7 +35087,7 @@ pub enum Options {
 
 impl std::fmt::Display for Options {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Options::CustomerService => "customer_service",
             Options::LowQuality => "low_quality",
             Options::MissingFeatures => "missing_features",
@@ -35077,7 +35152,7 @@ pub enum DefaultAllowedUpdates {
 
 impl std::fmt::Display for DefaultAllowedUpdates {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DefaultAllowedUpdates::Price => "price",
             DefaultAllowedUpdates::PromotionCode => "promotion_code",
             DefaultAllowedUpdates::Quantity => "quantity",
@@ -35159,8 +35234,8 @@ pub struct PortalSubscriptionUpdateProduct {
 }
 
 /**
- * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
- */
+* Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxBehavior {
     #[serde(rename = "exclusive")]
@@ -35177,7 +35252,7 @@ pub enum TaxBehavior {
 
 impl std::fmt::Display for TaxBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxBehavior::Exclusive => "exclusive",
             TaxBehavior::Inclusive => "inclusive",
             TaxBehavior::Unspecified => "unspecified",
@@ -35200,8 +35275,8 @@ impl TaxBehavior {
 }
 
 /**
- * One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
- */
+* One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PriceType {
     #[serde(rename = "one_time")]
@@ -35216,7 +35291,7 @@ pub enum PriceType {
 
 impl std::fmt::Display for PriceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PriceType::OneTime => "one_time",
             PriceType::Recurring => "recurring",
             PriceType::Noop => "",
@@ -35457,6 +35532,7 @@ pub struct PriceTier {
 /// - `TaxCode`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TaxCodeAnyOf {
@@ -35682,8 +35758,8 @@ pub struct Product {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum PromotionCodeObject {
     #[serde(rename = "promotion_code")]
@@ -35696,7 +35772,7 @@ pub enum PromotionCodeObject {
 
 impl std::fmt::Display for PromotionCodeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PromotionCodeObject::PromotionCode => "promotion_code",
             PromotionCodeObject::Noop => "",
             PromotionCodeObject::FallthroughString => "*",
@@ -35865,6 +35941,7 @@ pub struct PromotionCodesResourceRestrictions {
 /// - `DeletedInvoice`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum QuoteInvoiceAnyOf {
@@ -35949,8 +36026,8 @@ impl std::convert::From<QuoteInvoiceAnyOf> for String {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum QuoteObject {
     #[serde(rename = "quote")]
@@ -35963,7 +36040,7 @@ pub enum QuoteObject {
 
 impl std::fmt::Display for QuoteObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             QuoteObject::Quote => "quote",
             QuoteObject::Noop => "",
             QuoteObject::FallthroughString => "*",
@@ -35984,8 +36061,8 @@ impl QuoteObject {
 }
 
 /**
- * The status of the quote.
- */
+* The status of the quote.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum QuoteStatus {
     #[serde(rename = "accepted")]
@@ -36004,7 +36081,7 @@ pub enum QuoteStatus {
 
 impl std::fmt::Display for QuoteStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             QuoteStatus::Accepted => "accepted",
             QuoteStatus::Canceled => "canceled",
             QuoteStatus::Draft => "draft",
@@ -36033,6 +36110,7 @@ impl QuoteStatus {
 /// - `SubscriptionSchedule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScheduleAnyOf {
@@ -36544,8 +36622,8 @@ pub struct QuotesResourceUpfront {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RadarEarlyFraudWarningObject {
     #[serde(rename = "radar.early_fraud_warning")]
@@ -36558,7 +36636,7 @@ pub enum RadarEarlyFraudWarningObject {
 
 impl std::fmt::Display for RadarEarlyFraudWarningObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RadarEarlyFraudWarningObject::RadarEarlyFraudWarning => "radar.early_fraud_warning",
             RadarEarlyFraudWarningObject::Noop => "",
             RadarEarlyFraudWarningObject::FallthroughString => "*",
@@ -36645,8 +36723,8 @@ pub struct RadarEarlyFraudWarning {
 }
 
 /**
- * The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`.
- */
+* The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, or `customer_id`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ItemType {
     #[serde(rename = "card_bin")]
@@ -36673,7 +36751,7 @@ pub enum ItemType {
 
 impl std::fmt::Display for ItemType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ItemType::CardBin => "card_bin",
             ItemType::CardFingerprint => "card_fingerprint",
             ItemType::CaseSensitiveString => "case_sensitive_string",
@@ -37015,6 +37093,7 @@ pub struct Cards {
 /// - `Card`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DefaultCardAnyOf {
@@ -37260,8 +37339,8 @@ pub struct RecurringData {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RefundObject {
     #[serde(rename = "refund")]
@@ -37274,7 +37353,7 @@ pub enum RefundObject {
 
 impl std::fmt::Display for RefundObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RefundObject::Refund => "refund",
             RefundObject::Noop => "",
             RefundObject::FallthroughString => "*",
@@ -37295,8 +37374,8 @@ impl RefundObject {
 }
 
 /**
- * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
- */
+* Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum RefundReason {
     #[serde(rename = "duplicate")]
@@ -37315,7 +37394,7 @@ pub enum RefundReason {
 
 impl std::fmt::Display for RefundReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RefundReason::Duplicate => "duplicate",
             RefundReason::ExpiredUncapturedCharge => "expired_uncaptured_charge",
             RefundReason::Fraudulent => "fraudulent",
@@ -37344,6 +37423,7 @@ impl RefundReason {
 /// - `TransferReversal`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TransferReversalAnyOf {
@@ -37620,8 +37700,8 @@ pub struct RefundNextActionDisplayDetails {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReportingReportRunObject {
     #[serde(rename = "reporting.report_run")]
@@ -37634,7 +37714,7 @@ pub enum ReportingReportRunObject {
 
 impl std::fmt::Display for ReportingReportRunObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReportingReportRunObject::ReportingReportRun => "reporting.report_run",
             ReportingReportRunObject::Noop => "",
             ReportingReportRunObject::FallthroughString => "*",
@@ -37759,8 +37839,8 @@ pub struct ReportingReportRun {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReportingReportTypeObject {
     #[serde(rename = "reporting.report_type")]
@@ -37773,7 +37853,7 @@ pub enum ReportingReportTypeObject {
 
 impl std::fmt::Display for ReportingReportTypeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReportingReportTypeObject::ReportingReportType => "reporting.report_type",
             ReportingReportTypeObject::Noop => "",
             ReportingReportTypeObject::FallthroughString => "*",
@@ -37889,8 +37969,8 @@ pub struct ReportingReportType {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReserveTransactionObject {
     #[serde(rename = "reserve_transaction")]
@@ -37903,7 +37983,7 @@ pub enum ReserveTransactionObject {
 
 impl std::fmt::Display for ReserveTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReserveTransactionObject::ReserveTransaction => "reserve_transaction",
             ReserveTransactionObject::Noop => "",
             ReserveTransactionObject::FallthroughString => "*",
@@ -37970,8 +38050,8 @@ pub struct ReserveTransaction {
 }
 
 /**
- * The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
- */
+* The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ClosedReason {
     #[serde(rename = "approved")]
@@ -37992,7 +38072,7 @@ pub enum ClosedReason {
 
 impl std::fmt::Display for ClosedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ClosedReason::Approved => "approved",
             ClosedReason::Disputed => "disputed",
             ClosedReason::Redacted => "redacted",
@@ -38017,8 +38097,8 @@ impl ClosedReason {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ReviewObject {
     #[serde(rename = "review")]
@@ -38031,7 +38111,7 @@ pub enum ReviewObject {
 
 impl std::fmt::Display for ReviewObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ReviewObject::Review => "review",
             ReviewObject::Noop => "",
             ReviewObject::FallthroughString => "*",
@@ -38052,8 +38132,8 @@ impl ReviewObject {
 }
 
 /**
- * The reason the review was opened. One of `rule` or `manual`.
- */
+* The reason the review was opened. One of `rule` or `manual`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OpenedReason {
     #[serde(rename = "manual")]
@@ -38068,7 +38148,7 @@ pub enum OpenedReason {
 
 impl std::fmt::Display for OpenedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OpenedReason::Manual => "manual",
             OpenedReason::Rule => "rule",
             OpenedReason::Noop => "",
@@ -38238,8 +38318,8 @@ pub struct Rule {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ScheduledQueryRunObject {
     #[serde(rename = "scheduled_query_run")]
@@ -38252,7 +38332,7 @@ pub enum ScheduledQueryRunObject {
 
 impl std::fmt::Display for ScheduledQueryRunObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ScheduledQueryRunObject::ScheduledQueryRun => "scheduled_query_run",
             ScheduledQueryRunObject::Noop => "",
             ScheduledQueryRunObject::FallthroughString => "*",
@@ -38386,8 +38466,8 @@ pub struct SepaDebitGeneratedFrom {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SetupAttemptObject {
     #[serde(rename = "setup_attempt")]
@@ -38400,7 +38480,7 @@ pub enum SetupAttemptObject {
 
 impl std::fmt::Display for SetupAttemptObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SetupAttemptObject::SetupAttempt => "setup_attempt",
             SetupAttemptObject::Noop => "",
             SetupAttemptObject::FallthroughString => "*",
@@ -38782,8 +38862,8 @@ pub struct SetupAttemptPaymentMethodDetailsSofort {
 }
 
 /**
- * Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
- */
+* Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SetupIntentCancellationReason {
     #[serde(rename = "abandoned")]
@@ -38800,7 +38880,7 @@ pub enum SetupIntentCancellationReason {
 
 impl std::fmt::Display for SetupIntentCancellationReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SetupIntentCancellationReason::Abandoned => "abandoned",
             SetupIntentCancellationReason::Duplicate => "duplicate",
             SetupIntentCancellationReason::RequestedByCustomer => "requested_by_customer",
@@ -38823,8 +38903,8 @@ impl SetupIntentCancellationReason {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SetupIntentObject {
     #[serde(rename = "setup_intent")]
@@ -38837,7 +38917,7 @@ pub enum SetupIntentObject {
 
 impl std::fmt::Display for SetupIntentObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SetupIntentObject::SetupIntent => "setup_intent",
             SetupIntentObject::Noop => "",
             SetupIntentObject::FallthroughString => "*",
@@ -38858,8 +38938,8 @@ impl SetupIntentObject {
 }
 
 /**
- * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
- */
+* [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SetupIntentStatus {
     #[serde(rename = "canceled")]
@@ -38882,7 +38962,7 @@ pub enum SetupIntentStatus {
 
 impl std::fmt::Display for SetupIntentStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SetupIntentStatus::Canceled => "canceled",
             SetupIntentStatus::Processing => "processing",
             SetupIntentStatus::RequiresAction => "requires_action",
@@ -39338,6 +39418,7 @@ pub struct SetupIntentNextActionRedirectUrl {
 /// - `SetupIntentTypeSpecificPaymentMethodOptionsClient`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SetupIntentPaymentMethodOptionsAcssDebitAnyOf {
@@ -39379,6 +39460,7 @@ impl SetupIntentPaymentMethodOptionsAcssDebitAnyOf {
 /// - `SetupIntentPaymentMethodOptionsSepaDebit`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SetupIntentPaymentMethodOptionsSepaDebitAnyOf {
@@ -39420,6 +39502,7 @@ impl SetupIntentPaymentMethodOptionsSepaDebitAnyOf {
 /// - `SetupIntentPaymentMethodOptionsUsBankAccount`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SetupIntentPaymentMethodOptionsUsBankAccountAnyOf {
@@ -39770,8 +39853,8 @@ pub struct ShippingMethod {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ShippingRateObject {
     #[serde(rename = "shipping_rate")]
@@ -39784,7 +39867,7 @@ pub enum ShippingRateObject {
 
 impl std::fmt::Display for ShippingRateObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ShippingRateObject::ShippingRate => "shipping_rate",
             ShippingRateObject::Noop => "",
             ShippingRateObject::FallthroughString => "*",
@@ -39805,8 +39888,8 @@ impl ShippingRateObject {
 }
 
 /**
- * The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
- */
+* The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ShippingRateType {
     #[serde(rename = "fixed_amount")]
@@ -39819,7 +39902,7 @@ pub enum ShippingRateType {
 
 impl std::fmt::Display for ShippingRateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ShippingRateType::FixedAmount => "fixed_amount",
             ShippingRateType::Noop => "",
             ShippingRateType::FallthroughString => "*",
@@ -39950,8 +40033,8 @@ pub struct ShippingRateDeliveryEstimateData {
 }
 
 /**
- * A unit of time.
- */
+* A unit of time.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Unit {
     #[serde(rename = "business_day")]
@@ -39972,7 +40055,7 @@ pub enum Unit {
 
 impl std::fmt::Display for Unit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Unit::BusinessDay => "business_day",
             Unit::Day => "day",
             Unit::Hour => "hour",
@@ -40035,6 +40118,7 @@ pub struct SigmaScheduledQueryRunError {
 /// - `Product`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SkuProductAnyOf {
@@ -40237,8 +40321,8 @@ pub struct SkuInventory {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceObject {
     #[serde(rename = "source")]
@@ -40251,7 +40335,7 @@ pub enum SourceObject {
 
 impl std::fmt::Display for SourceObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceObject::Source => "source",
             SourceObject::Noop => "",
             SourceObject::FallthroughString => "*",
@@ -40272,8 +40356,8 @@ impl SourceObject {
 }
 
 /**
- * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
- */
+* The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceType {
     #[serde(rename = "ach_credit_transfer")]
@@ -40320,7 +40404,7 @@ pub enum SourceType {
 
 impl std::fmt::Display for SourceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceType::AchCreditTransfer => "ach_credit_transfer",
             SourceType::AchDebit => "ach_debit",
             SourceType::AcssDebit => "acss_debit",
@@ -40763,8 +40847,8 @@ pub struct SourceCodeVerificationFlow {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceMandateNotificationObject {
     #[serde(rename = "source_mandate_notification")]
@@ -40777,7 +40861,7 @@ pub enum SourceMandateNotificationObject {
 
 impl std::fmt::Display for SourceMandateNotificationObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceMandateNotificationObject::SourceMandateNotification => {
                 "source_mandate_notification"
             }
@@ -41248,8 +41332,8 @@ pub struct SourceRedirectFlow {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceTransactionObject {
     #[serde(rename = "source_transaction")]
@@ -41262,7 +41346,7 @@ pub enum SourceTransactionObject {
 
 impl std::fmt::Display for SourceTransactionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceTransactionObject::SourceTransaction => "source_transaction",
             SourceTransactionObject::Noop => "",
             SourceTransactionObject::FallthroughString => "*",
@@ -41283,8 +41367,8 @@ impl SourceTransactionObject {
 }
 
 /**
- * The type of source this transaction is attached to.
- */
+* The type of source this transaction is attached to.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SourceTransactionType {
     #[serde(rename = "ach_credit_transfer")]
@@ -41327,7 +41411,7 @@ pub enum SourceTransactionType {
 
 impl std::fmt::Display for SourceTransactionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SourceTransactionType::AchCreditTransfer => "ach_credit_transfer",
             SourceTransactionType::AchDebit => "ach_debit",
             SourceTransactionType::Alipay => "alipay",
@@ -43255,8 +43339,8 @@ pub struct Items {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionObject {
     #[serde(rename = "subscription")]
@@ -43269,7 +43353,7 @@ pub enum SubscriptionObject {
 
 impl std::fmt::Display for SubscriptionObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionObject::Subscription => "subscription",
             SubscriptionObject::Noop => "",
             SubscriptionObject::FallthroughString => "*",
@@ -43290,16 +43374,16 @@ impl SubscriptionObject {
 }
 
 /**
- * Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`, `canceled`, or `unpaid`.
- *   
- *   For `collection_method=charge_automatically` a subscription moves into `incomplete` if the initial payment attempt fails. A subscription in this state can only have metadata and default_source updated. Once the first invoice is paid, the subscription moves into an `active` state. If the first invoice is not paid within 23 hours, the subscription transitions to `incomplete_expired`. This is a terminal state, the open invoice will be voided and no further invoices will be generated.
- *   
- *   A subscription that is currently in a trial period is `trialing` and moves to `active` when the trial period is over.
- *   
- *   If subscription `collection_method=charge_automatically` it becomes `past_due` when payment to renew it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has exhausted all payment retry attempts.
- *   
- *   If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
- */
+* Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`, `canceled`, or `unpaid`.
+*   
+*   For `collection_method=charge_automatically` a subscription moves into `incomplete` if the initial payment attempt fails. A subscription in this state can only have metadata and default_source updated. Once the first invoice is paid, the subscription moves into an `active` state. If the first invoice is not paid within 23 hours, the subscription transitions to `incomplete_expired`. This is a terminal state, the open invoice will be voided and no further invoices will be generated.
+*   
+*   A subscription that is currently in a trial period is `trialing` and moves to `active` when the trial period is over.
+*   
+*   If subscription `collection_method=charge_automatically` it becomes `past_due` when payment to renew it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has exhausted all payment retry attempts.
+*   
+*   If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionStatus {
     #[serde(rename = "active")]
@@ -43324,7 +43408,7 @@ pub enum SubscriptionStatus {
 
 impl std::fmt::Display for SubscriptionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionStatus::Active => "active",
             SubscriptionStatus::Canceled => "canceled",
             SubscriptionStatus::Incomplete => "incomplete",
@@ -43801,8 +43885,8 @@ pub struct SubscriptionPendingInvoiceItemInterval {
 }
 
 /**
- * Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` and `cancel`.
- */
+* Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` and `cancel`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum EndBehavior {
     #[serde(rename = "cancel")]
@@ -43821,7 +43905,7 @@ pub enum EndBehavior {
 
 impl std::fmt::Display for EndBehavior {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EndBehavior::Cancel => "cancel",
             EndBehavior::None => "none",
             EndBehavior::Release => "release",
@@ -43845,8 +43929,8 @@ impl EndBehavior {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionScheduleObject {
     #[serde(rename = "subscription_schedule")]
@@ -43859,7 +43943,7 @@ pub enum SubscriptionScheduleObject {
 
 impl std::fmt::Display for SubscriptionScheduleObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionScheduleObject::SubscriptionSchedule => "subscription_schedule",
             SubscriptionScheduleObject::Noop => "",
             SubscriptionScheduleObject::FallthroughString => "*",
@@ -43880,8 +43964,8 @@ impl SubscriptionScheduleObject {
 }
 
 /**
- * The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
- */
+* The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionScheduleStatus {
     #[serde(rename = "active")]
@@ -43902,7 +43986,7 @@ pub enum SubscriptionScheduleStatus {
 
 impl std::fmt::Display for SubscriptionScheduleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionScheduleStatus::Active => "active",
             SubscriptionScheduleStatus::Canceled => "canceled",
             SubscriptionScheduleStatus::Completed => "completed",
@@ -44071,6 +44155,7 @@ pub struct SubscriptionSchedule {
 /// - `PriceData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PriceAnyOf {
@@ -44207,8 +44292,8 @@ pub struct SubscriptionScheduleCurrentPhase {
 }
 
 /**
- * Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
- */
+* Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum BillingCycleAnchor {
     #[serde(rename = "automatic")]
@@ -44223,7 +44308,7 @@ pub enum BillingCycleAnchor {
 
 impl std::fmt::Display for BillingCycleAnchor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BillingCycleAnchor::Automatic => "automatic",
             BillingCycleAnchor::PhaseStart => "phase_start",
             BillingCycleAnchor::Noop => "",
@@ -44251,6 +44336,7 @@ impl BillingCycleAnchor {
 /// - `DeletedCoupon`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum CouponAnyOf {
@@ -44484,8 +44570,8 @@ pub struct SubscriptionTransferDataType {
 }
 
 /**
- * The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
- */
+* The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Behavior {
     #[serde(rename = "keep_as_draft")]
@@ -44502,7 +44588,7 @@ pub enum Behavior {
 
 impl std::fmt::Display for Behavior {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Behavior::KeepAsDraft => "keep_as_draft",
             Behavior::MarkUncollectible => "mark_uncollectible",
             Behavior::Void => "void",
@@ -44654,8 +44740,8 @@ pub struct SubscriptionsResourcePendingUpdate {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxCodeObject {
     #[serde(rename = "tax_code")]
@@ -44668,7 +44754,7 @@ pub enum TaxCodeObject {
 
 impl std::fmt::Display for TaxCodeObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxCodeObject::TaxCode => "tax_code",
             TaxCodeObject::Noop => "",
             TaxCodeObject::FallthroughString => "*",
@@ -44726,8 +44812,8 @@ pub struct TaxCode {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxDeductedAtSourceObject {
     #[serde(rename = "tax_deducted_at_source")]
@@ -44740,7 +44826,7 @@ pub enum TaxDeductedAtSourceObject {
 
 impl std::fmt::Display for TaxDeductedAtSourceObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxDeductedAtSourceObject::TaxDeductedAtSource => "tax_deducted_at_source",
             TaxDeductedAtSourceObject::Noop => "",
             TaxDeductedAtSourceObject::FallthroughString => "*",
@@ -44889,8 +44975,8 @@ pub struct TaxId {
 }
 
 /**
- * Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
- */
+* Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxVerificationStatus {
     #[serde(rename = "pending")]
@@ -44909,7 +44995,7 @@ pub enum TaxVerificationStatus {
 
 impl std::fmt::Display for TaxVerificationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxVerificationStatus::Pending => "pending",
             TaxVerificationStatus::Unavailable => "unavailable",
             TaxVerificationStatus::Unverified => "unverified",
@@ -44961,8 +45047,8 @@ pub struct TaxVerificationData {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxRateObject {
     #[serde(rename = "tax_rate")]
@@ -44975,7 +45061,7 @@ pub enum TaxRateObject {
 
 impl std::fmt::Display for TaxRateObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxRateObject::TaxRate => "tax_rate",
             TaxRateObject::Noop => "",
             TaxRateObject::FallthroughString => "*",
@@ -44996,8 +45082,8 @@ impl TaxRateObject {
 }
 
 /**
- * The high-level tax type, such as `vat` or `sales_tax`.
- */
+* The high-level tax type, such as `vat` or `sales_tax`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TaxType {
     #[serde(rename = "gst")]
@@ -45024,7 +45110,7 @@ pub enum TaxType {
 
 impl std::fmt::Display for TaxType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TaxType::Gst => "gst",
             TaxType::Hst => "hst",
             TaxType::Jct => "jct",
@@ -45184,8 +45270,8 @@ pub struct TaxRate {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TerminalConnectionTokenObject {
     #[serde(rename = "terminal.connection_token")]
@@ -45198,7 +45284,7 @@ pub enum TerminalConnectionTokenObject {
 
 impl std::fmt::Display for TerminalConnectionTokenObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TerminalConnectionTokenObject::TerminalConnectionToken => "terminal.connection_token",
             TerminalConnectionTokenObject::Noop => "",
             TerminalConnectionTokenObject::FallthroughString => "*",
@@ -45309,8 +45395,8 @@ pub struct TerminalLocation {
 }
 
 /**
- * Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.
- */
+* Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum DeviceType {
     #[serde(rename = "bbpos_chipper2x")]
@@ -45331,7 +45417,7 @@ pub enum DeviceType {
 
 impl std::fmt::Display for DeviceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DeviceType::BbposChipper2X => "bbpos_chipper2x",
             DeviceType::BbposWisepad3 => "bbpos_wisepad3",
             DeviceType::BbposWiseposE => "bbpos_wisepos_e",
@@ -45361,6 +45447,7 @@ impl DeviceType {
 /// - `TerminalLocation`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LocationAnyOf {
@@ -45607,8 +45694,8 @@ pub struct TerminalReaderResourceProcessSetupIntentAction {
 }
 
 /**
- * Status of the action performed by the reader.
- */
+* Status of the action performed by the reader.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TerminalReaderResourceActionStatus {
     #[serde(rename = "failed")]
@@ -45625,7 +45712,7 @@ pub enum TerminalReaderResourceActionStatus {
 
 impl std::fmt::Display for TerminalReaderResourceActionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TerminalReaderResourceActionStatus::Failed => "failed",
             TerminalReaderResourceActionStatus::InProgress => "in_progress",
             TerminalReaderResourceActionStatus::Succeeded => "succeeded",
@@ -45648,8 +45735,8 @@ impl TerminalReaderResourceActionStatus {
 }
 
 /**
- * Type of action performed by the reader.
- */
+* Type of action performed by the reader.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TerminalReaderResourceActionType {
     #[serde(rename = "process_payment_intent")]
@@ -45666,7 +45753,7 @@ pub enum TerminalReaderResourceActionType {
 
 impl std::fmt::Display for TerminalReaderResourceActionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TerminalReaderResourceActionType::ProcessPaymentIntent => "process_payment_intent",
             TerminalReaderResourceActionType::ProcessSetupIntent => "process_setup_intent",
             TerminalReaderResourceActionType::SetReaderDisplay => "set_reader_display",
@@ -45744,8 +45831,8 @@ pub struct TerminalReaderResourceAction {
 }
 
 /**
- * Type of information to be displayed by the reader.
- */
+* Type of information to be displayed by the reader.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TerminalReaderResourceSetDisplayActionType {
     #[serde(rename = "cart")]
@@ -45758,7 +45845,7 @@ pub enum TerminalReaderResourceSetDisplayActionType {
 
 impl std::fmt::Display for TerminalReaderResourceSetDisplayActionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TerminalReaderResourceSetDisplayActionType::Cart => "cart",
             TerminalReaderResourceSetDisplayActionType::Noop => "",
             TerminalReaderResourceSetDisplayActionType::FallthroughString => "*",
@@ -45798,8 +45885,8 @@ pub struct TerminalReaderResourceSetDisplayAction {
 }
 
 /**
- * The status of the Test Clock.
- */
+* The status of the Test Clock.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TestClockStatus {
     #[serde(rename = "advancing")]
@@ -45816,7 +45903,7 @@ pub enum TestClockStatus {
 
 impl std::fmt::Display for TestClockStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TestClockStatus::Advancing => "advancing",
             TestClockStatus::InternalFailure => "internal_failure",
             TestClockStatus::Ready => "ready",
@@ -45911,8 +45998,8 @@ pub struct TestClock {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ThreeDSecureObject {
     #[serde(rename = "three_d_secure")]
@@ -45925,7 +46012,7 @@ pub enum ThreeDSecureObject {
 
 impl std::fmt::Display for ThreeDSecureObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ThreeDSecureObject::ThreeDSecure => "three_d_secure",
             ThreeDSecureObject::Noop => "",
             ThreeDSecureObject::FallthroughString => "*",
@@ -46039,9 +46126,9 @@ pub struct ThreeDSecure {
 }
 
 /**
- * For authenticated transactions: how the customer was authenticated by
- *   the issuing bank.
- */
+* For authenticated transactions: how the customer was authenticated by
+*   the issuing bank.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum AuthenticationFlow {
     #[serde(rename = "challenge")]
@@ -46056,7 +46143,7 @@ pub enum AuthenticationFlow {
 
 impl std::fmt::Display for AuthenticationFlow {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthenticationFlow::Challenge => "challenge",
             AuthenticationFlow::Frictionless => "frictionless",
             AuthenticationFlow::Noop => "",
@@ -46078,8 +46165,8 @@ impl AuthenticationFlow {
 }
 
 /**
- * Indicates the outcome of 3D Secure authentication.
- */
+* Indicates the outcome of 3D Secure authentication.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ThreeDSecureDetailsResult {
     #[serde(rename = "attempt_acknowledged")]
@@ -46100,7 +46187,7 @@ pub enum ThreeDSecureDetailsResult {
 
 impl std::fmt::Display for ThreeDSecureDetailsResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ThreeDSecureDetailsResult::AttemptAcknowledged => "attempt_acknowledged",
             ThreeDSecureDetailsResult::Authenticated => "authenticated",
             ThreeDSecureDetailsResult::Failed => "failed",
@@ -46125,9 +46212,9 @@ impl ThreeDSecureDetailsResult {
 }
 
 /**
- * Additional information about why 3D Secure succeeded or failed based
- *   on the `result`.
- */
+* Additional information about why 3D Secure succeeded or failed based
+*   on the `result`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ResultReason {
     #[serde(rename = "abandoned")]
@@ -46152,7 +46239,7 @@ pub enum ResultReason {
 
 impl std::fmt::Display for ResultReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ResultReason::Abandoned => "abandoned",
             ResultReason::Bypassed => "bypassed",
             ResultReason::Canceled => "canceled",
@@ -46179,8 +46266,8 @@ impl ResultReason {
 }
 
 /**
- * The version of 3D Secure that was used.
- */
+* The version of 3D Secure that was used.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Version {
     #[serde(rename = "1.0.2")]
@@ -46197,7 +46284,7 @@ pub enum Version {
 
 impl std::fmt::Display for Version {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Version::OneHundredAndTwo => "1.0.2",
             Version::TwoHundredAndTen => "2.1.0",
             Version::Twenty => "2.2.0",
@@ -46260,8 +46347,8 @@ pub struct ThreeDSecureUsage {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TokenObject {
     #[serde(rename = "token")]
@@ -46274,7 +46361,7 @@ pub enum TokenObject {
 
 impl std::fmt::Display for TokenObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TokenObject::Token => "token",
             TokenObject::Noop => "",
             TokenObject::FallthroughString => "*",
@@ -46452,8 +46539,8 @@ pub struct Token {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TopupObject {
     #[serde(rename = "topup")]
@@ -46466,7 +46553,7 @@ pub enum TopupObject {
 
 impl std::fmt::Display for TopupObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TopupObject::Topup => "topup",
             TopupObject::Noop => "",
             TopupObject::FallthroughString => "*",
@@ -46487,8 +46574,8 @@ impl TopupObject {
 }
 
 /**
- * The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
- */
+* The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TopupStatus {
     #[serde(rename = "canceled")]
@@ -46509,7 +46596,7 @@ pub enum TopupStatus {
 
 impl std::fmt::Display for TopupStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TopupStatus::Canceled => "canceled",
             TopupStatus::Failed => "failed",
             TopupStatus::Pending => "pending",
@@ -46703,8 +46790,8 @@ pub struct Topup {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TransferObject {
     #[serde(rename = "transfer")]
@@ -46717,7 +46804,7 @@ pub enum TransferObject {
 
 impl std::fmt::Display for TransferObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TransferObject::Transfer => "transfer",
             TransferObject::Noop => "",
             TransferObject::FallthroughString => "*",
@@ -46994,8 +47081,8 @@ pub struct TransferData {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TransferReversalObject {
     #[serde(rename = "transfer_reversal")]
@@ -47008,7 +47095,7 @@ pub enum TransferReversalObject {
 
 impl std::fmt::Display for TransferReversalObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TransferReversalObject::TransferReversal => "transfer_reversal",
             TransferReversalObject::Noop => "",
             TransferReversalObject::FallthroughString => "*",
@@ -47202,8 +47289,8 @@ pub struct TransferSchedule {
 }
 
 /**
- * After division, either round the result `up` or `down`.
- */
+* After division, either round the result `up` or `down`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Round {
     #[serde(rename = "down")]
@@ -47218,7 +47305,7 @@ pub enum Round {
 
 impl std::fmt::Display for Round {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Round::Down => "down",
             Round::Up => "up",
             Round::Noop => "",
@@ -47259,8 +47346,8 @@ pub struct TransformUsage {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsageRecordObject {
     #[serde(rename = "usage_record")]
@@ -47273,7 +47360,7 @@ pub enum UsageRecordObject {
 
 impl std::fmt::Display for UsageRecordObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsageRecordObject::UsageRecord => "usage_record",
             UsageRecordObject::Noop => "",
             UsageRecordObject::FallthroughString => "*",
@@ -47351,8 +47438,8 @@ pub struct UsageRecord {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum UsageRecordSummaryObject {
     #[serde(rename = "usage_record_summary")]
@@ -47365,7 +47452,7 @@ pub enum UsageRecordSummaryObject {
 
 impl std::fmt::Display for UsageRecordSummaryObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UsageRecordSummaryObject::UsageRecordSummary => "usage_record_summary",
             UsageRecordSummaryObject::Noop => "",
             UsageRecordSummaryObject::FallthroughString => "*",
@@ -47445,8 +47532,8 @@ pub struct UsageRecordSummary {
 }
 
 /**
- * Indicates whether this object and its related objects have been redacted or not.
- */
+* Indicates whether this object and its related objects have been redacted or not.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum VerificationSessionRedactionStatus {
     #[serde(rename = "processing")]
@@ -47461,7 +47548,7 @@ pub enum VerificationSessionRedactionStatus {
 
 impl std::fmt::Display for VerificationSessionRedactionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VerificationSessionRedactionStatus::Processing => "processing",
             VerificationSessionRedactionStatus::Redacted => "redacted",
             VerificationSessionRedactionStatus::Noop => "",
@@ -47770,6 +47857,7 @@ pub struct Paid {
 /// - `Paid`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PaidAnyOf {
@@ -48010,8 +48098,8 @@ pub struct GetBitcoinReceiversResponse {
 }
 
 /**
- * String representing the object's type. Objects of the same type share the same value.
- */
+* String representing the object's type. Objects of the same type share the same value.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SearchResultObject {
     #[serde(rename = "search_result")]
@@ -48024,7 +48112,7 @@ pub enum SearchResultObject {
 
 impl std::fmt::Display for SearchResultObject {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SearchResultObject::SearchResult => "search_result",
             SearchResultObject::Noop => "",
             SearchResultObject::FallthroughString => "*",
@@ -48240,7 +48328,7 @@ pub enum Shipping {
 
 impl std::fmt::Display for Shipping {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Shipping::Noop => "",
             Shipping::FallthroughString => "*",
         }
@@ -48265,6 +48353,7 @@ impl Shipping {
 /// - `Shipping`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TaxRatesAnyOf {
@@ -48396,6 +48485,7 @@ pub struct GetCustomersResponse {
 /// - `DeletedCustomer`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetCustomersCustomerResponseAnyOf {
@@ -48505,6 +48595,7 @@ pub struct BankAccountList {
 /// - `PaymentSourceAnyOf`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DeleteCustomersCustomerCardsResponseAnyOf {
@@ -48529,8 +48620,8 @@ impl DeleteCustomersCustomerCardsResponseAnyOf {
 }
 
 /**
- * A required filter on the list, based on the object `type` field.
- */
+* A required filter on the list, based on the object `type` field.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetCustomersCustomerPaymentMethodsType {
     #[serde(rename = "acss_debit")]
@@ -48585,7 +48676,7 @@ pub enum GetCustomersCustomerPaymentMethodsType {
 
 impl std::fmt::Display for GetCustomersCustomerPaymentMethodsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetCustomersCustomerPaymentMethodsType::AcssDebit => "acss_debit",
             GetCustomersCustomerPaymentMethodsType::AfterpayClearpay => "afterpay_clearpay",
             GetCustomersCustomerPaymentMethodsType::Alipay => "alipay",
@@ -48891,8 +48982,8 @@ pub struct GetInvoiceitemsResponse {
 }
 
 /**
- * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
- */
+* The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetInvoicesStatus {
     #[serde(rename = "draft")]
@@ -48913,7 +49004,7 @@ pub enum GetInvoicesStatus {
 
 impl std::fmt::Display for GetInvoicesStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetInvoicesStatus::Draft => "draft",
             GetInvoicesStatus::Open => "open",
             GetInvoicesStatus::Paid => "paid",
@@ -49018,6 +49109,7 @@ pub struct OptionalFieldsAddress {
 /// - `OptionalFieldsAddress`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AddressAnyOf {
@@ -49068,6 +49160,7 @@ pub struct CustomerShipping {
 /// - `CustomerShipping`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ShippingAnyOf {
@@ -49097,6 +49190,7 @@ impl ShippingAnyOf {
 /// - `Shipping`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IpAddressAnyOf {
@@ -49157,7 +49251,7 @@ pub enum GetInvoicesUpcomingCustomerDetailsTaxExempt {
 
 impl std::fmt::Display for GetInvoicesUpcomingCustomerDetailsTaxExempt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetInvoicesUpcomingCustomerDetailsTaxExempt::Exempt => "exempt",
             GetInvoicesUpcomingCustomerDetailsTaxExempt::None => "none",
             GetInvoicesUpcomingCustomerDetailsTaxExempt::Reverse => "reverse",
@@ -49279,7 +49373,7 @@ pub enum GetInvoicesUpcomingCustomerDetailsDataParamsType {
 
 impl std::fmt::Display for GetInvoicesUpcomingCustomerDetailsDataParamsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetInvoicesUpcomingCustomerDetailsDataParamsType::AeTrn => "ae_trn",
             GetInvoicesUpcomingCustomerDetailsDataParamsType::AuAbn => "au_abn",
             GetInvoicesUpcomingCustomerDetailsDataParamsType::AuArn => "au_arn",
@@ -49418,6 +49512,7 @@ pub struct Discounts {
 /// - `Vec<Discounts>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetInvoicesUpcomingDiscountsAnyOf {
@@ -49462,6 +49557,7 @@ impl std::convert::From<GetInvoicesUpcomingDiscountsAnyOf> for Vec<Discounts> {
 /// - `Shipping`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MetadataAnyOf {
@@ -49613,8 +49709,8 @@ pub struct InvoiceItems {
 }
 
 /**
- * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
- */
+* For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionBillingCycleAnchor {
     #[serde(rename = "now")]
@@ -49629,7 +49725,7 @@ pub enum SubscriptionBillingCycleAnchor {
 
 impl std::fmt::Display for SubscriptionBillingCycleAnchor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionBillingCycleAnchor::Now => "now",
             SubscriptionBillingCycleAnchor::Unchanged => "unchanged",
             SubscriptionBillingCycleAnchor::Noop => "",
@@ -49656,6 +49752,7 @@ impl SubscriptionBillingCycleAnchor {
 /// - `SubscriptionBillingCycleAnchor`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SubscriptionBillingCycleAnchorAnyOf {
@@ -49703,6 +49800,7 @@ impl std::convert::From<SubscriptionBillingCycleAnchorAnyOf> for i64 {
 /// - `Shipping`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SubscriptionCancelAtAnyOf {
@@ -49760,6 +49858,7 @@ pub struct BillingThresholds {
 /// - `BillingThresholds`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum BillingThresholdsAnyOf {
@@ -49883,8 +49982,8 @@ pub struct SubscriptionItems {
 }
 
 /**
- * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
- */
+* If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SubscriptionTrialEnd {
     #[serde(rename = "now")]
@@ -49897,7 +49996,7 @@ pub enum SubscriptionTrialEnd {
 
 impl std::fmt::Display for SubscriptionTrialEnd {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SubscriptionTrialEnd::Now => "now",
             SubscriptionTrialEnd::Noop => "",
             SubscriptionTrialEnd::FallthroughString => "*",
@@ -49923,6 +50022,7 @@ impl SubscriptionTrialEnd {
 /// - `SubscriptionTrialEnd`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SubscriptionTrialEndAnyOf {
@@ -50624,7 +50724,7 @@ pub enum GetRecipientsType {
 
 impl std::fmt::Display for GetRecipientsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetRecipientsType::Corporation => "corporation",
             GetRecipientsType::Individual => "individual",
             GetRecipientsType::Noop => "",
@@ -50684,6 +50784,7 @@ pub struct GetRecipientsResponse {
 /// - `DeletedRecipient`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetRecipientsResponseAnyOf {
@@ -50992,6 +51093,7 @@ pub struct GetSkusResponse {
 /// - `Sku`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetSkusResponseAnyOf {
@@ -51126,8 +51228,8 @@ pub struct GetSubscriptionSchedulesResponse {
 }
 
 /**
- * The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
- */
+* The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetSubscriptionsStatus {
     #[serde(rename = "active")]
@@ -51156,7 +51258,7 @@ pub enum GetSubscriptionsStatus {
 
 impl std::fmt::Display for GetSubscriptionsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetSubscriptionsStatus::Active => "active",
             GetSubscriptionsStatus::All => "all",
             GetSubscriptionsStatus::Canceled => "canceled",
@@ -51292,6 +51394,7 @@ pub struct TerminalLocationList {
 /// - `TerminalLocation`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetTerminalLocationResponseAnyOf {
@@ -51365,6 +51468,7 @@ pub struct TerminalReaderRetrieve {
 /// - `TerminalReader`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetTerminalReadersReaderResponseAnyOf {
@@ -51430,8 +51534,8 @@ pub struct GetTestHelpersClocksResponse {
 }
 
 /**
- * Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
- */
+* Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
+*/
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetTopupsStatus {
     #[serde(rename = "canceled")]
@@ -51450,7 +51554,7 @@ pub enum GetTopupsStatus {
 
 impl std::fmt::Display for GetTopupsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GetTopupsStatus::Canceled => "canceled",
             GetTopupsStatus::Failed => "failed",
             GetTopupsStatus::Pending => "pending",
