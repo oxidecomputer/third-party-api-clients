@@ -305,7 +305,7 @@ impl Spreadsheets {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/v4/spreadsheets/{}/values/{}/append?{}",
+            "/v4/spreadsheets/{}/values/{}:append?{}",
             crate::progenitor_support::encode_path(spreadsheet_id),
             crate::progenitor_support::encode_path(range),
             query_
