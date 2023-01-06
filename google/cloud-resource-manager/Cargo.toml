@@ -44,7 +44,7 @@ async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }
 base64 = "^0.13"
 yup-oauth2 = "^5"
-tokio = { version = "1.20.1", features = ["full"] }
+tokio = { version = "1.20.3", features = ["full"] }
 
 [dev-dependencies]
 base64 = "^0.13"
