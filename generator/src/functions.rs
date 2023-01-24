@@ -138,7 +138,7 @@ pub fn generate_files(
                 content
             };
 
-            let docs = get_fn_docs(o, m, p, parameters, ts)?;
+            let docs = get_fn_docs(proper_name, o, m, p, parameters, ts)?;
 
             let mut bounds: Vec<String> = Vec::new();
 
@@ -727,7 +727,7 @@ fn get_fn_params(
         let nam = &to_snake_case(&parameter_data.name);
 
         if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
-            let typ = parameter_data.render_type(&param_name, ts)?;
+            let typ = parameter_data.render_type(proper_name, &param_name, ts)?;
             if nam == "ref"
                 || nam == "type"
                 || nam == "foo"
@@ -1143,6 +1143,7 @@ fn get_fn_inner(
 }
 
 fn get_fn_docs(
+    proper_name: &str,
     o: &openapiv3::Operation,
     m: &str,
     p: &str,
@@ -1215,7 +1216,7 @@ fn get_fn_docs(
         }
 
         let nam = &to_snake_case(&clean_name(&parameter_data.name));
-        let typ = parameter_data.render_type(&param_name, ts)?;
+        let typ = parameter_data.render_type(proper_name, &param_name, ts)?;
 
         if nam == "ref"
             || nam == "type"

@@ -62,6 +62,11 @@ impl Template {
                         r#"if {} {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
                         nam, prop, nam
                     ));
+                } else if value == "Option<&str>" {
+                    a(&format!(
+                        r#"if let Some(s) = {} {{ if !s.is_empty() {{ query_args.push(("{}".to_string(), s.to_string())); }} }}"#,
+                        nam, prop
+                    ));
                 } else if value == "&str" {
                     a(&format!(
                         r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,

@@ -169,11 +169,11 @@ where
 }
 
 trait ParameterDataExt {
-    fn render_type(&self, name: &str, ts: &mut TypeSpace) -> Result<String>;
+    fn render_type(&self, proper_name: &str, name: &str, ts: &mut TypeSpace) -> Result<String>;
 }
 
 impl ParameterDataExt for openapiv3::ParameterData {
-    fn render_type(&self, name: &str, ts: &mut TypeSpace) -> Result<String> {
+    fn render_type(&self, proper_name: &str, name: &str, ts: &mut TypeSpace) -> Result<String> {
         use openapiv3::{SchemaKind, Type};
 
         // Cleanup the name.
@@ -250,9 +250,20 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                                 //println!("XXX min/max length");
                                 //}
-
                                 match &st.format {
-                                    Item(DateTime) => "chrono::DateTime<chrono::Utc>".to_string(),
+                                    // FIXME: In [list_workflow_runs](https://docs.rs/octorust/latest/octorust/actions/struct.Actions.html#method.list_workflow_runs), the created
+                                    // parameter is an optional DateTime as specified in github spec, but in practice, it is some date-time range of sort as specificed by the
+                                    // [search syntax](https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#query-for-dates).
+                                    // Convert this to an Option<&str> so the interface do not change for people not
+                                    // using the parameter currently, if they were, it was not working as they expected unless they looked for a specified date-time.
+                                    // https://github.com/github/rest-api-description/issues/2088
+                                    Item(DateTime) => {
+                                        if proper_name == "GitHub" && self.name == "created" {
+                                            "Option<&str>".to_string()
+                                        } else {
+                                            "chrono::DateTime<chrono::Utc>".to_string()
+                                        }
+                                    }
                                     Item(Date) => "chrono::NaiveDate".to_string(),
                                     Item(Password) => "&str".to_string(),
                                     // TODO: as per the spec this is base64 encoded chars.
@@ -1419,7 +1430,6 @@ impl TypeSpace {
         } else {
             "".to_string()
         };
-
         let mut s = sc.clone();
 
         // If we have an additional description and it is better than our original,
