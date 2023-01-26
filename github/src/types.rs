@@ -6123,7 +6123,7 @@ pub struct License {
 }
 
 /// Minimal Repository
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MinimalRepository {
     #[serde(
         default,
@@ -10850,7 +10850,7 @@ pub struct SimpleCommit {
 }
 
 /// An invocation of a workflow
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowRun {
     #[serde(
         default,
@@ -12998,7 +12998,7 @@ pub struct CheckRun {
 }
 
 /// Check Annotation
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CheckAnnotation {
     #[serde(
         default,
