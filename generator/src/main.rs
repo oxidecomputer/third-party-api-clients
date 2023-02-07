@@ -3255,7 +3255,7 @@ reqwest = {{ version = "0.11.11", default-features = false, features = ["json", 
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
-reqwest-tracing = {{ version = "0.3.0" }}
+reqwest-tracing = "0.3.0"
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
