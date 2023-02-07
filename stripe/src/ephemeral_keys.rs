@@ -13,28 +13,28 @@ impl EphemeralKeys {
     }
 
     /**
-     * This function performs a `POST` to the `/v1/ephemeral_keys` endpoint.
-     *
-     * <p>Creates a short-lived API key for a given resource.</p>
-     */
+    * This function performs a `POST` to the `/v1/ephemeral_keys` endpoint.
+    *
+    * <p>Creates a short-lived API key for a given resource.</p>
+    */
     pub async fn post(&self) -> Result<crate::types::EphemeralKey> {
         let url = "/v1/ephemeral_keys".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-     * This function performs a `DELETE` to the `/v1/ephemeral_keys/{key}` endpoint.
-     *
-     * <p>Invalidates a short-lived API key for a given resource.</p>
-     *
-     * **Parameters:**
-     *
-     * * `key: &str` -- The account's country.
-     */
+    * This function performs a `DELETE` to the `/v1/ephemeral_keys/{key}` endpoint.
+    *
+    * <p>Invalidates a short-lived API key for a given resource.</p>
+    *
+    * **Parameters:**
+    *
+    * * `key: &str` -- The account's country.
+    */
     pub async fn delete_key(&self, key: &str) -> Result<crate::types::EphemeralKey> {
         let url = format!(
             "/v1/ephemeral_keys/{}",
-            crate::progenitor_support::encode_path(key),
+            crate::progenitor_support::encode_path(&key.to_string()),
         );
 
         self.client.delete(&url, None).await

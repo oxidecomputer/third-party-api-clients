@@ -13,17 +13,17 @@ impl ActivityFeed {
     }
 
     /**
-     * Get latest chimp chatter.
-     *
-     * This function performs a `GET` to the `/activity-feed/chimp-chatter` endpoint.
-     *
-     * Return the Chimp Chatter for this account ordered by most recent.
-     *
-     * **Parameters:**
-     *
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     */
+    * Get latest chimp chatter.
+    *
+    * This function performs a `GET` to the `/activity-feed/chimp-chatter` endpoint.
+    *
+    * Return the Chimp Chatter for this account ordered by most recent.
+    *
+    * **Parameters:**
+    *
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    */
     pub async fn get_chimp_chatter(
         &self,
         count: i64,

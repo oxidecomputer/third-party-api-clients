@@ -13,20 +13,20 @@ impl SubusersApi {
     }
 
     /**
-     * List all Subusers.
-     *
-     * This function performs a `GET` to the `/subusers` endpoint.
-     *
-     * **This endpoint allows you to retrieve a list of all of your subusers.**
-     *
-     * You can choose to retrieve specific subusers as well as limit the results that come back from the API.
-     *
-     * **Parameters:**
-     *
-     * * `username: &str` -- The license key provided with your New Relic account.
-     * * `limit: i64` -- The number of results you would like to get in each request.
-     * * `offset: i64` -- The number of subusers to skip.
-     */
+    * List all Subusers.
+    *
+    * This function performs a `GET` to the `/subusers` endpoint.
+    *
+    * **This endpoint allows you to retrieve a list of all of your subusers.**
+    *
+    * You can choose to retrieve specific subusers as well as limit the results that come back from the API.
+    *
+    * **Parameters:**
+    *
+    * * `username: &str` -- The license key provided with your New Relic account.
+    * * `limit: i64` -- The number of results you would like to get in each request.
+    * * `offset: i64` -- The number of subusers to skip.
+    */
     pub async fn get_subusers(
         &self,
         username: &str,
@@ -50,16 +50,16 @@ impl SubusersApi {
     }
 
     /**
-     * List all Subusers.
-     *
-     * This function performs a `GET` to the `/subusers` endpoint.
-     *
-     * As opposed to `get_subusers`, this function returns all the pages of the request at once.
-     *
-     * **This endpoint allows you to retrieve a list of all of your subusers.**
-     *
-     * You can choose to retrieve specific subusers as well as limit the results that come back from the API.
-     */
+    * List all Subusers.
+    *
+    * This function performs a `GET` to the `/subusers` endpoint.
+    *
+    * As opposed to `get_subusers`, this function returns all the pages of the request at once.
+    *
+    * **This endpoint allows you to retrieve a list of all of your subusers.**
+    *
+    * You can choose to retrieve specific subusers as well as limit the results that come back from the API.
+    */
     pub async fn get_all_subusers(
         &self,
         username: &str,
@@ -79,12 +79,12 @@ impl SubusersApi {
     }
 
     /**
-     * Create Subuser.
-     *
-     * This function performs a `POST` to the `/subusers` endpoint.
-     *
-     * **This endpoint allows you to create a new subuser.**
-     */
+    * Create Subuser.
+    *
+    * This function performs a `POST` to the `/subusers` endpoint.
+    *
+    * **This endpoint allows you to create a new subuser.**
+    */
     pub async fn post_subuser(
         &self,
         body: &crate::types::PostSubusersRequest,
@@ -96,33 +96,33 @@ impl SubusersApi {
     }
 
     /**
-     * Delete a subuser.
-     *
-     * This function performs a `DELETE` to the `/subusers/{subuser_name}` endpoint.
-     *
-     * **This endpoint allows you to delete a subuser.**
-     *
-     * This is a permanent action. Once deleted, a subuser cannot be retrieved.
-     */
+    * Delete a subuser.
+    *
+    * This function performs a `DELETE` to the `/subusers/{subuser_name}` endpoint.
+    *
+    * **This endpoint allows you to delete a subuser.**
+    *
+    * This is a permanent action. Once deleted, a subuser cannot be retrieved.
+    */
     pub async fn delete_subusers_subuser_name(
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Enable/disable a subuser.
-     *
-     * This function performs a `PATCH` to the `/subusers/{subuser_name}` endpoint.
-     *
-     * **This endpoint allows you to enable or disable a subuser.**
-     */
+    * Enable/disable a subuser.
+    *
+    * This function performs a `PATCH` to the `/subusers/{subuser_name}` endpoint.
+    *
+    * **This endpoint allows you to enable or disable a subuser.**
+    */
     pub async fn patch_subusers_subuser_name(
         &self,
         subuser_name: &str,
@@ -130,7 +130,7 @@ impl SubusersApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
 
         self.client
@@ -139,18 +139,18 @@ impl SubusersApi {
     }
 
     /**
-     * Retrieve Subuser Reputations.
-     *
-     * This function performs a `GET` to the `/subusers/reputations` endpoint.
-     *
-     * **This endpoint allows you to request the reputations for your subusers.**
-     *
-     * Subuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.
-     *
-     * **Parameters:**
-     *
-     * * `usernames: &str` -- The license key provided with your New Relic account.
-     */
+    * Retrieve Subuser Reputations.
+    *
+    * This function performs a `GET` to the `/subusers/reputations` endpoint.
+    *
+    * **This endpoint allows you to request the reputations for your subusers.**
+    *
+    * Subuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.
+    *
+    * **Parameters:**
+    *
+    * * `usernames: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_subusers_reputations(
         &self,
         usernames: &str,
@@ -166,16 +166,16 @@ impl SubusersApi {
     }
 
     /**
-     * Retrieve Subuser Reputations.
-     *
-     * This function performs a `GET` to the `/subusers/reputations` endpoint.
-     *
-     * As opposed to `get_subusers_reputations`, this function returns all the pages of the request at once.
-     *
-     * **This endpoint allows you to request the reputations for your subusers.**
-     *
-     * Subuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.
-     */
+    * Retrieve Subuser Reputations.
+    *
+    * This function performs a `GET` to the `/subusers/reputations` endpoint.
+    *
+    * As opposed to `get_subusers_reputations`, this function returns all the pages of the request at once.
+    *
+    * **This endpoint allows you to request the reputations for your subusers.**
+    *
+    * Subuser sender reputations give a good idea how well a sender is doing with regards to how recipients and recipient servers react to the mail that is being received. When a bounce, spam report, or other negative action happens on a sent email, it will affect your sender rating.
+    */
     pub async fn get_all_subusers_reputations(
         &self,
         usernames: &str,
@@ -191,19 +191,19 @@ impl SubusersApi {
     }
 
     /**
-     * Update IPs assigned to a subuser.
-     *
-     * This function performs a `PUT` to the `/subusers/{subuser_name}/ips` endpoint.
-     *
-     * **This endpoint allows you update your subusers' assigned IP.**
-     *
-     * Each subuser should be assigned to an IP address from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have one or more of their own IP addresses as well.
-     *
-     * More information:
-     *
-     * * [How to request more IPs](https://sendgrid.com/docs/ui/account-and-settings/dedicated-ip-addresses/)
-     * * [Setup Reverse DNS](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/)
-     */
+    * Update IPs assigned to a subuser.
+    *
+    * This function performs a `PUT` to the `/subusers/{subuser_name}/ips` endpoint.
+    *
+    * **This endpoint allows you update your subusers' assigned IP.**
+    *
+    * Each subuser should be assigned to an IP address from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have one or more of their own IP addresses as well.
+    *
+    * More information:
+    *
+    * * [How to request more IPs](https://sendgrid.com/docs/ui/account-and-settings/dedicated-ip-addresses/)
+    * * [Setup Reverse DNS](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-reverse-dns/)
+    */
     pub async fn put_subusers_subuser_name_ips(
         &self,
         subuser_name: &str,
@@ -211,7 +211,7 @@ impl SubusersApi {
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
         let url = format!(
             "/subusers/{}/ips",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
 
         self.client

@@ -13,17 +13,17 @@ impl Api {
     }
 
     /**
-     * This function performs a `GET` to the `/api.test` endpoint.
-     *
-     * Checks API calling code.
-     *
-     * FROM: <https://api.slack.com/methods/api.test>
-     *
-     * **Parameters:**
-     *
-     * * `error: &str` -- Error response to return.
-     * * `foo_: &str` -- example property to return.
-     */
+    * This function performs a `GET` to the `/api.test` endpoint.
+    *
+    * Checks API calling code.
+    *
+    * FROM: <https://api.slack.com/methods/api.test>
+    *
+    * **Parameters:**
+    *
+    * * `error: &str` -- Error response to return.
+    * * `foo_: &str` -- example property to return.
+    */
     pub async fn test(&self, error: &str, foo_: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !error.is_empty() {

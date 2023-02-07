@@ -1,22 +1,13 @@
 const TEMPLATE: &str = r#"use std::{fmt, str::FromStr};
 
+use parse_link_header::LinkMap;
 use serde::de::{self, Visitor};
 
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
-}
+pub struct NextLink(pub String);
 
+pub fn next_link(l: &LinkMap) -> Option<NextLink> {
+    l.get(&Some("next".to_string())).map(|link| link.raw_uri.to_string()).map(|l| NextLink(l))
+}
 
 pub mod date_format {
     use chrono::{NaiveDate};
@@ -706,6 +697,15 @@ pub enum MediaType {
 impl Default for MediaType {
     fn default() -> MediaType {
         MediaType::Json
+    }
+}
+
+impl std::fmt::Display for MediaType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            MediaType::Json => write!(f, "application/vnd.github.v3+json"),
+            MediaType::Preview(codename) => write!(f, "application/vnd.github.{}-preview+json", codename)
+        }
     }
 }
 

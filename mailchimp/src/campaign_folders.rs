@@ -13,19 +13,19 @@ impl CampaignFolders {
     }
 
     /**
-     * List campaign folders.
-     *
-     * This function performs a `GET` to the `/campaign-folders` endpoint.
-     *
-     * Get all folders used to organize campaigns.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     */
+    * List campaign folders.
+    *
+    * This function performs a `GET` to the `/campaign-folders` endpoint.
+    *
+    * Get all folders used to organize campaigns.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    */
     pub async fn get(
         &self,
         fields: &[String],
@@ -53,12 +53,12 @@ impl CampaignFolders {
     }
 
     /**
-     * Add campaign folder.
-     *
-     * This function performs a `POST` to the `/campaign-folders` endpoint.
-     *
-     * Create a new campaign folder.
-     */
+    * Add campaign folder.
+    *
+    * This function performs a `POST` to the `/campaign-folders` endpoint.
+    *
+    * Create a new campaign folder.
+    */
     pub async fn post(
         &self,
         body: &crate::types::GalleryFolder,
@@ -70,18 +70,18 @@ impl CampaignFolders {
     }
 
     /**
-     * Get campaign folder.
-     *
-     * This function performs a `GET` to the `/campaign-folders/{folder_id}` endpoint.
-     *
-     * Get information about a specific folder used to organize campaigns.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `folder_id: &str` -- The unique id for the campaign folder.
-     */
+    * Get campaign folder.
+    *
+    * This function performs a `GET` to the `/campaign-folders/{folder_id}` endpoint.
+    *
+    * Get information about a specific folder used to organize campaigns.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `folder_id: &str` -- The unique id for the campaign folder.
+    */
     pub async fn get_campaign_folders(
         &self,
         fields: &[String],
@@ -98,7 +98,7 @@ impl CampaignFolders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaign-folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -106,36 +106,36 @@ impl CampaignFolders {
     }
 
     /**
-     * Delete campaign folder.
-     *
-     * This function performs a `DELETE` to the `/campaign-folders/{folder_id}` endpoint.
-     *
-     * Delete a specific campaign folder, and mark all the campaigns in the folder as 'unfiled'.
-     *
-     * **Parameters:**
-     *
-     * * `folder_id: &str` -- The unique id for the campaign folder.
-     */
+    * Delete campaign folder.
+    *
+    * This function performs a `DELETE` to the `/campaign-folders/{folder_id}` endpoint.
+    *
+    * Delete a specific campaign folder, and mark all the campaigns in the folder as 'unfiled'.
+    *
+    * **Parameters:**
+    *
+    * * `folder_id: &str` -- The unique id for the campaign folder.
+    */
     pub async fn delete(&self, folder_id: &str) -> Result<()> {
         let url = format!(
             "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Update campaign folder.
-     *
-     * This function performs a `PATCH` to the `/campaign-folders/{folder_id}` endpoint.
-     *
-     * Update a specific folder used to organize campaigns.
-     *
-     * **Parameters:**
-     *
-     * * `folder_id: &str` -- The unique id for the campaign folder.
-     */
+    * Update campaign folder.
+    *
+    * This function performs a `PATCH` to the `/campaign-folders/{folder_id}` endpoint.
+    *
+    * Update a specific folder used to organize campaigns.
+    *
+    * **Parameters:**
+    *
+    * * `folder_id: &str` -- The unique id for the campaign folder.
+    */
     pub async fn patch(
         &self,
         folder_id: &str,
@@ -143,7 +143,7 @@ impl CampaignFolders {
     ) -> Result<crate::types::CampaignFolder> {
         let url = format!(
             "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client

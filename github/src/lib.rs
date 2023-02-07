@@ -457,7 +457,7 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    ) -> Result<(Option<crate::utils::NextLink>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -483,13 +483,11 @@ impl Client {
         };
 
         req = req.header(http::header::USER_AGENT, &*instance.agent);
-        req = req.header(
-            http::header::ACCEPT,
-            &*format!(
-                "{}",
-                hyperx::header::qitem::<mime::Mime>(From::from(media_type))
-            ),
-        );
+        req = req.header(http::header::ACCEPT, &media_type.to_string());
+        // req = req.header(
+        //     http::header::ACCEPT,
+        //     &*format!("{}", hyperx::header::qitem::<mime::Mime>(From::from(media_type))),
+        // );
 
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
@@ -517,7 +515,8 @@ impl Client {
             .headers()
             .get(http::header::LINK)
             .and_then(|l| l.to_str().ok())
-            .and_then(|l| l.parse().ok());
+            .and_then(|l| parse_link_header::parse(l).ok());
+        let next_link = link.as_ref().and_then(|map| crate::utils::next_link(map));
 
         let response_body = response.bytes().await?;
 
@@ -526,12 +525,11 @@ impl Client {
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
-                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(l));
                     if let Err(e) = instance2.http_cache.cache_response(
                         &uri3,
                         &response_body,
                         &etag,
-                        &next_link,
+                        &next_link.as_ref().map(|n| n.0.clone()),
                     ) {
                         // failing to cache isn't fatal, so just log & swallow the error
                         log::info!("failed to cache body & etag: {}", e);
@@ -546,7 +544,9 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)
             };
-            parsed_response.map(|out| (link, out)).map_err(Error::from)
+            parsed_response
+                .map(|out| (next_link, out))
+                .map_err(Error::from)
         } else if status == http::StatusCode::NOT_MODIFIED {
             // only supported case is when client provides if-none-match
             // header when cargo builds with --cfg feature="httpcache"
@@ -554,18 +554,12 @@ impl Client {
             {
                 let body = instance2.http_cache.lookup_body(&uri3).unwrap();
                 let out = serde_json::from_str::<Out>(&body).unwrap();
-                let link = match link {
-                    Some(link) => Ok(Some(link)),
+                let link = match next_link {
+                    Some(next_link) => Ok(Some(next_link)),
                     None => instance2
                         .http_cache
                         .lookup_next_link(&uri3)
-                        .map(|next_link| {
-                            next_link.map(|next| {
-                                let next = hyperx::header::LinkValue::new(next)
-                                    .push_rel(hyperx::header::RelationType::Next);
-                                hyperx::header::Link::new(vec![next])
-                            })
-                        }),
+                        .map(|next_link| next_link.map(|l| crate::utils::NextLink(l))),
                 };
                 link.map(|link| (link, out))
             }
@@ -652,7 +646,7 @@ impl Client {
         self.unfold(uri).await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -669,7 +663,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    ) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -795,8 +789,8 @@ impl Client {
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {
-                let url = reqwest::Url::parse(&url)?;
+            if let Some(url) = &link {
+                let url = reqwest::Url::parse(&url.0)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;
                 items = new_items;

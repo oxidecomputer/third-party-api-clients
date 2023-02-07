@@ -13,20 +13,20 @@ impl Senders {
     }
 
     /**
-     * Create a Sender Identity.
-     *
-     * This function performs a `POST` to the `/marketing/senders` endpoint.
-     *
-     * **This endpoint allows you to create a new sender identity.**
-     *
-     * *You may create up to 100 unique sender identities.*
-     *
-     * Sender identities are required to be verified before use. If your domain has been authenticated, a new sender identity will auto verify on creation. Otherwise an email will be sent to the `from.email`.
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Create a Sender Identity.
+    *
+    * This function performs a `POST` to the `/marketing/senders` endpoint.
+    *
+    * **This endpoint allows you to create a new sender identity.**
+    *
+    * *You may create up to 100 unique sender identities.*
+    *
+    * Sender identities are required to be verified before use. If your domain has been authenticated, a new sender identity will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_marketing(
         &self,
         body: &crate::types::PostMarketingSendersRequest,

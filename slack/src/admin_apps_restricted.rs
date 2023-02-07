@@ -13,20 +13,20 @@ impl AdminAppsRestricted {
     }
 
     /**
-     * This function performs a `GET` to the `/admin.apps.restricted.list` endpoint.
-     *
-     * List restricted apps for an org or workspace.
-     *
-     * FROM: <https://api.slack.com/methods/admin.apps.restricted.list>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.apps:read`.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `team_id: &str`
-     * * `enterprise_id: &str`
-     */
+    * This function performs a `GET` to the `/admin.apps.restricted.list` endpoint.
+    *
+    * List restricted apps for an org or workspace.
+    *
+    * FROM: <https://api.slack.com/methods/admin.apps.restricted.list>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.apps:read`.
+    * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+    * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+    * * `team_id: &str`
+    * * `enterprise_id: &str`
+    */
     pub async fn list(
         &self,
         limit: i64,

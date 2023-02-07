@@ -13,18 +13,18 @@ impl UsersProfile {
     }
 
     /**
-     * This function performs a `GET` to the `/users.profile.get` endpoint.
-     *
-     * Retrieves a user's profile information.
-     *
-     * FROM: <https://api.slack.com/methods/users.profile.get>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
-     * * `include_labels: bool` -- Include labels for each ID in custom profile fields.
-     * * `user: &str` -- User to retrieve profile info for.
-     */
+    * This function performs a `GET` to the `/users.profile.get` endpoint.
+    *
+    * Retrieves a user's profile information.
+    *
+    * FROM: <https://api.slack.com/methods/users.profile.get>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
+    * * `include_labels: bool` -- Include labels for each ID in custom profile fields.
+    * * `user: &str` -- User to retrieve profile info for.
+    */
     pub async fn get(
         &self,
         include_labels: bool,
@@ -44,16 +44,16 @@ impl UsersProfile {
     }
 
     /**
-     * This function performs a `POST` to the `/users.profile.set` endpoint.
-     *
-     * Set the profile information for a user.
-     *
-     * FROM: <https://api.slack.com/methods/users.profile.set>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
-     */
+    * This function performs a `POST` to the `/users.profile.set` endpoint.
+    *
+    * Set the profile information for a user.
+    *
+    * FROM: <https://api.slack.com/methods/users.profile.set>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
+    */
     pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
         let url = "/users.profile.set".to_string();
         self.client.post(&url, None).await

@@ -13,12 +13,12 @@ impl Account {
     }
 
     /**
-     * Get Account.
-     *
-     * This function performs a `GET` to the `/account` endpoint.
-     *
-     * Get the developer's account information
-     */
+    * Get Account.
+    *
+    * This function performs a `GET` to the `/account` endpoint.
+    *
+    * Get the developer's account information
+    */
     pub async fn get(&self) -> Result<crate::types::Account> {
         let url = "/account".to_string();
         self.client.get(&url, None).await

@@ -13,10 +13,10 @@ impl Receiving {
     }
 
     /**
-     * Get Fulfillment Centers.
-     *
-     * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
-     */
+    * Get Fulfillment Centers.
+    *
+    * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
+    */
     pub async fn get_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
@@ -25,12 +25,12 @@ impl Receiving {
     }
 
     /**
-     * Get Fulfillment Centers.
-     *
-     * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
-     *
-     * As opposed to `get_fulfillment_center`, this function returns all the pages of the request at once.
-     */
+    * Get Fulfillment Centers.
+    *
+    * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
+    *
+    * As opposed to `get_fulfillment_center`, this function returns all the pages of the request at once.
+    */
     pub async fn get_all_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
@@ -39,14 +39,14 @@ impl Receiving {
     }
 
     /**
-     * Get Warehouse Receiving Order.
-     *
-     * This function performs a `GET` to the `/receiving/{id}` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Unique id of the channel.
-     */
+    * Get Warehouse Receiving Order.
+    *
+    * This function performs a `GET` to the `/receiving/{id}` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Unique id of the channel.
+    */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrder> {
         let url = format!(
             "/receiving/{}",
@@ -57,14 +57,14 @@ impl Receiving {
     }
 
     /**
-     * Get Warehouse Receiving Order Box Labels.
-     *
-     * This function performs a `GET` to the `/receiving/{id}/labels` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Unique id of the channel.
-     */
+    * Get Warehouse Receiving Order Box Labels.
+    *
+    * This function performs a `GET` to the `/receiving/{id}/labels` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Unique id of the channel.
+    */
     pub async fn get_label(&self, id: i64) -> Result<bytes::Bytes> {
         let url = format!(
             "/receiving/{}/labels",
@@ -75,10 +75,10 @@ impl Receiving {
     }
 
     /**
-     * Create Warehouse Receiving Order.
-     *
-     * This function performs a `POST` to the `/receiving` endpoint.
-     */
+    * Create Warehouse Receiving Order.
+    *
+    * This function performs a `POST` to the `/receiving` endpoint.
+    */
     pub async fn post(
         &self,
         body: &crate::types::ReceivingCreateOrderModel,
@@ -90,14 +90,14 @@ impl Receiving {
     }
 
     /**
-     * Cancel Warehouse Receiving Order.
-     *
-     * This function performs a `POST` to the `/receiving/{id}/cancel` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Id of the receiving order to cancel.
-     */
+    * Cancel Warehouse Receiving Order.
+    *
+    * This function performs a `POST` to the `/receiving/{id}/cancel` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Id of the receiving order to cancel.
+    */
     pub async fn post_cancel(&self, id: i64) -> Result<()> {
         let url = format!(
             "/receiving/{}/cancel",

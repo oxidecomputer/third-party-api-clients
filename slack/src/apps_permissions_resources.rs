@@ -13,18 +13,18 @@ impl AppsPermissionsResources {
     }
 
     /**
-     * This function performs a `GET` to the `/apps.permissions.resources.list` endpoint.
-     *
-     * Returns list of resource grants this app has on a team.
-     *
-     * FROM: <https://api.slack.com/methods/apps.permissions.resources.list>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     * * `limit: i64` -- The maximum number of items to return.
-     */
+    * This function performs a `GET` to the `/apps.permissions.resources.list` endpoint.
+    *
+    * Returns list of resource grants this app has on a team.
+    *
+    * FROM: <https://api.slack.com/methods/apps.permissions.resources.list>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `none`.
+    * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+    * * `limit: i64` -- The maximum number of items to return.
+    */
     pub async fn list(
         &self,
         cursor: &str,

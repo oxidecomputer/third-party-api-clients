@@ -13,72 +13,72 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-01
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-01
+    */
     pub async fn deprecated_202001_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-01/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-04
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-04
+    */
     pub async fn deprecated_202004_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-04/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-07
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-07
+    */
     pub async fn deprecated_202007_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-07/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-10
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-10
+    */
     pub async fn get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-10/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2021-01
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2021-01
+    */
     pub async fn deprecated_202101_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2021-01/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Retrieves the account's current balance.
-     *
-     * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/balance.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-unstable
-     */
+    * Retrieves the account's current balance.
+    *
+    * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/balance.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-unstable
+    */
     pub async fn deprecated_unstable_get_balance(&self) -> Result<()> {
         let url = "/admin/api/unstable/shopify_payments/balance.json".to_string();
         self.client.get(&url, None).await
@@ -129,23 +129,23 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single dispute by ID.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/disputes/{dispute_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#show-2020-01
-     *
-     * **Parameters:**
-     *
-     * * `dispute_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single dispute by ID.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/disputes/{dispute_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#show-2020-01
+    *
+    * **Parameters:**
+    *
+    * * `dispute_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_202001_get_disputes_param_dispute(
         &self,
         dispute_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/shopify_payments/disputes/{}/json",
-            crate::progenitor_support::encode_path(dispute_id),
+            crate::progenitor_support::encode_path(&dispute_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -250,20 +250,20 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-01
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-01
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_202001_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -324,20 +324,20 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-04
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-04
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_202004_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -398,20 +398,20 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-07
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-07
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_202007_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -472,20 +472,20 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-10
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2020-10
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -546,20 +546,20 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2021-01
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-2021-01
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_202101_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -620,23 +620,23 @@ impl ShopifyPayments {
     }
 
     /**
-     * Retrieves a single payout by id.
-     *
-     * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/payouts/{payout_id}.json` endpoint.
-     *
-     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-unstable
-     *
-     * **Parameters:**
-     *
-     * * `payout_id: &str` -- storefront_access_token_id.
-     */
+    * Retrieves a single payout by id.
+    *
+    * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/payouts/{payout_id}.json` endpoint.
+    *
+    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#show-unstable
+    *
+    * **Parameters:**
+    *
+    * * `payout_id: &str` -- storefront_access_token_id.
+    */
     pub async fn deprecated_unstable_get_payouts_param_payout(
         &self,
         payout_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+            crate::progenitor_support::encode_path(&payout_id.to_string()),
         );
 
         self.client.get(&url, None).await

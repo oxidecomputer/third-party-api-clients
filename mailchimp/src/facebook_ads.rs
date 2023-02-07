@@ -13,21 +13,21 @@ impl FacebookAds {
     }
 
     /**
-     * List facebook ads.
-     *
-     * This function performs a `GET` to the `/facebook-ads` endpoint.
-     *
-     * Get list of Facebook ads.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `sort_field: crate::types::GetAllFacebookAdsSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     */
+    * List facebook ads.
+    *
+    * This function performs a `GET` to the `/facebook-ads` endpoint.
+    *
+    * Get list of Facebook ads.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    * * `sort_field: crate::types::GetAllFacebookAdsSortField` -- Returns files sorted by the specified field.
+    * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+    */
     pub async fn get_all(
         &self,
         fields: &[String],
@@ -63,18 +63,18 @@ impl FacebookAds {
     }
 
     /**
-     * Get facebook ad info.
-     *
-     * This function performs a `GET` to the `/facebook-ads/{outreach_id}` endpoint.
-     *
-     * Get details of a Facebook ad.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `outreach_id: &str` -- The name of the folder.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    * Get facebook ad info.
+    *
+    * This function performs a `GET` to the `/facebook-ads/{outreach_id}` endpoint.
+    *
+    * Get details of a Facebook ad.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `outreach_id: &str` -- The name of the folder.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    */
     pub async fn get(
         &self,
         fields: &[String],
@@ -91,7 +91,7 @@ impl FacebookAds {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
+            crate::progenitor_support::encode_path(&outreach_id.to_string()),
             query_
         );
 

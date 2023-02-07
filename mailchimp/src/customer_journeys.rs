@@ -13,17 +13,17 @@ impl CustomerJourneys {
     }
 
     /**
-     * Customer Journeys API trigger for a contact.
-     *
-     * This function performs a `POST` to the `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger` endpoint.
-     *
-     * A step trigger in a Customer Journey. To use it, create a starting point or step from the Customer Journey builder in the app using the Customer Journeys API condition. We’ll provide a url during the process that includes the {journey_id} and {step_id}. You’ll then be able to use this endpoint to trigger the condition for the posted contact.
-     *
-     * **Parameters:**
-     *
-     * * `journey_id: i64` -- The display order for interests.
-     * * `step_id: i64` -- The display order for interests.
-     */
+    * Customer Journeys API trigger for a contact.
+    *
+    * This function performs a `POST` to the `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger` endpoint.
+    *
+    * A step trigger in a Customer Journey. To use it, create a starting point or step from the Customer Journey builder in the app using the Customer Journeys API condition. We’ll provide a url during the process that includes the {journey_id} and {step_id}. You’ll then be able to use this endpoint to trigger the condition for the posted contact.
+    *
+    * **Parameters:**
+    *
+    * * `journey_id: i64` -- The display order for interests.
+    * * `step_id: i64` -- The display order for interests.
+    */
     pub async fn post_steps_actions_trigger(
         &self,
         journey_id: i64,

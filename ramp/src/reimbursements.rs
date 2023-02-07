@@ -13,15 +13,15 @@ impl Reimbursements {
     }
 
     /**
-     * List Reimbursements.
-     *
-     * This function performs a `GET` to the `/reimbursements` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    * List Reimbursements.
+    *
+    * This function performs a `GET` to the `/reimbursements` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    */
     pub async fn get_page(
         &self,
         start: &str,
@@ -44,12 +44,12 @@ impl Reimbursements {
     }
 
     /**
-     * List Reimbursements.
-     *
-     * This function performs a `GET` to the `/reimbursements` endpoint.
-     *
-     * As opposed to `get`, this function returns all the pages of the request at once.
-     */
+    * List Reimbursements.
+    *
+    * This function performs a `GET` to the `/reimbursements` endpoint.
+    *
+    * As opposed to `get`, this function returns all the pages of the request at once.
+    */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = "/reimbursements".to_string();
         let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
@@ -91,14 +91,14 @@ impl Reimbursements {
     }
 
     /**
-     * Get details for one reimbursement.
-     *
-     * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
-     */
+    * Get details for one reimbursement.
+    *
+    * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
+    */
     pub async fn get(&self, id: &str) -> Result<crate::types::Reimbursement> {
         let url = format!(
             "/reimbursements/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

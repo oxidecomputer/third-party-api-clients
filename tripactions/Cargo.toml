@@ -5,7 +5,7 @@ version = "0.3.1"
 documentation = "https://docs.rs/tripactions/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/tripactions"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 license = "MIT"
 
 [features]
@@ -42,7 +42,7 @@ url = { version = "2", features = ["serde"] }
 bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }
-tokio = { version = "1.20.1", features = ["full"] }
+tokio = { version = "1.25.0", features = ["full"] }
 
 [dev-dependencies]
 base64 = "^0.13"

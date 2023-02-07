@@ -5,7 +5,7 @@ version = "0.5.1"
 documentation = "https://docs.rs/sheets/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/google/sheets"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 license = "MIT"
 
 [features]
@@ -44,7 +44,7 @@ async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }
 base64 = "^0.13"
 yup-oauth2 = "^5"
-tokio = { version = "1.20.1", features = ["full"] }
+tokio = { version = "1.25.0", features = ["full"] }
 
 [dev-dependencies]
 base64 = "^0.13"

@@ -13,17 +13,17 @@ impl Root {
     }
 
     /**
-     * List api root resources.
-     *
-     * This function performs a `GET` to the `/` endpoint.
-     *
-     * Get links to all other resources available in the API.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     */
+    * List api root resources.
+    *
+    * This function performs a `GET` to the `/` endpoint.
+    *
+    * Get links to all other resources available in the API.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    */
     pub async fn get(
         &self,
         fields: &[String],

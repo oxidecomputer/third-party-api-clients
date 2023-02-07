@@ -13,25 +13,25 @@ impl FileManager {
     }
 
     /**
-     * List stored files.
-     *
-     * This function performs a `GET` to the `/file-manager/files` endpoint.
-     *
-     * Get a list of available images and files stored in the File Manager for the account.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `type_: &str` -- The file type for the File Manager file.
-     * * `created_by: &str` -- The Mailchimp account user who created the File Manager file.
-     * * `before_created_at: &str` -- Restrict the response to files created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_created_at: &str` -- Restrict the response to files created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `sort_field: crate::types::GetFileManagerFilesSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     */
+    * List stored files.
+    *
+    * This function performs a `GET` to the `/file-manager/files` endpoint.
+    *
+    * Get a list of available images and files stored in the File Manager for the account.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    * * `type_: &str` -- The file type for the File Manager file.
+    * * `created_by: &str` -- The Mailchimp account user who created the File Manager file.
+    * * `before_created_at: &str` -- Restrict the response to files created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    * * `since_created_at: &str` -- Restrict the response to files created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    * * `sort_field: crate::types::GetFileManagerFilesSortField` -- Returns files sorted by the specified field.
+    * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+    */
     pub async fn get_file(
         &self,
         fields: &[String],
@@ -86,12 +86,12 @@ impl FileManager {
     }
 
     /**
-     * Add file.
-     *
-     * This function performs a `POST` to the `/file-manager/files` endpoint.
-     *
-     * Upload a new image or file to the File Manager.
-     */
+    * Add file.
+    *
+    * This function performs a `POST` to the `/file-manager/files` endpoint.
+    *
+    * Upload a new image or file to the File Manager.
+    */
     pub async fn post(&self, body: &crate::types::GalleryFile) -> Result<crate::types::Files> {
         let url = "/file-manager/files".to_string();
         self.client
@@ -100,18 +100,18 @@ impl FileManager {
     }
 
     /**
-     * Get file.
-     *
-     * This function performs a `GET` to the `/file-manager/files/{file_id}` endpoint.
-     *
-     * Get information about a specific file in the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `file_id: &str` -- The unique id for the File Manager file.
-     */
+    * Get file.
+    *
+    * This function performs a `GET` to the `/file-manager/files/{file_id}` endpoint.
+    *
+    * Get information about a specific file in the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `file_id: &str` -- The unique id for the File Manager file.
+    */
     pub async fn get_file_file_manager(
         &self,
         fields: &[String],
@@ -128,7 +128,7 @@ impl FileManager {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/file-manager/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
             query_
         );
 
@@ -136,36 +136,36 @@ impl FileManager {
     }
 
     /**
-     * Delete file.
-     *
-     * This function performs a `DELETE` to the `/file-manager/files/{file_id}` endpoint.
-     *
-     * Remove a specific file from the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- The unique id for the File Manager file.
-     */
+    * Delete file.
+    *
+    * This function performs a `DELETE` to the `/file-manager/files/{file_id}` endpoint.
+    *
+    * Remove a specific file from the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- The unique id for the File Manager file.
+    */
     pub async fn delete_files(&self, file_id: &str) -> Result<()> {
         let url = format!(
             "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Update file.
-     *
-     * This function performs a `PATCH` to the `/file-manager/files/{file_id}` endpoint.
-     *
-     * Update a file in the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- The unique id for the File Manager file.
-     */
+    * Update file.
+    *
+    * This function performs a `PATCH` to the `/file-manager/files/{file_id}` endpoint.
+    *
+    * Update a file in the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- The unique id for the File Manager file.
+    */
     pub async fn patch_files(
         &self,
         file_id: &str,
@@ -173,7 +173,7 @@ impl FileManager {
     ) -> Result<crate::types::Files> {
         let url = format!(
             "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         self.client
@@ -182,22 +182,22 @@ impl FileManager {
     }
 
     /**
-     * List folders.
-     *
-     * This function performs a `GET` to the `/file-manager/folders` endpoint.
-     *
-     * Get a list of all folders in the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `created_by: &str` -- The Mailchimp account user who created the File Manager file.
-     * * `before_created_at: &str` -- Restrict the response to files created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_created_at: &str` -- Restrict the response to files created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     */
+    * List folders.
+    *
+    * This function performs a `GET` to the `/file-manager/folders` endpoint.
+    *
+    * Get a list of all folders in the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    * * `created_by: &str` -- The Mailchimp account user who created the File Manager file.
+    * * `before_created_at: &str` -- Restrict the response to files created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    * * `since_created_at: &str` -- Restrict the response to files created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    */
     pub async fn get_folder(
         &self,
         fields: &[String],
@@ -240,12 +240,12 @@ impl FileManager {
     }
 
     /**
-     * Add folder.
-     *
-     * This function performs a `POST` to the `/file-manager/folders` endpoint.
-     *
-     * Create a new folder in the File Manager.
-     */
+    * Add folder.
+    *
+    * This function performs a `POST` to the `/file-manager/folders` endpoint.
+    *
+    * Create a new folder in the File Manager.
+    */
     pub async fn post_folder(
         &self,
         body: &crate::types::GalleryFolder,
@@ -257,18 +257,18 @@ impl FileManager {
     }
 
     /**
-     * Get folder.
-     *
-     * This function performs a `GET` to the `/file-manager/folders/{folder_id}` endpoint.
-     *
-     * Get information about a specific folder in the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `folder_id: &str` -- The unique id for the File Manager folder.
-     */
+    * Get folder.
+    *
+    * This function performs a `GET` to the `/file-manager/folders/{folder_id}` endpoint.
+    *
+    * Get information about a specific folder in the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `folder_id: &str` -- The unique id for the File Manager folder.
+    */
     pub async fn get_folder_file_manager(
         &self,
         fields: &[String],
@@ -285,7 +285,7 @@ impl FileManager {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/file-manager/folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -293,36 +293,36 @@ impl FileManager {
     }
 
     /**
-     * Delete folder.
-     *
-     * This function performs a `DELETE` to the `/file-manager/folders/{folder_id}` endpoint.
-     *
-     * Delete a specific folder in the File Manager.
-     *
-     * **Parameters:**
-     *
-     * * `folder_id: &str` -- The unique id for the File Manager folder.
-     */
+    * Delete folder.
+    *
+    * This function performs a `DELETE` to the `/file-manager/folders/{folder_id}` endpoint.
+    *
+    * Delete a specific folder in the File Manager.
+    *
+    * **Parameters:**
+    *
+    * * `folder_id: &str` -- The unique id for the File Manager folder.
+    */
     pub async fn delete_folders(&self, folder_id: &str) -> Result<()> {
         let url = format!(
             "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Update folder.
-     *
-     * This function performs a `PATCH` to the `/file-manager/folders/{folder_id}` endpoint.
-     *
-     * Update a specific File Manager folder.
-     *
-     * **Parameters:**
-     *
-     * * `folder_id: &str` -- The unique id for the File Manager folder.
-     */
+    * Update folder.
+    *
+    * This function performs a `PATCH` to the `/file-manager/folders/{folder_id}` endpoint.
+    *
+    * Update a specific File Manager folder.
+    *
+    * **Parameters:**
+    *
+    * * `folder_id: &str` -- The unique id for the File Manager folder.
+    */
     pub async fn patch_folders(
         &self,
         folder_id: &str,
@@ -330,7 +330,7 @@ impl FileManager {
     ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
         let url = format!(
             "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client

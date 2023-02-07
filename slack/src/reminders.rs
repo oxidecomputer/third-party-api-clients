@@ -13,65 +13,65 @@ impl Reminders {
     }
 
     /**
-     * This function performs a `POST` to the `/reminders.add` endpoint.
-     *
-     * Creates a reminder.
-     *
-     * FROM: <https://api.slack.com/methods/reminders.add>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
-     */
+    * This function performs a `POST` to the `/reminders.add` endpoint.
+    *
+    * Creates a reminder.
+    *
+    * FROM: <https://api.slack.com/methods/reminders.add>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
+    */
     pub async fn add(&self) -> Result<crate::types::RemindersAddSchema> {
         let url = "/reminders.add".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-     * This function performs a `POST` to the `/reminders.complete` endpoint.
-     *
-     * Marks a reminder as complete.
-     *
-     * FROM: <https://api.slack.com/methods/reminders.complete>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
-     */
+    * This function performs a `POST` to the `/reminders.complete` endpoint.
+    *
+    * Marks a reminder as complete.
+    *
+    * FROM: <https://api.slack.com/methods/reminders.complete>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
+    */
     pub async fn complete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.complete".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-     * This function performs a `POST` to the `/reminders.delete` endpoint.
-     *
-     * Deletes a reminder.
-     *
-     * FROM: <https://api.slack.com/methods/reminders.delete>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
-     */
+    * This function performs a `POST` to the `/reminders.delete` endpoint.
+    *
+    * Deletes a reminder.
+    *
+    * FROM: <https://api.slack.com/methods/reminders.delete>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
+    */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.delete".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-     * This function performs a `GET` to the `/reminders.info` endpoint.
-     *
-     * Gets information about a reminder.
-     *
-     * FROM: <https://api.slack.com/methods/reminders.info>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
-     * * `reminder: &str` -- The ID of the reminder.
-     */
+    * This function performs a `GET` to the `/reminders.info` endpoint.
+    *
+    * Gets information about a reminder.
+    *
+    * FROM: <https://api.slack.com/methods/reminders.info>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
+    * * `reminder: &str` -- The ID of the reminder.
+    */
     pub async fn info(&self, reminder: &str) -> Result<crate::types::RemindersAddSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !reminder.is_empty() {
@@ -84,16 +84,16 @@ impl Reminders {
     }
 
     /**
-     * This function performs a `GET` to the `/reminders.list` endpoint.
-     *
-     * Lists all reminders created by or for a given user.
-     *
-     * FROM: <https://api.slack.com/methods/reminders.list>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
-     */
+    * This function performs a `GET` to the `/reminders.list` endpoint.
+    *
+    * Lists all reminders created by or for a given user.
+    *
+    * FROM: <https://api.slack.com/methods/reminders.list>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
+    */
     pub async fn list(&self) -> Result<crate::types::RemindersListSchema> {
         let url = "/reminders.list".to_string();
         self.client.get(&url, None).await

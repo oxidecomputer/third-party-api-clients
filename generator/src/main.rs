@@ -3228,7 +3228,7 @@ version = "{}"
 documentation = "https://docs.rs/{}/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{}"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 license = "MIT"
 
 [features]
@@ -3244,11 +3244,11 @@ async-recursion = "^1.0"
 chrono = {{ version = "0.4", features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
-hyperx = "1"
 jsonwebtoken = "8"
 log = {{ version = "^0.4", features = ["serde"] }}
 mime = "0.3"
 openssl = {{ version = "0.10", default-features = false, optional = true }}
+parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11.11", default-features = false, features = ["json", "multipart"] }}
@@ -3262,7 +3262,7 @@ serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
-tokio = {{ version = "1.20.1", features = ["full"] }}
+tokio = {{ version = "1.25.0", features = ["full"] }}
 
 [dev-dependencies]
 base64 = "^0.13"

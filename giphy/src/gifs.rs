@@ -13,17 +13,17 @@ impl Gifs {
     }
 
     /**
-     * Get GIFs by ID.
-     *
-     * This function performs a `GET` to the `/gifs` endpoint.
-     *
-     * A multiget version of the get GIF by ID endpoint.
-     *
-     *
-     * **Parameters:**
-     *
-     * * `ids: &str` -- Filters results by specified GIF IDs, separated by commas.
-     */
+    * Get GIFs by ID.
+    *
+    * This function performs a `GET` to the `/gifs` endpoint.
+    *
+    * A multiget version of the get GIF by ID endpoint.
+    *
+    *
+    * **Parameters:**
+    *
+    * * `ids: &str` -- Filters results by specified GIF IDs, separated by commas.
+    */
     pub async fn get(&self, ids: &str) -> Result<crate::types::GetGifsByResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
@@ -36,18 +36,18 @@ impl Gifs {
     }
 
     /**
-     * Random GIF.
-     *
-     * This function performs a `GET` to the `/gifs/random` endpoint.
-     *
-     * Returns a random GIF, limited by tag. Excluding the tag parameter will return a random GIF from the GIPHY catalog.
-     *
-     *
-     * **Parameters:**
-     *
-     * * `tag: &str` -- The unique bit.ly URL for this GIF.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
-     */
+    * Random GIF.
+    *
+    * This function performs a `GET` to the `/gifs/random` endpoint.
+    *
+    * Returns a random GIF, limited by tag. Excluding the tag parameter will return a random GIF from the GIPHY catalog.
+    *
+    *
+    * **Parameters:**
+    *
+    * * `tag: &str` -- The unique bit.ly URL for this GIF.
+    * * `rating: &str` -- The unique bit.ly URL for this GIF.
+    */
     pub async fn random(&self, tag: &str, rating: &str) -> Result<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !rating.is_empty() {
@@ -63,21 +63,21 @@ impl Gifs {
     }
 
     /**
-     * Search GIFs.
-     *
-     * This function performs a `GET` to the `/gifs/search` endpoint.
-     *
-     * Search all GIPHY GIFs for a word or phrase. Punctuation will be stripped and ignored.  Use a plus or url encode for phrases. Example paul+rudd, ryan+gosling or american+psycho.
-     *
-     *
-     * **Parameters:**
-     *
-     * * `q: &str` -- The unique bit.ly URL for this GIF.
-     * * `limit: i64` -- The maximum number of records to return.
-     * * `offset: i64` -- An optional results offset.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
-     * * `lang: &str` -- Specify default language for regional content; use a 2-letter ISO 639-1 language code.
-     */
+    * Search GIFs.
+    *
+    * This function performs a `GET` to the `/gifs/search` endpoint.
+    *
+    * Search all GIPHY GIFs for a word or phrase. Punctuation will be stripped and ignored.  Use a plus or url encode for phrases. Example paul+rudd, ryan+gosling or american+psycho.
+    *
+    *
+    * **Parameters:**
+    *
+    * * `q: &str` -- The unique bit.ly URL for this GIF.
+    * * `limit: i64` -- The maximum number of records to return.
+    * * `offset: i64` -- An optional results offset.
+    * * `rating: &str` -- The unique bit.ly URL for this GIF.
+    * * `lang: &str` -- Specify default language for regional content; use a 2-letter ISO 639-1 language code.
+    */
     pub async fn search(
         &self,
         q: &str,
@@ -109,17 +109,17 @@ impl Gifs {
     }
 
     /**
-     * Translate phrase to GIF.
-     *
-     * This function performs a `GET` to the `/gifs/translate` endpoint.
-     *
-     * The translate API draws on search, but uses the GIPHY `special sauce` to handle translating from one vocabulary to another. In this case, words and phrases to GIF
-     *
-     *
-     * **Parameters:**
-     *
-     * * `s: &str` -- The unique bit.ly URL for this GIF.
-     */
+    * Translate phrase to GIF.
+    *
+    * This function performs a `GET` to the `/gifs/translate` endpoint.
+    *
+    * The translate API draws on search, but uses the GIPHY `special sauce` to handle translating from one vocabulary to another. In this case, words and phrases to GIF
+    *
+    *
+    * **Parameters:**
+    *
+    * * `s: &str` -- The unique bit.ly URL for this GIF.
+    */
     pub async fn translate(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !s.is_empty() {
@@ -132,19 +132,19 @@ impl Gifs {
     }
 
     /**
-     * Trending GIFs.
-     *
-     * This function performs a `GET` to the `/gifs/trending` endpoint.
-     *
-     * Fetch GIFs currently trending online. Hand curated by the GIPHY editorial team.  The data returned mirrors the GIFs showcased on the GIPHY homepage. Returns 25 results by default.
-     *
-     *
-     * **Parameters:**
-     *
-     * * `limit: i64` -- The maximum number of records to return.
-     * * `offset: i64` -- An optional results offset.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
-     */
+    * Trending GIFs.
+    *
+    * This function performs a `GET` to the `/gifs/trending` endpoint.
+    *
+    * Fetch GIFs currently trending online. Hand curated by the GIPHY editorial team.  The data returned mirrors the GIFs showcased on the GIPHY homepage. Returns 25 results by default.
+    *
+    *
+    * **Parameters:**
+    *
+    * * `limit: i64` -- The maximum number of records to return.
+    * * `offset: i64` -- An optional results offset.
+    * * `rating: &str` -- The unique bit.ly URL for this GIF.
+    */
     pub async fn trending(
         &self,
         limit: i64,
@@ -168,17 +168,17 @@ impl Gifs {
     }
 
     /**
-     * Get GIF by Id.
-     *
-     * This function performs a `GET` to the `/gifs/{gifId}` endpoint.
-     *
-     * Returns a GIF given that GIF's unique ID
-     *
-     *
-     * **Parameters:**
-     *
-     * * `gif_id: i64` -- Filters results by specified GIF ID.
-     */
+    * Get GIF by Id.
+    *
+    * This function performs a `GET` to the `/gifs/{gifId}` endpoint.
+    *
+    * Returns a GIF given that GIF's unique ID
+    *
+    *
+    * **Parameters:**
+    *
+    * * `gif_id: i64` -- Filters results by specified GIF ID.
+    */
     pub async fn get_gifs(&self, gif_id: i64) -> Result<crate::types::RandomGifResponse> {
         let url = format!(
             "/gifs/{}",
