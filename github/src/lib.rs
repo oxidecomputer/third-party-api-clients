@@ -423,28 +423,36 @@ impl Client {
                 parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
             }
             Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
-                if let Some(token) = apptoken.token() {
-                    let auth = format!("token {}", token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                let token = if let Some(token) = apptoken.token().await {
+                    token
                 } else {
-                    log::debug!("app token is stale, refreshing");
-                    let token_ref = apptoken.access_key.clone();
+                    let mut token_guard = apptoken.access_key.write().await;
+                    if let Some(token) = token_guard.as_ref().and_then(|t| t.token()) {
+                        token.to_owned()
+                    } else {
+                        log::debug!("app token is stale, refreshing");
 
-                    let token = self
-                        .apps()
-                        .create_installation_access_token(
-                            apptoken.installation_id as i64,
-                            &types::AppsCreateInstallationAccessTokenRequest {
-                                permissions: Default::default(),
-                                repositories: Default::default(),
-                                repository_ids: Default::default(),
-                            },
-                        )
-                        .await?;
-                    let auth = format!("token {}", &token.token);
-                    *token_ref.lock().unwrap() = Some(token.token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-                }
+                        let created_at = tokio::time::Instant::now();
+                        let token = self
+                            .apps()
+                            .create_installation_access_token(
+                                apptoken.installation_id as i64,
+                                &types::AppsCreateInstallationAccessTokenRequest {
+                                    permissions: Default::default(),
+                                    repositories: Default::default(),
+                                    repository_ids: Default::default(),
+                                },
+                            )
+                            .await?;
+                        *token_guard = Some(crate::auth::ExpiringInstallationToken::new(
+                            token.token.clone(),
+                            created_at,
+                        ));
+                        token.token
+                    }
+                };
+                let auth = format!("token {}", token);
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
             }
             None => parsed_url.map(|u| (u, None)).map_err(Error::from),
         }
