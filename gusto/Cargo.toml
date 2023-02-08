@@ -9,7 +9,7 @@ edition = "2018"
 license = "MIT"
 
 [features]
-default = ["rustls-tls"]
+default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
@@ -32,7 +32,7 @@ reqwest = { version = "0.11.11", default-features = false, features = ["json", "
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
-reqwest-tracing = { version = "0.3.0", features = ["opentelemetry_0_17"] }
+reqwest-tracing = "0.3.0"
 ring = { version = "0.16", default-features = false, optional = true }
 schemars = { version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }
 serde = { version = "1", features = ["derive"] }
