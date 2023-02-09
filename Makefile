@@ -156,7 +156,8 @@ $(DOCUSIGN_SPEC_DIR):
 	mkdir -p $@
 
 $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
-	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
+#	Skip docusign spec download until remote file is fixed
+# curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
 docusign: target/debug/generator $(DOCUSIGN_SPEC)
 	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.3.1 \
