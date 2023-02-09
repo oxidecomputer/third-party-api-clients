@@ -2831,7 +2831,7 @@ fn main() -> Result<()> {
         }
     };
 
-    let api = load_api(&args.opt_str("i").unwrap())?;
+    let api = load_api(args.opt_str("i").unwrap())?;
 
     let debug = |s: &str| {
         if args.opt_present("debug") {
