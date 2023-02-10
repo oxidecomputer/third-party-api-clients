@@ -24009,7 +24009,7 @@ components:
         passwordStrengthTypeMetadata:
           $ref: "#/components/schemas/accountPasswordStrengthType"
         questionsRequired:
-          description: The number of security questions required to confirm the user’s identity before the user can reset their password. The default value is `0`.
+          description: The number of security questions required to confirm the user's identity before the user can reset their password. The default value is `0`.
           type: string
         questionsRequiredMetadata:
           $ref: "#/components/schemas/accountPasswordQuestionsRequired"
@@ -25246,7 +25246,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -30740,7 +30740,7 @@ components:
         passwordStrengthTypeMetadata:
           $ref: "#/components/schemas/accountPasswordStrengthType"
         questionsRequired:
-          description: The number of security questions required to confirm the user’s identity before the user can reset their password. The default value is `0`.
+          description: The number of security questions required to confirm the user's identity before the user can reset their password. The default value is `0`.
           type: string
         questionsRequiredMetadata:
           $ref: "#/components/schemas/accountPasswordQuestionsRequired"
@@ -31982,7 +31982,7 @@ components:
             - Domains may be claimed by an organization.
             - When a domain is claimed by an organization, all users within that domain are added to the organization, even if they have trial or free accounts.
             - You can set domain controls for all users of the domain.
-            - You can export information about your organization’s users that are associated with your reserved domains.
+            - You can export information about your organization's users that are associated with your reserved domains.
 
             **Note**: Only SysAdmin users can change this setting.
           type: string
@@ -34098,7 +34098,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -37001,7 +37001,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -37653,7 +37653,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -38039,7 +38039,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -38449,7 +38449,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -38859,7 +38859,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -39269,7 +39269,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -39680,7 +39680,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -41202,7 +41202,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -41781,7 +41781,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -42254,7 +42254,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -42686,7 +42686,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -43236,9 +43236,9 @@ components:
           description: "The array of name/value custom data strings to be added to a document. Custom document field information is returned in the status, but otherwise is not used by DocuSign. The array contains the elements:\
 
 
-            * name ÃÂ¢ÃÂÃÂ A string that can be a maximum of 50 characters.\
+            * name - A string that can be a maximum of 50 characters.\
 
-            * value ÃÂ¢ÃÂÃÂ A string that can be a maximum of 200 characters.
+            * value - A string that can be a maximum of 200 characters.
 
 
             *IMPORTANT*: If you are using xml, the name/value pair is contained in a nameValue element.\ \n"
@@ -43365,9 +43365,9 @@ components:
           description: "The array of name/value custom data strings to be added to a document. Custom document field information is returned in the status, but otherwise is not used by DocuSign. The array contains the elements:\
 
 
-            * name ÃÂ¢ÃÂÃÂ A string that can be a maximum of 50 characters.\
+            * name - A string that can be a maximum of 50 characters.\
 
-            * value ÃÂ¢ÃÂÃÂ A string that can be a maximum of 200 characters.
+            * value - A string that can be a maximum of 200 characters.
 
 
             *IMPORTANT*: If you are using xml, the name/value pair is contained in a nameValue element.\ \n"
@@ -43764,7 +43764,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -44373,7 +44373,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -44847,7 +44847,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -46204,7 +46204,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -47733,7 +47733,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -48490,7 +48490,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -49031,7 +49031,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -49942,7 +49942,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -50515,7 +50515,7 @@ components:
             Possible values:
 
 
-            - `autoresponded`: The recipientÃ¢ÂÂs email system auto-responded to the email from DocuSign. This status is used in the web console to inform senders about the bounced-back email. This recipient status is only used if **Send-on-behalf-of** is turned off for the account.
+            - `autoresponded`: The recipient's email system auto-responded to the email from DocuSign. This status is used in the web console to inform senders about the bounced-back email. This recipient status is only used if **Send-on-behalf-of** is turned off for the account.
 
             - `completed`: The recipient has completed their actions (signing or other required actions if not a signer) for an envelope.
 
@@ -50674,7 +50674,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -51075,7 +51075,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -52242,7 +52242,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -53341,7 +53341,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -53637,7 +53637,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -54071,7 +54071,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -55148,7 +55148,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -55606,7 +55606,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -56391,7 +56391,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -58840,7 +58840,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -59503,11 +59503,11 @@ components:
           description: "Sets the type of signer certificate required for signing. If left blank, no certificate is required. Only one type of certificate can be set for a signer. The possible values are:
 
 
-            * docusign_express ÃÂ¢ÃÂÃÂ Requires a DocuSign Express certificate.
+            * docusign_express - Requires a DocuSign Express certificate.
 
-            * safe ÃÂ¢ÃÂÃÂ Requires a SAFE-BioPharma certificate.
+            * safe - Requires a SAFE-BioPharma certificate.
 
-            * open_trust ÃÂ¢ÃÂÃÂ Requires an OpenTrust certificate.\
+            * open_trust - Requires an OpenTrust certificate.\
 
 
             **Important**: There are certain rules and restrictions that must be followed when requiring OpenTrust digital signatures. See [ML:OpenTrust Rules and Restrictions] for more information.\
@@ -59649,7 +59649,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -60116,7 +60116,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -60590,7 +60590,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -61315,7 +61315,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -61632,7 +61632,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -63106,7 +63106,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -63628,7 +63628,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -65188,7 +65188,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 
@@ -66396,7 +66396,7 @@ components:
             This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :
 
             - `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.
-            - `right`: Aligns the tab’s left side with the last character of the matching anchor word.
+            - `right`: Aligns the tab's left side with the last character of the matching anchor word.
 
             **Note**: You can only specify the value of this property in POST requests.
 

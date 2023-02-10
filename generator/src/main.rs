@@ -2831,7 +2831,7 @@ fn main() -> Result<()> {
         }
     };
 
-    let api = load_api(&args.opt_str("i").unwrap())?;
+    let api = load_api(args.opt_str("i").unwrap())?;
 
     let debug = |s: &str| {
         if args.opt_present("debug") {
@@ -3232,7 +3232,7 @@ edition = "2018"
 license = "MIT"
 
 [features]
-default = ["rustls-tls"]
+default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
@@ -3241,7 +3241,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 [dependencies]
 anyhow = "1"
 async-recursion = "^1.0"
-chrono = {{ version = "0.4", features = ["serde"] }}
+chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
 hyperx = "1"
@@ -3255,7 +3255,7 @@ reqwest = {{ version = "0.11.11", default-features = false, features = ["json", 
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
-reqwest-tracing = {{ version = "0.3.0", features = ["opentelemetry_0_17"] }}
+reqwest-tracing = "0.3.0"
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
