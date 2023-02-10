@@ -3214,7 +3214,7 @@ uuid = { version = "1.1", features = ["serde", "v4"] }"#
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
 base64 = "^0.13"
-yup-oauth2 = "^5""#
+yup-oauth2 = "^8""#
                     .to_string();
             }
 

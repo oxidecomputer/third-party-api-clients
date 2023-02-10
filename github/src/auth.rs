@@ -143,7 +143,8 @@ impl ExpiringJWTCredential {
         let expires = now + MAX_JWT_TOKEN_LIFE;
 
         let payload = JWTCredentialClaim {
-            iat: now.as_secs(),
+            // GitHub recommends specifying this as 60 seconds in the past to avoid problems with clock drift.
+            iat: now.as_secs().saturating_sub(60),
             exp: expires.as_secs(),
             iss: app_id,
         };
