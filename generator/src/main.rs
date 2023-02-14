@@ -2202,7 +2202,7 @@ fn render_param(
 
     a(&format!("impl std::fmt::Display for {} {{", sn));
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
-    a(r#"match &*self {"#);
+    a(r#"match self {"#);
     for e in &enums {
         if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
@@ -2831,7 +2831,7 @@ fn main() -> Result<()> {
         }
     };
 
-    let api = load_api(&args.opt_str("i").unwrap())?;
+    let api = load_api(args.opt_str("i").unwrap())?;
 
     let debug = |s: &str| {
         if args.opt_present("debug") {
@@ -3214,7 +3214,7 @@ uuid = { version = "1.1", features = ["serde", "v4"] }"#
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
 base64 = "^0.13"
-yup-oauth2 = "^5""#
+yup-oauth2 = "^8""#
                     .to_string();
             }
 
@@ -3232,7 +3232,7 @@ edition = "2021"
 license = "MIT"
 
 [features]
-default = ["rustls-tls"]
+default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
@@ -3241,7 +3241,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 [dependencies]
 anyhow = "1"
 async-recursion = "^1.0"
-chrono = {{ version = "0.4", features = ["serde"] }}
+chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
 jsonwebtoken = "8"
@@ -3255,7 +3255,7 @@ reqwest = {{ version = "0.11.11", default-features = false, features = ["json", 
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
-reqwest-tracing = {{ version = "0.3.0", features = ["opentelemetry_0_17"] }}
+reqwest-tracing = "0.3.0"
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
@@ -3268,6 +3268,8 @@ tokio = {{ version = "1.25.0", features = ["full"] }}
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
+tokio = {{ version = "1.25.0", features = ["test-util"] }}
+wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
 all-features = true

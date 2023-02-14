@@ -13,23 +13,23 @@ impl FileLinks {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/file_links` endpoint.
-    *
-    * <p>Returns a list of file links.</p>
-    *
-    * **Parameters:**
-    *
-    * * `created: &str`
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `expired: bool` -- Filter links by their expiration status. By default, all links are returned.
-    * * `file: &str` -- Only return links for the given file.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/file_links` endpoint.
+     *
+     * <p>Returns a list of file links.</p>
+     *
+     * **Parameters:**
+     *
+     * * `created: &str`
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `expired: bool` -- Filter links by their expiration status. By default, all links are returned.
+     * * `file: &str` -- Only return links for the given file.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         expired: bool,
         file: &str,
@@ -62,15 +62,15 @@ impl FileLinks {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/file_links` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of file links.</p>
-    */
+     * This function performs a `GET` to the `/v1/file_links` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of file links.</p>
+     */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         expired: bool,
         file: &str,
     ) -> Result<Vec<crate::types::FileLink>> {
@@ -124,47 +124,47 @@ impl FileLinks {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/file_links` endpoint.
-    *
-    * <p>Creates a new file link object.</p>
-    */
+     * This function performs a `POST` to the `/v1/file_links` endpoint.
+     *
+     * <p>Creates a new file link object.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::FileLink> {
         let url = "/v1/file_links".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/file_links/{link}` endpoint.
-    *
-    * <p>Retrieves the file link with the given ID.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `link: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/file_links/{link}` endpoint.
+     *
+     * <p>Retrieves the file link with the given ID.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `link: &str` -- The account's country.
+     */
     pub async fn get_link(&self, link: &str) -> Result<crate::types::FileLink> {
         let url = format!(
             "/v1/file_links/{}",
-            crate::progenitor_support::encode_path(&link.to_string()),
+            crate::progenitor_support::encode_path(link),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/v1/file_links/{link}` endpoint.
-    *
-    * <p>Updates an existing file link object. Expired links can no longer be updated.</p>
-    *
-    * **Parameters:**
-    *
-    * * `link: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/file_links/{link}` endpoint.
+     *
+     * <p>Updates an existing file link object. Expired links can no longer be updated.</p>
+     *
+     * **Parameters:**
+     *
+     * * `link: &str` -- The account's country.
+     */
     pub async fn post_link(&self, link: &str) -> Result<crate::types::FileLink> {
         let url = format!(
             "/v1/file_links/{}",
-            crate::progenitor_support::encode_path(&link.to_string()),
+            crate::progenitor_support::encode_path(link),
         );
 
         self.client.post(&url, None).await

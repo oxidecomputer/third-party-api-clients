@@ -13,12 +13,12 @@ impl EmailAddressValidation {
     }
 
     /**
-    * Validate an email.
-    *
-    * This function performs a `POST` to the `/validations/email` endpoint.
-    *
-    * **This endpoint allows you to validate an email address.**
-    */
+     * Validate an email.
+     *
+     * This function performs a `POST` to the `/validations/email` endpoint.
+     *
+     * **This endpoint allows you to validate an email address.**
+     */
     pub async fn post_validations_email(
         &self,
         body: &crate::types::PostValidationsEmailRequest,

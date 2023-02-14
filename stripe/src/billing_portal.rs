@@ -13,19 +13,19 @@ impl BillingPortal {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
-    *
-    * <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
-    *
-    * **Parameters:**
-    *
-    * * `active: bool` -- Only return configurations that are active or inactive (e.g., pass `true` to only list active configurations).
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `is_default: bool` -- Only return the default or non-default configurations (e.g., pass `true` to only list the default configuration).
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
+     *
+     * <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
+     *
+     * **Parameters:**
+     *
+     * * `active: bool` -- Only return configurations that are active or inactive (e.g., pass `true` to only list active configurations).
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `is_default: bool` -- Only return the default or non-default configurations (e.g., pass `true` to only list the default configuration).
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_configurations(
         &self,
         active: bool,
@@ -61,12 +61,12 @@ impl BillingPortal {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
-    *
-    * As opposed to `get_configurations`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
-    */
+     * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
+     *
+     * As opposed to `get_configurations`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
+     */
     pub async fn get_all_configurations(
         &self,
         active: bool,
@@ -123,63 +123,63 @@ impl BillingPortal {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/billing_portal/configurations` endpoint.
-    *
-    * <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
-    */
+     * This function performs a `POST` to the `/v1/billing_portal/configurations` endpoint.
+     *
+     * <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
+     */
     pub async fn post_configuration(&self) -> Result<crate::types::PortalConfiguration> {
         let url = "/v1/billing_portal/configurations".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/billing_portal/configurations/{configuration}` endpoint.
-    *
-    * <p>Retrieves a configuration that describes the functionality of the customer portal.</p>
-    *
-    * **Parameters:**
-    *
-    * * `configuration: &str` -- The account's country.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    */
+     * This function performs a `GET` to the `/v1/billing_portal/configurations/{configuration}` endpoint.
+     *
+     * <p>Retrieves a configuration that describes the functionality of the customer portal.</p>
+     *
+     * **Parameters:**
+     *
+     * * `configuration: &str` -- The account's country.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     */
     pub async fn get_configurations_configuration(
         &self,
         configuration: &str,
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(&configuration.to_string()),
+            crate::progenitor_support::encode_path(configuration),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/v1/billing_portal/configurations/{configuration}` endpoint.
-    *
-    * <p>Updates a configuration that describes the functionality of the customer portal.</p>
-    *
-    * **Parameters:**
-    *
-    * * `configuration: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/billing_portal/configurations/{configuration}` endpoint.
+     *
+     * <p>Updates a configuration that describes the functionality of the customer portal.</p>
+     *
+     * **Parameters:**
+     *
+     * * `configuration: &str` -- The account's country.
+     */
     pub async fn post_configurations_configuration(
         &self,
         configuration: &str,
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(&configuration.to_string()),
+            crate::progenitor_support::encode_path(configuration),
         );
 
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/v1/billing_portal/sessions` endpoint.
-    *
-    * <p>Creates a session of the customer portal.</p>
-    */
+     * This function performs a `POST` to the `/v1/billing_portal/sessions` endpoint.
+     *
+     * <p>Creates a session of the customer portal.</p>
+     */
     pub async fn post_session(&self) -> Result<crate::types::PortalSession> {
         let url = "/v1/billing_portal/sessions".to_string();
         self.client.post(&url, None).await

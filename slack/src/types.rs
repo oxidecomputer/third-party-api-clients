@@ -2141,7 +2141,7 @@ pub enum Warnings {
 
 impl std::fmt::Display for Warnings {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Warnings::MethodDeprecated => "method_deprecated",
             Warnings::Noop => "",
             Warnings::FallthroughString => "*",
@@ -2229,7 +2229,7 @@ pub enum AutoType {
 
 impl std::fmt::Display for AutoType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AutoType::Admin => "admin",
             AutoType::Owner => "owner",
             AutoType::Noop => "",
@@ -2445,7 +2445,7 @@ pub enum Plan {
 
 impl std::fmt::Display for Plan {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Plan::Compliance => "compliance",
             Plan::Enterprise => "enterprise",
             Plan::Plus => "plus",
@@ -2677,7 +2677,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::Date => "date",
             Type::Link => "link",
             Type::Mailto => "mailto",
@@ -2793,8 +2793,8 @@ pub struct Profile {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUser {
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2802,21 +2802,21 @@ pub struct ObjsUser {
     )]
     pub color: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub deleted: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enterprise_user: Option<ObjsEnterpriseUser>,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2829,8 +2829,8 @@ pub struct ObjsUser {
     )]
     pub id: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2847,72 +2847,72 @@ pub struct ObjsUser {
     )]
     pub is_bot: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_external: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_forgotten: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_invited_user: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_owner: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_primary_owner: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_restricted: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_stranger: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_ultra_restricted: bool,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2926,8 +2926,8 @@ pub struct ObjsUser {
     )]
     pub name: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2937,8 +2937,8 @@ pub struct ObjsUser {
     #[serde()]
     pub profile: ObjsUserProfile,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2946,8 +2946,8 @@ pub struct ObjsUser {
     )]
     pub real_name: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2955,8 +2955,8 @@ pub struct ObjsUser {
     )]
     pub team: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2964,13 +2964,13 @@ pub struct ObjsUser {
     )]
     pub team_id: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_profile: Option<Profile>,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2978,8 +2978,8 @@ pub struct ObjsUser {
     )]
     pub two_factor_type: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2987,8 +2987,8 @@ pub struct ObjsUser {
     )]
     pub tz: Vec<TzAnyOf>,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2996,8 +2996,8 @@ pub struct ObjsUser {
     )]
     pub tz_label: String,
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3016,8 +3016,8 @@ pub struct ObjsUser {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUserData {
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3025,21 +3025,21 @@ pub struct ObjsUserData {
     )]
     pub color: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub deleted: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enterprise_user: Option<ObjsEnterpriseUser>,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -3052,8 +3052,8 @@ pub struct ObjsUserData {
     )]
     pub id: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -3070,64 +3070,64 @@ pub struct ObjsUserData {
     )]
     pub is_bot: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_external: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_forgotten: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_owner: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_primary_owner: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_restricted: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_stranger: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_ultra_restricted: bool,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3141,8 +3141,8 @@ pub struct ObjsUserData {
     )]
     pub name: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3152,8 +3152,8 @@ pub struct ObjsUserData {
     #[serde()]
     pub profile: ObjsUserProfile,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3161,8 +3161,8 @@ pub struct ObjsUserData {
     )]
     pub real_name: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3170,13 +3170,13 @@ pub struct ObjsUserData {
     )]
     pub team_id: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub team_profile: Option<Profile>,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3184,8 +3184,8 @@ pub struct ObjsUserData {
     )]
     pub teams: Vec<String>,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3193,8 +3193,8 @@ pub struct ObjsUserData {
     )]
     pub two_factor_type: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3202,8 +3202,8 @@ pub struct ObjsUserData {
     )]
     pub tz: Vec<TzAnyOf>,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3211,8 +3211,8 @@ pub struct ObjsUserData {
     )]
     pub tz_label: String,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3235,13 +3235,13 @@ pub struct ObjsUserData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ObjsUserAnyOf {
     /**
-    * user object for non enterprise type
-    */
+     * user object for non enterprise type
+     */
     #[serde(flatten)]
     pub objs_user: ObjsUser,
     /**
-    * enterprise user
-    */
+     * enterprise user
+     */
     #[serde(flatten)]
     pub objs_user_data: ObjsUserData,
 }
@@ -3645,8 +3645,8 @@ pub struct DndEndSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdminConversationsCreateSchema {
     /**
-    * Schema for successful response of admin.conversations.create
-    */
+     * Schema for successful response of admin.conversations.create
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3694,8 +3694,8 @@ pub struct AdminConversationsGetConversationPrefsSchemaData {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response of admin.conversations.getConversationPrefs
-    */
+     * Schema for successful response of admin.conversations.getConversationPrefs
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub prefs: Option<AdminConversationsGetConversationPrefsSchema>,
 }
@@ -3709,8 +3709,8 @@ pub struct AdminConversationsGetTeamsSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response of admin.conversations.getTeams
-    */
+     * Schema for successful response of admin.conversations.getTeams
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
     #[serde(
@@ -3822,8 +3822,8 @@ pub struct AppsPermissionsResourcesListSuccessSchema {
     )]
     pub resources: Vec<Resources>,
     /**
-    * Schema for successful response apps.permissions.resources.list method
-    */
+     * Schema for successful response apps.permissions.resources.list method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
 }
@@ -3905,8 +3905,8 @@ pub struct AuthRevokeSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthTestSuccessSchema {
     /**
-    * Schema for successful response auth.test method
-    */
+     * Schema for successful response auth.test method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3914,8 +3914,8 @@ pub struct AuthTestSuccessSchema {
     )]
     pub bot_id: String,
     /**
-    * Schema for successful response auth.test method
-    */
+     * Schema for successful response auth.test method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4059,8 +4059,8 @@ pub struct ChatGetPermalinkSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChatMeMessageSchema {
     /**
-    * Schema for successful response from chat.meMessage method
-    */
+     * Schema for successful response from chat.meMessage method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4073,8 +4073,8 @@ pub struct ChatMeMessageSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from chat.meMessage method
-    */
+     * Schema for successful response from chat.meMessage method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4300,16 +4300,16 @@ pub struct ChatUpdateSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsCloseSuccessSchema {
     /**
-    * Schema for successful response conversations.close method
-    */
+     * Schema for successful response conversations.close method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub already_closed: bool,
     /**
-    * Schema for successful response conversations.close method
-    */
+     * Schema for successful response conversations.close method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4415,13 +4415,13 @@ pub struct ConversationsJoinSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from conversations.join method
-    */
+     * Schema for successful response from conversations.join method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<ResponseMetadata>,
     /**
-    * Schema for successful response from conversations.join method
-    */
+     * Schema for successful response from conversations.join method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4434,8 +4434,8 @@ pub struct ConversationsJoinSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsLeaveSuccessSchema {
     /**
-    * Schema for successful response from conversations.leave method
-    */
+     * Schema for successful response from conversations.leave method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4463,8 +4463,8 @@ pub struct ConversationsListSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from conversations.list method
-    */
+     * Schema for successful response from conversations.list method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
 }
@@ -4556,8 +4556,8 @@ pub struct ChannelAnyOf {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsOpenSuccessSchema {
     /**
-    * Schema for successful response from conversations.open method when opening channels, ims, mpims
-    */
+     * Schema for successful response from conversations.open method when opening channels, ims, mpims
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4570,8 +4570,8 @@ pub struct ConversationsOpenSuccessSchema {
     )]
     pub channel: Vec<ChannelAnyOf>,
     /**
-    * Schema for successful response from conversations.open method when opening channels, ims, mpims
-    */
+     * Schema for successful response from conversations.open method when opening channels, ims, mpims
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4588,8 +4588,8 @@ pub struct ConversationsOpenSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConversationsRepliesSuccessSchema {
     /**
-    * Schema for successful response from conversations.replies method
-    */
+     * Schema for successful response from conversations.replies method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4666,16 +4666,16 @@ pub struct DndInfoSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from dnd.info method
-    */
+     * Schema for successful response from dnd.info method
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub snooze_enabled: bool,
     /**
-    * Schema for successful response from dnd.info method
-    */
+     * Schema for successful response from dnd.info method
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4683,8 +4683,8 @@ pub struct DndInfoSchema {
     )]
     pub snooze_endtime: i64,
     /**
-    * Schema for successful response from dnd.info method
-    */
+     * Schema for successful response from dnd.info method
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4732,8 +4732,8 @@ pub struct FilesInfoSchema {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_html: Option<serde_json::Value>,
     /**
-    * Schema for successful response from files.info method
-    */
+     * Schema for successful response from files.info method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4748,13 +4748,13 @@ pub struct FilesInfoSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from files.info method
-    */
+     * Schema for successful response from files.info method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
     /**
-    * Schema for successful response from files.info method
-    */
+     * Schema for successful response from files.info method
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4803,8 +4803,8 @@ pub struct MigrationExchangeSuccessSchema {
     )]
     pub enterprise_id: String,
     /**
-    * Schema for successful response from migration.exchange method
-    */
+     * Schema for successful response from migration.exchange method
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4823,8 +4823,8 @@ pub struct MigrationExchangeSuccessSchema {
     )]
     pub team_id: String,
     /**
-    * Schema for successful response from migration.exchange method
-    */
+     * Schema for successful response from migration.exchange method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_id_map: Option<Fields>,
 }
@@ -4841,7 +4841,7 @@ pub enum ItemsType {
 
 impl std::fmt::Display for ItemsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ItemsType::File => "file",
             ItemsType::Noop => "",
             ItemsType::FallthroughString => "*",
@@ -4893,7 +4893,7 @@ pub enum MessagePinType {
 
 impl std::fmt::Display for MessagePinType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MessagePinType::Message => "message",
             MessagePinType::Noop => "",
             MessagePinType::FallthroughString => "*",
@@ -5010,13 +5010,13 @@ pub struct ReactionsListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from reactions.list method
-    */
+     * Schema for successful response from reactions.list method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
     /**
-    * Schema for successful response from reactions.list method
-    */
+     * Schema for successful response from reactions.list method
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5126,8 +5126,8 @@ pub struct StarsListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from stars.list method
-    */
+     * Schema for successful response from stars.list method
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub paging: Option<ObjsPaging>,
 }
@@ -5385,8 +5385,8 @@ pub struct UsersConversationsSuccessSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
-    */
+     * Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub response_metadata: Option<NewPagingStyle>,
 }
@@ -5395,16 +5395,16 @@ pub struct UsersConversationsSuccessSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiMethodUsersGetPresence {
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
-    */
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub auto_away: bool,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
-    */
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5412,8 +5412,8 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub connection_count: i64,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
-    */
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5421,8 +5421,8 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub last_activity: i64,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
-    */
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5434,8 +5434,8 @@ pub struct ApiMethodUsersGetPresence {
     )]
     pub ok: bool,
     /**
-    * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
-    */
+     * Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5668,23 +5668,23 @@ pub struct UsersIdentityResponseDataTypeLinks {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersIdentityResponseAnyOf {
     /**
-    * Schema for 'identity.basic' scope
-    */
+     * Schema for 'identity.basic' scope
+     */
     #[serde(flatten)]
     pub users_identity_response: UsersIdentityResponse,
     /**
-    * Schema for 'identity.basic,identity.email' scopes
-    */
+     * Schema for 'identity.basic,identity.email' scopes
+     */
     #[serde(flatten)]
     pub users_identity_response_data: UsersIdentityResponseData,
     /**
-    * Schema for 'identity.basic,identity.avatar' scopes
-    */
+     * Schema for 'identity.basic,identity.avatar' scopes
+     */
     #[serde(flatten)]
     pub users_identity_response_data_type: UsersIdentityResponseDataType,
     /**
-    * Schema for 'identity.basic,identity.team' scopes
-    */
+     * Schema for 'identity.basic,identity.team' scopes
+     */
     #[serde(flatten)]
     pub users_identity_response_data_type_links: UsersIdentityResponseDataTypeLinks,
 }
@@ -5726,8 +5726,8 @@ pub struct UsersListSchema {
     )]
     pub ok: bool,
     /**
-    * Schema for successful response from users.list method
-    */
+     * Schema for successful response from users.list method
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5752,8 +5752,8 @@ pub struct UsersProfileGetSchema {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersProfileSetSchema {
     /**
-    * Schema for successful response from users.profile.set method
-    */
+     * Schema for successful response from users.profile.set method
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

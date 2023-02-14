@@ -13,12 +13,12 @@ impl Sessions {
     }
 
     /**
-    * Create Session with Session Token.
-    *
-    * This function performs a `POST` to the `/api/v1/sessions` endpoint.
-    *
-    * Creates a new session for a user with a valid session token. Use this API if, for example, you want to set the session cookie yourself instead of allowing Okta to set it, or want to hold the session ID in order to delete a session via the API instead of visiting the logout URL.
-    */
+     * Create Session with Session Token.
+     *
+     * This function performs a `POST` to the `/api/v1/sessions` endpoint.
+     *
+     * Creates a new session for a user with a valid session token. Use this API if, for example, you want to set the session cookie yourself instead of allowing Okta to set it, or want to hold the session ID in order to delete a session via the API instead of visiting the logout URL.
+     */
     pub async fn create(
         &self,
         body: &crate::types::CreateSessionRequest,
@@ -30,58 +30,58 @@ impl Sessions {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/sessions/{sessionId}` endpoint.
-    *
-    * Get details about a session.
-    *
-    * **Parameters:**
-    *
-    * * `session_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/sessions/{sessionId}` endpoint.
+     *
+     * Get details about a session.
+     *
+     * **Parameters:**
+     *
+     * * `session_id: &str`
+     */
     pub async fn get(&self, session_id: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Close Session.
-    *
-    * This function performs a `DELETE` to the `/api/v1/sessions/{sessionId}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `session_id: &str`
-    */
+     * Close Session.
+     *
+     * This function performs a `DELETE` to the `/api/v1/sessions/{sessionId}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `session_id: &str`
+     */
     pub async fn end(&self, session_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Refresh Session.
-    *
-    * This function performs a `POST` to the `/api/v1/sessions/{sessionId}/lifecycle/refresh` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `session_id: &str`
-    */
+     * Refresh Session.
+     *
+     * This function performs a `POST` to the `/api/v1/sessions/{sessionId}/lifecycle/refresh` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `session_id: &str`
+     */
     pub async fn refresh(&self, session_id: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/api/v1/sessions/{}/lifecycle/refresh",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.post(&url, None).await

@@ -13,32 +13,32 @@ impl ContactsApiLists {
     }
 
     /**
-    * Retrieve all lists.
-    *
-    * This function performs a `GET` to the `/contactdb/lists` endpoint.
-    *
-    * **This endpoint allows you to retrieve all of your recipient lists. If you don't have any lists, an empty array will be returned.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve all lists.
+     *
+     * This function performs a `GET` to the `/contactdb/lists` endpoint.
+     *
+     * **This endpoint allows you to retrieve all of your recipient lists. If you don't have any lists, an empty array will be returned.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_contactdb_lists(&self) -> Result<crate::types::ListAllListsResponse> {
         let url = "/contactdb/lists".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Create a List.
-    *
-    * This function performs a `POST` to the `/contactdb/lists` endpoint.
-    *
-    * **This endpoint allows you to create a list for your recipients.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Create a List.
+     *
+     * This function performs a `POST` to the `/contactdb/lists` endpoint.
+     *
+     * **This endpoint allows you to create a list for your recipients.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_contactdb_list(
         &self,
         body: &crate::types::IpPool,
@@ -50,16 +50,16 @@ impl ContactsApiLists {
     }
 
     /**
-    * Delete Multiple lists.
-    *
-    * This function performs a `DELETE` to the `/contactdb/lists` endpoint.
-    *
-    * **This endpoint allows you to delete multiple recipient lists.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Delete Multiple lists.
+     *
+     * This function performs a `DELETE` to the `/contactdb/lists` endpoint.
+     *
+     * **This endpoint allows you to delete multiple recipient lists.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn delete_contactdb_lists(&self, body: &[i64]) -> Result<()> {
         let url = "/contactdb/lists".to_string();
         self.client
@@ -68,41 +68,41 @@ impl ContactsApiLists {
     }
 
     /**
-    * Retrieve a single list.
-    *
-    * This function performs a `GET` to the `/contactdb/lists/{list_id}` endpoint.
-    *
-    * **This endpoint allows you to retrieve a single recipient list.**
-    *
-    * **Parameters:**
-    *
-    * * `list_id: i64` -- The ID of the list to retrieve.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve a single list.
+     *
+     * This function performs a `GET` to the `/contactdb/lists/{list_id}` endpoint.
+     *
+     * **This endpoint allows you to retrieve a single recipient list.**
+     *
+     * **Parameters:**
+     *
+     * * `list_id: i64` -- The ID of the list to retrieve.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_contactdb_lists_list(
         &self,
         list_id: &str,
     ) -> Result<crate::types::ContactdbList> {
         let url = format!(
             "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Delete a List.
-    *
-    * This function performs a `DELETE` to the `/contactdb/lists/{list_id}` endpoint.
-    *
-    * **This endpoint allows you to delete a specific recipient list with the given ID.**
-    *
-    * **Parameters:**
-    *
-    * * `delete_contacts: bool` -- Adds the ability to delete all contacts on the list in addition to deleting the list.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Delete a List.
+     *
+     * This function performs a `DELETE` to the `/contactdb/lists/{list_id}` endpoint.
+     *
+     * **This endpoint allows you to delete a specific recipient list with the given ID.**
+     *
+     * **Parameters:**
+     *
+     * * `delete_contacts: bool` -- Adds the ability to delete all contacts on the list in addition to deleting the list.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn delete_contactdb_lists_list(
         &self,
         list_id: &str,
@@ -116,7 +116,7 @@ impl ContactsApiLists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/contactdb/lists/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -126,17 +126,17 @@ impl ContactsApiLists {
     }
 
     /**
-    * Update a List.
-    *
-    * This function performs a `PATCH` to the `/contactdb/lists/{list_id}` endpoint.
-    *
-    * **This endpoint allows you to update the name of one of your recipient lists.**
-    *
-    * **Parameters:**
-    *
-    * * `list_id: i64` -- The ID of the list you are updating.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Update a List.
+     *
+     * This function performs a `PATCH` to the `/contactdb/lists/{list_id}` endpoint.
+     *
+     * **This endpoint allows you to update the name of one of your recipient lists.**
+     *
+     * **Parameters:**
+     *
+     * * `list_id: i64` -- The ID of the list you are updating.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn patch_contactdb_lists_list(
         &self,
         list_id: &str,
@@ -144,7 +144,7 @@ impl ContactsApiLists {
     ) -> Result<crate::types::PatchContactdbListsListResponse> {
         let url = format!(
             "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -153,19 +153,19 @@ impl ContactsApiLists {
     }
 
     /**
-    * Retrieve all recipients on a List.
-    *
-    * This function performs a `GET` to the `/contactdb/lists/{list_id}/recipients` endpoint.
-    *
-    * **This endpoint allows you to retrieve all recipients on the list with the given ID.**
-    *
-    * **Parameters:**
-    *
-    * * `page: i64` -- Page index of first recipient to return (must be a positive integer).
-    * * `page_size: i64` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000).
-    * * `list_id: i64` -- The ID of the list whose recipients you are requesting.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve all recipients on a List.
+     *
+     * This function performs a `GET` to the `/contactdb/lists/{list_id}/recipients` endpoint.
+     *
+     * **This endpoint allows you to retrieve all recipients on the list with the given ID.**
+     *
+     * **Parameters:**
+     *
+     * * `page: i64` -- Page index of first recipient to return (must be a positive integer).
+     * * `page_size: i64` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000).
+     * * `list_id: i64` -- The ID of the list whose recipients you are requesting.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_contactdb_lists_list_recipients(
         &self,
         list_id: i64,
@@ -190,18 +190,18 @@ impl ContactsApiLists {
     }
 
     /**
-    * Add Multiple Recipients to a List.
-    *
-    * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients` endpoint.
-    *
-    * **This endpoint allows you to add multiple recipients to a list.**
-    *
-    * Adds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints.
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Add Multiple Recipients to a List.
+     *
+     * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients` endpoint.
+     *
+     * **This endpoint allows you to add multiple recipients to a list.**
+     *
+     * Adds existing recipients to a list, passing in the recipient IDs to add. Recipient IDs should be passed exactly as they are returned from recipient endpoints.
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_contactdb_lists_list_recipient(
         &self,
         list_id: i64,
@@ -218,16 +218,16 @@ impl ContactsApiLists {
     }
 
     /**
-    * Add a Single Recipient to a List.
-    *
-    * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
-    *
-    * **This endpoint allows you to add a single recipient to a list.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Add a Single Recipient to a List.
+     *
+     * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
+     *
+     * **This endpoint allows you to add a single recipient to a list.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_contactdb_lists_list_recipients_recipient(
         &self,
         list_id: i64,
@@ -236,25 +236,25 @@ impl ContactsApiLists {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.post(&url, None).await
     }
 
     /**
-    * Delete a Single Recipient from a Single List.
-    *
-    * This function performs a `DELETE` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
-    *
-    * **This endpoint allows you to delete a single recipient from a list.**
-    *
-    * **Parameters:**
-    *
-    * * `list_id: i64` -- The ID of the list you are taking this recipient away from.
-    * * `recipient_id: i64` -- The ID of the recipient to take off the list.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Delete a Single Recipient from a Single List.
+     *
+     * This function performs a `DELETE` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
+     *
+     * **This endpoint allows you to delete a single recipient from a list.**
+     *
+     * **Parameters:**
+     *
+     * * `list_id: i64` -- The ID of the list you are taking this recipient away from.
+     * * `recipient_id: i64` -- The ID of the recipient to take off the list.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn delete_contactdb_lists_list_recipients_recipient(
         &self,
         list_id: i64,
@@ -264,7 +264,7 @@ impl ContactsApiLists {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client

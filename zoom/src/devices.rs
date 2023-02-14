@@ -13,24 +13,24 @@ impl Devices {
     }
 
     /**
-    * List H.323/SIP devices.
-    *
-    * This function performs a `GET` to the `/h323/devices` endpoint.
-    *
-    * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to list all H.323/SIP Devices on a Zoom account.<br><br>
-    * **Scopes:** `h323:read:admin`<br>
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
-    *
-    * **Parameters:**
-    *
-    * * `page_size: i64` -- The number of records returned within a single API call.
-    * * `page_number: i64` --
-    *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-    *   
-    *   The page number of the current page in the returned records.
-    * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-    */
+     * List H.323/SIP devices.
+     *
+     * This function performs a `GET` to the `/h323/devices` endpoint.
+     *
+     * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to list all H.323/SIP Devices on a Zoom account.<br><br>
+     * **Scopes:** `h323:read:admin`<br>
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     *
+     * **Parameters:**
+     *
+     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
+     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     */
     pub async fn list(
         &self,
         page_size: i64,
@@ -54,15 +54,15 @@ impl Devices {
     }
 
     /**
-    * Create a H.323/SIP device.
-    *
-    * This function performs a `POST` to the `/h323/devices` endpoint.
-    *
-    * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to add a H.323/SIP device to your Zoom account<br><br>
-    * **Scopes:** `h323:write:admin`<br>
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
-    */
+     * Create a H.323/SIP device.
+     *
+     * This function performs a `POST` to the `/h323/devices` endpoint.
+     *
+     * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to add a H.323/SIP device to your Zoom account<br><br>
+     * **Scopes:** `h323:write:admin`<br>
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
+     */
     pub async fn create(&self, body: &crate::types::Device) -> Result<()> {
         let url = "/h323/devices".to_string();
         self.client
@@ -71,46 +71,46 @@ impl Devices {
     }
 
     /**
-    * Delete a H.323/SIP device.
-    *
-    * This function performs a `DELETE` to the `/h323/devices/{deviceId}` endpoint.
-    *
-    * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to delete a H.323/SIP device from your Zoom account.<br><br>
-    * **Scopes:** `h323:write:admin`<br>
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
-    *
-    * **Parameters:**
-    *
-    * * `device_id: &str` -- User's first name.
-    */
+     * Delete a H.323/SIP device.
+     *
+     * This function performs a `DELETE` to the `/h323/devices/{deviceId}` endpoint.
+     *
+     * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to delete a H.323/SIP device from your Zoom account.<br><br>
+     * **Scopes:** `h323:write:admin`<br>
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
+     *
+     * **Parameters:**
+     *
+     * * `device_id: &str` -- User's first name.
+     */
     pub async fn delete(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
-            crate::progenitor_support::encode_path(&device_id.to_string()),
+            crate::progenitor_support::encode_path(device_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Update a H.323/SIP device.
-    *
-    * This function performs a `PATCH` to the `/h323/devices/{deviceId}` endpoint.
-    *
-    * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to edit information of a H.323/SIP device from your Zoom account.<br><br>
-    * **Scopes:** `h323:write:admin`<br>
-    *  <br>
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `device_id: &str` -- User's first name.
-    */
+     * Update a H.323/SIP device.
+     *
+     * This function performs a `PATCH` to the `/h323/devices/{deviceId}` endpoint.
+     *
+     * A H.323 or SIP device can make a video call to a [Room Connector](https://support.zoom.us/hc/en-us/articles/201363273-Getting-Started-With-H-323-SIP-Room-Connector) to join a Zoom cloud meeting. A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting. Use this API to edit information of a H.323/SIP device from your Zoom account.<br><br>
+     * **Scopes:** `h323:write:admin`<br>
+     *  <br>
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `device_id: &str` -- User's first name.
+     */
     pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
-            crate::progenitor_support::encode_path(&device_id.to_string()),
+            crate::progenitor_support::encode_path(device_id),
         );
 
         self.client

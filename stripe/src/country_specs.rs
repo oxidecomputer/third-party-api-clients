@@ -13,17 +13,17 @@ impl CountrySpecs {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/country_specs` endpoint.
-    *
-    * <p>Lists all Country Spec objects available in the API.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/country_specs` endpoint.
+     *
+     * <p>Lists all Country Spec objects available in the API.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         ending_before: &str,
@@ -50,12 +50,12 @@ impl CountrySpecs {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/country_specs` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Lists all Country Spec objects available in the API.</p>
-    */
+     * This function performs a `GET` to the `/v1/country_specs` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Lists all Country Spec objects available in the API.</p>
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CountrySpec>> {
         let url = "/v1/country_specs".to_string();
         let mut resp: crate::types::GetCountrySpecsResponse = self.client.get(&url, None).await?;
@@ -98,19 +98,19 @@ impl CountrySpecs {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/country_specs/{country}` endpoint.
-    *
-    * <p>Returns a Country Spec for a given Country code.</p>
-    *
-    * **Parameters:**
-    *
-    * * `country: &str` -- The account's country.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    */
+     * This function performs a `GET` to the `/v1/country_specs/{country}` endpoint.
+     *
+     * <p>Returns a Country Spec for a given Country code.</p>
+     *
+     * **Parameters:**
+     *
+     * * `country: &str` -- The account's country.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     */
     pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
         let url = format!(
             "/v1/country_specs/{}",
-            crate::progenitor_support::encode_path(&country.to_string()),
+            crate::progenitor_support::encode_path(country),
         );
 
         self.client.get(&url, None).await

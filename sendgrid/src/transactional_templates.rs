@@ -13,19 +13,19 @@ impl TransactionalTemplates {
     }
 
     /**
-    * Retrieve paged transactional templates.
-    *
-    * This function performs a `GET` to the `/templates` endpoint.
-    *
-    * **This endpoint allows you to retrieve all transactional templates.**
-    *
-    * **Parameters:**
-    *
-    * * `generations: crate::types::Generations` -- Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
-    * * `page_size: f64` -- The number of templates to be returned in each page of results.
-    * * `page_token: &str` -- A token corresponding to a specific page of results, as provided by metadata.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve paged transactional templates.
+     *
+     * This function performs a `GET` to the `/templates` endpoint.
+     *
+     * **This endpoint allows you to retrieve all transactional templates.**
+     *
+     * **Parameters:**
+     *
+     * * `generations: crate::types::Generations` -- Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
+     * * `page_size: f64` -- The number of templates to be returned in each page of results.
+     * * `page_token: &str` -- A token corresponding to a specific page of results, as provided by metadata.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_templates(
         &self,
         generations: crate::types::Generations,
@@ -49,16 +49,16 @@ impl TransactionalTemplates {
     }
 
     /**
-    * Create a transactional template.
-    *
-    * This function performs a `POST` to the `/templates` endpoint.
-    *
-    * **This endpoint allows you to create a transactional template.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Create a transactional template.
+     *
+     * This function performs a `POST` to the `/templates` endpoint.
+     *
+     * **This endpoint allows you to create a transactional template.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_template(
         &self,
         body: &crate::types::PostTemplatesRequest,
@@ -70,39 +70,39 @@ impl TransactionalTemplates {
     }
 
     /**
-    * Retrieve a single transactional template.
-    *
-    * This function performs a `GET` to the `/templates/{template_id}` endpoint.
-    *
-    * **This endpoint allows you to retrieve a single transactional template.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve a single transactional template.
+     *
+     * This function performs a `GET` to the `/templates/{template_id}` endpoint.
+     *
+     * **This endpoint allows you to retrieve a single transactional template.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_templates_template(
         &self,
         template_id: &str,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Duplicate a transactional template.
-    *
-    * This function performs a `POST` to the `/templates/{template_id}` endpoint.
-    *
-    * **This endpoint allows you to duplicate a transactional template.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Duplicate a transactional template.
+     *
+     * This function performs a `POST` to the `/templates/{template_id}` endpoint.
+     *
+     * **This endpoint allows you to duplicate a transactional template.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_templates_template(
         &self,
         template_id: &str,
@@ -110,7 +110,7 @@ impl TransactionalTemplates {
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -119,38 +119,38 @@ impl TransactionalTemplates {
     }
 
     /**
-    * Delete a template.
-    *
-    * This function performs a `DELETE` to the `/templates/{template_id}` endpoint.
-    *
-    * **This endpoint allows you to delete a transactional template.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Delete a template.
+     *
+     * This function performs a `DELETE` to the `/templates/{template_id}` endpoint.
+     *
+     * **This endpoint allows you to delete a transactional template.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Edit a transactional template.
-    *
-    * This function performs a `PATCH` to the `/templates/{template_id}` endpoint.
-    *
-    * **This endpoint allows you to edit the name of a transactional template.**
-    *
-    * To edit the template itself, [create a new transactional template version](https://sendgrid.api-docs.io/v3.0/transactional-templates-versions/create-a-new-transactional-template-version).
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Edit a transactional template.
+     *
+     * This function performs a `PATCH` to the `/templates/{template_id}` endpoint.
+     *
+     * **This endpoint allows you to edit the name of a transactional template.**
+     *
+     * To edit the template itself, [create a new transactional template version](https://sendgrid.api-docs.io/v3.0/transactional-templates-versions/create-a-new-transactional-template-version).
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn patch_templates_template(
         &self,
         template_id: &str,
@@ -158,7 +158,7 @@ impl TransactionalTemplates {
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client

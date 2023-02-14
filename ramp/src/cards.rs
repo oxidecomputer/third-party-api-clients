@@ -13,20 +13,20 @@ impl Cards {
     }
 
     /**
-    * List cards.
-    *
-    * This function performs a `GET` to the `/cards` endpoint.
-    *
-    * Retrieve all cards.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-    * * `user_id: &str` -- The OAuth2 token header.
-    * * `card_program_id: &str` -- The OAuth2 token header.
-    */
+     * List cards.
+     *
+     * This function performs a `GET` to the `/cards` endpoint.
+     *
+     * Retrieve all cards.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `user_id: &str` -- The OAuth2 token header.
+     * * `card_program_id: &str` -- The OAuth2 token header.
+     */
     pub async fn get_page(
         &self,
         start: &str,
@@ -57,14 +57,14 @@ impl Cards {
     }
 
     /**
-    * List cards.
-    *
-    * This function performs a `GET` to the `/cards` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * Retrieve all cards.
-    */
+     * List cards.
+     *
+     * This function performs a `GET` to the `/cards` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all cards.
+     */
     pub async fn get_all(
         &self,
         user_id: &str,
@@ -119,45 +119,39 @@ impl Cards {
     }
 
     /**
-    * GET a card.
-    *
-    * This function performs a `GET` to the `/cards/{id}` endpoint.
-    *
-    * Retrieve a single card.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * GET a card.
+     *
+     * This function performs a `GET` to the `/cards/{id}` endpoint.
+     *
+     * Retrieve a single card.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
-        let url = format!(
-            "/cards/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Update card.
-    *
-    * This function performs a `PATCH` to the `/cards/{id}` endpoint.
-    *
-    * Update card details
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Update card.
+     *
+     * This function performs a `PATCH` to the `/cards/{id}` endpoint.
+     *
+     * Update card details
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn patch_resources(
         &self,
         id: &str,
         body: &crate::types::PatchResourcesCardsCardRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/cards/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
 
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -165,16 +159,16 @@ impl Cards {
     }
 
     /**
-    * Create a physical card.
-    *
-    * This function performs a `POST` to the `/cards/deferred/physical` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Create a physical card.
+     *
+     * This function performs a `POST` to the `/cards/deferred/physical` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn post_resources_physical(
         &self,
         body: &crate::types::PostResourcesCardPhysicalRequest,
@@ -186,16 +180,16 @@ impl Cards {
     }
 
     /**
-    * Create a virtual card.
-    *
-    * This function performs a `POST` to the `/cards/deferred/virtual` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Create a virtual card.
+     *
+     * This function performs a `POST` to the `/cards/deferred/virtual` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn post_resources_virtual(
         &self,
         body: &crate::types::PostResourcesCardVirtualRequest,
@@ -207,12 +201,12 @@ impl Cards {
     }
 
     /**
-    * Delete a card.
-    *
-    * This function performs a `POST` to the `/cards/{id}/deferred/termination` endpoint.
-    *
-    * Terminates a card permanently.
-    */
+     * Delete a card.
+     *
+     * This function performs a `POST` to the `/cards/{id}/deferred/termination` endpoint.
+     *
+     * Terminates a card permanently.
+     */
     pub async fn post_resources_termination(
         &self,
         id: &str,
@@ -220,7 +214,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/termination",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -229,12 +223,12 @@ impl Cards {
     }
 
     /**
-    * Suspend a card.
-    *
-    * This function performs a `POST` to the `/cards/{id}/deferred/suspension` endpoint.
-    *
-    * Suspends a card so that it is locked from use. The suspension is revertable.
-    */
+     * Suspend a card.
+     *
+     * This function performs a `POST` to the `/cards/{id}/deferred/suspension` endpoint.
+     *
+     * Suspends a card so that it is locked from use. The suspension is revertable.
+     */
     pub async fn post_resources_suspension(
         &self,
         id: &str,
@@ -242,7 +236,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/suspension",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -251,12 +245,12 @@ impl Cards {
     }
 
     /**
-    * Removes a card's suspension.
-    *
-    * This function performs a `POST` to the `/cards/{id}/deferred/unsuspension` endpoint.
-    *
-    * Removes a card's suspension so that it may be used again.
-    */
+     * Removes a card's suspension.
+     *
+     * This function performs a `POST` to the `/cards/{id}/deferred/unsuspension` endpoint.
+     *
+     * Removes a card's suspension so that it may be used again.
+     */
     pub async fn post_resources_unsuspension(
         &self,
         id: &str,
@@ -264,7 +258,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/unsuspension",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -273,23 +267,23 @@ impl Cards {
     }
 
     /**
-    * Get status of a deferred card task.
-    *
-    * This function performs a `GET` to the `/cards/deferred/status/{id}` endpoint.
-    *
-    * Gets status of a deferred task for cards
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Get status of a deferred card task.
+     *
+     * This function performs a `GET` to the `/cards/deferred/status/{id}` endpoint.
+     *
+     * Gets status of a deferred task for cards
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn get_resources_deferred(
         &self,
         id: &str,
     ) -> Result<crate::types::GetResourcesCardsDeferredResponse> {
         let url = format!(
             "/cards/deferred/status/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

@@ -13,18 +13,18 @@ impl NetworkZones {
     }
 
     /**
-    * List Network Zones.
-    *
-    * This function performs a `GET` to the `/api/v1/zones` endpoint.
-    *
-    * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
-    *
-    * **Parameters:**
-    *
-    * * `after: &str` -- Specifies the pagination cursor for the next page of network zones.
-    * * `limit: i64` -- Specifies the number of results for a page.
-    * * `filter: &str` -- Filters zones by usage or id expression.
-    */
+     * List Network Zones.
+     *
+     * This function performs a `GET` to the `/api/v1/zones` endpoint.
+     *
+     * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
+     *
+     * **Parameters:**
+     *
+     * * `after: &str` -- Specifies the pagination cursor for the next page of network zones.
+     * * `limit: i64` -- Specifies the number of results for a page.
+     * * `filter: &str` -- Filters zones by usage or id expression.
+     */
     pub async fn list(
         &self,
         after: &str,
@@ -48,14 +48,14 @@ impl NetworkZones {
     }
 
     /**
-    * List Network Zones.
-    *
-    * This function performs a `GET` to the `/api/v1/zones` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
-    */
+     * List Network Zones.
+     *
+     * This function performs a `GET` to the `/api/v1/zones` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
+     */
     pub async fn list_all(&self, filter: &str) -> Result<Vec<crate::types::NetworkZone>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
@@ -68,12 +68,12 @@ impl NetworkZones {
     }
 
     /**
-    * Add Network Zone.
-    *
-    * This function performs a `POST` to the `/api/v1/zones` endpoint.
-    *
-    * Adds a new network zone to your Okta organization.
-    */
+     * Add Network Zone.
+     *
+     * This function performs a `POST` to the `/api/v1/zones` endpoint.
+     *
+     * Adds a new network zone to your Okta organization.
+     */
     pub async fn create(
         &self,
         body: &crate::types::NetworkZone,
@@ -85,36 +85,36 @@ impl NetworkZones {
     }
 
     /**
-    * Get Network Zone.
-    *
-    * This function performs a `GET` to the `/api/v1/zones/{zoneId}` endpoint.
-    *
-    * Fetches a network zone from your Okta organization by `id`.
-    *
-    * **Parameters:**
-    *
-    * * `zone_id: &str`
-    */
+     * Get Network Zone.
+     *
+     * This function performs a `GET` to the `/api/v1/zones/{zoneId}` endpoint.
+     *
+     * Fetches a network zone from your Okta organization by `id`.
+     *
+     * **Parameters:**
+     *
+     * * `zone_id: &str`
+     */
     pub async fn get(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(&zone_id.to_string()),
+            crate::progenitor_support::encode_path(zone_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Update Network Zone.
-    *
-    * This function performs a `PUT` to the `/api/v1/zones/{zoneId}` endpoint.
-    *
-    * Updates a network zone in your organization.
-    *
-    * **Parameters:**
-    *
-    * * `zone_id: &str`
-    */
+     * Update Network Zone.
+     *
+     * This function performs a `PUT` to the `/api/v1/zones/{zoneId}` endpoint.
+     *
+     * Updates a network zone in your organization.
+     *
+     * **Parameters:**
+     *
+     * * `zone_id: &str`
+     */
     pub async fn update(
         &self,
         zone_id: &str,
@@ -122,7 +122,7 @@ impl NetworkZones {
     ) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(&zone_id.to_string()),
+            crate::progenitor_support::encode_path(zone_id),
         );
 
         self.client
@@ -131,60 +131,60 @@ impl NetworkZones {
     }
 
     /**
-    * Delete Network Zone.
-    *
-    * This function performs a `DELETE` to the `/api/v1/zones/{zoneId}` endpoint.
-    *
-    * Removes network zone.
-    *
-    * **Parameters:**
-    *
-    * * `zone_id: &str`
-    */
+     * Delete Network Zone.
+     *
+     * This function performs a `DELETE` to the `/api/v1/zones/{zoneId}` endpoint.
+     *
+     * Removes network zone.
+     *
+     * **Parameters:**
+     *
+     * * `zone_id: &str`
+     */
     pub async fn delete(&self, zone_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(&zone_id.to_string()),
+            crate::progenitor_support::encode_path(zone_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Activate Network Zone.
-    *
-    * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/activate` endpoint.
-    *
-    * Activate Network Zone
-    *
-    * **Parameters:**
-    *
-    * * `zone_id: &str`
-    */
+     * Activate Network Zone.
+     *
+     * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/activate` endpoint.
+     *
+     * Activate Network Zone
+     *
+     * **Parameters:**
+     *
+     * * `zone_id: &str`
+     */
     pub async fn activate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(&zone_id.to_string()),
+            crate::progenitor_support::encode_path(zone_id),
         );
 
         self.client.post(&url, None).await
     }
 
     /**
-    * Deactivate Network Zone.
-    *
-    * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/deactivate` endpoint.
-    *
-    * Deactivates a network zone.
-    *
-    * **Parameters:**
-    *
-    * * `zone_id: &str`
-    */
+     * Deactivate Network Zone.
+     *
+     * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/deactivate` endpoint.
+     *
+     * Deactivates a network zone.
+     *
+     * **Parameters:**
+     *
+     * * `zone_id: &str`
+     */
     pub async fn deactivate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(&zone_id.to_string()),
+            crate::progenitor_support::encode_path(zone_id),
         );
 
         self.client.post(&url, None).await

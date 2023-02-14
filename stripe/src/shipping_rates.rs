@@ -13,24 +13,24 @@ impl ShippingRates {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
-    *
-    * <p>Returns a list of your shipping rates.</p>
-    *
-    * **Parameters:**
-    *
-    * * `active: bool` -- Only return shipping rates that are active or inactive.
-    * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-    * * `currency: &str` -- Only return shipping rates for the given currency.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
+     *
+     * <p>Returns a list of your shipping rates.</p>
+     *
+     * **Parameters:**
+     *
+     * * `active: bool` -- Only return shipping rates that are active or inactive.
+     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * * `currency: &str` -- Only return shipping rates for the given currency.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -62,16 +62,16 @@ impl ShippingRates {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of your shipping rates.</p>
-    */
+     * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of your shipping rates.</p>
+     */
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         currency: &str,
     ) -> Result<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -124,53 +124,53 @@ impl ShippingRates {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/shipping_rates` endpoint.
-    *
-    * <p>Creates a new shipping rate object.</p>
-    */
+     * This function performs a `POST` to the `/v1/shipping_rates` endpoint.
+     *
+     * <p>Creates a new shipping rate object.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::ShippingRate> {
         let url = "/v1/shipping_rates".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/shipping_rates/{shipping_rate_token}` endpoint.
-    *
-    * <p>Returns the shipping rate object with the given ID.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `shipping_rate_token: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/shipping_rates/{shipping_rate_token}` endpoint.
+     *
+     * <p>Returns the shipping rate object with the given ID.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `shipping_rate_token: &str` -- The account's country.
+     */
     pub async fn get_rate_token(
         &self,
         shipping_rate_token: &str,
     ) -> Result<crate::types::ShippingRate> {
         let url = format!(
             "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
+            crate::progenitor_support::encode_path(shipping_rate_token),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/v1/shipping_rates/{shipping_rate_token}` endpoint.
-    *
-    * <p>Updates an existing shipping rate object.</p>
-    *
-    * **Parameters:**
-    *
-    * * `shipping_rate_token: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/shipping_rates/{shipping_rate_token}` endpoint.
+     *
+     * <p>Updates an existing shipping rate object.</p>
+     *
+     * **Parameters:**
+     *
+     * * `shipping_rate_token: &str` -- The account's country.
+     */
     pub async fn post_rate_token(
         &self,
         shipping_rate_token: &str,
     ) -> Result<crate::types::ShippingRate> {
         let url = format!(
             "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
+            crate::progenitor_support::encode_path(shipping_rate_token),
         );
 
         self.client.post(&url, None).await

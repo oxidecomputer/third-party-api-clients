@@ -144,23 +144,36 @@ impl Client {
                 parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
             }
             Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
-                if let Some(token) = apptoken.token() {
-                    let auth = format!("token {}", token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                let token = if let Some(token) = apptoken.token().await {
+                    token
                 } else {
-                    log::debug!("app token is stale, refreshing");
-                    let token_ref = apptoken.access_key.clone();
+                    let mut token_guard = apptoken.access_key.write().await;
+                    if let Some(token) = token_guard.as_ref().and_then(|t| t.token()) {
+                        token.to_owned()
+                    } else {
+                        log::debug!("app token is stale, refreshing");
 
-                    let token = self.apps().create_installation_access_token(apptoken.installation_id as i64,
-                    &types::AppsCreateInstallationAccessTokenRequest{
-                        permissions: Default::default(),
-                        repositories: Default::default(),
-                        repository_ids: Default::default(),
-                    }).await?;
-                    let auth = format!("token {}", &token.token);
-                    *token_ref.lock().unwrap() = Some(token.token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-                }
+                        let created_at = tokio::time::Instant::now();
+                        let token = self
+                            .apps()
+                            .create_installation_access_token(
+                                apptoken.installation_id as i64,
+                                &types::AppsCreateInstallationAccessTokenRequest {
+                                    permissions: Default::default(),
+                                    repositories: Default::default(),
+                                    repository_ids: Default::default(),
+                                },
+                            )
+                            .await?;
+                        *token_guard = Some(crate::auth::ExpiringInstallationToken::new(
+                            token.token.clone(),
+                            created_at,
+                        ));
+                        token.token
+                    }
+                };
+                let auth = format!("token {}", token);
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
             }
             None => parsed_url.map(|u| (u, None)).map_err(Error::from),
         }
@@ -235,7 +248,7 @@ impl Client {
             .get(http::header::LINK)
             .and_then(|l| l.to_str().ok())
             .and_then(|l| parse_link_header::parse(l).ok());
-        let next_link = link.as_ref().and_then(|map| crate::utils::next_link(map));
+        let next_link = link.as_ref().and_then(crate::utils::next_link);
 
         let response_body = response.bytes().await?;
 
@@ -272,7 +285,7 @@ impl Client {
                     let link = match next_link {
                         Some(next_link) => Ok(Some(next_link)),
                         None => instance2.http_cache.lookup_next_link(&uri3)
-                            .map(|next_link| next_link.map(|l| crate::utils::NextLink(l)))
+                            .map(|next_link| next_link.map(crate::utils::NextLink))
                     };
                     link.map(|link| (link, out))
                 }
@@ -1004,7 +1017,9 @@ where
         .headers()
         .get(http::header::LINK)
         .and_then(|l| l.to_str().ok())
-        .and_then(|l| l.parse().ok());
+        .and_then(|l| parse_link_header::parse(l).ok())
+        .as_ref()
+        .and_then(crate::utils::next_link);
 
     let response_body = response.bytes().await?;
 
@@ -1292,8 +1307,8 @@ where
     while !items.is_empty() {{
         global_items.append(&mut items);
         // We need to get the next link.
-        if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {{
-            let url = reqwest::Url::parse(&url)?;
+        if let Some(url) = link.as_ref() {{
+            let url = reqwest::Url::parse(&url.0)?;
             let (new_link, new_items) = self.get_pages_url(&url).await?;
             link = new_link;
             items = new_items;

@@ -98,7 +98,7 @@ pub struct NextLink(pub String);
 pub fn next_link(l: &LinkMap) -> Option<NextLink> {
     l.get(&Some("next".to_string()))
         .map(|link| link.raw_uri.to_string())
-        .map(|l| NextLink(l))
+        .map(NextLink)
 }
 
 pub mod date_format {

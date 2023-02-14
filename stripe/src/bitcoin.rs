@@ -13,20 +13,20 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
-    *
-    * <p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>
-    *
-    * **Parameters:**
-    *
-    * * `active: bool` -- Whether the account can create live charges.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `filled: bool` -- Whether the account can create live charges.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    * * `uncaptured_funds: bool` -- Whether the account can create live charges.
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
+     *
+     * <p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>
+     *
+     * **Parameters:**
+     *
+     * * `active: bool` -- Whether the account can create live charges.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `filled: bool` -- Whether the account can create live charges.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `uncaptured_funds: bool` -- Whether the account can create live charges.
+     */
     pub async fn get_receivers(
         &self,
         active: bool,
@@ -65,12 +65,12 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
-    *
-    * As opposed to `get_receivers`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
+     *
+     * As opposed to `get_receivers`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>
+     */
     pub async fn get_all_receivers(
         &self,
         active: bool,
@@ -131,38 +131,38 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/receivers/{id}` endpoint.
-    *
-    * <p>Retrieves the Bitcoin receiver with the given ID.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `id: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/receivers/{id}` endpoint.
+     *
+     * <p>Retrieves the Bitcoin receiver with the given ID.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `id: &str` -- The account's country.
+     */
     pub async fn get_receiver(&self, id: &str) -> Result<crate::types::BitcoinReceiver> {
         let url = format!(
             "/v1/bitcoin/receivers/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
-    *
-    * <p>List bitcoin transacitons for a given receiver.</p>
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Only return transactions for the customer specified by this customer ID.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `receiver: &str` -- The account's country.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
+     *
+     * <p>List bitcoin transacitons for a given receiver.</p>
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Only return transactions for the customer specified by this customer ID.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `receiver: &str` -- The account's country.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_receivers_receiver_transactions(
         &self,
         customer: &str,
@@ -187,7 +187,7 @@ impl Bitcoin {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(&receiver.to_string()),
+            crate::progenitor_support::encode_path(receiver),
             query_
         );
 
@@ -198,12 +198,12 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
-    *
-    * As opposed to `get_receivers_receiver_transactions`, this function returns all the pages of the request at once.
-    *
-    * <p>List bitcoin transacitons for a given receiver.</p>
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
+     *
+     * As opposed to `get_receivers_receiver_transactions`, this function returns all the pages of the request at once.
+     *
+     * <p>List bitcoin transacitons for a given receiver.</p>
+     */
     pub async fn get_all_receivers_receiver_transactions(
         &self,
         customer: &str,
@@ -216,7 +216,7 @@ impl Bitcoin {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(&receiver.to_string()),
+            crate::progenitor_support::encode_path(receiver),
             query_
         );
 
@@ -260,19 +260,19 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
-    *
-    * <p>List bitcoin transacitons for a given receiver.</p>
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Only return transactions for the customer specified by this customer ID.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `receiver: &str` -- The account's country.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
+     *
+     * <p>List bitcoin transacitons for a given receiver.</p>
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Only return transactions for the customer specified by this customer ID.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `receiver: &str` -- The account's country.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_transactions(
         &self,
         customer: &str,
@@ -307,12 +307,12 @@ impl Bitcoin {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
-    *
-    * As opposed to `get_transactions`, this function returns all the pages of the request at once.
-    *
-    * <p>List bitcoin transacitons for a given receiver.</p>
-    */
+     * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
+     *
+     * As opposed to `get_transactions`, this function returns all the pages of the request at once.
+     *
+     * <p>List bitcoin transacitons for a given receiver.</p>
+     */
     pub async fn get_all_transactions(
         &self,
         customer: &str,

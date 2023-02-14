@@ -13,18 +13,18 @@ impl Locations {
     }
 
     /**
-    * List locations.
-    *
-    * This function performs a `GET` to the `/locations` endpoint.
-    *
-    * Retrieves all locations for your business.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-    */
+     * List locations.
+     *
+     * This function performs a `GET` to the `/locations` endpoint.
+     *
+     * Retrieves all locations for your business.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     */
     pub async fn get_page(
         &self,
         start: &str,
@@ -47,14 +47,14 @@ impl Locations {
     }
 
     /**
-    * List locations.
-    *
-    * This function performs a `GET` to the `/locations` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * Retrieves all locations for your business.
-    */
+     * List locations.
+     *
+     * This function performs a `GET` to the `/locations` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieves all locations for your business.
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Location>> {
         let url = "/locations".to_string();
         let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
@@ -96,16 +96,16 @@ impl Locations {
     }
 
     /**
-    * Create new location.
-    *
-    * This function performs a `POST` to the `/locations` endpoint.
-    *
-    * Creates a new location for the business.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Create new location.
+     *
+     * This function performs a `POST` to the `/locations` endpoint.
+     *
+     * Creates a new location for the business.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
@@ -117,41 +117,35 @@ impl Locations {
     }
 
     /**
-    * GET a location.
-    *
-    * This function performs a `GET` to the `/locations/{id}` endpoint.
-    *
-    * Retrieve a specific location.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * GET a location.
+     *
+     * This function performs a `GET` to the `/locations/{id}` endpoint.
+     *
+     * Retrieve a specific location.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
-        let url = format!(
-            "/locations/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Update location.
-    *
-    * This function performs a `PATCH` to the `/locations/{id}` endpoint.
-    *
-    * Modifies a specific location.
-    */
+     * Update location.
+     *
+     * This function performs a `PATCH` to the `/locations/{id}` endpoint.
+     *
+     * Modifies a specific location.
+     */
     pub async fn patch(
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/locations/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
 
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

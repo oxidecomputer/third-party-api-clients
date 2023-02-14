@@ -13,25 +13,25 @@ impl Users {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
-    *
-    * Retrieves a paginated list of either deleted users or all users in a domain.
-    *
-    * **Parameters:**
-    *
-    * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
-    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
-    * * `domain: &str` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
-    * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
-    * * `max_results: i64` -- Maximum number of results to return.
-    * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
-    * * `page_token: &str` -- Token to specify next page in the list.
-    * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-    * * `query: &str` -- Query string for searching user fields. For more information on constructing user queries, see [Search for Users](/admin-sdk/directory/v1/guides/search-users).
-    * * `show_deleted: &str` -- If set to `true`, retrieves the list of deleted users. (Default: `false`).
-    * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-    * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
+     *
+     * Retrieves a paginated list of either deleted users or all users in a domain.
+     *
+     * **Parameters:**
+     *
+     * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
+     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
+     * * `domain: &str` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
+     * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
+     * * `max_results: i64` -- Maximum number of results to return.
+     * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
+     * * `page_token: &str` -- Token to specify next page in the list.
+     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
+     * * `query: &str` -- Query string for searching user fields. For more information on constructing user queries, see [Search for Users](/admin-sdk/directory/v1/guides/search-users).
+     * * `show_deleted: &str` -- If set to `true`, retrieves the list of deleted users. (Default: `false`).
+     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     */
     pub async fn list(
         &self,
         customer: &str,
@@ -90,12 +90,12 @@ impl Users {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Retrieves a paginated list of either deleted users or all users in a domain.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of either deleted users or all users in a domain.
+     */
     pub async fn list_all(
         &self,
         customer: &str,
@@ -172,10 +172,10 @@ impl Users {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users` endpoint.
-    *
-    * Creates a user.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users` endpoint.
+     *
+     * Creates a user.
+     */
     pub async fn insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
         let url = "/admin/directory/v1/users".to_string();
         self.client
@@ -184,25 +184,25 @@ impl Users {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/watch` endpoint.
-    *
-    * Watches for changes in users list.
-    *
-    * **Parameters:**
-    *
-    * * `custom_field_mask: &str` -- Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
-    * * `customer: &str` -- Immutable ID of the Google Workspace account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
-    * * `domain: &str` -- Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.".
-    * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
-    * * `max_results: i64` -- Maximum number of results to return.
-    * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
-    * * `page_token: &str` -- Token to specify next page in the list.
-    * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-    * * `query: &str` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-users.
-    * * `show_deleted: &str` -- If set to true, retrieves the list of deleted users. (Default: false).
-    * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-    * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/watch` endpoint.
+     *
+     * Watches for changes in users list.
+     *
+     * **Parameters:**
+     *
+     * * `custom_field_mask: &str` -- Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+     * * `customer: &str` -- Immutable ID of the Google Workspace account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
+     * * `domain: &str` -- Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.".
+     * * `event: crate::types::Event` -- Event on which subscription is intended (if subscribing).
+     * * `max_results: i64` -- Maximum number of results to return.
+     * * `order_by: crate::types::DirectoryUsersListOrderBy` -- Property to use for sorting results.
+     * * `page_token: &str` -- Token to specify next page in the list.
+     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
+     * * `query: &str` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-users.
+     * * `show_deleted: &str` -- If set to true, retrieves the list of deleted users. (Default: false).
+     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     */
     pub async fn watch(
         &self,
         customer: &str,
@@ -261,17 +261,17 @@ impl Users {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}` endpoint.
-    *
-    * Retrieves a user.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
-    * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
-    * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}` endpoint.
+     *
+     * Retrieves a user.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `custom_field_mask: &str` -- A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when `projection=custom`.
+     * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
+     * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+     */
     pub async fn get(
         &self,
         user_key: &str,
@@ -288,7 +288,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}?{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
             query_
         );
 
@@ -296,14 +296,14 @@ impl Users {
     }
 
     /**
-    * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}` endpoint.
-    *
-    * Updates a user. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to `null` will be cleared.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}` endpoint.
+     *
+     * Updates a user. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to `null` will be cleared.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn update(
         &self,
         user_key: &str,
@@ -311,7 +311,7 @@ impl Users {
     ) -> Result<crate::types::User> {
         let url = format!(
             "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -320,32 +320,32 @@ impl Users {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}` endpoint.
-    *
-    * Deletes a user.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}` endpoint.
+     *
+     * Deletes a user.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn delete(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}` endpoint.
-    *
-    * Updates a user using patch semantics. The update method should be used instead, since it also supports patch semantics and has better performance. This method is unable to clear fields that contain repeated objects (`addresses`, `phones`, etc). Use the update method instead.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}` endpoint.
+     *
+     * Updates a user using patch semantics. The update method should be used instead, since it also supports patch semantics and has better performance. This method is unable to clear fields that contain repeated objects (`addresses`, `phones`, etc). Use the update method instead.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn patch(
         &self,
         user_key: &str,
@@ -353,7 +353,7 @@ impl Users {
     ) -> Result<crate::types::User> {
         let url = format!(
             "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -362,15 +362,15 @@ impl Users {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
-    *
-    * Lists all aliases for a user.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
+     *
+     * Lists all aliases for a user.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
+     */
     pub async fn aliases_list(
         &self,
         user_key: &str,
@@ -383,7 +383,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}/aliases?{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
             query_
         );
 
@@ -391,14 +391,14 @@ impl Users {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
-    *
-    * Adds an alias.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
+     *
+     * Adds an alias.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn aliases_insert(
         &self,
         user_key: &str,
@@ -406,7 +406,7 @@ impl Users {
     ) -> Result<crate::types::Alias> {
         let url = format!(
             "/admin/directory/v1/users/{}/aliases",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -415,15 +415,15 @@ impl Users {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases/watch` endpoint.
-    *
-    * Watches for changes in users list.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Email or immutable ID of the user.
-    * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases/watch` endpoint.
+     *
+     * Watches for changes in users list.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Email or immutable ID of the user.
+     * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
+     */
     pub async fn aliases_watch(
         &self,
         user_key: &str,
@@ -437,7 +437,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}/aliases/watch?{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
             query_
         );
 
@@ -447,34 +447,34 @@ impl Users {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/aliases/{alias}` endpoint.
-    *
-    * Removes an alias.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    * * `alias: &str` -- The alias to be removed.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/aliases/{alias}` endpoint.
+     *
+     * Removes an alias.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `alias: &str` -- The alias to be removed.
+     */
     pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/aliases/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
-            crate::progenitor_support::encode_path(&alias.to_string()),
+            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(alias),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/makeAdmin` endpoint.
-    *
-    * Makes a user a super administrator.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/makeAdmin` endpoint.
+     *
+     * Makes a user a super administrator.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn make_admin(
         &self,
         user_key: &str,
@@ -482,7 +482,7 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/makeAdmin",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -491,32 +491,32 @@ impl Users {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
-    *
-    * Retrieves the user's photo.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
+     *
+     * Retrieves the user's photo.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn photos_get(&self, user_key: &str) -> Result<crate::types::UserPhoto> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
-    *
-    * Adds a photo for the user.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
+     *
+     * Adds a photo for the user.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn photos_update(
         &self,
         user_key: &str,
@@ -524,7 +524,7 @@ impl Users {
     ) -> Result<crate::types::UserPhoto> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -533,32 +533,32 @@ impl Users {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
-    *
-    * Removes the user's photo.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
+     *
+     * Removes the user's photo.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn photos_delete(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
-    *
-    * Adds a photo for the user. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch).
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
+     *
+     * Adds a photo for the user. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch).
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn photos_patch(
         &self,
         user_key: &str,
@@ -566,7 +566,7 @@ impl Users {
     ) -> Result<crate::types::UserPhoto> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client
@@ -575,36 +575,36 @@ impl Users {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/signOut` endpoint.
-    *
-    * Signs a user out of all web and device sessions and reset their sign-in cookies. User will have to sign in by authenticating again.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/signOut` endpoint.
+     *
+     * Signs a user out of all web and device sessions and reset their sign-in cookies. User will have to sign in by authenticating again.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     */
     pub async fn sign_out(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/signOut",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/undelete` endpoint.
-    *
-    * Undeletes a deleted user.
-    *
-    * **Parameters:**
-    *
-    * * `user_key: &str` -- The immutable id of the user.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/undelete` endpoint.
+     *
+     * Undeletes a deleted user.
+     *
+     * **Parameters:**
+     *
+     * * `user_key: &str` -- The immutable id of the user.
+     */
     pub async fn undelete(&self, user_key: &str, body: &crate::types::UserUndelete) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/undelete",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client

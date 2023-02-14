@@ -13,27 +13,27 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Retrieve monitor settings for a subuser.
-    *
-    * This function performs a `GET` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Retrieve monitor settings for a subuser.
+     *
+     * This function performs a `GET` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn get_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Monitor> {
         let url = format!(
             "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Update Monitor Settings for a subuser.
-    *
-    * This function performs a `PUT` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Update Monitor Settings for a subuser.
+     *
+     * This function performs a `PUT` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn put_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
@@ -41,7 +41,7 @@ impl SubuserMonitorSettings {
     ) -> Result<crate::types::Monitor> {
         let url = format!(
             "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client
@@ -50,10 +50,10 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Create monitor settings.
-    *
-    * This function performs a `POST` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Create monitor settings.
+     *
+     * This function performs a `POST` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn post_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
@@ -61,7 +61,7 @@ impl SubuserMonitorSettings {
     ) -> Result<crate::types::Monitor> {
         let url = format!(
             "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client
@@ -70,17 +70,17 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Delete monitor settings.
-    *
-    * This function performs a `DELETE` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Delete monitor settings.
+     *
+     * This function performs a `DELETE` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn delete_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client.delete(&url, None).await

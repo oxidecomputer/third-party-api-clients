@@ -13,17 +13,17 @@ impl TaxCodes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/tax_codes` endpoint.
-    *
-    * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/tax_codes` endpoint.
+     *
+     * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         ending_before: &str,
@@ -50,12 +50,12 @@ impl TaxCodes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/tax_codes` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
-    */
+     * This function performs a `GET` to the `/v1/tax_codes` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
         let url = "/v1/tax_codes".to_string();
         let mut resp: crate::types::TaxProductResourceCodeList =
@@ -99,19 +99,19 @@ impl TaxCodes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/tax_codes/{id}` endpoint.
-    *
-    * <p>Retrieves the details of an existing tax code. Supply the unique tax code ID and Stripe will return the corresponding tax code information.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `id: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/tax_codes/{id}` endpoint.
+     *
+     * <p>Retrieves the details of an existing tax code. Supply the unique tax code ID and Stripe will return the corresponding tax code information.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `id: &str` -- The account's country.
+     */
     pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
         let url = format!(
             "/v1/tax_codes/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

@@ -5,8 +5,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Acl {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14,8 +14,8 @@ pub struct Acl {
     )]
     pub etag: String,
     /**
-    * List of rules on the access control list.
-    */
+     * List of rules on the access control list.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -23,8 +23,8 @@ pub struct Acl {
     )]
     pub items: Vec<AclRule>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -32,8 +32,8 @@ pub struct Acl {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -42,8 +42,8 @@ pub struct Acl {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -57,8 +57,8 @@ pub struct Acl {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Scope {
     /**
-    * The extent to which calendar access is granted by this ACL rule.
-    */
+     * The extent to which calendar access is granted by this ACL rule.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -67,8 +67,8 @@ pub struct Scope {
     )]
     pub type_: String,
     /**
-    * The extent to which calendar access is granted by this ACL rule.
-    */
+     * The extent to which calendar access is granted by this ACL rule.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -80,8 +80,8 @@ pub struct Scope {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AclRule {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -89,8 +89,8 @@ pub struct AclRule {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -98,8 +98,8 @@ pub struct AclRule {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -107,8 +107,8 @@ pub struct AclRule {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -116,8 +116,8 @@ pub struct AclRule {
     )]
     pub role: String,
     /**
-    * The extent to which calendar access is granted by this ACL rule.
-    */
+     * The extent to which calendar access is granted by this ACL rule.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub scope: Option<Scope>,
 }
@@ -131,8 +131,8 @@ pub struct Calendar {
     )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -140,8 +140,8 @@ pub struct Calendar {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -149,8 +149,8 @@ pub struct Calendar {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -158,8 +158,8 @@ pub struct Calendar {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -167,8 +167,8 @@ pub struct Calendar {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -176,8 +176,8 @@ pub struct Calendar {
     )]
     pub location: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -185,8 +185,8 @@ pub struct Calendar {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -199,8 +199,8 @@ pub struct Calendar {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarList {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -208,8 +208,8 @@ pub struct CalendarList {
     )]
     pub etag: String,
     /**
-    * Calendars that are present on the user's calendar list.
-    */
+     * Calendars that are present on the user's calendar list.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -217,8 +217,8 @@ pub struct CalendarList {
     )]
     pub items: Vec<CalendarListEntry>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -226,8 +226,8 @@ pub struct CalendarList {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -236,8 +236,8 @@ pub struct CalendarList {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -251,8 +251,8 @@ pub struct CalendarList {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationSettings {
     /**
-    * The notifications that the authenticated user is receiving for this calendar.
-    */
+     * The notifications that the authenticated user is receiving for this calendar.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -264,8 +264,8 @@ pub struct NotificationSettings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarListEntry {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -274,8 +274,8 @@ pub struct CalendarListEntry {
     )]
     pub access_role: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -284,8 +284,8 @@ pub struct CalendarListEntry {
     )]
     pub background_color: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -300,8 +300,8 @@ pub struct CalendarListEntry {
     )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
-    * The default reminders that the authenticated user has for this calendar.
-    */
+     * The default reminders that the authenticated user has for this calendar.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -310,16 +310,16 @@ pub struct CalendarListEntry {
     )]
     pub default_reminders: Vec<EventReminder>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub deleted: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -327,8 +327,8 @@ pub struct CalendarListEntry {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -336,8 +336,8 @@ pub struct CalendarListEntry {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -346,16 +346,16 @@ pub struct CalendarListEntry {
     )]
     pub foreground_color: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub hidden: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -363,8 +363,8 @@ pub struct CalendarListEntry {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -372,8 +372,8 @@ pub struct CalendarListEntry {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -381,8 +381,8 @@ pub struct CalendarListEntry {
     )]
     pub location: String,
     /**
-    * The notifications that the authenticated user is receiving for this calendar.
-    */
+     * The notifications that the authenticated user is receiving for this calendar.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -390,24 +390,24 @@ pub struct CalendarListEntry {
     )]
     pub notification_settings: Option<NotificationSettings>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub primary: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub selected: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -415,8 +415,8 @@ pub struct CalendarListEntry {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -425,8 +425,8 @@ pub struct CalendarListEntry {
     )]
     pub summary_override: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -439,8 +439,8 @@ pub struct CalendarListEntry {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarNotification {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -448,8 +448,8 @@ pub struct CalendarNotification {
     )]
     pub method: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -462,8 +462,8 @@ pub struct CalendarNotification {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -471,8 +471,8 @@ pub struct Channel {
     )]
     pub address: String,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -480,8 +480,8 @@ pub struct Channel {
     )]
     pub expiration: i64,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -489,8 +489,8 @@ pub struct Channel {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -498,8 +498,8 @@ pub struct Channel {
     )]
     pub kind: String,
     /**
-    * Additional parameters controlling delivery channel behavior. Optional.
-    */
+     * Additional parameters controlling delivery channel behavior. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -507,16 +507,16 @@ pub struct Channel {
     )]
     pub params: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub payload: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -525,8 +525,8 @@ pub struct Channel {
     )]
     pub resource_id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -535,8 +535,8 @@ pub struct Channel {
     )]
     pub resource_uri: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -544,8 +544,8 @@ pub struct Channel {
     )]
     pub token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -558,8 +558,8 @@ pub struct Channel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ColorDefinition {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -567,8 +567,8 @@ pub struct ColorDefinition {
     )]
     pub background: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -580,18 +580,18 @@ pub struct ColorDefinition {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Colors {
     /**
-    * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
-    */
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub calendar: Option<ColorDefinition>,
     /**
-    * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
-    */
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub event: Option<ColorDefinition>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -599,8 +599,8 @@ pub struct Colors {
     )]
     pub kind: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -613,8 +613,8 @@ pub struct Colors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceData {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -635,10 +635,10 @@ pub struct ConferenceData {
     )]
     pub create_request: Option<CreateConferenceRequest>,
     /**
-    * Information about individual conference entry points, such as URLs or phone numbers.
-    *  All of them must belong to the same conference.
-    *  Either conferenceSolution and at least one entryPoint, or createRequest is required.
-    */
+     * Information about individual conference entry points, such as URLs or phone numbers.
+     *  All of them must belong to the same conference.
+     *  Either conferenceSolution and at least one entryPoint, or createRequest is required.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -647,8 +647,8 @@ pub struct ConferenceData {
     )]
     pub entry_points: Vec<EntryPoint>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -658,8 +658,8 @@ pub struct ConferenceData {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parameters: Option<ConferenceParameters>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -685,8 +685,8 @@ pub struct Shared {}
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     /**
-    * Properties that are shared between copies of the event on other attendees' calendars.
-    */
+     * Properties that are shared between copies of the event on other attendees' calendars.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parameters: Option<Shared>,
 }
@@ -694,12 +694,12 @@ pub struct ConferenceParametersAddOn {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceProperties {
     /**
-    * The types of conference solutions that are supported for this calendar.
-    *  The possible values are:
-    *  - "eventHangout"
-    *  - "eventNamedHangout"
-    *  - "hangoutsMeet"  Optional.
-    */
+     * The types of conference solutions that are supported for this calendar.
+     *  The possible values are:
+     *  - "eventHangout"
+     *  - "eventNamedHangout"
+     *  - "hangoutsMeet"  Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -712,8 +712,8 @@ pub struct ConferenceProperties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceRequestStatus {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -726,8 +726,8 @@ pub struct ConferenceRequestStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolution {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -738,8 +738,8 @@ pub struct ConferenceSolution {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub key: Option<ConferenceSolutionKey>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -751,8 +751,8 @@ pub struct ConferenceSolution {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolutionKey {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -771,8 +771,8 @@ pub struct CreateConferenceRequest {
     )]
     pub conference_solution_key: Option<ConferenceSolutionKey>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -787,8 +787,8 @@ pub struct CreateConferenceRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EntryPoint {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -797,12 +797,12 @@ pub struct EntryPoint {
     )]
     pub access_code: String,
     /**
-    * The types of conference solutions that are supported for this calendar.
-    *  The possible values are:
-    *  - "eventHangout"
-    *  - "eventNamedHangout"
-    *  - "hangoutsMeet"  Optional.
-    */
+     * The types of conference solutions that are supported for this calendar.
+     *  The possible values are:
+     *  - "eventHangout"
+     *  - "eventNamedHangout"
+     *  - "hangoutsMeet"  Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -811,8 +811,8 @@ pub struct EntryPoint {
     )]
     pub entry_point_features: Vec<String>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -821,8 +821,8 @@ pub struct EntryPoint {
     )]
     pub entry_point_type: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -830,8 +830,8 @@ pub struct EntryPoint {
     )]
     pub label: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -840,8 +840,8 @@ pub struct EntryPoint {
     )]
     pub meeting_code: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -849,8 +849,8 @@ pub struct EntryPoint {
     )]
     pub passcode: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -858,8 +858,8 @@ pub struct EntryPoint {
     )]
     pub password: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -867,8 +867,8 @@ pub struct EntryPoint {
     )]
     pub pin: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -877,8 +877,8 @@ pub struct EntryPoint {
     )]
     pub region_code: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -890,8 +890,8 @@ pub struct EntryPoint {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -899,8 +899,8 @@ pub struct Error {
     )]
     pub domain: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -913,8 +913,8 @@ pub struct Error {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Creator {
     /**
-    * The creator of the event. Read-only.
-    */
+     * The creator of the event. Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -923,8 +923,8 @@ pub struct Creator {
     )]
     pub display_name: String,
     /**
-    * The creator of the event. Read-only.
-    */
+     * The creator of the event. Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -932,8 +932,8 @@ pub struct Creator {
     )]
     pub email: String,
     /**
-    * The creator of the event. Read-only.
-    */
+     * The creator of the event. Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -941,8 +941,8 @@ pub struct Creator {
     )]
     pub id: String,
     /**
-    * The creator of the event. Read-only.
-    */
+     * The creator of the event. Read-only.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -955,13 +955,13 @@ pub struct Creator {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedProperties {
     /**
-    * Extended properties of the event.
-    */
+     * Extended properties of the event.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub private: Option<Shared>,
     /**
-    * Extended properties of the event.
-    */
+     * Extended properties of the event.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shared: Option<Shared>,
 }
@@ -970,8 +970,8 @@ pub struct ExtendedProperties {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Gadget {
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -979,8 +979,8 @@ pub struct Gadget {
     )]
     pub display: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -988,8 +988,8 @@ pub struct Gadget {
     )]
     pub height: i64,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -998,8 +998,8 @@ pub struct Gadget {
     )]
     pub icon_link: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1007,8 +1007,8 @@ pub struct Gadget {
     )]
     pub link: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1016,8 +1016,8 @@ pub struct Gadget {
     )]
     pub preferences: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1025,8 +1025,8 @@ pub struct Gadget {
     )]
     pub title: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1035,8 +1035,8 @@ pub struct Gadget {
     )]
     pub type_: String,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1049,8 +1049,8 @@ pub struct Gadget {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Organizer {
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-    */
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1059,8 +1059,8 @@ pub struct Organizer {
     )]
     pub display_name: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-    */
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1068,8 +1068,8 @@ pub struct Organizer {
     )]
     pub email: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-    */
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1077,8 +1077,8 @@ pub struct Organizer {
     )]
     pub id: String,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-    */
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1091,8 +1091,8 @@ pub struct Organizer {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reminders {
     /**
-    * Information about the event's reminders for the authenticated user.
-    */
+     * Information about the event's reminders for the authenticated user.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1100,8 +1100,8 @@ pub struct Reminders {
     )]
     pub overrides: Vec<EventReminder>,
     /**
-    * Information about the event's reminders for the authenticated user.
-    */
+     * Information about the event's reminders for the authenticated user.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1114,8 +1114,8 @@ pub struct Reminders {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-    */
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1123,8 +1123,8 @@ pub struct Source {
     )]
     pub title: String,
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-    */
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1136,8 +1136,8 @@ pub struct Source {
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1145,10 +1145,10 @@ pub struct Event {
     )]
     pub anyone_can_add_self: bool,
     /**
-    * File attachments for the event. Currently only Google Drive attachments are supported.
-    *  In order to modify attachments the supportsAttachments request parameter should be set to true.
-    *  There can be at most 25 attachments per event,
-    */
+     * File attachments for the event. Currently only Google Drive attachments are supported.
+     *  In order to modify attachments the supportsAttachments request parameter should be set to true.
+     *  There can be at most 25 attachments per event,
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1156,8 +1156,8 @@ pub struct Event {
     )]
     pub attachments: Vec<EventAttachment>,
     /**
-    * The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
-    */
+     * The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1165,8 +1165,8 @@ pub struct Event {
     )]
     pub attendees: Vec<EventAttendee>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1174,8 +1174,8 @@ pub struct Event {
     )]
     pub attendees_omitted: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1190,8 +1190,8 @@ pub struct Event {
     )]
     pub conference_data: Option<ConferenceData>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1200,13 +1200,13 @@ pub struct Event {
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * The creator of the event. Read-only.
-    */
+     * The creator of the event. Read-only.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub creator: Option<Creator>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1216,8 +1216,8 @@ pub struct Event {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end: Option<EventDateTime>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1225,8 +1225,8 @@ pub struct Event {
     )]
     pub end_time_unspecified: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1234,8 +1234,8 @@ pub struct Event {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1244,8 +1244,8 @@ pub struct Event {
     )]
     pub event_type: String,
     /**
-    * Extended properties of the event.
-    */
+     * Extended properties of the event.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1253,13 +1253,13 @@ pub struct Event {
     )]
     pub extended_properties: Option<ExtendedProperties>,
     /**
-    * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-    */
+     * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub gadget: Option<Gadget>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1267,8 +1267,8 @@ pub struct Event {
     )]
     pub guests_can_invite_others: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1276,8 +1276,8 @@ pub struct Event {
     )]
     pub guests_can_modify: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1285,8 +1285,8 @@ pub struct Event {
     )]
     pub guests_can_see_other_guests: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1295,8 +1295,8 @@ pub struct Event {
     )]
     pub hangout_link: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1305,8 +1305,8 @@ pub struct Event {
     )]
     pub html_link: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1315,8 +1315,8 @@ pub struct Event {
     )]
     pub i_cal_uid: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1324,8 +1324,8 @@ pub struct Event {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1333,8 +1333,8 @@ pub struct Event {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1342,16 +1342,16 @@ pub struct Event {
     )]
     pub location: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub locked: bool,
     /**
-    * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-    */
+     * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organizer: Option<Organizer>,
     #[serde(
@@ -1361,8 +1361,8 @@ pub struct Event {
     )]
     pub original_start_time: Option<EventDateTime>,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1370,12 +1370,12 @@ pub struct Event {
     )]
     pub private_copy: bool,
     /**
-    * The types of conference solutions that are supported for this calendar.
-    *  The possible values are:
-    *  - "eventHangout"
-    *  - "eventNamedHangout"
-    *  - "hangoutsMeet"  Optional.
-    */
+     * The types of conference solutions that are supported for this calendar.
+     *  The possible values are:
+     *  - "eventHangout"
+     *  - "eventNamedHangout"
+     *  - "hangoutsMeet"  Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1383,8 +1383,8 @@ pub struct Event {
     )]
     pub recurrence: Vec<String>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1393,13 +1393,13 @@ pub struct Event {
     )]
     pub recurring_event_id: String,
     /**
-    * Information about the event's reminders for the authenticated user.
-    */
+     * Information about the event's reminders for the authenticated user.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reminders: Option<Reminders>,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1407,15 +1407,15 @@ pub struct Event {
     )]
     pub sequence: i64,
     /**
-    * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-    */
+     * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start: Option<EventDateTime>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1423,8 +1423,8 @@ pub struct Event {
     )]
     pub status: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1432,8 +1432,8 @@ pub struct Event {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1441,8 +1441,8 @@ pub struct Event {
     )]
     pub transparency: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1451,8 +1451,8 @@ pub struct Event {
     )]
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1464,8 +1464,8 @@ pub struct Event {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttachment {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1474,8 +1474,8 @@ pub struct EventAttachment {
     )]
     pub file_id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1484,8 +1484,8 @@ pub struct EventAttachment {
     )]
     pub file_url: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1494,8 +1494,8 @@ pub struct EventAttachment {
     )]
     pub icon_link: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1504,8 +1504,8 @@ pub struct EventAttachment {
     )]
     pub mime_type: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1517,8 +1517,8 @@ pub struct EventAttachment {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttendee {
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1527,8 +1527,8 @@ pub struct EventAttendee {
     )]
     pub additional_guests: i64,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1536,8 +1536,8 @@ pub struct EventAttendee {
     )]
     pub comment: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1546,8 +1546,8 @@ pub struct EventAttendee {
     )]
     pub display_name: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1555,8 +1555,8 @@ pub struct EventAttendee {
     )]
     pub email: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1564,32 +1564,32 @@ pub struct EventAttendee {
     )]
     pub id: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub optional: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub organizer: bool,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub resource: bool,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1598,8 +1598,8 @@ pub struct EventAttendee {
     )]
     pub response_status: String,
     /**
-    * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-    */
+     * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -1611,8 +1611,8 @@ pub struct EventAttendee {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventDateTime {
     /**
-    * The date, in the format "yyyy-mm-dd", if this is an all-day event.
-    */
+     * The date, in the format "yyyy-mm-dd", if this is an all-day event.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1620,8 +1620,8 @@ pub struct EventDateTime {
     )]
     pub date: Option<chrono::NaiveDate>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1631,8 +1631,8 @@ pub struct EventDateTime {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1645,8 +1645,8 @@ pub struct EventDateTime {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventReminder {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1654,8 +1654,8 @@ pub struct EventReminder {
     )]
     pub method: String,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1667,8 +1667,8 @@ pub struct EventReminder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Events {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1677,8 +1677,8 @@ pub struct Events {
     )]
     pub access_role: String,
     /**
-    * The default reminders that the authenticated user has for this calendar.
-    */
+     * The default reminders that the authenticated user has for this calendar.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1687,8 +1687,8 @@ pub struct Events {
     )]
     pub default_reminders: Vec<EventReminder>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1696,8 +1696,8 @@ pub struct Events {
     )]
     pub description: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1705,8 +1705,8 @@ pub struct Events {
     )]
     pub etag: String,
     /**
-    * List of events on the calendar.
-    */
+     * List of events on the calendar.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1714,8 +1714,8 @@ pub struct Events {
     )]
     pub items: Vec<Event>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1723,8 +1723,8 @@ pub struct Events {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1733,8 +1733,8 @@ pub struct Events {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1743,8 +1743,8 @@ pub struct Events {
     )]
     pub next_sync_token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1752,8 +1752,8 @@ pub struct Events {
     )]
     pub summary: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1762,8 +1762,8 @@ pub struct Events {
     )]
     pub time_zone: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1776,8 +1776,8 @@ pub struct Events {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyCalendar {
     /**
-    * List of time ranges during which this calendar should be regarded as busy.
-    */
+     * List of time ranges during which this calendar should be regarded as busy.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1785,8 +1785,8 @@ pub struct FreeBusyCalendar {
     )]
     pub busy: Vec<TimePeriod>,
     /**
-    * Optional error(s) (if computation for the calendar failed).
-    */
+     * Optional error(s) (if computation for the calendar failed).
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1798,12 +1798,12 @@ pub struct FreeBusyCalendar {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyGroup {
     /**
-    * The types of conference solutions that are supported for this calendar.
-    *  The possible values are:
-    *  - "eventHangout"
-    *  - "eventNamedHangout"
-    *  - "hangoutsMeet"  Optional.
-    */
+     * The types of conference solutions that are supported for this calendar.
+     *  The possible values are:
+     *  - "eventHangout"
+     *  - "eventNamedHangout"
+     *  - "hangoutsMeet"  Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1811,8 +1811,8 @@ pub struct FreeBusyGroup {
     )]
     pub calendars: Vec<String>,
     /**
-    * Optional error(s) (if computation for the calendar failed).
-    */
+     * Optional error(s) (if computation for the calendar failed).
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1824,8 +1824,8 @@ pub struct FreeBusyGroup {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequest {
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1834,8 +1834,8 @@ pub struct FreeBusyRequest {
     )]
     pub calendar_expansion_max: i64,
     /**
-    * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
-    */
+     * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1844,8 +1844,8 @@ pub struct FreeBusyRequest {
     )]
     pub group_expansion_max: i64,
     /**
-    * List of calendars and/or groups to query.
-    */
+     * List of calendars and/or groups to query.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1853,8 +1853,8 @@ pub struct FreeBusyRequest {
     )]
     pub items: Vec<FreeBusyRequestItem>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1864,8 +1864,8 @@ pub struct FreeBusyRequest {
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1875,8 +1875,8 @@ pub struct FreeBusyRequest {
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1889,8 +1889,8 @@ pub struct FreeBusyRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequestItem {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1902,18 +1902,18 @@ pub struct FreeBusyRequestItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyResponse {
     /**
-    * List of free/busy information for calendars.
-    */
+     * List of free/busy information for calendars.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub calendars: Option<FreeBusyCalendar>,
     /**
-    * Expansion of groups.
-    */
+     * Expansion of groups.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub groups: Option<FreeBusyGroup>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1921,8 +1921,8 @@ pub struct FreeBusyResponse {
     )]
     pub kind: String,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1932,8 +1932,8 @@ pub struct FreeBusyResponse {
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1947,8 +1947,8 @@ pub struct FreeBusyResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Setting {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1956,8 +1956,8 @@ pub struct Setting {
     )]
     pub etag: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1965,8 +1965,8 @@ pub struct Setting {
     )]
     pub id: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1974,8 +1974,8 @@ pub struct Setting {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1987,8 +1987,8 @@ pub struct Setting {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1996,8 +1996,8 @@ pub struct Settings {
     )]
     pub etag: String,
     /**
-    * List of user settings.
-    */
+     * List of user settings.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2005,8 +2005,8 @@ pub struct Settings {
     )]
     pub items: Vec<Setting>,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2014,8 +2014,8 @@ pub struct Settings {
     )]
     pub kind: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2024,8 +2024,8 @@ pub struct Settings {
     )]
     pub next_page_token: String,
     /**
-    * ETag of the collection.
-    */
+     * ETag of the collection.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2038,8 +2038,8 @@ pub struct Settings {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimePeriod {
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2048,8 +2048,8 @@ pub struct TimePeriod {
     )]
     pub end: Option<chrono::DateTime<chrono::Utc>>,
     /**
-    * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    */
+     * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2074,7 +2074,7 @@ pub enum Alt {
 
 impl std::fmt::Display for Alt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Alt::Json => "json",
             Alt::Noop => "",
             Alt::FallthroughString => "*",
@@ -2111,7 +2111,7 @@ pub enum OrderBy {
 
 impl std::fmt::Display for OrderBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OrderBy::StartTime => "startTime",
             OrderBy::Updated => "updated",
             OrderBy::Noop => "",
@@ -2151,7 +2151,7 @@ pub enum SendUpdates {
 
 impl std::fmt::Display for SendUpdates {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SendUpdates::All => "all",
             SendUpdates::ExternalOnly => "externalOnly",
             SendUpdates::None => "none",
@@ -2194,7 +2194,7 @@ pub enum MinAccessRole {
 
 impl std::fmt::Display for MinAccessRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MinAccessRole::FreeBusyReader => "freeBusyReader",
             MinAccessRole::Owner => "owner",
             MinAccessRole::Reader => "reader",

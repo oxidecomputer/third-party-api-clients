@@ -13,18 +13,18 @@ impl Comments {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
-    *
-    * Lists a file's comments.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `include_deleted: bool` -- Whether to include deleted comments. Deleted comments will not include their original content.
-    * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-    * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-    * * `start_modified_time: &str` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
-    */
+     * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
+     *
+     * Lists a file's comments.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `include_deleted: bool` -- Whether to include deleted comments. Deleted comments will not include their original content.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     * * `start_modified_time: &str` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
+     */
     pub async fn list(
         &self,
         file_id: &str,
@@ -52,7 +52,7 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -63,12 +63,12 @@ impl Comments {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Lists a file's comments.
-    */
+     * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Lists a file's comments.
+     */
     pub async fn list_all(
         &self,
         file_id: &str,
@@ -88,7 +88,7 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -125,14 +125,14 @@ impl Comments {
     }
 
     /**
-    * This function performs a `POST` to the `/files/{fileId}/comments` endpoint.
-    *
-    * Creates a new comment on a file.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    */
+     * This function performs a `POST` to the `/files/{fileId}/comments` endpoint.
+     *
+     * Creates a new comment on a file.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     */
     pub async fn create(
         &self,
         file_id: &str,
@@ -140,7 +140,7 @@ impl Comments {
     ) -> Result<crate::types::Comment> {
         let url = format!(
             "/files/{}/comments",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
         );
 
         self.client
@@ -149,16 +149,16 @@ impl Comments {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}` endpoint.
-    *
-    * Gets a comment by ID.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `comment_id: &str` -- A link to this theme's background image.
-    * * `include_deleted: bool` -- Whether to return deleted comments. Deleted comments will not include their original content.
-    */
+     * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}` endpoint.
+     *
+     * Gets a comment by ID.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `comment_id: &str` -- A link to this theme's background image.
+     * * `include_deleted: bool` -- Whether to return deleted comments. Deleted comments will not include their original content.
+     */
     pub async fn get(
         &self,
         file_id: &str,
@@ -172,8 +172,8 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments/{}?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(comment_id),
             query_
         );
 
@@ -181,35 +181,35 @@ impl Comments {
     }
 
     /**
-    * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}` endpoint.
-    *
-    * Deletes a comment.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `comment_id: &str` -- A link to this theme's background image.
-    */
+     * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}` endpoint.
+     *
+     * Deletes a comment.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `comment_id: &str` -- A link to this theme's background image.
+     */
     pub async fn delete(&self, file_id: &str, comment_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}` endpoint.
-    *
-    * Updates a comment with patch semantics.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `comment_id: &str` -- A link to this theme's background image.
-    */
+     * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}` endpoint.
+     *
+     * Updates a comment with patch semantics.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `comment_id: &str` -- A link to this theme's background image.
+     */
     pub async fn update(
         &self,
         file_id: &str,
@@ -218,8 +218,8 @@ impl Comments {
     ) -> Result<crate::types::Comment> {
         let url = format!(
             "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client

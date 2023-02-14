@@ -13,10 +13,10 @@ impl ThreatInsights {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/threats/configuration` endpoint.
-    *
-    * Gets current ThreatInsight configuration
-    */
+     * This function performs a `GET` to the `/api/v1/threats/configuration` endpoint.
+     *
+     * Gets current ThreatInsight configuration
+     */
     pub async fn get_current_configuration(
         &self,
     ) -> Result<crate::types::ThreatInsightConfiguration> {
@@ -25,10 +25,10 @@ impl ThreatInsights {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/threats/configuration` endpoint.
-    *
-    * Updates ThreatInsight configuration
-    */
+     * This function performs a `POST` to the `/api/v1/threats/configuration` endpoint.
+     *
+     * Updates ThreatInsight configuration
+     */
     pub async fn update_configuration(
         &self,
         body: &crate::types::ThreatInsightConfiguration,

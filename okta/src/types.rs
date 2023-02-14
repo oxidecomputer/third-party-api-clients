@@ -70,7 +70,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Type::App => "APP",
             Type::AppType => "APP_TYPE",
             Type::Noop => "",
@@ -330,7 +330,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Status::Active => "ACTIVE",
             Status::Deleted => "DELETED",
             Status::Inactive => "INACTIVE",
@@ -497,7 +497,7 @@ pub enum ApplicationCredentialsScheme {
 
 impl std::fmt::Display for ApplicationCredentialsScheme {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ApplicationCredentialsScheme::AdminSetsCredentials => "ADMIN_SETS_CREDENTIALS",
             ApplicationCredentialsScheme::EditPasswordOnly => "EDIT_PASSWORD_ONLY",
             ApplicationCredentialsScheme::EditUsernameAndPassword => "EDIT_USERNAME_AND_PASSWORD",
@@ -568,7 +568,7 @@ pub enum Use {
 
 impl std::fmt::Display for Use {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Use::Sig => "sig",
             Use::Noop => "",
             Use::FallthroughString => "*",
@@ -747,7 +747,7 @@ pub enum ApplicationSignOnMode {
 
 impl std::fmt::Display for ApplicationSignOnMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ApplicationSignOnMode::AutoLogin => "AUTO_LOGIN",
             ApplicationSignOnMode::BasicAuth => "BASIC_AUTH",
             ApplicationSignOnMode::Bookmark => "BOOKMARK",
@@ -848,7 +848,7 @@ pub enum AuthenticationProviderType {
 
 impl std::fmt::Display for AuthenticationProviderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthenticationProviderType::ActiveDirectory => "ACTIVE_DIRECTORY",
             AuthenticationProviderType::Federation => "FEDERATION",
             AuthenticationProviderType::Import => "IMPORT",
@@ -887,7 +887,7 @@ pub enum IssuerMode {
 
 impl std::fmt::Display for IssuerMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IssuerMode::CustomUrl => "CUSTOM_URL",
             IssuerMode::OrgUrl => "ORG_URL",
             IssuerMode::Noop => "",
@@ -922,7 +922,7 @@ pub enum RoleStatus {
 
 impl std::fmt::Display for RoleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RoleStatus::Active => "ACTIVE",
             RoleStatus::Inactive => "INACTIVE",
             RoleStatus::Noop => "",
@@ -1022,7 +1022,7 @@ pub enum AuthorizationServerCredentialsRotationMode {
 
 impl std::fmt::Display for AuthorizationServerCredentialsRotationMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthorizationServerCredentialsRotationMode::Auto => "AUTO",
             AuthorizationServerCredentialsRotationMode::Manual => "MANUAL",
             AuthorizationServerCredentialsRotationMode::Noop => "",
@@ -1143,7 +1143,7 @@ pub enum AuthorizationServerPolicyRuleType {
 
 impl std::fmt::Display for AuthorizationServerPolicyRuleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthorizationServerPolicyRuleType::ResourceAccess => "RESOURCE_ACCESS",
             AuthorizationServerPolicyRuleType::Noop => "",
             AuthorizationServerPolicyRuleType::FallthroughString => "*",
@@ -1669,7 +1669,7 @@ pub enum DnsRecordType {
 
 impl std::fmt::Display for DnsRecordType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DnsRecordType::Cname => "CNAME",
             DnsRecordType::Txt => "TXT",
             DnsRecordType::Noop => "",
@@ -1704,7 +1704,7 @@ pub enum TrustLevel {
 
 impl std::fmt::Display for TrustLevel {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TrustLevel::Any => "ANY",
             TrustLevel::Trusted => "TRUSTED",
             TrustLevel::Noop => "",
@@ -1763,7 +1763,7 @@ pub enum SupportedMdmFrameworks {
 
 impl std::fmt::Display for SupportedMdmFrameworks {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SupportedMdmFrameworks::Afw => "AFW",
             SupportedMdmFrameworks::Native => "NATIVE",
             SupportedMdmFrameworks::Safe => "SAFE",
@@ -1803,7 +1803,7 @@ pub enum Types {
 
 impl std::fmt::Display for Types {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Types::Android => "ANDROID",
             Types::Ios => "IOS",
             Types::Osx => "OSX",
@@ -1944,7 +1944,7 @@ pub enum DomainCertificateSourceType {
 
 impl std::fmt::Display for DomainCertificateSourceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DomainCertificateSourceType::Manual => "MANUAL",
             DomainCertificateSourceType::Noop => "",
             DomainCertificateSourceType::FallthroughString => "*",
@@ -1976,7 +1976,7 @@ pub enum DomainCertificateType {
 
 impl std::fmt::Display for DomainCertificateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DomainCertificateType::Pem => "PEM",
             DomainCertificateType::Noop => "",
             DomainCertificateType::FallthroughString => "*",
@@ -2024,7 +2024,7 @@ pub enum DomainValidationStatus {
 
 impl std::fmt::Display for DomainValidationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             DomainValidationStatus::Completed => "COMPLETED",
             DomainValidationStatus::InProgress => "IN_PROGRESS",
             DomainValidationStatus::NotStarted => "NOT_STARTED",
@@ -2093,7 +2093,7 @@ pub enum EnabledStatus {
 
 impl std::fmt::Display for EnabledStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EnabledStatus::Disabled => "DISABLED",
             EnabledStatus::Enabled => "ENABLED",
             EnabledStatus::Noop => "",
@@ -2128,7 +2128,7 @@ pub enum VerificationStatus {
 
 impl std::fmt::Display for VerificationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             VerificationStatus::Unverified => "UNVERIFIED",
             VerificationStatus::Verified => "VERIFIED",
             VerificationStatus::Noop => "",
@@ -2211,7 +2211,7 @@ pub enum EventHookChannelType {
 
 impl std::fmt::Display for EventHookChannelType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EventHookChannelType::Http => "HTTP",
             EventHookChannelType::Noop => "",
             EventHookChannelType::FallthroughString => "*",
@@ -2297,7 +2297,7 @@ pub enum EventHookChannelConfigAuthSchemeType {
 
 impl std::fmt::Display for EventHookChannelConfigAuthSchemeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EventHookChannelConfigAuthSchemeType::Header => "HEADER",
             EventHookChannelConfigAuthSchemeType::Noop => "",
             EventHookChannelConfigAuthSchemeType::FallthroughString => "*",
@@ -2347,7 +2347,7 @@ pub enum EventSubscriptionsType {
 
 impl std::fmt::Display for EventSubscriptionsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             EventSubscriptionsType::EventType => "EVENT_TYPE",
             EventSubscriptionsType::FlowEvent => "FLOW_EVENT",
             EventSubscriptionsType::Noop => "",
@@ -2406,7 +2406,7 @@ pub enum FactorProvider {
 
 impl std::fmt::Display for FactorProvider {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorProvider::Custom => "CUSTOM",
             FactorProvider::Duo => "DUO",
             FactorProvider::Fido => "FIDO",
@@ -2463,7 +2463,7 @@ pub enum FactorResultType {
 
 impl std::fmt::Display for FactorResultType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorResultType::Cancelled => "CANCELLED",
             FactorResultType::Challenge => "CHALLENGE",
             FactorResultType::Error => "ERROR",
@@ -2516,7 +2516,7 @@ pub enum FactorStatus {
 
 impl std::fmt::Display for FactorStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorStatus::Active => "ACTIVE",
             FactorStatus::Disabled => "DISABLED",
             FactorStatus::Enrolled => "ENROLLED",
@@ -2578,7 +2578,7 @@ pub enum FactorType {
 
 impl std::fmt::Display for FactorType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorType::Call => "call",
             FactorType::Email => "email",
             FactorType::Hotp => "hotp",
@@ -2662,7 +2662,7 @@ pub enum FeatureStageState {
 
 impl std::fmt::Display for FeatureStageState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FeatureStageState::Closed => "CLOSED",
             FeatureStageState::Open => "OPEN",
             FeatureStageState::Noop => "",
@@ -2697,7 +2697,7 @@ pub enum FeatureStageValue {
 
 impl std::fmt::Display for FeatureStageValue {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FeatureStageValue::Beta => "BETA",
             FeatureStageValue::Ea => "EA",
             FeatureStageValue::Noop => "",
@@ -2730,7 +2730,7 @@ pub enum FeatureType {
 
 impl std::fmt::Display for FeatureType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FeatureType::SelfService => "self-service",
             FeatureType::Noop => "",
             FeatureType::FallthroughString => "*",
@@ -2950,7 +2950,7 @@ pub enum GroupRuleStatus {
 
 impl std::fmt::Display for GroupRuleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GroupRuleStatus::Active => "ACTIVE",
             GroupRuleStatus::Inactive => "INACTIVE",
             GroupRuleStatus::Invalid => "INVALID",
@@ -2988,7 +2988,7 @@ pub enum GroupType {
 
 impl std::fmt::Display for GroupType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GroupType::AppGroup => "APP_GROUP",
             GroupType::BuiltIn => "BUILT_IN",
             GroupType::OktaGroup => "OKTA_GROUP",
@@ -3041,7 +3041,7 @@ pub enum IdentityProviderIssuerMode {
 
 impl std::fmt::Display for IdentityProviderIssuerMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IdentityProviderIssuerMode::CustomUrlDomain => "CUSTOM_URL_DOMAIN",
             IdentityProviderIssuerMode::OrgUrl => "ORG_URL",
             IdentityProviderIssuerMode::Noop => "",
@@ -3092,7 +3092,7 @@ pub enum IdentityProviderType {
 
 impl std::fmt::Display for IdentityProviderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             IdentityProviderType::AgentlessDsso => "AgentlessDSSO",
             IdentityProviderType::Facebook => "FACEBOOK",
             IdentityProviderType::Google => "GOOGLE",
@@ -3254,7 +3254,7 @@ pub enum Revocation {
 
 impl std::fmt::Display for Revocation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Revocation::Crl => "CRL",
             Revocation::DeltaCrl => "DELTA_CRL",
             Revocation::Ocsp => "OCSP",
@@ -3344,7 +3344,7 @@ pub enum Provider {
 
 impl std::fmt::Display for Provider {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Provider::Any => "ANY",
             Provider::Okta => "OKTA",
             Provider::SpecificIdp => "SPECIFIC_IDP",
@@ -3572,7 +3572,7 @@ pub enum InlineHookType {
 
 impl std::fmt::Display for InlineHookType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             InlineHookType::ComOktaImportTransform => "com.okta.import.transform",
             InlineHookType::ComOktaOauth2TokensTransform => "com.okta.oauth2.tokens.transform",
             InlineHookType::ComOktaSamlTokensTransform => "com.okta.saml.tokens.transform",
@@ -3882,7 +3882,7 @@ pub enum LinkedObjectDetailsType {
 
 impl std::fmt::Display for LinkedObjectDetailsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LinkedObjectDetailsType::User => "USER",
             LinkedObjectDetailsType::Noop => "",
             LinkedObjectDetailsType::FallthroughString => "*",
@@ -4001,7 +4001,7 @@ pub enum LogAuthenticationProvider {
 
 impl std::fmt::Display for LogAuthenticationProvider {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LogAuthenticationProvider::ActiveDirectory => "ACTIVE_DIRECTORY",
             LogAuthenticationProvider::FactorProvider => "FACTOR_PROVIDER",
             LogAuthenticationProvider::Federation => "FEDERATION",
@@ -4087,7 +4087,7 @@ pub enum LogCredentialProvider {
 
 impl std::fmt::Display for LogCredentialProvider {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LogCredentialProvider::Duo => "DUO",
             LogCredentialProvider::Google => "GOOGLE",
             LogCredentialProvider::OktaAuthenticationProvider => "OKTA_AUTHENTICATION_PROVIDER",
@@ -4139,7 +4139,7 @@ pub enum LogCredentialType {
 
 impl std::fmt::Display for LogCredentialType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LogCredentialType::Assertion => "ASSERTION",
             LogCredentialType::Email => "EMAIL",
             LogCredentialType::Iwa => "IWA",
@@ -4424,7 +4424,7 @@ pub enum LogSeverity {
 
 impl std::fmt::Display for LogSeverity {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             LogSeverity::Debug => "DEBUG",
             LogSeverity::Error => "ERROR",
             LogSeverity::Info => "INFO",
@@ -4540,7 +4540,7 @@ pub enum Enrollment {
 
 impl std::fmt::Display for Enrollment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Enrollment::AnyOrNone => "ANY_OR_NONE",
             Enrollment::Omm => "OMM",
             Enrollment::Noop => "",
@@ -4672,7 +4672,7 @@ pub enum NetworkZoneAddressType {
 
 impl std::fmt::Display for NetworkZoneAddressType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NetworkZoneAddressType::Cidr => "CIDR",
             NetworkZoneAddressType::Range => "RANGE",
             NetworkZoneAddressType::Noop => "",
@@ -4723,7 +4723,7 @@ pub enum NetworkZoneType {
 
 impl std::fmt::Display for NetworkZoneType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NetworkZoneType::Dynamic => "DYNAMIC",
             NetworkZoneType::Ip => "IP",
             NetworkZoneType::Noop => "",
@@ -4758,7 +4758,7 @@ pub enum NetworkZoneUsage {
 
 impl std::fmt::Display for NetworkZoneUsage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             NetworkZoneUsage::Blocklist => "BLOCKLIST",
             NetworkZoneUsage::Policy => "POLICY",
             NetworkZoneUsage::Noop => "",
@@ -4810,7 +4810,7 @@ pub enum ClaimType {
 
 impl std::fmt::Display for ClaimType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ClaimType::Identity => "IDENTITY",
             ClaimType::Resource => "RESOURCE",
             ClaimType::Noop => "",
@@ -4849,7 +4849,7 @@ pub enum GroupFilterType {
 
 impl std::fmt::Display for GroupFilterType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             GroupFilterType::Contains => "CONTAINS",
             GroupFilterType::Equals => "EQUALS",
             GroupFilterType::Regex => "REGEX",
@@ -4888,7 +4888,7 @@ pub enum ValueType {
 
 impl std::fmt::Display for ValueType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ValueType::Expression => "EXPRESSION",
             ValueType::Groups => "GROUPS",
             ValueType::System => "SYSTEM",
@@ -5009,7 +5009,7 @@ pub enum OAuth2RefreshTokenStatus {
 
 impl std::fmt::Display for OAuth2RefreshTokenStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OAuth2RefreshTokenStatus::Active => "ACTIVE",
             OAuth2RefreshTokenStatus::Revoked => "REVOKED",
             OAuth2RefreshTokenStatus::Noop => "",
@@ -5110,7 +5110,7 @@ pub enum Consent {
 
 impl std::fmt::Display for Consent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Consent::Admin => "ADMIN",
             Consent::Implicit => "IMPLICIT",
             Consent::Required => "REQUIRED",
@@ -5146,7 +5146,7 @@ pub enum MetadataPublish {
 
 impl std::fmt::Display for MetadataPublish {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MetadataPublish::AllClients => "ALL_CLIENTS",
             MetadataPublish::NoClients => "NO_CLIENTS",
             MetadataPublish::Noop => "",
@@ -5288,7 +5288,7 @@ pub enum OAuth2ScopeConsentGrantSource {
 
 impl std::fmt::Display for OAuth2ScopeConsentGrantSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OAuth2ScopeConsentGrantSource::Admin => "ADMIN",
             OAuth2ScopeConsentGrantSource::EndUser => "END_USER",
             OAuth2ScopeConsentGrantSource::Noop => "",
@@ -5411,7 +5411,7 @@ pub enum OAuthEndpointAuthenticationMethod {
 
 impl std::fmt::Display for OAuthEndpointAuthenticationMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OAuthEndpointAuthenticationMethod::ClientSecretBasic => "client_secret_basic",
             OAuthEndpointAuthenticationMethod::ClientSecretJwt => "client_secret_jwt",
             OAuthEndpointAuthenticationMethod::ClientSecretPost => "client_secret_post",
@@ -5455,7 +5455,7 @@ pub enum OAuthGrantType {
 
 impl std::fmt::Display for OAuthGrantType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OAuthGrantType::AuthorizationCode => "authorization_code",
             OAuthGrantType::ClientCredentials => "client_credentials",
             OAuthGrantType::Implicit => "implicit",
@@ -5495,7 +5495,7 @@ pub enum OAuthResponseType {
 
 impl std::fmt::Display for OAuthResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OAuthResponseType::Code => "code",
             OAuthResponseType::IdToken => "id_token",
             OAuthResponseType::Token => "token",
@@ -5577,7 +5577,7 @@ pub enum Access {
 
 impl std::fmt::Display for Access {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Access::Allow => "ALLOW",
             Access::Deny => "DENY",
             Access::Noop => "",
@@ -5614,7 +5614,7 @@ pub enum FactorPromptMode {
 
 impl std::fmt::Display for FactorPromptMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorPromptMode::Always => "ALWAYS",
             FactorPromptMode::Device => "DEVICE",
             FactorPromptMode::Session => "SESSION",
@@ -5717,7 +5717,7 @@ pub enum OpenConnectApplicationConsentMethod {
 
 impl std::fmt::Display for OpenConnectApplicationConsentMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OpenConnectApplicationConsentMethod::Required => "REQUIRED",
             OpenConnectApplicationConsentMethod::Trusted => "TRUSTED",
             OpenConnectApplicationConsentMethod::Noop => "",
@@ -5880,7 +5880,7 @@ pub enum OpenConnectApplicationType {
 
 impl std::fmt::Display for OpenConnectApplicationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OpenConnectApplicationType::Browser => "browser",
             OpenConnectApplicationType::Native => "native",
             OpenConnectApplicationType::Service => "service",
@@ -5917,7 +5917,7 @@ pub enum OpenConnectRefreshTokenRotationType {
 
 impl std::fmt::Display for OpenConnectRefreshTokenRotationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             OpenConnectRefreshTokenRotationType::Rotate => "rotate",
             OpenConnectRefreshTokenRotationType::Static => "static",
             OpenConnectRefreshTokenRotationType::Noop => "",
@@ -6004,7 +6004,7 @@ pub enum PasswordCredentialHashAlgorithm {
 
 impl std::fmt::Display for PasswordCredentialHashAlgorithm {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PasswordCredentialHashAlgorithm::Bcrypt => "BCRYPT",
             PasswordCredentialHashAlgorithm::Md5 => "MD5",
             PasswordCredentialHashAlgorithm::ShAminusOne => "SHA-1",
@@ -6080,7 +6080,7 @@ pub enum PasswordPolicyAuthenticationProviderCondition {
 
 impl std::fmt::Display for PasswordPolicyAuthenticationProviderCondition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PasswordPolicyAuthenticationProviderCondition::ActiveDirectory => "ACTIVE_DIRECTORY",
             PasswordPolicyAuthenticationProviderCondition::Any => "ANY",
             PasswordPolicyAuthenticationProviderCondition::Ldap => "LDAP",
@@ -6426,7 +6426,7 @@ pub enum PlatformConditionEvaluatorType {
 
 impl std::fmt::Display for PlatformConditionEvaluatorType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlatformConditionEvaluatorType::Any => "ANY",
             PlatformConditionEvaluatorType::Desktop => "DESKTOP",
             PlatformConditionEvaluatorType::Mobile => "MOBILE",
@@ -6479,7 +6479,7 @@ pub enum PlatformConditionEvaluatorOperatingSystemType {
 
 impl std::fmt::Display for PlatformConditionEvaluatorOperatingSystemType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PlatformConditionEvaluatorOperatingSystemType::Android => "ANDROID",
             PlatformConditionEvaluatorOperatingSystemType::Any => "ANY",
             PlatformConditionEvaluatorOperatingSystemType::Ios => "IOS",
@@ -6532,7 +6532,7 @@ pub enum MatchType {
 
 impl std::fmt::Display for MatchType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             MatchType::Expression => "EXPRESSION",
             MatchType::Semver => "SEMVER",
             MatchType::Noop => "",
@@ -6651,7 +6651,7 @@ pub enum Action {
 
 impl std::fmt::Display for Action {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Action::Auto => "AUTO",
             Action::Disabled => "DISABLED",
             Action::Noop => "",
@@ -6700,7 +6700,7 @@ pub enum Connection {
 
 impl std::fmt::Display for Connection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Connection::Anywhere => "ANYWHERE",
             Connection::Zone => "ZONE",
             Connection::Noop => "",
@@ -6761,7 +6761,7 @@ pub enum PolicyRuleType {
 
 impl std::fmt::Display for PolicyRuleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PolicyRuleType::Password => "PASSWORD",
             PolicyRuleType::SignOn => "SIGN_ON",
             PolicyRuleType::Noop => "",
@@ -6878,7 +6878,7 @@ pub enum PolicyRuleActionsEnrollSelf {
 
 impl std::fmt::Display for PolicyRuleActionsEnrollSelf {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PolicyRuleActionsEnrollSelf::Challenge => "CHALLENGE",
             PolicyRuleActionsEnrollSelf::Login => "LOGIN",
             PolicyRuleActionsEnrollSelf::Never => "NEVER",
@@ -6914,7 +6914,7 @@ pub enum AuthType {
 
 impl std::fmt::Display for AuthType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             AuthType::Any => "ANY",
             AuthType::Radius => "RADIUS",
             AuthType::Noop => "",
@@ -7068,7 +7068,7 @@ pub enum PolicySubjectMatchType {
 
 impl std::fmt::Display for PolicySubjectMatchType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PolicySubjectMatchType::CustomAttribute => "CUSTOM_ATTRIBUTE",
             PolicySubjectMatchType::Email => "EMAIL",
             PolicySubjectMatchType::Username => "USERNAME",
@@ -7109,7 +7109,7 @@ pub enum PolicyType {
 
 impl std::fmt::Display for PolicyType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PolicyType::IdpDiscovery => "IDP_DISCOVERY",
             PolicyType::OauthAuthorizationPolicy => "OAUTH_AUTHORIZATION_POLICY",
             PolicyType::OktaSignOn => "OKTA_SIGN_ON",
@@ -7219,7 +7219,7 @@ pub enum ProtocolType {
 
 impl std::fmt::Display for ProtocolType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProtocolType::Mtls => "MTLS",
             ProtocolType::Oauth2 => "OAUTH2",
             ProtocolType::Oidc => "OIDC",
@@ -7296,7 +7296,7 @@ pub enum Scope {
 
 impl std::fmt::Display for Scope {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Scope::Any => "ANY",
             Scope::None => "NONE",
             Scope::Request => "REQUEST",
@@ -7354,7 +7354,7 @@ pub enum Binding {
 
 impl std::fmt::Display for Binding {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Binding::HttpPost => "HTTP-POST",
             Binding::HttpRedirect => "HTTP-REDIRECT",
             Binding::Noop => "",
@@ -7389,7 +7389,7 @@ pub enum ProtocolEndpointType {
 
 impl std::fmt::Display for ProtocolEndpointType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProtocolEndpointType::Instance => "INSTANCE",
             ProtocolEndpointType::Org => "ORG",
             ProtocolEndpointType::Noop => "",
@@ -7470,7 +7470,7 @@ pub enum ProtocolRelayStateFormat {
 
 impl std::fmt::Display for ProtocolRelayStateFormat {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProtocolRelayStateFormat::FromUrl => "FROM_URL",
             ProtocolRelayStateFormat::Opaque => "OPAQUE",
             ProtocolRelayStateFormat::Noop => "",
@@ -7518,7 +7518,7 @@ pub enum ProvisioningAction {
 
 impl std::fmt::Display for ProvisioningAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProvisioningAction::Auto => "AUTO",
             ProvisioningAction::Callout => "CALLOUT",
             ProvisioningAction::Disabled => "DISABLED",
@@ -7578,7 +7578,7 @@ pub enum ProvisioningDeprovisionedConditionAction {
 
 impl std::fmt::Display for ProvisioningDeprovisionedConditionAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProvisioningDeprovisionedConditionAction::None => "NONE",
             ProvisioningDeprovisionedConditionAction::Reactivate => "REACTIVATE",
             ProvisioningDeprovisionedConditionAction::Noop => "",
@@ -7623,7 +7623,7 @@ pub enum ProvisioningGroupsAction {
 
 impl std::fmt::Display for ProvisioningGroupsAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProvisioningGroupsAction::Append => "APPEND",
             ProvisioningGroupsAction::Assign => "ASSIGN",
             ProvisioningGroupsAction::None => "NONE",
@@ -7685,7 +7685,7 @@ pub enum ProvisioningSuspendedConditionAction {
 
 impl std::fmt::Display for ProvisioningSuspendedConditionAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ProvisioningSuspendedConditionAction::None => "NONE",
             ProvisioningSuspendedConditionAction::Unsuspend => "UNSUSPEND",
             ProvisioningSuspendedConditionAction::Noop => "",
@@ -7873,7 +7873,7 @@ pub enum RoleAssignmentType {
 
 impl std::fmt::Display for RoleAssignmentType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RoleAssignmentType::Group => "GROUP",
             RoleAssignmentType::User => "USER",
             RoleAssignmentType::Noop => "",
@@ -7922,7 +7922,7 @@ pub enum RoleType {
 
 impl std::fmt::Display for RoleType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             RoleType::ApiAccessManagementAdmin => "API_ACCESS_MANAGEMENT_ADMIN",
             RoleType::AppAdmin => "APP_ADMIN",
             RoleType::HelpDeskAdmin => "HELP_DESK_ADMIN",
@@ -8203,7 +8203,7 @@ pub enum Value {
 
 impl std::fmt::Display for Value {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             Value::Activating => "ACTIVATING",
             Value::Active => "ACTIVE",
             Value::Deleted => "DELETED",
@@ -8286,7 +8286,7 @@ pub enum ScopeType {
 
 impl std::fmt::Display for ScopeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             ScopeType::Cors => "CORS",
             ScopeType::Redirect => "REDIRECT",
             ScopeType::Noop => "",
@@ -8511,7 +8511,7 @@ pub enum SessionAuthenticationMethod {
 
 impl std::fmt::Display for SessionAuthenticationMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionAuthenticationMethod::Fpt => "fpt",
             SessionAuthenticationMethod::Geo => "geo",
             SessionAuthenticationMethod::Hwk => "hwk",
@@ -8572,7 +8572,7 @@ pub enum SessionIdentityProviderType {
 
 impl std::fmt::Display for SessionIdentityProviderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionIdentityProviderType::ActiveDirectory => "ACTIVE_DIRECTORY",
             SessionIdentityProviderType::Federation => "FEDERATION",
             SessionIdentityProviderType::Ldap => "LDAP",
@@ -8612,7 +8612,7 @@ pub enum SessionStatus {
 
 impl std::fmt::Display for SessionStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SessionStatus::Active => "ACTIVE",
             SessionStatus::MfaEnroll => "MFA_ENROLL",
             SessionStatus::MfaRequired => "MFA_REQUIRED",
@@ -8717,7 +8717,7 @@ pub enum SmsTemplateType {
 
 impl std::fmt::Display for SmsTemplateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             SmsTemplateType::SmsVerifyCode => "SMS_VERIFY_CODE",
             SmsTemplateType::Noop => "",
             SmsTemplateType::FallthroughString => "*",
@@ -8768,7 +8768,7 @@ pub enum TokenType {
 
 impl std::fmt::Display for TokenType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TokenType::Access => "ACCESS",
             TokenType::Refresh => "REFRESH",
             TokenType::Noop => "",
@@ -9277,7 +9277,7 @@ pub enum UserIdentifierConditionEvaluatorPatternMatchType {
 
 impl std::fmt::Display for UserIdentifierConditionEvaluatorPatternMatchType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserIdentifierConditionEvaluatorPatternMatchType::Contains => "CONTAINS",
             UserIdentifierConditionEvaluatorPatternMatchType::Equals => "EQUALS",
             UserIdentifierConditionEvaluatorPatternMatchType::Expression => "EXPRESSION",
@@ -9327,7 +9327,7 @@ pub enum UserIdentifierPolicyRuleConditionType {
 
 impl std::fmt::Display for UserIdentifierPolicyRuleConditionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserIdentifierPolicyRuleConditionType::Attribute => "ATTRIBUTE",
             UserIdentifierPolicyRuleConditionType::Identifier => "IDENTIFIER",
             UserIdentifierPolicyRuleConditionType::Noop => "",
@@ -9407,7 +9407,7 @@ pub enum UserNextLogin {
 
 impl std::fmt::Display for UserNextLogin {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserNextLogin::ChangePassword => "changePassword",
             UserNextLogin::Noop => "",
             UserNextLogin::FallthroughString => "*",
@@ -9995,7 +9995,7 @@ pub enum UserSchemaAttributeMasterType {
 
 impl std::fmt::Display for UserSchemaAttributeMasterType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserSchemaAttributeMasterType::Okta => "OKTA",
             UserSchemaAttributeMasterType::Override => "OVERRIDE",
             UserSchemaAttributeMasterType::ProfileMaster => "PROFILE_MASTER",
@@ -10053,7 +10053,7 @@ pub enum UserSchemaAttributeType {
 
 impl std::fmt::Display for UserSchemaAttributeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserSchemaAttributeType::Array => "array",
             UserSchemaAttributeType::Boolean => "boolean",
             UserSchemaAttributeType::Integer => "integer",
@@ -10311,7 +10311,7 @@ pub enum UserStatus {
 
 impl std::fmt::Display for UserStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             UserStatus::Active => "ACTIVE",
             UserStatus::Deprovisioned => "DEPROVISIONED",
             UserStatus::LockedOut => "LOCKED_OUT",
@@ -10495,7 +10495,7 @@ pub enum FactorResult {
 
 impl std::fmt::Display for FactorResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             FactorResult::Challenge => "CHALLENGE",
             FactorResult::Error => "ERROR",
             FactorResult::Expired => "EXPIRED",

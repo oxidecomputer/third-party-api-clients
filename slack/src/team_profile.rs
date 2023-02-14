@@ -13,17 +13,17 @@ impl TeamProfile {
     }
 
     /**
-    * This function performs a `GET` to the `/team.profile.get` endpoint.
-    *
-    * Retrieve a team's profile.
-    *
-    * FROM: <https://api.slack.com/methods/team.profile.get>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
-    * * `visibility: &str` -- Filter by visibility.
-    */
+     * This function performs a `GET` to the `/team.profile.get` endpoint.
+     *
+     * Retrieve a team's profile.
+     *
+     * FROM: <https://api.slack.com/methods/team.profile.get>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
+     * * `visibility: &str` -- Filter by visibility.
+     */
     pub async fn get(&self, visibility: &str) -> Result<crate::types::TeamProfileGetSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !visibility.is_empty() {

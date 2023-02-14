@@ -156,7 +156,8 @@ $(DOCUSIGN_SPEC_DIR):
 	mkdir -p $@
 
 $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
-	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
+#	Skip docusign spec download until remote file is fixed
+# curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
 docusign: target/debug/generator $(DOCUSIGN_SPEC)
 	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.3.1 \
@@ -195,7 +196,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.2.2 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \

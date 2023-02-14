@@ -13,24 +13,24 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get(
         &self,
         ids: &str,
@@ -74,12 +74,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-01
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-01
+     */
     pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/customers.json".to_string();
         self.client
@@ -88,21 +88,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_search(
         &self,
         order: &str,
@@ -130,17 +130,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -149,7 +149,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -157,16 +157,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_param(
         &self,
         customer_id: &str,
@@ -174,7 +174,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -183,20 +183,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -221,7 +221,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -230,16 +230,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_param_send_invite(
         &self,
         customer_id: &str,
@@ -247,7 +247,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -256,56 +256,56 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-01
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-01
+     */
     pub async fn deprecated_202001_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get(
         &self,
         ids: &str,
@@ -349,12 +349,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-04
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-04
+     */
     pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/customers.json".to_string();
         self.client
@@ -363,21 +363,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_search(
         &self,
         order: &str,
@@ -405,17 +405,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -424,7 +424,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -432,16 +432,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_param(
         &self,
         customer_id: &str,
@@ -449,7 +449,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -458,20 +458,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -496,7 +496,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -505,16 +505,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_param_send_invite(
         &self,
         customer_id: &str,
@@ -522,7 +522,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -531,56 +531,56 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-04
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-04
+     */
     pub async fn deprecated_202004_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get(
         &self,
         ids: &str,
@@ -624,12 +624,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-07
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-07
+     */
     pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/customers.json".to_string();
         self.client
@@ -638,21 +638,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_search(
         &self,
         order: &str,
@@ -680,17 +680,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -699,7 +699,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -707,16 +707,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_param(
         &self,
         customer_id: &str,
@@ -724,7 +724,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -733,20 +733,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -771,7 +771,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -780,16 +780,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_param_send_invite(
         &self,
         customer_id: &str,
@@ -797,7 +797,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -806,56 +806,56 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-07
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-07
+     */
     pub async fn deprecated_202007_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get(
         &self,
         ids: &str,
@@ -899,12 +899,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-10
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-10
+     */
     pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/customers.json".to_string();
         self.client
@@ -913,21 +913,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_search(
         &self,
         order: &str,
@@ -955,17 +955,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -974,7 +974,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -982,20 +982,20 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_param(&self, customer_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1004,20 +1004,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -1042,7 +1042,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1051,16 +1051,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_param_send_invite(
         &self,
         customer_id: &str,
@@ -1068,7 +1068,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1077,56 +1077,56 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-10
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-10
+     */
     pub async fn get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-10/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get(
         &self,
         ids: &str,
@@ -1170,12 +1170,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2021-01
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2021-01
+     */
     pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/customers.json".to_string();
         self.client
@@ -1184,21 +1184,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_search(
         &self,
         order: &str,
@@ -1226,17 +1226,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -1245,7 +1245,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -1253,16 +1253,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_param(
         &self,
         customer_id: &str,
@@ -1270,7 +1270,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1279,20 +1279,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -1317,7 +1317,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1326,16 +1326,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_param_send_invite(
         &self,
         customer_id: &str,
@@ -1343,7 +1343,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1352,56 +1352,56 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2021-01
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2021-01
+     */
     pub async fn deprecated_202101_get_count(&self) -> Result<()> {
         let url = "/admin/api/2021-01/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-    * * `since_id: &str` -- Restrict results to those after the specified ID.
-    * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id: &str` -- Restrict results to those after the specified ID.
+     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get(
         &self,
         ids: &str,
@@ -1445,12 +1445,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-unstable
-    */
+     * Creates a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-unstable
+     */
     pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/unstable/customers.json".to_string();
         self.client
@@ -1459,21 +1459,21 @@ impl Customers {
     }
 
     /**
-    * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/search.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `query: &str` -- Text to search for in the shop's customer data.
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Searches for customers that match a supplied query. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/search.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#search-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `query: &str` -- Text to search for in the shop's customer data.
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_search(
         &self,
         order: &str,
@@ -1501,17 +1501,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_param(
         &self,
         customer_id: &str,
@@ -1524,7 +1524,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -1532,16 +1532,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_param(
         &self,
         customer_id: &str,
@@ -1549,7 +1549,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1558,20 +1558,20 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer. A customer can't be deleted if they have existing orders.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer. A customer can't be deleted if they have existing orders.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/customers/{customer_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -1596,7 +1596,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1605,16 +1605,16 @@ impl Customers {
     }
 
     /**
-    * Sends an account invite to a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/send_invite.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Sends an account invite to a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/send_invite.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#send_invite-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_param_send_invite(
         &self,
         customer_id: &str,
@@ -1622,7 +1622,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1631,68 +1631,68 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customers.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-unstable
-    */
+     * Retrieves a count of all customers.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-unstable
+     */
     pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
         let url = "/admin/api/unstable/customers/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#orders-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_param_addresses(
         &self,
         customer_id: &str,
@@ -1700,7 +1700,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1709,17 +1709,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1727,25 +1727,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1754,8 +1754,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -1764,17 +1764,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1782,26 +1782,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -1818,7 +1818,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -1826,17 +1826,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -1844,44 +1844,44 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_param_addresses(
         &self,
         customer_id: &str,
@@ -1889,7 +1889,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -1898,17 +1898,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1916,25 +1916,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1943,8 +1943,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -1953,17 +1953,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -1971,26 +1971,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -2007,7 +2007,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -2015,17 +2015,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -2033,44 +2033,44 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_param_addresses(
         &self,
         customer_id: &str,
@@ -2078,7 +2078,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -2087,17 +2087,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2105,25 +2105,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2132,8 +2132,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -2142,17 +2142,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2160,26 +2160,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -2196,7 +2196,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -2204,17 +2204,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -2222,44 +2222,44 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_param_addresses(
         &self,
         customer_id: &str,
@@ -2267,7 +2267,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -2276,17 +2276,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2294,25 +2294,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2321,8 +2321,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -2331,17 +2331,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2349,26 +2349,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -2385,7 +2385,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -2393,17 +2393,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -2411,44 +2411,44 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_param_addresses(
         &self,
         customer_id: &str,
@@ -2456,7 +2456,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -2465,17 +2465,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2483,25 +2483,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2510,8 +2510,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -2520,17 +2520,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2538,26 +2538,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -2574,7 +2574,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -2582,17 +2582,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -2600,44 +2600,44 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a new address for a customer.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/addresses.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a new address for a customer.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/addresses.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_param_addresses(
         &self,
         customer_id: &str,
@@ -2645,7 +2645,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -2654,17 +2654,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves details a single customer address.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves details a single customer address.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2672,25 +2672,25 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Updates an existing customer address.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing customer address.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2699,8 +2699,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client
@@ -2709,17 +2709,17 @@ impl Customers {
     }
 
     /**
-    * Removes an address from a customer’s address list.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Removes an address from a customer’s address list.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_param_addresses_address(
         &self,
         customer_id: &str,
@@ -2727,26 +2727,26 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Performs bulk operations for multiple customer addresses.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-    * * `operation: &str` -- storefront_access_token_id.
-    */
+     * Performs bulk operations for multiple customer addresses.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#set-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
+     * * `operation: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_param_addresses_set(
         &self,
         customer_id: &str,
@@ -2763,7 +2763,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -2771,17 +2771,17 @@ impl Customers {
     }
 
     /**
-    * Sets the default address for a customer.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    * * `address_id: &str` -- storefront_access_token_id.
-    */
+     * Sets the default address for a customer.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/customers/{customer_id}/addresses/{address_id}/default.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer-address#default-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `address_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_param_addresses_address_default(
         &self,
         customer_id: &str,
@@ -2789,27 +2789,27 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
 
         self.client.put(&url, None).await
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_saved_searche(
         &self,
         limit: &str,
@@ -2833,12 +2833,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-01
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-01
+     */
     pub async fn deprecated_202001_create_saved_searches(
         &self,
         body: &serde_json::Value,
@@ -2850,16 +2850,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn deprecated_202001_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -2875,17 +2875,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -2898,7 +2898,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -2906,16 +2906,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -2923,7 +2923,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -2932,44 +2932,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -2990,7 +2990,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -2998,19 +2998,19 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_saved_searche(
         &self,
         limit: &str,
@@ -3034,12 +3034,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-04
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-04
+     */
     pub async fn deprecated_202004_create_saved_searches(
         &self,
         body: &serde_json::Value,
@@ -3051,16 +3051,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn deprecated_202004_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -3076,17 +3076,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3099,7 +3099,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3107,16 +3107,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3124,7 +3124,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -3133,44 +3133,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -3191,7 +3191,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3199,19 +3199,19 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_saved_searche(
         &self,
         limit: &str,
@@ -3235,12 +3235,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-07
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-07
+     */
     pub async fn deprecated_202007_create_saved_searches(
         &self,
         body: &serde_json::Value,
@@ -3252,16 +3252,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn deprecated_202007_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -3277,17 +3277,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3300,7 +3300,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3308,16 +3308,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3325,7 +3325,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -3334,44 +3334,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -3392,7 +3392,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3400,19 +3400,19 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_saved_searche(&self, limit: &str, since_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -3431,12 +3431,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-10
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-10
+     */
     pub async fn create_saved_searches(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/customer_saved_searches.json".to_string();
         self.client
@@ -3445,16 +3445,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -3470,17 +3470,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3493,7 +3493,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3501,16 +3501,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3518,7 +3518,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -3527,44 +3527,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -3585,7 +3585,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3593,19 +3593,19 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_saved_searche(
         &self,
         limit: &str,
@@ -3629,12 +3629,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2021-01
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2021-01
+     */
     pub async fn deprecated_202101_create_saved_searches(
         &self,
         body: &serde_json::Value,
@@ -3646,16 +3646,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn deprecated_202101_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -3671,17 +3671,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3694,7 +3694,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3702,16 +3702,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3719,7 +3719,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -3728,44 +3728,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -3786,7 +3786,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3794,19 +3794,19 @@ impl Customers {
     }
 
     /**
-    * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_saved_searche(
         &self,
         limit: &str,
@@ -3833,12 +3833,12 @@ impl Customers {
     }
 
     /**
-    * Creates a customer saved search.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/customer_saved_searches.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-unstable
-    */
+     * Creates a customer saved search.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/customer_saved_searches.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-unstable
+     */
     pub async fn deprecated_unstable_create_saved_searches(
         &self,
         body: &serde_json::Value,
@@ -3850,16 +3850,16 @@ impl Customers {
     }
 
     /**
-    * Retrieves a count of all customer saved searches.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-unstable
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    */
+     * Retrieves a count of all customer saved searches.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#count-unstable
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     */
     pub async fn deprecated_unstable_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
@@ -3875,17 +3875,17 @@ impl Customers {
     }
 
     /**
-    * Retrieves a single customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3898,7 +3898,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 
@@ -3906,16 +3906,16 @@ impl Customers {
     }
 
     /**
-    * Updates a customer saved search.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a customer saved search.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
@@ -3923,7 +3923,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client
@@ -3932,44 +3932,44 @@ impl Customers {
     }
 
     /**
-    * Deletes a customer saved search.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a customer saved search.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-    * Retrieves all customers returned by a customer saved search.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-    * * `order: &str` -- Set the field and direction by which to order results.
-    *                     (default: last_order_date DESC).
-    * * `limit: &str` -- The maximum number of results to show.
-    *                     (default: 50, maximum: 250).
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves all customers returned by a customer saved search.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/customer_saved_searches/{customer_saved_search_id}/customers.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#other-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `order: &str` -- Set the field and direction by which to order results.
+     *                     (default: last_order_date DESC).
+     * * `limit: &str` -- The maximum number of results to show.
+     *                     (default: 50, maximum: 250).
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_saved_searches_param_search_customers(
         &self,
         customer_saved_search_id: &str,
@@ -3990,7 +3990,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
 

@@ -16,7 +16,7 @@ pub enum TravelerType {
 
 impl std::fmt::Display for TravelerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TravelerType::Guest => "GUEST",
             TravelerType::Passenger => "PASSENGER",
             TravelerType::Noop => "",
@@ -57,7 +57,7 @@ pub enum BookingStatus {
 
 impl std::fmt::Display for BookingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BookingStatus::Accepted => "ACCEPTED",
             BookingStatus::Canceled => "CANCELED",
             BookingStatus::Confirmed => "CONFIRMED",
@@ -103,7 +103,7 @@ pub enum BookingType {
 
 impl std::fmt::Display for BookingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BookingType::BlackCar => "BLACK_CAR",
             BookingType::Car => "CAR",
             BookingType::Flight => "FLIGHT",
@@ -146,7 +146,7 @@ pub enum PaymentSchedule {
 
 impl std::fmt::Display for PaymentSchedule {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentSchedule::Later => "LATER",
             PaymentSchedule::Now => "NOW",
             PaymentSchedule::Partial => "PARTIAL",
@@ -183,7 +183,7 @@ pub enum PassengerStatus {
 
 impl std::fmt::Display for PassengerStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PassengerStatus::Disabled => "DISABLED",
             PassengerStatus::Enabled => "ENABLED",
             PassengerStatus::Noop => "",
@@ -562,8 +562,8 @@ pub struct BookingReport {
     )]
     pub cancellation_reason: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -613,8 +613,8 @@ pub struct BookingReport {
     )]
     pub corporate_discount_used: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -644,8 +644,8 @@ pub struct BookingReport {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<Location>,
     /**
-    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
-    */
+     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -736,8 +736,8 @@ pub struct BookingReport {
     )]
     pub invoice: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -918,8 +918,8 @@ pub struct BookingReport {
     )]
     pub segments: Vec<Segment>,
     /**
-    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
-    */
+     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

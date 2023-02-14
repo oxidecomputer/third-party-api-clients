@@ -1,20 +1,14 @@
 use std::{fmt, str::FromStr};
 
+use parse_link_header::LinkMap;
 use serde::de::{self, Visitor};
 
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
+pub struct NextLink(pub String);
+
+pub fn next_link(l: &LinkMap) -> Option<NextLink> {
+    l.get(&Some("next".to_string()))
+        .map(|link| link.raw_uri.to_string())
+        .map(NextLink)
 }
 
 pub mod date_format {

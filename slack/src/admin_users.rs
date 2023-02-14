@@ -13,51 +13,51 @@ impl AdminUsers {
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.assign` endpoint.
-    *
-    * Add an Enterprise user to a workspace.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.assign>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.assign` endpoint.
+     *
+     * Add an Enterprise user to a workspace.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.assign>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.assign".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.invite` endpoint.
-    *
-    * Invite a user to a workspace.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.invite>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.invite` endpoint.
+     *
+     * Invite a user to a workspace.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.invite>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.invite".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/admin.users.list` endpoint.
-    *
-    * List users on a workspace
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.list>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:read`.
-    * * `team_id: &str` -- The ID (`T1234`) of the workspace.
-    * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-    * * `limit: i64` -- Limit for how many users to be retrieved per page.
-    */
+     * This function performs a `GET` to the `/admin.users.list` endpoint.
+     *
+     * List users on a workspace
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.list>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:read`.
+     * * `team_id: &str` -- The ID (`T1234`) of the workspace.
+     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `limit: i64` -- Limit for how many users to be retrieved per page.
+     */
     pub async fn list(
         &self,
         team_id: &str,
@@ -81,80 +81,80 @@ impl AdminUsers {
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.remove` endpoint.
-    *
-    * Remove a user from a workspace.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.remove>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.remove` endpoint.
+     *
+     * Remove a user from a workspace.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.remove>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.remove".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.setAdmin` endpoint.
-    *
-    * Set an existing guest, regular user, or owner to be an admin user.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.setAdmin>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.setAdmin` endpoint.
+     *
+     * Set an existing guest, regular user, or owner to be an admin user.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.setAdmin>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setAdmin".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.setExpiration` endpoint.
-    *
-    * Set an expiration for a guest user
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.setExpiration>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.setExpiration` endpoint.
+     *
+     * Set an expiration for a guest user
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.setExpiration>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setExpiration".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.setOwner` endpoint.
-    *
-    * Set an existing guest, regular user, or admin user to be a workspace owner.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.setOwner>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.setOwner` endpoint.
+     *
+     * Set an existing guest, regular user, or admin user to be a workspace owner.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.setOwner>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setOwner".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/admin.users.setRegular` endpoint.
-    *
-    * Set an existing guest user, admin user, or owner to be a regular user.
-    *
-    * FROM: <https://api.slack.com/methods/admin.users.setRegular>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
-    */
+     * This function performs a `POST` to the `/admin.users.setRegular` endpoint.
+     *
+     * Set an existing guest user, admin user, or owner to be a regular user.
+     *
+     * FROM: <https://api.slack.com/methods/admin.users.setRegular>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     */
     pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setRegular".to_string();
         self.client.post(&url, None).await

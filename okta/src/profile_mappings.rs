@@ -13,17 +13,17 @@ impl ProfileMappings {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/mappings` endpoint.
-    *
-    * Enumerates Profile Mappings in your organization with pagination.
-    *
-    * **Parameters:**
-    *
-    * * `after: &str`
-    * * `limit: i64`
-    * * `source_id: &str`
-    * * `target_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/mappings` endpoint.
+     *
+     * Enumerates Profile Mappings in your organization with pagination.
+     *
+     * **Parameters:**
+     *
+     * * `after: &str`
+     * * `limit: i64`
+     * * `source_id: &str`
+     * * `target_id: &str`
+     */
     pub async fn list(
         &self,
         after: &str,
@@ -51,12 +51,12 @@ impl ProfileMappings {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/mappings` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Enumerates Profile Mappings in your organization with pagination.
-    */
+     * This function performs a `GET` to the `/api/v1/mappings` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Enumerates Profile Mappings in your organization with pagination.
+     */
     pub async fn list_all(
         &self,
         source_id: &str,
@@ -76,36 +76,36 @@ impl ProfileMappings {
     }
 
     /**
-    * Get Profile Mapping.
-    *
-    * This function performs a `GET` to the `/api/v1/mappings/{mappingId}` endpoint.
-    *
-    * Fetches a single Profile Mapping referenced by its ID.
-    *
-    * **Parameters:**
-    *
-    * * `mapping_id: &str`
-    */
+     * Get Profile Mapping.
+     *
+     * This function performs a `GET` to the `/api/v1/mappings/{mappingId}` endpoint.
+     *
+     * Fetches a single Profile Mapping referenced by its ID.
+     *
+     * **Parameters:**
+     *
+     * * `mapping_id: &str`
+     */
     pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-    * Update Profile Mapping.
-    *
-    * This function performs a `POST` to the `/api/v1/mappings/{mappingId}` endpoint.
-    *
-    * Updates an existing Profile Mapping by adding, updating, or removing one or many Property Mappings.
-    *
-    * **Parameters:**
-    *
-    * * `mapping_id: &str`
-    */
+     * Update Profile Mapping.
+     *
+     * This function performs a `POST` to the `/api/v1/mappings/{mappingId}` endpoint.
+     *
+     * Updates an existing Profile Mapping by adding, updating, or removing one or many Property Mappings.
+     *
+     * **Parameters:**
+     *
+     * * `mapping_id: &str`
+     */
     pub async fn update(
         &self,
         mapping_id: &str,
@@ -113,7 +113,7 @@ impl ProfileMappings {
     ) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
 
         self.client
