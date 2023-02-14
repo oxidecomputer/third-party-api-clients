@@ -3250,7 +3250,7 @@ mime = "0.3"
 openssl = {{ version = "0.10", default-features = false, optional = true }}
 parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
-percent-encoding = "2.1"
+percent-encoding = "2.2"
 reqwest = {{ version = "0.11.11", default-features = false, features = ["json", "multipart"] }}
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
@@ -3267,7 +3267,6 @@ tokio = {{ version = "1.25.0", features = ["full"] }}
 [dev-dependencies]
 base64 = "^0.13"
 dirs = "^3.0.2"
-hyperx = "1"
 nom_pem = "4"
 tokio = {{ version = "1.25.0", features = ["test-util"] }}
 wiremock = "0.5.17"
