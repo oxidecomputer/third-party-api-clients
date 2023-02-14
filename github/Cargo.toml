@@ -39,13 +39,13 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 serde_urlencoded = "^0.7"
 url = { version = "2", features = ["serde"] }
-tokio = { version = "1.20.1", features = ["full"] }
+tokio = { version = "1.25.0", features = ["full"] }
 
 [dev-dependencies]
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
-tokio = { version = "1.20.1", features = ["test-util"] }
+tokio = { version = "1.25.0", features = ["test-util"] }
 wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
