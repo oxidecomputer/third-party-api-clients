@@ -44,13 +44,13 @@ async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }
 base64 = "^0.13"
 yup-oauth2 = "^8"
-tokio = { version = "1.20.1", features = ["full"] }
+tokio = { version = "1.20.4", features = ["full"] }
 
 [dev-dependencies]
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
-tokio = { version = "1.20.1", features = ["test-util"] }
+tokio = { version = "1.20.4", features = ["test-util"] }
 wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
