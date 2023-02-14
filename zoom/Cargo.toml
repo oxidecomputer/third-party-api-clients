@@ -8,6 +8,9 @@ readme = "README.md"
 edition = "2021"
 license = "MIT"
 
+[lib]
+doctest = false
+
 [features]
 default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
 # enable etag-based http_cache functionality
@@ -47,6 +50,7 @@ tokio = { version = "1.25.0", features = ["full"] }
 [dev-dependencies]
 base64 = "^0.13"
 dirs = "^3.0.2"
+hyperx = "1"
 nom_pem = "4"
 tokio = { version = "1.25.0", features = ["test-util"] }
 wiremock = "0.5.17"

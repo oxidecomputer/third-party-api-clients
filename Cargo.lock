@@ -256,6 +256,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -292,6 +293,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -569,6 +571,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -605,6 +608,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -642,6 +646,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -679,6 +684,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -716,6 +722,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -753,6 +760,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -790,6 +798,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -956,6 +965,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "hyperx"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5617e92fc2f2501c3e2bc6ce547cad841adba2bae5b921c7e52510beca6d084c"
+dependencies = [
+ "base64",
+ "bytes",
+ "http",
+ "httpdate",
+ "language-tags",
+ "mime",
+ "percent-encoding",
+ "unicase",
+]
+
+[[package]]
 name = "idna"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1043,6 +1068,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "language-tags"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d4345964bb142484797b161f473a503a434de77149dd8c7427788c6e13379388"
+
+[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1086,6 +1117,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1265,6 +1297,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1300,6 +1333,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1534,6 +1568,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1820,6 +1855,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -1999,6 +2035,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2122,6 +2159,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2159,6 +2197,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2195,6 +2234,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2258,6 +2298,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2552,6 +2593,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
@@ -2992,6 +3034,7 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
+ "hyperx",
  "jsonwebtoken",
  "log",
  "mime",

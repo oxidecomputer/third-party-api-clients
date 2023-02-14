@@ -172,7 +172,7 @@ impl Apps {
     ) -> Result<crate::types::HookDelivery> {
         let url = format!(
             "/app/hook/deliveries/{}",
-            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+            crate::progenitor_support::encode_path(delivery_id),
         );
 
         self.client.get(&url, None).await
@@ -196,7 +196,7 @@ impl Apps {
     pub async fn redeliver_webhook_delivery(&self, delivery_id: i64) -> Result<()> {
         let url = format!(
             "/app/hook/deliveries/{}/attempts",
-            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+            crate::progenitor_support::encode_path(delivery_id),
         );
 
         self.client.post(&url, None).await
@@ -298,7 +298,7 @@ impl Apps {
     ) -> Result<crate::types::Installation> {
         let url = format!(
             "/app/installations/{}",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
         );
 
         self.client.get(&url, None).await
@@ -322,7 +322,7 @@ impl Apps {
     pub async fn delete_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
         );
 
         self.client.delete(&url, None).await
@@ -351,7 +351,7 @@ impl Apps {
     ) -> Result<crate::types::InstallationToken> {
         let url = format!(
             "/app/installations/{}/access_tokens",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
         );
 
         self.client
@@ -382,7 +382,7 @@ impl Apps {
     pub async fn suspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}/suspended",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
         );
 
         self.client.put(&url, None).await
@@ -406,7 +406,7 @@ impl Apps {
     pub async fn unsuspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}/suspended",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
         );
 
         self.client.delete(&url, None).await
@@ -769,7 +769,7 @@ impl Apps {
     ) -> Result<crate::types::MarketplacePurchaseData> {
         let url = format!(
             "/marketplace_listing/accounts/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await
@@ -872,7 +872,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
-            crate::progenitor_support::encode_path(&plan_id.to_string()),
+            crate::progenitor_support::encode_path(plan_id),
             query_
         );
 
@@ -908,7 +908,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
-            crate::progenitor_support::encode_path(&plan_id.to_string()),
+            crate::progenitor_support::encode_path(plan_id),
             query_
         );
 
@@ -936,7 +936,7 @@ impl Apps {
     ) -> Result<crate::types::MarketplacePurchaseData> {
         let url = format!(
             "/marketplace_listing/stubbed/accounts/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await
@@ -1041,7 +1041,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
-            crate::progenitor_support::encode_path(&plan_id.to_string()),
+            crate::progenitor_support::encode_path(plan_id),
             query_
         );
 
@@ -1077,7 +1077,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
-            crate::progenitor_support::encode_path(&plan_id.to_string()),
+            crate::progenitor_support::encode_path(plan_id),
             query_
         );
 
@@ -1138,7 +1138,7 @@ impl Apps {
             "/repos/{}/{}/content_references/{}/attachments",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&content_reference_id.to_string()),
+            crate::progenitor_support::encode_path(content_reference_id),
         );
 
         self.client
@@ -1251,7 +1251,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/user/installations/{}/repositories?{}",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
             query_
         );
 
@@ -1281,8 +1281,8 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/user/installations/{}/repositories/{}",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
-            crate::progenitor_support::encode_path(&repository_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
+            crate::progenitor_support::encode_path(repository_id),
         );
 
         self.client.put(&url, None).await
@@ -1311,8 +1311,8 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/user/installations/{}/repositories/{}",
-            crate::progenitor_support::encode_path(&installation_id.to_string()),
-            crate::progenitor_support::encode_path(&repository_id.to_string()),
+            crate::progenitor_support::encode_path(installation_id),
+            crate::progenitor_support::encode_path(repository_id),
         );
 
         self.client.delete(&url, None).await

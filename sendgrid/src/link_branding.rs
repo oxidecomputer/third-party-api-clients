@@ -102,7 +102,7 @@ impl LinkBranding {
     ) -> Result<crate::types::PostWhitelabelLinksValidateResponse> {
         let url = format!(
             "/whitelabel/links/{}/validate",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -124,7 +124,7 @@ impl LinkBranding {
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = format!(
             "/whitelabel/links/{}/subuser",
-            crate::progenitor_support::encode_path(&link_id.to_string()),
+            crate::progenitor_support::encode_path(link_id),
         );
 
         self.client
@@ -151,7 +151,7 @@ impl LinkBranding {
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = format!(
             "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -175,7 +175,7 @@ impl LinkBranding {
     pub async fn delete_whitelabel_links(&self, id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -201,7 +201,7 @@ impl LinkBranding {
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = format!(
             "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client

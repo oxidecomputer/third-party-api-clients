@@ -141,12 +141,12 @@ impl Template {
                     || n == "use"
                 {
                     out.push_str(&format!(
-                        "crate::progenitor_support::encode_path(&{}_.to_string()),",
+                        "crate::progenitor_support::encode_path({}_),",
                         to_snake_case(n)
                     ));
                 } else {
                     out.push_str(&format!(
-                        "crate::progenitor_support::encode_path(&{}.to_string()),",
+                        "crate::progenitor_support::encode_path({}),",
                         to_snake_case(n)
                     ));
                 }

@@ -79,7 +79,7 @@ impl Spreadsheets {
         let url = format!(
             "/v4/spreadsheets/{}/developerMetadata/{}",
             crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(&metadata_id.to_string()),
+            crate::progenitor_support::encode_path(metadata_id),
         );
 
         self.client.get(&url, None).await
@@ -128,7 +128,7 @@ impl Spreadsheets {
         let url = format!(
             "/v4/spreadsheets/{}/sheets/{}/copyTo",
             crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(&sheet_id.to_string()),
+            crate::progenitor_support::encode_path(sheet_id),
         );
 
         self.client

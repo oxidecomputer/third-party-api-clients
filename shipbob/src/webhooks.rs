@@ -99,10 +99,7 @@ impl Webhooks {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn delete(&self, id: i64) -> Result<()> {
-        let url = format!(
-            "/webhook/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/webhook/{}", crate::progenitor_support::encode_path(id),);
 
         self.client.delete(&url, None).await
     }

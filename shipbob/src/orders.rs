@@ -49,7 +49,7 @@ impl Orders {
     pub async fn get(&self, order_id: i64) -> Result<crate::types::Order> {
         let url = format!(
             "/order/{}",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.get(&url, None).await
@@ -224,7 +224,7 @@ impl Orders {
     pub async fn post_cancel(&self, order_id: i64) -> Result<crate::types::OrdersCanceledOrder> {
         let url = format!(
             "/order/{}/cancel",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.post(&url, None).await
@@ -242,7 +242,7 @@ impl Orders {
     pub async fn get_store_json(&self, order_id: i64) -> Result<String> {
         let url = format!(
             "/order/{}/storeOrderJson",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.get(&url, None).await
@@ -264,7 +264,7 @@ impl Orders {
     ) -> Result<String> {
         let url = format!(
             "/order/{}/storeOrderJson",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client
@@ -290,8 +290,8 @@ impl Orders {
     ) -> Result<crate::types::OrdersShipment> {
         let url = format!(
             "/order/{}/shipment/{}",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -316,7 +316,7 @@ impl Orders {
         let url = format!(
             "/order/{}/shipment/{}/cancel",
             crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.post(&url, None).await
@@ -340,8 +340,8 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/order/{}/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -361,8 +361,8 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/order/{}/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -381,7 +381,7 @@ impl Orders {
     pub async fn get_shipments(&self, order_id: i64) -> Result<Vec<crate::types::OrdersShipment>> {
         let url = format!(
             "/order/{}/shipment",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.get(&url, None).await
@@ -400,7 +400,7 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipment>> {
         let url = format!(
             "/order/{}/shipment",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -424,8 +424,8 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/order/{}/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -445,8 +445,8 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/order/{}/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -468,7 +468,7 @@ impl Orders {
     ) -> Result<crate::types::OrdersShipment> {
         let url = format!(
             "/shipment/{}",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -490,7 +490,7 @@ impl Orders {
     ) -> Result<crate::types::OrdersShipment> {
         let url = format!(
             "/shipment/{}/cancel",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.post(&url, None).await
@@ -531,7 +531,7 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -550,7 +550,7 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -572,7 +572,7 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get(&url, None).await
@@ -591,7 +591,7 @@ impl Orders {
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
         let url = format!(
             "/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            crate::progenitor_support::encode_path(shipment_id),
         );
 
         self.client.get_all_pages(&url, None).await

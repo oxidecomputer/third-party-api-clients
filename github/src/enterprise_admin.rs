@@ -163,7 +163,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+            crate::progenitor_support::encode_path(org_id),
         );
 
         self.client.put(&url, None).await
@@ -193,7 +193,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+            crate::progenitor_support::encode_path(org_id),
         );
 
         self.client.delete(&url, None).await
@@ -350,7 +350,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
         );
 
         self.client.get(&url, None).await
@@ -380,7 +380,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
         );
 
         self.client.delete(&url, None).await
@@ -411,7 +411,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
         );
 
         self.client
@@ -455,7 +455,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
             query_
         );
 
@@ -487,7 +487,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
         );
 
         self.client
@@ -521,8 +521,8 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
+            crate::progenitor_support::encode_path(org_id),
         );
 
         self.client.put(&url, None).await
@@ -554,8 +554,8 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
+            crate::progenitor_support::encode_path(org_id),
         );
 
         self.client.delete(&url, None).await
@@ -597,7 +597,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
             query_
         );
 
@@ -629,7 +629,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
         );
 
         self.client
@@ -664,8 +664,8 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
+            crate::progenitor_support::encode_path(runner_id),
         );
 
         self.client.put(&url, None).await
@@ -697,8 +697,8 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+            crate::progenitor_support::encode_path(runner_group_id),
+            crate::progenitor_support::encode_path(runner_id),
         );
 
         self.client.delete(&url, None).await
@@ -891,7 +891,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runners/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+            crate::progenitor_support::encode_path(runner_id),
         );
 
         self.client.get(&url, None).await
@@ -921,7 +921,7 @@ impl EnterpriseAdmin {
         let url = format!(
             "/enterprises/{}/actions/runners/{}",
             crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+            crate::progenitor_support::encode_path(runner_id),
         );
 
         self.client.delete(&url, None).await

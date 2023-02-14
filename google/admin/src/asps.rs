@@ -44,7 +44,7 @@ impl Asps {
         let url = format!(
             "/admin/directory/v1/users/{}/asps/{}",
             crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(&code_id.to_string()),
+            crate::progenitor_support::encode_path(code_id),
         );
 
         self.client.get(&url, None).await
@@ -64,7 +64,7 @@ impl Asps {
         let url = format!(
             "/admin/directory/v1/users/{}/asps/{}",
             crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(&code_id.to_string()),
+            crate::progenitor_support::encode_path(code_id),
         );
 
         self.client.delete(&url, None).await

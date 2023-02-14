@@ -48,10 +48,7 @@ impl Receiving {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrder> {
-        let url = format!(
-            "/receiving/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/receiving/{}", crate::progenitor_support::encode_path(id),);
 
         self.client.get(&url, None).await
     }
@@ -68,7 +65,7 @@ impl Receiving {
     pub async fn get_label(&self, id: i64) -> Result<bytes::Bytes> {
         let url = format!(
             "/receiving/{}/labels",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -101,7 +98,7 @@ impl Receiving {
     pub async fn post_cancel(&self, id: i64) -> Result<()> {
         let url = format!(
             "/receiving/{}/cancel",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await

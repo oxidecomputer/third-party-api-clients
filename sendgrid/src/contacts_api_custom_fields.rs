@@ -70,7 +70,7 @@ impl ContactsApiCustomFields {
     ) -> Result<crate::types::ContactdbCustomFieldWithAllOf> {
         let url = format!(
             "/contactdb/custom_fields/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            crate::progenitor_support::encode_path(custom_field_id),
         );
 
         self.client.get(&url, None).await
@@ -93,7 +93,7 @@ impl ContactsApiCustomFields {
     ) -> Result<crate::types::GlobalErrorResponseSchema> {
         let url = format!(
             "/contactdb/custom_fields/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            crate::progenitor_support::encode_path(custom_field_id),
         );
 
         self.client.delete(&url, None).await

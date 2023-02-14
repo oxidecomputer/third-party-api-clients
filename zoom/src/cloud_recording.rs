@@ -397,7 +397,7 @@ impl CloudRecording {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/recordings/registrants?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
             query_
         );
 
@@ -430,7 +430,7 @@ impl CloudRecording {
     ) -> Result<crate::types::MeetingRecordingRegistrantCreateResponse> {
         let url = format!(
             "/meetings/{}/recordings/registrants",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
         );
 
         self.client.post(&url, None).await
@@ -462,7 +462,7 @@ impl CloudRecording {
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/recordings/registrants/status",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
         );
 
         self.client

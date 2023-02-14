@@ -2386,8 +2386,8 @@ fn gen(
     a("        .add(b'}');");
     a("");
     a("    #[allow(dead_code)]");
-    a("    pub(crate) fn encode_path(pc: &str) -> String {");
-    a("        utf8_percent_encode(pc, PATH_SET).to_string()");
+    a("    pub(crate) fn encode_path<S>(pc: S) -> String where S: ToString {");
+    a("        utf8_percent_encode(pc.to_string().as_str(), PATH_SET).to_string()");
     a("    }");
     a("}");
     a("");
@@ -3267,6 +3267,7 @@ tokio = {{ version = "1.25.0", features = ["full"] }}
 [dev-dependencies]
 base64 = "^0.13"
 dirs = "^3.0.2"
+hyperx = "1"
 nom_pem = "4"
 tokio = {{ version = "1.25.0", features = ["test-util"] }}
 wiremock = "0.5.17"

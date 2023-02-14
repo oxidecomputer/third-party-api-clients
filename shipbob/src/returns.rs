@@ -23,10 +23,7 @@ impl Returns {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReturnOrder> {
-        let url = format!(
-            "/return/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/return/{}", crate::progenitor_support::encode_path(id),);
 
         self.client.get(&url, None).await
     }
@@ -46,10 +43,7 @@ impl Returns {
         id: i64,
         body: &crate::types::ReturnsCreateReturn,
     ) -> Result<crate::types::ReturnOrder> {
-        let url = format!(
-            "/return/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/return/{}", crate::progenitor_support::encode_path(id),);
 
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -236,7 +230,7 @@ impl Returns {
     pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}/cancel",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -258,7 +252,7 @@ impl Returns {
     ) -> Result<crate::types::ReturnOrderStatusHistory> {
         let url = format!(
             "/return/{}/statushistory",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

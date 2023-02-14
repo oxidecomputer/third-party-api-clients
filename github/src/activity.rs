@@ -274,7 +274,7 @@ impl Activity {
     pub async fn get_thread(&self, thread_id: i64) -> Result<crate::types::Thread> {
         let url = format!(
             "/notifications/threads/{}",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+            crate::progenitor_support::encode_path(thread_id),
         );
 
         self.client.get(&url, None).await
@@ -296,7 +296,7 @@ impl Activity {
     pub async fn mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "/notifications/threads/{}",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+            crate::progenitor_support::encode_path(thread_id),
         );
 
         self.client.patch(&url, None).await
@@ -323,7 +323,7 @@ impl Activity {
     ) -> Result<crate::types::ThreadSubscription> {
         let url = format!(
             "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+            crate::progenitor_support::encode_path(thread_id),
         );
 
         self.client.get(&url, None).await
@@ -353,7 +353,7 @@ impl Activity {
     ) -> Result<crate::types::ThreadSubscription> {
         let url = format!(
             "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+            crate::progenitor_support::encode_path(thread_id),
         );
 
         self.client
@@ -377,7 +377,7 @@ impl Activity {
     pub async fn delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+            crate::progenitor_support::encode_path(thread_id),
         );
 
         self.client.delete(&url, None).await

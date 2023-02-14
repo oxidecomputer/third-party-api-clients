@@ -94,7 +94,7 @@ impl OauthAuthorizations {
     pub async fn get_grant(&self, grant_id: i64) -> Result<crate::types::ApplicationGrant> {
         let url = format!(
             "/applications/grants/{}",
-            crate::progenitor_support::encode_path(&grant_id.to_string()),
+            crate::progenitor_support::encode_path(grant_id),
         );
 
         self.client.get(&url, None).await
@@ -118,7 +118,7 @@ impl OauthAuthorizations {
     pub async fn delete_grant(&self, grant_id: i64) -> Result<()> {
         let url = format!(
             "/applications/grants/{}",
-            crate::progenitor_support::encode_path(&grant_id.to_string()),
+            crate::progenitor_support::encode_path(grant_id),
         );
 
         self.client.delete(&url, None).await
@@ -307,7 +307,7 @@ impl OauthAuthorizations {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            crate::progenitor_support::encode_path(authorization_id),
         );
 
         self.client.get(&url, None).await
@@ -329,7 +329,7 @@ impl OauthAuthorizations {
     pub async fn delete_authorization(&self, authorization_id: i64) -> Result<()> {
         let url = format!(
             "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            crate::progenitor_support::encode_path(authorization_id),
         );
 
         self.client.delete(&url, None).await
@@ -359,7 +359,7 @@ impl OauthAuthorizations {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            crate::progenitor_support::encode_path(authorization_id),
         );
 
         self.client

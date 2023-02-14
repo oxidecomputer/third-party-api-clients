@@ -65,7 +65,7 @@ impl SenderIdentitiesApi {
     pub async fn get_senders_sender(&self, sender_id: i64) -> Result<crate::types::SenderAllOf> {
         let url = format!(
             "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+            crate::progenitor_support::encode_path(sender_id),
         );
 
         self.client.get(&url, None).await
@@ -85,7 +85,7 @@ impl SenderIdentitiesApi {
     pub async fn delete_senders_sender(&self, sender_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+            crate::progenitor_support::encode_path(sender_id),
         );
 
         self.client.delete(&url, None).await
@@ -113,7 +113,7 @@ impl SenderIdentitiesApi {
     ) -> Result<crate::types::SenderAllOf> {
         let url = format!(
             "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+            crate::progenitor_support::encode_path(sender_id),
         );
 
         self.client
@@ -138,7 +138,7 @@ impl SenderIdentitiesApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/senders/{}/resend_verification",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+            crate::progenitor_support::encode_path(sender_id),
         );
 
         self.client.post(&url, None).await

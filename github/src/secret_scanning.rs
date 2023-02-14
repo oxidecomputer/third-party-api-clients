@@ -130,7 +130,7 @@ impl SecretScanning {
             "/repos/{}/{}/secret-scanning/alerts/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&alert_number.to_string()),
+            crate::progenitor_support::encode_path(alert_number),
         );
 
         self.client.get(&url, None).await
@@ -164,7 +164,7 @@ impl SecretScanning {
             "/repos/{}/{}/secret-scanning/alerts/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&alert_number.to_string()),
+            crate::progenitor_support::encode_path(alert_number),
         );
 
         self.client

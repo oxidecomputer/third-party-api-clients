@@ -347,7 +347,7 @@ impl Repos {
             "/repos/{}/{}/autolinks/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&autolink_id.to_string()),
+            crate::progenitor_support::encode_path(autolink_id),
         );
 
         self.client.get(&url, None).await
@@ -375,7 +375,7 @@ impl Repos {
             "/repos/{}/{}/autolinks/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&autolink_id.to_string()),
+            crate::progenitor_support::encode_path(autolink_id),
         );
 
         self.client.delete(&url, None).await
@@ -2167,7 +2167,7 @@ impl Repos {
             "/repos/{}/{}/comments/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client.get(&url, None).await
@@ -2198,7 +2198,7 @@ impl Repos {
             "/repos/{}/{}/comments/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client.delete(&url, None).await
@@ -2230,7 +2230,7 @@ impl Repos {
             "/repos/{}/{}/comments/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client
@@ -3685,7 +3685,7 @@ impl Repos {
             "/repos/{}/{}/deployments/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
         );
 
         self.client.get(&url, None).await
@@ -3723,7 +3723,7 @@ impl Repos {
             "/repos/{}/{}/deployments/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
         );
 
         self.client.delete(&url, None).await
@@ -3766,7 +3766,7 @@ impl Repos {
             "/repos/{}/{}/deployments/{}/statuses?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
             query_
         );
 
@@ -3794,7 +3794,7 @@ impl Repos {
             "/repos/{}/{}/deployments/{}/statuses",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -3828,7 +3828,7 @@ impl Repos {
             "/repos/{}/{}/deployments/{}/statuses",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
         );
 
         self.client
@@ -3863,8 +3863,8 @@ impl Repos {
             "/repos/{}/{}/deployments/{}/statuses/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&deployment_id.to_string()),
-            crate::progenitor_support::encode_path(&status_id.to_string()),
+            crate::progenitor_support::encode_path(deployment_id),
+            crate::progenitor_support::encode_path(status_id),
         );
 
         self.client.get(&url, None).await
@@ -4276,7 +4276,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client.get(&url, None).await
@@ -4302,7 +4302,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client.delete(&url, None).await
@@ -4334,7 +4334,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client
@@ -4369,7 +4369,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/config",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client.get(&url, None).await
@@ -4403,7 +4403,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/config",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client
@@ -4448,7 +4448,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/deliveries?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
             query_
         );
 
@@ -4482,7 +4482,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/deliveries?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
             query_
         );
 
@@ -4516,8 +4516,8 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/deliveries/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
-            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
+            crate::progenitor_support::encode_path(delivery_id),
         );
 
         self.client.get(&url, None).await
@@ -4550,8 +4550,8 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/deliveries/{}/attempts",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
-            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
+            crate::progenitor_support::encode_path(delivery_id),
         );
 
         self.client.post(&url, None).await
@@ -4577,7 +4577,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/pings",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client.post(&url, None).await
@@ -4605,7 +4605,7 @@ impl Repos {
             "/repos/{}/{}/hooks/{}/tests",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(hook_id),
         );
 
         self.client.post(&url, None).await
@@ -4702,7 +4702,7 @@ impl Repos {
             "/repos/{}/{}/invitations/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&invitation_id.to_string()),
+            crate::progenitor_support::encode_path(invitation_id),
         );
 
         self.client.delete(&url, None).await
@@ -4734,7 +4734,7 @@ impl Repos {
             "/repos/{}/{}/invitations/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&invitation_id.to_string()),
+            crate::progenitor_support::encode_path(invitation_id),
         );
 
         self.client
@@ -4864,7 +4864,7 @@ impl Repos {
             "/repos/{}/{}/keys/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.get(&url, None).await
@@ -4890,7 +4890,7 @@ impl Repos {
             "/repos/{}/{}/keys/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.delete(&url, None).await
@@ -5210,7 +5210,7 @@ impl Repos {
             "/repos/{}/{}/pages/builds/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&build_id.to_string()),
+            crate::progenitor_support::encode_path(build_id),
         );
 
         self.client.get(&url, None).await
@@ -5455,7 +5455,7 @@ impl Repos {
             "/repos/{}/{}/releases/assets/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&asset_id.to_string()),
+            crate::progenitor_support::encode_path(asset_id),
         );
 
         self.client.get(&url, None).await
@@ -5481,7 +5481,7 @@ impl Repos {
             "/repos/{}/{}/releases/assets/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&asset_id.to_string()),
+            crate::progenitor_support::encode_path(asset_id),
         );
 
         self.client.delete(&url, None).await
@@ -5513,7 +5513,7 @@ impl Repos {
             "/repos/{}/{}/releases/assets/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&asset_id.to_string()),
+            crate::progenitor_support::encode_path(asset_id),
         );
 
         self.client
@@ -5607,7 +5607,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
         );
 
         self.client.get(&url, None).await
@@ -5633,7 +5633,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
         );
 
         self.client.delete(&url, None).await
@@ -5665,7 +5665,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
         );
 
         self.client
@@ -5710,7 +5710,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}/assets?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
             query_
         );
 
@@ -5738,7 +5738,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}/assets",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -5799,7 +5799,7 @@ impl Repos {
             "/repos/{}/{}/releases/{}/assets?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&release_id.to_string()),
+            crate::progenitor_support::encode_path(release_id),
             query_
         );
 
@@ -6955,7 +6955,7 @@ impl Repos {
     pub async fn decline_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "/user/repository_invitations/{}",
-            crate::progenitor_support::encode_path(&invitation_id.to_string()),
+            crate::progenitor_support::encode_path(invitation_id),
         );
 
         self.client.delete(&url, None).await
@@ -6977,7 +6977,7 @@ impl Repos {
     pub async fn accept_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "/user/repository_invitations/{}",
-            crate::progenitor_support::encode_path(&invitation_id.to_string()),
+            crate::progenitor_support::encode_path(invitation_id),
         );
 
         self.client.patch(&url, None).await

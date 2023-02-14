@@ -144,7 +144,7 @@ impl Products {
     pub async fn get(&self, product_id: i64) -> Result<crate::types::Product> {
         let url = format!(
             "/product/{}",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client.get(&url, None).await
@@ -167,7 +167,7 @@ impl Products {
     ) -> Result<Vec<crate::types::Product>> {
         let url = format!(
             "/product/{}",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client

@@ -74,7 +74,7 @@ impl Checks {
             "/repos/{}/{}/check-runs/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            crate::progenitor_support::encode_path(check_run_id),
         );
 
         self.client.get(&url, None).await
@@ -108,7 +108,7 @@ impl Checks {
             "/repos/{}/{}/check-runs/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            crate::progenitor_support::encode_path(check_run_id),
         );
 
         self.client
@@ -153,7 +153,7 @@ impl Checks {
             "/repos/{}/{}/check-runs/{}/annotations?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            crate::progenitor_support::encode_path(check_run_id),
             query_
         );
 
@@ -181,7 +181,7 @@ impl Checks {
             "/repos/{}/{}/check-runs/{}/annotations",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            crate::progenitor_support::encode_path(check_run_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -278,7 +278,7 @@ impl Checks {
             "/repos/{}/{}/check-suites/{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+            crate::progenitor_support::encode_path(check_suite_id),
         );
 
         self.client.get(&url, None).await
@@ -340,7 +340,7 @@ impl Checks {
             "/repos/{}/{}/check-suites/{}/check-runs?{}",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+            crate::progenitor_support::encode_path(check_suite_id),
             query_
         );
 
@@ -374,7 +374,7 @@ impl Checks {
             "/repos/{}/{}/check-suites/{}/rerequest",
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+            crate::progenitor_support::encode_path(check_suite_id),
         );
 
         self.client.post(&url, None).await

@@ -534,7 +534,7 @@ impl Users {
     ) -> Result<crate::types::GpgKey> {
         let url = format!(
             "/user/gpg_keys/{}",
-            crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
+            crate::progenitor_support::encode_path(gpg_key_id),
         );
 
         self.client.get(&url, None).await
@@ -556,7 +556,7 @@ impl Users {
     pub async fn delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
         let url = format!(
             "/user/gpg_keys/{}",
-            crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
+            crate::progenitor_support::encode_path(gpg_key_id),
         );
 
         self.client.delete(&url, None).await
@@ -650,7 +650,7 @@ impl Users {
     ) -> Result<crate::types::Key> {
         let url = format!(
             "/user/keys/{}",
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.get(&url, None).await
@@ -672,7 +672,7 @@ impl Users {
     pub async fn delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
         let url = format!(
             "/user/keys/{}",
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.delete(&url, None).await

@@ -204,7 +204,7 @@ impl ContactsApiSegments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/contactdb/segments/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
             query_
         );
 

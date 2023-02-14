@@ -24,7 +24,7 @@ impl Inventory {
     pub async fn get(&self, inventory_id: i64) -> Result<crate::types::Inventory> {
         let url = format!(
             "/inventory/{}",
-            crate::progenitor_support::encode_path(&inventory_id.to_string()),
+            crate::progenitor_support::encode_path(inventory_id),
         );
 
         self.client.get(&url, None).await
@@ -139,7 +139,7 @@ impl Inventory {
     pub async fn get_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
         let url = format!(
             "/product/{}/inventory",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client.get(&url, None).await
@@ -155,7 +155,7 @@ impl Inventory {
     pub async fn get_all_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
         let url = format!(
             "/product/{}/inventory",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client.get_all_pages(&url, None).await

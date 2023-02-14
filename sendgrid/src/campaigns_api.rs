@@ -87,7 +87,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::GetCampaignsCampaignResponse> {
         let url = format!(
             "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.get(&url, None).await
@@ -107,7 +107,7 @@ impl CampaignsApi {
     pub async fn delete_campaigns_campaign(&self, campaign_id: i64) -> Result<()> {
         let url = format!(
             "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.delete(&url, None).await
@@ -133,7 +133,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::CampaignResponseAllOf> {
         let url = format!(
             "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -160,7 +160,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::SendACampaignResponse> {
         let url = format!(
             "/campaigns/{}/schedules/now",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -183,7 +183,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::ScheduleACampaignRequest> {
         let url = format!(
             "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.get(&url, None).await
@@ -209,7 +209,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::ScheduleACampaignResponse> {
         let url = format!(
             "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -234,7 +234,7 @@ impl CampaignsApi {
     pub async fn delete_campaigns_campaign_schedules(&self, campaign_id: i64) -> Result<()> {
         let url = format!(
             "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.delete(&url, None).await
@@ -258,7 +258,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::UpdateAScheduledCampaignResponse> {
         let url = format!(
             "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -286,7 +286,7 @@ impl CampaignsApi {
     ) -> Result<crate::types::SendATestCampaignRequest> {
         let url = format!(
             "/campaigns/{}/schedules/test",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client

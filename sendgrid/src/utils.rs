@@ -632,3 +632,37 @@ pub mod deserialize_null_vector {
         Ok(Default::default())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::next_link;
+
+    #[test]
+    fn test_hyperx_next_link_compat() {
+        fn hyperx_next_link(l: &hyperx::header::Link) -> Option<String> {
+            l.values().iter().find_map(|value| {
+                value.rel().and_then(|rels| {
+                    if rels
+                        .iter()
+                        .any(|rel| rel == &hyperx::header::RelationType::Next)
+                    {
+                        Some(value.link().into())
+                    } else {
+                        None
+                    }
+                })
+            })
+        }
+
+        let value = "<https://previous-link>; rel=\"prev\", <https://next-link>; rel=\"next\", <https://last-link>; rel=\"last\", <https://first-link>; rel=\"first\"";
+
+        let old_link: hyperx::header::Link = value.parse().unwrap();
+        let old_next = hyperx_next_link(&old_link).unwrap();
+
+        let new_link = parse_link_header::parse(value).unwrap();
+        let new_next = next_link(&new_link).unwrap().0;
+
+        assert_eq!(old_next, new_next);
+        assert_eq!("https://next-link", new_next);
+    }
+}

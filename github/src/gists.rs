@@ -394,7 +394,7 @@ impl Gists {
         let url = format!(
             "/gists/{}/comments/{}",
             crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client.get(&url, None).await
@@ -418,7 +418,7 @@ impl Gists {
         let url = format!(
             "/gists/{}/comments/{}",
             crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client.delete(&url, None).await
@@ -447,7 +447,7 @@ impl Gists {
         let url = format!(
             "/gists/{}/comments/{}",
             crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(comment_id),
         );
 
         self.client

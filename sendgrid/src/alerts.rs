@@ -105,7 +105,7 @@ impl Alerts {
     pub async fn get(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
         let url = format!(
             "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+            crate::progenitor_support::encode_path(alert_id),
         );
 
         self.client.get(&url, None).await
@@ -131,7 +131,7 @@ impl Alerts {
     pub async fn delete(&self, alert_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+            crate::progenitor_support::encode_path(alert_id),
         );
 
         self.client.delete(&url, None).await
@@ -161,7 +161,7 @@ impl Alerts {
     ) -> Result<crate::types::GetAlertsAlertResponse> {
         let url = format!(
             "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+            crate::progenitor_support::encode_path(alert_id),
         );
 
         self.client

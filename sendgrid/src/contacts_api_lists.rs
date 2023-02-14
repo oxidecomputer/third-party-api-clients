@@ -182,7 +182,7 @@ impl ContactsApiLists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/contactdb/lists/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -209,7 +209,7 @@ impl ContactsApiLists {
     ) -> Result<()> {
         let url = format!(
             "/contactdb/lists/{}/recipients",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -235,7 +235,7 @@ impl ContactsApiLists {
     ) -> Result<()> {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(recipient_id),
         );
 
@@ -263,7 +263,7 @@ impl ContactsApiLists {
     ) -> Result<()> {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(recipient_id),
         );
 

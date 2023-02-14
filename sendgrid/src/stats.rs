@@ -409,7 +409,7 @@ impl Stats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(&client_type.to_string()),
+            crate::progenitor_support::encode_path(client_type),
             query_
         );
 
@@ -455,7 +455,7 @@ impl Stats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(&client_type.to_string()),
+            crate::progenitor_support::encode_path(client_type),
             query_
         );
 
