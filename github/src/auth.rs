@@ -232,16 +232,13 @@ impl PartialEq for InstallationTokenGenerator {
 #[cfg(test)]
 mod tests {
     use std::time::Duration;
-
     use super::*;
 
-    const APP_ID: u64 = 162665041;
-    const INSTALLATION_ID: u64 = 1780480419;
-    const PRIVATE_KEY: &[u8] = include_bytes!("dummy-rsa.der");
+    use crate::tests::{app_id, installation_id, private_key};
 
     #[tokio::test(start_paused = true)]
     async fn jwt_credentials_refreshes_when_necessary() {
-        let credentials = JWTCredentials::new(APP_ID, Vec::from(PRIVATE_KEY))
+        let credentials = JWTCredentials::new(app_id(), private_key())
             .expect("Should be able to create credentials");
 
         assert!(
@@ -266,10 +263,10 @@ mod tests {
 
     #[tokio::test(start_paused = true)]
     async fn installation_token_generator_expires_after_token_interval() {
-        let jwt_credentials = JWTCredentials::new(APP_ID, Vec::from(PRIVATE_KEY))
+        let jwt_credentials = JWTCredentials::new(app_id(), private_key())
             .expect("Should be able to create JWT credentials");
 
-        let generator = InstallationTokenGenerator::new(INSTALLATION_ID, jwt_credentials.clone());
+        let generator = InstallationTokenGenerator::new(installation_id(), jwt_credentials.clone());
 
         assert_eq!(
             None,
