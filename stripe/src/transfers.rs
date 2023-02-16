@@ -54,13 +54,12 @@ impl Transfers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/transfers?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::TransferList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/transfers` endpoint.
      *
@@ -83,7 +82,6 @@ impl Transfers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/transfers?{}", query_);
-
         let mut resp: crate::types::TransferList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -122,7 +120,6 @@ impl Transfers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/transfers` endpoint.
      *
@@ -130,9 +127,9 @@ impl Transfers {
      */
     pub async fn post(&self) -> Result<crate::types::Transfer> {
         let url = "/v1/transfers".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/transfers/{id}/reversals` endpoint.
      *
@@ -169,13 +166,12 @@ impl Transfers {
             crate::progenitor_support::encode_path(id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Reversals = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/transfers/{id}/reversals` endpoint.
      *
@@ -188,7 +184,6 @@ impl Transfers {
             "/v1/transfers/{}/reversals",
             crate::progenitor_support::encode_path(id),
         );
-
         let mut resp: crate::types::Reversals = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -227,7 +222,6 @@ impl Transfers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/transfers/{id}/reversals` endpoint.
      *
@@ -246,10 +240,9 @@ impl Transfers {
             "/v1/transfers/{}/reversals",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/transfers/{transfer}` endpoint.
      *
@@ -265,10 +258,9 @@ impl Transfers {
             "/v1/transfers/{}",
             crate::progenitor_support::encode_path(transfer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/transfers/{transfer}` endpoint.
      *
@@ -285,10 +277,9 @@ impl Transfers {
             "/v1/transfers/{}",
             crate::progenitor_support::encode_path(transfer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/transfers/{transfer}/reversals/{id}` endpoint.
      *
@@ -310,10 +301,9 @@ impl Transfers {
             crate::progenitor_support::encode_path(transfer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/transfers/{transfer}/reversals/{id}` endpoint.
      *
@@ -336,7 +326,7 @@ impl Transfers {
             crate::progenitor_support::encode_path(transfer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

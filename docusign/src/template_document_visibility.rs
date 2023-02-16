@@ -35,15 +35,14 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Returns document visibility for a template recipient.
      *
@@ -65,14 +64,13 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::DocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates document visibility for a template recipient.
      *
@@ -97,11 +95,11 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

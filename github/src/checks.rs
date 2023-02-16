@@ -41,12 +41,11 @@ impl Checks {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a check run.
      *
@@ -76,10 +75,9 @@ impl Checks {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a check run.
      *
@@ -110,12 +108,11 @@ impl Checks {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List check run annotations.
      *
@@ -156,10 +153,9 @@ impl Checks {
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List check run annotations.
      *
@@ -183,10 +179,8 @@ impl Checks {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a check suite.
      *
@@ -214,12 +208,11 @@ impl Checks {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update repository preferences for check suites.
      *
@@ -245,12 +238,11 @@ impl Checks {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a check suite.
      *
@@ -280,10 +272,9 @@ impl Checks {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List check runs in a check suite.
      *
@@ -343,10 +334,9 @@ impl Checks {
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Rerequest a check suite.
      *
@@ -376,10 +366,9 @@ impl Checks {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List check runs for a Git reference.
      *
@@ -444,10 +433,9 @@ impl Checks {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List check suites for a Git reference.
      *
@@ -500,7 +488,7 @@ impl Checks {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

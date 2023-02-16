@@ -27,9 +27,9 @@ impl IpAccessManagement {
      */
     pub async fn get_access_settings_whitelist(&self) -> Result<crate::types::IpAccessResponse> {
         let url = "/access_settings/whitelist".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add one or more IPs to the allow list.
      *
@@ -48,11 +48,11 @@ impl IpAccessManagement {
         body: &crate::types::PostAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::IpAccessResponse> {
         let url = "/access_settings/whitelist".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove one or more IPs from the allow list.
      *
@@ -73,11 +73,11 @@ impl IpAccessManagement {
         body: &crate::types::DeleteAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::Help> {
         let url = "/access_settings/whitelist".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve all recent access attempts.
      *
@@ -100,10 +100,9 @@ impl IpAccessManagement {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/access_settings/activity?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a specific allowed IP.
      *
@@ -123,12 +122,11 @@ impl IpAccessManagement {
     ) -> Result<crate::types::IpAccessResponse> {
         let url = format!(
             "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Remove a specific IP from the allowed list.
      *
@@ -148,9 +146,9 @@ impl IpAccessManagement {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

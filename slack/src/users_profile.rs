@@ -39,10 +39,9 @@ impl UsersProfile {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.profile.get?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/users.profile.set` endpoint.
      *
@@ -56,6 +55,7 @@ impl UsersProfile {
      */
     pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
         let url = "/users.profile.set".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

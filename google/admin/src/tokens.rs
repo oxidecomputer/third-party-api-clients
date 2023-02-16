@@ -26,10 +26,9 @@ impl Tokens {
             "/admin/directory/v1/users/{}/tokens",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/tokens/{clientId}` endpoint.
      *
@@ -46,10 +45,9 @@ impl Tokens {
             crate::progenitor_support::encode_path(user_key),
             crate::progenitor_support::encode_path(client_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/tokens/{clientId}` endpoint.
      *
@@ -66,7 +64,7 @@ impl Tokens {
             crate::progenitor_support::encode_path(user_key),
             crate::progenitor_support::encode_path(client_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

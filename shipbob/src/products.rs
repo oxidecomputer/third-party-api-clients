@@ -71,10 +71,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/product?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get multiple products.
      *
@@ -108,10 +107,8 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/product?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Add a single product to the store.
      *
@@ -126,11 +123,11 @@ impl Products {
         body: &crate::types::ProductsCreateProductModel,
     ) -> Result<Vec<crate::types::Product>> {
         let url = "/product".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a single product.
      *
@@ -146,10 +143,9 @@ impl Products {
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify a single product.
      *
@@ -169,12 +165,11 @@ impl Products {
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add multiple products to the store.
      *
@@ -189,6 +184,7 @@ impl Products {
         body: &[crate::types::ProductsCreateProductModel],
     ) -> Result<Vec<crate::types::Product>> {
         let url = "/product/batch".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

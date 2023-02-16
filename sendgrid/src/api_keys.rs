@@ -37,10 +37,9 @@ impl ApiKeys {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api_keys?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create API keys.
      *
@@ -69,11 +68,11 @@ impl ApiKeys {
         body: &crate::types::CreateApiKeysRequest,
     ) -> Result<crate::types::CreateApiKeysResponse> {
         let url = "/api_keys".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve an existing API Key.
      *
@@ -92,12 +91,11 @@ impl ApiKeys {
     pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+            crate::progenitor_support::encode_path(&api_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update API key name and scopes.
      *
@@ -122,14 +120,13 @@ impl ApiKeys {
     ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+            crate::progenitor_support::encode_path(&api_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete API keys.
      *
@@ -146,12 +143,11 @@ impl ApiKeys {
     pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+            crate::progenitor_support::encode_path(&api_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update API key name.
      *
@@ -172,9 +168,9 @@ impl ApiKeys {
     ) -> Result<crate::types::ApiKeyNameId> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+            crate::progenitor_support::encode_path(&api_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

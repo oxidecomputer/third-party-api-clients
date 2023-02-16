@@ -2,6 +2,15 @@ use anyhow::Result;
 
 use crate::Client;
 
+#[derive(Debug, Default, Clone)]
+pub struct PostFilesDefaultServer {}
+
+impl PostFilesDefaultServer {
+    pub fn default_url(&self) -> &str {
+        "https://files.stripe.com/"
+    }
+}
+
 pub struct Files {
     pub client: Client,
 }
@@ -49,13 +58,12 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/files?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/files` endpoint.
      *
@@ -74,7 +82,6 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/files?{}", query_);
-
         let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -113,7 +120,6 @@ impl Files {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/files` endpoint.
      *
@@ -123,9 +129,11 @@ impl Files {
      */
     pub async fn post(&self) -> Result<crate::types::File> {
         let url = "/v1/files".to_string();
+        let url = self
+            .client
+            .url(&url, Some(PostFilesDefaultServer::default().default_url()));
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/files/{file}` endpoint.
      *
@@ -138,7 +146,7 @@ impl Files {
      */
     pub async fn get(&self, file: &str) -> Result<crate::types::File> {
         let url = format!("/v1/files/{}", crate::progenitor_support::encode_path(file),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

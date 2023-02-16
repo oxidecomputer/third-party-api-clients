@@ -42,10 +42,9 @@ impl Orgs {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/organizations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organizations.
      *
@@ -66,10 +65,8 @@ impl Orgs {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/organizations?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get an organization.
      *
@@ -87,10 +84,9 @@ impl Orgs {
      */
     pub async fn get(&self, org: &str) -> Result<crate::types::OrganizationFull> {
         let url = format!("/orgs/{}", crate::progenitor_support::encode_path(org),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update an organization.
      *
@@ -112,12 +108,11 @@ impl Orgs {
         body: &crate::types::OrgsUpdateRequest,
     ) -> Result<crate::types::OrganizationFull> {
         let url = format!("/orgs/{}", crate::progenitor_support::encode_path(org),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get the audit log for an organization.
      *
@@ -187,10 +182,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the audit log for an organization.
      *
@@ -235,10 +229,8 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List users blocked by an organization.
      *
@@ -257,10 +249,9 @@ impl Orgs {
             "/orgs/{}/blocks",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List users blocked by an organization.
      *
@@ -277,10 +268,8 @@ impl Orgs {
             "/orgs/{}/blocks",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a user is blocked by an organization.
      *
@@ -301,10 +290,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Block a user from an organization.
      *
@@ -325,10 +313,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Unblock a user from an organization.
      *
@@ -349,10 +336,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List SAML SSO authorizations for an organization.
      *
@@ -376,10 +362,9 @@ impl Orgs {
             "/orgs/{}/credential-authorizations",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List SAML SSO authorizations for an organization.
      *
@@ -401,10 +386,8 @@ impl Orgs {
             "/orgs/{}/credential-authorizations",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Remove a SAML SSO authorization for an organization.
      *
@@ -427,10 +410,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&credential_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List failed organization invitations.
      *
@@ -465,10 +447,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List failed organization invitations.
      *
@@ -488,10 +469,8 @@ impl Orgs {
             "/orgs/{}/failed_invitations",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List organization webhooks.
      *
@@ -526,10 +505,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization webhooks.
      *
@@ -546,10 +524,8 @@ impl Orgs {
             "/orgs/{}/hooks",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an organization webhook.
      *
@@ -572,12 +548,11 @@ impl Orgs {
             "/orgs/{}/hooks",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get an organization webhook.
      *
@@ -598,10 +573,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an organization webhook.
      *
@@ -622,10 +596,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an organization webhook.
      *
@@ -651,12 +624,11 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a webhook configuration for an organization.
      *
@@ -683,10 +655,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a webhook configuration for an organization.
      *
@@ -714,12 +685,11 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List deliveries for an organization webhook.
      *
@@ -757,10 +727,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List deliveries for an organization webhook.
      *
@@ -789,10 +758,8 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a webhook delivery for an organization webhook.
      *
@@ -820,10 +787,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Redeliver a delivery for an organization webhook.
      *
@@ -851,10 +817,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Ping an organization webhook.
      *
@@ -875,10 +840,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List app installations for an organization.
      *
@@ -913,10 +877,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pending organization invitations.
      *
@@ -951,10 +914,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pending organization invitations.
      *
@@ -974,10 +936,8 @@ impl Orgs {
             "/orgs/{}/invitations",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an organization invitation.
      *
@@ -1002,12 +962,11 @@ impl Orgs {
             "/orgs/{}/invitations",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Cancel an organization invitation.
      *
@@ -1030,10 +989,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List organization invitation teams.
      *
@@ -1071,10 +1029,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization invitation teams.
      *
@@ -1096,10 +1053,8 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List organization members.
      *
@@ -1149,10 +1104,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization members.
      *
@@ -1183,10 +1137,8 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check organization membership for a user.
      *
@@ -1207,10 +1159,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Remove an organization member.
      *
@@ -1231,10 +1182,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get organization membership for a user.
      *
@@ -1259,10 +1209,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Set organization membership for a user.
      *
@@ -1296,12 +1245,11 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove organization membership for a user.
      *
@@ -1324,10 +1272,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List outside collaborators for an organization.
      *
@@ -1369,10 +1316,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List outside collaborators for an organization.
      *
@@ -1399,10 +1345,8 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Convert an organization member to outside collaborator.
      *
@@ -1427,10 +1371,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Remove outside collaborator from an organization.
      *
@@ -1451,10 +1394,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List public organization members.
      *
@@ -1489,10 +1431,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public organization members.
      *
@@ -1512,10 +1453,8 @@ impl Orgs {
             "/orgs/{}/public_members",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check public organization membership for a user.
      *
@@ -1536,10 +1475,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Set public organization membership for the authenticated user.
      *
@@ -1566,10 +1504,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Remove public organization membership for the authenticated user.
      *
@@ -1594,10 +1531,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List organization memberships for the authenticated user.
      *
@@ -1631,10 +1567,9 @@ impl Orgs {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/memberships/orgs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization memberships for the authenticated user.
      *
@@ -1656,10 +1591,8 @@ impl Orgs {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/memberships/orgs?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get an organization membership for the authenticated user.
      *
@@ -1681,10 +1614,9 @@ impl Orgs {
             "/user/memberships/orgs/{}",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update an organization membership for the authenticated user.
      *
@@ -1707,12 +1639,11 @@ impl Orgs {
             "/user/memberships/orgs/{}",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List organizations for the authenticated user.
      *
@@ -1745,10 +1676,9 @@ impl Orgs {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/orgs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organizations for the authenticated user.
      *
@@ -1770,7 +1700,6 @@ impl Orgs {
         let url = "/user/orgs".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List organizations for a user.
      *
@@ -1807,10 +1736,9 @@ impl Orgs {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organizations for a user.
      *
@@ -1832,7 +1760,6 @@ impl Orgs {
             "/users/{}/orgs",
             crate::progenitor_support::encode_path(username),
         );
-
         self.client.get_all_pages(&url, None).await
     }
 }

@@ -25,9 +25,9 @@ impl AdminApps {
      */
     pub async fn approve(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.apps.approve".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.apps.restrict` endpoint.
      *
@@ -41,6 +41,7 @@ impl AdminApps {
      */
     pub async fn restrict(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.apps.restrict".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

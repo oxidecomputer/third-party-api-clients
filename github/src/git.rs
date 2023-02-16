@@ -37,12 +37,11 @@ impl Git {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a blob.
      *
@@ -72,10 +71,9 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(file_sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a commit.
      *
@@ -130,12 +128,11 @@ impl Git {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a commit.
      *
@@ -192,10 +189,9 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List matching references.
      *
@@ -242,10 +238,9 @@ impl Git {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List matching references.
      *
@@ -275,10 +270,8 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a reference.
      *
@@ -308,10 +301,9 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a reference.
      *
@@ -337,12 +329,11 @@ impl Git {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a reference.
      *
@@ -365,10 +356,9 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a reference.
      *
@@ -397,12 +387,11 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a tag object.
      *
@@ -457,12 +446,11 @@ impl Git {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a tag.
      *
@@ -517,10 +505,9 @@ impl Git {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(tag_sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a tree.
      *
@@ -548,12 +535,11 @@ impl Git {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a tree.
      *
@@ -591,7 +577,7 @@ impl Git {
             crate::progenitor_support::encode_path(tree_sha),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

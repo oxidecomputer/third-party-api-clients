@@ -29,10 +29,9 @@ impl JobApplicantsBeta {
             "/v1/companies/{}/job_applicants",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all job applicants for a company.
      *
@@ -52,10 +51,8 @@ impl JobApplicantsBeta {
             "/v1/companies/{}/job_applicants",
             crate::progenitor_support::encode_path(company_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a job applicant.
      *
@@ -74,12 +71,11 @@ impl JobApplicantsBeta {
             "/v1/companies/{}/job_applicants",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a job applicant.
      *
@@ -99,10 +95,9 @@ impl JobApplicantsBeta {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(job_applicant_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a job applicant.
      *
@@ -123,12 +118,11 @@ impl JobApplicantsBeta {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(job_applicant_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a job applicant.
      *
@@ -148,7 +142,7 @@ impl JobApplicantsBeta {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(job_applicant_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -82,13 +82,12 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Users = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.users.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
      *
@@ -138,7 +137,6 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users?{}", query_);
-
         let mut resp: crate::types::Users = self.client.get(&url, None).await?;
 
         let mut users = resp.users;
@@ -170,7 +168,6 @@ impl Users {
         // Return our response data.
         Ok(users)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users` endpoint.
      *
@@ -178,11 +175,11 @@ impl Users {
      */
     pub async fn insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
         let url = "/admin/directory/v1/users".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/watch` endpoint.
      *
@@ -254,12 +251,11 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users/watch?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -291,10 +287,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_key),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -313,12 +308,11 @@ impl Users {
             "/admin/directory/v1/users/{}",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -333,10 +327,9 @@ impl Users {
             "/admin/directory/v1/users/{}",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -355,12 +348,11 @@ impl Users {
             "/admin/directory/v1/users/{}",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
      *
@@ -386,10 +378,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_key),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
      *
@@ -408,12 +399,11 @@ impl Users {
             "/admin/directory/v1/users/{}/aliases",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases/watch` endpoint.
      *
@@ -440,12 +430,11 @@ impl Users {
             crate::progenitor_support::encode_path(user_key),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/aliases/{alias}` endpoint.
      *
@@ -462,10 +451,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_key),
             crate::progenitor_support::encode_path(alias),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/makeAdmin` endpoint.
      *
@@ -484,12 +472,11 @@ impl Users {
             "/admin/directory/v1/users/{}/makeAdmin",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -504,10 +491,9 @@ impl Users {
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -526,12 +512,11 @@ impl Users {
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -546,10 +531,9 @@ impl Users {
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -568,12 +552,11 @@ impl Users {
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/signOut` endpoint.
      *
@@ -588,10 +571,9 @@ impl Users {
             "/admin/directory/v1/users/{}/signOut",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/undelete` endpoint.
      *
@@ -606,7 +588,7 @@ impl Users {
             "/admin/directory/v1/users/{}/undelete",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

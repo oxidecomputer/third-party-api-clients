@@ -130,7 +130,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.gusto.com";
+pub const FALLBACK_HOST: &str = "https://api.gusto.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -162,10 +162,54 @@ use tokio::sync::RwLock;
 const TOKEN_ENDPOINT: &str = "https://api.gusto.com/oauth/token";
 const USER_CONSENT_ENDPOINT: &str = "https://api.gusto.com/oauth/authorize";
 
+pub enum RootDefaultServers {
+    RootDemoServer(RootDemoServer),
+    RootProductionServer(RootProductionServer),
+}
+
+impl RootDefaultServers {
+    pub fn default_url(&self) -> &str {
+        match self {
+            Self::RootDemoServer(inner) => inner.default_url(),
+            Self::RootProductionServer(inner) => inner.default_url(),
+        }
+    }
+}
+
+#[derive(Debug, Default, Clone)]
+pub struct RootDemoServer {}
+
+impl RootDemoServer {
+    pub fn default_url(&self) -> &str {
+        "https://api.gusto-demo.com"
+    }
+}
+
+#[derive(Debug, Default, Clone)]
+pub struct RootProductionServer {}
+
+impl RootProductionServer {
+    pub fn default_url(&self) -> &str {
+        "https://api.gusto.com"
+    }
+}
+
+impl From<RootDemoServer> for RootDefaultServers {
+    fn from(server: RootDemoServer) -> Self {
+        Self::RootDemoServer(server)
+    }
+}
+impl From<RootProductionServer> for RootDefaultServers {
+    fn from(server: RootProductionServer) -> Self {
+        Self::RootProductionServer(server)
+    }
+}
+
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     host: String,
+    host_override: Option<String>,
     token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
@@ -235,6 +279,8 @@ impl Client {
         redirect_uri: R,
         token: T,
         refresh_token: Q,
+
+        server: impl Into<RootDefaultServers>,
     ) -> Self
     where
         I: ToString,
@@ -259,8 +305,11 @@ impl Client {
                     ))
                     .build();
 
+                let host = server.into().default_url().to_string();
+
                 Client {
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -338,14 +387,33 @@ impl Client {
         seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid))
     }
 
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
+        self.host_override = Some(host.to_string());
+        self
+    }
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self {
+        self.host_override = None;
+        self
+    }
+
+    pub fn get_host_override(&self) -> Option<&str> {
+        self.host_override.as_deref()
+    }
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
+        format!(
+            "{}{}",
+            self.get_host_override()
+                .or(host)
+                .unwrap_or(self.host.as_str()),
+            path
+        )
     }
 
     /// Create a new Client struct from environment variables. It
@@ -354,7 +422,11 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    pub fn new_from_env<T, R>(
+        token: T,
+        refresh_token: R,
+        server: impl Into<RootDefaultServers>,
+    ) -> Self
     where
         T: ToString,
         R: ToString,
@@ -363,7 +435,14 @@ impl Client {
         let client_secret = env::var("GUSTO_CLIENT_SECRET").expect("must set GUSTO_CLIENT_SECRET");
         let redirect_uri = env::var("GUSTO_REDIRECT_URI").expect("must set GUSTO_REDIRECT_URI");
 
-        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+        Client::new(
+            client_id,
+            client_secret,
+            redirect_uri,
+            token,
+            refresh_token,
+            server,
+        )
     }
 
     /// Return a user consent url with an optional set of scopes.
@@ -482,12 +561,7 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<reqwest::Request> {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -644,12 +718,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -714,12 +783,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -783,12 +847,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -873,8 +932,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::GET, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::GET, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -914,8 +972,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, &(self.host.to_string() + uri), None)
-            .await
+        self.request_with_links(http::Method::GET, uri, None).await
     }
 
     #[allow(dead_code)]
@@ -935,8 +992,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::POST, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -944,8 +1000,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PATCH, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PATCH, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -953,8 +1008,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PUT, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PUT, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -962,12 +1016,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::DELETE,
-            &(self.host.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::DELETE, uri, message)
+            .await
     }
 
     /// Return a reference to an interface that provides access to Current User operations.

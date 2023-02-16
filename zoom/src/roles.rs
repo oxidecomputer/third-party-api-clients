@@ -29,9 +29,9 @@ impl Roles {
      */
     pub async fn get(&self) -> Result<crate::types::Domains> {
         let url = "/roles".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a role.
      *
@@ -49,11 +49,11 @@ impl Roles {
      */
     pub async fn create(&self, body: &crate::types::CreateRoleRequest) -> Result<()> {
         let url = "/roles".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List members in a role.
      *
@@ -104,13 +104,12 @@ impl Roles {
             crate::progenitor_support::encode_path(role_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RoleMembersList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.members.to_vec())
     }
-
     /**
      * List members in a role.
      *
@@ -140,7 +139,6 @@ impl Roles {
             crate::progenitor_support::encode_path(role_id),
             query_
         );
-
         let mut resp: crate::types::RoleMembersList = self.client.get(&url, None).await?;
 
         let mut members = resp.members;
@@ -173,7 +171,6 @@ impl Roles {
         // Return our response data.
         Ok(members)
     }
-
     /**
      * Assign a role.
      *
@@ -200,12 +197,11 @@ impl Roles {
             "/roles/{}/members",
             crate::progenitor_support::encode_path(role_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign a role.
      *
@@ -230,10 +226,9 @@ impl Roles {
             crate::progenitor_support::encode_path(role_id),
             crate::progenitor_support::encode_path(member_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get role information.
      *
@@ -259,10 +254,9 @@ impl Roles {
         role_id: &str,
     ) -> Result<crate::types::GetRoleInformationResponse> {
         let url = format!("/roles/{}", crate::progenitor_support::encode_path(role_id),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a role.
      *
@@ -285,10 +279,9 @@ impl Roles {
      */
     pub async fn delete(&self, role_id: &str) -> Result<()> {
         let url = format!("/roles/{}", crate::progenitor_support::encode_path(role_id),);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update role information.
      *
@@ -313,7 +306,7 @@ impl Roles {
         body: &crate::types::UpdateRoleRequest,
     ) -> Result<()> {
         let url = format!("/roles/{}", crate::progenitor_support::encode_path(role_id),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

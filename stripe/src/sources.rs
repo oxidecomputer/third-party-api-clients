@@ -19,9 +19,9 @@ impl Sources {
      */
     pub async fn post(&self) -> Result<crate::types::SourceData> {
         let url = "/v1/sources".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/sources/{source}` endpoint.
      *
@@ -44,10 +44,9 @@ impl Sources {
             crate::progenitor_support::encode_path(source),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/sources/{source}` endpoint.
      *
@@ -64,10 +63,9 @@ impl Sources {
             "/v1/sources/{}",
             crate::progenitor_support::encode_path(source),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/mandate_notifications/{mandate_notification}` endpoint.
      *
@@ -89,10 +87,9 @@ impl Sources {
             crate::progenitor_support::encode_path(source),
             crate::progenitor_support::encode_path(mandate_notification),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
      *
@@ -129,14 +126,13 @@ impl Sources {
             crate::progenitor_support::encode_path(source),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ApmsSourcesSourceTransactionList =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
      *
@@ -152,7 +148,6 @@ impl Sources {
             "/v1/sources/{}/source_transactions",
             crate::progenitor_support::encode_path(source),
         );
-
         let mut resp: crate::types::ApmsSourcesSourceTransactionList =
             self.client.get(&url, None).await?;
 
@@ -192,7 +187,6 @@ impl Sources {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/source_transactions/{source_transaction}` endpoint.
      *
@@ -214,10 +208,9 @@ impl Sources {
             crate::progenitor_support::encode_path(source),
             crate::progenitor_support::encode_path(source_transaction),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/sources/{source}/verify` endpoint.
      *
@@ -232,7 +225,7 @@ impl Sources {
             "/v1/sources/{}/verify",
             crate::progenitor_support::encode_path(source),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

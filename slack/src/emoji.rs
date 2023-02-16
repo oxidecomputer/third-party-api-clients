@@ -25,6 +25,7 @@ impl Emoji {
      */
     pub async fn list(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/emoji.list".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

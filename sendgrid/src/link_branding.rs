@@ -36,10 +36,9 @@ impl LinkBranding {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/links?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve all branded links.
      *
@@ -57,7 +56,6 @@ impl LinkBranding {
         let url = "/whitelabel/links".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a branded link.
      *
@@ -78,11 +76,11 @@ impl LinkBranding {
         body: &crate::types::PostWhitelabelLinksRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = "/whitelabel/links".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Validate a branded link.
      *
@@ -104,10 +102,9 @@ impl LinkBranding {
             "/whitelabel/links/{}/validate",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Associate a branded link with a subuser.
      *
@@ -126,12 +123,11 @@ impl LinkBranding {
             "/whitelabel/links/{}/subuser",
             crate::progenitor_support::encode_path(&link_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve a branded link.
      *
@@ -153,10 +149,9 @@ impl LinkBranding {
             "/whitelabel/links/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a branded link.
      *
@@ -177,10 +172,9 @@ impl LinkBranding {
             "/whitelabel/links/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a branded link.
      *
@@ -203,12 +197,11 @@ impl LinkBranding {
             "/whitelabel/links/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve the default branded link.
      *
@@ -239,10 +232,9 @@ impl LinkBranding {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/links/default?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a subuser's branded link.
      *
@@ -266,10 +258,9 @@ impl LinkBranding {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/links/subuser?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Disassociate a branded link from a subuser.
      *
@@ -295,7 +286,7 @@ impl LinkBranding {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/links/subuser?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

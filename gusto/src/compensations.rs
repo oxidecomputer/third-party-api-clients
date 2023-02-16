@@ -27,10 +27,9 @@ impl Compensations {
             "/v1/compensations/{}",
             crate::progenitor_support::encode_path(compensation_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a compensation.
      *
@@ -49,12 +48,11 @@ impl Compensations {
             "/v1/compensations/{}",
             crate::progenitor_support::encode_path(compensation_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get compensations for a job.
      *
@@ -71,10 +69,9 @@ impl Compensations {
             "/v1/jobs/{}/compensations",
             crate::progenitor_support::encode_path(job_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get compensations for a job.
      *
@@ -93,7 +90,6 @@ impl Compensations {
             "/v1/jobs/{}/compensations",
             crate::progenitor_support::encode_path(job_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
 }

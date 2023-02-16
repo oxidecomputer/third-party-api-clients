@@ -25,9 +25,9 @@ impl AdminUsersSession {
      */
     pub async fn invalidate(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.session.invalidate".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.session.reset` endpoint.
      *
@@ -41,6 +41,7 @@ impl AdminUsersSession {
      */
     pub async fn reset(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.session.reset".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

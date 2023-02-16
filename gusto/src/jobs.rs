@@ -24,10 +24,9 @@ impl Jobs {
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(job_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a job.
      *
@@ -44,12 +43,11 @@ impl Jobs {
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(job_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an individual job.
      *
@@ -62,10 +60,9 @@ impl Jobs {
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(job_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get jobs for an employee.
      *
@@ -78,10 +75,9 @@ impl Jobs {
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get jobs for an employee.
      *
@@ -96,10 +92,8 @@ impl Jobs {
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(employee_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a job.
      *
@@ -116,12 +110,11 @@ impl Jobs {
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a compensation.
      *
@@ -140,7 +133,7 @@ impl Jobs {
             "/v1/jobs/{}/compensations",
             crate::progenitor_support::encode_path(job_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

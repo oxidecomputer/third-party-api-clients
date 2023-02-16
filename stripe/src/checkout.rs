@@ -52,14 +52,13 @@ impl Checkout {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/checkout/sessions?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PaymentPagesCheckoutSessionList =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
      *
@@ -81,7 +80,6 @@ impl Checkout {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/checkout/sessions?{}", query_);
-
         let mut resp: crate::types::PaymentPagesCheckoutSessionList =
             self.client.get(&url, None).await?;
 
@@ -121,7 +119,6 @@ impl Checkout {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/checkout/sessions` endpoint.
      *
@@ -129,9 +126,9 @@ impl Checkout {
      */
     pub async fn post_session(&self) -> Result<crate::types::Session> {
         let url = "/v1/checkout/sessions".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}` endpoint.
      *
@@ -147,10 +144,9 @@ impl Checkout {
             "/v1/checkout/sessions/{}",
             crate::progenitor_support::encode_path(session),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/checkout/sessions/{session}/expire` endpoint.
      *
@@ -170,10 +166,9 @@ impl Checkout {
             "/v1/checkout/sessions/{}/expire",
             crate::progenitor_support::encode_path(session),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
      *
@@ -210,13 +205,12 @@ impl Checkout {
             crate::progenitor_support::encode_path(session),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
      *
@@ -232,7 +226,6 @@ impl Checkout {
             "/v1/checkout/sessions/{}/line_items",
             crate::progenitor_support::encode_path(session),
         );
-
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         let mut data = resp.data;

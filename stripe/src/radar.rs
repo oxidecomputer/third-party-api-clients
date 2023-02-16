@@ -52,13 +52,12 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RadarEarlyFraudWarningList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings` endpoint.
      *
@@ -80,7 +79,6 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
-
         let mut resp: crate::types::RadarEarlyFraudWarningList =
             self.client.get(&url, None).await?;
 
@@ -120,7 +118,6 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings/{early_fraud_warning}` endpoint.
      *
@@ -141,10 +138,9 @@ impl Radar {
             "/v1/radar/early_fraud_warnings/{}",
             crate::progenitor_support::encode_path(early_fraud_warning),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
      *
@@ -187,13 +183,12 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_list_items?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListItems = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
      *
@@ -216,7 +211,6 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_list_items?{}", query_);
-
         let mut resp: crate::types::ListItems = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -255,7 +249,6 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_list_items` endpoint.
      *
@@ -263,9 +256,9 @@ impl Radar {
      */
     pub async fn post_value_list_item(&self) -> Result<crate::types::RadarListItem> {
         let url = "/v1/radar/value_list_items".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items/{item}` endpoint.
      *
@@ -284,10 +277,9 @@ impl Radar {
             "/v1/radar/value_list_items/{}",
             crate::progenitor_support::encode_path(item),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/radar/value_list_items/{item}` endpoint.
      *
@@ -305,10 +297,9 @@ impl Radar {
             "/v1/radar/value_list_items/{}",
             crate::progenitor_support::encode_path(item),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
      *
@@ -351,13 +342,12 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_lists?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetRadarValueListsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
      *
@@ -380,7 +370,6 @@ impl Radar {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_lists?{}", query_);
-
         let mut resp: crate::types::GetRadarValueListsResponse =
             self.client.get(&url, None).await?;
 
@@ -420,7 +409,6 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_lists` endpoint.
      *
@@ -428,9 +416,9 @@ impl Radar {
      */
     pub async fn post_value_list(&self) -> Result<crate::types::RadarList> {
         let url = "/v1/radar/value_lists".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -446,10 +434,9 @@ impl Radar {
             "/v1/radar/value_lists/{}",
             crate::progenitor_support::encode_path(value_list),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -464,10 +451,9 @@ impl Radar {
             "/v1/radar/value_lists/{}",
             crate::progenitor_support::encode_path(value_list),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -485,7 +471,7 @@ impl Radar {
             "/v1/radar/value_lists/{}",
             crate::progenitor_support::encode_path(value_list),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

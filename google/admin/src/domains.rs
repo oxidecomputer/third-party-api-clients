@@ -26,10 +26,9 @@ impl Domains {
             "/admin/directory/v1/customer/{}/domains",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/domains` endpoint.
      *
@@ -48,12 +47,11 @@ impl Domains {
             "/admin/directory/v1/customer/{}/domains",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domains/{domainName}` endpoint.
      *
@@ -70,10 +68,9 @@ impl Domains {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(domain_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/domains/{domainName}` endpoint.
      *
@@ -90,7 +87,7 @@ impl Domains {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(domain_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

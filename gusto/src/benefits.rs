@@ -23,9 +23,9 @@ impl Benefits {
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
         let url = "/v1/benefits".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all benefits supported by Gusto.
      *
@@ -41,7 +41,6 @@ impl Benefits {
         let url = "/v1/benefits".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a supported benefit by ID.
      *
@@ -56,10 +55,9 @@ impl Benefits {
             "/v1/benefits/{}",
             crate::progenitor_support::encode_path(benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get benefits for a company.
      *
@@ -74,10 +72,9 @@ impl Benefits {
             "/v1/companies/{}/company_benefits",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get benefits for a company.
      *
@@ -97,10 +94,8 @@ impl Benefits {
             "/v1/companies/{}/company_benefits",
             crate::progenitor_support::encode_path(company_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a company benefit.
      *
@@ -119,12 +114,11 @@ impl Benefits {
             "/v1/companies/{}/company_benefits",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a company benefit.
      *
@@ -142,10 +136,9 @@ impl Benefits {
             "/v1/company_benefits/{}",
             crate::progenitor_support::encode_path(company_benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a company benefit.
      *
@@ -164,12 +157,11 @@ impl Benefits {
             "/v1/company_benefits/{}",
             crate::progenitor_support::encode_path(company_benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get an employee's benefits.
      *
@@ -187,10 +179,9 @@ impl Benefits {
             "/v1/employees/{}/employee_benefits",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get an employee's benefits.
      *
@@ -210,10 +201,8 @@ impl Benefits {
             "/v1/employees/{}/employee_benefits",
             crate::progenitor_support::encode_path(employee_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an employee benefit.
      *
@@ -230,12 +219,11 @@ impl Benefits {
             "/v1/employees/{}/employee_benefits",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Year-to-date Benefit Amounts from Different Company.
      *
@@ -252,12 +240,11 @@ impl Benefits {
             "/v1/employees/{}/ytd_benefit_amounts_from_different_company",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get an employee benefit.
      *
@@ -273,10 +260,9 @@ impl Benefits {
             "/v1/employee_benefits/{}",
             crate::progenitor_support::encode_path(employee_benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update an employee benefit.
      *
@@ -293,12 +279,11 @@ impl Benefits {
             "/v1/employee_benefits/{}",
             crate::progenitor_support::encode_path(employee_benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an employee benefit.
      *
@@ -311,7 +296,7 @@ impl Benefits {
             "/v1/employee_benefits/{}",
             crate::progenitor_support::encode_path(employee_benefit_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -102,13 +102,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -127,14 +126,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -194,13 +192,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -227,14 +224,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -255,15 +251,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -283,13 +278,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -299,9 +293,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_202001_get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/2020-01/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -328,10 +322,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all articles from a blog. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -422,13 +415,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -447,14 +439,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -514,13 +505,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -547,14 +537,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -575,15 +564,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -603,13 +591,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -619,9 +606,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_202004_get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/2020-04/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -648,10 +635,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all articles from a blog. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -742,13 +728,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -767,14 +752,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -834,13 +818,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -867,14 +850,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -895,15 +877,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -923,13 +904,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -939,9 +919,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_202007_get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/2020-07/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -968,10 +948,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all articles from a blog. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1062,13 +1041,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -1087,14 +1065,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -1154,13 +1131,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -1187,14 +1163,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -1215,15 +1190,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -1243,13 +1217,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -1259,9 +1232,9 @@ impl OnlineStore {
      */
     pub async fn get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/2020-10/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -1284,10 +1257,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all articles from a blog. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1378,13 +1350,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -1403,14 +1374,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -1470,13 +1440,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -1503,14 +1472,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -1531,15 +1499,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -1559,13 +1526,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -1575,9 +1541,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_202101_get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/2021-01/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -1604,10 +1570,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all articles from a blog. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1698,13 +1663,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates an article for a blog.
      *
@@ -1723,14 +1687,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all articles from a blog.
      *
@@ -1790,13 +1753,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single article.
      *
@@ -1823,14 +1785,13 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an article.
      *
@@ -1851,15 +1812,14 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an article.
      *
@@ -1879,13 +1839,12 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list all of article authors.
      *
@@ -1895,9 +1854,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_unstable_get_articles_author(&self) -> Result<()> {
         let url = "/admin/api/unstable/articles/authors.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of all the tags.
      *
@@ -1924,10 +1883,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/articles/tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -1959,13 +1917,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -1997,15 +1954,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2030,13 +1986,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -2068,13 +2023,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -2106,15 +2060,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2139,13 +2092,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -2177,13 +2129,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -2215,15 +2166,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2248,13 +2198,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -2286,13 +2235,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -2324,15 +2272,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2357,13 +2304,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -2395,13 +2341,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -2433,15 +2378,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2466,13 +2410,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves a single asset for a theme by its key.
               To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
@@ -2504,13 +2447,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates or updates an asset for a theme.
               In the PUT request, you can include the src or source_key property to create the asset from an existing file.
@@ -2542,15 +2484,14 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an asset from a theme.
      *
@@ -2575,13 +2516,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieve a list of all blogs. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2619,10 +2559,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/blogs.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new blog.
      *
@@ -2632,11 +2571,11 @@ impl OnlineStore {
      */
     pub async fn deprecated_202001_create_blogs(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/blogs.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all blogs.
      *
@@ -2646,9 +2585,9 @@ impl OnlineStore {
      */
     pub async fn deprecated_202001_get_blogs_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/blogs/count.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single blog by its ID.
      *
@@ -2673,13 +2612,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a blog.
      *
@@ -2698,14 +2636,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a blog.
      *
@@ -2720,12 +2657,11 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_blogs_param_blog(&self, blog_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of comments. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2817,10 +2753,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/comments.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a comment for an article.
      *
@@ -2830,11 +2765,11 @@ impl OnlineStore {
      */
     pub async fn deprecated_202001_create_comments(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/comments.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of comments.
      *
@@ -2910,10 +2845,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/comments/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single comment by its ID.
      *
@@ -2938,13 +2872,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/comments/{}/json?{}",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a comment of an article.
      *
@@ -2963,14 +2896,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Marks a comment as spam.
      *
@@ -2989,14 +2921,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/spam.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Marks a comment as not spam.
      *
@@ -3015,14 +2946,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/not_spam.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Approves a comment.
      *
@@ -3041,14 +2971,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/approve.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a comment.
      *
@@ -3067,14 +2996,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/remove.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Restores a previously removed comment.
      *
@@ -3093,14 +3021,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/restore.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3143,10 +3070,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -3157,11 +3083,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202001_create_redirects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -3188,10 +3114,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -3216,13 +3141,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -3241,14 +3165,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -3266,12 +3189,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3314,10 +3236,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -3328,11 +3249,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202004_create_redirects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -3359,10 +3280,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -3387,13 +3307,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -3412,14 +3331,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -3437,12 +3355,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3485,10 +3402,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -3499,11 +3415,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202007_create_redirects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -3530,10 +3446,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -3558,13 +3473,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -3583,14 +3497,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -3608,12 +3521,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3656,10 +3568,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -3670,11 +3581,11 @@ impl OnlineStore {
     */
     pub async fn create_redirects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -3697,10 +3608,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -3725,13 +3635,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -3750,14 +3659,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -3772,12 +3680,11 @@ impl OnlineStore {
     pub async fn delete_redirects_param_redirect(&self, redirect_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3820,10 +3727,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -3834,11 +3740,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202101_create_redirects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -3865,10 +3771,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -3893,13 +3798,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -3918,14 +3822,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -3943,12 +3846,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of URL redirects. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3991,10 +3893,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/redirects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
               For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
@@ -4008,11 +3909,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/redirects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of URL redirects.
      *
@@ -4039,10 +3940,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/redirects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single redirect.
      *
@@ -4067,13 +3967,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing redirect.
      *
@@ -4092,14 +3991,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a redirect.
      *
@@ -4117,12 +4015,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4180,10 +4077,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -4196,11 +4092,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-01/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -4219,10 +4115,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -4247,13 +4142,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -4272,14 +4166,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -4297,12 +4190,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4360,10 +4252,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -4376,11 +4267,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-04/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -4399,10 +4290,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -4427,13 +4317,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -4452,14 +4341,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -4477,12 +4365,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4540,10 +4427,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -4556,11 +4442,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-07/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -4579,10 +4465,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -4607,13 +4492,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -4632,14 +4516,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -4657,12 +4540,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4720,10 +4602,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -4733,11 +4614,11 @@ impl OnlineStore {
      */
     pub async fn create_script_tags(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -4756,10 +4637,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -4780,13 +4660,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -4805,14 +4684,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -4827,12 +4705,11 @@ impl OnlineStore {
     pub async fn delete_script_tags_param_tag(&self, script_tag_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4890,10 +4767,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -4906,11 +4782,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2021-01/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -4929,10 +4805,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -4957,13 +4832,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -4982,14 +4856,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -5007,12 +4880,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of all script tags. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -5070,10 +4942,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/script_tags.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new script tag.
      *
@@ -5086,11 +4957,11 @@ impl OnlineStore {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/script_tags.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of all script tags.
      *
@@ -5109,10 +4980,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/script_tags/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single script tag.
      *
@@ -5137,13 +5007,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a script tag.
      *
@@ -5162,14 +5031,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a script tag.
      *
@@ -5187,12 +5055,11 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5211,10 +5078,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5227,11 +5093,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202001_create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5256,13 +5122,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5281,14 +5146,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5303,12 +5167,11 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5327,10 +5190,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5343,11 +5205,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202004_create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5372,13 +5234,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5397,14 +5258,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5419,12 +5279,11 @@ impl OnlineStore {
     pub async fn deprecated_202004_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5443,10 +5302,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5459,11 +5317,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202007_create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5488,13 +5346,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5513,14 +5370,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5535,12 +5391,11 @@ impl OnlineStore {
     pub async fn deprecated_202007_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5559,10 +5414,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5575,11 +5429,11 @@ impl OnlineStore {
     */
     pub async fn create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5600,13 +5454,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5625,14 +5478,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5647,12 +5499,11 @@ impl OnlineStore {
     pub async fn delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5671,10 +5522,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5687,11 +5537,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_202101_create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5716,13 +5566,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5741,14 +5590,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5763,12 +5611,11 @@ impl OnlineStore {
     pub async fn deprecated_202101_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of themes.
      *
@@ -5787,10 +5634,9 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/themes.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
               A new theme is always unpublished by default. To publish a theme when you create it, include
@@ -5803,11 +5649,11 @@ impl OnlineStore {
     */
     pub async fn deprecated_unstable_create_themes(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/unstable/themes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single theme.
      *
@@ -5832,13 +5678,12 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing theme.
      *
@@ -5857,14 +5702,13 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a theme.
      *
@@ -5882,9 +5726,9 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

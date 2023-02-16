@@ -76,13 +76,12 @@ impl Subscriptions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscriptions` endpoint.
      *
@@ -122,7 +121,6 @@ impl Subscriptions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions?{}", query_);
-
         let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -161,7 +159,6 @@ impl Subscriptions {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscriptions` endpoint.
      *
@@ -175,9 +172,9 @@ impl Subscriptions {
      */
     pub async fn post(&self) -> Result<crate::types::Subscription> {
         let url = "/v1/subscriptions".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscriptions/search` endpoint.
      *
@@ -211,13 +208,12 @@ impl Subscriptions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions/search?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscriptions/search` endpoint.
      *
@@ -235,7 +231,6 @@ impl Subscriptions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions/search?{}", query_);
-
         let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -274,7 +269,6 @@ impl Subscriptions {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -293,10 +287,9 @@ impl Subscriptions {
             "/v1/subscriptions/{}",
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -314,10 +307,9 @@ impl Subscriptions {
             "/v1/subscriptions/{}",
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -339,10 +331,9 @@ impl Subscriptions {
             "/v1/subscriptions/{}",
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/subscriptions/{subscription_exposed_id}/discount` endpoint.
      *
@@ -360,7 +351,7 @@ impl Subscriptions {
             "/v1/subscriptions/{}/discount",
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

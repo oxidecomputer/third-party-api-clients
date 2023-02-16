@@ -111,10 +111,9 @@ impl Lists {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/lists?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add list.
      *
@@ -124,11 +123,11 @@ impl Lists {
      */
     pub async fn post(&self, body: &crate::types::SubscriberList) -> Result<crate::types::Lists> {
         let url = "/lists".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get list info.
      *
@@ -169,10 +168,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Batch subscribe or unsubscribe.
      *
@@ -212,12 +210,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete list.
      *
@@ -231,10 +228,9 @@ impl Lists {
      */
     pub async fn delete(&self, list_id: &str) -> Result<()> {
         let url = format!("/lists/{}", crate::progenitor_support::encode_path(list_id),);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update lists.
      *
@@ -252,12 +248,11 @@ impl Lists {
         body: &crate::types::SubscriberListData,
     ) -> Result<crate::types::Lists> {
         let url = format!("/lists/{}", crate::progenitor_support::encode_path(list_id),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List abuse reports.
      *
@@ -300,10 +295,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get abuse report.
      *
@@ -349,10 +343,9 @@ impl Lists {
             crate::progenitor_support::encode_path(report_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List recent activity.
      *
@@ -385,10 +378,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List top email clients.
      *
@@ -421,10 +413,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List growth history data.
      *
@@ -477,10 +468,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get growth history by month.
      *
@@ -516,10 +506,9 @@ impl Lists {
             crate::progenitor_support::encode_path(month),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List interest categories.
      *
@@ -567,10 +556,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add interest category.
      *
@@ -591,12 +579,11 @@ impl Lists {
             "/lists/{}/interest-categories",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get interest category info.
      *
@@ -632,10 +619,9 @@ impl Lists {
             crate::progenitor_support::encode_path(interest_category_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete interest category.
      *
@@ -658,10 +644,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(interest_category_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update interest category.
      *
@@ -685,12 +670,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(interest_category_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List interests in category.
      *
@@ -736,10 +720,9 @@ impl Lists {
             crate::progenitor_support::encode_path(interest_category_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add interest in category.
      *
@@ -763,12 +746,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(interest_category_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get interest in category.
      *
@@ -807,10 +789,9 @@ impl Lists {
             crate::progenitor_support::encode_path(interest_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete interest in category.
      *
@@ -836,10 +817,9 @@ impl Lists {
             crate::progenitor_support::encode_path(interest_category_id),
             crate::progenitor_support::encode_path(interest_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update interest in category.
      *
@@ -866,12 +846,11 @@ impl Lists {
             crate::progenitor_support::encode_path(interest_category_id),
             crate::progenitor_support::encode_path(interest_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List segments.
      *
@@ -966,10 +945,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add segment.
      *
@@ -990,12 +968,11 @@ impl Lists {
             "/lists/{}/segments",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get segment info.
      *
@@ -1052,10 +1029,9 @@ impl Lists {
             crate::progenitor_support::encode_path(segment_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Batch add or remove members.
      *
@@ -1079,12 +1055,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(segment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete segment.
      *
@@ -1103,10 +1078,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(segment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update segment.
      *
@@ -1130,12 +1104,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(segment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List members in segment.
      *
@@ -1202,10 +1175,9 @@ impl Lists {
             crate::progenitor_support::encode_path(segment_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add member to segment.
      *
@@ -1229,12 +1201,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(segment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove list member from segment.
      *
@@ -1260,10 +1231,9 @@ impl Lists {
             crate::progenitor_support::encode_path(segment_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Search for tags on a list by name.
      *
@@ -1291,10 +1261,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List members info.
      *
@@ -1433,10 +1402,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add member to list.
      *
@@ -1468,12 +1436,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get member info.
      *
@@ -1509,10 +1476,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update list member.
      *
@@ -1547,12 +1513,11 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Archive list member.
      *
@@ -1571,10 +1536,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update list member.
      *
@@ -1609,12 +1573,11 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * View recent activity 50.
      *
@@ -1655,10 +1618,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * View recent activity.
      *
@@ -1709,10 +1671,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List member tags.
      *
@@ -1758,10 +1719,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or remove member tags.
      *
@@ -1785,12 +1745,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List member events.
      *
@@ -1836,10 +1795,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add event.
      *
@@ -1863,12 +1821,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List member goal events.
      *
@@ -1904,10 +1861,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List recent member notes.
      *
@@ -1963,10 +1919,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add member note.
      *
@@ -1990,12 +1945,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get member note.
      *
@@ -2034,10 +1988,9 @@ impl Lists {
             crate::progenitor_support::encode_path(note_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete note.
      *
@@ -2063,10 +2016,9 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             crate::progenitor_support::encode_path(note_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update note.
      *
@@ -2093,12 +2045,11 @@ impl Lists {
             crate::progenitor_support::encode_path(subscriber_hash),
             crate::progenitor_support::encode_path(note_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete list member.
      *
@@ -2121,10 +2072,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List merge fields.
      *
@@ -2177,10 +2127,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add merge field.
      *
@@ -2201,12 +2150,11 @@ impl Lists {
             "/lists/{}/merge-fields",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get merge field.
      *
@@ -2242,10 +2190,9 @@ impl Lists {
             crate::progenitor_support::encode_path(merge_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete merge field.
      *
@@ -2264,10 +2211,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(merge_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update merge field.
      *
@@ -2291,12 +2237,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(merge_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List webhooks.
      *
@@ -2313,10 +2258,9 @@ impl Lists {
             "/lists/{}/webhooks",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add webhook.
      *
@@ -2337,12 +2281,11 @@ impl Lists {
             "/lists/{}/webhooks",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get webhook info.
      *
@@ -2365,10 +2308,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(webhook_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete webhook.
      *
@@ -2387,10 +2329,9 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(webhook_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update webhook.
      *
@@ -2414,12 +2355,11 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             crate::progenitor_support::encode_path(webhook_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List signup forms.
      *
@@ -2436,10 +2376,9 @@ impl Lists {
             "/lists/{}/signup-forms",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Customize signup form.
      *
@@ -2460,12 +2399,11 @@ impl Lists {
             "/lists/{}/signup-forms",
             crate::progenitor_support::encode_path(list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List locations.
      *
@@ -2498,7 +2436,7 @@ impl Lists {
             crate::progenitor_support::encode_path(list_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

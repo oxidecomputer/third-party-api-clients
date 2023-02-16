@@ -45,10 +45,9 @@ impl SubusersApi {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List all Subusers.
      *
@@ -74,10 +73,8 @@ impl SubusersApi {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create Subuser.
      *
@@ -90,11 +87,11 @@ impl SubusersApi {
         body: &crate::types::PostSubusersRequest,
     ) -> Result<crate::types::SubuserPost> {
         let url = "/subusers".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a subuser.
      *
@@ -110,12 +107,11 @@ impl SubusersApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Enable/disable a subuser.
      *
@@ -130,14 +126,13 @@ impl SubusersApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve Subuser Reputations.
      *
@@ -161,10 +156,9 @@ impl SubusersApi {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers/reputations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve Subuser Reputations.
      *
@@ -186,10 +180,8 @@ impl SubusersApi {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers/reputations?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Update IPs assigned to a subuser.
      *
@@ -211,9 +203,9 @@ impl SubusersApi {
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
         let url = format!(
             "/subusers/{}/ips",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

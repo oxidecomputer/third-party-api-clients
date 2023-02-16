@@ -44,10 +44,9 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/categories?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve all categories.
      *
@@ -71,10 +70,8 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/categories?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?].
      *
@@ -132,10 +129,9 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/categories/stats/sums?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve Email Statistics for Categories.
      *
@@ -185,10 +181,9 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/categories/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve Email Statistics for Categories.
      *
@@ -226,7 +221,6 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/categories/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
 }

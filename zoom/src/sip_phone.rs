@@ -56,13 +56,12 @@ impl SipPhone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.phones.to_vec())
     }
-
     /**
      * List SIP phones.
      *
@@ -84,7 +83,6 @@ impl SipPhone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
-
         let mut resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
 
         let mut phones = resp.phones;
@@ -117,7 +115,6 @@ impl SipPhone {
         // Return our response data.
         Ok(phones)
     }
-
     /**
      * Enable SIP phone.
      *
@@ -134,11 +131,11 @@ impl SipPhone {
      */
     pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
         let url = "/sip_phones".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete SIP phone.
      *
@@ -160,10 +157,9 @@ impl SipPhone {
             "/sip_phones/{}",
             crate::progenitor_support::encode_path(phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update SIP phone.
      *
@@ -189,7 +185,7 @@ impl SipPhone {
             "/sip_phones/{}",
             crate::progenitor_support::encode_path(phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

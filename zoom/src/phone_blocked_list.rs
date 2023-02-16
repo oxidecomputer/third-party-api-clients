@@ -44,13 +44,12 @@ impl PhoneBlockedList {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/blocked_list?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.blocked_list.to_vec())
     }
-
     /**
      * List blocked lists.
      *
@@ -100,7 +99,6 @@ impl PhoneBlockedList {
         // Return our response data.
         Ok(blocked_list)
     }
-
     /**
      * Create a blocked list.
      *
@@ -119,11 +117,11 @@ impl PhoneBlockedList {
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<crate::types::Groups> {
         let url = "/phone/blocked_list".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get blocked list details.
      *
@@ -148,10 +146,9 @@ impl PhoneBlockedList {
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(blocked_list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a blocked list.
      *
@@ -175,10 +172,9 @@ impl PhoneBlockedList {
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(blocked_list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a blocked list.
      *
@@ -205,7 +201,7 @@ impl PhoneBlockedList {
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(blocked_list_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

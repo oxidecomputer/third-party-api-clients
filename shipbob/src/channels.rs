@@ -19,9 +19,9 @@ impl Channels {
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::Channel>> {
         let url = "/channel".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get user-authorized channel info.
      *

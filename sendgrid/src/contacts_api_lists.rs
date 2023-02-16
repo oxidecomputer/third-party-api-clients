@@ -25,9 +25,9 @@ impl ContactsApiLists {
      */
     pub async fn get_contactdb_lists(&self) -> Result<crate::types::ListAllListsResponse> {
         let url = "/contactdb/lists".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a List.
      *
@@ -44,11 +44,11 @@ impl ContactsApiLists {
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ContactdbList> {
         let url = "/contactdb/lists".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete Multiple lists.
      *
@@ -62,11 +62,11 @@ impl ContactsApiLists {
      */
     pub async fn delete_contactdb_lists(&self, body: &[i64]) -> Result<()> {
         let url = "/contactdb/lists".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve a single list.
      *
@@ -85,12 +85,11 @@ impl ContactsApiLists {
     ) -> Result<crate::types::ContactdbList> {
         let url = format!(
             "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(&list_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a List.
      *
@@ -116,15 +115,14 @@ impl ContactsApiLists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/contactdb/lists/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(&list_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update a List.
      *
@@ -144,14 +142,13 @@ impl ContactsApiLists {
     ) -> Result<crate::types::PatchContactdbListsListResponse> {
         let url = format!(
             "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(&list_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve all recipients on a List.
      *
@@ -185,10 +182,9 @@ impl ContactsApiLists {
             crate::progenitor_support::encode_path(&list_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add Multiple Recipients to a List.
      *
@@ -211,12 +207,11 @@ impl ContactsApiLists {
             "/contactdb/lists/{}/recipients",
             crate::progenitor_support::encode_path(&list_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add a Single Recipient to a List.
      *
@@ -236,12 +231,11 @@ impl ContactsApiLists {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Delete a Single Recipient from a Single List.
      *
@@ -264,9 +258,9 @@ impl ContactsApiLists {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -24,10 +24,9 @@ impl Garnishments {
             "/v1/employees/{}/garnishments",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get garnishments for an employee.
      *
@@ -45,10 +44,8 @@ impl Garnishments {
             "/v1/employees/{}/garnishments",
             crate::progenitor_support::encode_path(employee_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a garnishment.
      *
@@ -65,12 +62,11 @@ impl Garnishments {
             "/v1/employees/{}/garnishments",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a garnishment.
      *
@@ -83,10 +79,9 @@ impl Garnishments {
             "/v1/garnishments/{}",
             crate::progenitor_support::encode_path(garnishment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a garnishment.
      *
@@ -103,7 +98,7 @@ impl Garnishments {
             "/v1/garnishments/{}",
             crate::progenitor_support::encode_path(garnishment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

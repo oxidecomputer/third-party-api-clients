@@ -24,6 +24,7 @@ impl EmailAddressValidation {
         body: &crate::types::PostValidationsEmailRequest,
     ) -> Result<crate::types::PostValidationsEmailResponse> {
         let url = "/validations/email".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -35,15 +35,14 @@ impl EnvelopeDocumentTabs {
     ) -> Result<crate::types::EnvelopeDocumentTabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Returns the tabs on a document.
      *
@@ -81,15 +80,14 @@ impl EnvelopeDocumentTabs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates the tabs for an envelope document.
      *
@@ -112,16 +110,15 @@ impl EnvelopeDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Adds the tabs to an envelope document.
      *
@@ -144,16 +141,15 @@ impl EnvelopeDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes tabs from an envelope document.
      *
@@ -176,11 +172,11 @@ impl EnvelopeDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

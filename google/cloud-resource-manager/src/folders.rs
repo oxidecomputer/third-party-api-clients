@@ -46,13 +46,12 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2/folders?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.folders.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v2/folders` endpoint.
      *
@@ -74,7 +73,6 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2/folders?{}", query_);
-
         let mut resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
 
         let mut folders = resp.folders;
@@ -106,7 +104,6 @@ impl Folders {
         // Return our response data.
         Ok(folders)
     }
-
     /**
      * This function performs a `POST` to the `/v2/folders` endpoint.
      *
@@ -127,12 +124,11 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2/folders?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/folders:search` endpoint.
      *
@@ -143,6 +139,7 @@ impl Folders {
         body: &crate::types::SearchFoldersRequest,
     ) -> Result<Vec<crate::types::Folder>> {
         let url = "/v2/folders:search".to_string();
+        let url = self.client.url(&url, None);
         let resp: crate::types::SearchFoldersResponse = self
             .client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -151,7 +148,6 @@ impl Folders {
         // Return our response data.
         Ok(resp.folders.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v2/{name}` endpoint.
      *
@@ -163,10 +159,9 @@ impl Folders {
      */
     pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v2/{name}` endpoint.
      *
@@ -178,10 +173,9 @@ impl Folders {
      */
     pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/v2/{name}` endpoint.
      *
@@ -208,12 +202,11 @@ impl Folders {
             crate::progenitor_support::encode_path(name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{name}:move` endpoint.
      *
@@ -229,12 +222,11 @@ impl Folders {
         body: &crate::types::MoveFolderRequest,
     ) -> Result<crate::types::Operation> {
         let url = format!("/v2/{}/move", crate::progenitor_support::encode_path(name),);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{name}:undelete` endpoint.
      *
@@ -253,12 +245,11 @@ impl Folders {
             "/v2/{}/undelete",
             crate::progenitor_support::encode_path(name),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:getIamPolicy` endpoint.
      *
@@ -277,12 +268,11 @@ impl Folders {
             "/v2/{}/getIamPolicy",
             crate::progenitor_support::encode_path(resource),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:setIamPolicy` endpoint.
      *
@@ -301,12 +291,11 @@ impl Folders {
             "/v2/{}/setIamPolicy",
             crate::progenitor_support::encode_path(resource),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:testIamPermissions` endpoint.
      *
@@ -325,7 +314,7 @@ impl Folders {
             "/v2/{}/testIamPermissions",
             crate::progenitor_support::encode_path(resource),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

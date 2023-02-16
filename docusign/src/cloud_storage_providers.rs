@@ -43,14 +43,13 @@ impl CloudStorageProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Configures the redirect URL information  for one or more cloud storage providers for the specified user.
      *
@@ -72,15 +71,14 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes the user authentication information for one or more cloud storage providers.
      *
@@ -102,15 +100,14 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets the specified Cloud Storage Provider configuration for the User.
      *
@@ -145,15 +142,14 @@ impl CloudStorageProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(service_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&service_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Deletes the user authentication information for the specified cloud storage provider.
      *
@@ -178,11 +174,11 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(service_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&service_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

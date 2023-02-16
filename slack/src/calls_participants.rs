@@ -25,9 +25,9 @@ impl CallsParticipants {
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/calls.participants.add".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/calls.participants.remove` endpoint.
      *
@@ -41,6 +41,7 @@ impl CallsParticipants {
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/calls.participants.remove".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

@@ -54,10 +54,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a webinar.
      *
@@ -81,10 +80,9 @@ impl Webinars {
             "/users/{}/webinars",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get a webinar.
      *
@@ -123,10 +121,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a webinar.
      *
@@ -171,10 +168,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a webinar.
      *
@@ -204,10 +200,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.patch(&url, None).await
     }
-
     /**
      * List webinar participants.
      *
@@ -250,14 +245,13 @@ impl Webinars {
             crate::progenitor_support::encode_path(webinar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.participants.to_vec())
     }
-
     /**
      * List webinar participants.
      *
@@ -285,7 +279,6 @@ impl Webinars {
             "/past_webinars/{}/participants",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
         let mut resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await?;
 
@@ -319,7 +312,6 @@ impl Webinars {
         // Return our response data.
         Ok(participants)
     }
-
     /**
      * Update webinar status.
      *
@@ -345,12 +337,11 @@ impl Webinars {
             "/webinars/{}/status",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List panelists.
      *
@@ -374,10 +365,9 @@ impl Webinars {
             "/webinars/{}/panelists",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add panelists.
      *
@@ -404,12 +394,11 @@ impl Webinars {
             "/webinars/{}/panelists",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove panelists.
      *
@@ -431,10 +420,9 @@ impl Webinars {
             "/webinars/{}/panelists",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Remove a panelist.
      *
@@ -460,10 +448,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(&panelist_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List webinar registrants.
      *
@@ -529,10 +516,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(webinar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add a webinar registrant.
      *
@@ -565,10 +551,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(webinar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Perform batch registration.
      *
@@ -603,12 +588,11 @@ impl Webinars {
             "/webinars/{}/batch_registrants",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update registrant's status.
      *
@@ -642,12 +626,11 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List past webinar instances.
      *
@@ -669,10 +652,9 @@ impl Webinars {
             "/past_webinars/{}/instances",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List a webinar's polls .
      *
@@ -694,10 +676,9 @@ impl Webinars {
             "/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a webinar's poll.
      *
@@ -723,12 +704,11 @@ impl Webinars {
             "/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a webinar poll.
      *
@@ -756,10 +736,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(poll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a webinar poll.
      *
@@ -788,12 +767,11 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(poll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a webinar poll.
      *
@@ -817,10 +795,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(poll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List registration questions.
      *
@@ -847,10 +824,9 @@ impl Webinars {
             "/webinars/{}/registrants/questions",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update registration questions.
      *
@@ -879,12 +855,11 @@ impl Webinars {
             "/webinars/{}/registrants/questions",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a webinar registrant.
      *
@@ -920,10 +895,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(registrant_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a webinar registrant.
      *
@@ -957,10 +931,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(registrant_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get webinar absentees.
      *
@@ -1000,10 +973,9 @@ impl Webinars {
             crate::progenitor_support::encode_path(webinar_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get webinar tracking sources.
      *
@@ -1030,10 +1002,9 @@ impl Webinars {
             "/webinars/{}/tracking_sources",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List past webinar poll results.
      *
@@ -1062,10 +1033,9 @@ impl Webinars {
             "/past_webinars/{}/polls",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List Q&A of past webinar.
      *
@@ -1096,10 +1066,9 @@ impl Webinars {
             "/past_webinars/{}/qa",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List webinar templates.
      *
@@ -1120,10 +1089,9 @@ impl Webinars {
             "/users/{}/webinar_templates",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get live stream details.
      *
@@ -1152,10 +1120,9 @@ impl Webinars {
             "/webinars/{}/livestream",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a live stream.
      *
@@ -1184,12 +1151,11 @@ impl Webinars {
             "/webinars/{}/livestream",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update Live Stream Status.
      *
@@ -1217,12 +1183,11 @@ impl Webinars {
             "/webinars/{}/livestream/status",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create webinar's invite links.
      *
@@ -1249,7 +1214,7 @@ impl Webinars {
             "/webinars/{}/invite_links",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

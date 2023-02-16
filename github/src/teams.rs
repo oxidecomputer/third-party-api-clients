@@ -50,10 +50,9 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List teams.
      *
@@ -88,10 +87,9 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List teams.
      *
@@ -108,10 +106,8 @@ impl Teams {
             "/orgs/{}/teams",
             crate::progenitor_support::encode_path(org),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a team.
      *
@@ -136,12 +132,11 @@ impl Teams {
             "/orgs/{}/teams",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a team by name.
      *
@@ -164,10 +159,9 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a team.
      *
@@ -192,10 +186,9 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a team.
      *
@@ -223,12 +216,11 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List discussions.
      *
@@ -280,10 +272,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List discussions.
      *
@@ -318,10 +309,8 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a discussion.
      *
@@ -351,12 +340,11 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a discussion.
      *
@@ -386,10 +374,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a discussion.
      *
@@ -419,10 +406,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a discussion.
      *
@@ -453,12 +439,11 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List discussion comments.
      *
@@ -508,10 +493,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List discussion comments.
      *
@@ -544,10 +528,8 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a discussion comment.
      *
@@ -580,12 +562,11 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a discussion comment.
      *
@@ -618,10 +599,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a discussion comment.
      *
@@ -654,10 +634,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a discussion comment.
      *
@@ -691,12 +670,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List pending team invitations.
      *
@@ -736,10 +714,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pending team invitations.
      *
@@ -763,10 +740,8 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List team members.
      *
@@ -814,10 +789,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team members.
      *
@@ -848,10 +822,8 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get team membership for a user.
      *
@@ -888,10 +860,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team membership for a user.
      *
@@ -930,12 +901,11 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove team membership for a user.
      *
@@ -969,10 +939,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List team projects.
      *
@@ -1012,10 +981,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team projects.
      *
@@ -1039,10 +1007,8 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check team permissions for a project.
      *
@@ -1072,10 +1038,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team project permissions.
      *
@@ -1106,12 +1071,11 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a project from a team.
      *
@@ -1141,10 +1105,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List team repositories.
      *
@@ -1184,10 +1147,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team repositories.
      *
@@ -1211,10 +1173,8 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check team permissions for a repository.
      *
@@ -1251,10 +1211,9 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team repository permissions.
      *
@@ -1290,12 +1249,11 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a repository from a team.
      *
@@ -1328,10 +1286,9 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List IdP groups for a team.
      *
@@ -1360,10 +1317,9 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create or update IdP group connections.
      *
@@ -1393,12 +1349,11 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List child teams.
      *
@@ -1438,10 +1393,9 @@ impl Teams {
             crate::progenitor_support::encode_path(team_slug),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List child teams.
      *
@@ -1465,10 +1419,8 @@ impl Teams {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(team_slug),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a team (Legacy).
      *
@@ -1487,10 +1439,9 @@ impl Teams {
             "/teams/{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a team (Legacy).
      *
@@ -1513,10 +1464,9 @@ impl Teams {
             "/teams/{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a team (Legacy).
      *
@@ -1543,12 +1493,11 @@ impl Teams {
             "/teams/{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List discussions (Legacy).
      *
@@ -1592,10 +1541,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List discussions (Legacy).
      *
@@ -1624,10 +1572,8 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a discussion (Legacy).
      *
@@ -1654,12 +1600,11 @@ impl Teams {
             "/teams/{}/discussions",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a discussion (Legacy).
      *
@@ -1686,10 +1631,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a discussion (Legacy).
      *
@@ -1716,10 +1660,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a discussion (Legacy).
      *
@@ -1747,12 +1690,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List discussion comments (Legacy).
      *
@@ -1799,10 +1741,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List discussion comments (Legacy).
      *
@@ -1833,10 +1774,8 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a discussion comment (Legacy).
      *
@@ -1866,12 +1805,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a discussion comment (Legacy).
      *
@@ -1901,10 +1839,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a discussion comment (Legacy).
      *
@@ -1934,10 +1871,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a discussion comment (Legacy).
      *
@@ -1968,12 +1904,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List pending team invitations (Legacy).
      *
@@ -2010,10 +1945,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pending team invitations (Legacy).
      *
@@ -2035,10 +1969,8 @@ impl Teams {
             "/teams/{}/invitations",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List team members (Legacy).
      *
@@ -2083,10 +2015,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team members (Legacy).
      *
@@ -2115,10 +2046,8 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get team member (Legacy).
      *
@@ -2143,10 +2072,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add team member (Legacy).
      *
@@ -2177,10 +2105,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Remove team member (Legacy).
      *
@@ -2209,10 +2136,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get team membership for a user (Legacy).
      *
@@ -2246,10 +2172,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team membership for a user (Legacy).
      *
@@ -2285,12 +2210,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove team membership for a user (Legacy).
      *
@@ -2321,10 +2245,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List team projects (Legacy).
      *
@@ -2361,10 +2284,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team projects (Legacy).
      *
@@ -2386,10 +2308,8 @@ impl Teams {
             "/teams/{}/projects",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check team permissions for a project (Legacy).
      *
@@ -2416,10 +2336,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team project permissions (Legacy).
      *
@@ -2447,12 +2366,11 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a project from a team (Legacy).
      *
@@ -2475,10 +2393,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List team repositories (Legacy).
      *
@@ -2513,10 +2430,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List team repositories (Legacy).
      *
@@ -2536,10 +2452,8 @@ impl Teams {
             "/teams/{}/repos",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check team permissions for a repository (Legacy).
      *
@@ -2571,10 +2485,9 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update team repository permissions (Legacy).
      *
@@ -2607,12 +2520,11 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a repository from a team (Legacy).
      *
@@ -2637,10 +2549,9 @@ impl Teams {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List IdP groups for a team (Legacy).
      *
@@ -2666,10 +2577,9 @@ impl Teams {
             "/teams/{}/team-sync/group-mappings",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create or update IdP group connections (Legacy).
      *
@@ -2696,12 +2606,11 @@ impl Teams {
             "/teams/{}/team-sync/group-mappings",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List child teams (Legacy).
      *
@@ -2736,10 +2645,9 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List child teams (Legacy).
      *
@@ -2756,10 +2664,8 @@ impl Teams {
             "/teams/{}/teams",
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List teams for the authenticated user.
      *
@@ -2788,10 +2694,9 @@ impl Teams {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/teams?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List teams for the authenticated user.
      *

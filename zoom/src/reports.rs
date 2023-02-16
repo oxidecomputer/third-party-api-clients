@@ -39,10 +39,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/daily?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get active/inactive host reports.
      *
@@ -95,10 +94,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/users?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get meeting reports.
      *
@@ -153,10 +151,9 @@ impl Reports {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get meeting detail reports.
      *
@@ -184,10 +181,9 @@ impl Reports {
             "/report/meetings/{}",
             crate::progenitor_support::encode_path(meeting_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get meeting participant reports.
      *
@@ -234,10 +230,9 @@ impl Reports {
             crate::progenitor_support::encode_path(meeting_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get meeting poll reports.
      *
@@ -265,10 +260,9 @@ impl Reports {
             "/report/meetings/{}/polls",
             crate::progenitor_support::encode_path(meeting_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get webinar detail reports.
      *
@@ -295,10 +289,9 @@ impl Reports {
             "/report/webinars/{}",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get webinar participant reports.
      *
@@ -343,10 +336,9 @@ impl Reports {
             crate::progenitor_support::encode_path(webinar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get webinar poll reports.
      *
@@ -373,10 +365,9 @@ impl Reports {
             "/report/webinars/{}/polls",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get webinar Q&A report.
      *
@@ -405,10 +396,9 @@ impl Reports {
             "/report/webinars/{}/qa",
             crate::progenitor_support::encode_path(webinar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get telephone reports.
      *
@@ -469,10 +459,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/telephone?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get cloud recording usage report.
      *
@@ -504,10 +493,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/cloud_recording?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get operation logs report.
      *
@@ -557,10 +545,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/operationlogs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get sign In / sign out activity report.
      *
@@ -602,14 +589,13 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/activities?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.activity_logs.to_vec())
     }
-
     /**
      * Get sign In / sign out activity report.
      *
@@ -638,7 +624,6 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/activities?{}", query_);
-
         let mut resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None).await?;
 
@@ -672,7 +657,6 @@ impl Reports {
         // Return our response data.
         Ok(activity_logs)
     }
-
     /**
      * Get billing reports.
      *
@@ -689,9 +673,9 @@ impl Reports {
      */
     pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
         let url = "/report/billing".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get billing invoice reports.
      *
@@ -723,7 +707,7 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/billing/invoices?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

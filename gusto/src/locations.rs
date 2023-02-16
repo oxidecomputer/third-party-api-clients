@@ -29,10 +29,9 @@ impl Locations {
             "/v1/companies/{}/locations",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get company locations.
      *
@@ -52,10 +51,8 @@ impl Locations {
             "/v1/companies/{}/locations",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a company location.
      *
@@ -74,12 +71,11 @@ impl Locations {
             "/v1/companies/{}/locations",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a location.
      *
@@ -92,10 +88,9 @@ impl Locations {
             "/v1/locations/{}",
             crate::progenitor_support::encode_path(location_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a location.
      *
@@ -112,7 +107,7 @@ impl Locations {
             "/v1/locations/{}",
             crate::progenitor_support::encode_path(location_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -26,7 +26,7 @@ impl TwoStepVerification {
             "/admin/directory/v1/users/{}/twoStepVerification/turnOff",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

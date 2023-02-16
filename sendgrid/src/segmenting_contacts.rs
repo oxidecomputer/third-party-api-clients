@@ -50,10 +50,9 @@ impl SegmentingContacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/segments?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create Segment.
      *
@@ -66,11 +65,11 @@ impl SegmentingContacts {
         body: &crate::types::PostMarketingSegmentsRequestAllOf,
     ) -> Result<crate::types::FullSegmentAllOf> {
         let url = "/marketing/segments".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Segment by ID.
      *
@@ -94,13 +93,12 @@ impl SegmentingContacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/segments/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete Segment.
      *
@@ -116,12 +114,11 @@ impl SegmentingContacts {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/marketing/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update Segment.
      *
@@ -138,14 +135,13 @@ impl SegmentingContacts {
     ) -> Result<crate::types::FullSegmentAllOf> {
         let url = format!(
             "/marketing/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Bulk Delete Segments.
      *
@@ -160,6 +156,7 @@ impl SegmentingContacts {
         body: &crate::types::PostMarketingSegmentsDeleteRequest,
     ) -> Result<crate::types::PostMarketingSegmentsDeleteResponse> {
         let url = "/marketing/segments/delete".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

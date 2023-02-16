@@ -31,11 +31,11 @@ impl Orders {
         body: &crate::types::OrdersEstimateFulfillmentRequestModel,
     ) -> Result<crate::types::OrdersEstimate> {
         let url = "/order/estimate".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Order.
      *
@@ -51,10 +51,9 @@ impl Orders {
             "/order/{}",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get Orders.
      *
@@ -130,10 +129,9 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/order?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get Orders.
      *
@@ -188,10 +186,8 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/order?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create Order.
      *
@@ -206,11 +202,11 @@ impl Orders {
         body: &crate::types::OrdersCreateOrderModel,
     ) -> Result<crate::types::Order> {
         let url = "/order".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Cancel single Order by Order ID.
      *
@@ -226,10 +222,9 @@ impl Orders {
             "/order/{}/cancel",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get Order Store Json.
      *
@@ -244,10 +239,9 @@ impl Orders {
             "/order/{}/storeOrderJson",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Save the Store Order Json.
      *
@@ -266,12 +260,11 @@ impl Orders {
             "/order/{}/storeOrderJson",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get one Shipment by Order Id and Shipment Id.
      *
@@ -293,10 +286,9 @@ impl Orders {
             crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Cancel one Shipment by Order Id and Shipment Id.
      *
@@ -315,13 +307,12 @@ impl Orders {
     ) -> Result<crate::types::OrdersShipment> {
         let url = format!(
             "/order/{}/shipment/{}/cancel",
-            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get one Shipment's status timeline by Order Id and Shipment Id.
      *
@@ -343,10 +334,9 @@ impl Orders {
             crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get one Shipment's status timeline by Order Id and Shipment Id.
      *
@@ -364,10 +354,8 @@ impl Orders {
             crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get all Shipments for Order.
      *
@@ -383,10 +371,9 @@ impl Orders {
             "/order/{}/shipment",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all Shipments for Order.
      *
@@ -402,10 +389,8 @@ impl Orders {
             "/order/{}/shipment",
             crate::progenitor_support::encode_path(&order_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get logs for one Shipment by Order Id and Shipment Id.
      *
@@ -427,10 +412,9 @@ impl Orders {
             crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get logs for one Shipment by Order Id and Shipment Id.
      *
@@ -448,10 +432,8 @@ impl Orders {
             crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get one Shipment by Shipment Id.
      *
@@ -470,10 +452,9 @@ impl Orders {
             "/shipment/{}",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Cancel one Shipment by Shipment Id.
      *
@@ -492,10 +473,9 @@ impl Orders {
             "/shipment/{}/cancel",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Cancel multiple Shipments by Shipment Id.
      *
@@ -510,11 +490,11 @@ impl Orders {
         body: &crate::types::OrdersCancelShipmentsModel,
     ) -> Result<crate::types::OrdersCanceledShipments> {
         let url = "/shipment/cancelbulk".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get one Shipment's status timeline by Shipment Id.
      *
@@ -533,10 +513,9 @@ impl Orders {
             "/shipment/{}/timeline",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get one Shipment's status timeline by Shipment Id.
      *
@@ -552,10 +531,8 @@ impl Orders {
             "/shipment/{}/timeline",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get logs for one Shipment by Shipment Id.
      *
@@ -574,10 +551,9 @@ impl Orders {
             "/shipment/{}/logs",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get logs for one Shipment by Shipment Id.
      *
@@ -593,10 +569,8 @@ impl Orders {
             "/shipment/{}/logs",
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get shipping methods.
      *
@@ -623,10 +597,9 @@ impl Orders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/shippingmethod?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get shipping methods.
      *

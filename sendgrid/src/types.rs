@@ -193,7 +193,7 @@ pub enum Operator {
 
 impl std::fmt::Display for Operator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Operator::Contains => "contains",
             Operator::Eq => "eq",
             Operator::Gt => "gt",
@@ -231,7 +231,7 @@ pub enum AndOr {
 
 impl std::fmt::Display for AndOr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AndOr::And => "and",
             AndOr::Or => "or",
             AndOr::Noop => "",
@@ -591,7 +591,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Type::Date => "date",
             Type::Number => "number",
             Type::Text => "text",
@@ -698,7 +698,7 @@ pub enum LinkBranding200ResponseDnsDomainCnameType {
 
 impl std::fmt::Display for LinkBranding200ResponseDnsDomainCnameType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             LinkBranding200ResponseDnsDomainCnameType::Cname => "cname",
             LinkBranding200ResponseDnsDomainCnameType::Mx => "mx",
             LinkBranding200ResponseDnsDomainCnameType::Txt => "txt",
@@ -1861,7 +1861,7 @@ pub enum Editor {
 
 impl std::fmt::Display for Editor {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Editor::Code => "code",
             Editor::Design => "design",
             Editor::Noop => "",
@@ -2139,7 +2139,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Status::Cancel => "cancel",
             Status::Pause => "pause",
             Status::Noop => "",
@@ -2622,7 +2622,7 @@ pub enum Generation {
 
 impl std::fmt::Display for Generation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Generation::Dynamic => "dynamic",
             Generation::Legacy => "legacy",
             Generation::Noop => "",
@@ -3036,7 +3036,7 @@ pub enum ContactExportStatus {
 
 impl std::fmt::Display for ContactExportStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             ContactExportStatus::Failure => "failure",
             ContactExportStatus::Pending => "pending",
             ContactExportStatus::Ready => "ready",
@@ -3541,7 +3541,7 @@ pub enum FieldType {
 
 impl std::fmt::Display for FieldType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             FieldType::Date => "Date",
             FieldType::Number => "Number",
             FieldType::Text => "Text",
@@ -4464,7 +4464,7 @@ pub enum AbPhase {
 
 impl std::fmt::Display for AbPhase {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AbPhase::All => "all",
             AbPhase::Send => "send",
             AbPhase::Test => "test",
@@ -4667,7 +4667,7 @@ pub enum SinglesendSearchStatus {
 
 impl std::fmt::Display for SinglesendSearchStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             SinglesendSearchStatus::Draft => "draft",
             SinglesendSearchStatus::Scheduled => "scheduled",
             SinglesendSearchStatus::Triggered => "triggered",
@@ -5332,7 +5332,7 @@ pub enum AbTestSummaryType {
 
 impl std::fmt::Display for AbTestSummaryType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AbTestSummaryType::Content => "content",
             AbTestSummaryType::Subject => "subject",
             AbTestSummaryType::Noop => "",
@@ -5372,7 +5372,7 @@ pub enum WinnerCriteria {
 
 impl std::fmt::Display for WinnerCriteria {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             WinnerCriteria::Click => "click",
             WinnerCriteria::Manual => "manual",
             WinnerCriteria::Open => "open",
@@ -6121,7 +6121,7 @@ pub enum EmailActivityResponseCommonFieldsStatus {
 
 impl std::fmt::Display for EmailActivityResponseCommonFieldsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             EmailActivityResponseCommonFieldsStatus::Delivered => "delivered",
             EmailActivityResponseCommonFieldsStatus::NotDelivered => "not delivered",
             EmailActivityResponseCommonFieldsStatus::Processed => "processed",
@@ -6420,7 +6420,7 @@ pub enum UserType {
 
 impl std::fmt::Display for UserType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             UserType::Admin => "admin",
             UserType::Owner => "owner",
             UserType::Teammate => "teammate",
@@ -7124,7 +7124,7 @@ pub enum AbbvMessageStatus {
 
 impl std::fmt::Display for AbbvMessageStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AbbvMessageStatus::Delivered => "delivered",
             AbbvMessageStatus::NotDelivered => "not_delivered",
             AbbvMessageStatus::Processed => "processed",
@@ -7244,7 +7244,7 @@ pub enum EventName {
 
 impl std::fmt::Display for EventName {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             EventName::Bounced => "bounced",
             EventName::Clicked => "clicked",
             EventName::Deferred => "deferred",
@@ -7293,7 +7293,7 @@ pub enum BounceType {
 
 impl std::fmt::Display for BounceType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             BounceType::Blocked => "blocked",
             BounceType::Bounced => "bounced",
             BounceType::Expired => "expired",
@@ -7394,7 +7394,7 @@ pub enum OutboundIpType {
 
 impl std::fmt::Display for OutboundIpType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             OutboundIpType::Dedicated => "dedicated",
             OutboundIpType::Shared => "shared",
             OutboundIpType::Noop => "",
@@ -7795,7 +7795,7 @@ pub enum AggregatedBy {
 
 impl std::fmt::Display for AggregatedBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AggregatedBy::Day => "day",
             AggregatedBy::Total => "total",
             AggregatedBy::FallthroughString => "*",
@@ -7824,7 +7824,7 @@ pub enum GroupBy {
 
 impl std::fmt::Display for GroupBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             GroupBy::AbPhase => "ab_phase",
             GroupBy::AbVariation => "ab_variation",
             GroupBy::Noop => "",
@@ -7857,7 +7857,7 @@ pub enum TraitAutomationQueryParamsGroupBy {
 
 impl std::fmt::Display for TraitAutomationQueryParamsGroupBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             TraitAutomationQueryParamsGroupBy::StepId => "step_id",
             TraitAutomationQueryParamsGroupBy::Noop => "",
             TraitAutomationQueryParamsGroupBy::FallthroughString => "*",
@@ -7891,7 +7891,7 @@ pub enum AbPhaseId {
 
 impl std::fmt::Display for AbPhaseId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AbPhaseId::Send => "send",
             AbPhaseId::Test => "test",
             AbPhaseId::Noop => "",
@@ -7931,7 +7931,7 @@ pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
 
 impl std::fmt::Display for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Day => "day",
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Month => "month",
             TraitStatsAdvancedBaseQueryStringsAggregatedBy::Week => "week",
@@ -8181,7 +8181,7 @@ pub enum Disposition {
 
 impl std::fmt::Display for Disposition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Disposition::Attachment => "attachment",
             Disposition::Inline => "inline",
             Disposition::FallthroughString => "*",
@@ -9612,7 +9612,7 @@ pub enum GetAlertsResponseType {
 
 impl std::fmt::Display for GetAlertsResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             GetAlertsResponseType::StatsNotification => "stats_notification",
             GetAlertsResponseType::UsageLimit => "usage_limit",
             GetAlertsResponseType::Noop => "",
@@ -9795,7 +9795,7 @@ pub enum GetAlertsAlertResponseType {
 
 impl std::fmt::Display for GetAlertsAlertResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             GetAlertsAlertResponseType::StatsNotification => "stats_notification",
             GetAlertsAlertResponseType::UsageAlert => "usage_alert",
             GetAlertsAlertResponseType::Noop => "",
@@ -10011,7 +10011,7 @@ pub enum GetUserAccountResponseType {
 
 impl std::fmt::Display for GetUserAccountResponseType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             GetUserAccountResponseType::Free => "free",
             GetUserAccountResponseType::Paid => "paid",
             GetUserAccountResponseType::Noop => "",
@@ -10273,7 +10273,7 @@ pub enum SortByDirection {
 
 impl std::fmt::Display for SortByDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             SortByDirection::Asc => "asc",
             SortByDirection::Desc => "desc",
             SortByDirection::FallthroughString => "*",
@@ -10317,7 +10317,7 @@ pub enum SortByMetric {
 
 impl std::fmt::Display for SortByMetric {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             SortByMetric::Blocks => "blocks",
             SortByMetric::Bounces => "bounces",
             SortByMetric::Clicks => "clicks",
@@ -10599,7 +10599,7 @@ pub enum Verdict {
 
 impl std::fmt::Display for Verdict {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Verdict::Invalid => "Invalid",
             Verdict::Risky => "Risky",
             Verdict::Valid => "Valid",
@@ -11878,7 +11878,7 @@ pub enum FileType {
 
 impl std::fmt::Display for FileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             FileType::Csv => "csv",
             FileType::Json => "json",
             FileType::FallthroughString => "*",
@@ -11992,7 +11992,7 @@ pub enum PutMcContactsImportsRequestFileType {
 
 impl std::fmt::Display for PutMcContactsImportsRequestFileType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             PutMcContactsImportsRequestFileType::Csv => "csv",
             PutMcContactsImportsRequestFileType::Noop => "",
             PutMcContactsImportsRequestFileType::FallthroughString => "*",
@@ -12530,7 +12530,7 @@ pub enum SendAt {
 
 impl std::fmt::Display for SendAt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             SendAt::Now => "now",
             SendAt::Noop => "",
             SendAt::FallthroughString => "*",
@@ -12571,7 +12571,7 @@ pub enum PutMarketingSinglesendsScheduleResponseStatus {
 
 impl std::fmt::Display for PutMarketingSinglesendsScheduleResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             PutMarketingSinglesendsScheduleResponseStatus::Scheduled => "scheduled",
             PutMarketingSinglesendsScheduleResponseStatus::Noop => "",
             PutMarketingSinglesendsScheduleResponseStatus::FallthroughString => "*",
@@ -13362,7 +13362,7 @@ pub enum ScheduleACampaignResponseStatus {
 
 impl std::fmt::Display for ScheduleACampaignResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             ScheduleACampaignResponseStatus::Scheduled => "Scheduled",
             ScheduleACampaignResponseStatus::Noop => "",
             ScheduleACampaignResponseStatus::FallthroughString => "*",
@@ -13461,7 +13461,7 @@ pub enum Generations {
 
 impl std::fmt::Display for Generations {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Generations::Dynamic => "dynamic",
             Generations::Legacy => "legacy",
             Generations::LegacyDynamic => "legacy,dynamic",
@@ -13720,7 +13720,7 @@ pub enum PostMessagesDownloadResponseStatus {
 
 impl std::fmt::Display for PostMessagesDownloadResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             PostMessagesDownloadResponseStatus::Pending => "pending",
             PostMessagesDownloadResponseStatus::Noop => "",
             PostMessagesDownloadResponseStatus::FallthroughString => "*",
@@ -13880,7 +13880,7 @@ pub enum Country {
 
 impl std::fmt::Display for Country {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Country::Ca => "CA",
             Country::Us => "US",
             Country::Noop => "",
@@ -14019,7 +14019,7 @@ pub enum ClientType {
 
 impl std::fmt::Display for ClientType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             ClientType::Desktop => "desktop",
             ClientType::Phone => "phone",
             ClientType::Tablet => "tablet",
@@ -14372,3 +14372,6 @@ pub struct GetAsmSuppressionsEmailResponse {
     )]
     pub suppressions: Vec<Suppressions>,
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

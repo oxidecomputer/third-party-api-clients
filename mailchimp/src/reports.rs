@@ -63,10 +63,9 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reports?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get campaign report.
      *
@@ -99,10 +98,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List abuse reports.
      *
@@ -135,10 +133,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get abuse report.
      *
@@ -174,10 +171,9 @@ impl Reports {
             crate::progenitor_support::encode_path(report_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List campaign feedback.
      *
@@ -210,10 +206,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List campaign details.
      *
@@ -256,10 +251,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get campaign link details.
      *
@@ -295,10 +289,9 @@ impl Reports {
             crate::progenitor_support::encode_path(link_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List clicked link subscribers.
      *
@@ -344,10 +337,9 @@ impl Reports {
             crate::progenitor_support::encode_path(link_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get clicked link subscriber.
      *
@@ -386,10 +378,9 @@ impl Reports {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List campaign open details.
      *
@@ -437,10 +428,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get opened campaign subscriber.
      *
@@ -476,10 +466,9 @@ impl Reports {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List domain performance stats.
      *
@@ -512,10 +501,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List EepURL activity.
      *
@@ -548,10 +536,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List email activity.
      *
@@ -599,10 +586,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get subscriber email activity.
      *
@@ -643,10 +629,9 @@ impl Reports {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List top open activities.
      *
@@ -689,10 +674,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List campaign recipients.
      *
@@ -735,10 +719,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get campaign recipient info.
      *
@@ -774,10 +757,9 @@ impl Reports {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List child campaign reports.
      *
@@ -810,10 +792,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List unsubscribed members.
      *
@@ -856,10 +837,9 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get unsubscribed member.
      *
@@ -895,10 +875,9 @@ impl Reports {
             crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List campaign product activity.
      *
@@ -946,7 +925,7 @@ impl Reports {
             crate::progenitor_support::encode_path(campaign_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

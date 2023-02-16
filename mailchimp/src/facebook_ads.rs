@@ -58,10 +58,9 @@ impl FacebookAds {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/facebook-ads?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get facebook ad info.
      *
@@ -94,7 +93,7 @@ impl FacebookAds {
             crate::progenitor_support::encode_path(outreach_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

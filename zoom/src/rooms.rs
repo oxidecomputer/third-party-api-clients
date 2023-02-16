@@ -62,13 +62,12 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListZoomRoomsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.rooms.to_vec())
     }
-
     /**
      * List Zoom Rooms.
      *
@@ -104,7 +103,6 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms?{}", query_);
-
         let mut resp: crate::types::ListZoomRoomsResponseData = self.client.get(&url, None).await?;
 
         let mut rooms = resp.rooms;
@@ -137,7 +135,6 @@ impl Rooms {
         // Return our response data.
         Ok(rooms)
     }
-
     /**
      * Add a Zoom Room.
      *
@@ -154,11 +151,11 @@ impl Rooms {
         body: &crate::types::AddRoomRequest,
     ) -> Result<crate::types::AddRoomResponse> {
         let url = "/rooms".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Zoom Room profile.
      *
@@ -181,10 +178,9 @@ impl Rooms {
         room_id: &str,
     ) -> Result<crate::types::GetZrProfileResponse> {
         let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a Zoom Room.
      *
@@ -202,10 +198,9 @@ impl Rooms {
      */
     pub async fn delete_zoom(&self, room_id: &str) -> Result<crate::types::Domains> {
         let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a Zoom Room profile.
      *
@@ -228,12 +223,11 @@ impl Rooms {
         body: &crate::types::UpdateRoomProfileRequest,
     ) -> Result<crate::types::Domains> {
         let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Zoom Room settings.
      *
@@ -268,10 +262,9 @@ impl Rooms {
             crate::progenitor_support::encode_path(room_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update Zoom Room settings.
      *
@@ -302,10 +295,9 @@ impl Rooms {
             crate::progenitor_support::encode_path(room_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.patch(&url, None).await
     }
-
     /**
      * List Zoom Room devices.
      *
@@ -331,10 +323,9 @@ impl Rooms {
             "/rooms/{}/devices",
             crate::progenitor_support::encode_path(room_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Change a Zoom Room's location.
      *
@@ -360,12 +351,11 @@ impl Rooms {
             "/rooms/{}/location",
             crate::progenitor_support::encode_path(room_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Check-in or check-out of a Zoom Room.
      *
@@ -388,12 +378,11 @@ impl Rooms {
             "/rooms/{}/events",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List digital signage contents.
      *
@@ -439,14 +428,13 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/digital_signage?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contents.to_vec())
     }
-
     /**
      * List digital signage contents.
      *
@@ -477,7 +465,6 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/digital_signage?{}", query_);
-
         let mut resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None).await?;
 
@@ -511,7 +498,6 @@ impl Rooms {
         // Return our response data.
         Ok(contents)
     }
-
     /**
      * Update E911 digital signage.
      *
@@ -528,6 +514,7 @@ impl Rooms {
      */
     pub async fn manage_e_91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
         let url = "/rooms/events".to_string();
+        let url = self.client.url(&url, None);
         self.client.patch(&url, None).await
     }
 }

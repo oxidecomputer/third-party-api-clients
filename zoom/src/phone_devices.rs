@@ -49,13 +49,12 @@ impl PhoneDevices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/devices?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListPhoneDevicesResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.devices.to_vec())
     }
-
     /**
      * List devices.
      *
@@ -81,7 +80,6 @@ impl PhoneDevices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/devices?{}", query_);
-
         let mut resp: crate::types::ListPhoneDevicesResponseData =
             self.client.get(&url, None).await?;
 
@@ -115,7 +113,6 @@ impl PhoneDevices {
         // Return our response data.
         Ok(devices)
     }
-
     /**
      * Add a device.
      *
@@ -134,11 +131,11 @@ impl PhoneDevices {
      */
     pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
         let url = "/phone/devices".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get device details.
      *
@@ -161,10 +158,9 @@ impl PhoneDevices {
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(device_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a device.
      *
@@ -189,10 +185,9 @@ impl PhoneDevices {
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(device_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a device.
      *
@@ -220,7 +215,7 @@ impl PhoneDevices {
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(device_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

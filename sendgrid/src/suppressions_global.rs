@@ -28,11 +28,11 @@ impl SuppressionsGlobal {
         body: &crate::types::SuppressionsRequestBody,
     ) -> Result<crate::types::SuppressionsRequestBody> {
         let url = "/asm/suppressions/global".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve all global suppressions.
      *
@@ -70,10 +70,9 @@ impl SuppressionsGlobal {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/unsubscribes?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve all global suppressions.
      *
@@ -101,10 +100,8 @@ impl SuppressionsGlobal {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/unsubscribes?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve a Global Suppression.
      *
@@ -124,12 +121,11 @@ impl SuppressionsGlobal {
     ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a Global Suppression.
      *
@@ -146,9 +142,9 @@ impl SuppressionsGlobal {
     pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

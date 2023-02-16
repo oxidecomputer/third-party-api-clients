@@ -54,13 +54,12 @@ impl Disputes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/disputes?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetDisputesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/disputes` endpoint.
      *
@@ -83,7 +82,6 @@ impl Disputes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/disputes?{}", query_);
-
         let mut resp: crate::types::GetDisputesResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -122,7 +120,6 @@ impl Disputes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/disputes/{dispute}` endpoint.
      *
@@ -138,10 +135,9 @@ impl Disputes {
             "/v1/disputes/{}",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/disputes/{dispute}` endpoint.
      *
@@ -158,10 +154,9 @@ impl Disputes {
             "/v1/disputes/{}",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/disputes/{dispute}/close` endpoint.
      *
@@ -178,7 +173,7 @@ impl Disputes {
             "/v1/disputes/{}/close",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

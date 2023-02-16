@@ -56,13 +56,12 @@ impl Events {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/events?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::NotificationEventList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/events` endpoint.
      *
@@ -86,7 +85,6 @@ impl Events {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/events?{}", query_);
-
         let mut resp: crate::types::NotificationEventList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -125,7 +123,6 @@ impl Events {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/events/{id}` endpoint.
      *
@@ -138,7 +135,7 @@ impl Events {
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Event> {
         let url = format!("/v1/events/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

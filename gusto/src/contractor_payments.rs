@@ -43,10 +43,9 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(company_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a contractor payment (Beta).
      *
@@ -100,10 +99,9 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(company_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get a single contractor payment.
      *
@@ -121,10 +119,9 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Cancel a contractor payment (Beta).
      *
@@ -144,7 +141,7 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

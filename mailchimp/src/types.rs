@@ -30795,3 +30795,6 @@ pub struct VerifiedDomainsDataType {
     )]
     pub verification_email: String,
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

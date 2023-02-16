@@ -19,6 +19,8 @@ use inflector::cases::{
 use openapiv3::OpenAPI;
 use serde::Deserialize;
 
+use client::GeneratedServers;
+
 fn save<P>(p: P, data: &str) -> Result<()>
 where
     P: AsRef<Path>,
@@ -64,7 +66,7 @@ where
     }
 
     if !api.servers.is_empty() {
-        println!("servers not presently supported");
+        println!("Only default server urls are supported. Variables are not configurable");
     }
 
     if api.security.is_some() {
@@ -131,7 +133,7 @@ where
                             }
 
                             if !o.servers.is_empty() {
-                                println!("op {}: servers, unsupported", oid);
+                                println!("op {}: servers are only partially supported. Variables are not supported", oid);
                             }
 
                             if o.security.is_some() {
@@ -2267,6 +2269,7 @@ fn gen(
     token_endpoint: &str,
     user_consent_endpoint: &str,
     add_post_header: &str,
+    servers: &GeneratedServers,
 ) -> Result<String> {
     let mut out = String::new();
 
@@ -2353,7 +2356,7 @@ fn gen(
     a("");
 
     a(&format!(
-        r#"pub const DEFAULT_HOST: &str = "https://{}";"#,
+        r#"pub const FALLBACK_HOST: &str = "https://{}";"#,
         host.trim_start_matches("https://")
     ));
     a("");
@@ -2396,6 +2399,12 @@ fn gen(
 
     // Print the client template.
     if proper_name == "GitHub" {
+        let server_block = if servers.count > 0 {
+            servers.output.as_deref().unwrap()
+        } else {
+            ""
+        };
+        a(server_block);
         a(crate::client::GITHUB_TEMPLATE);
     } else if proper_name == "SendGrid"
         || proper_name == "Giphy"
@@ -2407,12 +2416,14 @@ fn gen(
         a(&crate::client::generate_client_generic_api_key(
             proper_name,
             add_post_header,
+            servers,
         ));
     } else if proper_name == "TripActions" {
         a(&crate::client::generate_client_generic_client_credentials(
             proper_name,
             token_endpoint,
             add_post_header,
+            servers,
         ));
     } else {
         a(&crate::client::generate_client_generic_token(
@@ -2420,6 +2431,7 @@ fn gen(
             token_endpoint,
             user_consent_endpoint,
             add_post_header,
+            servers,
         ));
     }
 
@@ -2833,6 +2845,8 @@ fn main() -> Result<()> {
 
     let api = load_api(args.opt_str("i").unwrap())?;
 
+    let servers = client::generate_servers(&api.servers, "Root");
+
     let debug = |s: &str| {
         if args.opt_present("debug") {
             println!("{}", s);
@@ -3155,6 +3169,19 @@ fn main() -> Result<()> {
     }
     debug("");
 
+    // Try parsing the servers block and add it to the typespace if it exists
+    if api.servers.len() == 1 {
+        let servers = client::generate_servers(&api.servers, &to_pascal_case(""));
+        let server_type = servers.top_level_type.unwrap();
+
+        ts.add_if_not_exists(
+            Some(server_type),
+            TypeDetails::Object(BTreeMap::new(), openapiv3::SchemaData::default()),
+            "",
+            true,
+        );
+    }
+
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
     let host = args.opt_str("host").unwrap();
@@ -3188,6 +3215,7 @@ fn main() -> Result<()> {
         &token_endpoint,
         &user_consent_endpoint,
         &add_post_header,
+        &servers,
     ) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
@@ -3376,7 +3404,7 @@ rustdoc-args = ["--cfg", "docsrs"]
             match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
                 Ok(files) => {
                     // We have a map of our files, let's write to them.
-                    for (f, content) in files {
+                    for (f, output) in files {
                         let mut tagrs = src.clone();
                         tagrs.push(format!("{}.rs", to_snake_case(&clean_name(&f))));
 
@@ -3384,6 +3412,8 @@ rustdoc-args = ["--cfg", "docsrs"]
                             r#"use anyhow::Result;
 
 use crate::Client;
+
+{}
 
 pub struct {} {{
     pub client: Client,
@@ -3400,11 +3430,13 @@ impl {} {{
 
     {}
 }}"#,
+                            output.head,
                             struct_name(&f),
                             struct_name(&f),
                             struct_name(&f),
-                            content,
+                            output.impl_content,
                         );
+
                         save(tagrs, output.as_str())?;
                     }
 

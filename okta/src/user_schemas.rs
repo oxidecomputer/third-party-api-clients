@@ -26,12 +26,11 @@ impl UserSchemas {
     pub async fn get_application(&self, app_instance_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+            crate::progenitor_support::encode_path(&app_instance_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Partial updates on the User Profile properties of the Application User Schema.
      *
@@ -50,14 +49,13 @@ impl UserSchemas {
     ) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+            crate::progenitor_support::encode_path(&app_instance_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Fetches the schema for a Schema Id.
      *
@@ -72,12 +70,11 @@ impl UserSchemas {
     pub async fn get(&self, schema_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+            crate::progenitor_support::encode_path(&schema_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
      *
@@ -94,9 +91,9 @@ impl UserSchemas {
     ) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+            crate::progenitor_support::encode_path(&schema_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

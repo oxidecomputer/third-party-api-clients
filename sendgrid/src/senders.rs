@@ -32,6 +32,7 @@ impl Senders {
         body: &crate::types::PostMarketingSendersRequest,
     ) -> Result<crate::types::SenderAllOf> {
         let url = "/marketing/senders".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -26,10 +26,9 @@ impl Asps {
             "/admin/directory/v1/users/{}/asps",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/asps/{codeId}` endpoint.
      *
@@ -46,10 +45,9 @@ impl Asps {
             crate::progenitor_support::encode_path(user_key),
             crate::progenitor_support::encode_path(&code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/asps/{codeId}` endpoint.
      *
@@ -66,7 +64,7 @@ impl Asps {
             crate::progenitor_support::encode_path(user_key),
             crate::progenitor_support::encode_path(&code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -47,13 +47,12 @@ impl PhoneSharedLineGroups {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/shared_line_groups?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListSharedLineGroupsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.shared_line_groups.to_vec())
     }
-
     /**
      * List shared line groups.
      *
@@ -107,7 +106,6 @@ impl PhoneSharedLineGroups {
         // Return our response data.
         Ok(shared_line_groups)
     }
-
     /**
      * Create a shared line group.
      *
@@ -128,11 +126,11 @@ impl PhoneSharedLineGroups {
         body: &crate::types::CreateSharedLineGroupRequest,
     ) -> Result<()> {
         let url = "/phone/shared_line_groups".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a shared line group.
      *
@@ -161,10 +159,9 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a shared line group.
      *
@@ -189,10 +186,9 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a shared line group.
      *
@@ -220,12 +216,11 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add members to a shared line group.
      *
@@ -256,12 +251,11 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}/members",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign members of a shared line group.
      *
@@ -287,10 +281,9 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}/members",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Unassign a member from a shared line group.
      *
@@ -322,10 +315,9 @@ impl PhoneSharedLineGroups {
             crate::progenitor_support::encode_path(shared_line_group_id),
             crate::progenitor_support::encode_path(member_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Assign phone numbers.
      *
@@ -353,12 +345,11 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}/phone_numbers",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign all phone numbers.
      *
@@ -382,10 +373,9 @@ impl PhoneSharedLineGroups {
             "/phone/shared_line_groups/{}/phone_numbers",
             crate::progenitor_support::encode_path(shared_line_group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Unassign a phone number.
      *
@@ -415,7 +405,7 @@ impl PhoneSharedLineGroups {
             crate::progenitor_support::encode_path(shared_line_group_id),
             crate::progenitor_support::encode_path(phone_number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -52,14 +52,13 @@ impl SetupAttempts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_attempts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PaymentFlowsSetupIntentAttemptList =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/setup_attempts` endpoint.
      *
@@ -78,7 +77,6 @@ impl SetupAttempts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_attempts?{}", query_);
-
         let mut resp: crate::types::PaymentFlowsSetupIntentAttemptList =
             self.client.get(&url, None).await?;
 

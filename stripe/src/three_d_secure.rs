@@ -19,9 +19,9 @@ impl ThreeDSecure {
      */
     pub async fn post_3d_secure(&self) -> Result<crate::types::ThreeDSecure> {
         let url = "/v1/3d_secure".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/3d_secure/{three_d_secure}` endpoint.
      *
@@ -40,7 +40,7 @@ impl ThreeDSecure {
             "/v1/3d_secure/{}",
             crate::progenitor_support::encode_path(three_d_secure),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

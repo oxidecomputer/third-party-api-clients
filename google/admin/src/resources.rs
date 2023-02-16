@@ -42,13 +42,12 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Buildings = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.buildings.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
      *
@@ -61,7 +60,6 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/buildings",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::Buildings = self.client.get(&url, None).await?;
 
         let mut buildings = resp.buildings;
@@ -93,7 +91,6 @@ impl Resources {
         // Return our response data.
         Ok(buildings)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
      *
@@ -123,12 +120,11 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
      *
@@ -149,10 +145,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(building_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
      *
@@ -185,12 +180,11 @@ impl Resources {
             crate::progenitor_support::encode_path(building_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
      *
@@ -207,10 +201,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(building_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
      *
@@ -243,12 +236,11 @@ impl Resources {
             crate::progenitor_support::encode_path(building_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
      *
@@ -289,13 +281,12 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
      *
@@ -322,7 +313,6 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
         let mut resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
@@ -354,7 +344,6 @@ impl Resources {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
      *
@@ -373,12 +362,11 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/calendars",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
      *
@@ -399,10 +387,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
      *
@@ -424,12 +411,11 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
      *
@@ -446,10 +432,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
      *
@@ -471,12 +456,11 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
      *
@@ -507,13 +491,12 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Features = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.features.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
      *
@@ -526,7 +509,6 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/features",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::Features = self.client.get(&url, None).await?;
 
         let mut features = resp.features;
@@ -558,7 +540,6 @@ impl Resources {
         // Return our response data.
         Ok(features)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
      *
@@ -577,12 +558,11 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/features",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
      *
@@ -603,10 +583,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(feature_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
      *
@@ -628,12 +607,11 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(feature_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
      *
@@ -650,10 +628,9 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(feature_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
      *
@@ -675,12 +652,11 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(feature_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features/{oldName}/rename` endpoint.
      *
@@ -702,7 +678,7 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(old_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

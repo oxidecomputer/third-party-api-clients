@@ -49,13 +49,12 @@ impl Teamdrives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.team_drives.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/teamdrives` endpoint.
      *
@@ -80,7 +79,6 @@ impl Teamdrives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
-
         let mut resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
 
         let mut team_drives = resp.team_drives;
@@ -112,7 +110,6 @@ impl Teamdrives {
         // Return our response data.
         Ok(team_drives)
     }
-
     /**
      * This function performs a `POST` to the `/teamdrives` endpoint.
      *
@@ -133,12 +130,11 @@ impl Teamdrives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -167,10 +163,9 @@ impl Teamdrives {
             crate::progenitor_support::encode_path(team_drive_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -185,10 +180,9 @@ impl Teamdrives {
             "/teamdrives/{}",
             crate::progenitor_support::encode_path(team_drive_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -218,7 +212,7 @@ impl Teamdrives {
             crate::progenitor_support::encode_path(team_drive_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

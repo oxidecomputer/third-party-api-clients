@@ -42,13 +42,12 @@ impl Revisions {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RevisionList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.revisions.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
      *
@@ -61,7 +60,6 @@ impl Revisions {
             "/files/{}/revisions",
             crate::progenitor_support::encode_path(file_id),
         );
-
         let mut resp: crate::types::RevisionList = self.client.get(&url, None).await?;
 
         let mut revisions = resp.revisions;
@@ -93,7 +91,6 @@ impl Revisions {
         // Return our response data.
         Ok(revisions)
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -125,10 +122,9 @@ impl Revisions {
             crate::progenitor_support::encode_path(revision_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -145,10 +141,9 @@ impl Revisions {
             crate::progenitor_support::encode_path(file_id),
             crate::progenitor_support::encode_path(revision_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -170,7 +165,7 @@ impl Revisions {
             crate::progenitor_support::encode_path(file_id),
             crate::progenitor_support::encode_path(revision_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

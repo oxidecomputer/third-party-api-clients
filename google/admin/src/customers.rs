@@ -26,10 +26,9 @@ impl Customers {
             "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(customer_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customers/{customerKey}` endpoint.
      *
@@ -48,12 +47,11 @@ impl Customers {
             "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(customer_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customers/{customerKey}` endpoint.
      *
@@ -72,12 +70,11 @@ impl Customers {
             "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(customer_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{name}` endpoint.
      *
@@ -92,10 +89,9 @@ impl Customers {
             "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/{name}` endpoint.
      *
@@ -110,10 +106,9 @@ impl Customers {
             "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/{name}` endpoint.
      *
@@ -145,12 +140,11 @@ impl Customers {
             crate::progenitor_support::encode_path(name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
      *
@@ -191,13 +185,12 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.printers.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
      *
@@ -224,7 +217,6 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-
         let mut resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
 
         let mut printers = resp.printers;
@@ -256,7 +248,6 @@ impl Customers {
         // Return our response data.
         Ok(printers)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
      *
@@ -275,12 +266,11 @@ impl Customers {
             "/admin/directory/v1/{}/chrome/printers",
             crate::progenitor_support::encode_path(parent),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/{parent}/chrome/printers:batchCreatePrinters` endpoint.
      *
@@ -299,12 +289,11 @@ impl Customers {
             "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
             crate::progenitor_support::encode_path(parent),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/{parent}/chrome/printers:batchDeletePrinters` endpoint.
      *
@@ -323,12 +312,11 @@ impl Customers {
             "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
             crate::progenitor_support::encode_path(parent),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers:listPrinterModels` endpoint.
      *
@@ -364,13 +352,12 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.printer_models.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers:listPrinterModels` endpoint.
      *
@@ -393,7 +380,6 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-
         let mut resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
 
         let mut printer_models = resp.printer_models;

@@ -52,6 +52,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                 }
                 TypeDetails::AllOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
                 TypeDetails::Object(omap, schema_data) => {
+                    // panic!("{:#?} {:#?} {:#?}", te.details, omap, schema_data);
                     /*
                      * TODO: This breaks things so ignore for now.
                      * Eventually this should work, we should ignore empty structs.

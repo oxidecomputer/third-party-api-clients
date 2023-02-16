@@ -46,10 +46,9 @@ impl TrustedOrigins {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/trustedOrigins?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/trustedOrigins` endpoint.
      *
@@ -71,10 +70,8 @@ impl TrustedOrigins {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/trustedOrigins?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/trustedOrigins` endpoint.
      *
@@ -85,11 +82,11 @@ impl TrustedOrigins {
         body: &crate::types::TrustedOrigin,
     ) -> Result<crate::types::TrustedOrigin> {
         let url = "/api/v1/trustedOrigins".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
      *
@@ -102,12 +99,11 @@ impl TrustedOrigins {
     pub async fn get_origin(&self, trusted_origin_id: &str) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
      *
@@ -124,14 +120,13 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
      *
@@ -144,12 +139,11 @@ impl TrustedOrigins {
     pub async fn delete_origin(&self, trusted_origin_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate` endpoint.
      *
@@ -165,12 +159,11 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate` endpoint.
      *
@@ -186,9 +179,9 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

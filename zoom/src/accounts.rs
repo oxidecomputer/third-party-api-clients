@@ -54,10 +54,9 @@ impl Accounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/accounts?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a sub account.
      *
@@ -80,11 +79,11 @@ impl Accounts {
         body: &crate::types::AccountCreateRequest,
     ) -> Result<crate::types::AccountCreateResponse> {
         let url = "/accounts".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get sub account details.
      *
@@ -111,10 +110,9 @@ impl Accounts {
             "/accounts/{}",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Disassociate a sub account.
      *
@@ -142,10 +140,9 @@ impl Accounts {
             "/accounts/{}",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update options.
      *
@@ -176,12 +173,11 @@ impl Accounts {
             "/accounts/{}/options",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get settings.
      *
@@ -232,10 +228,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get settings.
      *
@@ -286,10 +281,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get settings.
      *
@@ -340,10 +334,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get settings.
      *
@@ -394,10 +387,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get settings.
      *
@@ -448,10 +440,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update settings.
      *
@@ -485,12 +476,11 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get managed domains.
      *
@@ -519,10 +509,9 @@ impl Accounts {
             "/accounts/{}/managed_domains",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get trusted domains.
      *
@@ -547,10 +536,9 @@ impl Accounts {
             "/accounts/{}/trusted_domains",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get locked settings.
      *
@@ -606,10 +594,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update locked settings.
      *
@@ -636,10 +623,9 @@ impl Accounts {
             "/accounts/{}/lock_settings",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.patch(&url, None).await
     }
-
     /**
      * Update the account owner.
      *
@@ -664,12 +650,11 @@ impl Accounts {
             "/accounts/{}/owner",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Upload virtual background files.
      *
@@ -698,12 +683,11 @@ impl Accounts {
             "/accounts/{}/settings/virtual_backgrounds",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete virtual background files.
      *
@@ -733,7 +717,7 @@ impl Accounts {
             crate::progenitor_support::encode_path(account_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

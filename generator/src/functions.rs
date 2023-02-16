@@ -1,13 +1,29 @@
 use std::collections::BTreeMap;
 
 use anyhow::{bail, Result};
-use inflector::cases::snakecase::to_snake_case;
+use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
-    clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name,
-    path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType, ParameterDataExt,
-    ReferenceOrExt, TypeId, TypeSpace,
+    clean_fn_name, clean_name, client::generate_servers, get_parameter_data, make_plural,
+    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType,
+    ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
 };
+
+#[derive(Debug, Default)]
+pub struct FileOutput {
+    pub head: String,
+    pub impl_content: String,
+}
+
+impl FileOutput {
+    fn add_head(&mut self, head: &str) {
+        self.head.push_str(head);
+    }
+
+    fn add_content(&mut self, content: &str) {
+        self.impl_content.push_str(content);
+    }
+}
 
 /*
  * Generate a function for each Operation.
@@ -17,8 +33,8 @@ pub fn generate_files(
     proper_name: &str,
     ts: &mut TypeSpace,
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
-) -> Result<BTreeMap<String, String>> {
-    let mut tag_files: BTreeMap<String, String> = Default::default();
+) -> Result<BTreeMap<String, FileOutput>> {
+    let mut tag_files: BTreeMap<String, FileOutput> = Default::default();
 
     let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
@@ -74,56 +90,52 @@ pub fn generate_files(
 
             let oid = clean_fn_name(proper_name, &od, &tag);
 
-            let mut out = String::new();
-            if let Some(o) = tag_files.get(&tag) {
-                out = o.to_string();
-            }
+            let out = tag_files.entry(tag.clone()).or_default();
 
-            let mut a = |s: &str| {
-                out.push_str(s);
-                out.push('\n');
-            };
+            let print_fn = |docs: &str,
+                            bounds: &Vec<String>,
+                            fn_params_str: &Vec<String>,
+                            body_param: &Option<String>,
+                            response_type: &str,
+                            template: &str,
+                            fn_inner: &str,
+                            fn_name: &str| {
+                let mut content = String::new();
 
-            let mut print_fn = |docs: &str,
-                                bounds: &Vec<String>,
-                                fn_params_str: &Vec<String>,
-                                body_param: &Option<String>,
-                                response_type: &str,
-                                template: &str,
-                                fn_inner: &str,
-                                fn_name: &str| {
                 // Print the function docs.
-                a(docs);
+                content.push_str(docs);
 
                 // For this one function, we need it to be recursive since this is how you get
                 // an access token when authenicating on behalf of an app with a JWT.
                 if fn_name == "create_installation_access_token" {
-                    a("#[async_recursion::async_recursion]");
+                    content.push_str("#[async_recursion::async_recursion]");
                 }
 
                 if bounds.is_empty() {
-                    a(&format!("pub async fn {}(", fn_name,));
+                    content.push_str(&format!("pub async fn {}(", fn_name,));
                 } else {
-                    a(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
+                    content.push_str(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
                 }
-                a("&self,");
+                content.push_str("&self,");
 
                 if !fn_params_str.is_empty() {
-                    a(&fn_params_str.join(" "));
+                    content.push_str(&fn_params_str.join(" "));
                 }
 
                 if let Some(bp) = &body_param {
-                    a(&format!("body: {}", bp));
+                    content.push_str(&format!("body: {}", bp));
                 }
 
-                a(&format!(") -> Result<{}> {{", response_type));
+                content.push_str(&format!(") -> Result<{}> {{", response_type));
 
-                a(template);
+                content.push_str(template);
 
-                a(fn_inner);
+                content.push_str(fn_inner);
 
-                a("}");
-                a("");
+                content.push('}');
+                content.push_str("");
+
+                content
             };
 
             let docs = get_fn_docs(o, m, p, parameters, ts)?;
@@ -228,7 +240,23 @@ pub fn generate_files(
              * Generate the URL for the request.
              */
             let tmp = parse(p)?;
-            let template = tmp.compile(query_params);
+            let mut template = tmp.compile(query_params);
+
+            // If there is exactly one alternative server defined, then switch to it
+            if o.servers.len() == 1 {
+                let servers = generate_servers(&o.servers, &to_pascal_case(&op_id));
+                let server_type = servers.top_level_type.unwrap();
+
+                if let Some(server_out) = &servers.output {
+                    out.add_head(server_out);
+                }
+
+                template.push_str(
+                    &format!("let url = self.client.url(&url, Some({server_type}::default().default_url()));")
+                );
+            } else {
+                template.push_str(&"let url = self.client.url(&url, None);".to_string());
+            }
 
             /*
              * Get the response type.
@@ -272,7 +300,7 @@ pub fn generate_files(
                 if let crate::TypeDetails::OneOf(one_of, _) = &te.details {
                     for itid in one_of {
                         let rt = ts.render_type(itid, false)?;
-                        print_fn(
+                        out.add_content(&print_fn(
                             &docs,
                             &bounds,
                             &fn_params_str,
@@ -285,7 +313,7 @@ pub fn generate_files(
                                 oid.trim_start_matches(&tag).trim_start_matches('_'),
                                 to_snake_case(&rt.replace("crate::types::", ""))
                             ))),
-                        );
+                        ));
                     }
                 }
             }
@@ -333,7 +361,7 @@ pub fn generate_files(
             fn_names.push(fn_name.clone() + &tag);
 
             // Print our standard function.
-            print_fn(
+            out.add_content(&print_fn(
                 &docs,
                 &bounds,
                 &fn_params_str,
@@ -342,7 +370,7 @@ pub fn generate_files(
                 &template,
                 &fn_inner,
                 &fn_name,
-            );
+            ));
 
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
@@ -410,7 +438,7 @@ pub fn generate_files(
                 fn_names.push(fn_name.clone() + &tag);
 
                 // Now let's print the new function.
-                print_fn(
+                out.add_content(&print_fn(
                     &docs,
                     &bounds,
                     &fn_params_str,
@@ -419,11 +447,11 @@ pub fn generate_files(
                     &template,
                     &fn_inner,
                     &fn_name,
-                );
+                ));
             }
 
             // Add this to our map of functions based on the tag name.
-            tag_files.insert(tag, out.to_string());
+            // tag_files.insert(tag, out.to_string());
 
             Ok(())
         };
@@ -914,7 +942,7 @@ fn get_fn_inner(
 
             // Paginate if we should.
             while !page.is_empty() {{
-                match self.client.{}::<{}>(page.trim_start_matches(crate::DEFAULT_HOST), {}).await {{
+                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), {}).await {{
                     Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 

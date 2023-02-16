@@ -24,10 +24,9 @@ impl Contractors {
             "/v1/contractors/{}",
             crate::progenitor_support::encode_path(contractor_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a contractor.
      *
@@ -44,12 +43,11 @@ impl Contractors {
             "/v1/contractors/{}",
             crate::progenitor_support::encode_path(contractor_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get contractors of a company.
      *
@@ -65,10 +63,9 @@ impl Contractors {
             "/v1/companies/{}/contractors",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get contractors of a company.
      *
@@ -86,10 +83,8 @@ impl Contractors {
             "/v1/companies/{}/contractors",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a contractor.
      *
@@ -106,7 +101,7 @@ impl Contractors {
             "/v1/companies/{}/contractors",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

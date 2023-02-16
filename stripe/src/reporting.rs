@@ -44,14 +44,13 @@ impl Reporting {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reporting/report_runs?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetReportingReportRunsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_runs` endpoint.
      *
@@ -103,7 +102,6 @@ impl Reporting {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/reporting/report_runs` endpoint.
      *
@@ -111,9 +109,9 @@ impl Reporting {
      */
     pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
         let url = "/v1/reporting/report_runs".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_runs/{report_run}` endpoint.
      *
@@ -132,10 +130,9 @@ impl Reporting {
             "/v1/reporting/report_runs/{}",
             crate::progenitor_support::encode_path(report_run),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
      *
@@ -147,13 +144,13 @@ impl Reporting {
      */
     pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
+        let url = self.client.url(&url, None);
         let resp: crate::types::FinancialReportingFinanceReportTypeList =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
      *
@@ -202,7 +199,6 @@ impl Reporting {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types/{report_type}` endpoint.
      *
@@ -221,7 +217,7 @@ impl Reporting {
             "/v1/reporting/report_types/{}",
             crate::progenitor_support::encode_path(report_type),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

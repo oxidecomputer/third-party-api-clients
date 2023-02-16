@@ -43,13 +43,12 @@ impl Payments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_payments?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Posts a payment to a past due invoice.
      *
@@ -75,14 +74,13 @@ impl Payments {
     ) -> Result<crate::types::BillingPaymentResponse> {
         let url = format!(
             "/v2.1/accounts/{}/billing_payments",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets billing payment information for a specific payment.
      *
@@ -104,10 +102,10 @@ impl Payments {
     ) -> Result<crate::types::BillingPaymentItem> {
         let url = format!(
             "/v2.1/accounts/{}/billing_payments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(payment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&payment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

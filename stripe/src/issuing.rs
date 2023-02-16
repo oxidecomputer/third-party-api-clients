@@ -59,14 +59,13 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/authorizations?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetIssuingAuthorizationsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/authorizations` endpoint.
      *
@@ -93,7 +92,6 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/authorizations?{}", query_);
-
         let mut resp: crate::types::GetIssuingAuthorizationsResponse =
             self.client.get(&url, None).await?;
 
@@ -133,7 +131,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/authorizations/{authorization}` endpoint.
      *
@@ -152,10 +149,9 @@ impl Issuing {
             "/v1/issuing/authorizations/{}",
             crate::progenitor_support::encode_path(authorization),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/authorizations/{authorization}` endpoint.
      *
@@ -173,10 +169,9 @@ impl Issuing {
             "/v1/issuing/authorizations/{}",
             crate::progenitor_support::encode_path(authorization),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/authorizations/{authorization}/approve` endpoint.
      *
@@ -194,10 +189,9 @@ impl Issuing {
             "/v1/issuing/authorizations/{}/approve",
             crate::progenitor_support::encode_path(authorization),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/authorizations/{authorization}/decline` endpoint.
      *
@@ -215,10 +209,9 @@ impl Issuing {
             "/v1/issuing/authorizations/{}/decline",
             crate::progenitor_support::encode_path(authorization),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cardholders` endpoint.
      *
@@ -271,13 +264,12 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cardholders?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetIssuingCardholdersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cardholders` endpoint.
      *
@@ -308,7 +300,6 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cardholders?{}", query_);
-
         let mut resp: crate::types::GetIssuingCardholdersResponse =
             self.client.get(&url, None).await?;
 
@@ -348,7 +339,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/cardholders` endpoint.
      *
@@ -356,9 +346,9 @@ impl Issuing {
      */
     pub async fn post_cardholder(&self) -> Result<crate::types::IssuingCardholder> {
         let url = "/v1/issuing/cardholders".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cardholders/{cardholder}` endpoint.
      *
@@ -377,10 +367,9 @@ impl Issuing {
             "/v1/issuing/cardholders/{}",
             crate::progenitor_support::encode_path(cardholder),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/cardholders/{cardholder}` endpoint.
      *
@@ -398,10 +387,9 @@ impl Issuing {
             "/v1/issuing/cardholders/{}",
             crate::progenitor_support::encode_path(cardholder),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cards` endpoint.
      *
@@ -464,13 +452,12 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cards?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetIssuingCardsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cards` endpoint.
      *
@@ -509,7 +496,6 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cards?{}", query_);
-
         let mut resp: crate::types::GetIssuingCardsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -548,7 +534,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/cards` endpoint.
      *
@@ -556,9 +541,9 @@ impl Issuing {
      */
     pub async fn post_card(&self) -> Result<crate::types::IssuingCard> {
         let url = "/v1/issuing/cards".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/cards/{card}` endpoint.
      *
@@ -574,10 +559,9 @@ impl Issuing {
             "/v1/issuing/cards/{}",
             crate::progenitor_support::encode_path(card),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/cards/{card}` endpoint.
      *
@@ -592,10 +576,9 @@ impl Issuing {
             "/v1/issuing/cards/{}",
             crate::progenitor_support::encode_path(card),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/disputes` endpoint.
      *
@@ -638,13 +621,12 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/disputes?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::IssuingDisputeList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/disputes` endpoint.
      *
@@ -667,7 +649,6 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/disputes?{}", query_);
-
         let mut resp: crate::types::IssuingDisputeList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -706,7 +687,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/disputes` endpoint.
      *
@@ -714,9 +694,9 @@ impl Issuing {
      */
     pub async fn post_dispute(&self) -> Result<crate::types::IssuingDispute> {
         let url = "/v1/issuing/disputes".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/disputes/{dispute}` endpoint.
      *
@@ -735,10 +715,9 @@ impl Issuing {
             "/v1/issuing/disputes/{}",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/disputes/{dispute}` endpoint.
      *
@@ -756,10 +735,9 @@ impl Issuing {
             "/v1/issuing/disputes/{}",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/disputes/{dispute}/submit` endpoint.
      *
@@ -777,10 +755,9 @@ impl Issuing {
             "/v1/issuing/disputes/{}/submit",
             crate::progenitor_support::encode_path(dispute),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/settlements` endpoint.
      *
@@ -813,13 +790,12 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/settlements?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetIssuingSettlementsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/settlements` endpoint.
      *
@@ -871,7 +847,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/settlements/{settlement}` endpoint.
      *
@@ -890,10 +865,9 @@ impl Issuing {
             "/v1/issuing/settlements/{}",
             crate::progenitor_support::encode_path(settlement),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/settlements/{settlement}` endpoint.
      *
@@ -911,10 +885,9 @@ impl Issuing {
             "/v1/issuing/settlements/{}",
             crate::progenitor_support::encode_path(settlement),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/transactions` endpoint.
      *
@@ -962,14 +935,13 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/transactions?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetIssuingTransactionsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/transactions` endpoint.
      *
@@ -996,7 +968,6 @@ impl Issuing {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/transactions?{}", query_);
-
         let mut resp: crate::types::GetIssuingTransactionsResponse =
             self.client.get(&url, None).await?;
 
@@ -1036,7 +1007,6 @@ impl Issuing {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuing/transactions/{transaction}` endpoint.
      *
@@ -1055,10 +1025,9 @@ impl Issuing {
             "/v1/issuing/transactions/{}",
             crate::progenitor_support::encode_path(transaction),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/issuing/transactions/{transaction}` endpoint.
      *
@@ -1076,7 +1045,7 @@ impl Issuing {
             "/v1/issuing/transactions/{}",
             crate::progenitor_support::encode_path(transaction),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

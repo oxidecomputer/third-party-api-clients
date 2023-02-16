@@ -30,12 +30,11 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductList> {
         let url = format!(
             "/v2.1/accounts/{}/reports",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a customized report.
      *
@@ -54,14 +53,13 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductSaveResponse> {
         let url = format!(
             "/v2.1/accounts/{}/reports",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Returns the result set from running the specified report.
      *
@@ -80,14 +78,13 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductRunResponse> {
         let url = format!(
             "/v2.1/accounts/{}/reports/report_results",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Returns the specified report as a CSV string.
      *
@@ -106,14 +103,13 @@ impl Reports {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/reports/report_results_csv",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets the specified report.
      *
@@ -133,13 +129,12 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductGet> {
         let url = format!(
             "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Saves a customized report.
      *
@@ -160,15 +155,14 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductSaveResponse> {
         let url = format!(
             "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a customized report.
      *
@@ -188,10 +182,10 @@ impl Reports {
     ) -> Result<crate::types::ReportInProductSaveResponse> {
         let url = format!(
             "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -69,13 +69,12 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::InvoicesList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices` endpoint.
      *
@@ -110,7 +109,6 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices?{}", query_);
-
         let mut resp: crate::types::InvoicesList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -149,7 +147,6 @@ impl Invoices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices` endpoint.
      *
@@ -157,9 +154,9 @@ impl Invoices {
      */
     pub async fn post(&self) -> Result<crate::types::Invoice> {
         let url = "/v1/invoices".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/search` endpoint.
      *
@@ -193,13 +190,12 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/search?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/search` endpoint.
      *
@@ -217,7 +213,6 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/search?{}", query_);
-
         let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -256,7 +251,6 @@ impl Invoices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/upcoming` endpoint.
      *
@@ -366,10 +360,9 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/upcoming?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/upcoming/lines` endpoint.
      *
@@ -490,13 +483,12 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/upcoming/lines?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/upcoming/lines` endpoint.
      *
@@ -577,7 +569,6 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/upcoming/lines?{}", query_);
-
         let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -616,7 +607,6 @@ impl Invoices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/{invoice}` endpoint.
      *
@@ -632,10 +622,9 @@ impl Invoices {
             "/v1/invoices/{}",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}` endpoint.
      *
@@ -655,10 +644,9 @@ impl Invoices {
             "/v1/invoices/{}",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/invoices/{invoice}` endpoint.
      *
@@ -673,10 +661,9 @@ impl Invoices {
             "/v1/invoices/{}",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/finalize` endpoint.
      *
@@ -691,10 +678,9 @@ impl Invoices {
             "/v1/invoices/{}/finalize",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/{invoice}/lines` endpoint.
      *
@@ -731,13 +717,12 @@ impl Invoices {
             crate::progenitor_support::encode_path(invoice),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/invoices/{invoice}/lines` endpoint.
      *
@@ -750,7 +735,6 @@ impl Invoices {
             "/v1/invoices/{}/lines",
             crate::progenitor_support::encode_path(invoice),
         );
-
         let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -789,7 +773,6 @@ impl Invoices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/mark_uncollectible` endpoint.
      *
@@ -804,10 +787,9 @@ impl Invoices {
             "/v1/invoices/{}/mark_uncollectible",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/pay` endpoint.
      *
@@ -822,10 +804,9 @@ impl Invoices {
             "/v1/invoices/{}/pay",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/send` endpoint.
      *
@@ -842,10 +823,9 @@ impl Invoices {
             "/v1/invoices/{}/send",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/void` endpoint.
      *
@@ -860,7 +840,7 @@ impl Invoices {
             "/v1/invoices/{}/void",
             crate::progenitor_support::encode_path(invoice),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

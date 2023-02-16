@@ -59,10 +59,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -90,12 +89,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -120,13 +118,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -145,14 +142,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -170,12 +166,11 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -223,10 +218,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -254,12 +248,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -284,13 +277,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -309,14 +301,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -334,12 +325,11 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -387,10 +377,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -418,12 +407,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -448,13 +436,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -473,14 +460,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -498,12 +484,11 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -551,10 +536,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -582,12 +566,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -608,13 +591,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -633,14 +615,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -655,12 +636,11 @@ impl Analytics {
     pub async fn delete_reports_param_report(&self, report_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -708,10 +688,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -739,12 +718,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -769,13 +747,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -794,14 +771,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -819,12 +795,11 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -872,10 +847,9 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new report.
      *
@@ -903,12 +877,11 @@ impl Analytics {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/reports.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -933,13 +906,12 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates a report.
      *
@@ -958,14 +930,13 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -983,9 +954,9 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+            crate::progenitor_support::encode_path(&report_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

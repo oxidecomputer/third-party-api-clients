@@ -48,10 +48,9 @@ impl ConnectedSites {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/connected-sites?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add connected site.
      *
@@ -61,11 +60,11 @@ impl ConnectedSites {
      */
     pub async fn post(&self, body: &crate::types::ConnectedSite) -> Result<crate::types::Sites> {
         let url = "/connected-sites".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get connected site.
      *
@@ -98,10 +97,9 @@ impl ConnectedSites {
             crate::progenitor_support::encode_path(connected_site_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete connected site.
      *
@@ -118,10 +116,9 @@ impl ConnectedSites {
             "/connected-sites/{}",
             crate::progenitor_support::encode_path(connected_site_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Verify connected site script.
      *
@@ -141,7 +138,7 @@ impl ConnectedSites {
             "/connected-sites/{}/actions/verify-script-installation",
             crate::progenitor_support::encode_path(connected_site_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

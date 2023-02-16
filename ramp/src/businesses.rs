@@ -25,9 +25,9 @@ impl Businesses {
      */
     pub async fn get_resources_busine(&self) -> Result<crate::types::Business> {
         let url = "/business".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * GET current info about a business.
      *
@@ -43,6 +43,7 @@ impl Businesses {
         &self,
     ) -> Result<crate::types::BusinessCurrentStatus> {
         let url = "/business/balance".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

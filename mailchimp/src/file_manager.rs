@@ -81,10 +81,9 @@ impl FileManager {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/file-manager/files?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add file.
      *
@@ -94,11 +93,11 @@ impl FileManager {
      */
     pub async fn post(&self, body: &crate::types::GalleryFile) -> Result<crate::types::Files> {
         let url = "/file-manager/files".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get file.
      *
@@ -131,10 +130,9 @@ impl FileManager {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete file.
      *
@@ -151,10 +149,9 @@ impl FileManager {
             "/file-manager/files/{}",
             crate::progenitor_support::encode_path(file_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update file.
      *
@@ -175,12 +172,11 @@ impl FileManager {
             "/file-manager/files/{}",
             crate::progenitor_support::encode_path(file_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List folders.
      *
@@ -235,10 +231,9 @@ impl FileManager {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/file-manager/folders?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add folder.
      *
@@ -251,11 +246,11 @@ impl FileManager {
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
         let url = "/file-manager/folders".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get folder.
      *
@@ -288,10 +283,9 @@ impl FileManager {
             crate::progenitor_support::encode_path(folder_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete folder.
      *
@@ -308,10 +302,9 @@ impl FileManager {
             "/file-manager/folders/{}",
             crate::progenitor_support::encode_path(folder_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update folder.
      *
@@ -332,7 +325,7 @@ impl FileManager {
             "/file-manager/folders/{}",
             crate::progenitor_support::encode_path(folder_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

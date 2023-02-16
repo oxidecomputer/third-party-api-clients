@@ -39,13 +39,12 @@ impl Departments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/departments?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List departments.
      *
@@ -67,7 +66,7 @@ impl Departments {
             match self
                 .client
                 .get::<crate::types::GetDepartmentsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -94,7 +93,6 @@ impl Departments {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Create department.
      *
@@ -107,11 +105,11 @@ impl Departments {
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
         let url = "/departments".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * GET a department.
      *
@@ -128,10 +126,9 @@ impl Departments {
             "/departments/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update department.
      *
@@ -148,7 +145,7 @@ impl Departments {
             "/departments/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

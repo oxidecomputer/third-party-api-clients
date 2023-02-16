@@ -47,13 +47,12 @@ impl IssuerFraudRecords {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuer_fraud_records?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RadarIssuerFraudRecordList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuer_fraud_records` endpoint.
      *
@@ -68,7 +67,6 @@ impl IssuerFraudRecords {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuer_fraud_records?{}", query_);
-
         let mut resp: crate::types::RadarIssuerFraudRecordList =
             self.client.get(&url, None).await?;
 
@@ -108,7 +106,6 @@ impl IssuerFraudRecords {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/issuer_fraud_records/{issuer_fraud_record}` endpoint.
      *
@@ -129,7 +126,7 @@ impl IssuerFraudRecords {
             "/v1/issuer_fraud_records/{}",
             crate::progenitor_support::encode_path(issuer_fraud_record),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

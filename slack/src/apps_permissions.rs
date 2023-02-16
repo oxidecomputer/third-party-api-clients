@@ -25,9 +25,9 @@ impl AppsPermissions {
      */
     pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
         let url = "/apps.permissions.info".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/apps.permissions.request` endpoint.
      *
@@ -55,7 +55,7 @@ impl AppsPermissions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/apps.permissions.request?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

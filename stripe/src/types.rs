@@ -51678,3 +51678,6 @@ pub struct GetWebhookEndpointsResponse {
     )]
     pub url: String,
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

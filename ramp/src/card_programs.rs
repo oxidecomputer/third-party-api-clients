@@ -39,13 +39,12 @@ impl CardPrograms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/card-programs?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.card_programs.to_vec())
     }
-
     /**
      * List card programs.
      *
@@ -67,7 +66,7 @@ impl CardPrograms {
             match self
                 .client
                 .get::<crate::types::GetCardProgramsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -94,7 +93,6 @@ impl CardPrograms {
         // Return our response data.
         Ok(card_programs)
     }
-
     /**
      * Create a card program.
      *
@@ -111,11 +109,11 @@ impl CardPrograms {
         body: &crate::types::PostResourcesCardProgramRequest,
     ) -> Result<crate::types::CardProgram> {
         let url = "/card-programs".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * GET a card program.
      *
@@ -132,7 +130,7 @@ impl CardPrograms {
             "/card-programs/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

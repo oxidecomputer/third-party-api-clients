@@ -33,14 +33,13 @@ impl EnvelopeDocumentVisibility {
     ) -> Result<crate::types::DocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates document visibility for a recipient.
      *
@@ -65,11 +64,11 @@ impl EnvelopeDocumentVisibility {
     ) -> Result<crate::types::DocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

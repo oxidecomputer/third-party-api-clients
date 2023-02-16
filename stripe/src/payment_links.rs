@@ -47,13 +47,12 @@ impl PaymentLinks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_links?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links` endpoint.
      *
@@ -68,7 +67,6 @@ impl PaymentLinks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_links?{}", query_);
-
         let mut resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -107,7 +105,6 @@ impl PaymentLinks {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_links` endpoint.
      *
@@ -115,9 +112,9 @@ impl PaymentLinks {
      */
     pub async fn post(&self) -> Result<crate::types::PaymentLink> {
         let url = "/v1/payment_links".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}` endpoint.
      *
@@ -133,10 +130,9 @@ impl PaymentLinks {
             "/v1/payment_links/{}",
             crate::progenitor_support::encode_path(payment_link),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_links/{payment_link}` endpoint.
      *
@@ -151,10 +147,9 @@ impl PaymentLinks {
             "/v1/payment_links/{}",
             crate::progenitor_support::encode_path(payment_link),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
      *
@@ -191,13 +186,12 @@ impl PaymentLinks {
             crate::progenitor_support::encode_path(payment_link),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
      *
@@ -213,7 +207,6 @@ impl PaymentLinks {
             "/v1/payment_links/{}/line_items",
             crate::progenitor_support::encode_path(payment_link),
         );
-
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         let mut data = resp.data;

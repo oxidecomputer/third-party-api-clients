@@ -76,10 +76,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pull requests.
      *
@@ -124,10 +123,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a pull request.
      *
@@ -159,12 +156,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List review comments in a repository.
      *
@@ -219,10 +215,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List review comments in a repository.
      *
@@ -259,10 +254,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a review comment for a pull request.
      *
@@ -290,10 +283,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a review comment for a pull request.
      *
@@ -321,10 +313,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a review comment for a pull request.
      *
@@ -353,12 +344,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a pull request.
      *
@@ -400,10 +390,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a pull request.
      *
@@ -434,12 +423,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List review comments on a pull request.
      *
@@ -497,10 +485,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List review comments on a pull request.
      *
@@ -539,10 +526,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a review comment for a pull request.
      *
@@ -578,12 +563,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a reply for a review comment.
      *
@@ -617,12 +601,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List commits on a pull request.
      *
@@ -663,10 +646,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commits on a pull request.
      *
@@ -690,10 +672,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List pull requests files.
      *
@@ -734,10 +714,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pull requests files.
      *
@@ -761,10 +740,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a pull request has been merged.
      *
@@ -787,10 +764,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Merge a pull request.
      *
@@ -819,12 +795,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List requested reviewers for a pull request.
      *
@@ -865,10 +840,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Request reviewers for a pull request.
      *
@@ -897,12 +871,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove requested reviewers from a pull request.
      *
@@ -931,12 +904,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List reviews for a pull request.
      *
@@ -977,10 +949,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reviews for a pull request.
      *
@@ -1004,10 +975,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a review for a pull request.
      *
@@ -1042,12 +1011,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a review for a pull request.
      *
@@ -1078,10 +1046,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a review for a pull request.
      *
@@ -1113,12 +1080,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a pending review for a pull request.
      *
@@ -1149,10 +1115,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List comments for a pull request review.
      *
@@ -1196,10 +1161,9 @@ impl Pulls {
             crate::progenitor_support::encode_path(&review_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List comments for a pull request review.
      *
@@ -1225,10 +1189,8 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Dismiss a review for a pull request.
      *
@@ -1260,12 +1222,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Submit a review for a pull request.
      *
@@ -1297,12 +1258,11 @@ impl Pulls {
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update a pull request branch.
      *
@@ -1331,7 +1291,7 @@ impl Pulls {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

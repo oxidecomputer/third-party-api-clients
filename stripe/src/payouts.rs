@@ -56,13 +56,12 @@ impl Payouts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payouts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PayoutList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payouts` endpoint.
      *
@@ -86,7 +85,6 @@ impl Payouts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payouts?{}", query_);
-
         let mut resp: crate::types::PayoutList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -125,7 +123,6 @@ impl Payouts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/payouts` endpoint.
      *
@@ -137,9 +134,9 @@ impl Payouts {
      */
     pub async fn post(&self) -> Result<crate::types::Payout> {
         let url = "/v1/payouts".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payouts/{payout}` endpoint.
      *
@@ -155,10 +152,9 @@ impl Payouts {
             "/v1/payouts/{}",
             crate::progenitor_support::encode_path(payout),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payouts/{payout}` endpoint.
      *
@@ -173,10 +169,9 @@ impl Payouts {
             "/v1/payouts/{}",
             crate::progenitor_support::encode_path(payout),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payouts/{payout}/cancel` endpoint.
      *
@@ -191,10 +186,9 @@ impl Payouts {
             "/v1/payouts/{}/cancel",
             crate::progenitor_support::encode_path(payout),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payouts/{payout}/reverse` endpoint.
      *
@@ -211,7 +205,7 @@ impl Payouts {
             "/v1/payouts/{}/reverse",
             crate::progenitor_support::encode_path(payout),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

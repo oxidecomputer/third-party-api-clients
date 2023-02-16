@@ -62,10 +62,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a team discussion comment.
      *
@@ -100,10 +99,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a team discussion comment.
      *
@@ -137,12 +134,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete team discussion comment reaction.
      *
@@ -178,10 +174,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List reactions for a team discussion.
      *
@@ -229,10 +224,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a team discussion.
      *
@@ -265,10 +259,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a team discussion.
      *
@@ -299,12 +291,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(team_slug),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete team discussion reaction.
      *
@@ -337,10 +328,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Delete a reaction (Legacy).
      *
@@ -361,10 +351,9 @@ impl Reactions {
             "/reactions/{}",
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List reactions for a commit comment.
      *
@@ -410,10 +399,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a commit comment.
      *
@@ -444,10 +432,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a commit comment.
      *
@@ -476,12 +462,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a commit comment reaction.
      *
@@ -514,10 +499,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List reactions for an issue comment.
      *
@@ -563,10 +547,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for an issue comment.
      *
@@ -597,10 +580,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for an issue comment.
      *
@@ -629,12 +610,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an issue comment reaction.
      *
@@ -667,10 +647,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List reactions for an issue.
      *
@@ -716,10 +695,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for an issue.
      *
@@ -750,10 +728,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for an issue.
      *
@@ -782,12 +758,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an issue reaction.
      *
@@ -820,10 +795,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List reactions for a pull request review comment.
      *
@@ -869,10 +843,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a pull request review comment.
      *
@@ -903,10 +876,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a pull request review comment.
      *
@@ -935,12 +906,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a pull request comment reaction.
      *
@@ -973,10 +943,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Create reaction for a release.
      *
@@ -1005,12 +974,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List reactions for a team discussion comment (Legacy).
      *
@@ -1058,10 +1026,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a team discussion comment (Legacy).
      *
@@ -1094,10 +1061,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a team discussion comment (Legacy).
      *
@@ -1128,12 +1093,11 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List reactions for a team discussion (Legacy).
      *
@@ -1178,10 +1142,9 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List reactions for a team discussion (Legacy).
      *
@@ -1212,10 +1175,8 @@ impl Reactions {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create reaction for a team discussion (Legacy).
      *
@@ -1243,7 +1204,7 @@ impl Reactions {
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

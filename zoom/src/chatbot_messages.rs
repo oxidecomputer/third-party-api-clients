@@ -27,11 +27,11 @@ impl ChatbotMessages {
      */
     pub async fn sendchatbot(&self, body: &crate::types::SendchatbotRequest) -> Result<()> {
         let url = "/im/chat/messages".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Edit a chatbot message.
      *
@@ -59,12 +59,11 @@ impl ChatbotMessages {
             "/im/chat/messages/{}",
             crate::progenitor_support::encode_path(message_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a chatbot message.
      *
@@ -83,7 +82,7 @@ impl ChatbotMessages {
             "/im/chat/messages/{}",
             crate::progenitor_support::encode_path(message_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -2,6 +2,15 @@ use anyhow::Result;
 
 use crate::Client;
 
+#[derive(Debug, Default, Clone)]
+pub struct ReposUploadReleaseAssetDefaultServer {}
+
+impl ReposUploadReleaseAssetDefaultServer {
+    pub fn default_url(&self) -> &str {
+        "https://uploads.github.com"
+    }
+}
+
 pub struct Repos {
     pub client: Client,
 }
@@ -63,10 +72,9 @@ impl Repos {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization repositories.
      *
@@ -101,10 +109,8 @@ impl Repos {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an organization repository.
      *
@@ -134,12 +140,11 @@ impl Repos {
             "/orgs/{}/repos",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a repository.
      *
@@ -162,10 +167,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a repository.
      *
@@ -189,10 +193,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a repository.
      *
@@ -218,12 +221,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List all autolinks of a repository.
      *
@@ -258,10 +260,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List all autolinks of a repository.
      *
@@ -285,10 +286,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an autolink reference for a repository.
      *
@@ -314,12 +313,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get an autolink reference of a repository.
      *
@@ -349,10 +347,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&autolink_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an autolink reference from a repository.
      *
@@ -377,10 +374,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&autolink_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Enable automated security fixes.
      *
@@ -401,10 +397,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Disable automated security fixes.
      *
@@ -425,10 +420,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List branches.
      *
@@ -471,10 +465,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List branches.
      *
@@ -503,10 +496,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a branch.
      *
@@ -534,10 +525,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get branch protection.
      *
@@ -565,10 +555,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update branch protection.
      *
@@ -603,12 +592,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete branch protection.
      *
@@ -636,10 +624,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get admin branch protection.
      *
@@ -667,10 +654,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Set admin branch protection.
      *
@@ -700,10 +686,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Delete admin branch protection.
      *
@@ -733,10 +718,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get pull request review protection.
      *
@@ -764,10 +748,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete pull request review protection.
      *
@@ -795,10 +778,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update pull request review protection.
      *
@@ -831,12 +813,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get commit signature protection.
      *
@@ -868,10 +849,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create commit signature protection.
      *
@@ -901,10 +881,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Delete commit signature protection.
      *
@@ -934,10 +913,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get status checks protection.
      *
@@ -965,10 +943,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Remove status check protection.
      *
@@ -996,10 +973,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update status check protection.
      *
@@ -1030,12 +1006,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get all status check contexts.
      *
@@ -1063,10 +1038,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all status check contexts.
      *
@@ -1090,10 +1064,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Set status check contexts.
      *
@@ -1122,12 +1094,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add status check contexts.
      *
@@ -1156,12 +1127,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove status check contexts.
      *
@@ -1190,12 +1160,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get access restrictions.
      *
@@ -1227,10 +1196,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete access restrictions.
      *
@@ -1260,10 +1228,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get apps with access to the protected branch.
      *
@@ -1293,10 +1260,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get apps with access to the protected branch.
      *
@@ -1322,10 +1288,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Set app access restrictions.
      *
@@ -1360,12 +1324,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add app access restrictions.
      *
@@ -1400,12 +1363,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove app access restrictions.
      *
@@ -1440,12 +1402,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get teams with access to the protected branch.
      *
@@ -1475,10 +1436,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get teams with access to the protected branch.
      *
@@ -1504,10 +1464,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Set team access restrictions.
      *
@@ -1542,12 +1500,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add team access restrictions.
      *
@@ -1582,12 +1539,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove team access restrictions.
      *
@@ -1622,12 +1578,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get users with access to the protected branch.
      *
@@ -1657,10 +1612,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get users with access to the protected branch.
      *
@@ -1686,10 +1640,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Set user access restrictions.
      *
@@ -1724,12 +1676,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Add user access restrictions.
      *
@@ -1764,12 +1715,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove user access restrictions.
      *
@@ -1804,12 +1754,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Rename a branch.
      *
@@ -1852,12 +1801,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(branch),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository collaborators.
      *
@@ -1905,10 +1853,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository collaborators.
      *
@@ -1939,10 +1886,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a user is a repository collaborator.
      *
@@ -1967,10 +1912,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add a repository collaborator.
      *
@@ -2009,12 +1953,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a repository collaborator.
      *
@@ -2037,10 +1980,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get repository permissions for a user.
      *
@@ -2068,10 +2010,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commit comments for a repository.
      *
@@ -2111,10 +2052,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commit comments for a repository.
      *
@@ -2138,10 +2078,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a commit comment.
      *
@@ -2169,10 +2107,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a commit comment.
      *
@@ -2200,10 +2137,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a commit comment.
      *
@@ -2232,12 +2168,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List commits.
      *
@@ -2327,10 +2262,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commits.
      *
@@ -2402,10 +2336,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List branches for HEAD commit.
      *
@@ -2435,10 +2367,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List branches for HEAD commit.
      *
@@ -2464,10 +2395,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List commit comments.
      *
@@ -2508,10 +2437,9 @@ impl Repos {
             crate::progenitor_support::encode_path(commit_sha),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commit comments.
      *
@@ -2535,10 +2463,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a commit comment.
      *
@@ -2569,12 +2495,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List pull requests associated with a commit.
      *
@@ -2615,10 +2540,9 @@ impl Repos {
             crate::progenitor_support::encode_path(commit_sha),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List pull requests associated with a commit.
      *
@@ -2642,10 +2566,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(commit_sha),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a commit.
      *
@@ -2721,10 +2643,9 @@ impl Repos {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the combined status for a specific reference.
      *
@@ -2773,10 +2694,9 @@ impl Repos {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commit statuses for a reference.
      *
@@ -2819,10 +2739,9 @@ impl Repos {
             crate::progenitor_support::encode_path(ref_),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List commit statuses for a reference.
      *
@@ -2848,10 +2767,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get community profile metrics.
      *
@@ -2887,10 +2804,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Compare two commits.
      *
@@ -2970,10 +2886,9 @@ impl Repos {
             crate::progenitor_support::encode_path(basehead),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get repository content.
      *
@@ -3040,10 +2955,9 @@ impl Repos {
             crate::progenitor_support::encode_path(path),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get repository content.
      *
@@ -3110,10 +3024,9 @@ impl Repos {
             crate::progenitor_support::encode_path(path),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get repository content.
      *
@@ -3180,10 +3093,9 @@ impl Repos {
             crate::progenitor_support::encode_path(path),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get repository content.
      *
@@ -3250,10 +3162,9 @@ impl Repos {
             crate::progenitor_support::encode_path(path),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get repository content.
      *
@@ -3320,10 +3231,9 @@ impl Repos {
             crate::progenitor_support::encode_path(path),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create or update file contents.
      *
@@ -3352,12 +3262,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(path),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a file.
      *
@@ -3392,12 +3301,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(path),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository contributors.
      *
@@ -3442,10 +3350,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository contributors.
      *
@@ -3476,10 +3383,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List deployments.
      *
@@ -3537,10 +3442,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List deployments.
      *
@@ -3581,10 +3485,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a deployment.
      *
@@ -3654,12 +3556,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a deployment.
      *
@@ -3687,10 +3588,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a deployment.
      *
@@ -3725,10 +3625,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List deployment statuses.
      *
@@ -3769,10 +3668,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List deployment statuses.
      *
@@ -3796,10 +3694,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a deployment status.
      *
@@ -3830,12 +3726,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a deployment status.
      *
@@ -3866,10 +3761,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
             crate::progenitor_support::encode_path(&status_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a repository dispatch event.
      *
@@ -3904,12 +3798,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get all environments.
      *
@@ -3936,10 +3829,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get an environment.
      *
@@ -3967,10 +3859,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(environment_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create or update an environment.
      *
@@ -4005,12 +3896,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(environment_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an environment.
      *
@@ -4038,10 +3928,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(environment_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List forks.
      *
@@ -4084,10 +3973,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List forks.
      *
@@ -4116,10 +4004,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a fork.
      *
@@ -4147,12 +4033,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository webhooks.
      *
@@ -4190,10 +4075,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository webhooks.
      *
@@ -4215,10 +4099,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a repository webhook.
      *
@@ -4245,12 +4127,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a repository webhook.
      *
@@ -4278,10 +4159,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a repository webhook.
      *
@@ -4304,10 +4184,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a repository webhook.
      *
@@ -4336,12 +4215,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a webhook configuration for a repository.
      *
@@ -4371,10 +4249,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a webhook configuration for a repository.
      *
@@ -4405,12 +4282,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List deliveries for a repository webhook.
      *
@@ -4451,10 +4327,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List deliveries for a repository webhook.
      *
@@ -4485,10 +4360,8 @@ impl Repos {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a delivery for a repository webhook.
      *
@@ -4519,10 +4392,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Redeliver a delivery for a repository webhook.
      *
@@ -4553,10 +4425,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Ping a repository webhook.
      *
@@ -4579,10 +4450,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Test the push repository webhook.
      *
@@ -4607,10 +4477,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List repository invitations.
      *
@@ -4648,10 +4517,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository invitations.
      *
@@ -4673,10 +4541,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Delete a repository invitation.
      *
@@ -4704,10 +4570,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a repository invitation.
      *
@@ -4736,12 +4601,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List deploy keys.
      *
@@ -4779,10 +4643,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List deploy keys.
      *
@@ -4804,10 +4667,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a deploy key.
      *
@@ -4833,12 +4694,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a deploy key.
      *
@@ -4866,10 +4726,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a deploy key.
      *
@@ -4892,10 +4751,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List repository languages.
      *
@@ -4916,10 +4774,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Merge a branch.
      *
@@ -4945,12 +4802,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a GitHub Pages site.
      *
@@ -4971,10 +4827,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update information about a GitHub Pages site.
      *
@@ -5000,12 +4855,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a GitHub Pages site.
      *
@@ -5031,12 +4885,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a GitHub Pages site.
      *
@@ -5057,10 +4910,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List GitHub Pages builds.
      *
@@ -5098,10 +4950,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List GitHub Pages builds.
      *
@@ -5123,10 +4974,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Request a GitHub Pages build.
      *
@@ -5153,10 +5002,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get latest Pages build.
      *
@@ -5181,10 +5029,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get GitHub Pages build.
      *
@@ -5212,10 +5059,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&build_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a DNS health check for GitHub Pages.
      *
@@ -5244,10 +5090,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a repository README.
      *
@@ -5282,10 +5127,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a repository README for a directory.
      *
@@ -5323,10 +5167,9 @@ impl Repos {
             crate::progenitor_support::encode_path(dir),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List releases.
      *
@@ -5366,10 +5209,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List releases.
      *
@@ -5393,10 +5235,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a release.
      *
@@ -5424,12 +5264,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a release asset.
      *
@@ -5457,10 +5296,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&asset_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a release asset.
      *
@@ -5483,10 +5321,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&asset_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a release asset.
      *
@@ -5515,12 +5352,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&asset_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get the latest release.
      *
@@ -5547,10 +5383,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a release by tag name.
      *
@@ -5578,10 +5413,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(tag),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a release.
      *
@@ -5609,10 +5443,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a release.
      *
@@ -5635,10 +5468,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a release.
      *
@@ -5667,12 +5499,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List release assets.
      *
@@ -5713,10 +5544,9 @@ impl Repos {
             crate::progenitor_support::encode_path(&release_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List release assets.
      *
@@ -5740,10 +5570,8 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Upload a release asset.
      *
@@ -5802,10 +5630,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&release_id.to_string()),
             query_
         );
-
+        let url = self.client.url(
+            &url,
+            Some(ReposUploadReleaseAssetDefaultServer::default().default_url()),
+        );
         self.client.post(&url, Some(body.into())).await
     }
-
     /**
      * Get the weekly commit activity.
      *
@@ -5826,10 +5656,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the weekly commit activity.
      *
@@ -5851,10 +5680,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get the last year of commit activity.
      *
@@ -5879,10 +5706,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the last year of commit activity.
      *
@@ -5904,10 +5730,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get all contributor commit activity.
      *
@@ -5938,10 +5762,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all contributor commit activity.
      *
@@ -5969,10 +5792,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get the weekly commit count.
      *
@@ -5999,10 +5820,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the hourly commit count for each day.
      *
@@ -6029,10 +5849,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the hourly commit count for each day.
      *
@@ -6056,10 +5875,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a commit status.
      *
@@ -6090,12 +5907,11 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(sha),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository tags.
      *
@@ -6133,10 +5949,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository tags.
      *
@@ -6154,10 +5969,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Download a repository archive (tar).
      *
@@ -6188,10 +6001,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository teams.
      *
@@ -6229,10 +6041,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository teams.
      *
@@ -6250,10 +6061,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get all repository topics.
      *
@@ -6291,10 +6100,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Replace all repository topics.
      *
@@ -6320,12 +6128,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get repository clones.
      *
@@ -6358,10 +6165,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get top referral paths.
      *
@@ -6386,10 +6192,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get top referral paths.
      *
@@ -6411,10 +6216,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get top referral sources.
      *
@@ -6439,10 +6242,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get top referral sources.
      *
@@ -6464,10 +6266,8 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get page views.
      *
@@ -6500,10 +6300,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Transfer a repository.
      *
@@ -6529,12 +6328,11 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Check if vulnerability alerts are enabled for a repository.
      *
@@ -6555,10 +6353,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Enable vulnerability alerts.
      *
@@ -6579,10 +6376,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Disable vulnerability alerts.
      *
@@ -6603,10 +6399,9 @@ impl Repos {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Download a repository archive (zip).
      *
@@ -6637,10 +6432,9 @@ impl Repos {
             crate::progenitor_support::encode_path(repo),
             crate::progenitor_support::encode_path(ref_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a repository using a template.
      *
@@ -6673,12 +6467,11 @@ impl Repos {
             crate::progenitor_support::encode_path(template_owner),
             crate::progenitor_support::encode_path(template_repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List public repositories.
      *
@@ -6703,10 +6496,9 @@ impl Repos {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/repositories?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public repositories.
      *
@@ -6732,10 +6524,8 @@ impl Repos {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/repositories?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List repositories for the authenticated user.
      *
@@ -6808,10 +6598,9 @@ impl Repos {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/repos?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repositories for the authenticated user.
      *
@@ -6859,10 +6648,8 @@ impl Repos {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/repos?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a repository for the authenticated user.
      *
@@ -6884,11 +6671,11 @@ impl Repos {
         body: &crate::types::ReposCreateRequest,
     ) -> Result<crate::types::Repository> {
         let url = "/user/repos".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository invitations for the authenticated user.
      *
@@ -6917,10 +6704,9 @@ impl Repos {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/repository_invitations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository invitations for the authenticated user.
      *
@@ -6938,7 +6724,6 @@ impl Repos {
         let url = "/user/repository_invitations".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Decline a repository invitation.
      *
@@ -6957,10 +6742,9 @@ impl Repos {
             "/user/repository_invitations/{}",
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Accept a repository invitation.
      *
@@ -6979,10 +6763,9 @@ impl Repos {
             "/user/repository_invitations/{}",
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.patch(&url, None).await
     }
-
     /**
      * List repositories for a user.
      *
@@ -7034,10 +6817,9 @@ impl Repos {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repositories for a user.
      *
@@ -7072,7 +6854,6 @@ impl Repos {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
 }

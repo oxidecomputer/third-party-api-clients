@@ -659,3 +659,6 @@ impl Alt {
         matches!(self, Alt::Noop)
     }
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

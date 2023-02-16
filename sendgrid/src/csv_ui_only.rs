@@ -40,10 +40,9 @@ impl CsvUiOnly {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/messages/download?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Download CSV.
      *
@@ -61,9 +60,9 @@ impl CsvUiOnly {
     ) -> Result<crate::types::GetMessagesDownloadResponse> {
         let url = format!(
             "/messages/download/{}",
-            crate::progenitor_support::encode_path(download_uuid),
+            crate::progenitor_support::encode_path(&download_uuid.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

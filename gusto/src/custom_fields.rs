@@ -27,10 +27,9 @@ impl CustomFields {
             "/v1/employees/{}/custom_fields",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the custom fields of a company.
      *
@@ -46,7 +45,7 @@ impl CustomFields {
             "/v1/companies/{}/custom_fields",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

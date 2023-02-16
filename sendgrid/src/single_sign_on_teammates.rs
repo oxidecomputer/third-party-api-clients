@@ -26,11 +26,11 @@ impl SingleSignOnTeammates {
         body: &crate::types::SsoTeammateRequestAllOf,
     ) -> Result<crate::types::SsoTeammateResponseAllOf> {
         let url = "/sso/teammates".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Edit an SSO Teammate.
      *
@@ -49,9 +49,9 @@ impl SingleSignOnTeammates {
     ) -> Result<crate::types::SsoTeammatesPatchResponseAllOf> {
         let url = format!(
             "/sso/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

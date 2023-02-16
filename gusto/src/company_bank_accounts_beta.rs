@@ -29,10 +29,9 @@ impl CompanyBankAccountsBeta {
             "/v1/companies/{}/bank_accounts",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all company bank accounts.
      *
@@ -52,10 +51,8 @@ impl CompanyBankAccountsBeta {
             "/v1/companies/{}/bank_accounts",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a company bank account.
      *
@@ -74,12 +71,11 @@ impl CompanyBankAccountsBeta {
             "/v1/companies/{}/bank_accounts",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Verify a company bank account.
      *
@@ -100,7 +96,7 @@ impl CompanyBankAccountsBeta {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             crate::progenitor_support::encode_path(bank_account_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

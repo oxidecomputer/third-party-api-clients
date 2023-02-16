@@ -44,13 +44,12 @@ impl PhoneSite {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sites?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.sites.to_vec())
     }
-
     /**
      * List phone sites.
      *
@@ -100,7 +99,6 @@ impl PhoneSite {
         // Return our response data.
         Ok(sites)
     }
-
     /**
      * Create a phone site.
      *
@@ -121,11 +119,11 @@ impl PhoneSite {
         body: &crate::types::CreatePhoneSiteRequest,
     ) -> Result<crate::types::Site> {
         let url = "/phone/sites".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get phone site details.
      *
@@ -151,10 +149,9 @@ impl PhoneSite {
             "/phone/sites/{}",
             crate::progenitor_support::encode_path(site_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a phone site.
      *
@@ -187,10 +184,9 @@ impl PhoneSite {
             crate::progenitor_support::encode_path(site_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update phone site details.
      *
@@ -219,7 +215,7 @@ impl PhoneSite {
             "/phone/sites/{}",
             crate::progenitor_support::encode_path(site_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

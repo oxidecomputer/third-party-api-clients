@@ -25,9 +25,9 @@ impl Pins {
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/pins.add".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/pins.list` endpoint.
      *
@@ -47,10 +47,9 @@ impl Pins {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/pins.list?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/pins.list` endpoint.
      *
@@ -70,10 +69,8 @@ impl Pins {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/pins.list?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/pins.remove` endpoint.
      *
@@ -87,6 +84,7 @@ impl Pins {
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/pins.remove".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

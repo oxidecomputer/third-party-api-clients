@@ -25,9 +25,9 @@ impl Users {
      */
     pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
         let url = "/user".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the authenticated user.
      *
@@ -41,9 +41,9 @@ impl Users {
      */
     pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the authenticated user.
      *
@@ -57,9 +57,9 @@ impl Users {
      */
     pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = "/user".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update the authenticated user.
      *
@@ -74,11 +74,11 @@ impl Users {
         body: &crate::types::UsersUpdateAuthenticatedRequest,
     ) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List users blocked by the authenticated user.
      *
@@ -90,9 +90,9 @@ impl Users {
      */
     pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List users blocked by the authenticated user.
      *
@@ -108,7 +108,6 @@ impl Users {
         let url = "/user/blocks".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a user is blocked by the authenticated user.
      *
@@ -127,10 +126,9 @@ impl Users {
             "/user/blocks/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Block a user.
      *
@@ -149,10 +147,9 @@ impl Users {
             "/user/blocks/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Unblock a user.
      *
@@ -171,10 +168,9 @@ impl Users {
             "/user/blocks/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Set primary email visibility for the authenticated user.
      *
@@ -189,11 +185,11 @@ impl Users {
         body: &crate::types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/email/visibility".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List email addresses for the authenticated user.
      *
@@ -222,10 +218,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/emails?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List email addresses for the authenticated user.
      *
@@ -241,7 +236,6 @@ impl Users {
         let url = "/user/emails".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Add an email address for the authenticated user.
      *
@@ -256,11 +250,11 @@ impl Users {
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an email address for the authenticated user.
      *
@@ -275,11 +269,11 @@ impl Users {
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> Result<()> {
         let url = "/user/emails".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List followers of the authenticated user.
      *
@@ -308,10 +302,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/followers?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List followers of the authenticated user.
      *
@@ -329,7 +322,6 @@ impl Users {
         let url = "/user/followers".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List the people the authenticated user follows.
      *
@@ -358,10 +350,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/following?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List the people the authenticated user follows.
      *
@@ -379,7 +370,6 @@ impl Users {
         let url = "/user/following".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a person is followed by the authenticated user.
      *
@@ -398,10 +388,9 @@ impl Users {
             "/user/following/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Follow a user.
      *
@@ -422,10 +411,9 @@ impl Users {
             "/user/following/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Unfollow a user.
      *
@@ -444,10 +432,9 @@ impl Users {
             "/user/following/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List GPG keys for the authenticated user.
      *
@@ -476,10 +463,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/gpg_keys?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List GPG keys for the authenticated user.
      *
@@ -495,7 +481,6 @@ impl Users {
         let url = "/user/gpg_keys".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a GPG key for the authenticated user.
      *
@@ -510,11 +495,11 @@ impl Users {
         body: &crate::types::UsersCreateGpgKeyAuthenticatedRequest,
     ) -> Result<crate::types::GpgKey> {
         let url = "/user/gpg_keys".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a GPG key for the authenticated user.
      *
@@ -536,10 +521,9 @@ impl Users {
             "/user/gpg_keys/{}",
             crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a GPG key for the authenticated user.
      *
@@ -558,10 +542,9 @@ impl Users {
             "/user/gpg_keys/{}",
             crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List public SSH keys for the authenticated user.
      *
@@ -590,10 +573,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/keys?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public SSH keys for the authenticated user.
      *
@@ -611,7 +593,6 @@ impl Users {
         let url = "/user/keys".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a public SSH key for the authenticated user.
      *
@@ -626,11 +607,11 @@ impl Users {
         body: &crate::types::UsersCreatePublicSshKeyAuthenticatedRequest,
     ) -> Result<crate::types::Key> {
         let url = "/user/keys".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a public SSH key for the authenticated user.
      *
@@ -652,10 +633,9 @@ impl Users {
             "/user/keys/{}",
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a public SSH key for the authenticated user.
      *
@@ -674,10 +654,9 @@ impl Users {
             "/user/keys/{}",
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List public email addresses for the authenticated user.
      *
@@ -706,10 +685,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/public_emails?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public email addresses for the authenticated user.
      *
@@ -727,7 +705,6 @@ impl Users {
         let url = "/user/public_emails".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List users.
      *
@@ -754,10 +731,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List users.
      *
@@ -778,10 +754,8 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a user.
      *
@@ -809,10 +783,9 @@ impl Users {
             "/users/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a user.
      *
@@ -840,10 +813,9 @@ impl Users {
             "/users/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a user.
      *
@@ -871,10 +843,9 @@ impl Users {
             "/users/{}",
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List followers of a user.
      *
@@ -909,10 +880,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List followers of a user.
      *
@@ -932,10 +902,8 @@ impl Users {
             "/users/{}/followers",
             crate::progenitor_support::encode_path(username),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * List the people a user follows.
      *
@@ -970,10 +938,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List the people a user follows.
      *
@@ -993,10 +960,8 @@ impl Users {
             "/users/{}/following",
             crate::progenitor_support::encode_path(username),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Check if a user follows another user.
      *
@@ -1017,10 +982,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             crate::progenitor_support::encode_path(target_user),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List GPG keys for a user.
      *
@@ -1055,10 +1019,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List GPG keys for a user.
      *
@@ -1078,10 +1041,8 @@ impl Users {
             "/users/{}/gpg_keys",
             crate::progenitor_support::encode_path(username),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get contextual information for a user.
      *
@@ -1123,10 +1084,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public keys for a user.
      *
@@ -1161,10 +1121,9 @@ impl Users {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List public keys for a user.
      *
@@ -1184,7 +1143,6 @@ impl Users {
             "/users/{}/keys",
             crate::progenitor_support::encode_path(username),
         );
-
         self.client.get_all_pages(&url, None).await
     }
 }

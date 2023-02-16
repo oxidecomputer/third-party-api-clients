@@ -80,13 +80,12 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.messages.to_vec())
     }
-
     /**
      * List user's chat messages.
      *
@@ -135,7 +134,6 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
         let mut resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
 
         let mut messages = resp.messages;
@@ -168,7 +166,6 @@ impl ChatMessages {
         // Return our response data.
         Ok(messages)
     }
-
     /**
      * Send a chat message.
      *
@@ -191,12 +188,11 @@ impl ChatMessages {
             "/chat/users/{}/messages",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Mark message read or unread.
      *
@@ -224,12 +220,11 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(message_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * React to a chat message.
      *
@@ -257,12 +252,11 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(message_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a message.
      *
@@ -305,10 +299,9 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(message_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a message.
      *
@@ -338,12 +331,11 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(message_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a message.
      *
@@ -393,7 +385,7 @@ impl ChatMessages {
             crate::progenitor_support::encode_path(message_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

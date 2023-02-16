@@ -52,13 +52,12 @@ impl RoleAssignments {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RoleAssignments = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
      *
@@ -85,7 +84,6 @@ impl RoleAssignments {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
         let mut resp: crate::types::RoleAssignments = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
@@ -117,7 +115,6 @@ impl RoleAssignments {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
      *
@@ -136,12 +133,11 @@ impl RoleAssignments {
             "/admin/directory/v1/customer/{}/roleassignments",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
      *
@@ -162,10 +158,9 @@ impl RoleAssignments {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(role_assignment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
      *
@@ -182,7 +177,7 @@ impl RoleAssignments {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(role_assignment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

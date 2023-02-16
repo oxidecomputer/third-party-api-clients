@@ -38,10 +38,9 @@ impl Employees {
             crate::progenitor_support::encode_path(employee_id_or_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update an employee.
      *
@@ -58,12 +57,11 @@ impl Employees {
             "/v1/employees/{}",
             crate::progenitor_support::encode_path(employee_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get employees of a company.
      *
@@ -105,10 +103,9 @@ impl Employees {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get employees of a company.
      *
@@ -137,10 +134,8 @@ impl Employees {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an employee.
      *
@@ -157,12 +152,11 @@ impl Employees {
             "/v1/companies/{}/employees",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get an employee's home address.
      *
@@ -175,10 +169,9 @@ impl Employees {
             "/v1/employees/{}/home_address",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update an employee's home address.
      *
@@ -195,7 +188,7 @@ impl Employees {
             "/v1/employees/{}/home_address",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

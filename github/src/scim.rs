@@ -72,10 +72,9 @@ impl Scim {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Provision and invite a SCIM user.
      *
@@ -98,12 +97,11 @@ impl Scim {
             "/scim/v2/organizations/{}/Users",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get SCIM provisioning information for a user.
      *
@@ -128,10 +126,9 @@ impl Scim {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(scim_user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a provisioned organization membership.
      *
@@ -161,12 +158,11 @@ impl Scim {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(scim_user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a SCIM user from an organization.
      *
@@ -187,10 +183,9 @@ impl Scim {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(scim_user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an attribute for a SCIM user.
      *
@@ -231,7 +226,7 @@ impl Scim {
             crate::progenitor_support::encode_path(org),
             crate::progenitor_support::encode_path(scim_user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

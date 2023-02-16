@@ -43,10 +43,9 @@ impl Webhooks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/webhook?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get Webhooks.
      *
@@ -66,10 +65,8 @@ impl Webhooks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/webhook?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a new webhook subscription.
      *
@@ -84,11 +81,11 @@ impl Webhooks {
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
     ) -> Result<crate::types::Webhook> {
         let url = "/webhook".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete an existing webhook subscription.
      *
@@ -103,7 +100,7 @@ impl Webhooks {
             "/webhook/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

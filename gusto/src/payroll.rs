@@ -46,10 +46,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get pay periods for a company.
      *
@@ -81,10 +80,8 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get all payrolls for a company.
      *
@@ -139,10 +136,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all payrolls for a company.
      *
@@ -191,10 +187,8 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an Off-Cycle Payroll (Beta).
      *
@@ -213,12 +207,11 @@ impl Payroll {
             "/v1/companies/{}/payrolls",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a single payroll.
      *
@@ -257,10 +250,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(payroll_id_or_uuid),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a payroll by ID.
      *
@@ -279,12 +271,11 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id_or_uuid),
             crate::progenitor_support::encode_path(payroll_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update a payroll.
      *
@@ -307,12 +298,11 @@ impl Payroll {
             crate::progenitor_support::encode_path(pay_period_start_date),
             crate::progenitor_support::encode_path(pay_period_end_date),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Calculate a Payroll (Beta).
      *
@@ -330,10 +320,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(payroll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Submit Payroll (Beta).
      *
@@ -349,10 +338,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(payroll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Cancel a Payroll (Beta).
      *
@@ -373,10 +361,9 @@ impl Payroll {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(payroll_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Get approved Payroll Reversals.
      *
@@ -392,7 +379,7 @@ impl Payroll {
             "/v1/companies/{}/payroll_reversals",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

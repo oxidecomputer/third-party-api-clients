@@ -35,7 +35,7 @@ impl CustomerJourneys {
             crate::progenitor_support::encode_path(&journey_id.to_string()),
             crate::progenitor_support::encode_path(&step_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

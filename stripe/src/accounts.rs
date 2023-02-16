@@ -44,13 +44,12 @@ impl Accounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/accounts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts` endpoint.
      *
@@ -98,7 +97,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts` endpoint.
      *
@@ -107,9 +105,9 @@ impl Accounts {
      */
     pub async fn post(&self) -> Result<crate::types::Account> {
         let url = "/v1/accounts".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}` endpoint.
      *
@@ -125,10 +123,9 @@ impl Accounts {
             "/v1/accounts/{}",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}` endpoint.
      *
@@ -145,10 +142,9 @@ impl Accounts {
             "/v1/accounts/{}",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}` endpoint.
      *
@@ -167,10 +163,9 @@ impl Accounts {
             "/v1/accounts/{}",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/bank_accounts` endpoint.
      *
@@ -185,10 +180,9 @@ impl Accounts {
             "/v1/accounts/{}/bank_accounts",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -206,10 +200,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -232,10 +225,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -256,10 +248,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities` endpoint.
      *
@@ -275,13 +266,12 @@ impl Accounts {
             "/v1/accounts/{}/capabilities",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities` endpoint.
      *
@@ -297,7 +287,6 @@ impl Accounts {
             "/v1/accounts/{}/capabilities",
             crate::progenitor_support::encode_path(account),
         );
-
         let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -336,7 +325,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities/{capability}` endpoint.
      *
@@ -358,10 +346,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(capability),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/capabilities/{capability}` endpoint.
      *
@@ -382,10 +369,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(capability),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -422,13 +408,12 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -441,7 +426,6 @@ impl Accounts {
             "/v1/accounts/{}/external_accounts",
             crate::progenitor_support::encode_path(account),
         );
-
         let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -480,7 +464,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -495,10 +478,9 @@ impl Accounts {
             "/v1/accounts/{}/external_accounts",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -520,10 +502,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -546,10 +527,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -570,10 +550,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/login_links` endpoint.
      *
@@ -590,10 +569,9 @@ impl Accounts {
             "/v1/accounts/{}/login_links",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -632,13 +610,12 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -655,7 +632,6 @@ impl Accounts {
             "/v1/accounts/{}/people",
             crate::progenitor_support::encode_path(account),
         );
-
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -694,7 +670,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -709,10 +684,9 @@ impl Accounts {
             "/v1/accounts/{}/people",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -734,10 +708,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -758,10 +731,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -782,10 +754,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -824,13 +795,12 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -847,7 +817,6 @@ impl Accounts {
             "/v1/accounts/{}/persons",
             crate::progenitor_support::encode_path(account),
         );
-
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -886,7 +855,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -901,10 +869,9 @@ impl Accounts {
             "/v1/accounts/{}/persons",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -926,10 +893,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -950,10 +916,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -974,10 +939,9 @@ impl Accounts {
             crate::progenitor_support::encode_path(account),
             crate::progenitor_support::encode_path(person),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/reject` endpoint.
      *
@@ -994,7 +958,7 @@ impl Accounts {
             "/v1/accounts/{}/reject",
             crate::progenitor_support::encode_path(account),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

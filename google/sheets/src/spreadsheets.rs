@@ -22,11 +22,11 @@ impl Spreadsheets {
         body: &crate::types::Spreadsheet,
     ) -> Result<crate::types::Spreadsheet> {
         let url = "/v4/spreadsheets".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}` endpoint.
      *
@@ -57,10 +57,9 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(spreadsheet_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}` endpoint.
      *
@@ -81,10 +80,9 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(spreadsheet_id),
             crate::progenitor_support::encode_path(&metadata_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/developerMetadata:search` endpoint.
      *
@@ -103,12 +101,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/developerMetadata:search",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo` endpoint.
      *
@@ -130,12 +127,11 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(spreadsheet_id),
             crate::progenitor_support::encode_path(&sheet_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}` endpoint.
      *
@@ -180,10 +176,9 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(range),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}` endpoint.
      *
@@ -240,12 +235,11 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(range),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}:append` endpoint.
      *
@@ -310,12 +304,11 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(range),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}:clear` endpoint.
      *
@@ -337,12 +330,11 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(spreadsheet_id),
             crate::progenitor_support::encode_path(range),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchClear` endpoint.
      *
@@ -361,12 +353,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/values:batchClear",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter` endpoint.
      *
@@ -385,12 +376,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/values:batchClearByDataFilter",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/values:batchGet` endpoint.
      *
@@ -437,10 +427,9 @@ impl Spreadsheets {
             crate::progenitor_support::encode_path(spreadsheet_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter` endpoint.
      *
@@ -459,12 +448,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/values:batchGetByDataFilter",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchUpdate` endpoint.
      *
@@ -483,12 +471,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/values:batchUpdate",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter` endpoint.
      *
@@ -507,12 +494,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/values:batchUpdateByDataFilter",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}:batchUpdate` endpoint.
      *
@@ -531,12 +517,11 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/batchUpdate",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}:getByDataFilter` endpoint.
      *
@@ -555,7 +540,7 @@ impl Spreadsheets {
             "/v4/spreadsheets/{}/getByDataFilter",
             crate::progenitor_support::encode_path(spreadsheet_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

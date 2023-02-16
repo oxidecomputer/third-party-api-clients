@@ -73,10 +73,9 @@ impl Automations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/automations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add automation.
      *
@@ -89,11 +88,11 @@ impl Automations {
         body: &crate::types::AutomationWorkflow,
     ) -> Result<crate::types::Automations> {
         let url = "/automations".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get automation info.
      *
@@ -126,10 +125,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Pause automation emails.
      *
@@ -146,10 +144,9 @@ impl Automations {
             "/automations/{}/actions/pause-all-emails",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Start automation emails.
      *
@@ -166,10 +163,9 @@ impl Automations {
             "/automations/{}/actions/start-all-emails",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Archive automation.
      *
@@ -186,10 +182,9 @@ impl Automations {
             "/automations/{}/actions/archive",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List automated emails.
      *
@@ -206,10 +201,9 @@ impl Automations {
             "/automations/{}/emails",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get workflow email info.
      *
@@ -232,10 +226,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete workflow email.
      *
@@ -254,10 +247,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update workflow email.
      *
@@ -281,12 +273,11 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List automated email subscribers.
      *
@@ -309,10 +300,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add subscriber to workflow email.
      *
@@ -336,12 +326,11 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get automated email subscriber.
      *
@@ -367,10 +356,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Pause automated email.
      *
@@ -393,10 +381,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Start automated email.
      *
@@ -419,10 +406,9 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(workflow_email_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * List subscribers removed from workflow.
      *
@@ -442,10 +428,9 @@ impl Automations {
             "/automations/{}/removed-subscribers",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Remove subscriber from workflow.
      *
@@ -466,12 +451,11 @@ impl Automations {
             "/automations/{}/removed-subscribers",
             crate::progenitor_support::encode_path(workflow_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get subscriber removed from workflow.
      *
@@ -494,7 +478,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
             crate::progenitor_support::encode_path(subscriber_hash),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -55,13 +55,12 @@ impl Comments {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::CommentList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.comments.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
      *
@@ -91,7 +90,6 @@ impl Comments {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
         let mut resp: crate::types::CommentList = self.client.get(&url, None).await?;
 
         let mut comments = resp.comments;
@@ -123,7 +121,6 @@ impl Comments {
         // Return our response data.
         Ok(comments)
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/comments` endpoint.
      *
@@ -142,12 +139,11 @@ impl Comments {
             "/files/{}/comments",
             crate::progenitor_support::encode_path(file_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}` endpoint.
      *
@@ -176,10 +172,9 @@ impl Comments {
             crate::progenitor_support::encode_path(comment_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}` endpoint.
      *
@@ -196,10 +191,9 @@ impl Comments {
             crate::progenitor_support::encode_path(file_id),
             crate::progenitor_support::encode_path(comment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}` endpoint.
      *
@@ -221,7 +215,7 @@ impl Comments {
             crate::progenitor_support::encode_path(file_id),
             crate::progenitor_support::encode_path(comment_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

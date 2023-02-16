@@ -50,10 +50,9 @@ impl ReverseDns {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/ips?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve all reverse DNS records.
      *
@@ -83,10 +82,8 @@ impl ReverseDns {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/ips?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Set up reverse DNS.
      *
@@ -103,11 +100,11 @@ impl ReverseDns {
         body: &crate::types::PostWhitelabelIpsRequest,
     ) -> Result<crate::types::ReverseDns> {
         let url = "/whitelabel/ips".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Validate a reverse DNS record.
      *
@@ -131,12 +128,11 @@ impl ReverseDns {
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
         let url = format!(
             "/whitelabel/ips/{}/validate",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Retrieve a reverse DNS record.
      *
@@ -153,12 +149,11 @@ impl ReverseDns {
     pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a reverse DNS record.
      *
@@ -177,9 +172,9 @@ impl ReverseDns {
     pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

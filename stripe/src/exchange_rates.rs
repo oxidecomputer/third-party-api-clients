@@ -42,13 +42,12 @@ impl ExchangeRates {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/exchange_rates?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
      *
@@ -96,7 +95,6 @@ impl ExchangeRates {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/exchange_rates/{rate_id}` endpoint.
      *
@@ -112,7 +110,7 @@ impl ExchangeRates {
             "/v1/exchange_rates/{}",
             crate::progenitor_support::encode_path(rate_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

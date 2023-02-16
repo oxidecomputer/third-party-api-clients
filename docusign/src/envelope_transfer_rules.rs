@@ -43,13 +43,12 @@ impl EnvelopeTransferRules {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Changes the status of multiple envelope transfer rules.
      *
@@ -70,14 +69,13 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Creates an envelope transfer rule.
      *
@@ -107,14 +105,13 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Changes the status of an envelope transfer rule.
      *
@@ -139,15 +136,14 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRule> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_transfer_rule_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_transfer_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an envelope transfer rule.
      *
@@ -165,10 +161,10 @@ impl EnvelopeTransferRules {
     pub async fn delete(&self, account_id: &str, envelope_transfer_rule_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_transfer_rule_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_transfer_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

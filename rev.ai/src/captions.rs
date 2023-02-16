@@ -41,10 +41,10 @@ impl Captions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/jobs/{}/captions?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .request_with_accept_mime(reqwest::Method::GET, &url, &accept.to_string())
             .await

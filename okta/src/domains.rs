@@ -21,9 +21,9 @@ impl Domains {
      */
     pub async fn list(&self) -> Result<crate::types::DomainListResponse> {
         let url = "/api/v1/domains".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create Domain.
      *
@@ -33,11 +33,11 @@ impl Domains {
      */
     pub async fn create(&self, body: &crate::types::Domain) -> Result<crate::types::Domain> {
         let url = "/api/v1/domains".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Domain.
      *
@@ -52,12 +52,11 @@ impl Domains {
     pub async fn get(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete Domain.
      *
@@ -72,12 +71,11 @@ impl Domains {
     pub async fn delete(&self, domain_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Create Certificate.
      *
@@ -96,14 +94,13 @@ impl Domains {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/domains/{}/certificate",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Verify Domain.
      *
@@ -118,9 +115,9 @@ impl Domains {
     pub async fn verify(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}/verify",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

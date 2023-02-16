@@ -42,7 +42,7 @@ impl Rtm {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rtm.connect?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

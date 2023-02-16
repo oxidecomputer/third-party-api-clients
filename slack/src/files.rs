@@ -25,9 +25,9 @@ impl Files {
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.delete".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/files.info` endpoint.
      *
@@ -70,10 +70,9 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.info?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/files.list` endpoint.
      *
@@ -134,10 +133,9 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.list?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/files.revokePublicURL` endpoint.
      *
@@ -151,9 +149,9 @@ impl Files {
      */
     pub async fn revoke_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = "/files.revokePublicURL".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/files.sharedPublicURL` endpoint.
      *
@@ -167,9 +165,9 @@ impl Files {
      */
     pub async fn shared_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = "/files.sharedPublicURL".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/files.upload` endpoint.
      *
@@ -179,6 +177,7 @@ impl Files {
      */
     pub async fn upload(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = "/files.upload".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

@@ -47,10 +47,9 @@ impl OauthAuthorizations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/applications/grants?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List your grants.
      *
@@ -74,10 +73,8 @@ impl OauthAuthorizations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/applications/grants?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a single grant.
      *
@@ -96,10 +93,9 @@ impl OauthAuthorizations {
             "/applications/grants/{}",
             crate::progenitor_support::encode_path(&grant_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a grant.
      *
@@ -120,10 +116,9 @@ impl OauthAuthorizations {
             "/applications/grants/{}",
             crate::progenitor_support::encode_path(&grant_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List your authorizations.
      *
@@ -157,10 +152,9 @@ impl OauthAuthorizations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/authorizations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List your authorizations.
      *
@@ -182,10 +176,8 @@ impl OauthAuthorizations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/authorizations?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a new authorization.
      *
@@ -210,11 +202,11 @@ impl OauthAuthorizations {
         body: &crate::types::OauthAuthorizationsCreateAuthorizationRequest,
     ) -> Result<crate::types::Authorization> {
         let url = "/authorizations".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get-or-create an authorization for a specific app.
      *
@@ -245,12 +237,11 @@ impl OauthAuthorizations {
             "/authorizations/clients/{}",
             crate::progenitor_support::encode_path(client_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get-or-create an authorization for a specific app and fingerprint.
      *
@@ -282,12 +273,11 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(client_id),
             crate::progenitor_support::encode_path(fingerprint),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a single authorization.
      *
@@ -309,10 +299,9 @@ impl OauthAuthorizations {
             "/authorizations/{}",
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an authorization.
      *
@@ -331,10 +320,9 @@ impl OauthAuthorizations {
             "/authorizations/{}",
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an existing authorization.
      *
@@ -361,7 +349,7 @@ impl OauthAuthorizations {
             "/authorizations/{}",
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

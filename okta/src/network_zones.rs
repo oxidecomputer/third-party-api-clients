@@ -43,10 +43,9 @@ impl NetworkZones {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/zones?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List Network Zones.
      *
@@ -63,10 +62,8 @@ impl NetworkZones {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/zones?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Add Network Zone.
      *
@@ -79,11 +76,11 @@ impl NetworkZones {
         body: &crate::types::NetworkZone,
     ) -> Result<crate::types::NetworkZone> {
         let url = "/api/v1/zones".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Network Zone.
      *
@@ -98,12 +95,11 @@ impl NetworkZones {
     pub async fn get(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+            crate::progenitor_support::encode_path(&zone_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update Network Zone.
      *
@@ -122,14 +118,13 @@ impl NetworkZones {
     ) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+            crate::progenitor_support::encode_path(&zone_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete Network Zone.
      *
@@ -144,12 +139,11 @@ impl NetworkZones {
     pub async fn delete(&self, zone_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+            crate::progenitor_support::encode_path(&zone_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Activate Network Zone.
      *
@@ -164,12 +158,11 @@ impl NetworkZones {
     pub async fn activate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(zone_id),
+            crate::progenitor_support::encode_path(&zone_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Deactivate Network Zone.
      *
@@ -184,9 +177,9 @@ impl NetworkZones {
     pub async fn deactivate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
         let url = format!(
             "/api/v1/zones/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(zone_id),
+            crate::progenitor_support::encode_path(&zone_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

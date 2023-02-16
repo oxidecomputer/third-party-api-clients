@@ -21,9 +21,9 @@ impl Access {
      */
     pub async fn get_admin_oauth_scope(&self) -> Result<()> {
         let url = "/admin/oauth/access_scopes.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -33,9 +33,9 @@ impl Access {
      */
     pub async fn deprecated_202001_get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/2020-01/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -48,11 +48,11 @@ impl Access {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-01/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -70,12 +70,11 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -85,9 +84,9 @@ impl Access {
      */
     pub async fn deprecated_202004_get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/2020-04/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -100,11 +99,11 @@ impl Access {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-04/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -122,12 +121,11 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -137,9 +135,9 @@ impl Access {
      */
     pub async fn deprecated_202007_get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/2020-07/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -152,11 +150,11 @@ impl Access {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-07/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -174,12 +172,11 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -189,9 +186,9 @@ impl Access {
      */
     pub async fn get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/2020-10/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -201,11 +198,11 @@ impl Access {
      */
     pub async fn create_storefront_tokens(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -223,12 +220,11 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -238,9 +234,9 @@ impl Access {
      */
     pub async fn deprecated_202101_get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/2021-01/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -253,11 +249,11 @@ impl Access {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2021-01/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -275,12 +271,11 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of storefront access tokens that have been issued.
      *
@@ -290,9 +285,9 @@ impl Access {
      */
     pub async fn deprecated_unstable_get_storefront_token(&self) -> Result<()> {
         let url = "/admin/api/unstable/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new storefront access token.
      *
@@ -305,11 +300,11 @@ impl Access {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/storefront_access_tokens.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes an existing storefront access token.
      *
@@ -327,9 +322,9 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

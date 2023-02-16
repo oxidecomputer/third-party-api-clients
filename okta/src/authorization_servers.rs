@@ -41,10 +41,9 @@ impl AuthorizationServers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/authorizationServers?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers` endpoint.
      *
@@ -59,10 +58,8 @@ impl AuthorizationServers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/authorizationServers?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers` endpoint.
      *
@@ -73,11 +70,11 @@ impl AuthorizationServers {
         body: &crate::types::AuthorizationServer,
     ) -> Result<crate::types::AuthorizationServer> {
         let url = "/api/v1/authorizationServers".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}` endpoint.
      *
@@ -90,12 +87,11 @@ impl AuthorizationServers {
     pub async fn get(&self, auth_server_id: &str) -> Result<crate::types::AuthorizationServer> {
         let url = format!(
             "/api/v1/authorizationServers/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/authorizationServers/{authServerId}` endpoint.
      *
@@ -112,14 +108,13 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServer> {
         let url = format!(
             "/api/v1/authorizationServers/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}` endpoint.
      *
@@ -132,12 +127,11 @@ impl AuthorizationServers {
     pub async fn delete(&self, auth_server_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/claims` endpoint.
      *
@@ -153,12 +147,11 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::OAuth2Claim>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/claims` endpoint.
      *
@@ -172,12 +165,10 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::OAuth2Claim>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/claims` endpoint.
      *
@@ -194,14 +185,13 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Claim> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/claims/{claimId}` endpoint.
      *
@@ -219,13 +209,12 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Claim> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(claim_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&claim_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/authorizationServers/{authServerId}/claims/{claimId}` endpoint.
      *
@@ -244,15 +233,14 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Claim> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(claim_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&claim_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/claims/{claimId}` endpoint.
      *
@@ -266,13 +254,12 @@ impl AuthorizationServers {
     pub async fn delete_o_auth_2_claim(&self, auth_server_id: &str, claim_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/claims/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(claim_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&claim_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/clients` endpoint.
      *
@@ -288,12 +275,11 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::OAuth2Client>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/clients",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/clients` endpoint.
      *
@@ -307,12 +293,10 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::OAuth2Client>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/clients",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens` endpoint.
      *
@@ -347,14 +331,13 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/authorizationServers/{}/clients/{}/tokens?{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens` endpoint.
      *
@@ -375,14 +358,12 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/authorizationServers/{}/clients/{}/tokens?{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens` endpoint.
      *
@@ -400,13 +381,12 @@ impl AuthorizationServers {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/clients/{}/tokens",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens/{tokenId}` endpoint.
      *
@@ -433,15 +413,14 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/authorizationServers/{}/clients/{}/tokens/{}?{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(token_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&token_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens/{tokenId}` endpoint.
      *
@@ -461,14 +440,13 @@ impl AuthorizationServers {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/clients/{}/tokens/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(token_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&token_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/credentials/keys` endpoint.
      *
@@ -481,12 +459,11 @@ impl AuthorizationServers {
     pub async fn list_keys(&self, auth_server_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/credentials/keys",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/credentials/keys` endpoint.
      *
@@ -500,12 +477,10 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::JsonWebKey>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/credentials/keys",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/credentials/lifecycle/keyRotate` endpoint.
      *
@@ -522,14 +497,13 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::JsonWebKey>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/credentials/lifecycle/keyRotate",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/lifecycle/activate` endpoint.
      *
@@ -542,12 +516,11 @@ impl AuthorizationServers {
     pub async fn activate(&self, auth_server_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/lifecycle/deactivate` endpoint.
      *
@@ -560,12 +533,11 @@ impl AuthorizationServers {
     pub async fn deactivate(&self, auth_server_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies` endpoint.
      *
@@ -581,12 +553,11 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::AuthorizationServerPolicy>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies` endpoint.
      *
@@ -600,12 +571,10 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::AuthorizationServerPolicy>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies` endpoint.
      *
@@ -622,14 +591,13 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicy> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}` endpoint.
      *
@@ -647,13 +615,12 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicy> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}` endpoint.
      *
@@ -672,15 +639,14 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicy> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}` endpoint.
      *
@@ -694,13 +660,12 @@ impl AuthorizationServers {
     pub async fn delete_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/lifecycle/activate` endpoint.
      *
@@ -714,13 +679,12 @@ impl AuthorizationServers {
     pub async fn activate_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/lifecycle/deactivate` endpoint.
      *
@@ -734,13 +698,12 @@ impl AuthorizationServers {
     pub async fn deactivate_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules` endpoint.
      *
@@ -758,13 +721,12 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::AuthorizationServerPolicyRule>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules` endpoint.
      *
@@ -779,13 +741,11 @@ impl AuthorizationServers {
     ) -> Result<Vec<crate::types::AuthorizationServerPolicyRule>> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules` endpoint.
      *
@@ -804,15 +764,14 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicyRule> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -832,14 +791,13 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicyRule> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -860,16 +818,15 @@ impl AuthorizationServers {
     ) -> Result<crate::types::AuthorizationServerPolicyRule> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -889,14 +846,13 @@ impl AuthorizationServers {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}/lifecycle/activate` endpoint.
      *
@@ -916,14 +872,13 @@ impl AuthorizationServers {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate` endpoint.
      *
@@ -943,14 +898,13 @@ impl AuthorizationServers {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/scopes` endpoint.
      *
@@ -988,13 +942,12 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes?{}",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/scopes` endpoint.
      *
@@ -1022,13 +975,11 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes?{}",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/authorizationServers/{authServerId}/scopes` endpoint.
      *
@@ -1045,14 +996,13 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Scope> {
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes",
-            crate::progenitor_support::encode_path(auth_server_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}` endpoint.
      *
@@ -1070,13 +1020,12 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Scope> {
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(scope_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&scope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}` endpoint.
      *
@@ -1095,15 +1044,14 @@ impl AuthorizationServers {
     ) -> Result<crate::types::OAuth2Scope> {
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(scope_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&scope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}` endpoint.
      *
@@ -1117,10 +1065,10 @@ impl AuthorizationServers {
     pub async fn delete_o_auth_2_scope(&self, auth_server_id: &str, scope_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/authorizationServers/{}/scopes/{}",
-            crate::progenitor_support::encode_path(auth_server_id),
-            crate::progenitor_support::encode_path(scope_id),
+            crate::progenitor_support::encode_path(&auth_server_id.to_string()),
+            crate::progenitor_support::encode_path(&scope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

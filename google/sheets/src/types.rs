@@ -11639,3 +11639,6 @@ impl InsertDataOption {
         matches!(self, InsertDataOption::Noop)
     }
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

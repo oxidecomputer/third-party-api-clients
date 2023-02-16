@@ -121,7 +121,7 @@ pub enum Language {
 
 impl std::fmt::Display for Language {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Language::Ar => "ar",
             Language::Bg => "bg",
             Language::Ca => "ca",
@@ -274,7 +274,7 @@ pub enum Failure {
 
 impl std::fmt::Display for Failure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Failure::DownloadFailure => "download_failure",
             Failure::DurationExceeded => "duration_exceeded",
             Failure::DurationTooShort => "duration_too_short",
@@ -321,7 +321,7 @@ pub enum Status {
 
 impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Status::Failed => "failed",
             Status::InProgress => "in_progress",
             Status::Transcribed => "transcribed",
@@ -358,7 +358,7 @@ pub enum Type {
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Type::Async => "async",
             Type::Noop => "",
             Type::FallthroughString => "*",
@@ -725,7 +725,7 @@ pub enum TranscriptMonologuesElementsType {
 
 impl std::fmt::Display for TranscriptMonologuesElementsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             TranscriptMonologuesElementsType::Punct => "punct",
             TranscriptMonologuesElementsType::Text => "text",
             TranscriptMonologuesElementsType::Unknown => "unknown",
@@ -855,7 +855,7 @@ pub enum Accept {
 
 impl std::fmt::Display for Accept {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             Accept::ApplicationXSubrip => "application/x-subrip",
             Accept::TextVtt => "text/vtt",
             Accept::Noop => "",
@@ -893,7 +893,7 @@ pub enum AcceptTranscript {
 
 impl std::fmt::Display for AcceptTranscript {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match &*self {
             AcceptTranscript::ApplicationVndRevTranscript0Json => {
                 "application/vnd.rev.transcript.v1.0+json"
             }
@@ -915,3 +915,6 @@ impl AcceptTranscript {
         matches!(self, AcceptTranscript::Noop)
     }
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DefaultServer {}

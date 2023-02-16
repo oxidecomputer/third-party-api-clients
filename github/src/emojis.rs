@@ -23,6 +23,7 @@ impl Emojis {
      */
     pub async fn get(&self) -> Result<String> {
         let url = "/emojis".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -27,9 +27,9 @@ impl SenderVerification {
         &self,
     ) -> Result<crate::types::GetVerifiedSendersDomainsResponse> {
         let url = "/verified_senders/domains".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Completed Steps.
      *
@@ -45,9 +45,9 @@ impl SenderVerification {
         &self,
     ) -> Result<crate::types::GetVerifiedSendersStepsCompletedResponse> {
         let url = "/verified_senders/steps_completed".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get All Verified Senders.
      *
@@ -87,10 +87,9 @@ impl SenderVerification {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/verified_senders?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create Verified Sender Request.
      *
@@ -109,11 +108,11 @@ impl SenderVerification {
         body: &crate::types::VerifiedSenderRequestSchema,
     ) -> Result<crate::types::VerifiedSenderResponseSchema> {
         let url = "/verified_senders".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Verify Sender Request.
      *
@@ -126,12 +125,11 @@ impl SenderVerification {
     pub async fn get_verified_senders_verify_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/verified_senders/verify/{}",
-            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(&token.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete Verified Sender.
      *
@@ -146,12 +144,11 @@ impl SenderVerification {
     pub async fn delete_verified_senders(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/verified_senders/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Edit Verified Sender.
      *
@@ -172,14 +169,13 @@ impl SenderVerification {
     ) -> Result<crate::types::VerifiedSenderResponseSchema> {
         let url = format!(
             "/verified_senders/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Resend Verified Sender Request.
      *
@@ -194,9 +190,9 @@ impl SenderVerification {
     pub async fn post_verified_senders_resend(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/verified_senders/resend/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

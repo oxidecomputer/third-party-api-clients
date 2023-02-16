@@ -68,10 +68,9 @@ impl Ecommerce {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/ecommerce/orders?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List stores.
      *
@@ -108,10 +107,9 @@ impl Ecommerce {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/ecommerce/stores?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add store.
      *
@@ -124,11 +122,11 @@ impl Ecommerce {
         body: &crate::types::ECommerceStore,
     ) -> Result<crate::types::Stores> {
         let url = "/ecommerce/stores".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get store info.
      *
@@ -161,10 +159,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete store.
      *
@@ -181,10 +178,9 @@ impl Ecommerce {
             "/ecommerce/stores/{}",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update store.
      *
@@ -205,12 +201,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List carts.
      *
@@ -253,10 +248,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add cart.
      *
@@ -277,12 +271,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}/carts",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get cart info.
      *
@@ -318,10 +311,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(cart_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete cart.
      *
@@ -340,10 +332,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(cart_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update cart.
      *
@@ -367,12 +358,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(cart_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List cart line items.
      *
@@ -418,10 +408,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(cart_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add cart line item.
      *
@@ -445,12 +434,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(cart_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get cart line item.
      *
@@ -489,10 +477,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(line_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete cart line item.
      *
@@ -518,10 +505,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(cart_id),
             crate::progenitor_support::encode_path(line_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update cart line item.
      *
@@ -548,12 +534,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(cart_id),
             crate::progenitor_support::encode_path(line_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List customers.
      *
@@ -601,10 +586,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add customer.
      *
@@ -625,12 +609,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}/customers",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get customer info.
      *
@@ -666,10 +649,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update customer.
      *
@@ -693,12 +675,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(customer_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete customer.
      *
@@ -717,10 +698,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(customer_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update customer.
      *
@@ -744,12 +724,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(customer_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List promo rules.
      *
@@ -792,10 +771,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add promo rule.
      *
@@ -816,12 +794,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}/promo-rules",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get promo rule.
      *
@@ -857,10 +834,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(promo_rule_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete promo rule.
      *
@@ -883,10 +859,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(promo_rule_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update promo rule.
      *
@@ -910,12 +885,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(promo_rule_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List promo codes.
      *
@@ -961,10 +935,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(promo_rule_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add promo code.
      *
@@ -988,12 +961,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(promo_rule_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get promo code.
      *
@@ -1032,10 +1004,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(promo_code_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete promo code.
      *
@@ -1061,10 +1032,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(promo_rule_id),
             crate::progenitor_support::encode_path(promo_code_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update promo code.
      *
@@ -1091,12 +1061,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(promo_rule_id),
             crate::progenitor_support::encode_path(promo_code_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List orders.
      *
@@ -1159,10 +1128,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add order.
      *
@@ -1183,12 +1151,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}/orders",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get order info.
      *
@@ -1224,10 +1191,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(order_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete order.
      *
@@ -1246,10 +1212,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(order_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update order.
      *
@@ -1273,12 +1238,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(order_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List order line items.
      *
@@ -1324,10 +1288,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(order_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add order line item.
      *
@@ -1351,12 +1314,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(order_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get order line item.
      *
@@ -1395,10 +1357,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(line_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete order line item.
      *
@@ -1424,10 +1385,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(order_id),
             crate::progenitor_support::encode_path(line_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update order line item.
      *
@@ -1454,12 +1414,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(order_id),
             crate::progenitor_support::encode_path(line_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List product.
      *
@@ -1502,10 +1461,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add product.
      *
@@ -1526,12 +1484,11 @@ impl Ecommerce {
             "/ecommerce/stores/{}/products",
             crate::progenitor_support::encode_path(store_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get product info.
      *
@@ -1567,10 +1524,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete product.
      *
@@ -1589,10 +1545,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(product_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update product.
      *
@@ -1616,12 +1571,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(product_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List product variants.
      *
@@ -1667,10 +1621,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add product variant.
      *
@@ -1694,12 +1647,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(product_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get product variant info.
      *
@@ -1738,10 +1690,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(variant_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or update product variant.
      *
@@ -1768,12 +1719,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             crate::progenitor_support::encode_path(variant_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete product variant.
      *
@@ -1799,10 +1749,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             crate::progenitor_support::encode_path(variant_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update product variant.
      *
@@ -1829,12 +1778,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             crate::progenitor_support::encode_path(variant_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List product images.
      *
@@ -1880,10 +1828,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add product image.
      *
@@ -1907,12 +1854,11 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(store_id),
             crate::progenitor_support::encode_path(product_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get product image info.
      *
@@ -1951,10 +1897,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(image_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete product image.
      *
@@ -1980,10 +1925,9 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             crate::progenitor_support::encode_path(image_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update product image.
      *
@@ -2010,7 +1954,7 @@ impl Ecommerce {
             crate::progenitor_support::encode_path(product_id),
             crate::progenitor_support::encode_path(image_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

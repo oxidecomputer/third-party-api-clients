@@ -42,10 +42,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a package for an organization.
      *
@@ -77,10 +76,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Restore a package for an organization.
      *
@@ -124,10 +122,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by an organization.
      *
@@ -176,10 +173,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by an organization.
      *
@@ -213,10 +209,8 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a package version for an organization.
      *
@@ -250,10 +244,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete package version for an organization.
      *
@@ -288,10 +281,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Restore package version for an organization.
      *
@@ -330,10 +322,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get a package for the authenticated user.
      *
@@ -361,10 +352,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a package for the authenticated user.
      *
@@ -392,10 +382,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Restore a package for the authenticated user.
      *
@@ -434,10 +423,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by the authenticated user.
      *
@@ -483,10 +471,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by the authenticated user.
      *
@@ -518,10 +505,8 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a package version for the authenticated user.
      *
@@ -552,10 +537,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a package version for the authenticated user.
      *
@@ -586,10 +570,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Restore a package version for the authenticated user.
      *
@@ -623,10 +606,9 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get a package for a user.
      *
@@ -657,10 +639,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by a user.
      *
@@ -691,10 +672,9 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all package versions for a package owned by a user.
      *
@@ -721,10 +701,8 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(package_name),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a package version for a user.
      *
@@ -758,7 +736,7 @@ impl Packages {
             crate::progenitor_support::encode_path(package_name),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

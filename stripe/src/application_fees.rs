@@ -49,13 +49,12 @@ impl ApplicationFees {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/application_fees?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetApplicationFeesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/application_fees` endpoint.
      *
@@ -74,7 +73,6 @@ impl ApplicationFees {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/application_fees?{}", query_);
-
         let mut resp: crate::types::GetApplicationFeesResponse =
             self.client.get(&url, None).await?;
 
@@ -114,7 +112,6 @@ impl ApplicationFees {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/application_fees/{fee}/refunds/{id}` endpoint.
      *
@@ -132,10 +129,9 @@ impl ApplicationFees {
             crate::progenitor_support::encode_path(fee),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/application_fees/{fee}/refunds/{id}` endpoint.
      *
@@ -154,10 +150,9 @@ impl ApplicationFees {
             crate::progenitor_support::encode_path(fee),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/application_fees/{id}` endpoint.
      *
@@ -173,10 +168,9 @@ impl ApplicationFees {
             "/v1/application_fees/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/application_fees/{id}/refund` endpoint.
      *
@@ -191,10 +185,9 @@ impl ApplicationFees {
             "/v1/application_fees/{}/refund",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/application_fees/{id}/refunds` endpoint.
      *
@@ -231,13 +224,12 @@ impl ApplicationFees {
             crate::progenitor_support::encode_path(id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Refunds = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/application_fees/{id}/refunds` endpoint.
      *
@@ -250,7 +242,6 @@ impl ApplicationFees {
             "/v1/application_fees/{}/refunds",
             crate::progenitor_support::encode_path(id),
         );
-
         let mut resp: crate::types::Refunds = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -289,7 +280,6 @@ impl ApplicationFees {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/application_fees/{id}/refunds` endpoint.
      *
@@ -312,7 +302,7 @@ impl ApplicationFees {
             "/v1/application_fees/{}/refunds",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

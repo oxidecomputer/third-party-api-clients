@@ -112,13 +112,12 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ChangeList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.changes.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/changes` endpoint.
      *
@@ -197,7 +196,6 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
-
         let mut resp: crate::types::ChangeList = self.client.get(&url, None).await?;
 
         let mut changes = resp.changes;
@@ -229,7 +227,6 @@ impl Changes {
         // Return our response data.
         Ok(changes)
     }
-
     /**
      * This function performs a `GET` to the `/changes/startPageToken` endpoint.
      *
@@ -270,10 +267,9 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/startPageToken?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/changes/watch` endpoint.
      *
@@ -375,7 +371,7 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/watch?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

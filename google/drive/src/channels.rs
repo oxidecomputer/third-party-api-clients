@@ -19,6 +19,7 @@ impl Channels {
      */
     pub async fn stop(&self, body: &crate::types::Channel) -> Result<()> {
         let url = "/channels/stop".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

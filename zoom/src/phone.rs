@@ -39,12 +39,11 @@ impl Phone {
             "/accounts/{}/phone/setup",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List phone numbers.
      *
@@ -108,14 +107,13 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/numbers?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListAccountPhoneNumbersResponseData =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.phone_numbers.to_vec())
     }
-
     /**
      * List phone numbers.
      *
@@ -157,7 +155,6 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/numbers?{}", query_);
-
         let mut resp: crate::types::ListAccountPhoneNumbersResponseData =
             self.client.get(&url, None).await?;
 
@@ -191,7 +188,6 @@ impl Phone {
         // Return our response data.
         Ok(phone_numbers)
     }
-
     /**
      * Get user's profile.
      *
@@ -214,10 +210,9 @@ impl Phone {
             "/phone/users/{}",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update user's profile.
      *
@@ -240,12 +235,11 @@ impl Phone {
             "/phone/users/{}",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get account's setting.
      *
@@ -261,9 +255,9 @@ impl Phone {
      */
     pub async fn setting(&self, _account_id: &str) -> Result<crate::types::PhoneSettingResponse> {
         let url = "/phone/settings".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update BYOC settings.
      *
@@ -286,11 +280,11 @@ impl Phone {
         body: &crate::types::UpdatePhoneSettingsRequest,
     ) -> Result<()> {
         let url = "/phone/settings".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get user's settings.
      *
@@ -316,10 +310,9 @@ impl Phone {
             "/phone/users/{}/settings",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List setting templates.
      *
@@ -357,13 +350,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListSettingTemplatesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.templates.to_vec())
     }
-
     /**
      * List setting templates.
      *
@@ -389,7 +381,6 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
-
         let mut resp: crate::types::ListSettingTemplatesResponse =
             self.client.get(&url, None).await?;
 
@@ -423,7 +414,6 @@ impl Phone {
         // Return our response data.
         Ok(templates)
     }
-
     /**
      * Add a setting template.
      *
@@ -442,11 +432,11 @@ impl Phone {
         body: &crate::types::AddSettingTemplateRequest,
     ) -> Result<crate::types::AddSettingTemplateResponse> {
         let url = "/phone/setting_templates".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Batch add emergency service locations.
      *
@@ -459,11 +449,11 @@ impl Phone {
         body: &crate::types::BatchAddLocationsRequest,
     ) -> Result<Vec<crate::types::BatchAddLocationsResponse>> {
         let url = "/phone/batch_locations".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List emergency service locations.
      *
@@ -496,13 +486,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/locations?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListLocationsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.locations.to_vec())
     }
-
     /**
      * List emergency service locations.
      *
@@ -552,7 +541,6 @@ impl Phone {
         // Return our response data.
         Ok(locations)
     }
-
     /**
      * Add emergency service location.
      *
@@ -571,11 +559,11 @@ impl Phone {
         body: &crate::types::AddLocationRequest,
     ) -> Result<Vec<crate::types::Site>> {
         let url = "/phone/locations".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get emergency service location details.
      *
@@ -601,10 +589,9 @@ impl Phone {
             "/phone/locations/{}",
             crate::progenitor_support::encode_path(location_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an emergency location.
      *
@@ -627,10 +614,9 @@ impl Phone {
             "/phone/locations/{}",
             crate::progenitor_support::encode_path(location_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update emergency service location.
      *
@@ -653,12 +639,11 @@ impl Phone {
             "/phone/locations/{}",
             crate::progenitor_support::encode_path(location_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List SIP groups.
      *
@@ -691,13 +676,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_groups?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.sip_groups.to_vec())
     }
-
     /**
      * List SIP groups.
      *
@@ -747,7 +731,6 @@ impl Phone {
         // Return our response data.
         Ok(sip_groups)
     }
-
     /**
      * Get setting template details.
      *
@@ -784,10 +767,9 @@ impl Phone {
             crate::progenitor_support::encode_path(template_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a setting template.
      *
@@ -814,12 +796,11 @@ impl Phone {
             "/phone/setting_templates/{}",
             crate::progenitor_support::encode_path(template_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get user's call logs.
      *
@@ -883,13 +864,12 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PhoneUserCallLogsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
     }
-
     /**
      * Get user's call logs.
      *
@@ -936,7 +916,6 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
         let mut resp: crate::types::PhoneUserCallLogsResponse = self.client.get(&url, None).await?;
 
         let mut call_logs = resp.call_logs;
@@ -969,7 +948,6 @@ impl Phone {
         // Return our response data.
         Ok(call_logs)
     }
-
     /**
      * Get user's recordings.
      *
@@ -1018,13 +996,12 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PhoneUserRecordingsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.recordings.to_vec())
     }
-
     /**
      * Get user's recordings.
      *
@@ -1059,7 +1036,6 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
         let mut resp: crate::types::PhoneUserRecordingsResponse =
             self.client.get(&url, None).await?;
 
@@ -1093,7 +1069,6 @@ impl Phone {
         // Return our response data.
         Ok(recordings)
     }
-
     /**
      * Get user's voicemails.
      *
@@ -1147,13 +1122,12 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PhoneUserVoiceMailsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.voice_mails.to_vec())
     }
-
     /**
      * Get user's voicemails.
      *
@@ -1192,7 +1166,6 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
         let mut resp: crate::types::PhoneUserVoiceMailsResponse =
             self.client.get(&url, None).await?;
 
@@ -1226,7 +1199,6 @@ impl Phone {
         // Return our response data.
         Ok(voice_mails)
     }
-
     /**
      * Set up shared access.
      *
@@ -1259,12 +1231,11 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(setting_type),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove shared access.
      *
@@ -1302,10 +1273,9 @@ impl Phone {
             crate::progenitor_support::encode_path(setting_type),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update shared access.
      *
@@ -1338,12 +1308,11 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(setting_type),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get account's call logs.
      *
@@ -1411,13 +1380,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::AccountCallLogsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
     }
-
     /**
      * Get account's call logs.
      *
@@ -1464,7 +1432,6 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
-
         let mut resp: crate::types::AccountCallLogsResponseData =
             self.client.get(&url, None).await?;
 
@@ -1498,7 +1465,6 @@ impl Phone {
         // Return our response data.
         Ok(call_logs)
     }
-
     /**
      * Assign phone number to user.
      *
@@ -1521,12 +1487,11 @@ impl Phone {
             "/phone/users/{}/phone_numbers",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign phone number.
      *
@@ -1554,10 +1519,9 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(phone_number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Assign calling plan to a user.
      *
@@ -1580,12 +1544,11 @@ impl Phone {
             "/phone/users/{}/calling_plans",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign user's calling plan.
      *
@@ -1610,10 +1573,9 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(type_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get call recordings.
      *
@@ -1682,14 +1644,13 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/recordings?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetPhoneRecordingsResponseData =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.recordings.to_vec())
     }
-
     /**
      * Get call recordings.
      *
@@ -1736,7 +1697,6 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/recordings?{}", query_);
-
         let mut resp: crate::types::GetPhoneRecordingsResponseData =
             self.client.get(&url, None).await?;
 
@@ -1770,7 +1730,6 @@ impl Phone {
         // Return our response data.
         Ok(recordings)
     }
-
     /**
      * List BYOC SIP trunks.
      *
@@ -1802,13 +1761,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_trunk/trunks?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListByocsipTrunkResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.byoc_sip_trunk.to_vec())
     }
-
     /**
      * List BYOC SIP trunks.
      *
@@ -1857,7 +1815,6 @@ impl Phone {
         // Return our response data.
         Ok(byoc_sip_trunk)
     }
-
     /**
      * Assign SIP trunks.
      *
@@ -1883,12 +1840,11 @@ impl Phone {
             "/accounts/{}/phone/sip_trunk/trunks",
             crate::progenitor_support::encode_path(account_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update SIP trunk details.
      *
@@ -1917,12 +1873,11 @@ impl Phone {
             crate::progenitor_support::encode_path(account_id),
             crate::progenitor_support::encode_path(sip_trunk_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List external contacts.
      *
@@ -1955,13 +1910,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/external_contacts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListExternalContactsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.external_contacts.to_vec())
     }
-
     /**
      * List external contacts.
      *
@@ -2012,7 +1966,6 @@ impl Phone {
         // Return our response data.
         Ok(external_contacts)
     }
-
     /**
      * Add an external contact.
      *
@@ -2031,11 +1984,11 @@ impl Phone {
         body: &crate::types::AddExternalContactRequest,
     ) -> Result<()> {
         let url = "/phone/external_contacts".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get external contact details.
      *
@@ -2061,10 +2014,9 @@ impl Phone {
             "/phone/external_contacts/{}",
             crate::progenitor_support::encode_path(external_contact_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an external contact.
      *
@@ -2087,10 +2039,9 @@ impl Phone {
             "/phone/external_contacts/{}",
             crate::progenitor_support::encode_path(external_contact_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update external contact.
      *
@@ -2117,12 +2068,11 @@ impl Phone {
             "/phone/external_contacts/{}",
             crate::progenitor_support::encode_path(external_contact_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get phone number details.
      *
@@ -2148,10 +2098,9 @@ impl Phone {
             "/phone/numbers/{}",
             crate::progenitor_support::encode_path(number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update phone number details.
      *
@@ -2177,12 +2126,11 @@ impl Phone {
             "/phone/numbers/{}",
             crate::progenitor_support::encode_path(number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Change main company number.
      *
@@ -2203,11 +2151,11 @@ impl Phone {
         body: &crate::types::ChangeMainCompanyNumberRequest,
     ) -> Result<()> {
         let url = "/phone/company_number".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List calling plans.
      *
@@ -2223,9 +2171,9 @@ impl Phone {
      */
     pub async fn list_calling_plan(&self) -> Result<crate::types::ListCallingPlansResponseData> {
         let url = "/phone/calling_plans".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List phone users.
      *
@@ -2263,13 +2211,12 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListPhoneUsersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.users.to_vec())
     }
-
     /**
      * List phone users.
      *
@@ -2295,7 +2242,6 @@ impl Phone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
-
         let mut resp: crate::types::ListPhoneUsersResponseData =
             self.client.get(&url, None).await?;
 
@@ -2329,7 +2275,6 @@ impl Phone {
         // Return our response data.
         Ok(users)
     }
-
     /**
      * Get call log details.
      *
@@ -2355,10 +2300,9 @@ impl Phone {
             "/phone/call_logs/{}",
             crate::progenitor_support::encode_path(call_log_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a user's call log.
      *
@@ -2383,10 +2327,9 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(call_log_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Add BYOC phone numbers.
      *
@@ -2405,11 +2348,11 @@ impl Phone {
         body: &crate::types::AddByocNumberRequest,
     ) -> Result<crate::types::AddByocNumberResponse> {
         let url = "/phone/byoc_numbers".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a voicemail.
      *
@@ -2431,7 +2374,7 @@ impl Phone {
             "/phone/voice_mails/{}",
             crate::progenitor_support::encode_path(voicemail_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

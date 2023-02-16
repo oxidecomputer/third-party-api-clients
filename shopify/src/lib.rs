@@ -123,7 +123,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://{shop}.myshopify.com/admin/api/2021-07";
+pub const FALLBACK_HOST: &str = "https://{shop}.myshopify.com/admin/api/2021-07";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -159,6 +159,7 @@ const USER_CONSENT_ENDPOINT: &str = "https://{shop}.myshopify.com/admin/oauth/au
 #[derive(Clone)]
 pub struct Client {
     host: String,
+    host_override: Option<String>,
     token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
@@ -252,8 +253,11 @@ impl Client {
                     ))
                     .build();
 
+                let host = FALLBACK_HOST.to_string();
+
                 Client {
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -331,14 +335,33 @@ impl Client {
         seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid))
     }
 
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
+        self.host_override = Some(host.to_string());
+        self
+    }
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self {
+        self.host_override = None;
+        self
+    }
+
+    pub fn get_host_override(&self) -> Option<&str> {
+        self.host_override.as_ref().map(|s| s.as_str())
+    }
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
+        format!(
+            "{}{}",
+            self.get_host_override()
+                .or(host)
+                .unwrap_or(self.host.as_str()),
+            path
+        )
     }
 
     /// Create a new Client struct from environment variables. It
@@ -476,12 +499,7 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<reqwest::Request> {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -638,12 +656,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -708,12 +721,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -777,12 +785,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -867,8 +870,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::GET, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::GET, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -908,8 +910,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, &(self.host.to_string() + uri), None)
-            .await
+        self.request_with_links(http::Method::GET, uri, None).await
     }
 
     #[allow(dead_code)]
@@ -929,8 +930,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::POST, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -938,8 +938,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PATCH, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PATCH, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -947,8 +946,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PUT, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PUT, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -956,12 +954,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::DELETE,
-            &(self.host.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::DELETE, uri, message)
+            .await
     }
 
     pub fn access(&self) -> access::Access {

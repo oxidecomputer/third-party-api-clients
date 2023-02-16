@@ -27,7 +27,7 @@ impl Mandates {
             "/v1/mandates/{}",
             crate::progenitor_support::encode_path(mandate),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

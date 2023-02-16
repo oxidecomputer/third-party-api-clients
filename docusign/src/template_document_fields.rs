@@ -33,14 +33,13 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates existing custom document fields in an existing template document.
      *
@@ -63,16 +62,15 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Creates custom document fields in an existing template document.
      *
@@ -95,16 +93,15 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes custom document fields from an existing template document.
      *
@@ -127,11 +124,11 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -44,13 +44,12 @@ impl Coupons {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/coupons?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/coupons` endpoint.
      *
@@ -98,7 +97,6 @@ impl Coupons {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/coupons` endpoint.
      *
@@ -108,9 +106,9 @@ impl Coupons {
      */
     pub async fn post(&self) -> Result<crate::types::Coupon> {
         let url = "/v1/coupons".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/coupons/{coupon}` endpoint.
      *
@@ -126,10 +124,9 @@ impl Coupons {
             "/v1/coupons/{}",
             crate::progenitor_support::encode_path(coupon),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/coupons/{coupon}` endpoint.
      *
@@ -144,10 +141,9 @@ impl Coupons {
             "/v1/coupons/{}",
             crate::progenitor_support::encode_path(coupon),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/coupons/{coupon}` endpoint.
      *
@@ -162,7 +158,7 @@ impl Coupons {
             "/v1/coupons/{}",
             crate::progenitor_support::encode_path(coupon),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -42,14 +42,13 @@ impl Sigma {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/sigma/scheduled_query_runs?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetSigmaScheduledQueryRunsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sigma/scheduled_query_runs` endpoint.
      *
@@ -100,7 +99,6 @@ impl Sigma {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sigma/scheduled_query_runs/{scheduled_query_run}` endpoint.
      *
@@ -119,7 +117,7 @@ impl Sigma {
             "/v1/sigma/scheduled_query_runs/{}",
             crate::progenitor_support::encode_path(scheduled_query_run),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -200,13 +200,12 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates one or more templates.
      *
@@ -275,14 +274,13 @@ impl Templates {
     ) -> Result<crate::types::TemplateSummary> {
         let url = format!(
             "/v2.1/accounts/{}/templates",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets a specific template associated with a specified account.
      *
@@ -317,14 +315,13 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing template.
      *
@@ -345,15 +342,14 @@ impl Templates {
     ) -> Result<crate::types::TemplateUpdateSummary> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Returns document page image(s) based on input.
      *
@@ -412,15 +408,14 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Deletes a page from a document in an template.
      *
@@ -445,17 +440,16 @@ impl Templates {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets a page image from a template for display.
      *
@@ -501,16 +495,15 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/page_image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Rotates page image from a template for display.
      *
@@ -535,17 +528,16 @@ impl Templates {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/page_image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets template notification information.
      *
@@ -565,13 +557,12 @@ impl Templates {
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/notification",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates the notification  structure for an existing template.
      *
@@ -592,15 +583,14 @@ impl Templates {
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/notification",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Shares a template with a group.
      *
@@ -625,16 +615,15 @@ impl Templates {
     ) -> Result<crate::types::GroupInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(template_part),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&template_part.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a member group's sharing permissions for a template.
      *
@@ -657,11 +646,11 @@ impl Templates {
     ) -> Result<crate::types::GroupInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(template_part),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&template_part.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

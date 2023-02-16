@@ -57,13 +57,12 @@ impl Quotes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/quotes?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetQuotesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes` endpoint.
      *
@@ -89,7 +88,6 @@ impl Quotes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/quotes?{}", query_);
-
         let mut resp: crate::types::GetQuotesResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -128,7 +126,6 @@ impl Quotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/quotes` endpoint.
      *
@@ -136,9 +133,9 @@ impl Quotes {
      */
     pub async fn post(&self) -> Result<crate::types::Quote> {
         let url = "/v1/quotes".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}` endpoint.
      *
@@ -154,10 +151,9 @@ impl Quotes {
             "/v1/quotes/{}",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/quotes/{quote}` endpoint.
      *
@@ -172,10 +168,9 @@ impl Quotes {
             "/v1/quotes/{}",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/quotes/{quote}/accept` endpoint.
      *
@@ -190,10 +185,9 @@ impl Quotes {
             "/v1/quotes/{}/accept",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/quotes/{quote}/cancel` endpoint.
      *
@@ -208,10 +202,9 @@ impl Quotes {
             "/v1/quotes/{}/cancel",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/computed_upfront_line_items` endpoint.
      *
@@ -248,13 +241,12 @@ impl Quotes {
             crate::progenitor_support::encode_path(quote),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/computed_upfront_line_items` endpoint.
      *
@@ -270,7 +262,6 @@ impl Quotes {
             "/v1/quotes/{}/computed_upfront_line_items",
             crate::progenitor_support::encode_path(quote),
         );
-
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -309,7 +300,6 @@ impl Quotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/quotes/{quote}/finalize` endpoint.
      *
@@ -324,10 +314,9 @@ impl Quotes {
             "/v1/quotes/{}/finalize",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/line_items` endpoint.
      *
@@ -364,13 +353,12 @@ impl Quotes {
             crate::progenitor_support::encode_path(quote),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/line_items` endpoint.
      *
@@ -383,7 +371,6 @@ impl Quotes {
             "/v1/quotes/{}/line_items",
             crate::progenitor_support::encode_path(quote),
         );
-
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -422,7 +409,6 @@ impl Quotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/pdf` endpoint.
      *
@@ -438,7 +424,7 @@ impl Quotes {
             "/v1/quotes/{}/pdf",
             crate::progenitor_support::encode_path(quote),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

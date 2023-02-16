@@ -36,13 +36,12 @@ impl Reimbursements {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reimbursements?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List Reimbursements.
      *
@@ -62,7 +61,7 @@ impl Reimbursements {
             match self
                 .client
                 .get::<crate::types::GetReimbursementsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -89,7 +88,6 @@ impl Reimbursements {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Get details for one reimbursement.
      *
@@ -100,7 +98,7 @@ impl Reimbursements {
             "/reimbursements/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -44,10 +44,9 @@ impl Team {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.accessLogs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/team.billableInfo` endpoint.
      *
@@ -67,10 +66,9 @@ impl Team {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.billableInfo?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/team.info` endpoint.
      *
@@ -90,10 +88,9 @@ impl Team {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.info?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/team.integrationLogs` endpoint.
      *
@@ -141,7 +138,7 @@ impl Team {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.integrationLogs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -23,9 +23,9 @@ impl CustomFields {
         &self,
     ) -> Result<crate::types::GetMcFieldDefinitionsResponse> {
         let url = "/marketing/field_definitions".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create Custom Field Definition.
      *
@@ -44,11 +44,11 @@ impl CustomFields {
         body: &crate::types::PostMcFieldDefinitionsRequest,
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = "/marketing/field_definitions".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete Custom Field Definition.
      *
@@ -61,12 +61,11 @@ impl CustomFields {
     pub async fn delete_mc_field_definitions_custom(&self, custom_field_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update Custom Field Definition.
      *
@@ -83,9 +82,9 @@ impl CustomFields {
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = format!(
             "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

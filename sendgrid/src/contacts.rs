@@ -27,9 +27,9 @@ impl Contacts {
      */
     pub async fn get_mc_contats(&self) -> Result<crate::types::GetMcContatsResponse> {
         let url = "/marketing/contacts".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add or Update a Contact.
      *
@@ -52,11 +52,11 @@ impl Contacts {
         body: &crate::types::PutMcContactsRequest,
     ) -> Result<crate::types::PutMcContactsResponse> {
         let url = "/marketing/contacts".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete Contacts.
      *
@@ -94,10 +94,9 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/contacts?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get Total Contact Count.
      *
@@ -107,9 +106,9 @@ impl Contacts {
      */
     pub async fn get_mc_count(&self) -> Result<crate::types::GetMcContactsCountResponse> {
         let url = "/marketing/contacts/count".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get All Existing Exports.
      *
@@ -127,9 +126,9 @@ impl Contacts {
         &self,
     ) -> Result<crate::types::GetMarketingContactsExportsResponse> {
         let url = "/marketing/contacts/exports".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Export Contacts.
      *
@@ -152,11 +151,11 @@ impl Contacts {
         body: &crate::types::PostMcContactsExportsRequest,
     ) -> Result<crate::types::PostMcContactsExportsResponse> {
         let url = "/marketing/contacts/exports".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a Contact by ID.
      *
@@ -169,12 +168,11 @@ impl Contacts {
     pub async fn get_mc(&self, id: &str) -> Result<crate::types::ContactDetails3> {
         let url = format!(
             "/marketing/contacts/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Search Contacts.
      *
@@ -197,11 +195,11 @@ impl Contacts {
         body: &crate::types::PostMcContactsSearchRequest,
     ) -> Result<crate::types::PostMcContactsSearchResponse> {
         let url = "/marketing/contacts/search".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Import Contacts.
      *
@@ -230,11 +228,11 @@ impl Contacts {
         body: &crate::types::PutMcContactsImportsRequest,
     ) -> Result<crate::types::PutMcContactsImportsResponse> {
         let url = "/marketing/contacts/imports".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Import Contacts Status.
      *
@@ -255,12 +253,11 @@ impl Contacts {
     pub async fn get_marketing_import(&self, id: &str) -> Result<crate::types::ContactImport> {
         let url = format!(
             "/marketing/contacts/imports/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Export Contacts Status.
      *
@@ -275,12 +272,11 @@ impl Contacts {
     pub async fn get_mc_export(&self, id: &str) -> Result<crate::types::ContactExport> {
         let url = format!(
             "/marketing/contacts/exports/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get Batched Contacts by IDs.
      *
@@ -297,11 +293,11 @@ impl Contacts {
         body: &crate::types::PostMarketingContactsBatchRequest,
     ) -> Result<crate::types::PostMarketingContactsBatchResponse> {
         let url = "/marketing/contacts/batch".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Contacts by Emails.
      *
@@ -328,6 +324,7 @@ impl Contacts {
         body: &crate::types::PostMarketingContactsSearchEmailsRequest,
     ) -> Result<crate::types::PostMarketingContactsSearchEmailsResponse> {
         let url = "/marketing/contacts/search/emails".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

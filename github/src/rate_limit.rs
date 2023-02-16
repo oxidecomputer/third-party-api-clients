@@ -25,6 +25,7 @@ impl RateLimit {
      */
     pub async fn get(&self) -> Result<crate::types::RateLimitOverview> {
         let url = "/rate_limit".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -131,13 +131,12 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events` endpoint.
      *
@@ -217,7 +216,6 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
         let mut resp: crate::types::Events = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
@@ -249,7 +247,6 @@ impl Events {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events` endpoint.
      *
@@ -307,12 +304,11 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/import` endpoint.
      *
@@ -350,12 +346,11 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/quickAdd` endpoint.
      *
@@ -396,10 +391,9 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/watch` endpoint.
      *
@@ -520,12 +514,11 @@ impl Events {
             crate::progenitor_support::encode_path(calendar_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -560,10 +553,9 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -625,12 +617,11 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -669,10 +660,9 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -734,12 +724,11 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
      *
@@ -804,13 +793,12 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
      *
@@ -855,7 +843,6 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
         let mut resp: crate::types::Events = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
@@ -887,7 +874,6 @@ impl Events {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/{eventId}/move` endpoint.
      *
@@ -931,7 +917,7 @@ impl Events {
             crate::progenitor_support::encode_path(event_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

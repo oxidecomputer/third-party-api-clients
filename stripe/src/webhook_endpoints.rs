@@ -42,13 +42,12 @@ impl WebhookEndpoints {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/webhook_endpoints?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetWebhookEndpointsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
      *
@@ -97,7 +96,6 @@ impl WebhookEndpoints {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/webhook_endpoints` endpoint.
      *
@@ -105,9 +103,9 @@ impl WebhookEndpoints {
      */
     pub async fn post(&self) -> Result<crate::types::WebhookEndpoint> {
         let url = "/v1/webhook_endpoints".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
      *
@@ -126,10 +124,9 @@ impl WebhookEndpoints {
             "/v1/webhook_endpoints/{}",
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
      *
@@ -147,10 +144,9 @@ impl WebhookEndpoints {
             "/v1/webhook_endpoints/{}",
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
      *
@@ -168,7 +164,7 @@ impl WebhookEndpoints {
             "/v1/webhook_endpoints/{}",
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

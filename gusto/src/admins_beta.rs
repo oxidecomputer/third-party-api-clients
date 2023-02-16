@@ -26,10 +26,9 @@ impl AdminsBeta {
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all the admins at a company.
      *
@@ -49,10 +48,8 @@ impl AdminsBeta {
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(company_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an admin for the company.
      *
@@ -71,7 +68,7 @@ impl AdminsBeta {
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

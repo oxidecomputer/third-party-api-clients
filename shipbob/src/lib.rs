@@ -158,7 +158,7 @@ pub mod webhooks;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.shipbob.com/1.0";
+pub const FALLBACK_HOST: &str = "https://api.shipbob.com/1.0";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -182,10 +182,20 @@ mod progenitor_support {
 
 use std::env;
 
+#[derive(Debug, Default, Clone)]
+pub struct RootDefaultServer {}
+
+impl RootDefaultServer {
+    pub fn default_url(&self) -> &str {
+        "https://api.shipbob.com/1.0/"
+    }
+}
+
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     host: String,
+    host_override: Option<String>,
     token: String,
 
     client: reqwest_middleware::ClientWithMiddleware,
@@ -214,8 +224,11 @@ impl Client {
                     ))
                     .build();
 
+                let host = RootDefaultServer::default().default_url().to_string();
+
                 Client {
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     token: token.to_string(),
 
                     client,
@@ -225,14 +238,33 @@ impl Client {
         }
     }
 
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
+        self.host_override = Some(host.to_string());
+        self
+    }
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self {
+        self.host_override = None;
+        self
+    }
+
+    pub fn get_host_override(&self) -> Option<&str> {
+        self.host_override.as_ref().map(|s| s.as_str())
+    }
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
+        format!(
+            "{}{}",
+            self.get_host_override()
+                .or(host)
+                .unwrap_or(self.host.as_str()),
+            path
+        )
     }
 
     /// Create a new Client struct from environment variables. It
@@ -259,12 +291,7 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<reqwest::Response> {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
         let instance = <&Client>::clone(&self);
         let mut req = instance.client.request(method.clone(), url);
         // Set the default headers.
@@ -377,12 +404,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -447,12 +469,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -516,12 +533,7 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let u = if uri.starts_with("https://") {
-            uri.to_string()
-        } else {
-            (self.host.clone() + uri).to_string()
-        };
-        let (url, auth) = self.url_and_auth(&u).await?;
+        let (url, auth) = self.url_and_auth(&uri).await?;
 
         let instance = <&Client>::clone(&self);
 
@@ -606,8 +618,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::GET, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::GET, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -647,8 +658,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, &(self.host.to_string() + uri), None)
-            .await
+        self.request_with_links(http::Method::GET, uri, None).await
     }
 
     #[allow(dead_code)]
@@ -668,8 +678,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::POST, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -677,8 +686,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PATCH, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PATCH, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -686,8 +694,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PUT, &(self.host.to_string() + uri), message)
-            .await
+        self.request_entity(http::Method::PUT, uri, message).await
     }
 
     #[allow(dead_code)]
@@ -695,12 +702,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::DELETE,
-            &(self.host.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::DELETE, uri, message)
+            .await
     }
 
     ///  >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s).

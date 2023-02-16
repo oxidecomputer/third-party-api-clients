@@ -33,9 +33,9 @@ impl Webhooks {
         &self,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update Event Notification Settings.
      *
@@ -58,11 +58,11 @@ impl Webhooks {
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve all parse settings.
      *
@@ -78,9 +78,9 @@ impl Webhooks {
         &self,
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
         let url = "/user/webhooks/parse/settings".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves Inbound Parse Webhook statistics.
      *
@@ -127,10 +127,9 @@ impl Webhooks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/webhooks/parse/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves Inbound Parse Webhook statistics.
      *
@@ -166,10 +165,8 @@ impl Webhooks {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/webhooks/parse/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve Signed Webhook Public Key.
      *
@@ -189,9 +186,9 @@ impl Webhooks {
         &self,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Enable/Disable Signed Webhook.
      *
@@ -212,11 +209,11 @@ impl Webhooks {
         body: &crate::types::GetTrackingSettingsOpenResponse,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Test Event Notification Settings.
      *
@@ -241,6 +238,7 @@ impl Webhooks {
         body: &crate::types::PostUserWebhooksEventTestRequest,
     ) -> Result<()> {
         let url = "/user/webhooks/event/test".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

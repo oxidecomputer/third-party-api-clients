@@ -50,10 +50,9 @@ impl SegmentingContactsBeta {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/segments/2.0?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create Segment.
      *
@@ -68,11 +67,11 @@ impl SegmentingContactsBeta {
         body: &crate::types::SegmentWriteV2,
     ) -> Result<crate::types::SegmentResponse> {
         let url = "/marketing/segments/2.0".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get Segment by ID.
      *
@@ -96,13 +95,12 @@ impl SegmentingContactsBeta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/segments/2.0/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete segment.
      *
@@ -113,12 +111,11 @@ impl SegmentingContactsBeta {
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update Segment.
      *
@@ -135,9 +132,9 @@ impl SegmentingContactsBeta {
     ) -> Result<crate::types::SegmentResponse> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

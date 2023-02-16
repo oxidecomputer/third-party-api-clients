@@ -45,10 +45,9 @@ impl Licenses {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/licenses?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get all commonly used licenses.
      *
@@ -70,10 +69,8 @@ impl Licenses {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/licenses?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a license.
      *
@@ -92,10 +89,9 @@ impl Licenses {
             "/licenses/{}",
             crate::progenitor_support::encode_path(license),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get the license for a repository.
      *
@@ -122,7 +118,7 @@ impl Licenses {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

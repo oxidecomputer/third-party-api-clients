@@ -58,10 +58,9 @@ impl Reporting {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reporting/facebook-ads?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get facebook ad report.
      *
@@ -94,10 +93,9 @@ impl Reporting {
             crate::progenitor_support::encode_path(outreach_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List facebook ecommerce report.
      *
@@ -145,10 +143,9 @@ impl Reporting {
             crate::progenitor_support::encode_path(outreach_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get landing page report.
      *
@@ -181,10 +178,9 @@ impl Reporting {
             crate::progenitor_support::encode_path(outreach_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List landing pages reports.
      *
@@ -221,7 +217,7 @@ impl Reporting {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reporting/landing-pages?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

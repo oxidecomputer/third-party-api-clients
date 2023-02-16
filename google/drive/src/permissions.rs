@@ -74,13 +74,12 @@ impl Permissions {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PermissionList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.permissions.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions` endpoint.
      *
@@ -127,7 +126,6 @@ impl Permissions {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
         let mut resp: crate::types::PermissionList = self.client.get(&url, None).await?;
 
         let mut permissions = resp.permissions;
@@ -159,7 +157,6 @@ impl Permissions {
         // Return our response data.
         Ok(permissions)
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/permissions` endpoint.
      *
@@ -233,12 +230,11 @@ impl Permissions {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -286,10 +282,9 @@ impl Permissions {
             crate::progenitor_support::encode_path(permission_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -337,10 +332,9 @@ impl Permissions {
             crate::progenitor_support::encode_path(permission_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -405,7 +399,7 @@ impl Permissions {
             crate::progenitor_support::encode_path(permission_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

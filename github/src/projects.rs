@@ -51,10 +51,9 @@ impl Projects {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List organization projects.
      *
@@ -81,10 +80,8 @@ impl Projects {
             crate::progenitor_support::encode_path(org),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an organization project.
      *
@@ -107,12 +104,11 @@ impl Projects {
             "/orgs/{}/projects",
             crate::progenitor_support::encode_path(org),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a project card.
      *
@@ -131,10 +127,9 @@ impl Projects {
             "/projects/columns/cards/{}",
             crate::progenitor_support::encode_path(&card_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a project card.
      *
@@ -153,10 +148,9 @@ impl Projects {
             "/projects/columns/cards/{}",
             crate::progenitor_support::encode_path(&card_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an existing project card.
      *
@@ -179,12 +173,11 @@ impl Projects {
             "/projects/columns/cards/{}",
             crate::progenitor_support::encode_path(&card_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Move a project card.
      *
@@ -207,12 +200,11 @@ impl Projects {
             "/projects/columns/cards/{}/moves",
             crate::progenitor_support::encode_path(&card_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a project column.
      *
@@ -231,10 +223,9 @@ impl Projects {
             "/projects/columns/{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a project column.
      *
@@ -253,10 +244,9 @@ impl Projects {
             "/projects/columns/{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an existing project column.
      *
@@ -279,12 +269,11 @@ impl Projects {
             "/projects/columns/{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List project cards.
      *
@@ -324,10 +313,9 @@ impl Projects {
             crate::progenitor_support::encode_path(&column_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List project cards.
      *
@@ -354,10 +342,8 @@ impl Projects {
             crate::progenitor_support::encode_path(&column_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a project card.
      *
@@ -380,12 +366,11 @@ impl Projects {
             "/projects/columns/{}/cards",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Move a project column.
      *
@@ -408,12 +393,11 @@ impl Projects {
             "/projects/columns/{}/moves",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a project.
      *
@@ -432,10 +416,9 @@ impl Projects {
             "/projects/{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a project.
      *
@@ -454,10 +437,9 @@ impl Projects {
             "/projects/{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a project.
      *
@@ -480,12 +462,11 @@ impl Projects {
             "/projects/{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List project collaborators.
      *
@@ -528,10 +509,9 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List project collaborators.
      *
@@ -558,10 +538,8 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Add project collaborator.
      *
@@ -587,12 +565,11 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove user as a collaborator.
      *
@@ -613,10 +590,9 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get project permission for a user.
      *
@@ -641,10 +617,9 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             crate::progenitor_support::encode_path(username),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List project columns.
      *
@@ -679,10 +654,9 @@ impl Projects {
             crate::progenitor_support::encode_path(&project_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List project columns.
      *
@@ -702,10 +676,8 @@ impl Projects {
             "/projects/{}/columns",
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a project column.
      *
@@ -728,12 +700,11 @@ impl Projects {
             "/projects/{}/columns",
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List repository projects.
      *
@@ -776,10 +747,9 @@ impl Projects {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List repository projects.
      *
@@ -808,10 +778,8 @@ impl Projects {
             crate::progenitor_support::encode_path(repo),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create a repository project.
      *
@@ -837,12 +805,11 @@ impl Projects {
             crate::progenitor_support::encode_path(owner),
             crate::progenitor_support::encode_path(repo),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a user project.
      *
@@ -857,11 +824,11 @@ impl Projects {
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
         let url = "/user/projects".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List user projects.
      *
@@ -901,10 +868,9 @@ impl Projects {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List user projects.
      *
@@ -931,7 +897,6 @@ impl Projects {
             crate::progenitor_support::encode_path(username),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
 }

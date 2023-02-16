@@ -48,10 +48,9 @@ impl CampaignFolders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/campaign-folders?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add campaign folder.
      *
@@ -64,11 +63,11 @@ impl CampaignFolders {
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::CampaignFolder> {
         let url = "/campaign-folders".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get campaign folder.
      *
@@ -101,10 +100,9 @@ impl CampaignFolders {
             crate::progenitor_support::encode_path(folder_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete campaign folder.
      *
@@ -121,10 +119,9 @@ impl CampaignFolders {
             "/campaign-folders/{}",
             crate::progenitor_support::encode_path(folder_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update campaign folder.
      *
@@ -145,7 +142,7 @@ impl CampaignFolders {
             "/campaign-folders/{}",
             crate::progenitor_support::encode_path(folder_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

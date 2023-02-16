@@ -62,13 +62,12 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.mobiledevices.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
      *
@@ -103,7 +102,6 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
         let mut resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
 
         let mut mobiledevices = resp.mobiledevices;
@@ -135,7 +133,6 @@ impl Mobiledevices {
         // Return our response data.
         Ok(mobiledevices)
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
      *
@@ -164,10 +161,9 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(resource_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
      *
@@ -184,10 +180,9 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(customer_id),
             crate::progenitor_support::encode_path(resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}/action` endpoint.
      *
@@ -209,7 +204,7 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(customer_id),
             crate::progenitor_support::encode_path(resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -33,10 +33,9 @@ impl EarningType {
             "/v1/companies/{}/earning_types",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a custom earning type.
      *
@@ -55,12 +54,11 @@ impl EarningType {
             "/v1/companies/{}/earning_types",
             crate::progenitor_support::encode_path(company_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update an earning type.
      *
@@ -79,12 +77,11 @@ impl EarningType {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(earning_type_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deactivate an earning type.
      *
@@ -102,7 +99,7 @@ impl EarningType {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(earning_type_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

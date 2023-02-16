@@ -142,7 +142,12 @@
   ],
   "servers": [
     {
-      "url": "https://api.github.com"
+      "url": "https://api.github.com/{name}",
+      "variables": {
+        "name": {
+          "default": "foo"
+        }
+      }
     }
   ],
   "externalDocs": {

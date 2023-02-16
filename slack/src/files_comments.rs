@@ -25,6 +25,7 @@ impl FilesComments {
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.comments.delete".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

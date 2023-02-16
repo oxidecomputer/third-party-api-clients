@@ -49,13 +49,12 @@ impl Drives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::DriveList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.drives.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/drives` endpoint.
      *
@@ -80,7 +79,6 @@ impl Drives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
-
         let mut resp: crate::types::DriveList = self.client.get(&url, None).await?;
 
         let mut drives = resp.drives;
@@ -112,7 +110,6 @@ impl Drives {
         // Return our response data.
         Ok(drives)
     }
-
     /**
      * This function performs a `POST` to the `/drives` endpoint.
      *
@@ -133,12 +130,11 @@ impl Drives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/drives/{driveId}` endpoint.
      *
@@ -167,10 +163,9 @@ impl Drives {
             crate::progenitor_support::encode_path(drive_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/drives/{driveId}` endpoint.
      *
@@ -185,10 +180,9 @@ impl Drives {
             "/drives/{}",
             crate::progenitor_support::encode_path(drive_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/drives/{driveId}` endpoint.
      *
@@ -218,12 +212,11 @@ impl Drives {
             crate::progenitor_support::encode_path(drive_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/drives/{driveId}/hide` endpoint.
      *
@@ -238,10 +231,9 @@ impl Drives {
             "/drives/{}/hide",
             crate::progenitor_support::encode_path(drive_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/drives/{driveId}/unhide` endpoint.
      *
@@ -256,7 +248,7 @@ impl Drives {
             "/drives/{}/unhide",
             crate::progenitor_support::encode_path(drive_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

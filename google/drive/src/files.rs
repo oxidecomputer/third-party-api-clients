@@ -107,13 +107,12 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::FileList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.files.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files` endpoint.
      *
@@ -186,7 +185,6 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
-
         let mut resp: crate::types::FileList = self.client.get(&url, None).await?;
 
         let mut files = resp.files;
@@ -218,7 +216,6 @@ impl Files {
         // Return our response data.
         Ok(files)
     }
-
     /**
      * This function performs a `POST` to the `/files` endpoint.
      *
@@ -288,12 +285,11 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/generateIds` endpoint.
      *
@@ -323,10 +319,9 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files/generateIds?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/trash` endpoint.
      *
@@ -338,9 +333,9 @@ impl Files {
      */
     pub async fn empty_trash(&self) -> Result<()> {
         let url = "/files/trash".to_string();
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}` endpoint.
      *
@@ -393,10 +388,9 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}` endpoint.
      *
@@ -434,10 +428,9 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}` endpoint.
      *
@@ -515,12 +508,11 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/copy` endpoint.
      *
@@ -588,12 +580,11 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/export` endpoint.
      *
@@ -615,10 +606,9 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/watch` endpoint.
      *
@@ -672,7 +662,7 @@ impl Files {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

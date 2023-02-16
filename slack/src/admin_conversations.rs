@@ -25,9 +25,9 @@ impl AdminConversations {
      */
     pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.archive".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.convertToPrivate` endpoint.
      *
@@ -41,9 +41,9 @@ impl AdminConversations {
      */
     pub async fn convert_private(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.convertToPrivate".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.create` endpoint.
      *
@@ -57,9 +57,9 @@ impl AdminConversations {
      */
     pub async fn create(&self) -> Result<crate::types::AdminConversationsCreateSchema> {
         let url = "/admin.conversations.create".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.delete` endpoint.
      *
@@ -73,9 +73,9 @@ impl AdminConversations {
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.delete".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.disconnectShared` endpoint.
      *
@@ -89,9 +89,9 @@ impl AdminConversations {
      */
     pub async fn disconnect_shared(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.disconnectShared".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.getConversationPrefs` endpoint.
      *
@@ -114,10 +114,9 @@ impl AdminConversations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.conversations.getConversationPrefs?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.getTeams` endpoint.
      *
@@ -150,10 +149,9 @@ impl AdminConversations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.conversations.getTeams?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.invite` endpoint.
      *
@@ -167,9 +165,9 @@ impl AdminConversations {
      */
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.invite".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.rename` endpoint.
      *
@@ -183,9 +181,9 @@ impl AdminConversations {
      */
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.rename".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.search` endpoint.
      *
@@ -241,10 +239,9 @@ impl AdminConversations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.conversations.search?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.setConversationPrefs` endpoint.
      *
@@ -258,9 +255,9 @@ impl AdminConversations {
      */
     pub async fn set_conversation_prefs(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.setConversationPrefs".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.setTeams` endpoint.
      *
@@ -274,9 +271,9 @@ impl AdminConversations {
      */
     pub async fn set_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.setTeams".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.unarchive` endpoint.
      *
@@ -290,6 +287,7 @@ impl AdminConversations {
      */
     pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.unarchive".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

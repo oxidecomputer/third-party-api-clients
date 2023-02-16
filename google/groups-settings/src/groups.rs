@@ -38,10 +38,9 @@ impl Groups {
             crate::progenitor_support::encode_path(group_unique_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/{groupUniqueId}` endpoint.
      *
@@ -69,12 +68,11 @@ impl Groups {
             crate::progenitor_support::encode_path(group_unique_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `PATCH` to the `/{groupUniqueId}` endpoint.
      *
@@ -102,7 +100,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_unique_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

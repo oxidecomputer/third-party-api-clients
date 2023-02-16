@@ -52,10 +52,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve global email statistics.
      *
@@ -89,10 +88,8 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve email statistics by country and state/province.
      *
@@ -140,10 +137,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/geo/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve email statistics by country and state/province.
      *
@@ -183,10 +179,8 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/geo/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve email statistics by device type.
      *
@@ -238,10 +232,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/devices/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve email statistics by device type.
      *
@@ -286,10 +279,8 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/devices/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve email statistics by client type.
      *
@@ -326,10 +317,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/clients/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve email statistics by client type.
      *
@@ -361,10 +351,8 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/clients/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve stats by a specific client type.
      *
@@ -412,10 +400,9 @@ impl Stats {
             crate::progenitor_support::encode_path(&client_type.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve stats by a specific client type.
      *
@@ -458,10 +445,8 @@ impl Stats {
             crate::progenitor_support::encode_path(&client_type.to_string()),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve email statistics by mailbox provider.
      *
@@ -512,10 +497,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/mailbox_providers/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve email statistics by mailbox provider.
      *
@@ -558,10 +542,8 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/mailbox_providers/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Retrieve email statistics by browser.
      *
@@ -609,10 +591,9 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/browsers/stats?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve email statistics by browser.
      *
@@ -652,7 +633,6 @@ impl Stats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/browsers/stats?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
 }

@@ -19,11 +19,11 @@ impl Calendars {
      */
     pub async fn insert(&self, body: &crate::types::Calendar) -> Result<crate::types::Calendar> {
         let url = "/calendars".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}` endpoint.
      *
@@ -38,10 +38,9 @@ impl Calendars {
             "/calendars/{}",
             crate::progenitor_support::encode_path(calendar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/calendars/{calendarId}` endpoint.
      *
@@ -60,12 +59,11 @@ impl Calendars {
             "/calendars/{}",
             crate::progenitor_support::encode_path(calendar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/calendars/{calendarId}` endpoint.
      *
@@ -80,10 +78,9 @@ impl Calendars {
             "/calendars/{}",
             crate::progenitor_support::encode_path(calendar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `PATCH` to the `/calendars/{calendarId}` endpoint.
      *
@@ -102,12 +99,11 @@ impl Calendars {
             "/calendars/{}",
             crate::progenitor_support::encode_path(calendar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/clear` endpoint.
      *
@@ -122,7 +118,7 @@ impl Calendars {
             "/calendars/{}/clear",
             crate::progenitor_support::encode_path(calendar_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

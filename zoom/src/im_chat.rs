@@ -55,10 +55,9 @@ impl ImChat {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/im/chat/sessions?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get IM chat messages.
      *
@@ -112,10 +111,9 @@ impl ImChat {
             crate::progenitor_support::encode_path(session_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get user’s IM messages.
      *
@@ -168,13 +166,12 @@ impl ImChat {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.messages.to_vec())
     }
-
     /**
      * Get user’s IM messages.
      *
@@ -212,7 +209,6 @@ impl ImChat {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
         let mut resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await?;
 
         let mut messages = resp.messages;
@@ -245,7 +241,6 @@ impl ImChat {
         // Return our response data.
         Ok(messages)
     }
-
     /**
      * Send IM messages.
      *
@@ -270,7 +265,7 @@ impl ImChat {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/im/users/me/chat/messages?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -25,9 +25,9 @@ impl SenderIdentitiesApi {
      */
     pub async fn get_senders(&self) -> Result<crate::types::GetSendersResponse> {
         let url = "/senders".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a Sender Identity.
      *
@@ -46,11 +46,11 @@ impl SenderIdentitiesApi {
         body: &crate::types::PostSendersRequestAllOf,
     ) -> Result<crate::types::SenderAllOf> {
         let url = "/senders".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * View a Sender Identity.
      *
@@ -67,10 +67,9 @@ impl SenderIdentitiesApi {
             "/senders/{}",
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a Sender Identity.
      *
@@ -87,10 +86,9 @@ impl SenderIdentitiesApi {
             "/senders/{}",
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a Sender Identity.
      *
@@ -115,12 +113,11 @@ impl SenderIdentitiesApi {
             "/senders/{}",
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Resend Sender Identity Verification.
      *
@@ -140,7 +137,7 @@ impl SenderIdentitiesApi {
             "/senders/{}/resend_verification",
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

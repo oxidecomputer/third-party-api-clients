@@ -19,6 +19,7 @@ impl AccountLinks {
      */
     pub async fn post(&self) -> Result<crate::types::AccountLink> {
         let url = "/v1/account_links".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

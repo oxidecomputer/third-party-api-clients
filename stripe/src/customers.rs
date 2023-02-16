@@ -54,13 +54,12 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers` endpoint.
      *
@@ -83,7 +82,6 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers?{}", query_);
-
         let mut resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -122,7 +120,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers` endpoint.
      *
@@ -130,9 +127,9 @@ impl Customers {
      */
     pub async fn post(&self) -> Result<crate::types::Customer> {
         let url = "/v1/customers".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/search` endpoint.
      *
@@ -166,13 +163,12 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers/search?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/search` endpoint.
      *
@@ -190,7 +186,6 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers/search?{}", query_);
-
         let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -229,7 +224,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}` endpoint.
      *
@@ -248,10 +242,9 @@ impl Customers {
             "/v1/customers/{}",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}` endpoint.
      *
@@ -268,10 +261,9 @@ impl Customers {
             "/v1/customers/{}",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}` endpoint.
      *
@@ -286,10 +278,9 @@ impl Customers {
             "/v1/customers/{}",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions` endpoint.
      *
@@ -326,14 +317,13 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::CustomerBalanceTransactionList =
             self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions` endpoint.
      *
@@ -349,7 +339,6 @@ impl Customers {
             "/v1/customers/{}/balance_transactions",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::CustomerBalanceTransactionList =
             self.client.get(&url, None).await?;
 
@@ -389,7 +378,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/balance_transactions` endpoint.
      *
@@ -407,10 +395,9 @@ impl Customers {
             "/v1/customers/{}/balance_transactions",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions/{transaction}` endpoint.
      *
@@ -432,10 +419,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(transaction),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/balance_transactions/{transaction}` endpoint.
      *
@@ -456,10 +442,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(transaction),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts` endpoint.
      *
@@ -496,13 +481,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts` endpoint.
      *
@@ -518,7 +502,6 @@ impl Customers {
             "/v1/customers/{}/bank_accounts",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -557,7 +540,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/bank_accounts` endpoint.
      *
@@ -579,10 +561,9 @@ impl Customers {
             "/v1/customers/{}/bank_accounts",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
      *
@@ -604,10 +585,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
      *
@@ -628,10 +608,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
      *
@@ -652,10 +631,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/bank_accounts/{id}/verify` endpoint.
      *
@@ -676,10 +654,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/cards` endpoint.
      *
@@ -718,13 +695,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Cards = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/cards` endpoint.
      *
@@ -739,7 +715,6 @@ impl Customers {
             "/v1/customers/{}/cards",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::Cards = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -778,7 +753,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/cards` endpoint.
      *
@@ -797,10 +771,9 @@ impl Customers {
             "/v1/customers/{}/cards",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/cards/{id}` endpoint.
      *
@@ -818,10 +791,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/cards/{id}` endpoint.
      *
@@ -842,10 +814,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/cards/{id}` endpoint.
      *
@@ -866,10 +837,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/discount` endpoint.
      *
@@ -885,10 +855,9 @@ impl Customers {
             "/v1/customers/{}/discount",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/discount` endpoint.
      *
@@ -903,10 +872,9 @@ impl Customers {
             "/v1/customers/{}/discount",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/payment_methods` endpoint.
      *
@@ -948,13 +916,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/payment_methods` endpoint.
      *
@@ -977,7 +944,6 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
         let mut resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -1016,7 +982,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/sources` endpoint.
      *
@@ -1058,13 +1023,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Sources = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/sources` endpoint.
      *
@@ -1087,7 +1051,6 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
         let mut resp: crate::types::Sources = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -1126,7 +1089,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/sources` endpoint.
      *
@@ -1145,10 +1107,9 @@ impl Customers {
             "/v1/customers/{}/sources",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/sources/{id}` endpoint.
      *
@@ -1170,10 +1131,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/sources/{id}` endpoint.
      *
@@ -1194,10 +1154,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/sources/{id}` endpoint.
      *
@@ -1218,10 +1177,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/sources/{id}/verify` endpoint.
      *
@@ -1242,10 +1200,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions` endpoint.
      *
@@ -1282,13 +1239,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions` endpoint.
      *
@@ -1304,7 +1260,6 @@ impl Customers {
             "/v1/customers/{}/subscriptions",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -1343,7 +1298,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/subscriptions` endpoint.
      *
@@ -1358,10 +1312,9 @@ impl Customers {
             "/v1/customers/{}/subscriptions",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -1383,10 +1336,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -1407,10 +1359,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
      *
@@ -1435,10 +1386,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}/discount` endpoint.
      *
@@ -1460,10 +1410,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}/discount` endpoint.
      *
@@ -1484,10 +1433,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids` endpoint.
      *
@@ -1524,13 +1472,12 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::TaxIds = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids` endpoint.
      *
@@ -1543,7 +1490,6 @@ impl Customers {
             "/v1/customers/{}/tax_ids",
             crate::progenitor_support::encode_path(customer),
         );
-
         let mut resp: crate::types::TaxIds = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -1582,7 +1528,6 @@ impl Customers {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/tax_ids` endpoint.
      *
@@ -1597,10 +1542,9 @@ impl Customers {
             "/v1/customers/{}/tax_ids",
             crate::progenitor_support::encode_path(customer),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids/{id}` endpoint.
      *
@@ -1618,10 +1562,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/tax_ids/{id}` endpoint.
      *
@@ -1642,7 +1585,7 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

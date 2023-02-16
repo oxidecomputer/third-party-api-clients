@@ -21,9 +21,9 @@ impl AdminConversationsRestrictAccess {
      */
     pub async fn add_group(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.restrictAccess.addGroup".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.restrictAccess.listGroups` endpoint.
      *
@@ -51,10 +51,9 @@ impl AdminConversationsRestrictAccess {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.conversations.restrictAccess.listGroups?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.restrictAccess.removeGroup` endpoint.
      *
@@ -64,6 +63,7 @@ impl AdminConversationsRestrictAccess {
      */
     pub async fn remove_group(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.restrictAccess.removeGroup".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

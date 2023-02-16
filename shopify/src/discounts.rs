@@ -29,12 +29,11 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -53,14 +52,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -80,13 +78,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -107,15 +104,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -135,13 +131,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -162,10 +157,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -201,14 +195,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -228,13 +221,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -256,13 +248,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -280,12 +271,11 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -304,14 +294,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -331,13 +320,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -358,15 +346,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -386,13 +373,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -413,10 +399,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -452,14 +437,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -479,13 +463,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -507,13 +490,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -531,12 +513,11 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -555,14 +536,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -582,13 +562,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -609,15 +588,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -637,13 +615,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -664,10 +641,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -703,14 +679,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -730,13 +705,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -758,13 +732,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -779,12 +752,11 @@ impl Discounts {
     pub async fn get_price_rules_param_rule_code(&self, price_rule_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -803,14 +775,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -830,13 +801,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -857,15 +827,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -885,13 +854,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -912,10 +880,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -951,14 +918,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -978,13 +944,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -1006,13 +971,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1030,12 +994,11 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -1054,14 +1017,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -1081,13 +1043,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -1108,15 +1069,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -1136,13 +1096,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -1163,10 +1122,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -1202,14 +1160,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -1229,13 +1186,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -1257,13 +1213,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1281,12 +1236,11 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a discount code.
      *
@@ -1305,14 +1259,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a single discount code.
      *
@@ -1332,13 +1285,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing discount code.
      *
@@ -1359,15 +1311,14 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a discount code.
      *
@@ -1387,13 +1338,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(discount_code_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
     * Retrieves the location of a discount code.
               The discount code's location is returned in the location header, not in the DiscountCode object itself.
@@ -1414,10 +1364,9 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/discount_codes/lookup.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a discount code creation job.
               The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
@@ -1453,14 +1402,13 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a discount code creation job.
      *
@@ -1480,13 +1428,12 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Retrieves a list of discount codes for a discount code creation job.
               Discount codes that have been successfully created include a populated id field. Discount codes that
@@ -1508,10 +1455,10 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(price_rule_id),
-            crate::progenitor_support::encode_path(batch_id),
+            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(&batch_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

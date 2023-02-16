@@ -41,10 +41,9 @@ impl Policies {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/policies?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/policies` endpoint.
      *
@@ -70,10 +69,8 @@ impl Policies {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/policies?{}", query_);
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies` endpoint.
      *
@@ -94,12 +91,11 @@ impl Policies {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/policies?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/policies/{policyId}` endpoint.
      *
@@ -118,13 +114,12 @@ impl Policies {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/policies/{}?{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/policies/{policyId}` endpoint.
      *
@@ -141,14 +136,13 @@ impl Policies {
     ) -> Result<crate::types::Policy> {
         let url = format!(
             "/api/v1/policies/{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/policies/{policyId}` endpoint.
      *
@@ -161,12 +155,11 @@ impl Policies {
     pub async fn delete_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/activate` endpoint.
      *
@@ -179,12 +172,11 @@ impl Policies {
     pub async fn activate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/deactivate` endpoint.
      *
@@ -197,12 +189,11 @@ impl Policies {
     pub async fn deactivate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
      *
@@ -218,12 +209,11 @@ impl Policies {
     ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
      *
@@ -237,12 +227,10 @@ impl Policies {
     ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules` endpoint.
      *
@@ -259,14 +247,13 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -284,13 +271,12 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -309,15 +295,14 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
      *
@@ -331,13 +316,12 @@ impl Policies {
     pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate` endpoint.
      *
@@ -351,13 +335,12 @@ impl Policies {
     pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate` endpoint.
      *
@@ -371,10 +354,10 @@ impl Policies {
     pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

@@ -50,13 +50,12 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.channels.to_vec())
     }
-
     /**
      * List user's channels.
      *
@@ -77,7 +76,6 @@ impl ChatChannels {
             "/chat/users/{}/channels",
             crate::progenitor_support::encode_path(user_id),
         );
-
         let mut resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
 
         let mut channels = resp.channels;
@@ -110,7 +108,6 @@ impl ChatChannels {
         // Return our response data.
         Ok(channels)
     }
-
     /**
      * Create a channel.
      *
@@ -137,12 +134,11 @@ impl ChatChannels {
             "/chat/users/{}/channels",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a channel.
      *
@@ -167,10 +163,9 @@ impl ChatChannels {
             "/chat/channels/{}",
             crate::progenitor_support::encode_path(channel_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a channel.
      *
@@ -195,10 +190,9 @@ impl ChatChannels {
             "/chat/channels/{}",
             crate::progenitor_support::encode_path(channel_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a channel.
      *
@@ -226,12 +220,11 @@ impl ChatChannels {
             "/chat/channels/{}",
             crate::progenitor_support::encode_path(channel_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Remove a member.
      *
@@ -261,10 +254,9 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(channel_id),
             crate::progenitor_support::encode_path(member_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Join a channel.
      *
@@ -289,10 +281,9 @@ impl ChatChannels {
             "/chat/channels/{}/members/me",
             crate::progenitor_support::encode_path(channel_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Leave a channel.
      *
@@ -314,7 +305,7 @@ impl ChatChannels {
             "/chat/channels/{}/members/me",
             crate::progenitor_support::encode_path(channel_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

@@ -44,13 +44,12 @@ impl Reviews {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reviews?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reviews` endpoint.
      *
@@ -98,7 +97,6 @@ impl Reviews {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reviews/{review}` endpoint.
      *
@@ -114,10 +112,9 @@ impl Reviews {
             "/v1/reviews/{}",
             crate::progenitor_support::encode_path(review),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/reviews/{review}/approve` endpoint.
      *
@@ -132,7 +129,7 @@ impl Reviews {
             "/v1/reviews/{}/approve",
             crate::progenitor_support::encode_path(review),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

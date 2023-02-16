@@ -20,9 +20,9 @@ impl Tokens {
      */
     pub async fn post(&self) -> Result<crate::types::Token> {
         let url = "/v1/tokens".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/tokens/{token}` endpoint.
      *
@@ -38,7 +38,7 @@ impl Tokens {
             "/v1/tokens/{}",
             crate::progenitor_support::encode_path(token),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

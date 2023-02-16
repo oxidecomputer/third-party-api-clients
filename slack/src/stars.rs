@@ -25,9 +25,9 @@ impl Stars {
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/stars.add".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/stars.list` endpoint.
      *
@@ -65,10 +65,9 @@ impl Stars {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stars.list?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/stars.remove` endpoint.
      *
@@ -82,6 +81,7 @@ impl Stars {
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/stars.remove".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

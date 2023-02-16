@@ -35,10 +35,9 @@ impl Stickers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stickers/random?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Search Stickers.
      *
@@ -81,10 +80,9 @@ impl Stickers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stickers/search?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Translate phrase to Sticker.
      *
@@ -104,10 +102,9 @@ impl Stickers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stickers/translate?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Trending Stickers.
      *
@@ -140,7 +137,7 @@ impl Stickers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/stickers/trending?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

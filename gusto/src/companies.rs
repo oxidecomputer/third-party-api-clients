@@ -24,10 +24,9 @@ impl Companies {
             "/v1/companies/{}",
             crate::progenitor_support::encode_path(company_id_or_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a partner managed company (Beta).
      *
@@ -64,11 +63,11 @@ impl Companies {
         body: &crate::types::PostPartnerManagedCompaniesRequest,
     ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
         let url = "/v1/partner_managed_companies".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a company.
      *
@@ -99,6 +98,7 @@ impl Companies {
         body: &crate::types::PostProvisionRequest,
     ) -> Result<crate::types::PostProvisionResponse> {
         let url = "/v1/provision".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

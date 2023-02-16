@@ -31,13 +31,12 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add one or more attachments to a draft or in-process envelope.
      *
@@ -58,15 +57,14 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete one or more attachments from a DRAFT envelope.
      *
@@ -87,15 +85,14 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves an attachment from the envelope.
      *
@@ -117,14 +114,13 @@ impl EnvelopeAttachments {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&attachment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add an attachment to a DRAFT or IN-PROCESS envelope.
      *
@@ -147,11 +143,11 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&attachment_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

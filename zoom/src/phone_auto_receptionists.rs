@@ -39,12 +39,11 @@ impl PhoneAutoReceptionists {
             "/phone/auto_receptionists/{}",
             crate::progenitor_support::encode_path(auto_receptionist_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Assign phone numbers.
      *
@@ -73,12 +72,11 @@ impl PhoneAutoReceptionists {
             "/phone/auto_receptionists/{}/phone_numbers",
             crate::progenitor_support::encode_path(auto_receptionist_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign all phone numbers.
      *
@@ -102,10 +100,9 @@ impl PhoneAutoReceptionists {
             "/phone/auto_receptionists/{}/phone_numbers",
             crate::progenitor_support::encode_path(auto_receptionist_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Unassign a phone number.
      *
@@ -136,10 +133,9 @@ impl PhoneAutoReceptionists {
             crate::progenitor_support::encode_path(auto_receptionist_id),
             crate::progenitor_support::encode_path(phone_number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Add an auto receptionist.
      *
@@ -159,6 +155,7 @@ impl PhoneAutoReceptionists {
         body: &crate::types::AddAutoReceptionistRequest,
     ) -> Result<crate::types::AddAutoReceptionistResponse> {
         let url = "/phone/auto_receptionists".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

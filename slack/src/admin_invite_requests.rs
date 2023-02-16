@@ -28,11 +28,11 @@ impl AdminInviteRequests {
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.inviteRequests.approve".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.inviteRequests.deny` endpoint.
      *
@@ -49,11 +49,11 @@ impl AdminInviteRequests {
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.inviteRequests.deny".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.inviteRequests.list` endpoint.
      *
@@ -86,7 +86,7 @@ impl AdminInviteRequests {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.inviteRequests.list?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

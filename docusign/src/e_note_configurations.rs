@@ -26,12 +26,11 @@ impl ENoteConfigurations {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::ENoteConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates configuration information for the eNote eOriginal integration.
      *
@@ -50,14 +49,13 @@ impl ENoteConfigurations {
     ) -> Result<crate::types::ENoteConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes configuration information for the eNote eOriginal integration.
      *
@@ -72,9 +70,9 @@ impl ENoteConfigurations {
     pub async fn delete(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

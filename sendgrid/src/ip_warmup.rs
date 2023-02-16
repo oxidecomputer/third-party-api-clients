@@ -21,9 +21,9 @@ impl IpWarmup {
      */
     pub async fn get_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = "/ips/warmup".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve all IPs currently in warmup.
      *
@@ -37,7 +37,6 @@ impl IpWarmup {
         let url = "/ips/warmup".to_string();
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Start warming up an IP address.
      *
@@ -50,11 +49,11 @@ impl IpWarmup {
         body: &crate::types::PostIpsWarmupRequest,
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = "/ips/warmup".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve the warmup status for a specific IP address.
      *
@@ -70,12 +69,11 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+            crate::progenitor_support::encode_path(&ip_address.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve the warmup status for a specific IP address.
      *
@@ -93,12 +91,10 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+            crate::progenitor_support::encode_path(&ip_address.to_string()),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Stop warming up an IP address.
      *
@@ -114,9 +110,9 @@ impl IpWarmup {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+            crate::progenitor_support::encode_path(&ip_address.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

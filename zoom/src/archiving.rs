@@ -60,13 +60,12 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/archive_files?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.meetings.to_vec())
     }
-
     /**
      * List archived files.
      *
@@ -101,7 +100,6 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/archive_files?{}", query_);
-
         let mut resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
 
         let mut meetings = resp.meetings;
@@ -134,7 +132,6 @@ impl Archiving {
         // Return our response data.
         Ok(meetings)
     }
-
     /**
      * Get meeting archived files.
      *
@@ -162,7 +159,7 @@ impl Archiving {
             "/past_meetings/{}/archive_files",
             crate::progenitor_support::encode_path(meeting_uuid),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

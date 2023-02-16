@@ -24,9 +24,9 @@ impl ImGroups {
      */
     pub async fn get(&self) -> Result<crate::types::Domains> {
         let url = "/im/groups".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create an IM directory group.
      *
@@ -39,11 +39,11 @@ impl ImGroups {
      */
     pub async fn create(&self, body: &crate::types::ImGroupCreateRequest) -> Result<()> {
         let url = "/im/groups".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieve an IM directory group.
      *
@@ -64,10 +64,9 @@ impl ImGroups {
             "/im/groups/{}",
             crate::progenitor_support::encode_path(group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete an IM directory group.
      *
@@ -88,10 +87,9 @@ impl ImGroups {
             "/im/groups/{}",
             crate::progenitor_support::encode_path(group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update an IM directory group.
      *
@@ -116,12 +114,11 @@ impl ImGroups {
             "/im/groups/{}",
             crate::progenitor_support::encode_path(group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * List IM directory group members.
      *
@@ -166,10 +163,9 @@ impl ImGroups {
             crate::progenitor_support::encode_path(group_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add IM directory group members.
      *
@@ -194,12 +190,11 @@ impl ImGroups {
             "/im/groups/{}/members",
             crate::progenitor_support::encode_path(group_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete IM directory group member.
      *
@@ -222,7 +217,7 @@ impl ImGroups {
             crate::progenitor_support::encode_path(group_id),
             crate::progenitor_support::encode_path(member_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

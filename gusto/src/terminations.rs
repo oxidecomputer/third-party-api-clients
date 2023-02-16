@@ -26,10 +26,9 @@ impl Terminations {
             "/v1/employees/{}/terminations",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get terminations for an employee.
      *
@@ -49,10 +48,8 @@ impl Terminations {
             "/v1/employees/{}/terminations",
             crate::progenitor_support::encode_path(employee_id),
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Create an employee termination.
      *
@@ -71,7 +68,7 @@ impl Terminations {
             "/v1/employees/{}/terminations",
             crate::progenitor_support::encode_path(employee_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

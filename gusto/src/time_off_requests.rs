@@ -60,10 +60,9 @@ impl TimeOffRequests {
             crate::progenitor_support::encode_path(company_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get time off requests for a company.
      *
@@ -109,10 +108,8 @@ impl TimeOffRequests {
             crate::progenitor_support::encode_path(company_id),
             query_
         );
-
         self.client.get_all_pages(&url, None).await
     }
-
     /**
      * Get a specific time off request.
      *
@@ -130,7 +127,7 @@ impl TimeOffRequests {
             crate::progenitor_support::encode_path(company_id),
             crate::progenitor_support::encode_path(time_off_request_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

@@ -67,13 +67,12 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.chromeosdevices.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos` endpoint.
      *
@@ -112,7 +111,6 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
         let mut resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await?;
 
         let mut chromeosdevices = resp.chromeosdevices;
@@ -144,7 +142,6 @@ impl Chromeosdevices {
         // Return our response data.
         Ok(chromeosdevices)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/moveDevicesToOu` endpoint.
      *
@@ -171,12 +168,11 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}` endpoint.
      *
@@ -205,10 +201,9 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(device_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}` endpoint.
      *
@@ -238,12 +233,11 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(device_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}` endpoint.
      *
@@ -273,12 +267,11 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(device_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{resourceId}/action` endpoint.
      *
@@ -300,7 +293,7 @@ impl Chromeosdevices {
             crate::progenitor_support::encode_path(customer_id),
             crate::progenitor_support::encode_path(resource_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -39,13 +39,12 @@ impl Locations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/locations?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List locations.
      *
@@ -67,7 +66,7 @@ impl Locations {
             match self
                 .client
                 .get::<crate::types::GetLocationResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -94,7 +93,6 @@ impl Locations {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Create new location.
      *
@@ -111,11 +109,11 @@ impl Locations {
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
         let url = "/locations".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * GET a location.
      *
@@ -129,10 +127,9 @@ impl Locations {
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
         let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update location.
      *
@@ -146,7 +143,7 @@ impl Locations {
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
         let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

@@ -48,13 +48,12 @@ impl CommonAreaPhones {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/common_area_phones?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::ListCommonAreaPhonesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.common_area_phones.to_vec())
     }
-
     /**
      * List common area phones.
      *
@@ -109,7 +108,6 @@ impl CommonAreaPhones {
         // Return our response data.
         Ok(common_area_phones)
     }
-
     /**
      * Add a common area phone.
      *
@@ -132,11 +130,11 @@ impl CommonAreaPhones {
         body: &crate::types::AddCommonAreaPhoneRequest,
     ) -> Result<crate::types::AddCommonAreaPhoneResponse> {
         let url = "/phone/common_area_phones".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get common area phone details.
      *
@@ -165,10 +163,9 @@ impl CommonAreaPhones {
             "/phone/common_area_phones/{}",
             crate::progenitor_support::encode_path(common_area_phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a common area phone.
      *
@@ -192,10 +189,9 @@ impl CommonAreaPhones {
             "/phone/common_area_phones/{}",
             crate::progenitor_support::encode_path(common_area_phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update common area phone.
      *
@@ -222,12 +218,11 @@ impl CommonAreaPhones {
             "/phone/common_area_phones/{}",
             crate::progenitor_support::encode_path(common_area_phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Assign phone numbers to common area phone.
      *
@@ -251,12 +246,11 @@ impl CommonAreaPhones {
             "/phone/common_area_phones/{}/phone_numbers",
             crate::progenitor_support::encode_path(common_area_phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign phone numbers from a common area phone.
      *
@@ -285,10 +279,9 @@ impl CommonAreaPhones {
             crate::progenitor_support::encode_path(common_area_phone_id),
             crate::progenitor_support::encode_path(phone_number_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Assign calling plans to common area phone.
      *
@@ -312,12 +305,11 @@ impl CommonAreaPhones {
             "/phone/common_area_phones/{}/calling_plans",
             crate::progenitor_support::encode_path(common_area_phone_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Unassign calling plan from a common area phone.
      *
@@ -346,7 +338,7 @@ impl CommonAreaPhones {
             crate::progenitor_support::encode_path(common_area_phone_id),
             crate::progenitor_support::encode_path(type_),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

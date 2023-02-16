@@ -44,10 +44,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -57,11 +56,11 @@ impl Products {
      */
     pub async fn deprecated_202001_create_collects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -86,13 +85,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -110,12 +108,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -134,10 +131,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of collects. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -170,10 +166,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -183,11 +178,11 @@ impl Products {
      */
     pub async fn deprecated_202004_create_collects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -212,13 +207,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -236,12 +230,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -260,10 +253,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of collects. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -296,10 +288,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -309,11 +300,11 @@ impl Products {
      */
     pub async fn deprecated_202007_create_collects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -338,13 +329,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -362,12 +352,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -386,10 +375,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of collects. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -417,10 +405,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -430,11 +417,11 @@ impl Products {
      */
     pub async fn create_collects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -455,13 +442,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -476,12 +462,11 @@ impl Products {
     pub async fn delete_collects_param_collect(&self, collect_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -500,10 +485,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of collects. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -536,10 +520,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -549,11 +532,11 @@ impl Products {
      */
     pub async fn deprecated_202101_create_collects(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -578,13 +561,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -602,12 +584,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -626,10 +607,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of collects. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -662,10 +642,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/collects.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds a product to a custom collection.
      *
@@ -678,11 +657,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/collects.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a specific collect by its ID.
      *
@@ -707,13 +686,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/collects/{}/json?{}",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Removes a product from a collection.
      *
@@ -731,12 +709,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/collects/{}/json",
-            crate::progenitor_support::encode_path(collect_id),
+            crate::progenitor_support::encode_path(&collect_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a count of collects.
      *
@@ -755,10 +732,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/collects/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -783,13 +759,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -815,13 +790,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -846,13 +820,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -878,13 +851,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -909,13 +881,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -941,13 +912,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -972,13 +942,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -1004,13 +973,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -1035,13 +1003,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -1067,13 +1034,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single collection.
      *
@@ -1098,13 +1064,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/collections/{}/json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieve a list of products belonging to a collection. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.. The products returned are sorted by the collection's sort order.
      *
@@ -1130,13 +1095,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/collections/{}/products.json?{}",
-            crate::progenitor_support::encode_path(collection_id),
+            crate::progenitor_support::encode_path(&collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1219,10 +1183,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -1235,11 +1198,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-01/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -1299,10 +1262,9 @@ impl Products {
             "/admin/api/2020-01/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -1327,13 +1289,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -1352,14 +1313,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -1377,12 +1337,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1465,10 +1424,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -1481,11 +1439,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-04/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -1545,10 +1503,9 @@ impl Products {
             "/admin/api/2020-04/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -1573,13 +1530,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -1598,14 +1554,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -1623,12 +1578,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1711,10 +1665,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -1727,11 +1680,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-07/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -1791,10 +1744,9 @@ impl Products {
             "/admin/api/2020-07/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -1819,13 +1771,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -1844,14 +1795,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -1869,12 +1819,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1957,10 +1906,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -1970,11 +1918,11 @@ impl Products {
      */
     pub async fn create_custom_collections(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -2034,10 +1982,9 @@ impl Products {
             "/admin/api/2020-10/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -2062,13 +2009,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -2087,14 +2033,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -2112,12 +2057,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2200,10 +2144,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -2216,11 +2159,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2021-01/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -2280,10 +2223,9 @@ impl Products {
             "/admin/api/2021-01/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -2308,13 +2250,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -2333,14 +2274,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -2358,12 +2298,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of custom collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2446,10 +2385,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/custom_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a custom collection.
      *
@@ -2462,11 +2400,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/custom_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of custom collections.
      *
@@ -2526,10 +2464,9 @@ impl Products {
             "/admin/api/unstable/custom_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single custom collection.
      *
@@ -2554,13 +2491,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/custom_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing custom collection.
      *
@@ -2579,14 +2515,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a custom collection.
      *
@@ -2604,12 +2539,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/custom_collections/{}/json",
-            crate::progenitor_support::encode_path(custom_collection_id),
+            crate::progenitor_support::encode_path(&custom_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2730,10 +2664,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -2747,11 +2680,11 @@ impl Products {
     */
     pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -2823,10 +2756,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -2847,13 +2779,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -2876,14 +2807,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -2898,12 +2828,11 @@ impl Products {
     pub async fn deprecated_202001_delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3024,10 +2953,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -3041,11 +2969,11 @@ impl Products {
     */
     pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -3117,10 +3045,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -3141,13 +3068,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -3170,14 +3096,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -3192,12 +3117,11 @@ impl Products {
     pub async fn deprecated_202004_delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3318,10 +3242,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -3335,11 +3258,11 @@ impl Products {
     */
     pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -3411,10 +3334,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -3435,13 +3357,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -3464,14 +3385,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -3486,12 +3406,11 @@ impl Products {
     pub async fn deprecated_202007_delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3612,10 +3531,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -3629,11 +3547,11 @@ impl Products {
     */
     pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -3705,10 +3623,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -3729,13 +3646,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -3754,14 +3670,13 @@ impl Products {
     pub async fn update_param(&self, product_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -3776,12 +3691,11 @@ impl Products {
     pub async fn delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3902,10 +3816,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -3919,11 +3832,11 @@ impl Products {
     */
     pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -3995,10 +3908,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -4019,13 +3931,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -4048,14 +3959,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -4070,12 +3980,11 @@ impl Products {
     pub async fn deprecated_202101_delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of products. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -4196,10 +4105,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/products.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Creates a new product.
               If you want to set the product's SEO information, then you can use the following properties:
@@ -4213,11 +4121,11 @@ impl Products {
     */
     pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/unstable/products.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of products.
      *
@@ -4289,10 +4197,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/products/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single product.
      *
@@ -4317,13 +4224,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/products/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
     * Updates a product and its variants and images.
               If you want to update the product's SEO information, then you can use the following properties:
@@ -4346,14 +4252,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes a product.
      *
@@ -4368,12 +4273,11 @@ impl Products {
     pub async fn deprecated_unstable_delete_param(&self, product_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/products/{}/json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -4403,13 +4307,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -4428,14 +4331,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -4460,13 +4362,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -4493,14 +4394,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -4521,15 +4421,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -4549,13 +4448,12 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -4585,13 +4483,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -4610,14 +4507,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -4642,13 +4538,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -4675,14 +4570,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -4703,15 +4597,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -4731,13 +4624,12 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -4767,13 +4659,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -4792,14 +4683,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -4824,13 +4714,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -4857,14 +4746,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -4885,15 +4773,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -4913,13 +4800,12 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -4949,13 +4835,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -4974,14 +4859,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -5002,13 +4886,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -5035,14 +4918,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -5063,15 +4945,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -5087,13 +4968,12 @@ impl Products {
     pub async fn delete_param_images_image(&self, product_id: &str, image_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -5123,13 +5003,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -5148,14 +5027,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -5180,13 +5058,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -5213,14 +5090,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -5241,15 +5117,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -5269,13 +5144,12 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Get all product images.
      *
@@ -5305,13 +5179,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/products/{}/images.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Create a new product image.
      *
@@ -5330,14 +5203,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/products/{}/images.json",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a count of all product images.
      *
@@ -5362,13 +5234,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/products/{}/images/count.json?{}",
-            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a single product image by id.
      *
@@ -5395,14 +5266,13 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/products/{}/images/{}/json?{}",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Modify an existing product image.
      *
@@ -5423,15 +5293,14 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * .
      *
@@ -5451,13 +5320,12 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/products/{}/images/{}/json",
-            crate::progenitor_support::encode_path(product_id),
-            crate::progenitor_support::encode_path(image_id),
+            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(&image_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -5540,10 +5408,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -5556,11 +5423,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-01/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -5617,10 +5484,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/smart_collections/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -5645,13 +5511,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -5670,14 +5535,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -5695,12 +5559,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -5733,15 +5596,14 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -5824,10 +5686,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -5840,11 +5701,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-04/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -5901,10 +5762,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/smart_collections/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -5929,13 +5789,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -5954,14 +5813,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -5979,12 +5837,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -6017,15 +5874,14 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -6108,10 +5964,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -6124,11 +5979,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2020-07/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -6185,10 +6040,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/smart_collections/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -6213,13 +6067,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -6238,14 +6091,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -6263,12 +6115,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -6301,15 +6152,14 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -6392,10 +6242,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -6405,11 +6254,11 @@ impl Products {
      */
     pub async fn create_smart_collections(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -6466,10 +6315,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/smart_collections/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -6494,13 +6342,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -6519,14 +6366,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -6544,12 +6390,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -6582,15 +6427,14 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -6673,10 +6517,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -6689,11 +6532,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/2021-01/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -6750,10 +6593,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/smart_collections/count.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -6778,13 +6620,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -6803,14 +6644,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -6828,12 +6668,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -6866,15 +6705,14 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a list of smart collections. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -6957,10 +6795,9 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/smart_collections.json?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a new smart collection using the specified rules.
      *
@@ -6973,11 +6810,11 @@ impl Products {
         body: &serde_json::Value,
     ) -> Result<()> {
         let url = "/admin/api/unstable/smart_collections.json".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Retrieves a count of smart collections.
      *
@@ -7037,10 +6874,9 @@ impl Products {
             "/admin/api/unstable/smart_collections/count.json?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Retrieves a single smart collection.
      *
@@ -7065,13 +6901,12 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/smart_collections/{}/json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates an existing smart collection.
      *
@@ -7090,14 +6925,13 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a smart collection.
      *
@@ -7115,12 +6949,11 @@ impl Products {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/smart_collections/{}/json",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Updates the ordering type of products in a smart collection.
      *
@@ -7153,10 +6986,10 @@ impl Products {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/smart_collections/{}/order.json?{}",
-            crate::progenitor_support::encode_path(smart_collection_id),
+            crate::progenitor_support::encode_path(&smart_collection_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

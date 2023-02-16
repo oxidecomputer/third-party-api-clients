@@ -49,13 +49,12 @@ impl Cards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.cards.to_vec())
     }
-
     /**
      * List cards.
      *
@@ -79,7 +78,6 @@ impl Cards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
-
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
 
         let mut cards = resp.cards;
@@ -90,7 +88,7 @@ impl Cards {
             match self
                 .client
                 .get::<crate::types::GetCardsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -117,7 +115,6 @@ impl Cards {
         // Return our response data.
         Ok(cards)
     }
-
     /**
      * GET a card.
      *
@@ -131,10 +128,9 @@ impl Cards {
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
         let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update card.
      *
@@ -152,12 +148,11 @@ impl Cards {
         body: &crate::types::PatchResourcesCardsCardRequest,
     ) -> Result<()> {
         let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a physical card.
      *
@@ -174,11 +169,11 @@ impl Cards {
         body: &crate::types::PostResourcesCardPhysicalRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/deferred/physical".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Create a virtual card.
      *
@@ -195,11 +190,11 @@ impl Cards {
         body: &crate::types::PostResourcesCardVirtualRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/deferred/virtual".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete a card.
      *
@@ -216,12 +211,11 @@ impl Cards {
             "/cards/{}/deferred/termination",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Suspend a card.
      *
@@ -238,12 +232,11 @@ impl Cards {
             "/cards/{}/deferred/suspension",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes a card's suspension.
      *
@@ -260,12 +253,11 @@ impl Cards {
             "/cards/{}/deferred/unsuspension",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get status of a deferred card task.
      *
@@ -285,7 +277,7 @@ impl Cards {
             "/cards/deferred/status/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

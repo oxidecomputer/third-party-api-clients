@@ -22,9 +22,9 @@ impl NotaryJurisdiction {
      */
     pub async fn s_get(&self) -> Result<crate::types::NotaryJurisdictionList> {
         let url = "/v2.1/current_user/notary/jurisdictions".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Creates a jurisdiction object.
      *
@@ -37,11 +37,11 @@ impl NotaryJurisdiction {
         body: &crate::types::NotaryJurisdictionData,
     ) -> Result<crate::types::NotaryJurisdictionData> {
         let url = "/v2.1/current_user/notary/jurisdictions".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets a jurisdiction object for the current user. The user must be a notary.
      *
@@ -91,12 +91,11 @@ impl NotaryJurisdiction {
     ) -> Result<crate::types::NotaryJurisdictionData> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(jurisdiction_id),
+            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates the jurisdiction information about a notary.
      *
@@ -201,14 +200,13 @@ impl NotaryJurisdiction {
     ) -> Result<crate::types::NotaryJurisdictionData> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(jurisdiction_id),
+            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Deletes the specified jurisdiction.
      *
@@ -251,9 +249,9 @@ impl NotaryJurisdiction {
     pub async fn s_delete_jurisdiction(&self, jurisdiction_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(jurisdiction_id),
+            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

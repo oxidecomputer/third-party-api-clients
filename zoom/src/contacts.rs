@@ -55,13 +55,12 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/contacts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::SearchCompanyContactsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
     }
-
     /**
      * Search company contacts.
      *
@@ -92,7 +91,6 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/contacts?{}", query_);
-
         let mut resp: crate::types::SearchCompanyContactsResponse =
             self.client.get(&url, None).await?;
 
@@ -126,7 +124,6 @@ impl Contacts {
         // Return our response data.
         Ok(contacts)
     }
-
     /**
      * List user's contacts.
      *
@@ -166,13 +163,12 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat/users/me/contacts?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetUserContactsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
     }
-
     /**
      * List user's contacts.
      *
@@ -198,7 +194,6 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat/users/me/contacts?{}", query_);
-
         let mut resp: crate::types::GetUserContactsResponseData =
             self.client.get(&url, None).await?;
 
@@ -232,7 +227,6 @@ impl Contacts {
         // Return our response data.
         Ok(contacts)
     }
-
     /**
      * Get user's contact details.
      *
@@ -269,7 +263,7 @@ impl Contacts {
             crate::progenitor_support::encode_path(contact_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

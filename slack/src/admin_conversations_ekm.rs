@@ -52,7 +52,7 @@ impl AdminConversationsEkm {
             "/admin.conversations.ekm.listOriginalConnectedChannelInfo?{}",
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

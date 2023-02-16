@@ -66,10 +66,9 @@ impl Conversations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/conversations?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get conversation.
      *
@@ -102,10 +101,9 @@ impl Conversations {
             crate::progenitor_support::encode_path(conversation_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List messages.
      *
@@ -153,10 +151,9 @@ impl Conversations {
             crate::progenitor_support::encode_path(conversation_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get message.
      *
@@ -192,7 +189,7 @@ impl Conversations {
             crate::progenitor_support::encode_path(message_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

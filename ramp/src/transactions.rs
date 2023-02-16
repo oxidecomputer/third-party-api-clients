@@ -121,13 +121,12 @@ impl Transactions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/transactions?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List transactions.
      *
@@ -211,7 +210,6 @@ impl Transactions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/transactions?{}", query_);
-
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -222,7 +220,7 @@ impl Transactions {
             match self
                 .client
                 .get::<crate::types::GetTransactionResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    page.trim_start_matches(&self.client.host),
                     None,
                 )
                 .await
@@ -249,7 +247,6 @@ impl Transactions {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * GET a transaction.
      *
@@ -266,7 +263,7 @@ impl Transactions {
             "/transactions/{}",
             crate::progenitor_support::encode_path(id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
 }

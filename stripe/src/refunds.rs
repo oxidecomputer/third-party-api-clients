@@ -54,13 +54,12 @@ impl Refunds {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/refunds?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::RefundList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/refunds` endpoint.
      *
@@ -83,7 +82,6 @@ impl Refunds {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/refunds?{}", query_);
-
         let mut resp: crate::types::RefundList = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
@@ -122,7 +120,6 @@ impl Refunds {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/refunds` endpoint.
      *
@@ -130,9 +127,9 @@ impl Refunds {
      */
     pub async fn post(&self) -> Result<crate::types::Refund> {
         let url = "/v1/refunds".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/refunds/{refund}` endpoint.
      *
@@ -148,10 +145,9 @@ impl Refunds {
             "/v1/refunds/{}",
             crate::progenitor_support::encode_path(refund),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/refunds/{refund}` endpoint.
      *
@@ -168,10 +164,9 @@ impl Refunds {
             "/v1/refunds/{}",
             crate::progenitor_support::encode_path(refund),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/refunds/{refund}/cancel` endpoint.
      *
@@ -188,7 +183,7 @@ impl Refunds {
             "/v1/refunds/{}/cancel",
             crate::progenitor_support::encode_path(refund),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

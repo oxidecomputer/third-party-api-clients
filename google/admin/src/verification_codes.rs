@@ -26,10 +26,9 @@ impl VerificationCodes {
             "/admin/directory/v1/users/{}/verificationCodes",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/verificationCodes/generate` endpoint.
      *
@@ -44,10 +43,9 @@ impl VerificationCodes {
             "/admin/directory/v1/users/{}/verificationCodes/generate",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/verificationCodes/invalidate` endpoint.
      *
@@ -62,7 +60,7 @@ impl VerificationCodes {
             "/admin/directory/v1/users/{}/verificationCodes/invalidate",
             crate::progenitor_support::encode_path(user_key),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

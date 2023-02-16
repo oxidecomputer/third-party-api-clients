@@ -39,7 +39,7 @@ impl RoomsDevices {
             crate::progenitor_support::encode_path(room_id),
             crate::progenitor_support::encode_path(device_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await

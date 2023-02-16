@@ -49,14 +49,13 @@ impl UserSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Adds/updates a user signature.
      *
@@ -78,15 +77,14 @@ impl UserSignatures {
     ) -> Result<crate::types::UserSignaturesInformation> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Adds user Signature and initials images to a Signature.
      *
@@ -126,15 +124,14 @@ impl UserSignatures {
     ) -> Result<crate::types::UserSignaturesInformation> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Gets the user signature information for the specified user.
      *
@@ -163,14 +160,13 @@ impl UserSignatures {
     ) -> Result<crate::types::UserSignature> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates the user signature for a specified user.
      *
@@ -212,17 +208,16 @@ impl UserSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Removes removes signature information for the specified user.
      *
@@ -251,14 +246,13 @@ impl UserSignatures {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Retrieves the user initials image or the  user signature image for the specified user.
      *
@@ -301,16 +295,15 @@ impl UserSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
-            crate::progenitor_support::encode_path(image_type),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(&image_type.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Updates the user signature image or user initials image for the specified user.
      *
@@ -352,16 +345,15 @@ impl UserSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
-            crate::progenitor_support::encode_path(image_type),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(&image_type.to_string()),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.put(&url, None).await
     }
-
     /**
      * Deletes the user initials image or the  user signature image for the specified user.
      *
@@ -397,12 +389,12 @@ impl UserSignatures {
     ) -> Result<crate::types::UserSignature> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(signature_id),
-            crate::progenitor_support::encode_path(image_type),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(&image_type.to_string()),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }

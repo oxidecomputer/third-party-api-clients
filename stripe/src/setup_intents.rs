@@ -54,13 +54,12 @@ impl SetupIntents {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_intents?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::PaymentFlowsSetupIntentList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/setup_intents` endpoint.
      *
@@ -83,7 +82,6 @@ impl SetupIntents {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_intents?{}", query_);
-
         let mut resp: crate::types::PaymentFlowsSetupIntentList =
             self.client.get(&url, None).await?;
 
@@ -123,7 +121,6 @@ impl SetupIntents {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/setup_intents` endpoint.
      *
@@ -134,9 +131,9 @@ impl SetupIntents {
      */
     pub async fn post(&self) -> Result<crate::types::SetupIntent> {
         let url = "/v1/setup_intents".to_string();
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `GET` to the `/v1/setup_intents/{intent}` endpoint.
      *
@@ -167,10 +164,9 @@ impl SetupIntents {
             crate::progenitor_support::encode_path(intent),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/setup_intents/{intent}` endpoint.
      *
@@ -185,10 +181,9 @@ impl SetupIntents {
             "/v1/setup_intents/{}",
             crate::progenitor_support::encode_path(intent),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/setup_intents/{intent}/cancel` endpoint.
      *
@@ -205,10 +200,9 @@ impl SetupIntents {
             "/v1/setup_intents/{}/cancel",
             crate::progenitor_support::encode_path(intent),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/setup_intents/{intent}/confirm` endpoint.
      *
@@ -235,10 +229,9 @@ impl SetupIntents {
             "/v1/setup_intents/{}/confirm",
             crate::progenitor_support::encode_path(intent),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * This function performs a `POST` to the `/v1/setup_intents/{intent}/verify_microdeposits` endpoint.
      *
@@ -256,7 +249,7 @@ impl SetupIntents {
             "/v1/setup_intents/{}/verify_microdeposits",
             crate::progenitor_support::encode_path(intent),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
 }

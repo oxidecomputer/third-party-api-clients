@@ -67,13 +67,12 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
-
+        let url = self.client.url(&url, None);
         let resp: crate::types::UsersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.users.to_vec())
     }
-
     /**
      * List users.
      *
@@ -103,7 +102,6 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
-
         let mut resp: crate::types::UsersResponseData = self.client.get(&url, None).await?;
 
         let mut users = resp.users;
@@ -136,7 +134,6 @@ impl Users {
         // Return our response data.
         Ok(users)
     }
-
     /**
      * Create users.
      *
@@ -154,11 +151,11 @@ impl Users {
         body: &crate::types::UserCreateRequest,
     ) -> Result<crate::types::UserCreateResponse> {
         let url = "/users".to_string();
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get a user.
      *
@@ -201,10 +198,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete a user.
      *
@@ -261,10 +257,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Update a user.
      *
@@ -301,12 +296,11 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get user's ZAK.
      *
@@ -321,9 +315,9 @@ impl Users {
      */
     pub async fn zak(&self) -> Result<crate::types::UserZakResponse> {
         let url = "/users/me/zak".to_string();
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * List user assistants.
      *
@@ -348,10 +342,9 @@ impl Users {
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Add assistants.
      *
@@ -380,12 +373,11 @@ impl Users {
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete user assistants.
      *
@@ -410,10 +402,9 @@ impl Users {
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Delete a user assistant.
      *
@@ -440,10 +431,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(assistant_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * List user schedulers.
      *
@@ -467,10 +457,9 @@ impl Users {
             "/users/{}/schedulers",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Delete user schedulers.
      *
@@ -494,10 +483,9 @@ impl Users {
             "/users/{}/schedulers",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Delete a scheduler.
      *
@@ -523,10 +511,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             crate::progenitor_support::encode_path(scheduler_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Upload a user's profile picture.
      *
@@ -547,10 +534,9 @@ impl Users {
             "/users/{}/picture",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.post(&url, None).await
     }
-
     /**
      * Get user settings.
      *
@@ -609,10 +595,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get user settings.
      *
@@ -671,10 +656,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get user settings.
      *
@@ -733,10 +717,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get user settings.
      *
@@ -795,10 +778,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update user settings.
      *
@@ -829,12 +811,11 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update user status.
      *
@@ -859,12 +840,11 @@ impl Users {
             "/users/{}/status",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update a user's password.
      *
@@ -892,12 +872,11 @@ impl Users {
             "/users/{}/password",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Get user permissions.
      *
@@ -918,10 +897,9 @@ impl Users {
             "/users/{}/permissions",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Get a user token.
      *
@@ -958,10 +936,9 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Revoke a user's SSO token.
      *
@@ -982,10 +959,9 @@ impl Users {
             "/users/{}/token",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
-
     /**
      * Check a user email.
      *
@@ -1011,10 +987,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/email?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Update a user's email.
      *
@@ -1040,12 +1015,11 @@ impl Users {
             "/users/{}/email",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Check a user's PM room.
      *
@@ -1071,10 +1045,9 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/vanity_name?{}", query_);
-
+        let url = self.client.url(&url, None);
         self.client.get(&url, None).await
     }
-
     /**
      * Switch a user's account.
      *
@@ -1110,12 +1083,11 @@ impl Users {
             crate::progenitor_support::encode_path(account_id),
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Update a user's presence status.
      *
@@ -1147,12 +1119,11 @@ impl Users {
             "/users/{}/presence_status",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Upload virtual background files.
      *
@@ -1181,12 +1152,11 @@ impl Users {
             "/users/{}/settings/virtual_backgrounds",
             crate::progenitor_support::encode_path(user_id),
         );
-
+        let url = self.client.url(&url, None);
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
-
     /**
      * Delete virtual background files.
      *
@@ -1215,7 +1185,7 @@ impl Users {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-
+        let url = self.client.url(&url, None);
         self.client.delete(&url, None).await
     }
 }
