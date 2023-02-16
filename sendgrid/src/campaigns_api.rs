@@ -44,7 +44,7 @@ impl CampaignsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/campaigns?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a Campaign.
@@ -66,7 +66,11 @@ impl CampaignsApi {
         let url = "/campaigns".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -89,7 +93,7 @@ impl CampaignsApi {
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a Campaign.
@@ -108,7 +112,7 @@ impl CampaignsApi {
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a Campaign.
@@ -134,7 +138,11 @@ impl CampaignsApi {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -159,7 +167,7 @@ impl CampaignsApi {
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * View Scheduled Time of a Campaign.
@@ -181,7 +189,7 @@ impl CampaignsApi {
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Schedule a Campaign.
@@ -207,7 +215,11 @@ impl CampaignsApi {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -230,7 +242,7 @@ impl CampaignsApi {
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a Scheduled Campaign.
@@ -254,7 +266,11 @@ impl CampaignsApi {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -281,7 +297,11 @@ impl CampaignsApi {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -26,7 +26,9 @@ impl Usergroups {
     pub async fn create(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.create".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/usergroups.disable` endpoint.
@@ -42,7 +44,9 @@ impl Usergroups {
     pub async fn disable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.disable".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/usergroups.enable` endpoint.
@@ -58,7 +62,9 @@ impl Usergroups {
     pub async fn enable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.enable".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/usergroups.list` endpoint.
@@ -93,7 +99,7 @@ impl Usergroups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/usergroups.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/usergroups.update` endpoint.
@@ -109,6 +115,8 @@ impl Usergroups {
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.update".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

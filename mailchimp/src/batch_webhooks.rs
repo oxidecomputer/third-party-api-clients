@@ -49,7 +49,7 @@ impl BatchWebhooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/batch-webhooks?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add batch webhook.
@@ -62,7 +62,11 @@ impl BatchWebhooks {
         let url = "/batch-webhooks".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -98,7 +102,7 @@ impl BatchWebhooks {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete batch webhook.
@@ -117,7 +121,7 @@ impl BatchWebhooks {
             crate::progenitor_support::encode_path(batch_webhook_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update batch webhook.
@@ -141,7 +145,11 @@ impl BatchWebhooks {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

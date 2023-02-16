@@ -39,7 +39,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -55,7 +55,11 @@ impl Billing {
         let url = "/admin/api/2020-01/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -82,11 +86,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Caution
@@ -111,11 +115,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -145,7 +153,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -161,7 +169,11 @@ impl Billing {
         let url = "/admin/api/2020-04/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -188,11 +200,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Caution
@@ -217,11 +229,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -251,7 +267,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -267,7 +283,11 @@ impl Billing {
         let url = "/admin/api/2020-07/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -294,11 +314,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Caution
@@ -323,11 +343,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -353,7 +377,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -366,7 +390,11 @@ impl Billing {
         let url = "/admin/api/2020-10/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -393,11 +421,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Caution
@@ -422,11 +450,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -456,7 +488,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -472,7 +504,11 @@ impl Billing {
         let url = "/admin/api/2021-01/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -499,11 +535,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of application charges.
@@ -532,7 +568,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/application_charges.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application charge.
@@ -548,7 +584,11 @@ impl Billing {
         let url = "/admin/api/unstable/application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -575,11 +615,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -600,7 +640,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -616,7 +656,11 @@ impl Billing {
         let url = "/admin/api/2020-01/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -643,11 +687,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -668,7 +712,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -684,7 +728,11 @@ impl Billing {
         let url = "/admin/api/2020-04/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -711,11 +759,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -736,7 +784,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -752,7 +800,11 @@ impl Billing {
         let url = "/admin/api/2020-07/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -779,11 +831,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -804,7 +856,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -817,7 +869,11 @@ impl Billing {
         let url = "/admin/api/2020-10/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -844,11 +900,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -869,7 +925,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -885,7 +941,11 @@ impl Billing {
         let url = "/admin/api/2021-01/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -912,11 +972,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all application credits.
@@ -937,7 +997,7 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/application_credits.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an application credit.
@@ -953,7 +1013,11 @@ impl Billing {
         let url = "/admin/api/unstable/application_credits.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -980,11 +1044,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/application_credits/{}/json?{}",
-            crate::progenitor_support::encode_path(&application_credit_id.to_string()),
+            crate::progenitor_support::encode_path(application_credit_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1016,7 +1080,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1032,7 +1096,11 @@ impl Billing {
         let url = "/admin/api/2020-01/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1059,11 +1127,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1082,10 +1150,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Caution
@@ -1110,11 +1178,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1144,11 +1216,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1180,7 +1252,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1196,7 +1268,11 @@ impl Billing {
         let url = "/admin/api/2020-04/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1223,11 +1299,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1246,10 +1322,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Caution
@@ -1274,11 +1350,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1308,11 +1388,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1344,7 +1424,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1360,7 +1440,11 @@ impl Billing {
         let url = "/admin/api/2020-07/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1387,11 +1471,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1410,10 +1494,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Caution
@@ -1438,11 +1522,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1472,11 +1560,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1508,7 +1596,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1524,7 +1612,11 @@ impl Billing {
         let url = "/admin/api/2020-10/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1551,11 +1643,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1574,10 +1666,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Caution
@@ -1602,11 +1694,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/activate.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1636,11 +1732,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1672,7 +1768,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1688,7 +1784,11 @@ impl Billing {
         let url = "/admin/api/2021-01/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1715,11 +1815,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1738,10 +1838,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Updates the capped amount of an active recurring application charge.
@@ -1770,11 +1870,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of recurring application charges.
@@ -1806,7 +1906,7 @@ impl Billing {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a recurring application charge.
@@ -1822,7 +1922,11 @@ impl Billing {
         let url = "/admin/api/unstable/recurring_application_charges.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1849,11 +1953,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancels a recurring application charge.
@@ -1872,10 +1976,10 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Updates the capped amount of an active recurring application charge.
@@ -1904,11 +2008,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/customize.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -1934,11 +2038,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -1958,11 +2062,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1991,12 +2099,12 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -2022,11 +2130,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -2046,11 +2154,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2079,12 +2191,12 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -2110,11 +2222,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -2134,11 +2246,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2167,12 +2283,12 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -2198,11 +2314,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -2222,11 +2338,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2255,12 +2375,12 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -2286,11 +2406,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -2310,11 +2430,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2343,12 +2467,12 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of usage charges.
@@ -2374,11 +2498,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/usage_charges.json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a usage charge.
@@ -2398,11 +2522,15 @@ impl Billing {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/usage_charges.json",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2431,11 +2559,11 @@ impl Billing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/recurring_application_charges/{}/usage_charges/{}/json?{}",
-            crate::progenitor_support::encode_path(&recurring_application_charge_id.to_string()),
-            crate::progenitor_support::encode_path(&usage_charge_id.to_string()),
+            crate::progenitor_support::encode_path(recurring_application_charge_id),
+            crate::progenitor_support::encode_path(usage_charge_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

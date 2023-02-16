@@ -74,7 +74,7 @@ impl Automations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/automations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add automation.
@@ -90,7 +90,11 @@ impl Automations {
         let url = "/automations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -126,7 +130,7 @@ impl Automations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Pause automation emails.
@@ -145,7 +149,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Start automation emails.
@@ -164,7 +168,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Archive automation.
@@ -183,7 +187,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * List automated emails.
@@ -202,7 +206,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get workflow email info.
@@ -227,7 +231,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete workflow email.
@@ -248,7 +252,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update workflow email.
@@ -275,7 +279,11 @@ impl Automations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -301,7 +309,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add subscriber to workflow email.
@@ -328,7 +336,11 @@ impl Automations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -357,7 +369,7 @@ impl Automations {
             crate::progenitor_support::encode_path(subscriber_hash),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Pause automated email.
@@ -382,7 +394,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Start automated email.
@@ -407,7 +419,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_email_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * List subscribers removed from workflow.
@@ -429,7 +441,7 @@ impl Automations {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Remove subscriber from workflow.
@@ -453,7 +465,11 @@ impl Automations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -479,6 +495,6 @@ impl Automations {
             crate::progenitor_support::encode_path(subscriber_hash),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

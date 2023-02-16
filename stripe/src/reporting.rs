@@ -45,8 +45,10 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reporting/report_runs?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetReportingReportRunsResponse =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::GetReportingReportRunsResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -64,7 +66,7 @@ impl Reporting {
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let url = "/v1/reporting/report_runs".to_string();
         let mut resp: crate::types::GetReportingReportRunsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -85,12 +87,12 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -110,7 +112,9 @@ impl Reporting {
     pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
         let url = "/v1/reporting/report_runs".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/reporting/report_runs/{report_run}` endpoint.
@@ -131,7 +135,9 @@ impl Reporting {
             crate::progenitor_support::encode_path(report_run),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
@@ -145,8 +151,10 @@ impl Reporting {
     pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
         let url = self.client.url(&url, None);
-        let resp: crate::types::FinancialReportingFinanceReportTypeList =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::FinancialReportingFinanceReportTypeList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -161,7 +169,7 @@ impl Reporting {
     pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
         let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -182,12 +190,12 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -218,6 +226,8 @@ impl Reporting {
             crate::progenitor_support::encode_path(report_type),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

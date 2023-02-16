@@ -26,10 +26,10 @@ impl Suppressions {
     pub async fn get_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all suppressions for a suppression group.
@@ -43,7 +43,7 @@ impl Suppressions {
     pub async fn get_all_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -67,11 +67,15 @@ impl Suppressions {
     ) -> Result<crate::types::PostAsmGroupsGroupSuppressionsResponse> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -94,11 +98,15 @@ impl Suppressions {
     ) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions/search",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -115,7 +123,7 @@ impl Suppressions {
     pub async fn get_asm(&self) -> Result<Vec<crate::types::GetAsmSuppressionsResponse>> {
         let url = "/asm/suppressions".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all suppressions.
@@ -147,10 +155,10 @@ impl Suppressions {
     ) -> Result<crate::types::GetAsmSuppressionsEmailResponse> {
         let url = format!(
             "/asm/suppressions/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a suppression from a suppression group.
@@ -168,10 +176,10 @@ impl Suppressions {
     pub async fn delete_asm_groups_group_email(&self, group_id: &str, email: &str) -> Result<()> {
         let url = format!(
             "/asm/groups/{}/suppressions/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

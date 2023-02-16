@@ -43,7 +43,7 @@ impl Resources {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Buildings = self.client.get(&url, None).await?;
+        let resp: crate::types::Buildings = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.buildings.to_vec())
@@ -60,7 +60,7 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/buildings",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::Buildings = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Buildings = self.client.get(&url, None, None).await?;
 
         let mut buildings = resp.buildings;
         let mut page = resp.next_page_token;
@@ -70,12 +70,12 @@ impl Resources {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -122,7 +122,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -146,7 +150,7 @@ impl Resources {
             crate::progenitor_support::encode_path(building_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
@@ -182,7 +186,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -202,7 +210,7 @@ impl Resources {
             crate::progenitor_support::encode_path(building_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
@@ -238,7 +246,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -282,7 +294,7 @@ impl Resources {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
+        let resp: crate::types::CalendarResources = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
@@ -313,7 +325,7 @@ impl Resources {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-        let mut resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
+        let mut resp: crate::types::CalendarResources = self.client.get(&url, None, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -323,12 +335,12 @@ impl Resources {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -364,7 +376,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -388,7 +404,7 @@ impl Resources {
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
@@ -413,7 +429,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -433,7 +453,7 @@ impl Resources {
             crate::progenitor_support::encode_path(calendar_resource_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
@@ -458,7 +478,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -492,7 +516,7 @@ impl Resources {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Features = self.client.get(&url, None).await?;
+        let resp: crate::types::Features = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.features.to_vec())
@@ -509,7 +533,7 @@ impl Resources {
             "/admin/directory/v1/customer/{}/resources/features",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::Features = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Features = self.client.get(&url, None, None).await?;
 
         let mut features = resp.features;
         let mut page = resp.next_page_token;
@@ -519,12 +543,12 @@ impl Resources {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -560,7 +584,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -584,7 +612,7 @@ impl Resources {
             crate::progenitor_support::encode_path(feature_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
@@ -609,7 +637,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -629,7 +661,7 @@ impl Resources {
             crate::progenitor_support::encode_path(feature_key),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
@@ -654,7 +686,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -680,7 +716,11 @@ impl Resources {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

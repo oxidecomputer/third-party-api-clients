@@ -36,7 +36,7 @@ impl AppsPermissionsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/apps.permissions.users.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/apps.permissions.users.request` endpoint.
@@ -71,6 +71,6 @@ impl AppsPermissionsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/apps.permissions.users.request?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

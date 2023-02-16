@@ -30,11 +30,11 @@ impl UserProfiles {
     pub async fn get(&self, account_id: &str, user_id: &str) -> Result<crate::types::UserProfile> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates the user profile information for the specified user.
@@ -59,12 +59,16 @@ impl UserProfiles {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

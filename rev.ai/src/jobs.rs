@@ -39,7 +39,7 @@ impl Jobs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/jobs?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get List of Jobs.
@@ -76,7 +76,11 @@ impl Jobs {
         let url = "/jobs".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -87,12 +91,9 @@ impl Jobs {
      * Returns information about a transcription job
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::JobAllOf> {
-        let url = format!(
-            "/jobs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/jobs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete Job by Id.
@@ -102,11 +103,8 @@ impl Jobs {
      * Deletes a transcription job. All data related to the job, such as input media and transcript, will be permanently deleted. A job can only be deleted once it's completed (either with success or failure).
      */
     pub async fn delete(&self, id: &str) -> Result<()> {
-        let url = format!(
-            "/jobs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/jobs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

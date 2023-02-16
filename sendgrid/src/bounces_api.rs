@@ -41,7 +41,7 @@ impl BouncesApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/bounces?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all bounces.
@@ -91,7 +91,11 @@ impl BouncesApi {
         let url = "/suppression/bounces".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -111,10 +115,10 @@ impl BouncesApi {
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let url = format!(
             "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a Bounce.
@@ -131,7 +135,7 @@ impl BouncesApi {
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let url = format!(
             "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -160,12 +164,16 @@ impl BouncesApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/suppression/bounces/{}?{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

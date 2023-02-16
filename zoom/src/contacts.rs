@@ -56,7 +56,8 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/contacts?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::SearchCompanyContactsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::SearchCompanyContactsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
@@ -92,7 +93,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/contacts?{}", query_);
         let mut resp: crate::types::SearchCompanyContactsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -103,12 +104,12 @@ impl Contacts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -164,7 +165,8 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat/users/me/contacts?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetUserContactsResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::GetUserContactsResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
@@ -195,7 +197,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat/users/me/contacts?{}", query_);
         let mut resp: crate::types::GetUserContactsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -206,12 +208,12 @@ impl Contacts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -264,6 +266,6 @@ impl Contacts {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

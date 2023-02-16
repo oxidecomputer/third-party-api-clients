@@ -6049,6 +6049,3 @@ impl DirectoryUsersAliasesListEvent {
         matches!(self, DirectoryUsersAliasesListEvent::Noop)
     }
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

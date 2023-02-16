@@ -24,12 +24,9 @@ impl DesignsApi {
      * This endpoint is valuable when retrieving information stored in a field that you wish to update using a PATCH request.
      */
     pub async fn get_design(&self, id: &str) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!(
-            "/designs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Duplicate Design.
@@ -50,13 +47,14 @@ impl DesignsApi {
         id: &str,
         body: &crate::types::DesignDuplicateInput,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!(
-            "/designs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -69,12 +67,9 @@ impl DesignsApi {
      * Be sure to check the ID of the design you intend to delete before making this request; deleting a design is a permanent action.
      */
     pub async fn delete_design(&self, id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/designs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update Design.
@@ -98,13 +93,14 @@ impl DesignsApi {
         id: &str,
         body: &crate::types::PutDesignRequest,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!(
-            "/designs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-        );
+        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -143,7 +139,7 @@ impl DesignsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/designs?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create Design.
@@ -165,7 +161,11 @@ impl DesignsApi {
         let url = "/designs".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -185,10 +185,10 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Duplicate SendGrid Pre-built Design.
@@ -209,11 +209,15 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -254,6 +258,6 @@ impl DesignsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/designs/pre-builts?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

@@ -27,11 +27,11 @@ impl EnvelopeWorkflowDefinition {
     pub async fn get(&self, account_id: &str, envelope_id: &str) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an envelope's workflow definition.
@@ -53,12 +53,16 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -77,11 +81,11 @@ impl EnvelopeWorkflowDefinition {
     pub async fn delete(&self, account_id: &str, envelope_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Gets template's workflow definition.
@@ -102,11 +106,11 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a template's workflow definiton.
@@ -128,12 +132,16 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -151,10 +159,10 @@ impl EnvelopeWorkflowDefinition {
     pub async fn delete_template(&self, account_id: &str, template_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

@@ -61,11 +61,11 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/subusers/{}/stats/monthly?{}",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve monthly stats for all subusers.
@@ -120,7 +120,7 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers/stats/monthly?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve the totals for each email statistic metric for all subusers.
@@ -177,7 +177,7 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers/stats/sums?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve email statistics for your subusers.
@@ -228,6 +228,6 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/subusers/stats?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

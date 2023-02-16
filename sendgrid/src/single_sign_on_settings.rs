@@ -36,7 +36,7 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sso/integrations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get All SSO Integrations.
@@ -75,7 +75,11 @@ impl SingleSignOnSettings {
         let url = "/sso/integrations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -103,11 +107,11 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an SSO Integration.
@@ -121,10 +125,10 @@ impl SingleSignOnSettings {
     pub async fn delete_sso_integrations(&self, id: &str) -> Result<()> {
         let url = format!(
             "/sso/integrations/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an SSO Integration.
@@ -152,12 +156,16 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

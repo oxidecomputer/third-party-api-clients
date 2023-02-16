@@ -22,7 +22,7 @@ impl ThreatInsights {
     ) -> Result<crate::types::ThreatInsightConfiguration> {
         let url = "/api/v1/threats/configuration".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/api/v1/threats/configuration` endpoint.
@@ -36,7 +36,11 @@ impl ThreatInsights {
         let url = "/api/v1/threats/configuration".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

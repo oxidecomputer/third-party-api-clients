@@ -61,7 +61,10 @@ impl Orders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/orders?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::OrdersLegacyResourceOrderList = self.client.get(&url, None).await?;
+        let resp: crate::types::OrdersLegacyResourceOrderList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -92,7 +95,7 @@ impl Orders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/orders?{}", query_);
         let mut resp: crate::types::OrdersLegacyResourceOrderList =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -113,12 +116,12 @@ impl Orders {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -138,7 +141,9 @@ impl Orders {
     pub async fn post(&self) -> Result<crate::types::Order> {
         let url = "/v1/orders".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/orders/{id}` endpoint.
@@ -153,7 +158,9 @@ impl Orders {
     pub async fn get(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/orders/{id}` endpoint.
@@ -167,7 +174,9 @@ impl Orders {
     pub async fn post_orders(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/orders/{id}/pay` endpoint.
@@ -184,7 +193,9 @@ impl Orders {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/orders/{id}/returns` endpoint.
@@ -201,6 +212,8 @@ impl Orders {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

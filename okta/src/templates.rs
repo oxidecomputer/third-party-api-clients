@@ -31,7 +31,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/templates/sms?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List SMS Templates.
@@ -68,7 +68,11 @@ impl Templates {
         let url = "/api/v1/templates/sms".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -85,10 +89,10 @@ impl Templates {
     pub async fn get_sm(&self, template_id: &str) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update SMS Template.
@@ -108,11 +112,15 @@ impl Templates {
     ) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -133,11 +141,15 @@ impl Templates {
     ) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -154,9 +166,9 @@ impl Templates {
     pub async fn delete_sms(&self, template_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

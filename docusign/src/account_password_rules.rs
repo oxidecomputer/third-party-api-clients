@@ -26,10 +26,10 @@ impl AccountPasswordRules {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountPasswordRulesData> {
         let url = format!(
             "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates the password rules for an account.
@@ -51,11 +51,15 @@ impl AccountPasswordRules {
     ) -> Result<crate::types::AccountPasswordRulesData> {
         let url = format!(
             "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -68,6 +72,6 @@ impl AccountPasswordRules {
     pub async fn password_rules_get(&self) -> Result<crate::types::UserPasswordRules> {
         let url = "/v2.1/current_user/password_rules".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

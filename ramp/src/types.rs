@@ -1987,6 +1987,3 @@ pub struct PostCustomProviderEntityTypeLinkRequest {
     )]
     pub ramp_id: String,
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

@@ -34,6 +34,6 @@ impl ApiKeyPermissions {
     pub async fn get_scopes(&self) -> Result<crate::types::GetScopesResponse> {
         let url = "/scopes".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

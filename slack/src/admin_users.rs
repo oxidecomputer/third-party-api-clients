@@ -26,7 +26,9 @@ impl AdminUsers {
     pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.assign".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.invite` endpoint.
@@ -42,7 +44,9 @@ impl AdminUsers {
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.invite".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/admin.users.list` endpoint.
@@ -77,7 +81,7 @@ impl AdminUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.users.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin.users.remove` endpoint.
@@ -93,7 +97,9 @@ impl AdminUsers {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.remove".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.setAdmin` endpoint.
@@ -109,7 +115,9 @@ impl AdminUsers {
     pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setAdmin".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.setExpiration` endpoint.
@@ -125,7 +133,9 @@ impl AdminUsers {
     pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setExpiration".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.setOwner` endpoint.
@@ -141,7 +151,9 @@ impl AdminUsers {
     pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setOwner".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.setRegular` endpoint.
@@ -157,6 +169,8 @@ impl AdminUsers {
     pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setRegular".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

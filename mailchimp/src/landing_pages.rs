@@ -54,7 +54,7 @@ impl LandingPages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/landing-pages?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add landing page.
@@ -80,7 +80,11 @@ impl LandingPages {
         let url = format!("/landing-pages?{}", query_);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -116,7 +120,7 @@ impl LandingPages {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete landing page.
@@ -135,7 +139,7 @@ impl LandingPages {
             crate::progenitor_support::encode_path(page_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update landing page.
@@ -159,7 +163,11 @@ impl LandingPages {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -179,7 +187,7 @@ impl LandingPages {
             crate::progenitor_support::encode_path(page_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Unpublish landing page.
@@ -198,7 +206,7 @@ impl LandingPages {
             crate::progenitor_support::encode_path(page_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get landing page content.
@@ -233,6 +241,6 @@ impl LandingPages {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

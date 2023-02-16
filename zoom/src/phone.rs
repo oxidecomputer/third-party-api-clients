@@ -41,7 +41,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -109,7 +113,7 @@ impl Phone {
         let url = format!("/phone/numbers?{}", query_);
         let url = self.client.url(&url, None);
         let resp: crate::types::ListAccountPhoneNumbersResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.phone_numbers.to_vec())
@@ -156,7 +160,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/numbers?{}", query_);
         let mut resp: crate::types::ListAccountPhoneNumbersResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut phone_numbers = resp.phone_numbers;
         let mut page = resp.next_page_token;
@@ -167,12 +171,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -211,7 +215,7 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update user's profile.
@@ -237,7 +241,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -256,7 +264,7 @@ impl Phone {
     pub async fn setting(&self, _account_id: &str) -> Result<crate::types::PhoneSettingResponse> {
         let url = "/phone/settings".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update BYOC settings.
@@ -282,7 +290,11 @@ impl Phone {
         let url = "/phone/settings".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -311,7 +323,7 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List setting templates.
@@ -351,7 +363,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListSettingTemplatesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListSettingTemplatesResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.templates.to_vec())
@@ -382,7 +395,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
         let mut resp: crate::types::ListSettingTemplatesResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut templates = resp.templates;
         let mut page = resp.next_page_token;
@@ -393,12 +406,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -434,7 +447,11 @@ impl Phone {
         let url = "/phone/setting_templates".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -451,7 +468,11 @@ impl Phone {
         let url = "/phone/batch_locations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -487,7 +508,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/locations?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListLocationsResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::ListLocationsResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.locations.to_vec())
@@ -509,7 +531,8 @@ impl Phone {
      */
     pub async fn list_all_locations(&self) -> Result<Vec<crate::types::ListLocationsResponse>> {
         let url = "/phone/locations".to_string();
-        let mut resp: crate::types::ListLocationsResponseData = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListLocationsResponseData =
+            self.client.get(&url, None, None).await?;
 
         let mut locations = resp.locations;
         let mut page = resp.next_page_token;
@@ -520,12 +543,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -561,7 +584,11 @@ impl Phone {
         let url = "/phone/locations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -590,7 +617,7 @@ impl Phone {
             crate::progenitor_support::encode_path(location_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an emergency location.
@@ -615,7 +642,7 @@ impl Phone {
             crate::progenitor_support::encode_path(location_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update emergency service location.
@@ -641,7 +668,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -677,7 +708,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_groups?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.sip_groups.to_vec())
@@ -699,7 +730,8 @@ impl Phone {
      */
     pub async fn list_all_sip_groups(&self) -> Result<Vec<crate::types::SipGroups>> {
         let url = "/phone/sip_groups".to_string();
-        let mut resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListSipGroupsResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut sip_groups = resp.sip_groups;
         let mut page = resp.next_page_token;
@@ -710,12 +742,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -768,7 +800,7 @@ impl Phone {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a setting template.
@@ -798,7 +830,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -865,7 +901,8 @@ impl Phone {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::PhoneUserCallLogsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::PhoneUserCallLogsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
@@ -916,7 +953,8 @@ impl Phone {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-        let mut resp: crate::types::PhoneUserCallLogsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::PhoneUserCallLogsResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut call_logs = resp.call_logs;
         let mut page = resp.next_page_token;
@@ -927,12 +965,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -997,7 +1035,8 @@ impl Phone {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::PhoneUserRecordingsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::PhoneUserRecordingsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.recordings.to_vec())
@@ -1037,7 +1076,7 @@ impl Phone {
             query_
         );
         let mut resp: crate::types::PhoneUserRecordingsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut recordings = resp.recordings;
         let mut page = resp.next_page_token;
@@ -1048,12 +1087,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1123,7 +1162,8 @@ impl Phone {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::PhoneUserVoiceMailsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::PhoneUserVoiceMailsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.voice_mails.to_vec())
@@ -1167,7 +1207,7 @@ impl Phone {
             query_
         );
         let mut resp: crate::types::PhoneUserVoiceMailsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut voice_mails = resp.voice_mails;
         let mut page = resp.next_page_token;
@@ -1178,12 +1218,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1233,7 +1273,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1274,7 +1318,7 @@ impl Phone {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update shared access.
@@ -1310,7 +1354,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1381,7 +1429,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::AccountCallLogsResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::AccountCallLogsResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
@@ -1433,7 +1482,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
         let mut resp: crate::types::AccountCallLogsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut call_logs = resp.call_logs;
         let mut page = resp.next_page_token;
@@ -1444,12 +1493,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1489,7 +1538,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1520,7 +1573,7 @@ impl Phone {
             crate::progenitor_support::encode_path(phone_number_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Assign calling plan to a user.
@@ -1546,7 +1599,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1574,7 +1631,7 @@ impl Phone {
             crate::progenitor_support::encode_path(type_),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get call recordings.
@@ -1646,7 +1703,7 @@ impl Phone {
         let url = format!("/phone/recordings?{}", query_);
         let url = self.client.url(&url, None);
         let resp: crate::types::GetPhoneRecordingsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.recordings.to_vec())
@@ -1698,7 +1755,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/recordings?{}", query_);
         let mut resp: crate::types::GetPhoneRecordingsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut recordings = resp.recordings;
         let mut page = resp.next_page_token;
@@ -1709,12 +1766,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1762,7 +1819,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_trunk/trunks?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListByocsipTrunkResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListByocsipTrunkResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.byoc_sip_trunk.to_vec())
@@ -1783,7 +1841,8 @@ impl Phone {
      */
     pub async fn list_all_byocsip_trunk(&self) -> Result<Vec<crate::types::ByocSipTrunk>> {
         let url = "/phone/sip_trunk/trunks".to_string();
-        let mut resp: crate::types::ListByocsipTrunkResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListByocsipTrunkResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut byoc_sip_trunk = resp.byoc_sip_trunk;
         let mut page = resp.next_page_token;
@@ -1794,12 +1853,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1842,7 +1901,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1875,7 +1938,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1911,7 +1978,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/external_contacts?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListExternalContactsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListExternalContactsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.external_contacts.to_vec())
@@ -1934,7 +2002,7 @@ impl Phone {
     pub async fn list_all_external_contacts(&self) -> Result<Vec<crate::types::ExternalContacts>> {
         let url = "/phone/external_contacts".to_string();
         let mut resp: crate::types::ListExternalContactsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut external_contacts = resp.external_contacts;
         let mut page = resp.next_page_token;
@@ -1945,12 +2013,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1986,7 +2054,11 @@ impl Phone {
         let url = "/phone/external_contacts".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2015,7 +2087,7 @@ impl Phone {
             crate::progenitor_support::encode_path(external_contact_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an external contact.
@@ -2040,7 +2112,7 @@ impl Phone {
             crate::progenitor_support::encode_path(external_contact_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update external contact.
@@ -2070,7 +2142,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2099,7 +2175,7 @@ impl Phone {
             crate::progenitor_support::encode_path(number_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update phone number details.
@@ -2128,7 +2204,11 @@ impl Phone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2153,7 +2233,11 @@ impl Phone {
         let url = "/phone/company_number".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2172,7 +2256,7 @@ impl Phone {
     pub async fn list_calling_plan(&self) -> Result<crate::types::ListCallingPlansResponseData> {
         let url = "/phone/calling_plans".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List phone users.
@@ -2212,7 +2296,8 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListPhoneUsersResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::ListPhoneUsersResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.users.to_vec())
@@ -2243,7 +2328,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
         let mut resp: crate::types::ListPhoneUsersResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut users = resp.users;
         let mut page = resp.next_page_token;
@@ -2254,12 +2339,12 @@ impl Phone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -2301,7 +2386,7 @@ impl Phone {
             crate::progenitor_support::encode_path(call_log_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a user's call log.
@@ -2328,7 +2413,7 @@ impl Phone {
             crate::progenitor_support::encode_path(call_log_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Add BYOC phone numbers.
@@ -2350,7 +2435,11 @@ impl Phone {
         let url = "/phone/byoc_numbers".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2375,6 +2464,6 @@ impl Phone {
             crate::progenitor_support::encode_path(voicemail_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

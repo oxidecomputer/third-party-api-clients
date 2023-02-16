@@ -25,7 +25,7 @@ impl PaySchedules {
             crate::progenitor_support::encode_path(company_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the pay schedules for a company.
@@ -64,7 +64,7 @@ impl PaySchedules {
             crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a pay schedule.
@@ -88,7 +88,11 @@ impl PaySchedules {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -26,7 +26,11 @@ impl Certificates {
         let url = "/sso/certificates".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -44,10 +48,10 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
         let url = format!(
             "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(&integration_id.to_string()),
+            crate::progenitor_support::encode_path(integration_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get All SSO Certificates by Integration.
@@ -66,7 +70,7 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
         let url = format!(
             "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(&integration_id.to_string()),
+            crate::progenitor_support::encode_path(integration_id),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -80,10 +84,10 @@ impl Certificates {
     pub async fn get_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(&cert_id.to_string()),
+            crate::progenitor_support::encode_path(cert_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an SSO Certificate.
@@ -97,10 +101,10 @@ impl Certificates {
     pub async fn delete_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(&cert_id.to_string()),
+            crate::progenitor_support::encode_path(cert_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update SSO Certificate.
@@ -118,11 +122,15 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoErrorResponse>> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(&cert_id.to_string()),
+            crate::progenitor_support::encode_path(cert_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

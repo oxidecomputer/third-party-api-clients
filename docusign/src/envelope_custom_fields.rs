@@ -33,11 +33,11 @@ impl EnvelopeCustomFields {
     ) -> Result<crate::types::CustomFieldsEnvelope> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates envelope custom fields in an envelope.
@@ -62,12 +62,16 @@ impl EnvelopeCustomFields {
     ) -> Result<crate::types::EnvelopeCustomFields> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -93,12 +97,16 @@ impl EnvelopeCustomFields {
     ) -> Result<crate::types::EnvelopeCustomFields> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -121,12 +129,16 @@ impl EnvelopeCustomFields {
     ) -> Result<crate::types::EnvelopeCustomFields> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/custom_fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

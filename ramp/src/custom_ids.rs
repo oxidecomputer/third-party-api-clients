@@ -24,7 +24,7 @@ impl CustomIds {
     pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomProviderResponse> {
         let url = "/custom-id-provider".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a Custom ID provider.
@@ -40,7 +40,7 @@ impl CustomIds {
     pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
         let url = "/custom-id-provider".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * .
@@ -56,7 +56,11 @@ impl CustomIds {
         let url = "/custom-id-provider/application-link".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -81,7 +85,7 @@ impl CustomIds {
             crate::progenitor_support::encode_path(custom_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Convert ramp id to custom id.
@@ -103,7 +107,7 @@ impl CustomIds {
             crate::progenitor_support::encode_path(ramp_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create custom id link.
@@ -123,7 +127,11 @@ impl CustomIds {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

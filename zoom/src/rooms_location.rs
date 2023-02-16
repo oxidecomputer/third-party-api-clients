@@ -59,7 +59,8 @@ impl RoomsLocation {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/locations?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListZrLocationsResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::ListZrLocationsResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.locations.to_vec())
@@ -97,7 +98,7 @@ impl RoomsLocation {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/locations?{}", query_);
         let mut resp: crate::types::ListZrLocationsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut locations = resp.locations;
         let mut page = resp.next_page_token;
@@ -108,12 +109,12 @@ impl RoomsLocation {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -151,7 +152,11 @@ impl RoomsLocation {
         let url = "/rooms/locations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -181,7 +186,7 @@ impl RoomsLocation {
             crate::progenitor_support::encode_path(location_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Zoom Room location profile.
@@ -213,7 +218,11 @@ impl RoomsLocation {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -251,7 +260,7 @@ impl RoomsLocation {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update location settings.
@@ -288,7 +297,9 @@ impl RoomsLocation {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.patch(&url, None).await
+        self.client
+            .patch(&url, None, Some("application/json"))
+            .await
     }
     /**
      * Get Zoom Room location structure.
@@ -307,7 +318,7 @@ impl RoomsLocation {
     ) -> Result<crate::types::GetZrLocationStructureResponse> {
         let url = "/rooms/locations/structure".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Zoom Rooms location structure.
@@ -328,7 +339,11 @@ impl RoomsLocation {
         let url = "/rooms/locations/structure".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -358,7 +373,11 @@ impl RoomsLocation {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

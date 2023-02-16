@@ -29,7 +29,7 @@ impl VerifiedDomains {
             crate::progenitor_support::encode_path(domain_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete domain.
@@ -48,7 +48,7 @@ impl VerifiedDomains {
             crate::progenitor_support::encode_path(domain_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Verify domain.
@@ -72,7 +72,11 @@ impl VerifiedDomains {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -85,7 +89,7 @@ impl VerifiedDomains {
     pub async fn get_verified_domains(&self) -> Result<crate::types::VerifiedDomainsData> {
         let url = "/verified-domains".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add domain to account.
@@ -101,7 +105,11 @@ impl VerifiedDomains {
         let url = "/verified-domains".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -28,7 +28,7 @@ impl RoomsAccount {
     pub async fn get_zr_account_profile(&self) -> Result<crate::types::UpdateZrAccProfileRequest> {
         let url = "/rooms/account_profile".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Zoom Room account profile.
@@ -50,7 +50,11 @@ impl RoomsAccount {
         let url = "/rooms/account_profile".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -83,7 +87,7 @@ impl RoomsAccount {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/account_settings?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Zoom Room account settings.
@@ -115,6 +119,8 @@ impl RoomsAccount {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/account_settings?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.patch(&url, None).await
+        self.client
+            .patch(&url, None, Some("application/json"))
+            .await
     }
 }

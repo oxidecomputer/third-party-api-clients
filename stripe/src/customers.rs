@@ -55,7 +55,10 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetCustomersResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -82,7 +85,8 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers?{}", query_);
-        let mut resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetCustomersResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -103,12 +107,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -128,7 +132,9 @@ impl Customers {
     pub async fn post(&self) -> Result<crate::types::Customer> {
         let url = "/v1/customers".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/search` endpoint.
@@ -164,7 +170,10 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers/search?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let resp: crate::types::SearchResult = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -186,7 +195,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers/search?{}", query_);
-        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -207,12 +216,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -243,7 +252,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}` endpoint.
@@ -262,7 +273,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}` endpoint.
@@ -279,7 +292,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions` endpoint.
@@ -318,8 +333,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::CustomerBalanceTransactionList =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::CustomerBalanceTransactionList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -340,7 +357,7 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let mut resp: crate::types::CustomerBalanceTransactionList =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -361,12 +378,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -396,7 +413,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions/{transaction}` endpoint.
@@ -420,7 +439,9 @@ impl Customers {
             crate::progenitor_support::encode_path(transaction),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/balance_transactions/{transaction}` endpoint.
@@ -443,7 +464,9 @@ impl Customers {
             crate::progenitor_support::encode_path(transaction),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts` endpoint.
@@ -482,7 +505,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
+        let resp: crate::types::BankAccountList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -502,7 +528,7 @@ impl Customers {
             "/v1/customers/{}/bank_accounts",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::BankAccountList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -523,12 +549,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -562,7 +588,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
@@ -586,7 +614,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
@@ -609,7 +639,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/bank_accounts/{id}` endpoint.
@@ -632,7 +664,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/bank_accounts/{id}/verify` endpoint.
@@ -655,7 +689,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/cards` endpoint.
@@ -696,7 +732,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Cards = self.client.get(&url, None).await?;
+        let resp: crate::types::Cards = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -715,7 +754,7 @@ impl Customers {
             "/v1/customers/{}/cards",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::Cards = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Cards = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -736,12 +775,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -772,7 +811,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/cards/{id}` endpoint.
@@ -792,7 +833,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/cards/{id}` endpoint.
@@ -815,7 +858,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/cards/{id}` endpoint.
@@ -838,7 +883,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/discount` endpoint.
@@ -856,7 +903,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/discount` endpoint.
@@ -873,7 +922,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/payment_methods` endpoint.
@@ -917,7 +968,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+        let resp: crate::types::PaymentFlowsMethodList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -944,7 +998,8 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-        let mut resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::PaymentFlowsMethodList =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -965,12 +1020,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -1024,7 +1079,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Sources = self.client.get(&url, None).await?;
+        let resp: crate::types::Sources = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -1051,7 +1109,7 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
             query_
         );
-        let mut resp: crate::types::Sources = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Sources = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -1072,12 +1130,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -1108,7 +1166,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/sources/{id}` endpoint.
@@ -1132,7 +1192,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/sources/{id}` endpoint.
@@ -1155,7 +1217,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/sources/{id}` endpoint.
@@ -1178,7 +1242,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/sources/{id}/verify` endpoint.
@@ -1201,7 +1267,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions` endpoint.
@@ -1240,7 +1308,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+        let resp: crate::types::Subscriptions = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -1260,7 +1331,7 @@ impl Customers {
             "/v1/customers/{}/subscriptions",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Subscriptions = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -1281,12 +1352,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -1313,7 +1384,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
@@ -1337,7 +1410,9 @@ impl Customers {
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
@@ -1360,7 +1435,9 @@ impl Customers {
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}` endpoint.
@@ -1387,7 +1464,9 @@ impl Customers {
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}/discount` endpoint.
@@ -1411,7 +1490,9 @@ impl Customers {
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/subscriptions/{subscription_exposed_id}/discount` endpoint.
@@ -1434,7 +1515,9 @@ impl Customers {
             crate::progenitor_support::encode_path(subscription_exposed_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids` endpoint.
@@ -1473,7 +1556,10 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::TaxIds = self.client.get(&url, None).await?;
+        let resp: crate::types::TaxIds = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -1490,7 +1576,7 @@ impl Customers {
             "/v1/customers/{}/tax_ids",
             crate::progenitor_support::encode_path(customer),
         );
-        let mut resp: crate::types::TaxIds = self.client.get(&url, None).await?;
+        let mut resp: crate::types::TaxIds = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -1511,12 +1597,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -1543,7 +1629,9 @@ impl Customers {
             crate::progenitor_support::encode_path(customer),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids/{id}` endpoint.
@@ -1563,7 +1651,9 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/customers/{customer}/tax_ids/{id}` endpoint.
@@ -1586,6 +1676,8 @@ impl Customers {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

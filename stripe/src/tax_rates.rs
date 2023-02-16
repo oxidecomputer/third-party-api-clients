@@ -55,7 +55,10 @@ impl TaxRates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/tax_rates?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetTaxRatesResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -82,7 +85,7 @@ impl TaxRates {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/tax_rates?{}", query_);
-        let mut resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -103,12 +106,12 @@ impl TaxRates {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -128,7 +131,9 @@ impl TaxRates {
     pub async fn post(&self) -> Result<crate::types::TaxRate> {
         let url = "/v1/tax_rates".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/tax_rates/{tax_rate}` endpoint.
@@ -146,7 +151,9 @@ impl TaxRates {
             crate::progenitor_support::encode_path(tax_rate),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/tax_rates/{tax_rate}` endpoint.
@@ -163,6 +170,8 @@ impl TaxRates {
             crate::progenitor_support::encode_path(tax_rate),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

@@ -33,7 +33,7 @@ impl Members {
             crate::progenitor_support::encode_path(member_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
@@ -79,7 +79,7 @@ impl Members {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::Members = self.client.get(&url, None).await?;
+        let resp: crate::types::Members = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.members.to_vec())
@@ -113,7 +113,7 @@ impl Members {
             crate::progenitor_support::encode_path(group_key),
             query_
         );
-        let mut resp: crate::types::Members = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Members = self.client.get(&url, None, None).await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -123,12 +123,12 @@ impl Members {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -164,7 +164,11 @@ impl Members {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -184,7 +188,7 @@ impl Members {
             crate::progenitor_support::encode_path(member_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
@@ -209,7 +213,11 @@ impl Members {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -229,7 +237,7 @@ impl Members {
             crate::progenitor_support::encode_path(member_key),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
@@ -254,7 +262,11 @@ impl Members {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

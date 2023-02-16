@@ -26,7 +26,7 @@ impl Users {
     pub async fn get(&self, id: &str) -> Result<crate::types::User> {
         let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Suspend a user.
@@ -38,7 +38,7 @@ impl Users {
     pub async fn delete(&self, id: &str) -> Result<()> {
         let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Modify Existing User.
@@ -51,7 +51,11 @@ impl Users {
         let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -92,7 +96,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetUsersResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -120,7 +124,7 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
-        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetUsersResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -131,6 +135,7 @@ impl Users {
                 .client
                 .get::<crate::types::GetUsersResponse>(
                     page.trim_start_matches(&self.client.host),
+                    None,
                     None,
                 )
                 .await
@@ -171,7 +176,11 @@ impl Users {
         let url = "/users/deferred".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -190,6 +199,6 @@ impl Users {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

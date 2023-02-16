@@ -26,7 +26,7 @@ impl SenderIdentitiesApi {
     pub async fn get_senders(&self) -> Result<crate::types::GetSendersResponse> {
         let url = "/senders".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a Sender Identity.
@@ -48,7 +48,11 @@ impl SenderIdentitiesApi {
         let url = "/senders".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -68,7 +72,7 @@ impl SenderIdentitiesApi {
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a Sender Identity.
@@ -87,7 +91,7 @@ impl SenderIdentitiesApi {
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a Sender Identity.
@@ -115,7 +119,11 @@ impl SenderIdentitiesApi {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -138,6 +146,6 @@ impl SenderIdentitiesApi {
             crate::progenitor_support::encode_path(&sender_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
 }

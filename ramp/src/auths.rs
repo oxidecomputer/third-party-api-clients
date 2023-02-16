@@ -55,6 +55,8 @@ impl Auths {
     pub async fn post_token(&self) -> Result<crate::types::OAuth2Token> {
         let url = "/token".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

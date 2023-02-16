@@ -28,7 +28,7 @@ impl Returns {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modify Return Order.
@@ -51,7 +51,11 @@ impl Returns {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json-patch+json"),
+            )
             .await
     }
     /**
@@ -136,7 +140,7 @@ impl Returns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/return?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get Return Orders.
@@ -215,7 +219,11 @@ impl Returns {
         let url = "/return".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json-patch+json"),
+            )
             .await
     }
     /**
@@ -234,7 +242,7 @@ impl Returns {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get One Return's status history.
@@ -255,6 +263,6 @@ impl Returns {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

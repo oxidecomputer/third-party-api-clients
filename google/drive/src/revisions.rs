@@ -43,7 +43,7 @@ impl Revisions {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::RevisionList = self.client.get(&url, None).await?;
+        let resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.revisions.to_vec())
@@ -60,7 +60,7 @@ impl Revisions {
             "/files/{}/revisions",
             crate::progenitor_support::encode_path(file_id),
         );
-        let mut resp: crate::types::RevisionList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
 
         let mut revisions = resp.revisions;
         let mut page = resp.next_page_token;
@@ -70,12 +70,12 @@ impl Revisions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -123,7 +123,7 @@ impl Revisions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
@@ -142,7 +142,7 @@ impl Revisions {
             crate::progenitor_support::encode_path(revision_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
@@ -167,7 +167,11 @@ impl Revisions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

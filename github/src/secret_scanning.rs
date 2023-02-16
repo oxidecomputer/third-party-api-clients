@@ -62,7 +62,7 @@ impl SecretScanning {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List secret scanning alerts for a repository.
@@ -130,7 +130,7 @@ impl SecretScanning {
             crate::progenitor_support::encode_path(&alert_number.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a secret scanning alert.
@@ -164,7 +164,11 @@ impl SecretScanning {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

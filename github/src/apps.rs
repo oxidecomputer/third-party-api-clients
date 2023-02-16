@@ -26,7 +26,7 @@ impl Apps {
     pub async fn get_authenticated(&self) -> Result<crate::types::GitHubApp> {
         let url = "/app".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a GitHub App from a manifest.
@@ -50,7 +50,7 @@ impl Apps {
             crate::progenitor_support::encode_path(code),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, Some("application/json")).await
     }
     /**
      * Get a webhook configuration for an app.
@@ -66,7 +66,7 @@ impl Apps {
     pub async fn get_webhook_config_for_app(&self) -> Result<crate::types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a webhook configuration for an app.
@@ -86,7 +86,11 @@ impl Apps {
         let url = "/app/hook/config".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -120,7 +124,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/hook/deliveries?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List deliveries for an app webhook.
@@ -171,7 +175,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Redeliver a delivery for an app webhook.
@@ -194,7 +198,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&delivery_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * List installations for the authenticated app.
@@ -237,7 +241,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/installations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List installations for the authenticated app.
@@ -292,7 +296,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an installation for the authenticated app.
@@ -315,7 +319,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Create an installation access token for an app.
@@ -349,6 +353,7 @@ impl Apps {
                 Some(reqwest::Body::from(serde_json::to_vec(body)?)),
                 crate::utils::MediaType::Json,
                 crate::auth::AuthenticationConstraint::JWT,
+                Some("application/json"),
             )
             .await
     }
@@ -373,7 +378,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Unsuspend an app installation.
@@ -396,7 +401,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Delete an app authorization.
@@ -423,7 +428,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -455,7 +464,7 @@ impl Apps {
             crate::progenitor_support::encode_path(access_token),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Check a token.
@@ -481,7 +490,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -508,7 +521,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -535,7 +552,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -562,7 +583,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -592,7 +617,7 @@ impl Apps {
             crate::progenitor_support::encode_path(access_token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Reset an authorization.
@@ -621,7 +646,7 @@ impl Apps {
             crate::progenitor_support::encode_path(access_token),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Revoke an authorization for an application.
@@ -650,7 +675,7 @@ impl Apps {
             crate::progenitor_support::encode_path(access_token),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get an app.
@@ -670,7 +695,7 @@ impl Apps {
     pub async fn get_by_slug(&self, app_slug: &str) -> Result<crate::types::GitHubApp> {
         let url = format!("/apps/{}", crate::progenitor_support::encode_path(app_slug),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories accessible to the app installation.
@@ -703,7 +728,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/installation/repositories?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Revoke an installation access token.
@@ -721,7 +746,7 @@ impl Apps {
     pub async fn revoke_installation_access_token(&self) -> Result<()> {
         let url = "/installation/token".to_string();
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get a subscription plan for an account.
@@ -747,7 +772,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&account_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List plans.
@@ -780,7 +805,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketplace_listing/plans?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List plans.
@@ -848,7 +873,7 @@ impl Apps {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List accounts for a plan.
@@ -908,7 +933,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&account_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List plans (stubbed).
@@ -941,7 +966,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketplace_listing/stubbed/plans?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List plans (stubbed).
@@ -1011,7 +1036,7 @@ impl Apps {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List accounts for a plan (stubbed).
@@ -1068,7 +1093,7 @@ impl Apps {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a content attachment.
@@ -1104,7 +1129,11 @@ impl Apps {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1134,7 +1163,7 @@ impl Apps {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List app installations accessible to the user access token.
@@ -1171,7 +1200,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/installations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories accessible to the user access token.
@@ -1214,7 +1243,7 @@ impl Apps {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add a repository to an app installation.
@@ -1243,7 +1272,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove a repository from an app installation.
@@ -1272,7 +1301,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List subscriptions for the authenticated user.
@@ -1303,7 +1332,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/marketplace_purchases?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List subscriptions for the authenticated user.
@@ -1351,7 +1380,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/marketplace_purchases/stubbed?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List subscriptions for the authenticated user (stubbed).
@@ -1394,6 +1423,6 @@ impl Apps {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

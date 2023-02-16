@@ -26,7 +26,7 @@ impl Dnd {
     pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/dnd.endDnd".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/dnd.endSnooze` endpoint.
@@ -42,7 +42,7 @@ impl Dnd {
     pub async fn end_snooze(&self) -> Result<crate::types::DndEndSnoozeSchema> {
         let url = "/dnd.endSnooze".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/dnd.info` endpoint.
@@ -64,7 +64,7 @@ impl Dnd {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/dnd.info?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/dnd.setSnooze` endpoint.
@@ -76,7 +76,9 @@ impl Dnd {
     pub async fn set_snooze(&self) -> Result<crate::types::DndSetSnoozeSchema> {
         let url = "/dnd.setSnooze".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/dnd.teamInfo` endpoint.
@@ -98,6 +100,6 @@ impl Dnd {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/dnd.teamInfo?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

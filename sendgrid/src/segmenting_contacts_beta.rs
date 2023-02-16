@@ -51,7 +51,7 @@ impl SegmentingContactsBeta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/segments/2.0?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create Segment.
@@ -69,7 +69,11 @@ impl SegmentingContactsBeta {
         let url = "/marketing/segments/2.0".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -95,11 +99,11 @@ impl SegmentingContactsBeta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/segments/2.0/{}?{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete segment.
@@ -111,10 +115,10 @@ impl SegmentingContactsBeta {
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update Segment.
@@ -132,11 +136,15 @@ impl SegmentingContactsBeta {
     ) -> Result<crate::types::SegmentResponse> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

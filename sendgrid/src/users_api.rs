@@ -24,7 +24,7 @@ impl UsersApi {
     pub async fn get_user_profile(&self) -> Result<crate::types::GetUserProfileResponse> {
         let url = "/user/profile".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a user's profile.
@@ -46,7 +46,11 @@ impl UsersApi {
         let url = "/user/profile".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -65,7 +69,7 @@ impl UsersApi {
     pub async fn get_user_account(&self) -> Result<crate::types::GetUserAccountResponse> {
         let url = "/user/account".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve your account email address.
@@ -81,7 +85,7 @@ impl UsersApi {
     pub async fn get_user_email(&self) -> Result<crate::types::GetUserEmailResponse> {
         let url = "/user/email".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update your account email address.
@@ -101,7 +105,11 @@ impl UsersApi {
         let url = "/user/email".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -118,7 +126,7 @@ impl UsersApi {
     pub async fn get_user_username(&self) -> Result<crate::types::Users> {
         let url = "/user/username".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update your username.
@@ -138,7 +146,11 @@ impl UsersApi {
         let url = "/user/username".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -157,7 +169,7 @@ impl UsersApi {
     pub async fn get_user_credits(&self) -> Result<crate::types::GetUserCreditsResponse> {
         let url = "/user/credits".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update your password.
@@ -177,7 +189,11 @@ impl UsersApi {
         let url = "/user/password".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

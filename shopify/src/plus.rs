@@ -53,7 +53,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -69,7 +69,11 @@ impl Plus {
         let url = "/admin/api/2020-01/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -89,10 +93,10 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -113,11 +117,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -142,7 +150,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -162,11 +170,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -219,7 +231,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of gift cards. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -262,7 +274,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -278,7 +290,11 @@ impl Plus {
         let url = "/admin/api/2020-04/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -298,10 +314,10 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -322,11 +338,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -351,7 +371,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -371,11 +391,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -428,7 +452,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of gift cards. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -471,7 +495,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -487,7 +511,11 @@ impl Plus {
         let url = "/admin/api/2020-07/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -507,10 +535,10 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -531,11 +559,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -560,7 +592,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -580,11 +612,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -637,7 +673,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of gift cards. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -680,7 +716,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -693,7 +729,11 @@ impl Plus {
         let url = "/admin/api/2020-10/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -710,10 +750,10 @@ impl Plus {
     pub async fn get_gift_cards_param_card(&self, gift_card_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -734,11 +774,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -763,7 +807,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -783,11 +827,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -840,7 +888,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of gift cards. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -883,7 +931,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -899,7 +947,11 @@ impl Plus {
         let url = "/admin/api/2021-01/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -919,10 +971,10 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -943,11 +995,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -972,7 +1028,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -992,11 +1048,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1049,7 +1109,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of gift cards. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1092,7 +1152,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/gift_cards.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a gift card.
@@ -1108,7 +1168,11 @@ impl Plus {
         let url = "/admin/api/unstable/gift_cards.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1128,10 +1192,10 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Updates an existing gift card.
@@ -1152,11 +1216,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1181,7 +1249,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/gift_cards/count.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disables a gift card. Disabling a gift card can't be undone.
@@ -1201,11 +1269,15 @@ impl Plus {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(&gift_card_id.to_string()),
+            crate::progenitor_support::encode_path(gift_card_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1258,7 +1330,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/gift_cards/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1284,7 +1356,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1300,10 +1372,10 @@ impl Plus {
     pub async fn deprecated_202001_get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1315,7 +1387,7 @@ impl Plus {
     pub async fn deprecated_202001_get_users_current(&self) -> Result<()> {
         let url = "/admin/api/2020-01/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1341,7 +1413,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1357,10 +1429,10 @@ impl Plus {
     pub async fn deprecated_202004_get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1372,7 +1444,7 @@ impl Plus {
     pub async fn deprecated_202004_get_users_current(&self) -> Result<()> {
         let url = "/admin/api/2020-04/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1398,7 +1470,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1414,10 +1486,10 @@ impl Plus {
     pub async fn deprecated_202007_get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1429,7 +1501,7 @@ impl Plus {
     pub async fn deprecated_202007_get_users_current(&self) -> Result<()> {
         let url = "/admin/api/2020-07/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1455,7 +1527,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1471,10 +1543,10 @@ impl Plus {
     pub async fn get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1486,7 +1558,7 @@ impl Plus {
     pub async fn get_users_current(&self) -> Result<()> {
         let url = "/admin/api/2020-10/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1512,7 +1584,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1528,10 +1600,10 @@ impl Plus {
     pub async fn deprecated_202101_get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1543,7 +1615,7 @@ impl Plus {
     pub async fn deprecated_202101_get_users_current(&self) -> Result<()> {
         let url = "/admin/api/2021-01/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of all users. Note: As of version 2021-01, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1569,7 +1641,7 @@ impl Plus {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/users.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single user.
@@ -1585,10 +1657,10 @@ impl Plus {
     pub async fn deprecated_unstable_get_users_param_user(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/users/{}/json",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves information about the user account associated with the access token used to make this API request. This request works only when the access token was created for a specific user of the shop.
@@ -1600,6 +1672,6 @@ impl Plus {
     pub async fn deprecated_unstable_get_users_current(&self) -> Result<()> {
         let url = "/admin/api/unstable/users/current.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

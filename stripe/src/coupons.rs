@@ -45,7 +45,10 @@ impl Coupons {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/coupons?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetCouponsResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -59,7 +62,7 @@ impl Coupons {
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Coupon>> {
         let url = "/v1/coupons".to_string();
-        let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -80,12 +83,12 @@ impl Coupons {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -107,7 +110,9 @@ impl Coupons {
     pub async fn post(&self) -> Result<crate::types::Coupon> {
         let url = "/v1/coupons".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/coupons/{coupon}` endpoint.
@@ -125,7 +130,9 @@ impl Coupons {
             crate::progenitor_support::encode_path(coupon),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/coupons/{coupon}` endpoint.
@@ -142,7 +149,9 @@ impl Coupons {
             crate::progenitor_support::encode_path(coupon),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/coupons/{coupon}` endpoint.
@@ -159,6 +168,8 @@ impl Coupons {
             crate::progenitor_support::encode_path(coupon),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

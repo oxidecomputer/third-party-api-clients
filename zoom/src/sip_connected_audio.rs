@@ -31,7 +31,7 @@ impl SipConnectedAudio {
     ) -> Result<crate::types::ListSipTrunkNumbersResponse> {
         let url = "/sip_trunk/numbers".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Assign SIP trunk configuration.
@@ -59,7 +59,11 @@ impl SipConnectedAudio {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -91,7 +95,11 @@ impl SipConnectedAudio {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -117,7 +125,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List SIP trunks.
@@ -142,7 +150,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Assign SIP trunks.
@@ -168,7 +176,11 @@ impl SipConnectedAudio {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -197,7 +209,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(trunk_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List internal call-out countries.
@@ -222,7 +234,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add internal call-out countries.
@@ -249,7 +261,11 @@ impl SipConnectedAudio {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -279,7 +295,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(country_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List internal numbers.
@@ -320,7 +336,8 @@ impl SipConnectedAudio {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListInternalNumbersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListInternalNumbersResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.internal_numbers.to_vec())
@@ -349,7 +366,7 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(account_id),
         );
         let mut resp: crate::types::ListInternalNumbersResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut internal_numbers = resp.internal_numbers;
         let mut page = resp.next_page_token;
@@ -360,12 +377,12 @@ impl SipConnectedAudio {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -408,7 +425,11 @@ impl SipConnectedAudio {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -436,6 +457,6 @@ impl SipConnectedAudio {
             crate::progenitor_support::encode_path(number_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

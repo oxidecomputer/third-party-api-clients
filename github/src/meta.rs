@@ -24,7 +24,7 @@ impl Meta {
     pub async fn root(&self) -> Result<crate::types::MetaRootResponse> {
         let url = "".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub meta information.
@@ -40,7 +40,7 @@ impl Meta {
     pub async fn get(&self) -> Result<crate::types::ApiOverview> {
         let url = "/meta".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get Octocat.
@@ -63,7 +63,7 @@ impl Meta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/octocat?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the Zen of GitHub.
@@ -75,6 +75,6 @@ impl Meta {
     pub async fn get_zen(&self) -> Result<String> {
         let url = "/zen".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

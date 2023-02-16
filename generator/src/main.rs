@@ -2204,7 +2204,7 @@ fn render_param(
 
     a(&format!("impl std::fmt::Display for {} {{", sn));
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
-    a(r#"match &*self {"#);
+    a(r#"match self {"#);
     for e in &enums {
         if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
@@ -3168,19 +3168,6 @@ fn main() -> Result<()> {
         tags.push(grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?);
     }
     debug("");
-
-    // Try parsing the servers block and add it to the typespace if it exists
-    if api.servers.len() == 1 {
-        let servers = client::generate_servers(&api.servers, &to_pascal_case(""));
-        let server_type = servers.top_level_type.unwrap();
-
-        ts.add_if_not_exists(
-            Some(server_type),
-            TypeDetails::Object(BTreeMap::new(), openapiv3::SchemaData::default()),
-            "",
-            true,
-        );
-    }
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();

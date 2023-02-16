@@ -33,7 +33,7 @@ impl Alerts {
     pub async fn get_page(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
         let url = "/alerts".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all alerts.
@@ -80,7 +80,11 @@ impl Alerts {
         let url = "/alerts".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -107,7 +111,7 @@ impl Alerts {
             crate::progenitor_support::encode_path(&alert_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an alert.
@@ -132,7 +136,7 @@ impl Alerts {
             crate::progenitor_support::encode_path(&alert_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an alert.
@@ -162,7 +166,11 @@ impl Alerts {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -30,7 +30,7 @@ impl CancelScheduledSends {
     pub async fn post_mail_batch(&self) -> Result<crate::types::MailBatchId> {
         let url = "/mail/batch".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Retrieve all scheduled sends.
@@ -50,7 +50,7 @@ impl CancelScheduledSends {
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = "/user/scheduled_sends".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all scheduled sends.
@@ -93,7 +93,11 @@ impl CancelScheduledSends {
         let url = "/user/scheduled_sends".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -116,10 +120,10 @@ impl CancelScheduledSends {
     pub async fn get_mail_batch(&self, batch_id: &str) -> Result<crate::types::MailBatchId> {
         let url = format!(
             "/mail/batch/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve scheduled send.
@@ -138,10 +142,10 @@ impl CancelScheduledSends {
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = format!(
             "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve scheduled send.
@@ -158,7 +162,7 @@ impl CancelScheduledSends {
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = format!(
             "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -178,10 +182,10 @@ impl CancelScheduledSends {
     pub async fn delete_user_scheduled_sends_batch(&self, batch_id: &str) -> Result<()> {
         let url = format!(
             "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a scheduled send.
@@ -203,11 +207,15 @@ impl CancelScheduledSends {
     ) -> Result<()> {
         let url = format!(
             "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -35,7 +35,7 @@ impl RequestLogs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2.1/diagnostics/request_logs?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Deletes the request log files.
@@ -47,7 +47,7 @@ impl RequestLogs {
     pub async fn api_delete_logs(&self) -> Result<()> {
         let url = "/v2.1/diagnostics/request_logs".to_string();
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Gets a request logging log file.
@@ -69,10 +69,10 @@ impl RequestLogs {
     pub async fn api_get(&self, request_log_id: &str) -> Result<bytes::Bytes> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
-            crate::progenitor_support::encode_path(&request_log_id.to_string()),
+            crate::progenitor_support::encode_path(request_log_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Gets the API request logging settings.
@@ -87,7 +87,7 @@ impl RequestLogs {
     pub async fn api_get_setting(&self) -> Result<crate::types::DiagnosticsSettingsInformation> {
         let url = "/v2.1/diagnostics/settings".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Enables or disables API request logging for troubleshooting.
@@ -114,7 +114,11 @@ impl RequestLogs {
         let url = "/v2.1/diagnostics/settings".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -26,7 +26,9 @@ impl Reminders {
     pub async fn add(&self) -> Result<crate::types::RemindersAddSchema> {
         let url = "/reminders.add".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/reminders.complete` endpoint.
@@ -42,7 +44,9 @@ impl Reminders {
     pub async fn complete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.complete".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/reminders.delete` endpoint.
@@ -58,7 +62,9 @@ impl Reminders {
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.delete".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/reminders.info` endpoint.
@@ -80,7 +86,7 @@ impl Reminders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reminders.info?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/reminders.list` endpoint.
@@ -96,6 +102,6 @@ impl Reminders {
     pub async fn list(&self) -> Result<crate::types::RemindersListSchema> {
         let url = "/reminders.list".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

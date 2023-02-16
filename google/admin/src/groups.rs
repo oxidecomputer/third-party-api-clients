@@ -67,7 +67,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/groups?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::Groups = self.client.get(&url, None).await?;
+        let resp: crate::types::Groups = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.groups.to_vec())
@@ -109,7 +109,7 @@ impl Groups {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/groups?{}", query_);
-        let mut resp: crate::types::Groups = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Groups = self.client.get(&url, None, None).await?;
 
         let mut groups = resp.groups;
         let mut page = resp.next_page_token;
@@ -119,12 +119,12 @@ impl Groups {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -149,7 +149,11 @@ impl Groups {
         let url = "/admin/directory/v1/groups".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -167,7 +171,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/groups/{groupKey}` endpoint.
@@ -189,7 +193,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -207,7 +215,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_key),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/groups/{groupKey}` endpoint.
@@ -229,7 +237,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -247,7 +259,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/groups/{groupKey}/aliases` endpoint.
@@ -269,7 +281,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -289,6 +305,6 @@ impl Groups {
             crate::progenitor_support::encode_path(alias),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

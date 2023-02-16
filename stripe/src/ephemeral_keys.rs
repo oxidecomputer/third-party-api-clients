@@ -20,7 +20,9 @@ impl EphemeralKeys {
     pub async fn post(&self) -> Result<crate::types::EphemeralKey> {
         let url = "/v1/ephemeral_keys".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/ephemeral_keys/{key}` endpoint.
@@ -37,6 +39,8 @@ impl EphemeralKeys {
             crate::progenitor_support::encode_path(key),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

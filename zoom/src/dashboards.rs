@@ -65,7 +65,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/meetings?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting details.
@@ -103,7 +103,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List meeting participants.
@@ -157,7 +157,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting participant QoS.
@@ -199,7 +199,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List meeting participants QoS.
@@ -247,7 +247,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get sharing/recording details.
@@ -295,7 +295,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List webinars.
@@ -346,7 +346,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/webinars?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar details.
@@ -384,7 +384,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar participants.
@@ -437,7 +437,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar participant QoS.
@@ -477,7 +477,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List webinar participant QoS.
@@ -525,7 +525,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get sharing/recording details.
@@ -573,7 +573,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List Zoom Rooms.
@@ -615,7 +615,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/zoomrooms?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get Zoom Rooms details.
@@ -667,7 +667,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get CRC port usage.
@@ -703,7 +703,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/crc?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get IM metrics.
@@ -750,7 +750,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/im?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get chat metrics.
@@ -799,7 +799,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/chat?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List Zoom meetings client feedback.
@@ -836,7 +836,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/client/feedback?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get top 25 issues of Zoom Rooms.
@@ -872,7 +872,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/zoomrooms/issues?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get top 25 Zoom Rooms with issues.
@@ -906,7 +906,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/issues/zoomrooms?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get issues of Zoom Rooms.
@@ -957,7 +957,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get zoom meetings client feedback.
@@ -1011,7 +1011,7 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List client meeting satisfaction.
@@ -1044,7 +1044,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/metrics/client/satisfaction?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List call logs.
@@ -1110,7 +1110,7 @@ impl Dashboards {
         let url = format!("/phone/metrics/call_logs?{}", query_);
         let url = self.client.url(&url, None);
         let resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
@@ -1156,7 +1156,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/metrics/call_logs?{}", query_);
         let mut resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut call_logs = resp.call_logs;
         let mut page = resp.next_page_token;
@@ -1167,12 +1167,12 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1218,7 +1218,7 @@ impl Dashboards {
             crate::progenitor_support::encode_path(call_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get call QoS.
@@ -1243,7 +1243,7 @@ impl Dashboards {
             crate::progenitor_support::encode_path(call_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get post meeting feedback.
@@ -1295,7 +1295,8 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.participants.to_vec())
@@ -1333,7 +1334,7 @@ impl Dashboards {
             query_
         );
         let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1344,12 +1345,12 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -1416,7 +1417,8 @@ impl Dashboards {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.participants.to_vec())
@@ -1455,7 +1457,7 @@ impl Dashboards {
             query_
         );
         let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1466,12 +1468,12 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 

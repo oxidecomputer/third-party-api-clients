@@ -57,7 +57,7 @@ impl SipPhone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.phones.to_vec())
@@ -83,7 +83,8 @@ impl SipPhone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
-        let mut resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListSipPhonesResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut phones = resp.phones;
         let mut page = resp.next_page_token;
@@ -94,12 +95,12 @@ impl SipPhone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -133,7 +134,11 @@ impl SipPhone {
         let url = "/sip_phones".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -158,7 +163,7 @@ impl SipPhone {
             crate::progenitor_support::encode_path(phone_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update SIP phone.
@@ -187,7 +192,11 @@ impl SipPhone {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

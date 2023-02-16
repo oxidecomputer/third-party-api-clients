@@ -30,6 +30,6 @@ impl Resources {
     pub async fn service_information_get(&self) -> Result<crate::types::ResourceInformation> {
         let url = "/v2.1".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

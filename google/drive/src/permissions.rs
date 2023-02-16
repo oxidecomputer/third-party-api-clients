@@ -75,7 +75,7 @@ impl Permissions {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::PermissionList = self.client.get(&url, None).await?;
+        let resp: crate::types::PermissionList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.permissions.to_vec())
@@ -126,7 +126,7 @@ impl Permissions {
             crate::progenitor_support::encode_path(file_id),
             query_
         );
-        let mut resp: crate::types::PermissionList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::PermissionList = self.client.get(&url, None, None).await?;
 
         let mut permissions = resp.permissions;
         let mut page = resp.next_page_token;
@@ -136,12 +136,12 @@ impl Permissions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -232,7 +232,11 @@ impl Permissions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -283,7 +287,7 @@ impl Permissions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
@@ -333,7 +337,7 @@ impl Permissions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
@@ -401,7 +405,11 @@ impl Permissions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

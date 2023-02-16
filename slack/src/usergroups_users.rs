@@ -40,7 +40,7 @@ impl UsergroupsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/usergroups.users.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/usergroups.users.update` endpoint.
@@ -56,6 +56,8 @@ impl UsergroupsUsers {
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.users.update".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

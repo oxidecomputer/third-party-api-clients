@@ -33,11 +33,11 @@ impl TemplateDocumentHtmlDefinitions {
     ) -> Result<crate::types::DocumentHtmlDefinitionOriginals> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/html_definitions",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

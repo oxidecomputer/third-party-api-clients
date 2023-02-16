@@ -23,7 +23,11 @@ impl SalesChannels {
         let url = "/admin/api/2020-01/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -37,7 +41,11 @@ impl SalesChannels {
         let url = "/admin/api/2020-04/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -51,7 +59,11 @@ impl SalesChannels {
         let url = "/admin/api/2020-07/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -65,7 +77,11 @@ impl SalesChannels {
         let url = "/admin/api/2020-10/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -79,7 +95,11 @@ impl SalesChannels {
         let url = "/admin/api/2021-01/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -96,7 +116,11 @@ impl SalesChannels {
         let url = "/admin/api/unstable/checkouts.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -117,11 +141,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -138,10 +166,10 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -161,11 +189,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -187,10 +219,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Completes a checkout.
@@ -210,11 +242,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -231,10 +267,10 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -254,11 +290,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -280,10 +320,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Completes a checkout.
@@ -303,11 +343,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -324,10 +368,10 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -347,11 +391,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -373,10 +421,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Completes a checkout.
@@ -396,11 +444,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -417,10 +469,10 @@ impl SalesChannels {
     pub async fn get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -440,11 +492,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -463,10 +519,10 @@ impl SalesChannels {
     pub async fn get_checkouts_param_token_shipping_rate(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Completes a checkout.
@@ -486,11 +542,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -507,10 +567,10 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -530,11 +590,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -556,10 +620,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Completes a checkout.
@@ -579,11 +643,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/complete.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -600,10 +668,10 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Modifies an existing checkout.
@@ -623,11 +691,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -649,10 +721,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/shipping_rates.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -674,7 +746,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -701,11 +773,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -724,10 +796,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -747,11 +819,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -771,10 +847,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -796,7 +872,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -823,11 +899,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -846,10 +922,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -869,11 +945,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -893,10 +973,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -918,7 +998,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -945,11 +1025,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -968,10 +1048,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -991,11 +1071,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1015,10 +1099,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1040,7 +1124,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1067,11 +1151,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -1090,10 +1174,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -1113,11 +1197,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1137,10 +1225,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1162,7 +1250,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1189,11 +1277,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -1212,10 +1300,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -1235,11 +1323,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1259,10 +1351,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1284,7 +1376,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/collection_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1311,11 +1403,11 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/collection_listings/{}/product_ids.json?{}",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific collection listing that is published to your app.
@@ -1334,10 +1426,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a collection listing to publish a collection to your app.
@@ -1357,11 +1449,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1381,10 +1477,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/collection_listings/{}/json",
-            crate::progenitor_support::encode_path(&collection_listing_id.to_string()),
+            crate::progenitor_support::encode_path(collection_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -1403,10 +1499,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -1473,12 +1569,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1500,11 +1600,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -1523,10 +1623,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -1545,10 +1645,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -1615,12 +1715,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1642,11 +1746,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -1665,10 +1769,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -1687,10 +1791,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -1757,12 +1861,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1784,11 +1892,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -1807,10 +1915,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -1826,10 +1934,10 @@ impl SalesChannels {
     pub async fn get_checkouts_param_token_payment(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -1896,12 +2004,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1923,11 +2035,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -1943,10 +2055,10 @@ impl SalesChannels {
     pub async fn get_checkouts_param_token_payments_count(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -1965,10 +2077,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -2035,12 +2147,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2062,11 +2178,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -2085,10 +2201,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of payments on a particular checkout.
@@ -2107,10 +2223,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/payments.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a payment on a checkout using the session ID returned by the card vault.
@@ -2177,12 +2293,16 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/checkouts/{}/payments.json?{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2204,11 +2324,11 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/payments/{}/json",
-            crate::progenitor_support::encode_path(&token.to_string()),
-            crate::progenitor_support::encode_path(&payment_id.to_string()),
+            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(payment_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Counts the number of payments attempted on a checkout.
@@ -2227,10 +2347,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/payments/count.json",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2275,7 +2395,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/product_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
@@ -2300,7 +2420,7 @@ impl SalesChannels {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a count of products that are published to your app.
@@ -2312,7 +2432,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/product_listings/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific product listing that is published to your app.
@@ -2331,10 +2451,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a product listing to publish a product to your app.
@@ -2354,11 +2474,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2378,10 +2502,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2426,7 +2550,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/product_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
@@ -2451,7 +2575,7 @@ impl SalesChannels {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a count of products that are published to your app.
@@ -2463,7 +2587,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/product_listings/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific product listing that is published to your app.
@@ -2482,10 +2606,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a product listing to publish a product to your app.
@@ -2505,11 +2629,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2529,10 +2657,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2577,7 +2705,7 @@ impl SalesChannels {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/product_listings.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
@@ -2602,7 +2730,7 @@ impl SalesChannels {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a count of products that are published to your app.
@@ -2614,7 +2742,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/product_listings/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific product listing that is published to your app.
@@ -2633,10 +2761,10 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a product listing to publish a product to your app.
@@ -2656,11 +2784,15 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2680,9 +2812,9 @@ impl SalesChannels {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/product_listings/{}/json",
-            crate::progenitor_support::encode_path(&product_listing_id.to_string()),
+            crate::progenitor_support::encode_path(product_listing_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

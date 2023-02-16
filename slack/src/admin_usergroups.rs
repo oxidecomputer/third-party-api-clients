@@ -26,7 +26,9 @@ impl AdminUsergroups {
     pub async fn add_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.addChannels".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.usergroups.addTeams` endpoint.
@@ -42,7 +44,9 @@ impl AdminUsergroups {
     pub async fn add_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.addTeams".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/admin.usergroups.listChannels` endpoint.
@@ -80,7 +84,7 @@ impl AdminUsergroups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.usergroups.listChannels?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin.usergroups.removeChannels` endpoint.
@@ -96,6 +100,8 @@ impl AdminUsergroups {
     pub async fn remove_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.removeChannels".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

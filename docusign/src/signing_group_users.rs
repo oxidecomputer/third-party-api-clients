@@ -33,11 +33,11 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signing_group_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Adds members to a signing group. .
@@ -61,12 +61,16 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signing_group_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -91,12 +95,16 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signing_group_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

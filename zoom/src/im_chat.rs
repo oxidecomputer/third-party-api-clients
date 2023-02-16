@@ -56,7 +56,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/im/chat/sessions?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get IM chat messages.
@@ -112,7 +112,7 @@ impl ImChat {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get user’s IM messages.
@@ -167,7 +167,7 @@ impl ImChat {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.messages.to_vec())
@@ -209,7 +209,8 @@ impl ImChat {
             crate::progenitor_support::encode_path(user_id),
             query_
         );
-        let mut resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListimmessagesResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut messages = resp.messages;
         let mut page = resp.next_page_token;
@@ -220,12 +221,12 @@ impl ImChat {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -267,7 +268,11 @@ impl ImChat {
         let url = format!("/im/users/me/chat/messages?{}", query_);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

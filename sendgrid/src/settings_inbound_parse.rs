@@ -38,7 +38,11 @@ impl SettingsInboundParse {
         let url = "/user/webhooks/parse/settings".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -60,10 +64,10 @@ impl SettingsInboundParse {
     ) -> Result<crate::types::ParseSetting> {
         let url = format!(
             "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(&hostname.to_string()),
+            crate::progenitor_support::encode_path(hostname),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a parse setting.
@@ -84,10 +88,10 @@ impl SettingsInboundParse {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(&hostname.to_string()),
+            crate::progenitor_support::encode_path(hostname),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a parse setting.
@@ -109,11 +113,15 @@ impl SettingsInboundParse {
     ) -> Result<crate::types::ParseSetting> {
         let url = format!(
             "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(&hostname.to_string()),
+            crate::progenitor_support::encode_path(hostname),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

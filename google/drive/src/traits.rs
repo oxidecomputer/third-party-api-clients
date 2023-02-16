@@ -246,6 +246,7 @@ impl FileOps for crate::files::Files {
                 method,
                 &uri,
                 Some(reqwest::Body::from(serde_json::to_vec(&f)?)),
+                None,
             )
             .await?;
 
@@ -268,6 +269,7 @@ impl FileOps for crate::files::Files {
             .request_raw(
                 reqwest::Method::GET,
                 &format!("/files/{}?supportsAllDrives=true&alt=media", id),
+                None,
                 None,
             )
             .await?;
@@ -324,6 +326,7 @@ impl FileOps for crate::files::Files {
             .post(
                 "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
                 Some(reqwest::Body::from(serde_json::to_vec(&file)?)),
+                None,
             )
             .await?;
 
@@ -348,7 +351,7 @@ impl FileOps for crate::files::Files {
         );
         let resp = self
             .client
-            .request_raw(reqwest::Method::GET, &url, None)
+            .request_raw(reqwest::Method::GET, &url, None, None)
             .await?;
 
         Ok(resp.text().await?)

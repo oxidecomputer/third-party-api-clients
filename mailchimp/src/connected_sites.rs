@@ -49,7 +49,7 @@ impl ConnectedSites {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/connected-sites?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add connected site.
@@ -62,7 +62,11 @@ impl ConnectedSites {
         let url = "/connected-sites".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -98,7 +102,7 @@ impl ConnectedSites {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete connected site.
@@ -117,7 +121,7 @@ impl ConnectedSites {
             crate::progenitor_support::encode_path(connected_site_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Verify connected site script.
@@ -139,6 +143,6 @@ impl ConnectedSites {
             crate::progenitor_support::encode_path(connected_site_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
 }

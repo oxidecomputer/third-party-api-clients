@@ -27,7 +27,7 @@ impl Groups {
     pub async fn get(&self) -> Result<crate::types::GroupList> {
         let url = "/groups".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a group.
@@ -47,7 +47,11 @@ impl Groups {
         let url = "/groups".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -73,7 +77,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a group.
@@ -98,7 +102,7 @@ impl Groups {
             crate::progenitor_support::encode_path(group_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a group.
@@ -128,7 +132,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -178,7 +186,8 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
+        let resp: crate::types::GroupMembersResponseData =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.members.to_vec())
@@ -205,7 +214,8 @@ impl Groups {
             "/groups/{}/members",
             crate::progenitor_support::encode_path(group_id),
         );
-        let mut resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GroupMembersResponseData =
+            self.client.get(&url, None, None).await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -216,12 +226,12 @@ impl Groups {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -265,7 +275,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -293,7 +307,7 @@ impl Groups {
             crate::progenitor_support::encode_path(member_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a group member.
@@ -331,7 +345,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -376,7 +394,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a group's settings.
@@ -420,7 +438,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a group's settings.
@@ -464,7 +482,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a group's settings.
@@ -508,7 +526,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a group's settings.
@@ -551,7 +569,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -594,7 +616,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get locked settings.
@@ -636,7 +658,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get locked settings.
@@ -678,7 +700,7 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update locked settings.
@@ -722,7 +744,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -763,7 +789,11 @@ impl Groups {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -797,6 +827,6 @@ impl Groups {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

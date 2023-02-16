@@ -69,7 +69,7 @@ impl IpAddresses {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/ips?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all IP addresses.
@@ -132,7 +132,11 @@ impl IpAddresses {
         let url = "/ips".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -145,7 +149,7 @@ impl IpAddresses {
     pub async fn get_ips_remaining(&self) -> Result<crate::types::GetIpsRemainingResponse> {
         let url = "/ips/remaining".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all assigned IPs.
@@ -159,7 +163,7 @@ impl IpAddresses {
     pub async fn get_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
         let url = "/ips/assigned".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all assigned IPs.
@@ -193,9 +197,9 @@ impl IpAddresses {
     ) -> Result<crate::types::GetIpsIpAddressResponse> {
         let url = format!(
             "/ips/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

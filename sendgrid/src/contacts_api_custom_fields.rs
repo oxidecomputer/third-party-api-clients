@@ -28,7 +28,7 @@ impl ContactsApiCustomFields {
     ) -> Result<crate::types::ListAllCustomFieldsResponse> {
         let url = "/contactdb/custom_fields".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a Custom Field.
@@ -50,7 +50,11 @@ impl ContactsApiCustomFields {
         let url = "/contactdb/custom_fields".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -73,7 +77,7 @@ impl ContactsApiCustomFields {
             crate::progenitor_support::encode_path(&custom_field_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a Custom Field.
@@ -95,7 +99,7 @@ impl ContactsApiCustomFields {
             crate::progenitor_support::encode_path(&custom_field_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieve reserved fields.
@@ -113,6 +117,6 @@ impl ContactsApiCustomFields {
     ) -> Result<crate::types::GetContactdbReservedFieldsResponse> {
         let url = "/contactdb/reserved_fields".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

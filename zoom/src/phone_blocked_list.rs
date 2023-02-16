@@ -45,7 +45,7 @@ impl PhoneBlockedList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/blocked_list?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.blocked_list.to_vec())
@@ -67,7 +67,7 @@ impl PhoneBlockedList {
      */
     pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
         let url = "/phone/blocked_list".to_string();
-        let mut resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
 
         let mut blocked_list = resp.blocked_list;
         let mut page = resp.next_page_token;
@@ -78,12 +78,12 @@ impl PhoneBlockedList {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -119,7 +119,11 @@ impl PhoneBlockedList {
         let url = "/phone/blocked_list".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -147,7 +151,7 @@ impl PhoneBlockedList {
             crate::progenitor_support::encode_path(blocked_list_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a blocked list.
@@ -173,7 +177,7 @@ impl PhoneBlockedList {
             crate::progenitor_support::encode_path(blocked_list_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a blocked list.
@@ -203,7 +207,11 @@ impl PhoneBlockedList {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

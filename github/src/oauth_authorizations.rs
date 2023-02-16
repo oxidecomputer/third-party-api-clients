@@ -48,7 +48,7 @@ impl OauthAuthorizations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/applications/grants?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List your grants.
@@ -94,7 +94,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&grant_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a grant.
@@ -117,7 +117,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&grant_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List your authorizations.
@@ -153,7 +153,7 @@ impl OauthAuthorizations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/authorizations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List your authorizations.
@@ -204,7 +204,11 @@ impl OauthAuthorizations {
         let url = "/authorizations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -239,7 +243,11 @@ impl OauthAuthorizations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -275,7 +283,11 @@ impl OauthAuthorizations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -300,7 +312,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an authorization.
@@ -321,7 +333,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an existing authorization.
@@ -351,7 +363,11 @@ impl OauthAuthorizations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

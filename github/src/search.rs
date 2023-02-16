@@ -73,7 +73,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/code?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search commits.
@@ -126,7 +126,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/commits?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search issues and pull requests.
@@ -183,7 +183,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/issues?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search labels.
@@ -242,7 +242,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/labels?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search repositories.
@@ -300,7 +300,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/repositories?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search topics.
@@ -344,7 +344,7 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/topics?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Search users.
@@ -398,6 +398,6 @@ impl Search {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/users?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

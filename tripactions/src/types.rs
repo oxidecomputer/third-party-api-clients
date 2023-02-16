@@ -16,7 +16,7 @@ pub enum TravelerType {
 
 impl std::fmt::Display for TravelerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             TravelerType::Guest => "GUEST",
             TravelerType::Passenger => "PASSENGER",
             TravelerType::Noop => "",
@@ -57,7 +57,7 @@ pub enum BookingStatus {
 
 impl std::fmt::Display for BookingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BookingStatus::Accepted => "ACCEPTED",
             BookingStatus::Canceled => "CANCELED",
             BookingStatus::Confirmed => "CONFIRMED",
@@ -103,7 +103,7 @@ pub enum BookingType {
 
 impl std::fmt::Display for BookingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             BookingType::BlackCar => "BLACK_CAR",
             BookingType::Car => "CAR",
             BookingType::Flight => "FLIGHT",
@@ -146,7 +146,7 @@ pub enum PaymentSchedule {
 
 impl std::fmt::Display for PaymentSchedule {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PaymentSchedule::Later => "LATER",
             PaymentSchedule::Now => "NOW",
             PaymentSchedule::Partial => "PARTIAL",
@@ -183,7 +183,7 @@ pub enum PassengerStatus {
 
 impl std::fmt::Display for PassengerStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
+        match self {
             PassengerStatus::Disabled => "DISABLED",
             PassengerStatus::Enabled => "ENABLED",
             PassengerStatus::Noop => "",

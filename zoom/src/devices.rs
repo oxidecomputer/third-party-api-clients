@@ -50,7 +50,7 @@ impl Devices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/h323/devices?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a H.323/SIP device.
@@ -66,7 +66,11 @@ impl Devices {
         let url = "/h323/devices".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -89,7 +93,7 @@ impl Devices {
             crate::progenitor_support::encode_path(device_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a H.323/SIP device.
@@ -112,7 +116,11 @@ impl Devices {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

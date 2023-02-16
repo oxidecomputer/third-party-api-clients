@@ -81,7 +81,7 @@ impl Query {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/messages?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Filter messages by message ID.
@@ -99,9 +99,9 @@ impl Query {
     pub async fn get_messages_msg(&self, msg_id: &str) -> Result<crate::types::Message> {
         let url = format!(
             "/messages/{}",
-            crate::progenitor_support::encode_path(&msg_id.to_string()),
+            crate::progenitor_support::encode_path(msg_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

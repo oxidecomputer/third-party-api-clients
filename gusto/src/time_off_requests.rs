@@ -61,7 +61,7 @@ impl TimeOffRequests {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get time off requests for a company.
@@ -128,6 +128,6 @@ impl TimeOffRequests {
             crate::progenitor_support::encode_path(time_off_request_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

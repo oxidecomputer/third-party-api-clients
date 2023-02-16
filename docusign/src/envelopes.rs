@@ -412,11 +412,11 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates an envelope.
@@ -538,12 +538,16 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -716,12 +720,16 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/status?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -768,12 +776,12 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Send, void, or modify a draft envelope. Purge documents from a completed envelope.
@@ -971,13 +979,17 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -999,11 +1011,11 @@ impl Envelopes {
     ) -> Result<crate::types::EnvelopeAuditEventResponse> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/audit_events",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Returns document page image(s) based on input.
@@ -1063,13 +1075,13 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Deletes a page from a document in an envelope.
@@ -1094,13 +1106,13 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
-            crate::progenitor_support::encode_path(&page_number.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(page_number),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Gets a page image from an envelope for display.
@@ -1147,14 +1159,14 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
-            crate::progenitor_support::encode_path(&page_number.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(page_number),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Rotates page image from an envelope for display.
@@ -1180,14 +1192,18 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
-            crate::progenitor_support::encode_path(&page_number.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(page_number),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -1209,11 +1225,11 @@ impl Envelopes {
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/notification",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Sets envelope notifications for an existing envelope.
@@ -1237,12 +1253,16 @@ impl Envelopes {
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/notification",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1281,13 +1301,13 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Sets the initials image for an accountless signer.
@@ -1312,12 +1332,12 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Gets signature information for a signer or sign-in-person recipient.
@@ -1340,12 +1360,12 @@ impl Envelopes {
     ) -> Result<crate::types::UserSignature> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve signature image information for a signer/sign-in-person recipient.
@@ -1383,13 +1403,13 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Sets the signature image for an accountless signer.
@@ -1414,11 +1434,11 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
 }

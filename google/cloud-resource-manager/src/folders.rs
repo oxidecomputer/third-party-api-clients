@@ -47,7 +47,7 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2/folders?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListFoldersResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.folders.to_vec())
@@ -73,7 +73,7 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v2/folders?{}", query_);
-        let mut resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListFoldersResponse = self.client.get(&url, None, None).await?;
 
         let mut folders = resp.folders;
         let mut page = resp.next_page_token;
@@ -83,12 +83,12 @@ impl Folders {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -126,7 +126,11 @@ impl Folders {
         let url = format!("/v2/folders?{}", query_);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -142,7 +146,11 @@ impl Folders {
         let url = self.client.url(&url, None);
         let resp: crate::types::SearchFoldersResponse = self
             .client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await?;
 
         // Return our response data.
@@ -160,7 +168,7 @@ impl Folders {
     pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/v2/{name}` endpoint.
@@ -174,7 +182,7 @@ impl Folders {
     pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/v2/{name}` endpoint.
@@ -204,7 +212,11 @@ impl Folders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -224,7 +236,11 @@ impl Folders {
         let url = format!("/v2/{}/move", crate::progenitor_support::encode_path(name),);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -247,7 +263,11 @@ impl Folders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -270,7 +290,11 @@ impl Folders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -293,7 +317,11 @@ impl Folders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -316,7 +344,11 @@ impl Folders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

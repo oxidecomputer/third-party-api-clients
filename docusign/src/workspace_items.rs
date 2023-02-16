@@ -82,13 +82,13 @@ impl WorkspaceItems {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Deletes files or sub-folders from a workspace.
@@ -114,13 +114,17 @@ impl WorkspaceItems {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -144,12 +148,12 @@ impl WorkspaceItems {
     ) -> Result<crate::types::WorkspaceItem> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Gets a workspace file.
@@ -186,14 +190,14 @@ impl WorkspaceItems {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update workspace file or folder metadata.
@@ -218,13 +222,13 @@ impl WorkspaceItems {
     ) -> Result<crate::types::WorkspaceItem> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(file_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * List File Pages.
@@ -276,13 +280,13 @@ impl WorkspaceItems {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&workspace_id.to_string()),
-            crate::progenitor_support::encode_path(&folder_id.to_string()),
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

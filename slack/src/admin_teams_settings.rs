@@ -32,7 +32,7 @@ impl AdminTeamsSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.teams.settings.info?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setDefaultChannels` endpoint.
@@ -44,7 +44,9 @@ impl AdminTeamsSettings {
     pub async fn set_default_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setDefaultChannels".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setDescription` endpoint.
@@ -60,7 +62,9 @@ impl AdminTeamsSettings {
     pub async fn set_description(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setDescription".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setDiscoverability` endpoint.
@@ -76,7 +80,9 @@ impl AdminTeamsSettings {
     pub async fn set_discoverability(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setDiscoverability".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setIcon` endpoint.
@@ -88,7 +94,9 @@ impl AdminTeamsSettings {
     pub async fn set_icon(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setIcon".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setName` endpoint.
@@ -104,6 +112,8 @@ impl AdminTeamsSettings {
     pub async fn set_name(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setName".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

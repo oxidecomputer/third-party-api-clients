@@ -20,7 +20,9 @@ impl Terminal {
     pub async fn post_connection_token(&self) -> Result<crate::types::TerminalConnectionToken> {
         let url = "/v1/terminal/connection_tokens".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/terminal/locations` endpoint.
@@ -53,7 +55,10 @@ impl Terminal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/terminal/locations?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::TerminalLocationList = self.client.get(&url, None).await?;
+        let resp: crate::types::TerminalLocationList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -67,7 +72,8 @@ impl Terminal {
      */
     pub async fn get_all_locations(&self) -> Result<Vec<crate::types::TerminalLocation>> {
         let url = "/v1/terminal/locations".to_string();
-        let mut resp: crate::types::TerminalLocationList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::TerminalLocationList =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -88,12 +94,12 @@ impl Terminal {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -114,7 +120,9 @@ impl Terminal {
     pub async fn post_location(&self) -> Result<crate::types::TerminalLocation> {
         let url = "/v1/terminal/locations".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/terminal/locations/{location}` endpoint.
@@ -135,7 +143,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(location),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/locations/{location}` endpoint.
@@ -155,7 +165,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(location),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/terminal/locations/{location}` endpoint.
@@ -175,7 +187,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(location),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/terminal/readers` endpoint.
@@ -223,7 +237,10 @@ impl Terminal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/terminal/readers?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::TerminalReaderRetrieve = self.client.get(&url, None).await?;
+        let resp: crate::types::TerminalReaderRetrieve = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -253,7 +270,8 @@ impl Terminal {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/terminal/readers?{}", query_);
-        let mut resp: crate::types::TerminalReaderRetrieve = self.client.get(&url, None).await?;
+        let mut resp: crate::types::TerminalReaderRetrieve =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -274,12 +292,12 @@ impl Terminal {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -299,7 +317,9 @@ impl Terminal {
     pub async fn post_reader(&self) -> Result<crate::types::TerminalReader> {
         let url = "/v1/terminal/readers".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/terminal/readers/{reader}` endpoint.
@@ -320,7 +340,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/readers/{reader}` endpoint.
@@ -340,7 +362,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/terminal/readers/{reader}` endpoint.
@@ -360,7 +384,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/readers/{reader}/cancel_action` endpoint.
@@ -380,7 +406,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/readers/{reader}/process_payment_intent` endpoint.
@@ -400,7 +428,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/readers/{reader}/process_setup_intent` endpoint.
@@ -420,7 +450,9 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/terminal/readers/{reader}/set_reader_display` endpoint.
@@ -440,6 +472,8 @@ impl Terminal {
             crate::progenitor_support::encode_path(reader),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

@@ -22,7 +22,7 @@ impl Receiving {
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
         let url = "/fulfillmentCenter".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get Fulfillment Centers.
@@ -52,7 +52,7 @@ impl Receiving {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get Warehouse Receiving Order Box Labels.
@@ -69,7 +69,7 @@ impl Receiving {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create Warehouse Receiving Order.
@@ -83,7 +83,11 @@ impl Receiving {
         let url = "/receiving".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json-patch+json"),
+            )
             .await
     }
     /**
@@ -101,6 +105,6 @@ impl Receiving {
             crate::progenitor_support::encode_path(&id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
 }

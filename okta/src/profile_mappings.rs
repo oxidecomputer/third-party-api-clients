@@ -47,7 +47,7 @@ impl ProfileMappings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/mappings?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/api/v1/mappings` endpoint.
@@ -86,10 +86,10 @@ impl ProfileMappings {
     pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Profile Mapping.
@@ -109,11 +109,15 @@ impl ProfileMappings {
     ) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -51,7 +51,7 @@ impl Replies {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ReplyList = self.client.get(&url, None).await?;
+        let resp: crate::types::ReplyList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.replies.to_vec())
@@ -80,7 +80,7 @@ impl Replies {
             crate::progenitor_support::encode_path(comment_id),
             query_
         );
-        let mut resp: crate::types::ReplyList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ReplyList = self.client.get(&url, None, None).await?;
 
         let mut replies = resp.replies;
         let mut page = resp.next_page_token;
@@ -90,12 +90,12 @@ impl Replies {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -134,7 +134,11 @@ impl Replies {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -169,7 +173,7 @@ impl Replies {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
@@ -190,7 +194,7 @@ impl Replies {
             crate::progenitor_support::encode_path(reply_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
@@ -218,7 +222,11 @@ impl Replies {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

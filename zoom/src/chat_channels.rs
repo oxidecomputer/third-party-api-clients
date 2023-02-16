@@ -51,7 +51,7 @@ impl ChatChannels {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetChannelsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.channels.to_vec())
@@ -76,7 +76,7 @@ impl ChatChannels {
             "/chat/users/{}/channels",
             crate::progenitor_support::encode_path(user_id),
         );
-        let mut resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetChannelsResponse = self.client.get(&url, None, None).await?;
 
         let mut channels = resp.channels;
         let mut page = resp.next_page_token;
@@ -87,12 +87,12 @@ impl ChatChannels {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -136,7 +136,11 @@ impl ChatChannels {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -164,7 +168,7 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(channel_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a channel.
@@ -191,7 +195,7 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(channel_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a channel.
@@ -222,7 +226,11 @@ impl ChatChannels {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -255,7 +263,7 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(member_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Join a channel.
@@ -282,7 +290,7 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(channel_id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Leave a channel.
@@ -306,6 +314,6 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(channel_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

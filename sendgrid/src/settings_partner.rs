@@ -32,7 +32,7 @@ impl SettingsPartner {
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
         let url = "/partner_settings/new_relic".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates New Relic partner settings.
@@ -56,7 +56,11 @@ impl SettingsPartner {
         let url = "/partner_settings/new_relic".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -89,6 +93,6 @@ impl SettingsPartner {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/partner_settings?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

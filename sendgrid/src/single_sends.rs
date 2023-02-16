@@ -41,7 +41,7 @@ impl SingleSends {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/singlesends?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create Single Send.
@@ -59,7 +59,11 @@ impl SingleSends {
         let url = "/marketing/singlesends".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -85,7 +89,7 @@ impl SingleSends {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketing/singlesends?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get Single Send by ID.
@@ -102,10 +106,10 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Duplicate Single Send.
@@ -125,11 +129,15 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -146,10 +154,10 @@ impl SingleSends {
     pub async fn delete_marketing_singlesends_single_sends(&self, id: &str) -> Result<()> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update Single Send.
@@ -167,11 +175,15 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -219,7 +231,11 @@ impl SingleSends {
         let url = format!("/marketing/singlesends/search?{}", query_);
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -238,11 +254,15 @@ impl SingleSends {
     ) -> Result<crate::types::PutMarketingSinglesendsScheduleResponse> {
         let url = format!(
             "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -260,10 +280,10 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendSchedule> {
         let url = format!(
             "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get All Categories.
@@ -279,6 +299,6 @@ impl SingleSends {
     ) -> Result<crate::types::GetMarketingSinglesendsCategoriesResponse> {
         let url = "/marketing/singlesends/categories".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

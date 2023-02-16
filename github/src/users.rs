@@ -26,7 +26,7 @@ impl Users {
     pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
         let url = "/user".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the authenticated user.
@@ -42,7 +42,7 @@ impl Users {
     pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the authenticated user.
@@ -58,7 +58,7 @@ impl Users {
     pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = "/user".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update the authenticated user.
@@ -76,7 +76,11 @@ impl Users {
         let url = "/user".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -91,7 +95,7 @@ impl Users {
     pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List users blocked by the authenticated user.
@@ -127,7 +131,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Block a user.
@@ -148,7 +152,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Unblock a user.
@@ -169,7 +173,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Set primary email visibility for the authenticated user.
@@ -187,7 +191,11 @@ impl Users {
         let url = "/user/email/visibility".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -219,7 +227,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/emails?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List email addresses for the authenticated user.
@@ -252,7 +260,11 @@ impl Users {
         let url = "/user/emails".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -271,7 +283,11 @@ impl Users {
         let url = "/user/emails".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -303,7 +319,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/followers?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List followers of the authenticated user.
@@ -351,7 +367,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/following?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List the people the authenticated user follows.
@@ -389,7 +405,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Follow a user.
@@ -412,7 +428,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Unfollow a user.
@@ -433,7 +449,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List GPG keys for the authenticated user.
@@ -464,7 +480,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/gpg_keys?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List GPG keys for the authenticated user.
@@ -497,7 +513,11 @@ impl Users {
         let url = "/user/gpg_keys".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -522,7 +542,7 @@ impl Users {
             crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a GPG key for the authenticated user.
@@ -543,7 +563,7 @@ impl Users {
             crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List public SSH keys for the authenticated user.
@@ -574,7 +594,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/keys?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public SSH keys for the authenticated user.
@@ -609,7 +629,11 @@ impl Users {
         let url = "/user/keys".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -634,7 +658,7 @@ impl Users {
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a public SSH key for the authenticated user.
@@ -655,7 +679,7 @@ impl Users {
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List public email addresses for the authenticated user.
@@ -686,7 +710,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/public_emails?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public email addresses for the authenticated user.
@@ -732,7 +756,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List users.
@@ -784,7 +808,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a user.
@@ -814,7 +838,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a user.
@@ -844,7 +868,7 @@ impl Users {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List followers of a user.
@@ -881,7 +905,7 @@ impl Users {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List followers of a user.
@@ -939,7 +963,7 @@ impl Users {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List the people a user follows.
@@ -983,7 +1007,7 @@ impl Users {
             crate::progenitor_support::encode_path(target_user),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List GPG keys for a user.
@@ -1020,7 +1044,7 @@ impl Users {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List GPG keys for a user.
@@ -1085,7 +1109,7 @@ impl Users {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public keys for a user.
@@ -1122,7 +1146,7 @@ impl Users {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public keys for a user.

@@ -44,7 +44,7 @@ impl ContractorPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a contractor payment (Beta).
@@ -100,7 +100,7 @@ impl ContractorPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get a single contractor payment.
@@ -120,7 +120,7 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancel a contractor payment (Beta).
@@ -142,6 +142,6 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

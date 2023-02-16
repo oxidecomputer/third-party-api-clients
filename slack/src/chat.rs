@@ -26,7 +26,9 @@ impl Chat {
     pub async fn delete(&self) -> Result<crate::types::ChatDeleteSuccessSchema> {
         let url = "/chat.delete".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.deleteScheduledMessage` endpoint.
@@ -42,7 +44,9 @@ impl Chat {
     pub async fn delete_scheduled_message(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/chat.deleteScheduledMessage".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/chat.getPermalink` endpoint.
@@ -72,7 +76,7 @@ impl Chat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat.getPermalink?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/chat.meMessage` endpoint.
@@ -88,7 +92,9 @@ impl Chat {
     pub async fn me_message(&self) -> Result<crate::types::ChatMeMessageSchema> {
         let url = "/chat.meMessage".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.postEphemeral` endpoint.
@@ -104,7 +110,9 @@ impl Chat {
     pub async fn post_ephemeral(&self) -> Result<crate::types::ChatPostEphemeralSuccessSchema> {
         let url = "/chat.postEphemeral".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.postMessage` endpoint.
@@ -120,7 +128,9 @@ impl Chat {
     pub async fn post_message(&self) -> Result<crate::types::ChatPostMessageSuccessSchema> {
         let url = "/chat.postMessage".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.scheduleMessage` endpoint.
@@ -136,7 +146,9 @@ impl Chat {
     pub async fn schedule_message(&self) -> Result<crate::types::ChatScheduleMessageSuccessSchema> {
         let url = "/chat.scheduleMessage".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.unfurl` endpoint.
@@ -152,7 +164,9 @@ impl Chat {
     pub async fn unfurl(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/chat.unfurl".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.update` endpoint.
@@ -168,6 +182,8 @@ impl Chat {
     pub async fn update(&self) -> Result<crate::types::ChatUpdateSuccessSchema> {
         let url = "/chat.update".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

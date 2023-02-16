@@ -38,7 +38,7 @@ impl Teammates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teammates?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Invite teammate.
@@ -62,7 +62,11 @@ impl Teammates {
         let url = "/teammates".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -84,10 +88,10 @@ impl Teammates {
     ) -> Result<crate::types::PostTeammatesResponse> {
         let url = format!(
             "/teammates/pending/{}/resend",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Retrieve access requests.
@@ -118,7 +122,7 @@ impl Teammates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/scopes/requests?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve access requests.
@@ -159,7 +163,7 @@ impl Teammates {
     pub async fn get_pending(&self) -> Result<crate::types::GetTeammatesPendingResponse> {
         let url = "/teammates/pending".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve specific teammate.
@@ -180,10 +184,10 @@ impl Teammates {
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete teammate.
@@ -204,10 +208,10 @@ impl Teammates {
     ) -> Result<crate::types::PostSendersResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update teammate's permissions.
@@ -233,11 +237,15 @@ impl Teammates {
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -255,10 +263,10 @@ impl Teammates {
     ) -> Result<crate::types::PatchScopesRequestsApproveResponse> {
         let url = format!(
             "/scopes/requests/{}/approve",
-            crate::progenitor_support::encode_path(&request_id.to_string()),
+            crate::progenitor_support::encode_path(request_id),
         );
         let url = self.client.url(&url, None);
-        self.client.patch(&url, None).await
+        self.client.patch(&url, None, None).await
     }
     /**
      * Deny access request.
@@ -272,10 +280,10 @@ impl Teammates {
     pub async fn delete_scopes_requests_request(&self, request_id: &str) -> Result<()> {
         let url = format!(
             "/scopes/requests/{}",
-            crate::progenitor_support::encode_path(&request_id.to_string()),
+            crate::progenitor_support::encode_path(request_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Delete pending teammate.
@@ -291,9 +299,9 @@ impl Teammates {
     pub async fn delete_pending_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/teammates/pending/{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

@@ -55,7 +55,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.conversations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/users.deletePhoto` endpoint.
@@ -67,7 +67,9 @@ impl Users {
     pub async fn delete_photo(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/users.deletePhoto".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.getPresence` endpoint.
@@ -92,7 +94,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.getPresence?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/users.identity` endpoint.
@@ -108,7 +110,7 @@ impl Users {
     pub async fn identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
         let url = "/users.identity".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/users.identity` endpoint.
@@ -151,7 +153,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.info?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/users.list` endpoint.
@@ -186,7 +188,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/users.lookupByEmail` endpoint.
@@ -208,7 +210,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.lookupByEmail?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/users.setActive` endpoint.
@@ -224,7 +226,7 @@ impl Users {
     pub async fn set_active(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/users.setActive".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/users.setPhoto` endpoint.
@@ -236,7 +238,9 @@ impl Users {
     pub async fn set_photo(&self) -> Result<crate::types::UsersSetPhotoSchema> {
         let url = "/users.setPhoto".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/users.setPresence` endpoint.
@@ -252,6 +256,8 @@ impl Users {
     pub async fn set_presence(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/users.setPresence".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

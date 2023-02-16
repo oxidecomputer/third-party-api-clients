@@ -52,7 +52,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List organization migrations.
@@ -106,7 +106,11 @@ impl Migrations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -149,7 +153,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Download an organization migration archive.
@@ -172,7 +176,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an organization migration archive.
@@ -195,7 +199,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Unlock an organization repository.
@@ -225,7 +229,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(repo_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List repositories in an organization migration.
@@ -265,7 +269,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories in an organization migration.
@@ -344,7 +348,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Start an import.
@@ -373,7 +377,11 @@ impl Migrations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -397,7 +405,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an import.
@@ -427,7 +435,11 @@ impl Migrations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -465,7 +477,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get commit authors.
@@ -529,7 +541,11 @@ impl Migrations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -557,7 +573,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get large files.
@@ -609,7 +625,11 @@ impl Migrations {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -641,7 +661,7 @@ impl Migrations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/migrations?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List user migrations.
@@ -674,7 +694,11 @@ impl Migrations {
         let url = "/user/migrations".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -714,7 +738,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Download a user migration archive.
@@ -755,7 +779,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a user migration archive.
@@ -776,7 +800,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Unlock a user repository.
@@ -803,7 +827,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(repo_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List repositories for a user migration.
@@ -840,7 +864,7 @@ impl Migrations {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories for a user migration.

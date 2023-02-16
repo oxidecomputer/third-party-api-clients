@@ -555,6 +555,7 @@ impl Client {
         method: &reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<reqwest::Request> {
         let (url, auth) = self.url_and_auth(uri).await?;
 
@@ -567,10 +568,18 @@ impl Client {
             reqwest::header::ACCEPT,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
-        req = req.header(
-            reqwest::header::CONTENT_TYPE,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
+
+        if let Some(content_type) = content_type {
+            req = req.header(
+                reqwest::header::CONTENT_TYPE,
+                reqwest::header::HeaderValue::from_str(content_type).unwrap(),
+            );
+        } else {
+            req = req.header(
+                reqwest::header::CONTENT_TYPE,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            );
+        }
 
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
@@ -588,6 +597,7 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<reqwest::Response> {
         if self.auto_refresh {
             let expired = self.is_expired().await;
@@ -616,7 +626,7 @@ impl Client {
             }
         }
 
-        let req = self.make_request(&method, uri, body).await?;
+        let req = self.make_request(&method, uri, body, content_type).await?;
         let resp = self.client.execute(req).await?;
 
         Ok(resp)
@@ -627,11 +637,12 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<Out>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let response = self.request_raw(method, uri, body).await?;
+        let response = self.request_raw(method, uri, body, content_type).await?;
 
         let status = response.status();
 
@@ -667,11 +678,12 @@ impl Client {
         method: http::Method,
         uri: &str,
         body: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let response = self.request_raw(method, uri, body).await?;
+        let response = self.request_raw(method, uri, body, content_type).await?;
 
         let status = response.status();
         let link = response
@@ -914,20 +926,27 @@ impl Client {
         method: http::Method,
         uri: &str,
         body: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let r = self.request(method, uri, body).await?;
+        let r = self.request(method, uri, body, content_type).await?;
         Ok(r)
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::GET, uri, message).await
+        self.request_entity(http::Method::GET, uri, message, content_type)
+            .await
     }
 
     #[allow(dead_code)]
@@ -967,7 +986,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, uri, None).await
+        self.request_with_links(http::Method::GET, uri, None, None)
+            .await
     }
 
     #[allow(dead_code)]
@@ -978,40 +998,63 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, url.as_str(), None)
+        self.request_with_links(http::Method::GET, url.as_str(), None, None)
             .await
     }
 
     #[allow(dead_code)]
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn post<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, uri, message).await
+        self.request_entity(http::Method::POST, uri, message, content_type)
+            .await
     }
 
     #[allow(dead_code)]
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn patch<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PATCH, uri, message).await
+        self.request_entity(http::Method::PATCH, uri, message, content_type)
+            .await
     }
 
     #[allow(dead_code)]
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn put<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PUT, uri, message).await
+        self.request_entity(http::Method::PUT, uri, message, content_type)
+            .await
     }
 
     #[allow(dead_code)]
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn delete<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::DELETE, uri, message)
+        self.request_entity(http::Method::DELETE, uri, message, content_type)
             .await
     }
 

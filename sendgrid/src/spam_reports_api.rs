@@ -50,7 +50,7 @@ impl SpamReportsApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/spam_reports?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all spam reports.
@@ -106,7 +106,11 @@ impl SpamReportsApi {
         let url = "/suppression/spam_reports".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -126,10 +130,10 @@ impl SpamReportsApi {
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific spam report.
@@ -146,7 +150,7 @@ impl SpamReportsApi {
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -169,9 +173,9 @@ impl SpamReportsApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

@@ -36,7 +36,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set GitHub Actions permissions for an organization.
@@ -66,7 +66,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -107,7 +111,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set selected repositories enabled for GitHub Actions in an organization.
@@ -135,7 +139,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -165,7 +173,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Disable a selected repository for GitHub Actions in an organization.
@@ -194,7 +202,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get allowed actions for an organization.
@@ -220,7 +228,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set allowed actions for an organization.
@@ -252,7 +260,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -294,7 +306,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a self-hosted runner group for an organization.
@@ -324,7 +336,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -356,7 +372,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a self-hosted runner group from an organization.
@@ -387,7 +403,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a self-hosted runner group for an organization.
@@ -420,7 +436,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -465,7 +485,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set repository access for a self-hosted runner group in an organization.
@@ -498,7 +518,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -535,7 +559,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove repository access to a self-hosted runner group in an organization.
@@ -570,7 +594,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List self-hosted runners in a group for an organization.
@@ -614,7 +638,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set self-hosted runners in a group for an organization.
@@ -647,7 +671,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -684,7 +712,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove a self-hosted runner from a group for an organization.
@@ -719,7 +747,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List self-hosted runners for an organization.
@@ -758,7 +786,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for an organization.
@@ -784,7 +812,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for an organization.
@@ -841,7 +869,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Create a remove token for an organization.
@@ -876,7 +904,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get a self-hosted runner for an organization.
@@ -905,7 +933,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a self-hosted runner from an organization.
@@ -934,7 +962,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List organization secrets.
@@ -971,7 +999,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get an organization public key.
@@ -992,7 +1020,7 @@ impl Actions {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get an organization secret.
@@ -1019,7 +1047,7 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create or update an organization secret.
@@ -1122,7 +1150,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1146,7 +1178,7 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List selected repositories for an organization secret.
@@ -1186,7 +1218,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set selected repositories for an organization secret.
@@ -1215,7 +1247,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1246,7 +1282,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove selected repository from an organization secret.
@@ -1276,7 +1312,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List artifacts for a repository.
@@ -1316,7 +1352,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get an artifact.
@@ -1346,7 +1382,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete an artifact.
@@ -1371,7 +1407,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Download an artifact.
@@ -1407,7 +1443,7 @@ impl Actions {
             crate::progenitor_support::encode_path(archive_format),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a job for a workflow run.
@@ -1437,7 +1473,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Download job logs for a workflow run.
@@ -1470,7 +1506,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Actions permissions for a repository.
@@ -1500,7 +1536,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set GitHub Actions permissions for a repository.
@@ -1533,7 +1569,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1563,7 +1603,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set allowed actions for a repository.
@@ -1598,7 +1638,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1639,7 +1683,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for a repository.
@@ -1668,7 +1712,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for a repository.
@@ -1729,7 +1773,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Create a remove token for a repository.
@@ -1765,7 +1809,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get a self-hosted runner for a repository.
@@ -1798,7 +1842,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a self-hosted runner from a repository.
@@ -1831,7 +1875,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List workflow runs for a repository.
@@ -1898,7 +1942,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a workflow run.
@@ -1928,7 +1972,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a workflow run.
@@ -1955,7 +1999,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get the review history for a workflow run.
@@ -1985,7 +2029,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the review history for a workflow run.
@@ -2037,7 +2081,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * List workflow run artifacts.
@@ -2080,7 +2124,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Cancel a workflow run.
@@ -2105,7 +2149,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * List jobs for a workflow run.
@@ -2155,7 +2199,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Download workflow run logs.
@@ -2188,7 +2232,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete workflow run logs.
@@ -2218,7 +2262,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get pending deployments for a workflow run.
@@ -2250,7 +2294,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get pending deployments for a workflow run.
@@ -2311,7 +2355,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2337,7 +2385,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get workflow run usage.
@@ -2369,7 +2417,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repository secrets.
@@ -2409,7 +2457,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a repository public key.
@@ -2436,7 +2484,7 @@ impl Actions {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a repository secret.
@@ -2466,7 +2514,7 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create or update a repository secret.
@@ -2572,7 +2620,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2603,7 +2655,7 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List repository workflows.
@@ -2643,7 +2695,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get a workflow.
@@ -2673,7 +2725,7 @@ impl Actions {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Disable a workflow.
@@ -2700,7 +2752,7 @@ impl Actions {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Create a workflow dispatch event.
@@ -2736,7 +2788,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2764,7 +2820,7 @@ impl Actions {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * List workflow runs.
@@ -2834,7 +2890,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get workflow usage.
@@ -2866,7 +2922,7 @@ impl Actions {
             crate::progenitor_support::encode_path(workflow_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List environment secrets.
@@ -2906,7 +2962,7 @@ impl Actions {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get an environment public key.
@@ -2933,7 +2989,7 @@ impl Actions {
             crate::progenitor_support::encode_path(environment_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get an environment secret.
@@ -2963,7 +3019,7 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create or update an environment secret.
@@ -3069,7 +3125,11 @@ impl Actions {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3100,6 +3160,6 @@ impl Actions {
             crate::progenitor_support::encode_path(secret_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

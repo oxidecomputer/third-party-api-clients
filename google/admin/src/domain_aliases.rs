@@ -41,7 +41,7 @@ impl DomainAliases {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
@@ -63,7 +63,11 @@ impl DomainAliases {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -87,7 +91,7 @@ impl DomainAliases {
             crate::progenitor_support::encode_path(domain_alias_name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
@@ -106,6 +110,6 @@ impl DomainAliases {
             crate::progenitor_support::encode_path(domain_alias_name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

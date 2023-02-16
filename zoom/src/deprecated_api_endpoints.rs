@@ -40,7 +40,7 @@ impl DeprecatedApiEndpoints {
             crate::progenitor_support::encode_path(meeting_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List past webinar files.
@@ -70,6 +70,6 @@ impl DeprecatedApiEndpoints {
             crate::progenitor_support::encode_path(webinar_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

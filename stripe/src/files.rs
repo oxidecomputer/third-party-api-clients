@@ -59,7 +59,10 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/files?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetFilesResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -82,7 +85,7 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/files?{}", query_);
-        let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -103,12 +106,12 @@ impl Files {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -132,7 +135,9 @@ impl Files {
         let url = self
             .client
             .url(&url, Some(PostFilesDefaultServer::default().default_url()));
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("multipart/form-data"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/files/{file}` endpoint.
@@ -147,6 +152,8 @@ impl Files {
     pub async fn get(&self, file: &str) -> Result<crate::types::File> {
         let url = format!("/v1/files/{}", crate::progenitor_support::encode_path(file),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

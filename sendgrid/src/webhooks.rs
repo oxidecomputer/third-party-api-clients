@@ -34,7 +34,7 @@ impl Webhooks {
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Event Notification Settings.
@@ -60,7 +60,11 @@ impl Webhooks {
         let url = "/user/webhooks/event/settings".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -79,7 +83,7 @@ impl Webhooks {
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
         let url = "/user/webhooks/parse/settings".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves Inbound Parse Webhook statistics.
@@ -128,7 +132,7 @@ impl Webhooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/webhooks/parse/stats?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves Inbound Parse Webhook statistics.
@@ -187,7 +191,7 @@ impl Webhooks {
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Enable/Disable Signed Webhook.
@@ -211,7 +215,11 @@ impl Webhooks {
         let url = "/user/webhooks/event/settings/signed".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -240,7 +248,11 @@ impl Webhooks {
         let url = "/user/webhooks/event/test".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

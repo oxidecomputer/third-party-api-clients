@@ -49,7 +49,7 @@ impl TemplateFolders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/template-folders?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Add template folder.
@@ -62,7 +62,11 @@ impl TemplateFolders {
         let url = "/template-folders".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -98,7 +102,7 @@ impl TemplateFolders {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete template folder.
@@ -117,7 +121,7 @@ impl TemplateFolders {
             crate::progenitor_support::encode_path(folder_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update template folder.
@@ -141,7 +145,11 @@ impl TemplateFolders {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

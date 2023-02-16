@@ -2216,6 +2216,3 @@ impl MinAccessRole {
         matches!(self, MinAccessRole::Noop)
     }
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

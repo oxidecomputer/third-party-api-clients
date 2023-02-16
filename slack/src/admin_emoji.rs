@@ -22,7 +22,9 @@ impl AdminEmoji {
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.emoji.add".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.emoji.addAlias` endpoint.
@@ -34,7 +36,9 @@ impl AdminEmoji {
     pub async fn add_alias(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.emoji.addAlias".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/admin.emoji.list` endpoint.
@@ -60,7 +64,7 @@ impl AdminEmoji {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.emoji.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin.emoji.remove` endpoint.
@@ -72,7 +76,9 @@ impl AdminEmoji {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.emoji.remove".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.emoji.rename` endpoint.
@@ -84,6 +90,8 @@ impl AdminEmoji {
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.emoji.rename".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

@@ -37,7 +37,8 @@ impl Reimbursements {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reimbursements?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReimbursementsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -51,7 +52,8 @@ impl Reimbursements {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = "/reimbursements".to_string();
-        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReimbursementsResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -62,6 +64,7 @@ impl Reimbursements {
                 .client
                 .get::<crate::types::GetReimbursementsResponse>(
                     page.trim_start_matches(&self.client.host),
+                    None,
                     None,
                 )
                 .await
@@ -99,6 +102,6 @@ impl Reimbursements {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

@@ -50,7 +50,10 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+        let resp: crate::types::PaymentFlowsIntentList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -73,7 +76,8 @@ impl PaymentIntents {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents?{}", query_);
-        let mut resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::PaymentFlowsIntentList =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -94,12 +98,12 @@ impl PaymentIntents {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -128,7 +132,9 @@ impl PaymentIntents {
     pub async fn post(&self) -> Result<crate::types::PaymentIntent> {
         let url = "/v1/payment_intents".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/payment_intents/search` endpoint.
@@ -164,7 +170,10 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents/search?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let resp: crate::types::SearchResult = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -186,7 +195,7 @@ impl PaymentIntents {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents/search?{}", query_);
-        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -207,12 +216,12 @@ impl PaymentIntents {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -255,7 +264,9 @@ impl PaymentIntents {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}` endpoint.
@@ -278,7 +289,9 @@ impl PaymentIntents {
             crate::progenitor_support::encode_path(intent),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/cancel` endpoint.
@@ -299,7 +312,9 @@ impl PaymentIntents {
             crate::progenitor_support::encode_path(intent),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/capture` endpoint.
@@ -320,7 +335,9 @@ impl PaymentIntents {
             crate::progenitor_support::encode_path(intent),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/confirm` endpoint.
@@ -361,7 +378,9 @@ impl PaymentIntents {
             crate::progenitor_support::encode_path(intent),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/verify_microdeposits` endpoint.
@@ -381,6 +400,8 @@ impl PaymentIntents {
             crate::progenitor_support::encode_path(intent),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

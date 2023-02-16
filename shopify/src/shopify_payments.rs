@@ -22,7 +22,7 @@ impl ShopifyPayments {
     pub async fn deprecated_202001_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-01/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves the account's current balance.
@@ -34,7 +34,7 @@ impl ShopifyPayments {
     pub async fn deprecated_202004_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-04/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves the account's current balance.
@@ -46,7 +46,7 @@ impl ShopifyPayments {
     pub async fn deprecated_202007_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-07/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves the account's current balance.
@@ -58,7 +58,7 @@ impl ShopifyPayments {
     pub async fn get_balance(&self) -> Result<()> {
         let url = "/admin/api/2020-10/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves the account's current balance.
@@ -70,7 +70,7 @@ impl ShopifyPayments {
     pub async fn deprecated_202101_get_balance(&self) -> Result<()> {
         let url = "/admin/api/2021-01/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves the account's current balance.
@@ -82,7 +82,7 @@ impl ShopifyPayments {
     pub async fn deprecated_unstable_get_balance(&self) -> Result<()> {
         let url = "/admin/api/unstable/shopify_payments/balance.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
@@ -125,7 +125,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single dispute by ID.
@@ -144,10 +144,10 @@ impl ShopifyPayments {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/shopify_payments/disputes/{}/json",
-            crate::progenitor_support::encode_path(&dispute_id.to_string()),
+            crate::progenitor_support::encode_path(dispute_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
@@ -190,7 +190,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -243,7 +243,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -259,10 +259,10 @@ impl ShopifyPayments {
     pub async fn deprecated_202001_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -315,7 +315,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -331,10 +331,10 @@ impl ShopifyPayments {
     pub async fn deprecated_202004_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -387,7 +387,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -403,10 +403,10 @@ impl ShopifyPayments {
     pub async fn deprecated_202007_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -459,7 +459,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -475,10 +475,10 @@ impl ShopifyPayments {
     pub async fn get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -531,7 +531,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -547,10 +547,10 @@ impl ShopifyPayments {
     pub async fn deprecated_202101_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -603,7 +603,7 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single payout by id.
@@ -622,10 +622,10 @@ impl ShopifyPayments {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(&payout_id.to_string()),
+            crate::progenitor_support::encode_path(payout_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
     * Retrieves a list of all balance transactions ordered by processing
@@ -674,6 +674,6 @@ impl ShopifyPayments {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

@@ -69,7 +69,7 @@ impl BookingData {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::BookingReportResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::BookingReportResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -116,11 +116,11 @@ impl BookingData {
 
         let mut resp: crate::types::BookingReportResponse = if !url.contains('?') {
             self.client
-                .get(&format!("{}?page=0&size=100", url), None)
+                .get(&format!("{}?page=0&size=100", url), None, None)
                 .await?
         } else {
             self.client
-                .get(&format!("{}&page=0&size=100", url), None)
+                .get(&format!("{}&page=0&size=100", url), None, None)
                 .await?
         };
 
@@ -132,12 +132,12 @@ impl BookingData {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?page={}&size=100", url, page), None)
+                    .get(&format!("{}?page={}&size=100", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&page={}&size=100", url, page), None)
+                    .get(&format!("{}&page={}&size=100", url, page), None, None)
                     .await?;
             }
 

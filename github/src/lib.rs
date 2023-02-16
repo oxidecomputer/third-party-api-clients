@@ -277,7 +277,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://api.github.com/foo"
+        "https://api.github.com"
     }
 }
 
@@ -493,6 +493,7 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
@@ -517,6 +518,10 @@ impl Client {
             }
             req
         };
+
+        if let Some(content_type) = content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type);
+        }
 
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
@@ -644,21 +649,27 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_, r) = self
-            .request(method, uri, body, media_type, authentication)
+            .request(method, uri, body, media_type, authentication, content_type)
             .await?;
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.get_media(uri, crate::utils::MediaType::Json, message)
+        self.get_media(uri, crate::utils::MediaType::Json, message, content_type)
             .await
     }
 
@@ -667,6 +678,7 @@ impl Client {
         uri: &str,
         media: crate::utils::MediaType,
         message: Option<reqwest::Body>,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -677,6 +689,7 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         )
         .await
     }
@@ -698,6 +711,7 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            None,
         )
         .await
     }
@@ -715,11 +729,17 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            None,
         )
         .await
     }
 
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn post<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -728,6 +748,7 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         )
         .await
     }
@@ -738,12 +759,20 @@ impl Client {
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, uri, message, media, authentication)
-            .await
+        self.request_entity(
+            http::Method::POST,
+            uri,
+            message,
+            media,
+            authentication,
+            content_type,
+        )
+        .await
     }
 
     async fn patch_media<D>(
@@ -751,6 +780,7 @@ impl Client {
         uri: &str,
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -761,23 +791,34 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         )
         .await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn patch<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json)
+        self.patch_media(uri, message, crate::utils::MediaType::Json, content_type)
             .await
     }
 
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn put<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json)
+        self.put_media(uri, message, crate::utils::MediaType::Json, content_type)
             .await
     }
 
@@ -786,6 +827,7 @@ impl Client {
         uri: &str,
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -796,11 +838,17 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         )
         .await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn delete<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        content_type: Option<&str>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -810,6 +858,7 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         )
         .await
     }

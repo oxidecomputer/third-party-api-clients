@@ -49,6 +49,6 @@ impl OauthV2 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/oauth.v2.access?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

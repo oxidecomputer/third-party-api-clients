@@ -27,7 +27,7 @@ impl Customers {
             crate::progenitor_support::encode_path(customer_key),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customers/{customerKey}` endpoint.
@@ -49,7 +49,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -72,7 +76,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -90,7 +98,7 @@ impl Customers {
             crate::progenitor_support::encode_path(name),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/{name}` endpoint.
@@ -107,7 +115,7 @@ impl Customers {
             crate::progenitor_support::encode_path(name),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/{name}` endpoint.
@@ -142,7 +150,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -186,7 +198,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListPrintersResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.printers.to_vec())
@@ -217,7 +229,8 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-        let mut resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListPrintersResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut printers = resp.printers;
         let mut page = resp.next_page_token;
@@ -227,12 +240,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -268,7 +281,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -291,7 +308,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -314,7 +335,11 @@ impl Customers {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -353,7 +378,8 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListPrinterModelsResponse =
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.printer_models.to_vec())
@@ -380,7 +406,8 @@ impl Customers {
             crate::progenitor_support::encode_path(parent),
             query_
         );
-        let mut resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListPrinterModelsResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut printer_models = resp.printer_models;
         let mut page = resp.next_page_token;
@@ -390,12 +417,12 @@ impl Customers {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 

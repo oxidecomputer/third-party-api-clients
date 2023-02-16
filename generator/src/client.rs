@@ -105,7 +105,7 @@ impl Client {
     }
 
     pub fn get_host_override(&self) -> Option<&str> {
-        self.host_override.as_ref().map(|s| s.as_str())
+        self.host_override.as_deref()
     }
 
     pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
@@ -203,6 +203,7 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
@@ -227,6 +228,10 @@ impl Client {
             }
             req
         };
+
+        if let Some(content_type) = content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type);
+        }
 
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
@@ -337,22 +342,23 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
+        let (_ , r) = self.request(method, uri, body, media_type, authentication, content_type).await?;
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.get_media(uri, crate::utils::MediaType::Json, message).await
+        self.get_media(uri, crate::utils::MediaType::Json, message, content_type).await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Option<reqwest::Body>) -> Result<D>
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -362,6 +368,7 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         ).await
     }
 
@@ -382,6 +389,7 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            None,
         ).await
     }
 
@@ -395,10 +403,11 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            None,
         ).await
     }
 
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -407,6 +416,7 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type,
         ).await
     }
 
@@ -416,6 +426,7 @@ impl Client {
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
+        content_type: Option<&str>
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -426,10 +437,11 @@ impl Client {
             message,
             media,
             authentication,
+            content_type
         ).await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -439,24 +451,25 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type
         ).await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+        self.patch_media(uri, message, crate::utils::MediaType::Json, content_type).await
     }
 
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json).await
+        self.put_media(uri, message, crate::utils::MediaType::Json, content_type).await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -466,10 +479,11 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type
         ).await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -479,6 +493,7 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
+            content_type
         ).await
     }
 
@@ -561,31 +576,9 @@ pub fn generate_client_generic_token(
 
     let token_auth_template = get_token_auth_template(consent_pattern);
 
-    let server_block = if servers.count > 0 {
-        servers.output.as_deref().unwrap()
-    } else {
-        ""
-    };
-
-    let server_arg = if servers.count > 1 {
-        format!(
-            "server: impl Into<{}>,",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::new()
-    };
-
-    let server_to_host = if servers.count > 1 {
-        String::from("let host = server.into().default_url().to_string();")
-    } else if servers.count == 1 {
-        format!(
-            "let host = {}::default().default_url().to_string();",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::from("let host = FALLBACK_HOST.to_string();")
-    };
+    let server_block = servers.server_block();
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
 
     format!(
         r#"use std::sync::Arc;
@@ -761,7 +754,7 @@ impl Client {{
     }}
 
     pub fn get_host_override(&self) -> Option<&str> {{
-        self.host_override.as_ref().map(|s| s.as_str())
+        self.host_override.as_deref()
     }}
 
     pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
@@ -815,18 +808,8 @@ fn basic_new_from_env(
         "".to_string()
     };
 
-    let server_arg = if servers.count > 1 {
-        let server_type = servers.top_level_type.as_ref().unwrap();
-        format!("server: impl Into<{server_type}>")
-    } else {
-        String::new()
-    };
-
-    let server_param = if servers.count > 1 {
-        "server,".to_string()
-    } else {
-        String::new()
-    };
+    let server_arg = servers.server_arg();
+    let server_param = servers.server_param();
 
     format!(
         r#"
@@ -936,25 +919,8 @@ pub fn generate_client_generic_api_key(
         ""
     };
 
-    let server_arg = if servers.count > 1 {
-        format!(
-            "server: impl Into<{}>,",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::new()
-    };
-
-    let server_to_host = if servers.count > 1 {
-        "let host = server.into().default_url().to_string();".to_string()
-    } else if servers.count == 1 {
-        format!(
-            "let host = {}::default().default_url().to_string();",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::from("let host = FALLBACK_HOST.to_string();")
-    };
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
 
     format!(
         r#"use std::env;
@@ -1029,7 +995,7 @@ impl Client {{
     }}
 
     pub fn get_host_override(&self) -> Option<&str> {{
-        self.host_override.as_ref().map(|s| s.as_str())
+        self.host_override.as_deref()
     }}
 
     pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
@@ -1104,11 +1070,12 @@ async fn request<Out>(
     method: reqwest::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body).await?;
+    let response = self.request_raw(method, uri, body, content_type).await?;
 
     let status = response.status();
 
@@ -1142,11 +1109,12 @@ async fn request_with_links<Out>(
     method: http::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<(Option<hyperx::header::Link>, Out)>
 where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body).await?;
+    let response = self.request_raw(method, uri, body, content_type).await?;
 
     let status = response.status();
     let link = response
@@ -1190,7 +1158,7 @@ async fn post_form<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let (url, auth) = self.url_and_auth(&uri).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1251,7 +1219,7 @@ async fn request_with_accept_mime<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let (url, auth) = self.url_and_auth(&uri).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1311,7 +1279,7 @@ async fn request_with_mime<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let (url, auth) = self.url_and_auth(&uri).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1380,18 +1348,19 @@ async fn request_entity<D>(
     method: http::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     let r = self
-        .request(method, uri, body)
+        .request(method, uri, body, content_type)
         .await?;
     Ok(r)
 }}
 
 #[allow(dead_code)]
-async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1399,6 +1368,7 @@ where
         http::Method::GET,
         uri,
         message,
+        content_type
     ).await
 }}
 
@@ -1446,6 +1416,7 @@ where
         http::Method::GET,
         uri,
         None,
+        None,
     ).await
 }}
 
@@ -1458,11 +1429,12 @@ where
         http::Method::GET,
         url.as_str(),
         None,
+        None,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1470,11 +1442,12 @@ where
         http::Method::POST,
         uri,
         message,
+        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1482,11 +1455,12 @@ where
         http::Method::PATCH,
         uri,
         message,
+        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1494,11 +1468,12 @@ where
         http::Method::PUT,
         uri,
         message,
+        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1506,6 +1481,7 @@ where
         http::Method::DELETE,
         uri,
         message,
+        content_type,
     ).await
 }}"#,
         raw_request
@@ -1529,9 +1505,10 @@ async fn request_raw(
     method: reqwest::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<reqwest::Response>
 {{
-    let (url, auth) = self.url_and_auth(&uri).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
     let instance = <&Client>::clone(&self);
     let mut req = instance.client.request(method.clone(), url);
     // Set the default headers.
@@ -1539,10 +1516,19 @@ async fn request_raw(
         reqwest::header::ACCEPT,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
+
+    if let Some(content_type) = content_type {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_str(content_type).unwrap(),
+        );
+    }} else {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+    }}
+
     {}
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
@@ -1575,8 +1561,9 @@ async fn make_request(
     method: &reqwest::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<reqwest::Request> {{
-    let (url, auth) = self.url_and_auth(&uri).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1587,10 +1574,19 @@ async fn make_request(
         reqwest::header::ACCEPT,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
+
+    if let Some(content_type) = content_type {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_str(content_type).unwrap(),
+        );
+    }} else {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+    }}
+
     {}
 
     if let Some(auth_str) = auth {{
@@ -1609,6 +1605,7 @@ async fn request_raw(
     method: reqwest::Method,
     uri: &str,
     body: Option<reqwest::Body>,
+    content_type: Option<&str>,
 ) -> Result<reqwest::Response> {{
     if self.auto_refresh {{
         let expired = self.is_expired().await;
@@ -1637,7 +1634,7 @@ async fn request_raw(
         }}
     }}
 
-    let req = self.make_request(&method, uri, body).await?;
+    let req = self.make_request(&method, uri, body, content_type).await?;
     let resp = self.client.execute(req).await?;
 
     Ok(resp)
@@ -1799,25 +1796,8 @@ pub fn generate_client_generic_client_credentials(
         ""
     };
 
-    let server_arg = if servers.count > 1 {
-        format!(
-            "server: impl Into<{}>,",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::new()
-    };
-
-    let server_to_host = if servers.count > 1 {
-        "let host = server.into().default_url().to_string();".to_string()
-    } else if servers.count == 1 {
-        format!(
-            "let host = {}::default().default_url().to_string();",
-            servers.top_level_type.as_ref().unwrap()
-        )
-    } else {
-        String::from("let host = FALLBACK_HOST.to_string();")
-    };
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
 
     format!(
         r#"use std::env;
@@ -1903,7 +1883,7 @@ impl Client {{
     }}
 
     pub fn get_host_override(&self) -> Option<&str> {{
-        self.host_override.as_ref().map(|s| s.as_str())
+        self.host_override.as_deref()
     }}
 
     pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
@@ -1988,6 +1968,44 @@ pub struct GeneratedServers {
     pub count: u64,
     pub output: Option<String>,
     pub top_level_type: Option<String>,
+}
+
+impl GeneratedServers {
+    pub fn server_block(&self) -> &str {
+        self.output.as_deref().unwrap_or("")
+    }
+
+    pub fn server_arg(&self) -> String {
+        if self.count > 1 {
+            format!(
+                "server: impl Into<{}>,",
+                self.top_level_type.as_ref().unwrap()
+            )
+        } else {
+            String::new()
+        }
+    }
+
+    pub fn server_param(&self) -> String {
+        if self.count > 1 {
+            "server,".to_string()
+        } else {
+            String::new()
+        }
+    }
+
+    pub fn host_from_server(&self) -> String {
+        if self.count > 1 {
+            String::from("let host = server.into().default_url().to_string();")
+        } else if self.count == 1 {
+            format!(
+                "let host = {}::default().default_url().to_string();",
+                self.top_level_type.as_ref().unwrap()
+            )
+        } else {
+            String::from("let host = FALLBACK_HOST.to_string();")
+        }
+    }
 }
 
 pub fn generate_servers(servers: &[openapiv3::Server], server_prefix: &str) -> GeneratedServers {

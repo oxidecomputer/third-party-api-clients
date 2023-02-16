@@ -51,7 +51,7 @@ impl ReverseDns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/whitelabel/ips?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all reverse DNS records.
@@ -102,7 +102,11 @@ impl ReverseDns {
         let url = "/whitelabel/ips".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -128,10 +132,10 @@ impl ReverseDns {
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
         let url = format!(
             "/whitelabel/ips/{}/validate",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Retrieve a reverse DNS record.
@@ -149,10 +153,10 @@ impl ReverseDns {
     pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a reverse DNS record.
@@ -172,9 +176,9 @@ impl ReverseDns {
     pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

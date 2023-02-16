@@ -36,7 +36,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set GitHub Actions permissions for an enterprise.
@@ -64,7 +64,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -104,7 +108,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set selected organizations enabled for GitHub Actions in an enterprise.
@@ -132,7 +136,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -162,7 +170,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&org_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Disable a selected organization for GitHub Actions in an enterprise.
@@ -191,7 +199,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&org_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get allowed actions for an enterprise.
@@ -217,7 +225,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set allowed actions for an enterprise.
@@ -245,7 +253,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -285,7 +297,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Create a self-hosted runner group for an enterprise.
@@ -313,7 +325,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -343,7 +359,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a self-hosted runner group from an enterprise.
@@ -372,7 +388,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update a self-hosted runner group for an enterprise.
@@ -403,7 +419,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -446,7 +466,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set organization access for a self-hosted runner group in an enterprise.
@@ -477,7 +497,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -510,7 +534,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&org_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove organization access to a self-hosted runner group in an enterprise.
@@ -542,7 +566,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&org_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List self-hosted runners in a group for an enterprise.
@@ -584,7 +608,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set self-hosted runners in a group for an enterprise.
@@ -615,7 +639,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -649,7 +677,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Remove a self-hosted runner from a group for an enterprise.
@@ -681,7 +709,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List self-hosted runners for an enterprise.
@@ -720,7 +748,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for an enterprise.
@@ -746,7 +774,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List runner applications for an enterprise.
@@ -803,7 +831,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Create a remove token for an enterprise.
@@ -838,7 +866,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client.post(&url, None, None).await
     }
     /**
      * Get a self-hosted runner for an enterprise.
@@ -867,7 +895,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a self-hosted runner from an enterprise.
@@ -896,7 +924,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Get the audit log for an enterprise.
@@ -966,7 +994,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get the audit log for an enterprise.
@@ -1060,7 +1088,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Provision a SCIM enterprise group and invite users.
@@ -1088,7 +1116,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1127,7 +1159,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set SCIM information for a provisioned enterprise group.
@@ -1158,7 +1190,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1186,7 +1222,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(scim_group_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an attribute for a SCIM enterprise group.
@@ -1217,7 +1253,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1277,7 +1317,7 @@ impl EnterpriseAdmin {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Provision and invite a SCIM enterprise user.
@@ -1307,7 +1347,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1335,7 +1379,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(scim_user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set SCIM information for a provisioned enterprise user.
@@ -1370,7 +1414,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1398,7 +1446,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(scim_user_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update an attribute for a SCIM enterprise user.
@@ -1444,7 +1492,11 @@ impl EnterpriseAdmin {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

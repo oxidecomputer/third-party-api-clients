@@ -50,7 +50,7 @@ impl Cards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.cards.to_vec())
@@ -78,7 +78,7 @@ impl Cards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
-        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None, None).await?;
 
         let mut cards = resp.cards;
         let mut page = resp.page.next.to_string();
@@ -89,6 +89,7 @@ impl Cards {
                 .client
                 .get::<crate::types::GetCardsResponse>(
                     page.trim_start_matches(&self.client.host),
+                    None,
                     None,
                 )
                 .await
@@ -129,7 +130,7 @@ impl Cards {
     pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
         let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update card.
@@ -150,7 +151,11 @@ impl Cards {
         let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -171,7 +176,11 @@ impl Cards {
         let url = "/cards/deferred/physical".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -192,7 +201,11 @@ impl Cards {
         let url = "/cards/deferred/virtual".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -213,7 +226,11 @@ impl Cards {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -234,7 +251,11 @@ impl Cards {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -255,7 +276,11 @@ impl Cards {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -278,6 +303,6 @@ impl Cards {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

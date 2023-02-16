@@ -26,10 +26,10 @@ impl AccountWatermarks {
     pub async fn watermark_get(&self, account_id: &str) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update watermark information.
@@ -49,11 +49,15 @@ impl AccountWatermarks {
     ) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -74,11 +78,15 @@ impl AccountWatermarks {
     ) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark/preview",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
 }

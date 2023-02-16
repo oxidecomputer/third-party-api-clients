@@ -48,7 +48,7 @@ impl PhoneCallQueues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_queues?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.call_queues.to_vec())
@@ -73,7 +73,8 @@ impl PhoneCallQueues {
      */
     pub async fn list_all_call_queues(&self) -> Result<Vec<crate::types::CallQueues>> {
         let url = "/phone/call_queues".to_string();
-        let mut resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListCallQueuesResponse =
+            self.client.get(&url, None, None).await?;
 
         let mut call_queues = resp.call_queues;
         let mut page = resp.next_page_token;
@@ -84,12 +85,12 @@ impl PhoneCallQueues {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -128,7 +129,11 @@ impl PhoneCallQueues {
         let url = "/phone/call_queues".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -159,7 +164,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(call_queue_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a call queue.
@@ -188,7 +193,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(call_queue_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Update call queue details.
@@ -220,7 +225,11 @@ impl PhoneCallQueues {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -253,7 +262,11 @@ impl PhoneCallQueues {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -283,7 +296,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(call_queue_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Unassign a phone number.
@@ -315,7 +328,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(phone_number_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Add members to a call queue.
@@ -346,7 +359,11 @@ impl PhoneCallQueues {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -373,7 +390,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(call_queue_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Unassign a member.
@@ -405,7 +422,7 @@ impl PhoneCallQueues {
             crate::progenitor_support::encode_path(member_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Change call queue manager.
@@ -438,7 +455,11 @@ impl PhoneCallQueues {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -492,7 +513,7 @@ impl PhoneCallQueues {
         );
         let url = self.client.url(&url, None);
         let resp: crate::types::GetCallQueueRecordingsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.recordings.to_vec())
@@ -533,7 +554,7 @@ impl PhoneCallQueues {
             query_
         );
         let mut resp: crate::types::GetCallQueueRecordingsResponseData =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut recordings = resp.recordings;
         let mut page = resp.next_page_token;
@@ -544,12 +565,12 @@ impl PhoneCallQueues {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 

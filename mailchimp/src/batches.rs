@@ -49,7 +49,7 @@ impl Batches {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/batches?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Start batch operation.
@@ -65,7 +65,11 @@ impl Batches {
         let url = "/batches".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -101,7 +105,7 @@ impl Batches {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete batch request.
@@ -120,6 +124,6 @@ impl Batches {
             crate::progenitor_support::encode_path(batch_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

@@ -70,7 +70,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -83,7 +83,11 @@ impl Customers {
         let url = "/admin/api/2020-01/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -125,7 +129,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -147,11 +151,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -171,11 +175,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -192,10 +200,10 @@ impl Customers {
     pub async fn deprecated_202001_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -216,11 +224,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -241,11 +253,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -258,7 +274,7 @@ impl Customers {
     pub async fn deprecated_202001_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -274,10 +290,10 @@ impl Customers {
     pub async fn deprecated_202001_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -337,7 +353,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -350,7 +366,11 @@ impl Customers {
         let url = "/admin/api/2020-04/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -392,7 +412,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -414,11 +434,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -438,11 +458,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -459,10 +483,10 @@ impl Customers {
     pub async fn deprecated_202004_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -483,11 +507,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -508,11 +536,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -525,7 +557,7 @@ impl Customers {
     pub async fn deprecated_202004_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -541,10 +573,10 @@ impl Customers {
     pub async fn deprecated_202004_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -604,7 +636,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -617,7 +649,11 @@ impl Customers {
         let url = "/admin/api/2020-07/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -659,7 +695,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -681,11 +717,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -705,11 +741,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -726,10 +766,10 @@ impl Customers {
     pub async fn deprecated_202007_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -750,11 +790,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -775,11 +819,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -792,7 +840,7 @@ impl Customers {
     pub async fn deprecated_202007_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -808,10 +856,10 @@ impl Customers {
     pub async fn deprecated_202007_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -871,7 +919,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -884,7 +932,11 @@ impl Customers {
         let url = "/admin/api/2020-10/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -926,7 +978,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -948,11 +1000,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -968,11 +1020,15 @@ impl Customers {
     pub async fn update_param(&self, customer_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -989,10 +1045,10 @@ impl Customers {
     pub async fn delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -1013,11 +1069,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1038,11 +1098,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1055,7 +1119,7 @@ impl Customers {
     pub async fn get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-10/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -1071,10 +1135,10 @@ impl Customers {
     pub async fn get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1134,7 +1198,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -1147,7 +1211,11 @@ impl Customers {
         let url = "/admin/api/2021-01/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1189,7 +1257,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -1211,11 +1279,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -1235,11 +1303,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1256,10 +1328,10 @@ impl Customers {
     pub async fn deprecated_202101_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -1280,11 +1352,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1305,11 +1381,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1322,7 +1402,7 @@ impl Customers {
     pub async fn deprecated_202101_get_count(&self) -> Result<()> {
         let url = "/admin/api/2021-01/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -1338,10 +1418,10 @@ impl Customers {
     pub async fn deprecated_202101_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customers. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1401,7 +1481,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/customers.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer.
@@ -1414,7 +1494,11 @@ impl Customers {
         let url = "/admin/api/unstable/customers.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1456,7 +1540,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/customers/search.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer.
@@ -1482,11 +1566,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer.
@@ -1506,11 +1590,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1527,10 +1615,10 @@ impl Customers {
     pub async fn deprecated_unstable_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
@@ -1551,11 +1639,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1576,11 +1668,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1593,7 +1689,7 @@ impl Customers {
     pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
         let url = "/admin/api/unstable/customers/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves all orders belonging to a customer. The query string parameters that are available to the  Order resource are also available to this endpoint.
@@ -1609,10 +1705,10 @@ impl Customers {
     pub async fn deprecated_unstable_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1628,10 +1724,10 @@ impl Customers {
     pub async fn deprecated_202001_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -1651,11 +1747,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1677,11 +1777,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -1703,12 +1803,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1730,11 +1834,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -1765,11 +1869,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -1790,11 +1894,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1810,10 +1914,10 @@ impl Customers {
     pub async fn deprecated_202004_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -1833,11 +1937,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1859,11 +1967,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -1885,12 +1993,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -1912,11 +2024,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -1947,11 +2059,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -1972,11 +2084,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -1992,10 +2104,10 @@ impl Customers {
     pub async fn deprecated_202007_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -2015,11 +2127,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2041,11 +2157,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -2067,12 +2183,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2094,11 +2214,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -2129,11 +2249,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -2154,11 +2274,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2174,10 +2294,10 @@ impl Customers {
     pub async fn get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -2197,11 +2317,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2223,11 +2347,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -2249,12 +2373,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2276,11 +2404,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -2311,11 +2439,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -2336,11 +2464,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2356,10 +2484,10 @@ impl Customers {
     pub async fn deprecated_202101_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -2379,11 +2507,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2405,11 +2537,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -2431,12 +2563,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2458,11 +2594,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -2493,11 +2629,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -2518,11 +2654,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of addresses for a customer. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2538,10 +2674,10 @@ impl Customers {
     pub async fn deprecated_unstable_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new address for a customer.
@@ -2561,11 +2697,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2587,11 +2727,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates an existing customer address.
@@ -2613,12 +2753,16 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2640,11 +2784,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Performs bulk operations for multiple customer addresses.
@@ -2675,11 +2819,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Sets the default address for a customer.
@@ -2700,11 +2844,11 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
-            crate::progenitor_support::encode_path(&address_id.to_string()),
+            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(address_id),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2739,7 +2883,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/customer_saved_searches.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -2755,7 +2899,11 @@ impl Customers {
         let url = "/admin/api/2020-01/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2780,7 +2928,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -2806,11 +2954,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -2830,11 +2978,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2854,10 +3006,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -2895,11 +3047,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -2934,7 +3086,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/customer_saved_searches.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -2950,7 +3102,11 @@ impl Customers {
         let url = "/admin/api/2020-04/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -2975,7 +3131,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -3001,11 +3157,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -3025,11 +3181,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3049,10 +3209,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -3090,11 +3250,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -3129,7 +3289,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/customer_saved_searches.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -3145,7 +3305,11 @@ impl Customers {
         let url = "/admin/api/2020-07/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3170,7 +3334,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -3196,11 +3360,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -3220,11 +3384,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3244,10 +3412,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -3285,11 +3453,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -3319,7 +3487,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/customer_saved_searches.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -3332,7 +3500,11 @@ impl Customers {
         let url = "/admin/api/2020-10/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3357,7 +3529,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -3383,11 +3555,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -3407,11 +3579,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3431,10 +3607,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -3472,11 +3648,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -3511,7 +3687,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/customer_saved_searches.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -3527,7 +3703,11 @@ impl Customers {
         let url = "/admin/api/2021-01/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3552,7 +3732,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -3578,11 +3758,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -3602,11 +3782,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3626,10 +3810,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -3667,11 +3851,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a list of customer saved searches. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -3709,7 +3893,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a customer saved search.
@@ -3725,7 +3909,11 @@ impl Customers {
         let url = "/admin/api/unstable/customer_saved_searches.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3750,7 +3938,7 @@ impl Customers {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single customer saved search.
@@ -3776,11 +3964,11 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a customer saved search.
@@ -3800,11 +3988,15 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -3824,10 +4016,10 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves all customers returned by a customer saved search.
@@ -3865,10 +4057,10 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
+            crate::progenitor_support::encode_path(customer_saved_search_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

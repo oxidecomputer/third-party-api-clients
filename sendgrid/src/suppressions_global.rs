@@ -30,7 +30,11 @@ impl SuppressionsGlobal {
         let url = "/asm/suppressions/global".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                None,
+            )
             .await
     }
     /**
@@ -71,7 +75,7 @@ impl SuppressionsGlobal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/unsubscribes?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all global suppressions.
@@ -121,10 +125,10 @@ impl SuppressionsGlobal {
     ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a Global Suppression.
@@ -142,9 +146,9 @@ impl SuppressionsGlobal {
     pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

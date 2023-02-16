@@ -45,7 +45,10 @@ impl Reviews {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reviews?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReviewsResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -59,7 +62,7 @@ impl Reviews {
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Review>> {
         let url = "/v1/reviews".to_string();
-        let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -80,12 +83,12 @@ impl Reviews {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -113,7 +116,9 @@ impl Reviews {
             crate::progenitor_support::encode_path(review),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/reviews/{review}/approve` endpoint.
@@ -130,6 +135,8 @@ impl Reviews {
             crate::progenitor_support::encode_path(review),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

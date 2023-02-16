@@ -28,6 +28,8 @@ impl Mandates {
             crate::progenitor_support::encode_path(mandate),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

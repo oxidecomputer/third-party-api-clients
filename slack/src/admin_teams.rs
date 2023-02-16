@@ -26,7 +26,9 @@ impl AdminTeams {
     pub async fn create(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.create".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/admin.teams.list` endpoint.
@@ -52,6 +54,6 @@ impl AdminTeams {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.teams.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

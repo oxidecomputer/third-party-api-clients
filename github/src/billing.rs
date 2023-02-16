@@ -38,7 +38,7 @@ impl Billing {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Packages billing for an enterprise.
@@ -66,7 +66,7 @@ impl Billing {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get shared storage billing for an enterprise.
@@ -94,7 +94,7 @@ impl Billing {
             crate::progenitor_support::encode_path(enterprise),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Actions billing for an organization.
@@ -122,7 +122,7 @@ impl Billing {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Packages billing for an organization.
@@ -150,7 +150,7 @@ impl Billing {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get shared storage billing for an organization.
@@ -178,7 +178,7 @@ impl Billing {
             crate::progenitor_support::encode_path(org),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Actions billing for a user.
@@ -206,7 +206,7 @@ impl Billing {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get GitHub Packages billing for a user.
@@ -234,7 +234,7 @@ impl Billing {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get shared storage billing for a user.
@@ -262,6 +262,6 @@ impl Billing {
             crate::progenitor_support::encode_path(username),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

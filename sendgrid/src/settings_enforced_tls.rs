@@ -30,7 +30,7 @@ impl SettingsEnforcedTls {
     pub async fn get_user(&self) -> Result<crate::types::EnforcedTlsRequestResponse> {
         let url = "/user/settings/enforced_tls".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update Enforced TLS settings.
@@ -54,7 +54,11 @@ impl SettingsEnforcedTls {
         let url = "/user/settings/enforced_tls".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -22,7 +22,7 @@ impl IpWarmup {
     pub async fn get_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = "/ips/warmup".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all IPs currently in warmup.
@@ -51,7 +51,11 @@ impl IpWarmup {
         let url = "/ips/warmup".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -69,10 +73,10 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve the warmup status for a specific IP address.
@@ -91,7 +95,7 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -110,9 +114,9 @@ impl IpWarmup {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

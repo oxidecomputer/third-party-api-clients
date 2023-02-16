@@ -48,7 +48,10 @@ impl IssuerFraudRecords {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuer_fraud_records?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::RadarIssuerFraudRecordList = self.client.get(&url, None).await?;
+        let resp: crate::types::RadarIssuerFraudRecordList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -68,7 +71,7 @@ impl IssuerFraudRecords {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuer_fraud_records?{}", query_);
         let mut resp: crate::types::RadarIssuerFraudRecordList =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -89,12 +92,12 @@ impl IssuerFraudRecords {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -127,6 +130,8 @@ impl IssuerFraudRecords {
             crate::progenitor_support::encode_path(issuer_fraud_record),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

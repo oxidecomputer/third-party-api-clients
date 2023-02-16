@@ -40,7 +40,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/daily?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get active/inactive host reports.
@@ -95,7 +95,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/users?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting reports.
@@ -152,7 +152,7 @@ impl Reports {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting detail reports.
@@ -182,7 +182,7 @@ impl Reports {
             crate::progenitor_support::encode_path(meeting_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting participant reports.
@@ -231,7 +231,7 @@ impl Reports {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get meeting poll reports.
@@ -261,7 +261,7 @@ impl Reports {
             crate::progenitor_support::encode_path(meeting_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar detail reports.
@@ -290,7 +290,7 @@ impl Reports {
             crate::progenitor_support::encode_path(webinar_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar participant reports.
@@ -337,7 +337,7 @@ impl Reports {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar poll reports.
@@ -366,7 +366,7 @@ impl Reports {
             crate::progenitor_support::encode_path(webinar_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get webinar Q&A report.
@@ -397,7 +397,7 @@ impl Reports {
             crate::progenitor_support::encode_path(webinar_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get telephone reports.
@@ -460,7 +460,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/telephone?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get cloud recording usage report.
@@ -494,7 +494,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/cloud_recording?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get operation logs report.
@@ -546,7 +546,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/operationlogs?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get sign In / sign out activity report.
@@ -591,7 +591,7 @@ impl Reports {
         let url = format!("/report/activities?{}", query_);
         let url = self.client.url(&url, None);
         let resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.activity_logs.to_vec())
@@ -625,7 +625,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/activities?{}", query_);
         let mut resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut activity_logs = resp.activity_logs;
         let mut page = resp.next_page_token;
@@ -636,12 +636,12 @@ impl Reports {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None, None)
                     .await?;
             }
 
@@ -674,7 +674,7 @@ impl Reports {
     pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
         let url = "/report/billing".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Get billing invoice reports.
@@ -708,6 +708,6 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/report/billing/invoices?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

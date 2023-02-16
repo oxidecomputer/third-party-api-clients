@@ -25,7 +25,9 @@ impl Balance {
     pub async fn get(&self) -> Result<crate::types::Balance> {
         let url = "/v1/balance".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/balance/history` endpoint.
@@ -82,7 +84,10 @@ impl Balance {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/balance/history?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let resp: crate::types::BalanceTransactionsList = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -119,7 +124,8 @@ impl Balance {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/balance/history?{}", query_);
-        let mut resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::BalanceTransactionsList =
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -140,12 +146,12 @@ impl Balance {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -175,6 +181,8 @@ impl Balance {
             crate::progenitor_support::encode_path(id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

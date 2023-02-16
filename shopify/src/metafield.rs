@@ -45,7 +45,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-01/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -58,7 +58,11 @@ impl Metafield {
         let url = "/admin/api/2020-01/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -71,7 +75,7 @@ impl Metafield {
     pub async fn deprecated_202001_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -97,11 +101,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -121,11 +125,15 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -142,10 +150,10 @@ impl Metafield {
     pub async fn deprecated_202001_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of metafields that belong to a Product Image resource.
@@ -180,7 +188,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-04/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -193,7 +201,11 @@ impl Metafield {
         let url = "/admin/api/2020-04/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -206,7 +218,7 @@ impl Metafield {
     pub async fn deprecated_202004_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -232,11 +244,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -256,11 +268,15 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -277,10 +293,10 @@ impl Metafield {
     pub async fn deprecated_202004_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of metafields that belong to a Product Image resource.
@@ -315,7 +331,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-07/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -328,7 +344,11 @@ impl Metafield {
         let url = "/admin/api/2020-07/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -341,7 +361,7 @@ impl Metafield {
     pub async fn deprecated_202007_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -367,11 +387,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -391,11 +411,15 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -412,10 +436,10 @@ impl Metafield {
     pub async fn deprecated_202007_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of metafields that belong to a Product Image resource.
@@ -446,7 +470,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2020-10/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -459,7 +483,11 @@ impl Metafield {
         let url = "/admin/api/2020-10/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -472,7 +500,7 @@ impl Metafield {
     pub async fn get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-10/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -494,11 +522,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -514,11 +542,15 @@ impl Metafield {
     pub async fn update_param(&self, metafield_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -535,10 +567,10 @@ impl Metafield {
     pub async fn delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of metafields that belong to a Product Image resource.
@@ -573,7 +605,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/2021-01/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -586,7 +618,11 @@ impl Metafield {
         let url = "/admin/api/2021-01/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -599,7 +635,7 @@ impl Metafield {
     pub async fn deprecated_202101_get_count(&self) -> Result<()> {
         let url = "/admin/api/2021-01/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -625,11 +661,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -649,11 +685,15 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -670,10 +710,10 @@ impl Metafield {
     pub async fn deprecated_202101_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Retrieves a list of metafields that belong to a Product Image resource.
@@ -708,7 +748,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/api/unstable/metafields.json?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Creates a new metafield for a resource.
@@ -721,7 +761,11 @@ impl Metafield {
         let url = "/admin/api/unstable/metafields.json".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -734,7 +778,7 @@ impl Metafield {
     pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
         let url = "/admin/api/unstable/metafields/count.json".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieves a single metafield from a resource by its ID.
@@ -760,11 +804,11 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Updates a metafield.
@@ -784,11 +828,15 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -805,9 +853,9 @@ impl Metafield {
     pub async fn deprecated_unstable_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/metafields/{}/json",
-            crate::progenitor_support::encode_path(&metafield_id.to_string()),
+            crate::progenitor_support::encode_path(metafield_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

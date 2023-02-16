@@ -50,7 +50,7 @@ impl BlocksApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/suppression/blocks?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve all blocks.
@@ -104,7 +104,11 @@ impl BlocksApi {
         let url = "/suppression/blocks".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -124,10 +128,10 @@ impl BlocksApi {
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Retrieve a specific block.
@@ -144,7 +148,7 @@ impl BlocksApi {
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -162,9 +166,9 @@ impl BlocksApi {
     pub async fn delete_suppression_blocks_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
 }

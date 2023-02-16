@@ -104025,6 +104025,3 @@ pub struct Zip {
     )]
     pub y_position_metadata: Option<PropertyMetadata>,
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

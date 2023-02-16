@@ -22,7 +22,9 @@ impl FilesRemote {
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.add".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/files.remote.info` endpoint.
@@ -48,7 +50,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.remote.info?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `GET` to the `/files.remote.list` endpoint.
@@ -93,7 +95,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.remote.list?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/files.remote.remove` endpoint.
@@ -105,7 +107,9 @@ impl FilesRemote {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.remove".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/files.remote.share` endpoint.
@@ -140,7 +144,7 @@ impl FilesRemote {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.remote.share?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/files.remote.update` endpoint.
@@ -152,6 +156,8 @@ impl FilesRemote {
     pub async fn update(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.update".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

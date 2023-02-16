@@ -32411,6 +32411,3 @@ pub struct ActivityListReposStarredByUserResponseAnyOf {
     #[serde(flatten)]
     pub starred_repository_vector: Vec<StarredRepository>,
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

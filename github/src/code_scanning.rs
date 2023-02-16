@@ -78,7 +78,7 @@ impl CodeScanning {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List code scanning alerts for a repository.
@@ -161,7 +161,7 @@ impl CodeScanning {
             crate::progenitor_support::encode_path(&alert_number.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Update a code scanning alert.
@@ -193,7 +193,11 @@ impl CodeScanning {
         );
         let url = self.client.url(&url, None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -242,7 +246,7 @@ impl CodeScanning {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List instances of a code scanning alert.
@@ -349,7 +353,7 @@ impl CodeScanning {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List code scanning analyses for a repository.
@@ -456,7 +460,7 @@ impl CodeScanning {
             crate::progenitor_support::encode_path(&analysis_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Delete a code scanning analysis from a repository.
@@ -557,7 +561,7 @@ impl CodeScanning {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * Upload an analysis as SARIF data.
@@ -602,7 +606,11 @@ impl CodeScanning {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -633,6 +641,6 @@ impl CodeScanning {
             crate::progenitor_support::encode_path(sarif_id),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

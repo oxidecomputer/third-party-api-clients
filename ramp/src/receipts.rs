@@ -59,7 +59,7 @@ impl Receipts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -95,7 +95,7 @@ impl Receipts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -106,6 +106,7 @@ impl Receipts {
                 .client
                 .get::<crate::types::GetReceiptsResponse>(
                     page.trim_start_matches(&self.client.host),
+                    None,
                     None,
                 )
                 .await
@@ -142,6 +143,6 @@ impl Receipts {
     pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
         let url = format!("/receipts/{}", crate::progenitor_support::encode_path(id),);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

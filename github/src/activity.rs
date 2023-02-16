@@ -41,7 +41,7 @@ impl Activity {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/events?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public events.
@@ -80,7 +80,7 @@ impl Activity {
     pub async fn get_feeds(&self) -> Result<crate::types::Feed> {
         let url = "/feeds".to_string();
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public events for a network of repositories.
@@ -120,7 +120,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public events for a network of repositories.
@@ -194,7 +194,7 @@ impl Activity {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/notifications?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List notifications for the authenticated user.
@@ -247,7 +247,11 @@ impl Activity {
         let url = "/notifications".to_string();
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -269,7 +273,7 @@ impl Activity {
             crate::progenitor_support::encode_path(&thread_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Mark a thread as read.
@@ -290,7 +294,7 @@ impl Activity {
             crate::progenitor_support::encode_path(&thread_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.patch(&url, None).await
+        self.client.patch(&url, None, None).await
     }
     /**
      * Get a thread subscription for the authenticated user.
@@ -316,7 +320,7 @@ impl Activity {
             crate::progenitor_support::encode_path(&thread_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set a thread subscription.
@@ -346,7 +350,11 @@ impl Activity {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -368,7 +376,7 @@ impl Activity {
             crate::progenitor_support::encode_path(&thread_id.to_string()),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List public organization events.
@@ -405,7 +413,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public organization events.
@@ -463,7 +471,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repository events.
@@ -546,7 +554,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repository notifications for the authenticated user.
@@ -617,7 +625,11 @@ impl Activity {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -660,7 +672,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List watchers.
@@ -700,7 +712,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List watchers.
@@ -750,7 +762,7 @@ impl Activity {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Set a repository subscription.
@@ -779,7 +791,11 @@ impl Activity {
         );
         let url = self.client.url(&url, None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
     /**
@@ -803,7 +819,7 @@ impl Activity {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List repositories starred by the authenticated user.
@@ -848,7 +864,7 @@ impl Activity {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/starred?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories starred by the authenticated user.
@@ -904,7 +920,7 @@ impl Activity {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * Star a repository for the authenticated user.
@@ -927,7 +943,7 @@ impl Activity {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.put(&url, None).await
+        self.client.put(&url, None, None).await
     }
     /**
      * Unstar a repository for the authenticated user.
@@ -950,7 +966,7 @@ impl Activity {
             crate::progenitor_support::encode_path(repo),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * List repositories watched by the authenticated user.
@@ -981,7 +997,7 @@ impl Activity {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/subscriptions?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories watched by the authenticated user.
@@ -1035,7 +1051,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List events for the authenticated user.
@@ -1096,7 +1112,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List organization events for the authenticated user.
@@ -1156,7 +1172,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public events for a user.
@@ -1214,7 +1230,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List events received by the authenticated user.
@@ -1272,7 +1288,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List public events received by a user.
@@ -1344,7 +1360,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories watched by a user.
@@ -1381,7 +1397,7 @@ impl Activity {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * List repositories watched by a user.

@@ -28,7 +28,7 @@ impl FederalTaxDetailsBeta {
 */pub async fn get_company_or_federal_tax_details(&self,company_id_or_uuid: &str,) -> Result<crate::types::GetCompanyFederalTaxDetailsResponse> {let url =
 format!("/v1/companies/{}/federal_tax_details",
 crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),);
-let url = self.client.url(&url, None);self.client.get(&url, None).await}/**
+let url = self.client.url(&url, None);self.client.get(&url, None, None).await}/**
 * Update Federal Tax Details.
 *
 * This function performs a `PUT` to the `/v1/companies/{company_id_or_uuid}/federal_tax_details` endpoint.
@@ -39,5 +39,5 @@ let url = self.client.url(&url, None);self.client.get(&url, None).await}/**
 */pub async fn put_company_or_federal_tax_details(&self,company_id_or_uuid: &str,body: &crate::types::PutCompanyFederalTaxDetailsRequest) -> Result<crate::types::GetCompanyFederalTaxDetailsResponse> {let url =
 format!("/v1/companies/{}/federal_tax_details",
 crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),);
-let url = self.client.url(&url, None);self.client.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?))).await}
+let url = self.client.url(&url, None);self.client.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)), Some("application/json")).await}
 }

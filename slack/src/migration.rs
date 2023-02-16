@@ -45,6 +45,6 @@ impl Migration {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/migration.exchange?{}", query_);
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
 }

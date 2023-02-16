@@ -63,7 +63,7 @@ impl Mobiledevices {
             query_
         );
         let url = self.client.url(&url, None);
-        let resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
+        let resp: crate::types::MobileDevices = self.client.get(&url, None, None).await?;
 
         // Return our response data.
         Ok(resp.mobiledevices.to_vec())
@@ -102,7 +102,7 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(customer_id),
             query_
         );
-        let mut resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
+        let mut resp: crate::types::MobileDevices = self.client.get(&url, None, None).await?;
 
         let mut mobiledevices = resp.mobiledevices;
         let mut page = resp.next_page_token;
@@ -112,12 +112,12 @@ impl Mobiledevices {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(&format!("{}?pageToken={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(&format!("{}&pageToken={}", url, page), None, None)
                     .await?;
             }
 
@@ -162,7 +162,7 @@ impl Mobiledevices {
             query_
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client.get(&url, None, None).await
     }
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
@@ -181,7 +181,7 @@ impl Mobiledevices {
             crate::progenitor_support::encode_path(resource_id),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client.delete(&url, None, None).await
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}/action` endpoint.
@@ -206,7 +206,11 @@ impl Mobiledevices {
         );
         let url = self.client.url(&url, None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                Some("application/json"),
+            )
             .await
     }
 }

@@ -43,7 +43,10 @@ impl WebhookEndpoints {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/webhook_endpoints?{}", query_);
         let url = self.client.url(&url, None);
-        let resp: crate::types::GetWebhookEndpointsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetWebhookEndpointsResponse = self
+            .client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -58,7 +61,7 @@ impl WebhookEndpoints {
     pub async fn get_all(&self) -> Result<Vec<crate::types::WebhookEndpoint>> {
         let url = "/v1/webhook_endpoints".to_string();
         let mut resp: crate::types::GetWebhookEndpointsResponse =
-            self.client.get(&url, None).await?;
+            self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -79,12 +82,12 @@ impl WebhookEndpoints {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(&format!("{}?startng_after={}", url, page), None, None)
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(&format!("{}&starting_after={}", url, page), None, None)
                     .await?;
             }
 
@@ -104,7 +107,9 @@ impl WebhookEndpoints {
     pub async fn post(&self) -> Result<crate::types::WebhookEndpoint> {
         let url = "/v1/webhook_endpoints".to_string();
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `GET` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
@@ -125,7 +130,9 @@ impl WebhookEndpoints {
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
         let url = self.client.url(&url, None);
-        self.client.get(&url, None).await
+        self.client
+            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `POST` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
@@ -145,7 +152,9 @@ impl WebhookEndpoints {
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
         let url = self.client.url(&url, None);
-        self.client.post(&url, None).await
+        self.client
+            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
@@ -165,6 +174,8 @@ impl WebhookEndpoints {
             crate::progenitor_support::encode_path(webhook_endpoint),
         );
         let url = self.client.url(&url, None);
-        self.client.delete(&url, None).await
+        self.client
+            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .await
     }
 }

@@ -3325,6 +3325,3 @@ impl Corpus {
         matches!(self, Corpus::Noop)
     }
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultServer {}

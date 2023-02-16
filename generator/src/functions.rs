@@ -142,13 +142,22 @@ pub fn generate_files(
 
             let mut bounds: Vec<String> = Vec::new();
 
+            let mut body_content_type_header = None;
+
+            // println!("{:?} {:?}", o.summary, o.request_body);
+
             let (body_param, body_func) = if let Some(b) = &o.request_body {
                 if let Ok(b) = b.item() {
                     if b.is_binary()? {
+                        let (ct, _) = b.content.first().unwrap();
+                        body_content_type_header = Some(ct.to_string());
+
                         bounds.push("B: Into<reqwest::Body>".to_string());
                         (Some("B".to_string()), Some("body".to_string()))
                     } else {
                         let (ct, mt) = b.content.first().unwrap();
+                        body_content_type_header = Some(ct.to_string());
+
                         if ct == "application/json"
                             || ct == "application/octet-stream"
                             || ct.contains("application/json")
@@ -230,6 +239,8 @@ pub fn generate_files(
                 (None, None)
             };
 
+            // println!("{body_content_type_header:?}");
+
             /*
              * Get the function parameters.
              */
@@ -255,7 +266,7 @@ pub fn generate_files(
                     &format!("let url = self.client.url(&url, Some({server_type}::default().default_url()));")
                 );
             } else {
-                template.push_str(&"let url = self.client.url(&url, None);".to_string());
+                template.push_str("let url = self.client.url(&url, None);");
             }
 
             /*
@@ -284,6 +295,7 @@ pub fn generate_files(
                 &inner_response_type,
                 &pagination_property,
                 false,
+                body_content_type_header.as_deref(),
             )?;
 
             // TODO: don't special case this.
@@ -397,6 +409,7 @@ pub fn generate_files(
                     &inner_response_type,
                     &pagination_property,
                     true,
+                    body_content_type_header.as_deref(),
                 )?;
 
                 let mut fn_name = oid
@@ -824,6 +837,7 @@ fn get_fn_inner(
     inner_response_type: &str,
     pagination_property: &str,
     all_pages: bool,
+    content_type: Option<&str>,
 ) -> Result<String> {
     let body = if let Some(f) = &body_func {
         if f == "json" {
@@ -835,12 +849,16 @@ fn get_fn_inner(
         "None"
     };
 
+    let content_type = content_type
+        .map(|c| format!(r#"Some("{c}")"#))
+        .unwrap_or_else(|| String::from("None"));
+
     if all_pages && pagination_property.is_empty() {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
 
             let mut {} = resp.{};
             let mut has_more = resp.has_more;
@@ -859,9 +877,9 @@ fn get_fn_inner(
                 }}
 
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}, None).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), {}, None).await?;
                 }}
 
 
@@ -892,7 +910,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -900,9 +918,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while !page.is_empty() {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}, None).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}, None).await?;
                 }}
 
 
@@ -935,14 +953,14 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let resp: {} = self.client.{}(&url, {}).await?;
+            r#"let resp: {} = self.client.{}(&url, {}, None).await?;
 
             let mut {} = resp.{};
             let mut page = resp.page.next.to_string();
 
             // Paginate if we should.
             while !page.is_empty() {{
-                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), {}).await {{
+                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), {}, None).await {{
                     Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 
@@ -983,9 +1001,9 @@ fn get_fn_inner(
         let inner = format!(
             r#"
             let mut resp: {} = if !url.contains('?') {{
-                self.client.{}(&format!("{{}}?page=0&size=100", url), {}).await?
+                self.client.{}(&format!("{{}}?page=0&size=100", url), {}, None).await?
             }} else {{
-                self.client.{}(&format!("{{}}&page=0&size=100", url), {}).await?
+                self.client.{}(&format!("{{}}&page=0&size=100", url), {}, None).await?
             }};
 
             let mut {} = resp.{};
@@ -994,9 +1012,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while page <= (resp.page.total_pages - 1) {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), {}, None).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), {}, None).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -1026,7 +1044,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Zoom" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -1035,9 +1053,9 @@ fn get_fn_inner(
             while !page.is_empty() {{
                 // Check if we already have URL params and need to concat the token.
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}, None).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}, None).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -1083,7 +1101,7 @@ fn get_fn_inner(
     {
         if inner_response_type.is_empty() {
             return Ok(format!(
-                "self.client.{}(&url, {}).await",
+                "self.client.{}(&url, {}, {content_type}).await",
                 m.to_lowercase(),
                 body
             ));
@@ -1097,7 +1115,7 @@ fn get_fn_inner(
 
         // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
-            r#"let resp: {} = self.client.{}(&url, {}).await?;
+            r#"let resp: {} = self.client.{}(&url, {}, {content_type}).await?;
 
                 // Return our response data.
                 Ok(resp.{}{})"#,
@@ -1113,13 +1131,15 @@ fn get_fn_inner(
         bail!("function {} should be authenticated", oid);
     }
 
-    Ok(r#"self.client.post_media(
+    Ok(format!(
+        r#"self.client.post_media(
             &url,
             Some(reqwest::Body::from(serde_json::to_vec(body)?)),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::JWT,
+            {content_type}
         ).await"#
-        .to_string())
+    ))
 }
 
 fn get_fn_docs(
