@@ -296,9 +296,10 @@ mod test {
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
         let out = t.compile(Default::default(), "None");
-        let want = "let url =
-self.client.url(&format!(\"/measure/{}\",
-crate::progenitor_support::encode_path(&number.to_string()),), \"None\");\n";
+        let want = r#"let url = self.client.url(
+&format!("/measure/{}",
+crate::progenitor_support::encode_path(&number.to_string()),), None);
+"#;
         assert_eq!(want, &out);
         Ok(())
     }
