@@ -46,7 +46,13 @@ impl CountrySpecs {
             .url(&format!("/v1/country_specs?{}", query_), None);
         let resp: crate::types::GetCountrySpecsResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -61,8 +67,16 @@ impl CountrySpecs {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CountrySpec>> {
         let url = self.client.url("/v1/country_specs", None);
-        let mut resp: crate::types::GetCountrySpecsResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetCountrySpecsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -83,12 +97,24 @@ impl CountrySpecs {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -119,7 +145,13 @@ impl CountrySpecs {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

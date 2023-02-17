@@ -34,7 +34,15 @@ impl AccountTabSettings {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Modifies tab settings for specified account.
@@ -62,8 +70,10 @@ impl AccountTabSettings {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

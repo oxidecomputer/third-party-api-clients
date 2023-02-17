@@ -26,7 +26,13 @@ impl CallsParticipants {
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/calls.participants.add", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl CallsParticipants {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/calls.participants.remove", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

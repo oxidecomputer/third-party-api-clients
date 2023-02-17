@@ -46,7 +46,16 @@ impl PhoneBlockedList {
         let url = self
             .client
             .url(&format!("/phone/blocked_list?{}", query_), None);
-        let resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListBlockedResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.blocked_list.to_vec())
@@ -68,7 +77,16 @@ impl PhoneBlockedList {
      */
     pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
         let url = self.client.url("/phone/blocked_list", None);
-        let mut resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListBlockedResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut blocked_list = resp.blocked_list;
         let mut page = resp.next_page_token;
@@ -79,12 +97,24 @@ impl PhoneBlockedList {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -121,8 +151,10 @@ impl PhoneBlockedList {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -153,7 +185,15 @@ impl PhoneBlockedList {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete a blocked list.
@@ -181,7 +221,15 @@ impl PhoneBlockedList {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update a blocked list.
@@ -215,8 +263,10 @@ impl PhoneBlockedList {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

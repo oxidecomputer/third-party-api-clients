@@ -23,7 +23,15 @@ impl CodesOfConduct {
      */
     pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = self.client.url("/codes_of_conduct", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get all codes of conduct.
@@ -38,7 +46,15 @@ impl CodesOfConduct {
      */
     pub async fn get_all_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = self.client.url("/codes_of_conduct", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get a code of conduct.
@@ -61,7 +77,15 @@ impl CodesOfConduct {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get the code of conduct for a repository.
@@ -92,6 +116,14 @@ impl CodesOfConduct {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -54,7 +54,15 @@ impl Accounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/accounts?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create a sub account.
@@ -81,8 +89,10 @@ impl Accounts {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -115,7 +125,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Disassociate a sub account.
@@ -147,7 +165,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update options.
@@ -185,8 +211,10 @@ impl Accounts {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -243,7 +271,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get settings.
@@ -298,7 +334,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get settings.
@@ -353,7 +397,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get settings.
@@ -408,7 +460,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get settings.
@@ -463,7 +523,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update settings.
@@ -504,8 +572,10 @@ impl Accounts {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -540,7 +610,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get trusted domains.
@@ -569,7 +647,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get locked settings.
@@ -629,7 +715,15 @@ impl Accounts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update locked settings.
@@ -661,7 +755,13 @@ impl Accounts {
             None,
         );
         self.client
-            .patch(&url, None, Some("application/json"))
+            .patch(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -694,8 +794,10 @@ impl Accounts {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -733,8 +835,10 @@ impl Accounts {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -770,6 +874,14 @@ impl Accounts {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

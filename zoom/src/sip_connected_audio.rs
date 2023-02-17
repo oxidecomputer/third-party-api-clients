@@ -30,7 +30,15 @@ impl SipConnectedAudio {
         &self,
     ) -> Result<crate::types::ListSipTrunkNumbersResponse> {
         let url = self.client.url("/sip_trunk/numbers", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Assign SIP trunk configuration.
@@ -62,8 +70,10 @@ impl SipConnectedAudio {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -100,8 +110,10 @@ impl SipConnectedAudio {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -130,7 +142,15 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List SIP trunks.
@@ -157,7 +177,15 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Assign SIP trunks.
@@ -187,8 +215,10 @@ impl SipConnectedAudio {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -220,7 +250,15 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List internal call-out countries.
@@ -247,7 +285,15 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Add internal call-out countries.
@@ -278,8 +324,10 @@ impl SipConnectedAudio {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -312,7 +360,15 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List internal numbers.
@@ -355,8 +411,16 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        let resp: crate::types::ListInternalNumbersResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListInternalNumbersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.internal_numbers.to_vec())
@@ -387,8 +451,16 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        let mut resp: crate::types::ListInternalNumbersResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListInternalNumbersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut internal_numbers = resp.internal_numbers;
         let mut page = resp.next_page_token;
@@ -399,12 +471,24 @@ impl SipConnectedAudio {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -451,8 +535,10 @@ impl SipConnectedAudio {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -483,6 +569,14 @@ impl SipConnectedAudio {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

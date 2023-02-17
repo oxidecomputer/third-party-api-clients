@@ -23,7 +23,15 @@ impl Gitignore {
      */
     pub async fn get_all_templates(&self) -> Result<Vec<String>> {
         let url = self.client.url("/gitignore/templates", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get all gitignore templates.
@@ -38,7 +46,15 @@ impl Gitignore {
      */
     pub async fn get_all_all_templates(&self) -> Result<Vec<String>> {
         let url = self.client.url("/gitignore/templates", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get a gitignore template.
@@ -62,6 +78,14 @@ impl Gitignore {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

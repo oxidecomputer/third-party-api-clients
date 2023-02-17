@@ -51,7 +51,15 @@ impl SpamReportsApi {
         let url = self
             .client
             .url(&format!("/suppression/spam_reports?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all spam reports.
@@ -82,7 +90,15 @@ impl SpamReportsApi {
         let url = self
             .client
             .url(&format!("/suppression/spam_reports?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete spam reports.
@@ -110,8 +126,10 @@ impl SpamReportsApi {
         self.client
             .delete(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -137,7 +155,15 @@ impl SpamReportsApi {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve a specific spam report.
@@ -159,7 +185,15 @@ impl SpamReportsApi {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete a specific spam report.
@@ -185,6 +219,14 @@ impl SpamReportsApi {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

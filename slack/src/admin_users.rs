@@ -26,7 +26,13 @@ impl AdminUsers {
     pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.assign", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl AdminUsers {
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.invite", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -80,7 +92,15 @@ impl AdminUsers {
         let url = self
             .client
             .url(&format!("/admin.users.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.users.remove` endpoint.
@@ -96,7 +116,13 @@ impl AdminUsers {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.remove", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -113,7 +139,13 @@ impl AdminUsers {
     pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setAdmin", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -130,7 +162,13 @@ impl AdminUsers {
     pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setExpiration", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -147,7 +185,13 @@ impl AdminUsers {
     pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setOwner", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -164,7 +208,13 @@ impl AdminUsers {
     pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setRegular", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

@@ -33,7 +33,15 @@ impl AdminTeamsSettings {
         let url = self
             .client
             .url(&format!("/admin.teams.settings.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.teams.settings.setDefaultChannels` endpoint.
@@ -47,7 +55,13 @@ impl AdminTeamsSettings {
             .client
             .url("/admin.teams.settings.setDefaultChannels", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -66,7 +80,13 @@ impl AdminTeamsSettings {
             .client
             .url("/admin.teams.settings.setDescription", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -85,7 +105,13 @@ impl AdminTeamsSettings {
             .client
             .url("/admin.teams.settings.setDiscoverability", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -98,7 +124,13 @@ impl AdminTeamsSettings {
     pub async fn set_icon(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.teams.settings.setIcon", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -115,7 +147,13 @@ impl AdminTeamsSettings {
     pub async fn set_name(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.teams.settings.setName", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

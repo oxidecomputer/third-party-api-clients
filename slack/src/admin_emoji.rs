@@ -22,7 +22,13 @@ impl AdminEmoji {
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.emoji.add", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -35,7 +41,13 @@ impl AdminEmoji {
     pub async fn add_alias(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.emoji.addAlias", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -63,7 +75,15 @@ impl AdminEmoji {
         let url = self
             .client
             .url(&format!("/admin.emoji.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.emoji.remove` endpoint.
@@ -75,7 +95,13 @@ impl AdminEmoji {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.emoji.remove", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -88,7 +114,13 @@ impl AdminEmoji {
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.emoji.rename", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

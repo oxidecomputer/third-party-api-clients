@@ -44,7 +44,13 @@ impl TaxCodes {
         let url = self.client.url(&format!("/v1/tax_codes?{}", query_), None);
         let resp: crate::types::TaxProductResourceCodeList = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -59,8 +65,16 @@ impl TaxCodes {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
         let url = self.client.url("/v1/tax_codes", None);
-        let mut resp: crate::types::TaxProductResourceCodeList =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::TaxProductResourceCodeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -81,12 +95,24 @@ impl TaxCodes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -117,7 +143,13 @@ impl TaxCodes {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

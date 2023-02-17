@@ -39,7 +39,15 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/report/daily?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get active/inactive host reports.
@@ -93,7 +101,15 @@ impl Reports {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/report/users?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting reports.
@@ -152,7 +168,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting detail reports.
@@ -184,7 +208,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting participant reports.
@@ -235,7 +267,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting poll reports.
@@ -267,7 +307,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar detail reports.
@@ -298,7 +346,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar participant reports.
@@ -347,7 +403,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar poll reports.
@@ -378,7 +442,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar Q&A report.
@@ -411,7 +483,15 @@ impl Reports {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get telephone reports.
@@ -475,7 +555,15 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/telephone?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get cloud recording usage report.
@@ -510,7 +598,15 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/cloud_recording?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get operation logs report.
@@ -563,7 +659,15 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/operationlogs?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get sign In / sign out activity report.
@@ -608,8 +712,16 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/activities?{}", query_), None);
-        let resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ReportSignInOutActivitiesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.activity_logs.to_vec())
@@ -644,8 +756,16 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/activities?{}", query_), None);
-        let mut resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ReportSignInOutActivitiesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut activity_logs = resp.activity_logs;
         let mut page = resp.next_page_token;
@@ -656,12 +776,24 @@ impl Reports {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -693,7 +825,15 @@ impl Reports {
      */
     pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
         let url = self.client.url("/report/billing", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get billing invoice reports.
@@ -728,6 +868,14 @@ impl Reports {
         let url = self
             .client
             .url(&format!("/report/billing/invoices?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

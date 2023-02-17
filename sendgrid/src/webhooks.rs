@@ -33,7 +33,15 @@ impl Webhooks {
         &self,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = self.client.url("/user/webhooks/event/settings", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Event Notification Settings.
@@ -60,8 +68,10 @@ impl Webhooks {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -80,7 +90,15 @@ impl Webhooks {
         &self,
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
         let url = self.client.url("/user/webhooks/parse/settings", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves Inbound Parse Webhook statistics.
@@ -130,7 +148,15 @@ impl Webhooks {
         let url = self
             .client
             .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves Inbound Parse Webhook statistics.
@@ -169,7 +195,15 @@ impl Webhooks {
         let url = self
             .client
             .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve Signed Webhook Public Key.
@@ -192,7 +226,15 @@ impl Webhooks {
         let url = self
             .client
             .url("/user/webhooks/event/settings/signed", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Enable/Disable Signed Webhook.
@@ -219,8 +261,10 @@ impl Webhooks {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -251,8 +295,10 @@ impl Webhooks {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

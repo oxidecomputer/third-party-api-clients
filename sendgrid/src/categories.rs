@@ -44,7 +44,15 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/categories?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all categories.
@@ -69,7 +77,15 @@ impl Categories {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/categories?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?].
@@ -130,7 +146,15 @@ impl Categories {
         let url = self
             .client
             .url(&format!("/categories/stats/sums?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve Email Statistics for Categories.
@@ -183,7 +207,15 @@ impl Categories {
         let url = self
             .client
             .url(&format!("/categories/stats?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve Email Statistics for Categories.
@@ -224,6 +256,14 @@ impl Categories {
         let url = self
             .client
             .url(&format!("/categories/stats?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

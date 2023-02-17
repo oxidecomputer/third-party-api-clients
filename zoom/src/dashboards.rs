@@ -66,7 +66,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/meetings?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting details.
@@ -106,7 +114,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List meeting participants.
@@ -162,7 +178,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get meeting participant QoS.
@@ -206,7 +230,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List meeting participants QoS.
@@ -256,7 +288,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get sharing/recording details.
@@ -306,7 +346,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List webinars.
@@ -358,7 +406,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/webinars?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar details.
@@ -398,7 +454,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar participants.
@@ -453,7 +517,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get webinar participant QoS.
@@ -495,7 +567,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List webinar participant QoS.
@@ -545,7 +625,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get sharing/recording details.
@@ -595,7 +683,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List Zoom Rooms.
@@ -638,7 +734,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/zoomrooms?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Zoom Rooms details.
@@ -692,7 +796,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get CRC port usage.
@@ -727,7 +839,15 @@ impl Dashboards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/metrics/crc?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get IM metrics.
@@ -773,7 +893,15 @@ impl Dashboards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/metrics/im?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get chat metrics.
@@ -821,7 +949,15 @@ impl Dashboards {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/metrics/chat?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List Zoom meetings client feedback.
@@ -859,7 +995,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/client/feedback?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get top 25 issues of Zoom Rooms.
@@ -896,7 +1040,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/zoomrooms/issues?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get top 25 Zoom Rooms with issues.
@@ -931,7 +1083,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/issues/zoomrooms?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get issues of Zoom Rooms.
@@ -984,7 +1144,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get zoom meetings client feedback.
@@ -1040,7 +1208,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List client meeting satisfaction.
@@ -1074,7 +1250,15 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/metrics/client/satisfaction?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List call logs.
@@ -1140,8 +1324,16 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/phone/metrics/call_logs?{}", query_), None);
-        let resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListCallLogsMetricsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.call_logs.to_vec())
@@ -1188,8 +1380,16 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/phone/metrics/call_logs?{}", query_), None);
-        let mut resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListCallLogsMetricsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut call_logs = resp.call_logs;
         let mut page = resp.next_page_token;
@@ -1200,12 +1400,24 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -1253,7 +1465,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get call QoS.
@@ -1280,7 +1500,15 @@ impl Dashboards {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get post meeting feedback.
@@ -1334,8 +1562,16 @@ impl Dashboards {
             ),
             None,
         );
-        let resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ParticipantFeedbackResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.participants.to_vec())
@@ -1375,8 +1611,16 @@ impl Dashboards {
             ),
             None,
         );
-        let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ParticipantFeedbackResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1387,12 +1631,24 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -1461,8 +1717,16 @@ impl Dashboards {
             ),
             None,
         );
-        let resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ParticipantFeedbackResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.participants.to_vec())
@@ -1503,8 +1767,16 @@ impl Dashboards {
             ),
             None,
         );
-        let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ParticipantFeedbackResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1515,12 +1787,24 @@ impl Dashboards {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 

@@ -41,7 +41,15 @@ impl SettingsMail {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/mail_settings?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve address whitelist mail settings.
@@ -62,7 +70,15 @@ impl SettingsMail {
         &self,
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
         let url = self.client.url("/mail_settings/address_whitelist", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update address whitelist mail settings.
@@ -93,8 +109,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -115,7 +133,15 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_footer(&self) -> Result<crate::types::MailSettingsFooter> {
         let url = self.client.url("/mail_settings/footer", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update footer mail settings.
@@ -140,8 +166,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -162,7 +190,15 @@ impl SettingsMail {
         &self,
     ) -> Result<crate::types::MailSettingsForwardSpam> {
         let url = self.client.url("/mail_settings/forward_spam", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update forward spam mail settings.
@@ -198,8 +234,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -220,7 +258,15 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_template(&self) -> Result<crate::types::MailSettingsTemplate> {
         let url = self.client.url("/mail_settings/template", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update template mail settings.
@@ -245,8 +291,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -273,7 +321,15 @@ impl SettingsMail {
         &self,
     ) -> Result<crate::types::MailSettingsBouncePurge> {
         let url = self.client.url("/mail_settings/bounce_purge", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update bounce purge mail settings.
@@ -302,8 +358,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -324,7 +382,15 @@ impl SettingsMail {
         &self,
     ) -> Result<crate::types::MailSettingsForwardBounce> {
         let url = self.client.url("/mail_settings/forward_bounce", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update forward bounce mail settings.
@@ -349,8 +415,10 @@ impl SettingsMail {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

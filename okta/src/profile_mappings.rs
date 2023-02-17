@@ -48,7 +48,15 @@ impl ProfileMappings {
         let url = self
             .client
             .url(&format!("/api/v1/mappings?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/mappings` endpoint.
@@ -73,7 +81,15 @@ impl ProfileMappings {
         let url = self
             .client
             .url(&format!("/api/v1/mappings?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Profile Mapping.
@@ -94,7 +110,15 @@ impl ProfileMappings {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Profile Mapping.
@@ -122,8 +146,10 @@ impl ProfileMappings {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

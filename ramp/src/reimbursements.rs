@@ -38,8 +38,16 @@ impl Reimbursements {
         let url = self
             .client
             .url(&format!("/reimbursements?{}", query_), None);
-        let resp: crate::types::GetReimbursementsResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetReimbursementsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -53,8 +61,16 @@ impl Reimbursements {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = self.client.url("/reimbursements", None);
-        let resp: crate::types::GetReimbursementsResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetReimbursementsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -65,8 +81,10 @@ impl Reimbursements {
                 .client
                 .get::<crate::types::GetReimbursementsResponse>(
                     page.trim_start_matches(&self.client.host),
-                    None,
-                    None,
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -105,6 +123,14 @@ impl Reimbursements {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

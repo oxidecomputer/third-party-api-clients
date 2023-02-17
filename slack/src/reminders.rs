@@ -26,7 +26,13 @@ impl Reminders {
     pub async fn add(&self) -> Result<crate::types::RemindersAddSchema> {
         let url = self.client.url("/reminders.add", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl Reminders {
     pub async fn complete(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/reminders.complete", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -60,7 +72,13 @@ impl Reminders {
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/reminders.delete", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -84,7 +102,15 @@ impl Reminders {
         let url = self
             .client
             .url(&format!("/reminders.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/reminders.list` endpoint.
@@ -99,6 +125,14 @@ impl Reminders {
      */
     pub async fn list(&self) -> Result<crate::types::RemindersListSchema> {
         let url = self.client.url("/reminders.list", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

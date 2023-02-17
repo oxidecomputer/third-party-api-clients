@@ -46,6 +46,14 @@ impl AdminTeamsAdmins {
         let url = self
             .client
             .url(&format!("/admin.teams.admins.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -23,7 +23,15 @@ impl CustomIds {
      */
     pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomProviderResponse> {
         let url = self.client.url("/custom-id-provider", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create a Custom ID provider.
@@ -38,7 +46,15 @@ impl CustomIds {
      */
     pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
         let url = self.client.url("/custom-id-provider", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * .
@@ -57,8 +73,10 @@ impl CustomIds {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -86,7 +104,15 @@ impl CustomIds {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Convert ramp id to custom id.
@@ -110,7 +136,15 @@ impl CustomIds {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create custom id link.
@@ -134,8 +168,10 @@ impl CustomIds {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

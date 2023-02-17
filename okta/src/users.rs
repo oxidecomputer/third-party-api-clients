@@ -63,7 +63,15 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/api/v1/users?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * List Users.
@@ -100,7 +108,15 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/api/v1/users?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create User.
@@ -137,8 +153,10 @@ impl Users {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -166,7 +184,15 @@ impl Users {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get User.
@@ -187,7 +213,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update User.
@@ -223,8 +257,10 @@ impl Users {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -260,8 +296,10 @@ impl Users {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -291,7 +329,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Assigned App Links.
@@ -312,7 +358,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Assigned App Links.
@@ -331,7 +385,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients` endpoint.
@@ -350,7 +412,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients` endpoint.
@@ -367,7 +437,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients/{clientId}/grants` endpoint.
@@ -410,7 +488,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients/{clientId}/grants` endpoint.
@@ -439,7 +525,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/clients/{clientId}/grants` endpoint.
@@ -460,7 +554,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients/{clientId}/tokens` endpoint.
@@ -503,7 +605,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients/{clientId}/tokens` endpoint.
@@ -532,7 +642,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/clients/{clientId}/tokens` endpoint.
@@ -553,7 +671,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/clients/{clientId}/tokens/{tokenId}` endpoint.
@@ -599,7 +725,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/clients/{clientId}/tokens/{tokenId}` endpoint.
@@ -627,7 +761,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Change Password.
@@ -663,8 +805,10 @@ impl Users {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -694,8 +838,10 @@ impl Users {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -719,7 +865,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/grants` endpoint.
@@ -764,7 +918,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/grants` endpoint.
@@ -795,7 +957,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/grants` endpoint.
@@ -814,7 +984,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/grants/{grantId}` endpoint.
@@ -847,7 +1025,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/grants/{grantId}` endpoint.
@@ -868,7 +1054,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Member Groups.
@@ -889,7 +1083,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Member Groups.
@@ -908,7 +1110,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Listing IdPs associated with a user.
@@ -932,7 +1142,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Listing IdPs associated with a user.
@@ -954,7 +1172,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Activate User.
@@ -986,7 +1212,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deactivate User.
@@ -1014,7 +1248,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Expire Password.
@@ -1035,7 +1277,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Expire Password.
@@ -1059,7 +1309,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Reactivate User.
@@ -1091,7 +1349,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Reset Factors.
@@ -1112,7 +1378,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Reset Password.
@@ -1144,7 +1418,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Suspend User.
@@ -1165,7 +1447,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Unlock User.
@@ -1186,7 +1476,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Unsuspend User.
@@ -1207,7 +1505,15 @@ impl Users {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/linkedObjects/{relationshipName}` endpoint.
@@ -1245,7 +1551,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/linkedObjects/{relationshipName}` endpoint.
@@ -1267,7 +1581,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/linkedObjects/{relationshipName}` endpoint.
@@ -1292,7 +1614,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles` endpoint.
@@ -1322,7 +1652,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles` endpoint.
@@ -1349,7 +1687,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/api/v1/users/{userId}/roles` endpoint.
@@ -1386,8 +1732,10 @@ impl Users {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -1410,7 +1758,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps` endpoint.
@@ -1448,7 +1804,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps` endpoint.
@@ -1470,7 +1834,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `PUT` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps` endpoint.
@@ -1491,7 +1863,15 @@ impl Users {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `PUT` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}` endpoint.
@@ -1519,7 +1899,15 @@ impl Users {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}` endpoint.
@@ -1547,7 +1935,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Add App Instance Target to App Administrator Role given to a User.
@@ -1580,7 +1976,15 @@ impl Users {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Remove App Instance Target to App Administrator Role given to a User.
@@ -1613,7 +2017,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles/{roleId}/targets/groups` endpoint.
@@ -1651,7 +2063,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/roles/{roleId}/targets/groups` endpoint.
@@ -1673,7 +2093,15 @@ impl Users {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `PUT` to the `/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}` endpoint.
@@ -1701,7 +2129,15 @@ impl Users {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}` endpoint.
@@ -1729,7 +2165,15 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/sessions` endpoint.
@@ -1755,6 +2199,14 @@ impl Users {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

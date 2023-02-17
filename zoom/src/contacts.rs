@@ -55,8 +55,16 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/contacts?{}", query_), None);
-        let resp: crate::types::SearchCompanyContactsResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::SearchCompanyContactsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
@@ -91,8 +99,16 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/contacts?{}", query_), None);
-        let mut resp: crate::types::SearchCompanyContactsResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::SearchCompanyContactsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -103,12 +119,24 @@ impl Contacts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -165,8 +193,16 @@ impl Contacts {
         let url = self
             .client
             .url(&format!("/chat/users/me/contacts?{}", query_), None);
-        let resp: crate::types::GetUserContactsResponseData =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetUserContactsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.contacts.to_vec())
@@ -198,8 +234,16 @@ impl Contacts {
         let url = self
             .client
             .url(&format!("/chat/users/me/contacts?{}", query_), None);
-        let mut resp: crate::types::GetUserContactsResponseData =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetUserContactsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -210,12 +254,24 @@ impl Contacts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -270,6 +326,14 @@ impl Contacts {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

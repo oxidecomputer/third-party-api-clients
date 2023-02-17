@@ -37,7 +37,15 @@ impl AppsPermissionsUsers {
         let url = self
             .client
             .url(&format!("/apps.permissions.users.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/apps.permissions.users.request` endpoint.
@@ -73,6 +81,14 @@ impl AppsPermissionsUsers {
         let url = self
             .client
             .url(&format!("/apps.permissions.users.request?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

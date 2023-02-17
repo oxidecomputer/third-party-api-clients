@@ -2395,6 +2395,13 @@ fn gen(
     a("}");
     a("");
 
+    a(r#"
+#[derive(Debug, Default)]
+pub(crate) struct Message {
+    pub body: Option<reqwest::Body>,
+    pub content_type: Option<String>,
+}"#);
+
     a("");
 
     // Print the client template.

@@ -46,7 +46,13 @@ impl Accounts {
         let url = self.client.url(&format!("/v1/accounts?{}", query_), None);
         let resp: crate::types::GetAccountsResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -61,7 +67,16 @@ impl Accounts {
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Account>> {
         let url = self.client.url("/v1/accounts", None);
-        let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetAccountsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -82,12 +97,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -108,7 +135,13 @@ impl Accounts {
     pub async fn post(&self) -> Result<crate::types::Account> {
         let url = self.client.url("/v1/accounts", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -130,7 +163,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -153,7 +192,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -178,7 +223,13 @@ impl Accounts {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -199,7 +250,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -223,7 +280,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -252,7 +315,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -279,7 +348,13 @@ impl Accounts {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -302,7 +377,13 @@ impl Accounts {
         );
         let resp: crate::types::ListAccountCapability = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -326,8 +407,16 @@ impl Accounts {
             ),
             None,
         );
-        let mut resp: crate::types::ListAccountCapability =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListAccountCapability = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -348,12 +437,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -390,7 +491,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -417,7 +524,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -461,7 +574,13 @@ impl Accounts {
         );
         let resp: crate::types::ExternalAccounts = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -482,7 +601,16 @@ impl Accounts {
             ),
             None,
         );
-        let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ExternalAccounts = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -503,12 +631,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -538,7 +678,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -566,7 +712,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -595,7 +747,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -622,7 +780,13 @@ impl Accounts {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -645,7 +809,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -691,7 +861,13 @@ impl Accounts {
         );
         let resp: crate::types::GetAccountPeopleResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -716,8 +892,16 @@ impl Accounts {
             ),
             None,
         );
-        let mut resp: crate::types::GetAccountPeopleResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -738,12 +922,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -773,7 +969,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -801,7 +1003,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -828,7 +1036,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -855,7 +1069,13 @@ impl Accounts {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -901,7 +1121,13 @@ impl Accounts {
         );
         let resp: crate::types::GetAccountPeopleResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -926,8 +1152,16 @@ impl Accounts {
             ),
             None,
         );
-        let mut resp: crate::types::GetAccountPeopleResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -948,12 +1182,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -983,7 +1229,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -1011,7 +1263,13 @@ impl Accounts {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -1038,7 +1296,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -1065,7 +1329,13 @@ impl Accounts {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -1088,7 +1358,13 @@ impl Accounts {
             None,
         );
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

@@ -848,15 +848,15 @@ fn get_fn_inner(
     };
 
     let content_type = content_type
-        .map(|c| format!(r#"Some("{c}")"#))
+        .map(|c| format!(r#"Some("{c}".to_string())"#))
         .unwrap_or_else(|| String::from("None"));
 
     if all_pages && pagination_property.is_empty() {
-        return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+        return Ok(format!("self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await", body));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut has_more = resp.has_more;
@@ -875,9 +875,9 @@ fn get_fn_inner(
                 }}
 
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
 
@@ -908,7 +908,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -916,9 +916,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while !page.is_empty() {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
 
@@ -951,14 +951,14 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let resp: {} = self.client.{}(&url, {}, None).await?;
+            r#"let resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.page.next.to_string();
 
             // Paginate if we should.
             while !page.is_empty() {{
-                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), {}, None).await {{
+                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), crate::Message {{ body: {}, content_type: None }}).await {{
                     Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 
@@ -999,9 +999,9 @@ fn get_fn_inner(
         let inner = format!(
             r#"
             let mut resp: {} = if !url.contains('?') {{
-                self.client.{}(&format!("{{}}?page=0&size=100", url), {}, None).await?
+                self.client.{}(&format!("{{}}?page=0&size=100", url), crate::Message {{ body: {}, content_type: None }}).await?
             }} else {{
-                self.client.{}(&format!("{{}}&page=0&size=100", url), {}, None).await?
+                self.client.{}(&format!("{{}}&page=0&size=100", url), crate::Message {{ body: {}, content_type: None }}).await?
             }};
 
             let mut {} = resp.{};
@@ -1010,9 +1010,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while page <= (resp.page.total_pages - 1) {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -1042,7 +1042,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Zoom" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}, None).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -1051,9 +1051,9 @@ fn get_fn_inner(
             while !page.is_empty() {{
                 // Check if we already have URL params and need to concat the token.
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}, None).await?;
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -1099,7 +1099,7 @@ fn get_fn_inner(
     {
         if inner_response_type.is_empty() {
             return Ok(format!(
-                "self.client.{}(&url, {}, {content_type}).await",
+                "self.client.{}(&url, crate::Message {{ body: {}, content_type: {content_type} }} ).await",
                 m.to_lowercase(),
                 body
             ));
@@ -1113,7 +1113,7 @@ fn get_fn_inner(
 
         // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
-            r#"let resp: {} = self.client.{}(&url, {}, {content_type}).await?;
+            r#"let resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: {content_type} }}).await?;
 
                 // Return our response data.
                 Ok(resp.{}{})"#,
@@ -1132,10 +1132,12 @@ fn get_fn_inner(
     Ok(format!(
         r#"self.client.post_media(
             &url,
-            Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+            crate::Message {{
+                body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                content_type: {content_type},
+            }},
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::JWT,
-            {content_type}
         ).await"#
     ))
 }

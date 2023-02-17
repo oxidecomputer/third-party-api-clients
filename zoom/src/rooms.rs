@@ -62,8 +62,16 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/rooms?{}", query_), None);
-        let resp: crate::types::ListZoomRoomsResponseData =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListZoomRoomsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.rooms.to_vec())
@@ -103,8 +111,16 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/rooms?{}", query_), None);
-        let mut resp: crate::types::ListZoomRoomsResponseData =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListZoomRoomsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut rooms = resp.rooms;
         let mut page = resp.next_page_token;
@@ -115,12 +131,24 @@ impl Rooms {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -155,8 +183,10 @@ impl Rooms {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -185,7 +215,15 @@ impl Rooms {
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete a Zoom Room.
@@ -207,7 +245,15 @@ impl Rooms {
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update a Zoom Room profile.
@@ -237,8 +283,10 @@ impl Rooms {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -279,7 +327,15 @@ impl Rooms {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Zoom Room settings.
@@ -315,7 +371,13 @@ impl Rooms {
             None,
         );
         self.client
-            .patch(&url, None, Some("application/json"))
+            .patch(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -346,7 +408,15 @@ impl Rooms {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Change a Zoom Room's location.
@@ -379,8 +449,10 @@ impl Rooms {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -412,8 +484,10 @@ impl Rooms {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -464,8 +538,16 @@ impl Rooms {
         let url = self
             .client
             .url(&format!("/rooms/digital_signage?{}", query_), None);
-        let resp: crate::types::ListDigitalSignageContentResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListDigitalSignageContentResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.contents.to_vec())
@@ -502,8 +584,16 @@ impl Rooms {
         let url = self
             .client
             .url(&format!("/rooms/digital_signage?{}", query_), None);
-        let mut resp: crate::types::ListDigitalSignageContentResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListDigitalSignageContentResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut contents = resp.contents;
         let mut page = resp.next_page_token;
@@ -514,12 +604,24 @@ impl Rooms {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -552,7 +654,13 @@ impl Rooms {
     pub async fn manage_e_91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
         let url = self.client.url("/rooms/events", None);
         self.client
-            .patch(&url, None, Some("application/json"))
+            .patch(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -48,7 +48,13 @@ impl Reporting {
             .url(&format!("/v1/reporting/report_runs?{}", query_), None);
         let resp: crate::types::GetReportingReportRunsResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -66,8 +72,16 @@ impl Reporting {
         _created: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let url = self.client.url("/v1/reporting/report_runs", None);
-        let mut resp: crate::types::GetReportingReportRunsResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetReportingReportRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -88,12 +102,24 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -113,7 +139,13 @@ impl Reporting {
     pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
         let url = self.client.url("/v1/reporting/report_runs", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -138,7 +170,13 @@ impl Reporting {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -154,7 +192,13 @@ impl Reporting {
         let url = self.client.url("/v1/reporting/report_types", None);
         let resp: crate::types::FinancialReportingFinanceReportTypeList = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -169,8 +213,16 @@ impl Reporting {
      */
     pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = self.client.url("/v1/reporting/report_types", None);
-        let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::FinancialReportingFinanceReportTypeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -191,12 +243,24 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -230,7 +294,13 @@ impl Reporting {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

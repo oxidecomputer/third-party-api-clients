@@ -68,7 +68,15 @@ impl IpAddresses {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/ips?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all IP addresses.
@@ -115,7 +123,15 @@ impl IpAddresses {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/ips?{}", query_), None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Add IPs.
@@ -132,8 +148,10 @@ impl IpAddresses {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -146,7 +164,15 @@ impl IpAddresses {
      */
     pub async fn get_ips_remaining(&self) -> Result<crate::types::GetIpsRemainingResponse> {
         let url = self.client.url("/ips/remaining", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all assigned IPs.
@@ -159,7 +185,15 @@ impl IpAddresses {
      */
     pub async fn get_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
         let url = self.client.url("/ips/assigned", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all assigned IPs.
@@ -174,7 +208,15 @@ impl IpAddresses {
      */
     pub async fn get_all_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
         let url = self.client.url("/ips/assigned", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all IP pools an IP address belongs to.
@@ -198,6 +240,14 @@ impl IpAddresses {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -20,7 +20,13 @@ impl EphemeralKeys {
     pub async fn post(&self) -> Result<crate::types::EphemeralKey> {
         let url = self.client.url("/v1/ephemeral_keys", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -41,7 +47,13 @@ impl EphemeralKeys {
             None,
         );
         self.client
-            .delete(&url, None, Some("application/x-www-form-urlencoded"))
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

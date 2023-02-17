@@ -51,7 +51,13 @@ impl IssuerFraudRecords {
             .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
         let resp: crate::types::RadarIssuerFraudRecordList = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -73,8 +79,16 @@ impl IssuerFraudRecords {
         let url = self
             .client
             .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
-        let mut resp: crate::types::RadarIssuerFraudRecordList =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::RadarIssuerFraudRecordList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -95,12 +109,24 @@ impl IssuerFraudRecords {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -136,7 +162,13 @@ impl IssuerFraudRecords {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

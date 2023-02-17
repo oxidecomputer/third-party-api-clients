@@ -29,7 +29,15 @@ impl CancelScheduledSends {
      */
     pub async fn post_mail_batch(&self) -> Result<crate::types::MailBatchId> {
         let url = self.client.url("/mail/batch", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all scheduled sends.
@@ -48,7 +56,15 @@ impl CancelScheduledSends {
         &self,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url("/user/scheduled_sends", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve all scheduled sends.
@@ -65,7 +81,15 @@ impl CancelScheduledSends {
         &self,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url("/user/scheduled_sends", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Cancel or pause a scheduled send.
@@ -92,8 +116,10 @@ impl CancelScheduledSends {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -122,7 +148,15 @@ impl CancelScheduledSends {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve scheduled send.
@@ -146,7 +180,15 @@ impl CancelScheduledSends {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve scheduled send.
@@ -168,7 +210,15 @@ impl CancelScheduledSends {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete a cancellation or pause from a scheduled send.
@@ -191,7 +241,15 @@ impl CancelScheduledSends {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update a scheduled send.
@@ -221,8 +279,10 @@ impl CancelScheduledSends {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

@@ -19,7 +19,15 @@ impl UserTypes {
      */
     pub async fn list(&self) -> Result<Vec<crate::types::UserType>> {
         let url = self.client.url("/api/v1/meta/types/user", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/meta/types/user` endpoint.
@@ -30,7 +38,15 @@ impl UserTypes {
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::UserType>> {
         let url = self.client.url("/api/v1/meta/types/user", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/api/v1/meta/types/user` endpoint.
@@ -42,8 +58,10 @@ impl UserTypes {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -64,7 +82,15 @@ impl UserTypes {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `PUT` to the `/api/v1/meta/types/user/{typeId}` endpoint.
@@ -90,8 +116,10 @@ impl UserTypes {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -119,8 +147,10 @@ impl UserTypes {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -141,6 +171,14 @@ impl UserTypes {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

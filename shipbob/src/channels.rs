@@ -19,7 +19,15 @@ impl Channels {
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::Channel>> {
         let url = self.client.url("/channel", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get user-authorized channel info.
@@ -30,6 +38,14 @@ impl Channels {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Channel>> {
         let url = self.client.url("/channel", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

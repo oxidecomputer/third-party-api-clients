@@ -26,8 +26,10 @@ impl Markdown {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -43,7 +45,13 @@ impl Markdown {
     pub async fn render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
         let url = self.client.url("/markdown/raw", None);
         self.client
-            .post(&url, Some(body.into()), Some("text/plain"))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(body.into()),
+                    content_type: Some("text/plain".to_string()),
+                },
+            )
             .await
     }
 }

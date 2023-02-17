@@ -26,7 +26,13 @@ impl Chat {
     pub async fn delete(&self) -> Result<crate::types::ChatDeleteSuccessSchema> {
         let url = self.client.url("/chat.delete", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl Chat {
     pub async fn delete_scheduled_message(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/chat.deleteScheduledMessage", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -75,7 +87,15 @@ impl Chat {
         let url = self
             .client
             .url(&format!("/chat.getPermalink?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/chat.meMessage` endpoint.
@@ -91,7 +111,13 @@ impl Chat {
     pub async fn me_message(&self) -> Result<crate::types::ChatMeMessageSchema> {
         let url = self.client.url("/chat.meMessage", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -108,7 +134,13 @@ impl Chat {
     pub async fn post_ephemeral(&self) -> Result<crate::types::ChatPostEphemeralSuccessSchema> {
         let url = self.client.url("/chat.postEphemeral", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -125,7 +157,13 @@ impl Chat {
     pub async fn post_message(&self) -> Result<crate::types::ChatPostMessageSuccessSchema> {
         let url = self.client.url("/chat.postMessage", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -142,7 +180,13 @@ impl Chat {
     pub async fn schedule_message(&self) -> Result<crate::types::ChatScheduleMessageSuccessSchema> {
         let url = self.client.url("/chat.scheduleMessage", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -159,7 +203,13 @@ impl Chat {
     pub async fn unfurl(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/chat.unfurl", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -176,7 +226,13 @@ impl Chat {
     pub async fn update(&self) -> Result<crate::types::ChatUpdateSuccessSchema> {
         let url = self.client.url("/chat.update", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

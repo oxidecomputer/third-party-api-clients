@@ -25,7 +25,15 @@ impl SettingsTracking {
      */
     pub async fn get_tracking_settings(&self) -> Result<crate::types::GetTrackingSettingsResponse> {
         let url = self.client.url("/tracking_settings", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve Click Track Settings.
@@ -44,7 +52,15 @@ impl SettingsTracking {
      */
     pub async fn get_tracking_settings_click(&self) -> Result<crate::types::ClickTracking> {
         let url = self.client.url("/tracking_settings/click", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Click Tracking Settings.
@@ -69,8 +85,10 @@ impl SettingsTracking {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -94,7 +112,15 @@ impl SettingsTracking {
         &self,
     ) -> Result<crate::types::GoogleAnalyticsSettings> {
         let url = self.client.url("/tracking_settings/google_analytics", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Google Analytics Settings.
@@ -119,8 +145,10 @@ impl SettingsTracking {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -145,7 +173,15 @@ impl SettingsTracking {
         &self,
     ) -> Result<crate::types::GetTrackingSettingsOpenResponse> {
         let url = self.client.url("/tracking_settings/open", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Open Tracking Settings.
@@ -172,8 +208,10 @@ impl SettingsTracking {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -194,7 +232,15 @@ impl SettingsTracking {
         &self,
     ) -> Result<crate::types::SubscriptionTrackingSettings> {
         let url = self.client.url("/tracking_settings/subscription", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update Subscription Tracking Settings.
@@ -217,8 +263,10 @@ impl SettingsTracking {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

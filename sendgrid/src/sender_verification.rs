@@ -27,7 +27,15 @@ impl SenderVerification {
         &self,
     ) -> Result<crate::types::GetVerifiedSendersDomainsResponse> {
         let url = self.client.url("/verified_senders/domains", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Completed Steps.
@@ -44,7 +52,15 @@ impl SenderVerification {
         &self,
     ) -> Result<crate::types::GetVerifiedSendersStepsCompletedResponse> {
         let url = self.client.url("/verified_senders/steps_completed", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get All Verified Senders.
@@ -87,7 +103,15 @@ impl SenderVerification {
         let url = self
             .client
             .url(&format!("/verified_senders?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create Verified Sender Request.
@@ -110,8 +134,10 @@ impl SenderVerification {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -132,7 +158,15 @@ impl SenderVerification {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete Verified Sender.
@@ -153,7 +187,15 @@ impl SenderVerification {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Edit Verified Sender.
@@ -183,8 +225,10 @@ impl SenderVerification {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -207,6 +251,14 @@ impl SenderVerification {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

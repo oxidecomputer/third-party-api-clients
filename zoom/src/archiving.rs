@@ -60,8 +60,16 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/archive_files?{}", query_), None);
-        let resp: crate::types::ListArchivedFilesResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListArchivedFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.meetings.to_vec())
@@ -100,8 +108,16 @@ impl Archiving {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/archive_files?{}", query_), None);
-        let mut resp: crate::types::ListArchivedFilesResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListArchivedFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut meetings = resp.meetings;
         let mut page = resp.next_page_token;
@@ -112,12 +128,24 @@ impl Archiving {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -163,6 +191,14 @@ impl Archiving {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

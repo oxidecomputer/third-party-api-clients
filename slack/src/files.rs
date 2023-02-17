@@ -26,7 +26,13 @@ impl Files {
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/files.delete", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -71,7 +77,15 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/files.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/files.list` endpoint.
@@ -133,7 +147,15 @@ impl Files {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/files.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/files.revokePublicURL` endpoint.
@@ -149,7 +171,13 @@ impl Files {
     pub async fn revoke_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.revokePublicURL", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -166,7 +194,13 @@ impl Files {
     pub async fn shared_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.sharedPublicURL", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -179,7 +213,13 @@ impl Files {
     pub async fn upload(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.upload", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

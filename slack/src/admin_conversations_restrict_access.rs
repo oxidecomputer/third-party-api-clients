@@ -24,7 +24,13 @@ impl AdminConversationsRestrictAccess {
             .client
             .url("/admin.conversations.restrictAccess.addGroup", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -57,7 +63,15 @@ impl AdminConversationsRestrictAccess {
             &format!("/admin.conversations.restrictAccess.listGroups?{}", query_),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.conversations.restrictAccess.removeGroup` endpoint.
@@ -71,7 +85,13 @@ impl AdminConversationsRestrictAccess {
             .client
             .url("/admin.conversations.restrictAccess.removeGroup", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

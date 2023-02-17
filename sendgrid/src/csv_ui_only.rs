@@ -42,7 +42,15 @@ impl CsvUiOnly {
         let url = self
             .client
             .url(&format!("/messages/download?{}", query_), None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Download CSV.
@@ -66,6 +74,14 @@ impl CsvUiOnly {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

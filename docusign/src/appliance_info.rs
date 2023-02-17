@@ -34,7 +34,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns whether a template was encrypted by Display Appliance.
@@ -58,7 +66,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns envelope and recipient information for Display Appliance.
@@ -85,7 +101,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns envelope account information for Display Appliance.
@@ -112,7 +136,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Return custom fields information for Display Appliance.
@@ -139,7 +171,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes custom fields information for Display Appliance.
@@ -166,7 +206,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Gets date signed information for Display Appliance.
@@ -193,7 +241,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates document information for Display Applianc.
@@ -223,7 +279,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes document information for Display Appliance.
@@ -253,7 +317,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Return document pages for Display Appliance.
@@ -280,7 +352,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns images for Display Appliance.
@@ -307,7 +387,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns locale policy information for Display Appliance.
@@ -338,7 +426,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates page information for Display Appliance.
@@ -361,7 +457,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Creates page information for Display Appliance.
@@ -384,7 +488,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes page information for Display Appliance.
@@ -407,7 +519,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Sets latest PDF for Display Appliance.
@@ -434,7 +554,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Return PDF for Display Appliance.
@@ -466,7 +594,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns PDF blobs for Display Appliance.
@@ -493,7 +629,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates PDF blobs for Display Appliance.
@@ -516,7 +660,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Adds PDF blobs for Display Appliance.
@@ -543,7 +695,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates RecipientDeniedDocumentCopy for Display Appliance.
@@ -570,7 +730,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.put(&url, None, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes RecipientDeniedDocumentCopy for Display Appliance.
@@ -597,7 +765,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns signer attachment information for Display Appliance.
@@ -624,7 +800,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes signer attachment information for Display Appliance.
@@ -651,7 +835,15 @@ impl ApplianceInfo {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Uploads Kazmon error for Display Appliance.
@@ -662,7 +854,15 @@ impl ApplianceInfo {
      */
     pub async fn envelope_post_error(&self) -> Result<()> {
         let url = self.client.url("/v2.1/display_appliance_info/error", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns signing URL for Display Appliance.
@@ -673,6 +873,14 @@ impl ApplianceInfo {
      */
     pub async fn envelope_post_redeem(&self) -> Result<crate::types::ApplianceInfo> {
         let url = self.client.url("/v2.1/display_appliance_info/redeem", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

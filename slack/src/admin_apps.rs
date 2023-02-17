@@ -26,7 +26,13 @@ impl AdminApps {
     pub async fn approve(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.apps.approve", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl AdminApps {
     pub async fn restrict(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.apps.restrict", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

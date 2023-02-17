@@ -39,7 +39,16 @@ impl Departments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/departments?{}", query_), None);
-        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetDepartmentsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -55,7 +64,16 @@ impl Departments {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
         let url = self.client.url("/departments", None);
-        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetDepartmentsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -66,8 +84,10 @@ impl Departments {
                 .client
                 .get::<crate::types::GetDepartmentsResponse>(
                     page.trim_start_matches(&self.client.host),
-                    None,
-                    None,
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -108,8 +128,10 @@ impl Departments {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -132,7 +154,15 @@ impl Departments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update department.
@@ -156,8 +186,10 @@ impl Departments {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

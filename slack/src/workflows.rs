@@ -44,7 +44,15 @@ impl Workflows {
         let url = self
             .client
             .url(&format!("/workflows.stepCompleted?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/workflows.stepFailed` endpoint.
@@ -78,7 +86,15 @@ impl Workflows {
         let url = self
             .client
             .url(&format!("/workflows.stepFailed?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/workflows.updateStep` endpoint.
@@ -127,6 +143,14 @@ impl Workflows {
         let url = self
             .client
             .url(&format!("/workflows.updateStep?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

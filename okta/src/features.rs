@@ -19,7 +19,15 @@ impl Features {
      */
     pub async fn list(&self) -> Result<Vec<crate::types::Feature>> {
         let url = self.client.url("/api/v1/features", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features` endpoint.
@@ -30,7 +38,15 @@ impl Features {
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Feature>> {
         let url = self.client.url("/api/v1/features", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}` endpoint.
@@ -49,7 +65,15 @@ impl Features {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
@@ -68,7 +92,15 @@ impl Features {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
@@ -88,7 +120,15 @@ impl Features {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
@@ -107,7 +147,15 @@ impl Features {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
@@ -127,7 +175,15 @@ impl Features {
             ),
             None,
         );
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/api/v1/features/{featureId}/{lifecycle}` endpoint.
@@ -160,6 +216,14 @@ impl Features {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

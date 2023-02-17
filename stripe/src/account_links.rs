@@ -20,7 +20,13 @@ impl AccountLinks {
     pub async fn post(&self) -> Result<crate::types::AccountLink> {
         let url = self.client.url("/v1/account_links", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

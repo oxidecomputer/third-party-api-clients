@@ -67,7 +67,15 @@ impl SubuserStatistics {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve monthly stats for all subusers.
@@ -123,7 +131,15 @@ impl SubuserStatistics {
         let url = self
             .client
             .url(&format!("/subusers/stats/monthly?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve the totals for each email statistic metric for all subusers.
@@ -181,7 +197,15 @@ impl SubuserStatistics {
         let url = self
             .client
             .url(&format!("/subusers/stats/sums?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve email statistics for your subusers.
@@ -233,6 +257,14 @@ impl SubuserStatistics {
         let url = self
             .client
             .url(&format!("/subusers/stats?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

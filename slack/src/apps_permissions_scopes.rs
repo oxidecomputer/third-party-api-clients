@@ -25,6 +25,14 @@ impl AppsPermissionsScopes {
      */
     pub async fn list(&self) -> Result<crate::types::ApiPermissionsScopesListSuccessSchema> {
         let url = self.client.url("/apps.permissions.scopes.list", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

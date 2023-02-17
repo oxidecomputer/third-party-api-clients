@@ -58,7 +58,16 @@ impl Receipts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/receipts?{}", query_), None);
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetReceiptsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -94,7 +103,16 @@ impl Receipts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/receipts?{}", query_), None);
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetReceiptsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -105,8 +123,10 @@ impl Receipts {
                 .client
                 .get::<crate::types::GetReceiptsResponse>(
                     page.trim_start_matches(&self.client.host),
-                    None,
-                    None,
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -144,6 +164,14 @@ impl Receipts {
             &format!("/receipts/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

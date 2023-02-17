@@ -20,7 +20,13 @@ impl ThreeDSecure {
     pub async fn post_3d_secure(&self) -> Result<crate::types::ThreeDSecure> {
         let url = self.client.url("/v1/3d_secure", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -45,7 +51,13 @@ impl ThreeDSecure {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

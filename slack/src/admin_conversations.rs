@@ -26,7 +26,13 @@ impl AdminConversations {
     pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.archive", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -45,7 +51,13 @@ impl AdminConversations {
             .client
             .url("/admin.conversations.convertToPrivate", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -62,7 +74,13 @@ impl AdminConversations {
     pub async fn create(&self) -> Result<crate::types::AdminConversationsCreateSchema> {
         let url = self.client.url("/admin.conversations.create", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -79,7 +97,13 @@ impl AdminConversations {
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.delete", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -98,7 +122,13 @@ impl AdminConversations {
             .client
             .url("/admin.conversations.disconnectShared", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -126,7 +156,15 @@ impl AdminConversations {
             &format!("/admin.conversations.getConversationPrefs?{}", query_),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/admin.conversations.getTeams` endpoint.
@@ -162,7 +200,15 @@ impl AdminConversations {
         let url = self
             .client
             .url(&format!("/admin.conversations.getTeams?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.conversations.invite` endpoint.
@@ -178,7 +224,13 @@ impl AdminConversations {
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.invite", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -195,7 +247,13 @@ impl AdminConversations {
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.rename", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -255,7 +313,15 @@ impl AdminConversations {
         let url = self
             .client
             .url(&format!("/admin.conversations.search?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.conversations.setConversationPrefs` endpoint.
@@ -273,7 +339,13 @@ impl AdminConversations {
             .client
             .url("/admin.conversations.setConversationPrefs", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -290,7 +362,13 @@ impl AdminConversations {
     pub async fn set_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.setTeams", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -307,7 +385,13 @@ impl AdminConversations {
     pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.conversations.unarchive", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

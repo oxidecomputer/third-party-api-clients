@@ -26,7 +26,13 @@ impl Usergroups {
     pub async fn create(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.create", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl Usergroups {
     pub async fn disable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.disable", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -60,7 +72,13 @@ impl Usergroups {
     pub async fn enable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.enable", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -97,7 +115,15 @@ impl Usergroups {
         let url = self
             .client
             .url(&format!("/usergroups.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/usergroups.update` endpoint.
@@ -113,7 +139,13 @@ impl Usergroups {
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.update", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

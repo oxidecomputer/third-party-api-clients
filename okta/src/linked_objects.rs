@@ -21,7 +21,15 @@ impl LinkedObjects {
         let url = self
             .client
             .url("/api/v1/meta/schemas/user/linkedObjects", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/api/v1/meta/schemas/user/linkedObjects` endpoint.
@@ -34,7 +42,15 @@ impl LinkedObjects {
         let url = self
             .client
             .url("/api/v1/meta/schemas/user/linkedObjects", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/api/v1/meta/schemas/user/linkedObjects` endpoint.
@@ -51,8 +67,10 @@ impl LinkedObjects {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -76,7 +94,15 @@ impl LinkedObjects {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/api/v1/meta/schemas/user/linkedObjects/{linkedObjectName}` endpoint.
@@ -95,6 +121,14 @@ impl LinkedObjects {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

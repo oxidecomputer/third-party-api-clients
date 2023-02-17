@@ -52,7 +52,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Creates one or more brand profiles for an account.
@@ -86,8 +94,10 @@ impl AccountBrands {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -119,8 +129,10 @@ impl AccountBrands {
         self.client
             .delete(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -167,7 +179,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates an existing brand.
@@ -200,8 +220,10 @@ impl AccountBrands {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                None,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
             )
             .await
     }
@@ -228,7 +250,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Exports a brand.
@@ -253,7 +283,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Gets a brand logo.
@@ -285,7 +323,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates a brand logo.
@@ -323,7 +369,13 @@ impl AccountBrands {
             None,
         );
         self.client
-            .put(&url, Some(body.into()), Some("image/png"))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(body.into()),
+                    content_type: Some("image/png".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -356,7 +408,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns metadata about the branding resources for an account.
@@ -385,7 +445,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Returns a branding resource file.
@@ -439,7 +507,15 @@ impl AccountBrands {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Updates a branding resource file.
@@ -485,7 +561,13 @@ impl AccountBrands {
             None,
         );
         self.client
-            .put(&url, None, Some("multipart/form-data"))
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("multipart/form-data".to_string()),
+                },
+            )
             .await
     }
 }

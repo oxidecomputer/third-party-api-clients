@@ -26,7 +26,13 @@ impl Reactions {
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/reactions.add", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -71,7 +77,15 @@ impl Reactions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/reactions.get?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/reactions.list` endpoint.
@@ -122,7 +136,15 @@ impl Reactions {
         let url = self
             .client
             .url(&format!("/reactions.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/reactions.remove` endpoint.
@@ -138,7 +160,13 @@ impl Reactions {
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/reactions.remove", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

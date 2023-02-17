@@ -25,7 +25,15 @@ impl Dnd {
      */
     pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/dnd.endDnd", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/dnd.endSnooze` endpoint.
@@ -40,7 +48,15 @@ impl Dnd {
      */
     pub async fn end_snooze(&self) -> Result<crate::types::DndEndSnoozeSchema> {
         let url = self.client.url("/dnd.endSnooze", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/dnd.info` endpoint.
@@ -61,7 +77,15 @@ impl Dnd {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/dnd.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/dnd.setSnooze` endpoint.
@@ -73,7 +97,13 @@ impl Dnd {
     pub async fn set_snooze(&self) -> Result<crate::types::DndSetSnoozeSchema> {
         let url = self.client.url("/dnd.setSnooze", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -95,6 +125,14 @@ impl Dnd {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/dnd.teamInfo?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

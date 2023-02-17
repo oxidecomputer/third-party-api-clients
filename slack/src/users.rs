@@ -56,7 +56,15 @@ impl Users {
         let url = self
             .client
             .url(&format!("/users.conversations?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/users.deletePhoto` endpoint.
@@ -68,7 +76,13 @@ impl Users {
     pub async fn delete_photo(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/users.deletePhoto", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -95,7 +109,15 @@ impl Users {
         let url = self
             .client
             .url(&format!("/users.getPresence?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.identity` endpoint.
@@ -110,7 +132,15 @@ impl Users {
      */
     pub async fn identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
         let url = self.client.url("/users.identity", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.identity` endpoint.
@@ -123,7 +153,15 @@ impl Users {
      */
     pub async fn get_all_identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
         let url = self.client.url("/users.identity", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.info` endpoint.
@@ -152,7 +190,15 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.list` endpoint.
@@ -186,7 +232,15 @@ impl Users {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/users.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/users.lookupByEmail` endpoint.
@@ -209,7 +263,15 @@ impl Users {
         let url = self
             .client
             .url(&format!("/users.lookupByEmail?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/users.setActive` endpoint.
@@ -224,7 +286,15 @@ impl Users {
      */
     pub async fn set_active(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/users.setActive", None);
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/users.setPhoto` endpoint.
@@ -236,7 +306,13 @@ impl Users {
     pub async fn set_photo(&self) -> Result<crate::types::UsersSetPhotoSchema> {
         let url = self.client.url("/users.setPhoto", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -253,7 +329,13 @@ impl Users {
     pub async fn set_presence(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/users.setPresence", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

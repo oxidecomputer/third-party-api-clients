@@ -26,7 +26,13 @@ impl AdminUsergroups {
     pub async fn add_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.addChannels", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl AdminUsergroups {
     pub async fn add_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.addTeams", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -83,7 +95,15 @@ impl AdminUsergroups {
         let url = self
             .client
             .url(&format!("/admin.usergroups.listChannels?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/admin.usergroups.removeChannels` endpoint.
@@ -99,7 +119,13 @@ impl AdminUsergroups {
     pub async fn remove_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.removeChannels", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

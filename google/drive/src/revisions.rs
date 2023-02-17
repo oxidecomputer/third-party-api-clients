@@ -45,7 +45,16 @@ impl Revisions {
             ),
             None,
         );
-        let resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
+        let resp: crate::types::RevisionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.revisions.to_vec())
@@ -65,7 +74,16 @@ impl Revisions {
             ),
             None,
         );
-        let mut resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::RevisionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut revisions = resp.revisions;
         let mut page = resp.next_page_token;
@@ -75,12 +93,24 @@ impl Revisions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None, None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None, None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -130,7 +160,15 @@ impl Revisions {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
@@ -151,7 +189,15 @@ impl Revisions {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
@@ -180,8 +226,10 @@ impl Revisions {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

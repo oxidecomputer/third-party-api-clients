@@ -50,8 +50,16 @@ impl CommonAreaPhones {
         let url = self
             .client
             .url(&format!("/phone/common_area_phones?{}", query_), None);
-        let resp: crate::types::ListCommonAreaPhonesResponse =
-            self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListCommonAreaPhonesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.common_area_phones.to_vec())
@@ -77,8 +85,16 @@ impl CommonAreaPhones {
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::CommonAreaPhones>> {
         let url = self.client.url("/phone/common_area_phones", None);
-        let mut resp: crate::types::ListCommonAreaPhonesResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListCommonAreaPhonesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut common_area_phones = resp.common_area_phones;
         let mut page = resp.next_page_token;
@@ -89,12 +105,24 @@ impl CommonAreaPhones {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -135,8 +163,10 @@ impl CommonAreaPhones {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -171,7 +201,15 @@ impl CommonAreaPhones {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Delete a common area phone.
@@ -199,7 +237,15 @@ impl CommonAreaPhones {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update common area phone.
@@ -233,8 +279,10 @@ impl CommonAreaPhones {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -267,8 +315,10 @@ impl CommonAreaPhones {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -303,7 +353,15 @@ impl CommonAreaPhones {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Assign calling plans to common area phone.
@@ -334,8 +392,10 @@ impl CommonAreaPhones {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -370,6 +430,14 @@ impl CommonAreaPhones {
             ),
             None,
         );
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

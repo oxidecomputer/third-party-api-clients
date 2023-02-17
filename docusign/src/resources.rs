@@ -29,6 +29,14 @@ impl Resources {
      */
     pub async fn service_information_get(&self) -> Result<crate::types::ResourceInformation> {
         let url = self.client.url("/v2.1", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

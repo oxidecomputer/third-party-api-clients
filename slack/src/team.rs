@@ -46,7 +46,15 @@ impl Team {
         let url = self
             .client
             .url(&format!("/team.accessLogs?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/team.billableInfo` endpoint.
@@ -69,7 +77,15 @@ impl Team {
         let url = self
             .client
             .url(&format!("/team.billableInfo?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/team.info` endpoint.
@@ -90,7 +106,15 @@ impl Team {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/team.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/team.integrationLogs` endpoint.
@@ -141,6 +165,14 @@ impl Team {
         let url = self
             .client
             .url(&format!("/team.integrationLogs?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

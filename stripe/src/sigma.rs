@@ -46,7 +46,13 @@ impl Sigma {
             .url(&format!("/v1/sigma/scheduled_query_runs?{}", query_), None);
         let resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
             .client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
@@ -63,8 +69,16 @@ impl Sigma {
         &self,
     ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
         let url = self.client.url("/v1/sigma/scheduled_query_runs", None);
-        let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -85,12 +99,24 @@ impl Sigma {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None, None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -124,7 +150,13 @@ impl Sigma {
             None,
         );
         self.client
-            .get(&url, None, Some("application/x-www-form-urlencoded"))
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

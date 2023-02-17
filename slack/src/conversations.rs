@@ -26,7 +26,13 @@ impl Conversations {
     pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.archive", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -43,7 +49,13 @@ impl Conversations {
     pub async fn close(&self) -> Result<crate::types::ConversationsCloseSuccessSchema> {
         let url = self.client.url("/conversations.close", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -60,7 +72,13 @@ impl Conversations {
     pub async fn create(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.create", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -112,7 +130,15 @@ impl Conversations {
         let url = self
             .client
             .url(&format!("/conversations.history?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/conversations.info` endpoint.
@@ -151,7 +177,15 @@ impl Conversations {
         let url = self
             .client
             .url(&format!("/conversations.info?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/conversations.invite` endpoint.
@@ -167,7 +201,13 @@ impl Conversations {
     pub async fn invite(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.invite", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -184,7 +224,13 @@ impl Conversations {
     pub async fn join(&self) -> Result<crate::types::ConversationsJoinSuccessSchema> {
         let url = self.client.url("/conversations.join", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -201,7 +247,13 @@ impl Conversations {
     pub async fn kick(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.kick", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -218,7 +270,13 @@ impl Conversations {
     pub async fn leave(&self) -> Result<crate::types::ConversationsLeaveSuccessSchema> {
         let url = self.client.url("/conversations.leave", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -260,7 +318,15 @@ impl Conversations {
         let url = self
             .client
             .url(&format!("/conversations.list?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/conversations.mark` endpoint.
@@ -276,7 +342,13 @@ impl Conversations {
     pub async fn mark(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.mark", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -313,7 +385,15 @@ impl Conversations {
         let url = self
             .client
             .url(&format!("/conversations.members?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/conversations.open` endpoint.
@@ -329,7 +409,13 @@ impl Conversations {
     pub async fn open(&self) -> Result<crate::types::ConversationsOpenSuccessSchema> {
         let url = self.client.url("/conversations.open", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -346,7 +432,13 @@ impl Conversations {
     pub async fn rename(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.rename", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -403,7 +495,15 @@ impl Conversations {
         let url = self
             .client
             .url(&format!("/conversations.replies?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/conversations.setPurpose` endpoint.
@@ -419,7 +519,13 @@ impl Conversations {
     pub async fn set_purpose(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.setPurpose", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -436,7 +542,13 @@ impl Conversations {
     pub async fn set_topic(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.setTopic", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
     /**
@@ -453,7 +565,13 @@ impl Conversations {
     pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.unarchive", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

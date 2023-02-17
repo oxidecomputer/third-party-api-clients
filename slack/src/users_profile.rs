@@ -41,7 +41,15 @@ impl UsersProfile {
         let url = self
             .client
             .url(&format!("/users.profile.get?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `POST` to the `/users.profile.set` endpoint.
@@ -57,7 +65,13 @@ impl UsersProfile {
     pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
         let url = self.client.url("/users.profile.set", None);
         self.client
-            .post(&url, None, Some("application/x-www-form-urlencoded"))
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
             .await
     }
 }

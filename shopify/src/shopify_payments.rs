@@ -23,7 +23,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/2020-01/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves the account's current balance.
@@ -36,7 +44,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/2020-04/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves the account's current balance.
@@ -49,7 +65,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/2020-07/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves the account's current balance.
@@ -62,7 +86,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/2020-10/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves the account's current balance.
@@ -75,7 +107,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/2021-01/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves the account's current balance.
@@ -88,7 +128,15 @@ impl ShopifyPayments {
         let url = self
             .client
             .url("/admin/api/unstable/shopify_payments/balance.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
@@ -133,7 +181,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single dispute by ID.
@@ -157,7 +213,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
@@ -202,7 +266,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -257,7 +329,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -278,7 +358,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -333,7 +421,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -354,7 +450,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -409,7 +513,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -430,7 +542,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -485,7 +605,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -506,7 +634,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -561,7 +697,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -582,7 +726,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
@@ -637,7 +789,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a single payout by id.
@@ -661,7 +821,15 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
     * Retrieves a list of all balance transactions ordered by processing
@@ -712,6 +880,14 @@ impl ShopifyPayments {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -98,7 +98,15 @@ impl EnvelopeConsumerDisclosures {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Gets the Electronic Record and Signature Disclosure for a specific envelope recipient.
@@ -226,6 +234,14 @@ impl EnvelopeConsumerDisclosures {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

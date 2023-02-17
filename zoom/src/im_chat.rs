@@ -57,7 +57,15 @@ impl ImChat {
         let url = self
             .client
             .url(&format!("/im/chat/sessions?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get IM chat messages.
@@ -115,7 +123,15 @@ impl ImChat {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get user’s IM messages.
@@ -172,7 +188,16 @@ impl ImChat {
             ),
             None,
         );
-        let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::ListimmessagesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.messages.to_vec())
@@ -217,8 +242,16 @@ impl ImChat {
             ),
             None,
         );
-        let mut resp: crate::types::ListimmessagesResponse =
-            self.client.get(&url, None, None).await?;
+        let mut resp: crate::types::ListimmessagesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut messages = resp.messages;
         let mut page = resp.next_page_token;
@@ -229,12 +262,24 @@ impl ImChat {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None, None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -279,8 +324,10 @@ impl ImChat {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

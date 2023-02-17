@@ -33,6 +33,14 @@ impl TeamProfile {
         let url = self
             .client
             .url(&format!("/team.profile.get?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

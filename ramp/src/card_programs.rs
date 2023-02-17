@@ -39,7 +39,16 @@ impl CardPrograms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/card-programs?{}", query_), None);
-        let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetCardProgramsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.card_programs.to_vec())
@@ -55,7 +64,16 @@ impl CardPrograms {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
         let url = self.client.url("/card-programs", None);
-        let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetCardProgramsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut card_programs = resp.card_programs;
         let mut page = resp.page.next.to_string();
@@ -66,8 +84,10 @@ impl CardPrograms {
                 .client
                 .get::<crate::types::GetCardProgramsResponse>(
                     page.trim_start_matches(&self.client.host),
-                    None,
-                    None,
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -112,8 +132,10 @@ impl CardPrograms {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -136,6 +158,14 @@ impl CardPrograms {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

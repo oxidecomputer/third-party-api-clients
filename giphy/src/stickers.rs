@@ -37,7 +37,15 @@ impl Stickers {
         let url = self
             .client
             .url(&format!("/stickers/random?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Search Stickers.
@@ -83,7 +91,15 @@ impl Stickers {
         let url = self
             .client
             .url(&format!("/stickers/search?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Translate phrase to Sticker.
@@ -106,7 +122,15 @@ impl Stickers {
         let url = self
             .client
             .url(&format!("/stickers/translate?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Trending Stickers.
@@ -142,6 +166,14 @@ impl Stickers {
         let url = self
             .client
             .url(&format!("/stickers/trending?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

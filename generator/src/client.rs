@@ -200,10 +200,9 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-        content_type: Option<&str>,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
@@ -229,8 +228,8 @@ impl Client {
             req
         };
 
-        if let Some(content_type) = content_type {
-            req = req.header(http::header::CONTENT_TYPE, content_type);
+        if let Some(content_type) = &message.content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type.clone());
         }
 
         req = req.header(http::header::USER_AGENT, &*instance.agent);
@@ -243,7 +242,7 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        if let Some(body) = body {
+        if let Some(body) = message.body {
             req = req.body(body);
         }
         let response = req.send().await?;
@@ -339,26 +338,25 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-        content_type: Option<&str>,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_ , r) = self.request(method, uri, body, media_type, authentication, content_type).await?;
+        let (_ , r) = self.request(method, uri, message, media_type, authentication).await?;
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.get_media(uri, crate::utils::MediaType::Json, message, content_type).await
+        self.get_media(uri, crate::utils::MediaType::Json, message).await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -368,11 +366,10 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            content_type,
         ).await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -386,10 +383,9 @@ impl Client {
         self.request(
             http::Method::GET,
             &uri,
-            None,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            None,
         ).await
     }
 
@@ -400,14 +396,13 @@ impl Client {
         self.request(
             http::Method::GET,
             url.as_str(),
-            None,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            None,
         ).await
     }
 
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -416,17 +411,15 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            content_type,
         ).await
     }
 
     async fn post_media<D>(
         &self,
         uri: &str,
-        message: Option<reqwest::Body>,
+        message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-        content_type: Option<&str>
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -437,11 +430,10 @@ impl Client {
             message,
             media,
             authentication,
-            content_type
         ).await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType, content_type: Option<&str>) -> Result<D>
+    async fn patch_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -451,25 +443,24 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            content_type
         ).await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json, content_type).await
+        self.patch_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json, content_type).await
+        self.put_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType, content_type: Option<&str>) -> Result<D>
+    async fn put_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -479,11 +470,10 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            content_type
         ).await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -493,7 +483,6 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-            content_type
         ).await
     }
 
@@ -1069,13 +1058,12 @@ async fn request<Out>(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body, content_type).await?;
+    let response = self.request_raw(method, uri, message).await?;
 
     let status = response.status();
 
@@ -1108,13 +1096,12 @@ async fn request_with_links<Out>(
     &self,
     method: http::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<(Option<hyperx::header::Link>, Out)>
 where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body, content_type).await?;
+    let response = self.request_raw(method, uri, message).await?;
 
     let status = response.status();
     let link = response
@@ -1347,20 +1334,19 @@ async fn request_entity<D>(
     &self,
     method: http::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     let r = self
-        .request(method, uri, body, content_type)
+        .request(method, uri, message)
         .await?;
     Ok(r)
 }}
 
 #[allow(dead_code)]
-async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+async fn get<D>(&self, uri: &str,  message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1368,12 +1354,11 @@ where
         http::Method::GET,
         uri,
         message,
-        content_type
     ).await
 }}
 
 #[allow(dead_code)]
-async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
+async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1415,8 +1400,7 @@ where
     self.request_with_links(
         http::Method::GET,
         uri,
-        None,
-        None,
+        Message::default(),
     ).await
 }}
 
@@ -1428,13 +1412,12 @@ where
     self.request_with_links(
         http::Method::GET,
         url.as_str(),
-        None,
-        None,
+        Message::default(),
     ).await
 }}
 
 #[allow(dead_code)]
-async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1442,12 +1425,11 @@ where
         http::Method::POST,
         uri,
         message,
-        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1455,12 +1437,11 @@ where
         http::Method::PATCH,
         uri,
         message,
-        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1468,12 +1449,11 @@ where
         http::Method::PUT,
         uri,
         message,
-        content_type,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>, content_type: Option<&str>) -> Result<D>
+async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1481,7 +1461,6 @@ where
         http::Method::DELETE,
         uri,
         message,
-        content_type,
     ).await
 }}"#,
         raw_request
@@ -1504,8 +1483,7 @@ async fn request_raw(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<reqwest::Response>
 {{
     let (url, auth) = self.url_and_auth(uri).await?;
@@ -1517,7 +1495,7 @@ async fn request_raw(
         reqwest::header::HeaderValue::from_static("application/json"),
     );
 
-    if let Some(content_type) = content_type {{
+    if let Some(content_type) = &message.content_type {{
         req = req.header(
             reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_str(content_type).unwrap(),
@@ -1533,7 +1511,7 @@ async fn request_raw(
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
-    if let Some(body) = body {{
+    if let Some(body) = message.body {{
         req = req.body(body);
     }}
     Ok(req.send().await?)
@@ -1560,8 +1538,7 @@ async fn make_request(
     &self,
     method: &reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<reqwest::Request> {{
     let (url, auth) = self.url_and_auth(uri).await?;
 
@@ -1575,7 +1552,7 @@ async fn make_request(
         reqwest::header::HeaderValue::from_static("application/json"),
     );
 
-    if let Some(content_type) = content_type {{
+    if let Some(content_type) = &message.content_type {{
         req = req.header(
             reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_str(content_type).unwrap(),
@@ -1593,7 +1570,7 @@ async fn make_request(
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
 
-    if let Some(body) = body {{
+    if let Some(body) = message.body {{
         req = req.body(body);
     }}
 
@@ -1604,8 +1581,7 @@ async fn request_raw(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
-    content_type: Option<&str>,
+    message: Message,
 ) -> Result<reqwest::Response> {{
     if self.auto_refresh {{
         let expired = self.is_expired().await;
@@ -1634,7 +1610,7 @@ async fn request_raw(
         }}
     }}
 
-    let req = self.make_request(&method, uri, body, content_type).await?;
+    let req = self.make_request(&method, uri, message).await?;
     let resp = self.client.execute(req).await?;
 
     Ok(resp)

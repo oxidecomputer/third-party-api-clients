@@ -39,7 +39,16 @@ impl Locations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/locations?{}", query_), None);
-        let resp: crate::types::GetLocationResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetLocationResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -55,7 +64,16 @@ impl Locations {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Location>> {
         let url = self.client.url("/locations", None);
-        let resp: crate::types::GetLocationResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::GetLocationResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -66,8 +84,10 @@ impl Locations {
                 .client
                 .get::<crate::types::GetLocationResponse>(
                     page.trim_start_matches(&self.client.host),
-                    None,
-                    None,
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -112,8 +132,10 @@ impl Locations {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -133,7 +155,15 @@ impl Locations {
             &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update location.
@@ -154,8 +184,10 @@ impl Locations {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

@@ -23,7 +23,15 @@ impl UsersApi {
      */
     pub async fn get_user_profile(&self) -> Result<crate::types::GetUserProfileResponse> {
         let url = self.client.url("/user/profile", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update a user's profile.
@@ -46,8 +54,10 @@ impl UsersApi {
         self.client
             .patch(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -66,7 +76,15 @@ impl UsersApi {
      */
     pub async fn get_user_account(&self) -> Result<crate::types::GetUserAccountResponse> {
         let url = self.client.url("/user/account", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieve your account email address.
@@ -81,7 +99,15 @@ impl UsersApi {
      */
     pub async fn get_user_email(&self) -> Result<crate::types::GetUserEmailResponse> {
         let url = self.client.url("/user/email", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update your account email address.
@@ -102,8 +128,10 @@ impl UsersApi {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -120,7 +148,15 @@ impl UsersApi {
      */
     pub async fn get_user_username(&self) -> Result<crate::types::Users> {
         let url = self.client.url("/user/username", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update your username.
@@ -141,8 +177,10 @@ impl UsersApi {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }
@@ -161,7 +199,15 @@ impl UsersApi {
      */
     pub async fn get_user_credits(&self) -> Result<crate::types::GetUserCreditsResponse> {
         let url = self.client.url("/user/credits", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Update your password.
@@ -182,8 +228,10 @@ impl UsersApi {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

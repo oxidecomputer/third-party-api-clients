@@ -36,7 +36,15 @@ impl RequestLogs {
         let url = self
             .client
             .url(&format!("/v2.1/diagnostics/request_logs?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Deletes the request log files.
@@ -47,7 +55,15 @@ impl RequestLogs {
      */
     pub async fn api_delete_logs(&self) -> Result<()> {
         let url = self.client.url("/v2.1/diagnostics/request_logs", None);
-        self.client.delete(&url, None, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Gets a request logging log file.
@@ -74,7 +90,15 @@ impl RequestLogs {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Gets the API request logging settings.
@@ -88,7 +112,15 @@ impl RequestLogs {
      */
     pub async fn api_get_setting(&self) -> Result<crate::types::DiagnosticsSettingsInformation> {
         let url = self.client.url("/v2.1/diagnostics/settings", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Enables or disables API request logging for troubleshooting.
@@ -116,8 +148,10 @@ impl RequestLogs {
         self.client
             .put(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
             )
             .await
     }

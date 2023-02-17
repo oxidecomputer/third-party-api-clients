@@ -23,7 +23,15 @@ impl DeprecatedApiCalls {
         let url = self
             .client
             .url("/admin/api/2021-01/deprecated_api_calls.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Retrieves a list of deprecated API calls made by the authenticated private app in the past 30 days.
@@ -36,6 +44,14 @@ impl DeprecatedApiCalls {
         let url = self
             .client
             .url("/admin/api/unstable/deprecated_api_calls.json", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

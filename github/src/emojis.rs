@@ -23,6 +23,14 @@ impl Emojis {
      */
     pub async fn get(&self) -> Result<String> {
         let url = self.client.url("/emojis", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

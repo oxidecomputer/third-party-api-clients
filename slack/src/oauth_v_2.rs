@@ -50,6 +50,14 @@ impl OauthV2 {
         let url = self
             .client
             .url(&format!("/oauth.v2.access?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

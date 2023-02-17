@@ -46,6 +46,14 @@ impl NotaryJournals {
             &format!("/v2.1/current_user/notary/journals?{}", query_),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

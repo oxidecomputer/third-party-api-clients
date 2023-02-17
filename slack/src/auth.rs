@@ -31,7 +31,15 @@ impl Auth {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/auth.revoke?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * This function performs a `GET` to the `/auth.test` endpoint.
@@ -46,6 +54,14 @@ impl Auth {
      */
     pub async fn test(&self) -> Result<crate::types::AuthTestSuccessSchema> {
         let url = self.client.url("/auth.test", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -21,7 +21,15 @@ impl Receiving {
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
         let url = self.client.url("/fulfillmentCenter", None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Fulfillment Centers.
@@ -34,7 +42,15 @@ impl Receiving {
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
         let url = self.client.url("/fulfillmentCenter", None);
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Warehouse Receiving Order.
@@ -53,7 +69,15 @@ impl Receiving {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Warehouse Receiving Order Box Labels.
@@ -72,7 +96,15 @@ impl Receiving {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Create Warehouse Receiving Order.
@@ -87,8 +119,10 @@ impl Receiving {
         self.client
             .post(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
-                Some("application/json-patch+json"),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
             )
             .await
     }
@@ -109,6 +143,14 @@ impl Receiving {
             ),
             None,
         );
-        self.client.post(&url, None, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

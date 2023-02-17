@@ -51,7 +51,15 @@ impl MarketingCampaignsStats {
         let url = self
             .client
             .url(&format!("/marketing/stats/automations?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Automation Stats by ID.
@@ -121,7 +129,15 @@ impl MarketingCampaignsStats {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get All Single Sends Stats.
@@ -162,7 +178,15 @@ impl MarketingCampaignsStats {
         let url = self
             .client
             .url(&format!("/marketing/stats/singlesends?{}", query_), None);
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Single Send Stats by ID.
@@ -227,7 +251,15 @@ impl MarketingCampaignsStats {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Automation Click Tracking Stats by ID.
@@ -279,7 +311,15 @@ impl MarketingCampaignsStats {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Get Single Send Click Tracking Stats by ID.
@@ -336,7 +376,15 @@ impl MarketingCampaignsStats {
             ),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Export Single Send Stats.
@@ -371,7 +419,15 @@ impl MarketingCampaignsStats {
             &format!("/marketing/stats/singlesends/export?{}", query_),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
     /**
      * Export Automation Stats.
@@ -406,6 +462,14 @@ impl MarketingCampaignsStats {
             &format!("/marketing/stats/automations/export?{}", query_),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

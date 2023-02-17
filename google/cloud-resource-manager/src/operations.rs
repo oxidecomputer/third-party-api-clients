@@ -26,6 +26,14 @@ impl Operations {
             &format!("/v1/{}", crate::progenitor_support::encode_path(name),),
             None,
         );
-        self.client.get(&url, None, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -68,7 +68,16 @@ impl BookingData {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
-        let resp: crate::types::BookingReportResponse = self.client.get(&url, None, None).await?;
+        let resp: crate::types::BookingReportResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
@@ -115,11 +124,23 @@ impl BookingData {
 
         let mut resp: crate::types::BookingReportResponse = if !url.contains('?') {
             self.client
-                .get(&format!("{}?page=0&size=100", url), None, None)
+                .get(
+                    &format!("{}?page=0&size=100", url),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
+                )
                 .await?
         } else {
             self.client
-                .get(&format!("{}&page=0&size=100", url), None, None)
+                .get(
+                    &format!("{}&page=0&size=100", url),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
+                )
                 .await?
         };
 
@@ -131,12 +152,24 @@ impl BookingData {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?page={}&size=100", url, page), None, None)
+                    .get(
+                        &format!("{}?page={}&size=100", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&page={}&size=100", url, page), None, None)
+                    .get(
+                        &format!("{}&page={}&size=100", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
