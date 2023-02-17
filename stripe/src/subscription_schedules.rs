@@ -59,8 +59,9 @@ impl SubscriptionSchedules {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_schedules?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_schedules?{}", query_), None);
         let resp: crate::types::GetSubscriptionSchedulesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -93,7 +94,9 @@ impl SubscriptionSchedules {
             query_args.push(("scheduled".to_string(), scheduled.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_schedules?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_schedules?{}", query_), None);
         let mut resp: crate::types::GetSubscriptionSchedulesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -139,8 +142,7 @@ impl SubscriptionSchedules {
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
     pub async fn post(&self) -> Result<crate::types::SubscriptionSchedule> {
-        let url = "/v1/subscription_schedules".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/subscription_schedules", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -156,11 +158,13 @@ impl SubscriptionSchedules {
      * * `schedule: &str` -- The account's country.
      */
     pub async fn get_schedule(&self, schedule: &str) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -178,11 +182,13 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -200,11 +206,13 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}/cancel",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}/cancel",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -222,11 +230,13 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}/release",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}/release",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

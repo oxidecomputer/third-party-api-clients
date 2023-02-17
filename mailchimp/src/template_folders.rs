@@ -47,8 +47,9 @@ impl TemplateFolders {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/template-folders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/template-folders?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,8 +60,7 @@ impl TemplateFolders {
      * Create a new template folder.
      */
     pub async fn post(&self, body: &crate::types::GalleryFolder) -> Result<crate::types::Folders> {
-        let url = "/template-folders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/template-folders", None);
         self.client
             .post(
                 &url,
@@ -96,12 +96,14 @@ impl TemplateFolders {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/template-folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/template-folders/{}?{}",
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -116,11 +118,13 @@ impl TemplateFolders {
      * * `folder_id: &str` -- The unique id for the template folder.
      */
     pub async fn delete(&self, folder_id: &str) -> Result<()> {
-        let url = format!(
-            "/template-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/template-folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -139,11 +143,13 @@ impl TemplateFolders {
         folder_id: &str,
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::Folders> {
-        let url = format!(
-            "/template-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/template-folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

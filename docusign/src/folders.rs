@@ -65,12 +65,14 @@ impl Folders {
             query_args.push(("user_filter".to_string(), user_filter.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/folders?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/folders?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -132,13 +134,15 @@ impl Folders {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/folders/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -164,12 +168,14 @@ impl Folders {
         folder_id: &str,
         body: &crate::types::FoldersRequest,
     ) -> Result<crate::types::FoldersResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/folders/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/folders/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -246,13 +252,15 @@ impl Folders {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/search_folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(search_folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/search_folders/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(search_folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

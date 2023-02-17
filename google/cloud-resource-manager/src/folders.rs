@@ -45,8 +45,7 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
         let resp: crate::types::ListFoldersResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -72,7 +71,7 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
         let mut resp: crate::types::ListFoldersResponse = self.client.get(&url, None, None).await?;
 
         let mut folders = resp.folders;
@@ -123,8 +122,7 @@ impl Folders {
             query_args.push(("parent".to_string(), parent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -142,8 +140,7 @@ impl Folders {
         &self,
         body: &crate::types::SearchFoldersRequest,
     ) -> Result<Vec<crate::types::Folder>> {
-        let url = "/v2/folders:search".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2/folders:search", None);
         let resp: crate::types::SearchFoldersResponse = self
             .client
             .post(
@@ -166,8 +163,10 @@ impl Folders {
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
-        let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -180,8 +179,10 @@ impl Folders {
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
-        let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -205,12 +206,14 @@ impl Folders {
             query_args.push(("updateMask".to_string(), update_mask.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2/{}?{}",
-            crate::progenitor_support::encode_path(name),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2/{}?{}",
+                crate::progenitor_support::encode_path(name),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -233,8 +236,10 @@ impl Folders {
         name: &str,
         body: &crate::types::MoveFolderRequest,
     ) -> Result<crate::types::Operation> {
-        let url = format!("/v2/{}/move", crate::progenitor_support::encode_path(name),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v2/{}/move", crate::progenitor_support::encode_path(name),),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -257,11 +262,13 @@ impl Folders {
         name: &str,
         body: &crate::types::MoveProjectMetadata,
     ) -> Result<crate::types::Folder> {
-        let url = format!(
-            "/v2/{}/undelete",
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/undelete",
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -284,11 +291,13 @@ impl Folders {
         resource: &str,
         body: &crate::types::GetIamPolicyRequest,
     ) -> Result<crate::types::Policy> {
-        let url = format!(
-            "/v2/{}/getIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/getIamPolicy",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -311,11 +320,13 @@ impl Folders {
         resource: &str,
         body: &crate::types::SetIamPolicyRequest,
     ) -> Result<crate::types::Policy> {
-        let url = format!(
-            "/v2/{}/setIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/setIamPolicy",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -338,11 +349,13 @@ impl Folders {
         resource: &str,
         body: &crate::types::TestIamPermissionsRequest,
     ) -> Result<crate::types::TestIamPermissionsResponse> {
-        let url = format!(
-            "/v2/{}/testIamPermissions",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/testIamPermissions",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

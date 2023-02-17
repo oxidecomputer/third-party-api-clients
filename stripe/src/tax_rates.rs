@@ -53,8 +53,7 @@ impl TaxRates {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/tax_rates?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/tax_rates?{}", query_), None);
         let resp: crate::types::GetTaxRatesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl TaxRates {
             query_args.push(("inclusive".to_string(), inclusive.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/tax_rates?{}", query_);
+        let url = self.client.url(&format!("/v1/tax_rates?{}", query_), None);
         let mut resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -129,8 +128,7 @@ impl TaxRates {
      * <p>Creates a new tax rate.</p>
      */
     pub async fn post(&self) -> Result<crate::types::TaxRate> {
-        let url = "/v1/tax_rates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/tax_rates", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -146,11 +144,13 @@ impl TaxRates {
      * * `tax_rate: &str` -- The account's country.
      */
     pub async fn get_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
-        let url = format!(
-            "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(tax_rate),
+        let url = self.client.url(
+            &format!(
+                "/v1/tax_rates/{}",
+                crate::progenitor_support::encode_path(tax_rate),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -165,11 +165,13 @@ impl TaxRates {
      * * `tax_rate: &str` -- The account's country.
      */
     pub async fn post_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
-        let url = format!(
-            "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(tax_rate),
+        let url = self.client.url(
+            &format!(
+                "/v1/tax_rates/{}",
+                crate::progenitor_support::encode_path(tax_rate),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -35,12 +35,14 @@ impl DomainAliases {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -57,11 +59,13 @@ impl DomainAliases {
         customer: &str,
         body: &crate::types::DomainAlias,
     ) -> Result<crate::types::DomainAlias> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -85,12 +89,14 @@ impl DomainAliases {
         customer: &str,
         domain_alias_name: &str,
     ) -> Result<crate::types::DomainAlias> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_alias_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_alias_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -104,12 +110,14 @@ impl DomainAliases {
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
     pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_alias_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_alias_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

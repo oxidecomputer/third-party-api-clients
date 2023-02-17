@@ -51,8 +51,9 @@ impl PaymentMethods {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_methods?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/payment_methods?{}", query_), None);
         let resp: crate::types::PaymentFlowsMethodList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -81,7 +82,9 @@ impl PaymentMethods {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_methods?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/payment_methods?{}", query_), None);
         let mut resp: crate::types::PaymentFlowsMethodList =
             self.client.get(&url, None, None).await?;
 
@@ -129,8 +132,7 @@ impl PaymentMethods {
      * <p>Instead of creating a PaymentMethod directly, we recommend using the <a href="/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a payment immediately or the <a href="/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PaymentMethod> {
-        let url = "/v1/payment_methods".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/payment_methods", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -146,11 +148,13 @@ impl PaymentMethods {
      * * `payment_method: &str` -- The account's country.
      */
     pub async fn get_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
-        let url = format!(
-            "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(payment_method),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_methods/{}",
+                crate::progenitor_support::encode_path(payment_method),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -165,11 +169,13 @@ impl PaymentMethods {
      * * `payment_method: &str` -- The account's country.
      */
     pub async fn post_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
-        let url = format!(
-            "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(payment_method),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_methods/{}",
+                crate::progenitor_support::encode_path(payment_method),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -197,11 +203,13 @@ impl PaymentMethods {
         &self,
         payment_method: &str,
     ) -> Result<crate::types::PaymentMethod> {
-        let url = format!(
-            "/v1/payment_methods/{}/attach",
-            crate::progenitor_support::encode_path(payment_method),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_methods/{}/attach",
+                crate::progenitor_support::encode_path(payment_method),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -219,11 +227,13 @@ impl PaymentMethods {
         &self,
         payment_method: &str,
     ) -> Result<crate::types::PaymentMethod> {
-        let url = format!(
-            "/v1/payment_methods/{}/detach",
-            crate::progenitor_support::encode_path(payment_method),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_methods/{}/detach",
+                crate::progenitor_support::encode_path(payment_method),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

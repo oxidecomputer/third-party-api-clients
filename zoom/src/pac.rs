@@ -32,11 +32,13 @@ impl Pac {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn user_pa_cs(&self, user_id: &str) -> Result<crate::types::UserPaCsResponse> {
-        let url = format!(
-            "/users/{}/pac",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/pac",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

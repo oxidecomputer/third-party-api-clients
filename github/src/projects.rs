@@ -46,12 +46,14 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -75,10 +77,13 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -100,11 +105,13 @@ impl Projects {
         org: &str,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/orgs/{}/projects",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -127,11 +134,13 @@ impl Projects {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn get_card(&self, card_id: i64) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(&card_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(&card_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -148,11 +157,13 @@ impl Projects {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn delete_card(&self, card_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(&card_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(&card_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -173,11 +184,13 @@ impl Projects {
         card_id: i64,
         body: &crate::types::ProjectsUpdateCardRequest,
     ) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(&card_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(&card_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -204,11 +217,13 @@ impl Projects {
         card_id: i64,
         body: &crate::types::ProjectsMoveCardRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/columns/cards/{}/moves",
-            crate::progenitor_support::encode_path(&card_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}/moves",
+                crate::progenitor_support::encode_path(&card_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -231,11 +246,13 @@ impl Projects {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn get_column(&self, column_id: i64) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -252,11 +269,13 @@ impl Projects {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn delete_column(&self, column_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -277,11 +296,13 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
     ) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -324,12 +345,14 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/columns/{}/cards?{}",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards?{}",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -353,10 +376,13 @@ impl Projects {
             query_args.push(("archived_state".to_string(), archived_state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/columns/{}/cards?{}",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards?{}",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -378,11 +404,13 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsCreateCardRequestOneOf,
     ) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/{}/cards",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -409,11 +437,13 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsMoveColumnRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/columns/{}/moves",
-            crate::progenitor_support::encode_path(&column_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/moves",
+                crate::progenitor_support::encode_path(&column_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -436,11 +466,13 @@ impl Projects {
      * * `project_id: i64`
      */
     pub async fn get(&self, project_id: i64) -> Result<crate::types::Project> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -457,11 +489,13 @@ impl Projects {
      * * `project_id: i64`
      */
     pub async fn delete(&self, project_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -482,11 +516,13 @@ impl Projects {
         project_id: i64,
         body: &crate::types::ProjectsUpdateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -532,12 +568,14 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/collaborators?{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators?{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -561,10 +599,13 @@ impl Projects {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/collaborators?{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators?{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -588,12 +629,14 @@ impl Projects {
         username: &str,
         body: &crate::types::ProjectsAddCollaboratorRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/{}/collaborators/{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -617,12 +660,14 @@ impl Projects {
      * * `username: &str`
      */
     pub async fn remove_collaborator(&self, project_id: i64, username: &str) -> Result<()> {
-        let url = format!(
-            "/projects/{}/collaborators/{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -644,12 +689,14 @@ impl Projects {
         project_id: i64,
         username: &str,
     ) -> Result<crate::types::RepositoryCollaboratorPermission> {
-        let url = format!(
-            "/projects/{}/collaborators/{}/permission",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}/permission",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -681,12 +728,14 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/columns?{}",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns?{}",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -704,9 +753,12 @@ impl Projects {
         &self,
         project_id: i64,
     ) -> Result<Vec<crate::types::ProjectColumn>> {
-        let url = format!(
-            "/projects/{}/columns",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -728,11 +780,13 @@ impl Projects {
         project_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
     ) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/{}/columns",
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns",
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -777,13 +831,15 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -808,11 +864,14 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -836,12 +895,14 @@ impl Projects {
         repo: &str,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/repos/{}/{}/projects",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -863,8 +924,7 @@ impl Projects {
         &self,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = "/user/projects".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/projects", None);
         self.client
             .post(
                 &url,
@@ -907,12 +967,14 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projects?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -936,10 +998,13 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projects?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }

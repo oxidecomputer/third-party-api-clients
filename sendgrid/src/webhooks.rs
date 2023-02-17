@@ -32,8 +32,7 @@ impl Webhooks {
     pub async fn get_user_event_settings(
         &self,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
-        let url = "/user/webhooks/event/settings".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/webhooks/event/settings", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -57,8 +56,7 @@ impl Webhooks {
         &self,
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
-        let url = "/user/webhooks/event/settings".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/webhooks/event/settings", None);
         self.client
             .patch(
                 &url,
@@ -81,8 +79,7 @@ impl Webhooks {
     pub async fn get_user_parse_settings(
         &self,
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
-        let url = "/user/webhooks/parse/settings".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/webhooks/parse/settings", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -130,8 +127,9 @@ impl Webhooks {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/webhooks/parse/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -168,7 +166,9 @@ impl Webhooks {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/webhooks/parse/stats?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -189,8 +189,9 @@ impl Webhooks {
     pub async fn get_user_event_settings_signed(
         &self,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
-        let url = "/user/webhooks/event/settings/signed".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/user/webhooks/event/settings/signed", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -212,8 +213,9 @@ impl Webhooks {
         &self,
         body: &crate::types::GetTrackingSettingsOpenResponse,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
-        let url = "/user/webhooks/event/settings/signed".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/user/webhooks/event/settings/signed", None);
         self.client
             .patch(
                 &url,
@@ -245,8 +247,7 @@ impl Webhooks {
         &self,
         body: &crate::types::PostUserWebhooksEventTestRequest,
     ) -> Result<()> {
-        let url = "/user/webhooks/event/test".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/webhooks/event/test", None);
         self.client
             .post(
                 &url,

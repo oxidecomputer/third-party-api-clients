@@ -22,11 +22,13 @@ impl AdminsBeta {
      * Returns a list of all the admins at a company
      */
     pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -44,9 +46,12 @@ impl AdminsBeta {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::Admin>> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -64,11 +69,13 @@ impl AdminsBeta {
         company_id: &str,
         body: &crate::types::PostCompanyAdminsRequest,
     ) -> Result<crate::types::Admin> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

@@ -65,8 +65,9 @@ impl Groups {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/directory/v1/groups?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/directory/v1/groups?{}", query_), None);
         let resp: crate::types::Groups = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -108,7 +109,9 @@ impl Groups {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/directory/v1/groups?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/admin/directory/v1/groups?{}", query_), None);
         let mut resp: crate::types::Groups = self.client.get(&url, None, None).await?;
 
         let mut groups = resp.groups;
@@ -146,8 +149,7 @@ impl Groups {
      * Creates a group.
      */
     pub async fn insert(&self, body: &crate::types::Group) -> Result<crate::types::Group> {
-        let url = "/admin/directory/v1/groups".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/directory/v1/groups", None);
         self.client
             .post(
                 &url,
@@ -166,11 +168,13 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn get(&self, group_key: &str) -> Result<crate::types::Group> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -187,11 +191,13 @@ impl Groups {
         group_key: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -210,11 +216,13 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn delete(&self, group_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -231,11 +239,13 @@ impl Groups {
         group_key: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -254,11 +264,13 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/aliases",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/aliases",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -275,11 +287,13 @@ impl Groups {
         group_key: &str,
         body: &crate::types::Alias,
     ) -> Result<crate::types::Alias> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/aliases",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/aliases",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -299,12 +313,14 @@ impl Groups {
      * * `alias: &str` -- The alias to be removed.
      */
     pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/aliases/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(alias),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/aliases/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(alias),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

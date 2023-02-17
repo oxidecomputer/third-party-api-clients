@@ -28,11 +28,13 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -57,12 +59,14 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}/activate",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}/activate",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -81,12 +85,14 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -105,12 +111,14 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -130,12 +138,14 @@ impl TransactionalTemplatesVersions {
         version_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

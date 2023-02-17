@@ -20,11 +20,13 @@ impl PaySchedules {
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
     pub async fn get_company(&self, company_id: &str) -> Result<Vec<crate::types::PaySchedule>> {
-        let url = format!(
-            "/v1/companies/{}/pay_schedules",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_schedules",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -40,9 +42,12 @@ impl PaySchedules {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::PaySchedule>> {
-        let url = format!(
-            "/v1/companies/{}/pay_schedules",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_schedules",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -58,12 +63,14 @@ impl PaySchedules {
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
     ) -> Result<crate::types::PaySchedule> {
-        let url = format!(
-            "/v1/companies/{}/pay_schedules/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_schedules/{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -81,12 +88,14 @@ impl PaySchedules {
         pay_schedule_id_or_uuid: &str,
         body: &crate::types::PutCompanyPaySchedulesScheduleRequest,
     ) -> Result<crate::types::PaySchedule> {
-        let url = format!(
-            "/v1/companies/{}/pay_schedules/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_schedules/{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

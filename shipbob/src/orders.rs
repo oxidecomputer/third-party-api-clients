@@ -30,8 +30,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersEstimateFulfillmentRequestModel,
     ) -> Result<crate::types::OrdersEstimate> {
-        let url = "/order/estimate".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/order/estimate", None);
         self.client
             .post(
                 &url,
@@ -51,11 +50,13 @@ impl Orders {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, order_id: i64) -> Result<crate::types::Order> {
-        let url = format!(
-            "/order/{}",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -132,8 +133,7 @@ impl Orders {
             query_args.push(("StartDate".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/order?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/order?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -189,7 +189,7 @@ impl Orders {
             query_args.push(("StartDate".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/order?{}", query_);
+        let url = self.client.url(&format!("/order?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -205,8 +205,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersCreateOrderModel,
     ) -> Result<crate::types::Order> {
-        let url = "/order".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/order", None);
         self.client
             .post(
                 &url,
@@ -226,11 +225,13 @@ impl Orders {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn post_cancel(&self, order_id: i64) -> Result<crate::types::OrdersCanceledOrder> {
-        let url = format!(
-            "/order/{}/cancel",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/cancel",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -243,11 +244,13 @@ impl Orders {
      * * `order_id: i64` -- The order ID to Get the JSON Stored.
      */
     pub async fn get_store_json(&self, order_id: i64) -> Result<String> {
-        let url = format!(
-            "/order/{}/storeOrderJson",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/storeOrderJson",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -264,11 +267,13 @@ impl Orders {
         order_id: i64,
         body: &crate::types::OrdersAddStoreOrderJsonModel,
     ) -> Result<String> {
-        let url = format!(
-            "/order/{}/storeOrderJson",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/storeOrderJson",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -293,12 +298,14 @@ impl Orders {
         order_id: i64,
         shipment_id: i64,
     ) -> Result<crate::types::OrdersShipment> {
-        let url = format!(
-            "/order/{}/shipment/{}",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -317,12 +324,14 @@ impl Orders {
         shipment_id: i64,
         order_id: &str,
     ) -> Result<crate::types::OrdersShipment> {
-        let url = format!(
-            "/order/{}/shipment/{}/cancel",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}/cancel",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -341,12 +350,14 @@ impl Orders {
         order_id: i64,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/order/{}/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}/timeline",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -361,10 +372,13 @@ impl Orders {
         order_id: i64,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/order/{}/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}/timeline",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -379,11 +393,13 @@ impl Orders {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get_shipments(&self, order_id: i64) -> Result<Vec<crate::types::OrdersShipment>> {
-        let url = format!(
-            "/order/{}/shipment",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -397,9 +413,12 @@ impl Orders {
         &self,
         order_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipment>> {
-        let url = format!(
-            "/order/{}/shipment",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -419,12 +438,14 @@ impl Orders {
         order_id: i64,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/order/{}/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}/logs",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -439,10 +460,13 @@ impl Orders {
         order_id: i64,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/order/{}/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/order/{}/shipment/{}/logs",
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -460,11 +484,13 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<crate::types::OrdersShipment> {
-        let url = format!(
-            "/shipment/{}",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -481,11 +507,13 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<crate::types::OrdersShipment> {
-        let url = format!(
-            "/shipment/{}/cancel",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}/cancel",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -501,8 +529,7 @@ impl Orders {
         &self,
         body: &crate::types::OrdersCancelShipmentsModel,
     ) -> Result<crate::types::OrdersCanceledShipments> {
-        let url = "/shipment/cancelbulk".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/shipment/cancelbulk", None);
         self.client
             .post(
                 &url,
@@ -525,11 +552,13 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}/timeline",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -543,9 +572,12 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/shipment/{}/timeline",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}/timeline",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -563,11 +595,13 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}/logs",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -581,9 +615,12 @@ impl Orders {
         &self,
         shipment_id: i64,
     ) -> Result<Vec<crate::types::OrdersShipmentLog>> {
-        let url = format!(
-            "/shipment/{}/logs",
-            crate::progenitor_support::encode_path(&shipment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/shipment/{}/logs",
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -612,8 +649,9 @@ impl Orders {
             query_args.push(("Page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/shippingmethod?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/shippingmethod?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -628,7 +666,7 @@ impl Orders {
     pub async fn get_all_shipping_method(
         &self,
     ) -> Result<Vec<crate::types::OrdersShipMethodDetail>> {
-        let url = "/shippingmethod".to_string();
+        let url = self.client.url("/shippingmethod", None);
         self.client.get_all_pages(&url, None).await
     }
 }

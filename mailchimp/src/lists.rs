@@ -110,8 +110,7 @@ impl Lists {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/lists?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/lists?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -122,8 +121,7 @@ impl Lists {
      * Create a new list in your Mailchimp account.
      */
     pub async fn post(&self, body: &crate::types::SubscriberList) -> Result<crate::types::Lists> {
-        let url = "/lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/lists", None);
         self.client
             .post(
                 &url,
@@ -167,12 +165,14 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -209,12 +209,14 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -235,8 +237,10 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      */
     pub async fn delete(&self, list_id: &str) -> Result<()> {
-        let url = format!("/lists/{}", crate::progenitor_support::encode_path(list_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -255,8 +259,10 @@ impl Lists {
         list_id: &str,
         body: &crate::types::SubscriberListData,
     ) -> Result<crate::types::Lists> {
-        let url = format!("/lists/{}", crate::progenitor_support::encode_path(list_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
+            None,
+        );
         self.client
             .patch(
                 &url,
@@ -302,12 +308,14 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/abuse-reports?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/abuse-reports?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -349,13 +357,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/abuse-reports/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/abuse-reports/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -385,12 +395,14 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/activity?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/activity?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -420,12 +432,14 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/clients?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/clients?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -475,12 +489,14 @@ impl Lists {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/growth-history?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/growth-history?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -512,13 +528,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/growth-history/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(month),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/growth-history/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(month),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -563,12 +581,14 @@ impl Lists {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/interest-categories?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -587,11 +607,13 @@ impl Lists {
         list_id: &str,
         body: &crate::types::InterestCategory,
     ) -> Result<crate::types::Categories> {
-        let url = format!(
-            "/lists/{}/interest-categories",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -629,13 +651,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/interest-categories/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -655,12 +679,14 @@ impl Lists {
         list_id: &str,
         interest_category_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/interest-categories/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -681,12 +707,14 @@ impl Lists {
         interest_category_id: &str,
         body: &crate::types::InterestCategory,
     ) -> Result<crate::types::Categories> {
-        let url = format!(
-            "/lists/{}/interest-categories/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -734,13 +762,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/interest-categories/{}/interests?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}/interests?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -761,12 +791,14 @@ impl Lists {
         interest_category_id: &str,
         body: &crate::types::Interest,
     ) -> Result<crate::types::InterestsInterest> {
-        let url = format!(
-            "/lists/{}/interest-categories/{}/interests",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}/interests",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -806,14 +838,16 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/interest-categories/{}/interests/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
-            crate::progenitor_support::encode_path(interest_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}/interests/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(interest_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -835,13 +869,15 @@ impl Lists {
         interest_category_id: &str,
         interest_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/interest-categories/{}/interests/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
-            crate::progenitor_support::encode_path(interest_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}/interests/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(interest_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -864,13 +900,15 @@ impl Lists {
         interest_id: &str,
         body: &crate::types::Interest,
     ) -> Result<crate::types::InterestsInterest> {
-        let url = format!(
-            "/lists/{}/interest-categories/{}/interests/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(interest_category_id),
-            crate::progenitor_support::encode_path(interest_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/interest-categories/{}/interests/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(interest_category_id),
+                crate::progenitor_support::encode_path(interest_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -968,12 +1006,14 @@ impl Lists {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/segments?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -992,11 +1032,13 @@ impl Lists {
         list_id: &str,
         body: &crate::types::ListData,
     ) -> Result<crate::types::Segments> {
-        let url = format!(
-            "/lists/{}/segments",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1055,13 +1097,15 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/segments/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1082,12 +1126,14 @@ impl Lists {
         segment_id: &str,
         body: &crate::types::MembersAddRemoveFromAStaticSegment,
     ) -> Result<crate::types::BatchAddRemoveListMembersFromStaticSegment> {
-        let url = format!(
-            "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1109,12 +1155,14 @@ impl Lists {
      * * `segment_id: &str` -- The unique id for the segment.
      */
     pub async fn delete_segments(&self, list_id: &str, segment_id: &str) -> Result<()> {
-        let url = format!(
-            "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1135,12 +1183,14 @@ impl Lists {
         segment_id: &str,
         body: &crate::types::ListDataType,
     ) -> Result<crate::types::Segments> {
-        let url = format!(
-            "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1209,13 +1259,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/segments/{}/members?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}/members?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1236,12 +1288,14 @@ impl Lists {
         segment_id: &str,
         body: &crate::types::SubscriberInAutomationQueue,
     ) -> Result<crate::types::ListMembers> {
-        let url = format!(
-            "/lists/{}/segments/{}/members",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}/members",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1269,13 +1323,15 @@ impl Lists {
         segment_id: &str,
         subscriber_hash: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/segments/{}/members/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(segment_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/segments/{}/members/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1300,12 +1356,14 @@ impl Lists {
             query_args.push(("name".to_string(), name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/tag-search?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/tag-search?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1441,12 +1499,14 @@ impl Lists {
             query_args.push(("vip_only".to_string(), vip_only.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1475,12 +1535,14 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1518,13 +1580,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1555,13 +1619,15 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1583,12 +1649,14 @@ impl Lists {
      * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn delete_members(&self, list_id: &str, subscriber_hash: &str) -> Result<()> {
-        let url = format!(
-            "/lists/{}/members/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1619,13 +1687,15 @@ impl Lists {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1668,13 +1738,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/activity?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/activity?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1721,13 +1793,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/activity-feed?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/activity-feed?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1769,13 +1843,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/tags?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/tags?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1796,12 +1872,14 @@ impl Lists {
         subscriber_hash: &str,
         body: &crate::types::MemberTags,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/members/{}/tags",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/tags",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1849,13 +1927,15 @@ impl Lists {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/events?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/events?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1876,12 +1956,14 @@ impl Lists {
         subscriber_hash: &str,
         body: &crate::types::EventsData,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/members/{}/events",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/events",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1919,13 +2001,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/goals?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/goals?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1977,13 +2061,15 @@ impl Lists {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/notes?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/notes?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2004,12 +2090,14 @@ impl Lists {
         subscriber_hash: &str,
         body: &crate::types::MemberNotes,
     ) -> Result<crate::types::CollectionOfNotesMember> {
-        let url = format!(
-            "/lists/{}/members/{}/notes",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/notes",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2049,14 +2137,16 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/members/{}/notes/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            crate::progenitor_support::encode_path(note_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/notes/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(note_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2078,13 +2168,15 @@ impl Lists {
         subscriber_hash: &str,
         note_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/members/{}/notes/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            crate::progenitor_support::encode_path(note_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/notes/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(note_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2107,13 +2199,15 @@ impl Lists {
         note_id: &str,
         body: &crate::types::MemberNotes,
     ) -> Result<crate::types::CollectionOfNotesMember> {
-        let url = format!(
-            "/lists/{}/members/{}/notes/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            crate::progenitor_support::encode_path(note_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/notes/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                crate::progenitor_support::encode_path(note_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -2139,12 +2233,14 @@ impl Lists {
         list_id: &str,
         subscriber_hash: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/lists/{}/members/{}/actions/delete-permanent",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/members/{}/actions/delete-permanent",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -2194,12 +2290,14 @@ impl Lists {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/merge-fields?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/merge-fields?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2218,11 +2316,13 @@ impl Lists {
         list_id: &str,
         body: &crate::types::MergeFieldData,
     ) -> Result<crate::types::MergeField> {
-        let url = format!(
-            "/lists/{}/merge-fields",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/merge-fields",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2260,13 +2360,15 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/merge-fields/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(merge_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/merge-fields/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(merge_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2282,12 +2384,14 @@ impl Lists {
      * * `merge_id: &str` -- The id for the merge field.
      */
     pub async fn delete_merge_fields(&self, list_id: &str, merge_id: &str) -> Result<()> {
-        let url = format!(
-            "/lists/{}/merge-fields/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(merge_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/merge-fields/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(merge_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2308,12 +2412,14 @@ impl Lists {
         merge_id: &str,
         body: &crate::types::MergeFieldDataType,
     ) -> Result<crate::types::MergeField> {
-        let url = format!(
-            "/lists/{}/merge-fields/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(merge_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/merge-fields/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(merge_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -2334,11 +2440,13 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      */
     pub async fn get_webhook(&self, list_id: &str) -> Result<crate::types::ListWebhooksData> {
-        let url = format!(
-            "/lists/{}/webhooks",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/webhooks",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2357,11 +2465,13 @@ impl Lists {
         list_id: &str,
         body: &crate::types::AddWebhook,
     ) -> Result<crate::types::ListWebhooks> {
-        let url = format!(
-            "/lists/{}/webhooks",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/webhooks",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2387,12 +2497,14 @@ impl Lists {
         list_id: &str,
         webhook_id: &str,
     ) -> Result<crate::types::ListWebhooks> {
-        let url = format!(
-            "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/webhooks/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2408,12 +2520,14 @@ impl Lists {
      * * `webhook_id: &str` -- The name of the folder.
      */
     pub async fn delete_webhooks(&self, list_id: &str, webhook_id: &str) -> Result<()> {
-        let url = format!(
-            "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/webhooks/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2434,12 +2548,14 @@ impl Lists {
         webhook_id: &str,
         body: &crate::types::AddWebhook,
     ) -> Result<crate::types::ListWebhooks> {
-        let url = format!(
-            "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(list_id),
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/webhooks/{}",
+                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -2460,11 +2576,13 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      */
     pub async fn get_signup_form(&self, list_id: &str) -> Result<crate::types::ListSignupForms> {
-        let url = format!(
-            "/lists/{}/signup-forms",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/signup-forms",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2483,11 +2601,13 @@ impl Lists {
         list_id: &str,
         body: &crate::types::SignupFormData,
     ) -> Result<crate::types::SignupForm> {
-        let url = format!(
-            "/lists/{}/signup-forms",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/signup-forms",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2523,12 +2643,14 @@ impl Lists {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/lists/{}/locations?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/lists/{}/locations?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

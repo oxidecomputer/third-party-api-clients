@@ -36,8 +36,7 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teammates?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/teammates?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,8 +58,7 @@ impl Teammates {
         &self,
         body: &crate::types::PostTeammatesRequest,
     ) -> Result<crate::types::PostTeammatesResponse> {
-        let url = "/teammates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/teammates", None);
         self.client
             .post(
                 &url,
@@ -86,11 +84,13 @@ impl Teammates {
         &self,
         token: &str,
     ) -> Result<crate::types::PostTeammatesResponse> {
-        let url = format!(
-            "/teammates/pending/{}/resend",
-            crate::progenitor_support::encode_path(token),
+        let url = self.client.url(
+            &format!(
+                "/teammates/pending/{}/resend",
+                crate::progenitor_support::encode_path(token),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -120,8 +120,9 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/scopes/requests?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/scopes/requests?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -144,7 +145,9 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/scopes/requests?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/scopes/requests?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -161,8 +164,7 @@ impl Teammates {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_pending(&self) -> Result<crate::types::GetTeammatesPendingResponse> {
-        let url = "/teammates/pending".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/teammates/pending", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -182,11 +184,13 @@ impl Teammates {
         &self,
         username: &str,
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
-        let url = format!(
-            "/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teammates/{}",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -206,11 +210,13 @@ impl Teammates {
         &self,
         username: &str,
     ) -> Result<crate::types::PostSendersResponse> {
-        let url = format!(
-            "/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teammates/{}",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -235,11 +241,13 @@ impl Teammates {
         username: &str,
         body: &crate::types::PatchTeammatesUsernameRequest,
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
-        let url = format!(
-            "/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teammates/{}",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -261,11 +269,13 @@ impl Teammates {
         &self,
         request_id: &str,
     ) -> Result<crate::types::PatchScopesRequestsApproveResponse> {
-        let url = format!(
-            "/scopes/requests/{}/approve",
-            crate::progenitor_support::encode_path(request_id),
+        let url = self.client.url(
+            &format!(
+                "/scopes/requests/{}/approve",
+                crate::progenitor_support::encode_path(request_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.patch(&url, None, None).await
     }
     /**
@@ -278,11 +288,13 @@ impl Teammates {
      * **Note:** Only teammate admins may delete a teammate's access request.
      */
     pub async fn delete_scopes_requests_request(&self, request_id: &str) -> Result<()> {
-        let url = format!(
-            "/scopes/requests/{}",
-            crate::progenitor_support::encode_path(request_id),
+        let url = self.client.url(
+            &format!(
+                "/scopes/requests/{}",
+                crate::progenitor_support::encode_path(request_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -297,11 +309,13 @@ impl Teammates {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_pending_token(&self, token: &str) -> Result<()> {
-        let url = format!(
-            "/teammates/pending/{}",
-            crate::progenitor_support::encode_path(token),
+        let url = self.client.url(
+            &format!(
+                "/teammates/pending/{}",
+                crate::progenitor_support::encode_path(token),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

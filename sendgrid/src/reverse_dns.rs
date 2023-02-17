@@ -49,8 +49,9 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/ips?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/ips?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -81,7 +82,9 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/ips?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/ips?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -99,8 +102,7 @@ impl ReverseDns {
         &self,
         body: &crate::types::PostWhitelabelIpsRequest,
     ) -> Result<crate::types::ReverseDns> {
-        let url = "/whitelabel/ips".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/whitelabel/ips", None);
         self.client
             .post(
                 &url,
@@ -130,11 +132,13 @@ impl ReverseDns {
         &self,
         id: &str,
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
-        let url = format!(
-            "/whitelabel/ips/{}/validate",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}/validate",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -151,11 +155,13 @@ impl ReverseDns {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
-        let url = format!(
-            "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -174,11 +180,13 @@ impl ReverseDns {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

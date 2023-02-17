@@ -44,8 +44,7 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/subusers?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -72,7 +71,7 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers?{}", query_);
+        let url = self.client.url(&format!("/subusers?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -86,8 +85,7 @@ impl SubusersApi {
         &self,
         body: &crate::types::PostSubusersRequest,
     ) -> Result<crate::types::SubuserPost> {
-        let url = "/subusers".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/subusers", None);
         self.client
             .post(
                 &url,
@@ -109,11 +107,13 @@ impl SubusersApi {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -128,11 +128,13 @@ impl SubusersApi {
         subuser_name: &str,
         body: &crate::types::PatchSubusersSubuserNameRequest,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -163,8 +165,9 @@ impl SubusersApi {
             query_args.push(("usernames".to_string(), usernames.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/reputations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/subusers/reputations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -187,7 +190,9 @@ impl SubusersApi {
             query_args.push(("usernames".to_string(), usernames.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/reputations?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/subusers/reputations?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -209,11 +214,13 @@ impl SubusersApi {
         subuser_name: &str,
         body: &[std::net::Ipv4Addr],
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
-        let url = format!(
-            "/subusers/{}/ips",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/ips",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

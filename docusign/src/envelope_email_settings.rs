@@ -29,12 +29,14 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -57,12 +59,14 @@ impl EnvelopeEmailSettings {
         envelope_id: &str,
         body: &crate::types::EmailSettings,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -91,12 +95,14 @@ impl EnvelopeEmailSettings {
         envelope_id: &str,
         body: &crate::types::EmailSettings,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -122,12 +128,14 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

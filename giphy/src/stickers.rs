@@ -34,8 +34,9 @@ impl Stickers {
             query_args.push(("tag".to_string(), tag.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stickers/random?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/stickers/random?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -79,8 +80,9 @@ impl Stickers {
             query_args.push(("rating".to_string(), rating.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stickers/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/stickers/search?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -101,8 +103,9 @@ impl Stickers {
             query_args.push(("s".to_string(), s.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stickers/translate?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/stickers/translate?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -136,8 +139,9 @@ impl Stickers {
             query_args.push(("rating".to_string(), rating.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stickers/trending?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/stickers/trending?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

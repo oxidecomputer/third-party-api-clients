@@ -58,8 +58,7 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
         let resp: crate::types::Charges = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -93,7 +92,7 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges?{}", query_);
+        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
         let mut resp: crate::types::Charges = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -138,8 +137,7 @@ impl Charges {
      * <p>To charge a credit card or other payment source, you create a <code>Charge</code> object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).</p>
      */
     pub async fn post(&self) -> Result<crate::types::Charge> {
-        let url = "/v1/charges".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/charges", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -176,8 +174,9 @@ impl Charges {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/charges/search?{}", query_), None);
         let resp: crate::types::SearchResult = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -202,7 +201,9 @@ impl Charges {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges/search?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/charges/search?{}", query_), None);
         let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -252,11 +253,13 @@ impl Charges {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -271,11 +274,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_charges(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -292,11 +297,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_capture(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}/capture",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/capture",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -312,11 +319,13 @@ impl Charges {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -331,11 +340,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -350,11 +361,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_dispute_close(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute/close",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute/close",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -379,11 +392,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_refund(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}/refund",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refund",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -419,12 +434,14 @@ impl Charges {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/charges/{}/refunds?{}",
-            crate::progenitor_support::encode_path(charge),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds?{}",
+                crate::progenitor_support::encode_path(charge),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::RefundList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -441,9 +458,12 @@ impl Charges {
      * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
      */
     pub async fn get_all_refunds(&self, charge: &str) -> Result<Vec<crate::types::Refund>> {
-        let url = format!(
-            "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
         let mut resp: crate::types::RefundList = self.client.get(&url, None, None).await?;
 
@@ -493,11 +513,13 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_refund_charges(&self, charge: &str) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -518,12 +540,14 @@ impl Charges {
         charge: &str,
         refund: &str,
     ) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds/{}",
+                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(refund),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -543,12 +567,14 @@ impl Charges {
         charge: &str,
         refund: &str,
     ) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds/{}",
+                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(refund),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -42,8 +42,7 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/webhook?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/webhook?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -64,7 +63,7 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/webhook?{}", query_);
+        let url = self.client.url(&format!("/webhook?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -80,8 +79,7 @@ impl Webhooks {
         &self,
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
     ) -> Result<crate::types::Webhook> {
-        let url = "/webhook".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/webhook", None);
         self.client
             .post(
                 &url,
@@ -100,11 +98,13 @@ impl Webhooks {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn delete(&self, id: i64) -> Result<()> {
-        let url = format!(
-            "/webhook/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webhook/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

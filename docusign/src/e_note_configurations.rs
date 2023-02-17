@@ -24,11 +24,13 @@ impl ENoteConfigurations {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::ENoteConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/enote_configuration",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,11 +49,13 @@ impl ENoteConfigurations {
         account_id: &str,
         body: &crate::types::ENoteConfiguration,
     ) -> Result<crate::types::ENoteConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/enote_configuration",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -72,11 +76,13 @@ impl ENoteConfigurations {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/enote_configuration",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

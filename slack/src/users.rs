@@ -53,8 +53,9 @@ impl Users {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.conversations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users.conversations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -65,8 +66,7 @@ impl Users {
      * FROM: <https://api.slack.com/methods/users.deletePhoto>
      */
     pub async fn delete_photo(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/users.deletePhoto".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.deletePhoto", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -92,8 +92,9 @@ impl Users {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.getPresence?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users.getPresence?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -108,8 +109,7 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `identity.basic`.
      */
     pub async fn identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
-        let url = "/users.identity".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.identity", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -122,7 +122,7 @@ impl Users {
      * FROM: <https://api.slack.com/methods/users.identity>
      */
     pub async fn get_all_identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
-        let url = "/users.identity".to_string();
+        let url = self.client.url("/users.identity", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -151,8 +151,7 @@ impl Users {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/users.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -186,8 +185,7 @@ impl Users {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/users.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -208,8 +206,9 @@ impl Users {
             query_args.push(("email".to_string(), email.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.lookupByEmail?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users.lookupByEmail?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -224,8 +223,7 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
     pub async fn set_active(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/users.setActive".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.setActive", None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -236,8 +234,7 @@ impl Users {
      * FROM: <https://api.slack.com/methods/users.setPhoto>
      */
     pub async fn set_photo(&self) -> Result<crate::types::UsersSetPhotoSchema> {
-        let url = "/users.setPhoto".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.setPhoto", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -254,8 +251,7 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
     pub async fn set_presence(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/users.setPresence".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.setPresence", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

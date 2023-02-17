@@ -29,11 +29,13 @@ impl EarningType {
         &self,
         company_id: &str,
     ) -> Result<crate::types::EarningTypeListResponse> {
-        let url = format!(
-            "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -50,11 +52,13 @@ impl EarningType {
         company_id: &str,
         body: &crate::types::PostCompanyEarningTypesRequest,
     ) -> Result<crate::types::EarningType> {
-        let url = format!(
-            "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -76,12 +80,14 @@ impl EarningType {
         earning_type_uuid: &str,
         body: &crate::types::PutCompanyEarningTypeRequest,
     ) -> Result<crate::types::EarningType> {
-        let url = format!(
-            "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -102,12 +108,14 @@ impl EarningType {
         company_id: &str,
         earning_type_uuid: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

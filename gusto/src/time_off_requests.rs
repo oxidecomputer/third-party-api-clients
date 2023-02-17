@@ -55,12 +55,14 @@ impl TimeOffRequests {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/time_off_requests?{}",
-            crate::progenitor_support::encode_path(company_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/time_off_requests?{}",
+                crate::progenitor_support::encode_path(company_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -103,10 +105,13 @@ impl TimeOffRequests {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/time_off_requests?{}",
-            crate::progenitor_support::encode_path(company_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/time_off_requests?{}",
+                crate::progenitor_support::encode_path(company_id),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -122,12 +127,14 @@ impl TimeOffRequests {
         company_id: &str,
         time_off_request_id: &str,
     ) -> Result<crate::types::TimeOffRequest> {
-        let url = format!(
-            "/v1/companies/{}/time_off_requests/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(time_off_request_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/time_off_requests/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(time_off_request_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

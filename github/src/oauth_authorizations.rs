@@ -46,8 +46,9 @@ impl OauthAuthorizations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/applications/grants?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/applications/grants?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -72,7 +73,9 @@ impl OauthAuthorizations {
             query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/applications/grants?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/applications/grants?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -89,11 +92,13 @@ impl OauthAuthorizations {
      * * `grant_id: i64` -- grant_id parameter.
      */
     pub async fn get_grant(&self, grant_id: i64) -> Result<crate::types::ApplicationGrant> {
-        let url = format!(
-            "/applications/grants/{}",
-            crate::progenitor_support::encode_path(&grant_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/applications/grants/{}",
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -112,11 +117,13 @@ impl OauthAuthorizations {
      * * `grant_id: i64` -- grant_id parameter.
      */
     pub async fn delete_grant(&self, grant_id: i64) -> Result<()> {
-        let url = format!(
-            "/applications/grants/{}",
-            crate::progenitor_support::encode_path(&grant_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/applications/grants/{}",
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -151,8 +158,9 @@ impl OauthAuthorizations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/authorizations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/authorizations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -175,7 +183,9 @@ impl OauthAuthorizations {
             query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/authorizations?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/authorizations?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -201,8 +211,7 @@ impl OauthAuthorizations {
         &self,
         body: &crate::types::OauthAuthorizationsCreateAuthorizationRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = "/authorizations".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/authorizations", None);
         self.client
             .post(
                 &url,
@@ -237,11 +246,13 @@ impl OauthAuthorizations {
         client_id: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/clients/{}",
-            crate::progenitor_support::encode_path(client_id),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/clients/{}",
+                crate::progenitor_support::encode_path(client_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -276,12 +287,14 @@ impl OauthAuthorizations {
         fingerprint: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/clients/{}/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(fingerprint),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/clients/{}/{}",
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(fingerprint),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -307,11 +320,13 @@ impl OauthAuthorizations {
         &self,
         authorization_id: i64,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -328,11 +343,13 @@ impl OauthAuthorizations {
      * * `authorization_id: i64` -- authorization_id parameter.
      */
     pub async fn delete_authorization(&self, authorization_id: i64) -> Result<()> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -357,11 +374,13 @@ impl OauthAuthorizations {
         authorization_id: i64,
         body: &crate::types::OauthAuthorizationsUpdateAuthorizationRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(&authorization_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

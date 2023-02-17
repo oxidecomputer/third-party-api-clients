@@ -34,8 +34,9 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sso/integrations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/sso/integrations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -58,7 +59,9 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sso/integrations?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/sso/integrations?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -72,8 +75,7 @@ impl SingleSignOnSettings {
         &self,
         body: &crate::types::CreateIntegrationRequest,
     ) -> Result<crate::types::SsoIntegrationAllOf> {
-        let url = "/sso/integrations".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/sso/integrations", None);
         self.client
             .post(
                 &url,
@@ -105,12 +107,14 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -123,11 +127,13 @@ impl SingleSignOnSettings {
      * You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
      */
     pub async fn delete_sso_integrations(&self, id: &str) -> Result<()> {
-        let url = format!(
-            "/sso/integrations/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -154,12 +160,14 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

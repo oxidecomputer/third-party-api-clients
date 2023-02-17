@@ -33,12 +33,14 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -63,12 +65,14 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -99,12 +103,14 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

@@ -60,8 +60,7 @@ impl Products {
             query_args.push(("url".to_string(), url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/products?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/products?{}", query_), None);
         let resp: crate::types::ProductList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -96,7 +95,7 @@ impl Products {
             query_args.push(("url".to_string(), url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/products?{}", query_);
+        let url = self.client.url(&format!("/v1/products?{}", query_), None);
         let mut resp: crate::types::ProductList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -141,8 +140,7 @@ impl Products {
      * <p>Creates a new product object.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Product> {
-        let url = "/v1/products".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/products", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -179,8 +177,9 @@ impl Products {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/products/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/products/search?{}", query_), None);
         let resp: crate::types::SearchResult = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -205,7 +204,9 @@ impl Products {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/products/search?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/products/search?{}", query_), None);
         let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -255,11 +256,13 @@ impl Products {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Product> {
-        let url = format!(
-            "/v1/products/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/products/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -274,11 +277,13 @@ impl Products {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_products(&self, id: &str) -> Result<crate::types::Product> {
-        let url = format!(
-            "/v1/products/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/products/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -293,11 +298,13 @@ impl Products {
      * * `id: &str` -- The account's country.
      */
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedProduct> {
-        let url = format!(
-            "/v1/products/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/products/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

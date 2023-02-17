@@ -39,8 +39,9 @@ impl Settings {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/settings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users/me/settings?{}", query_), None);
         let resp: crate::types::Settings = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -54,7 +55,7 @@ impl Settings {
      * Returns all user settings for the authenticated user.
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
-        let url = "/users/me/settings".to_string();
+        let url = self.client.url("/users/me/settings", None);
         let mut resp: crate::types::Settings = self.client.get(&url, None, None).await?;
 
         let mut items = resp.items;
@@ -114,8 +115,9 @@ impl Settings {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/settings/watch?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users/me/settings/watch?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -134,11 +136,13 @@ impl Settings {
      * * `setting: &str` -- The id of the user setting.
      */
     pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
-        let url = format!(
-            "/users/me/settings/{}",
-            crate::progenitor_support::encode_path(setting),
+        let url = self.client.url(
+            &format!(
+                "/users/me/settings/{}",
+                crate::progenitor_support::encode_path(setting),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

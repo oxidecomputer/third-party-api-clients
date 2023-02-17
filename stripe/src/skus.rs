@@ -60,8 +60,7 @@ impl Skus {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/skus?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/skus?{}", query_), None);
         let resp: crate::types::GetSkusResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -96,7 +95,7 @@ impl Skus {
             query_args.push(("product".to_string(), product.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/skus?{}", query_);
+        let url = self.client.url(&format!("/v1/skus?{}", query_), None);
         let mut resp: crate::types::GetSkusResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -141,8 +140,7 @@ impl Skus {
      * <p>Creates a new SKU associated with a product.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Sku> {
-        let url = "/v1/skus".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/skus", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -158,8 +156,10 @@ impl Skus {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::GetSkusResponseAnyOf> {
-        let url = format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -176,8 +176,10 @@ impl Skus {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_skus(&self, id: &str) -> Result<crate::types::Sku> {
-        let url = format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -192,8 +194,10 @@ impl Skus {
      * * `id: &str` -- The account's country.
      */
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedSku> {
-        let url = format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

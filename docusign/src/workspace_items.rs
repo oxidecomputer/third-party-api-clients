@@ -80,14 +80,16 @@ impl WorkspaceItems {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -112,13 +114,15 @@ impl WorkspaceItems {
         workspace_id: &str,
         body: &crate::types::WorkspaceItemList,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -146,13 +150,15 @@ impl WorkspaceItems {
         folder_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::WorkspaceItem> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}/files",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}/files",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -188,15 +194,17 @@ impl WorkspaceItems {
             query_args.push(("pdf_version".to_string(), pdf_version.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -220,14 +228,16 @@ impl WorkspaceItems {
         folder_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::WorkspaceItem> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -278,15 +288,17 @@ impl WorkspaceItems {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
-            crate::progenitor_support::encode_path(folder_id),
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+                crate::progenitor_support::encode_path(folder_id),
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

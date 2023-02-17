@@ -35,11 +35,13 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         body: &crate::types::UpdateAutoReceptionistRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -72,11 +74,13 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         body: &crate::types::AddByocNumberResponse,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -104,11 +108,13 @@ impl PhoneAutoReceptionists {
         &self,
         auto_receptionist_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -136,12 +142,14 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         phone_number_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
-            crate::progenitor_support::encode_path(phone_number_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers/{}",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+                crate::progenitor_support::encode_path(phone_number_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -162,8 +170,7 @@ impl PhoneAutoReceptionists {
         &self,
         body: &crate::types::AddAutoReceptionistRequest,
     ) -> Result<crate::types::AddAutoReceptionistResponse> {
-        let url = "/phone/auto_receptionists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/phone/auto_receptionists", None);
         self.client
             .post(
                 &url,

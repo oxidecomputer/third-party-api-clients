@@ -56,8 +56,7 @@ impl Quotes {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/quotes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
         let resp: crate::types::GetQuotesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -90,7 +89,7 @@ impl Quotes {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/quotes?{}", query_);
+        let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
         let mut resp: crate::types::GetQuotesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -135,8 +134,7 @@ impl Quotes {
      * <p>A quote models prices and services for a customer. Default options for <code>header</code>, <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Quote> {
-        let url = "/v1/quotes".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/quotes", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -152,11 +150,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn get(&self, quote: &str) -> Result<crate::types::Quote> {
-        let url = format!(
-            "/v1/quotes/{}",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -171,11 +171,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn post_quotes(&self, quote: &str) -> Result<crate::types::Quote> {
-        let url = format!(
-            "/v1/quotes/{}",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -190,11 +192,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn post_accept(&self, quote: &str) -> Result<crate::types::Quote> {
-        let url = format!(
-            "/v1/quotes/{}/accept",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/accept",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -209,11 +213,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn post_cancel(&self, quote: &str) -> Result<crate::types::Quote> {
-        let url = format!(
-            "/v1/quotes/{}/cancel",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/cancel",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -249,12 +255,14 @@ impl Quotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/quotes/{}/computed_upfront_line_items?{}",
-            crate::progenitor_support::encode_path(quote),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/computed_upfront_line_items?{}",
+                crate::progenitor_support::encode_path(quote),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -274,9 +282,12 @@ impl Quotes {
         &self,
         quote: &str,
     ) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/quotes/{}/computed_upfront_line_items",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/computed_upfront_line_items",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
         let mut resp: crate::types::LineItems = self.client.get(&url, None, None).await?;
 
@@ -326,11 +337,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn post_finalize(&self, quote: &str) -> Result<crate::types::Quote> {
-        let url = format!(
-            "/v1/quotes/{}/finalize",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/finalize",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -366,12 +379,14 @@ impl Quotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/quotes/{}/line_items?{}",
-            crate::progenitor_support::encode_path(quote),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/line_items?{}",
+                crate::progenitor_support::encode_path(quote),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -388,9 +403,12 @@ impl Quotes {
      * <p>When retrieving a quote, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
     pub async fn get_all_line_items(&self, quote: &str) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/quotes/{}/line_items",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/line_items",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
         let mut resp: crate::types::LineItems = self.client.get(&url, None, None).await?;
 
@@ -441,11 +459,13 @@ impl Quotes {
      * * `quote: &str` -- The account's country.
      */
     pub async fn get_pdf(&self, quote: &str) -> Result<()> {
-        let url = format!(
-            "/v1/quotes/{}/pdf",
-            crate::progenitor_support::encode_path(quote),
+        let url = self.client.url(
+            &format!(
+                "/v1/quotes/{}/pdf",
+                crate::progenitor_support::encode_path(quote),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

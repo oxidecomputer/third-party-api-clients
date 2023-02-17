@@ -27,11 +27,13 @@ impl AccountSealProviders {
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountSealProviders> {
-        let url = format!(
-            "/v2.1/accounts/{}/seals",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/seals",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

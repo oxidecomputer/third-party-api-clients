@@ -43,8 +43,7 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/accounts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/accounts?{}", query_), None);
         let resp: crate::types::GetAccountsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -61,7 +60,7 @@ impl Accounts {
      * <p>Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>. If you’re not a platform, the list is empty.</p>
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Account>> {
-        let url = "/v1/accounts".to_string();
+        let url = self.client.url("/v1/accounts", None);
         let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -107,8 +106,7 @@ impl Accounts {
      * To do this, you’ll first need to <a href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Account> {
-        let url = "/v1/accounts".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/accounts", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -124,11 +122,13 @@ impl Accounts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -145,11 +145,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_accounts(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -168,11 +170,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn delete(&self, account: &str) -> Result<crate::types::DeletedAccount> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -187,11 +191,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_bank(&self, account: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -208,12 +214,14 @@ impl Accounts {
      * * `id: &str` -- The account's country.
      */
     pub async fn get_bank(&self, account: &str, id: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -235,12 +243,14 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -260,12 +270,14 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -281,11 +293,13 @@ impl Accounts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_capabilities(&self, account: &str) -> Result<Vec<crate::types::Capability>> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ListAccountCapability = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -305,9 +319,12 @@ impl Accounts {
         &self,
         account: &str,
     ) -> Result<Vec<crate::types::Capability>> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
         let mut resp: crate::types::ListAccountCapability =
             self.client.get(&url, None, None).await?;
@@ -364,12 +381,14 @@ impl Accounts {
         account: &str,
         capability: &str,
     ) -> Result<crate::types::Capability> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(capability),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -389,12 +408,14 @@ impl Accounts {
         account: &str,
         capability: &str,
     ) -> Result<crate::types::Capability> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(capability),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -430,12 +451,14 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/external_accounts?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ExternalAccounts = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -452,9 +475,12 @@ impl Accounts {
      * <p>List external accounts for an account.</p>
      */
     pub async fn get_all_external(&self, account: &str) -> Result<Vec<crate::types::DataAnyOf>> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
         let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None, None).await?;
 
@@ -504,11 +530,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_external(&self, account: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -529,12 +557,14 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -556,12 +586,14 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -581,12 +613,14 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -603,11 +637,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_login_link(&self, account: &str) -> Result<crate::types::LoginLink> {
-        let url = format!(
-            "/v1/accounts/{}/login_links",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/login_links",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -645,12 +681,14 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/people?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::GetAccountPeopleResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -671,9 +709,12 @@ impl Accounts {
         account: &str,
         _relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
-        let url = format!(
-            "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
         let mut resp: crate::types::GetAccountPeopleResponse =
             self.client.get(&url, None, None).await?;
@@ -724,11 +765,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_people(&self, account: &str) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -749,12 +792,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -774,12 +819,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -799,12 +846,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::DeletedPerson> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -842,12 +891,14 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/persons?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::GetAccountPeopleResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -868,9 +919,12 @@ impl Accounts {
         account: &str,
         _relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
-        let url = format!(
-            "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
         let mut resp: crate::types::GetAccountPeopleResponse =
             self.client.get(&url, None, None).await?;
@@ -921,11 +975,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_person(&self, account: &str) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -946,12 +1002,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -971,12 +1029,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -996,12 +1056,14 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::DeletedPerson> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -1018,11 +1080,13 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_reject(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}/reject",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/reject",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

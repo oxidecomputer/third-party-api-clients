@@ -42,8 +42,7 @@ impl NetworkZones {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/zones?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/api/v1/zones?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -61,7 +60,7 @@ impl NetworkZones {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/zones?{}", query_);
+        let url = self.client.url(&format!("/api/v1/zones?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -75,8 +74,7 @@ impl NetworkZones {
         &self,
         body: &crate::types::NetworkZone,
     ) -> Result<crate::types::NetworkZone> {
-        let url = "/api/v1/zones".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/api/v1/zones", None);
         self.client
             .post(
                 &url,
@@ -97,11 +95,13 @@ impl NetworkZones {
      * * `zone_id: &str`
      */
     pub async fn get(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
-        let url = format!(
-            "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/zones/{}",
+                crate::progenitor_support::encode_path(zone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -120,11 +120,13 @@ impl NetworkZones {
         zone_id: &str,
         body: &crate::types::NetworkZone,
     ) -> Result<crate::types::NetworkZone> {
-        let url = format!(
-            "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/zones/{}",
+                crate::progenitor_support::encode_path(zone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -145,11 +147,13 @@ impl NetworkZones {
      * * `zone_id: &str`
      */
     pub async fn delete(&self, zone_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/zones/{}",
-            crate::progenitor_support::encode_path(zone_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/zones/{}",
+                crate::progenitor_support::encode_path(zone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -164,11 +168,13 @@ impl NetworkZones {
      * * `zone_id: &str`
      */
     pub async fn activate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
-        let url = format!(
-            "/api/v1/zones/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(zone_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/zones/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(zone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -183,11 +189,13 @@ impl NetworkZones {
      * * `zone_id: &str`
      */
     pub async fn deactivate(&self, zone_id: &str) -> Result<crate::types::NetworkZone> {
-        let url = format!(
-            "/api/v1/zones/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(zone_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/zones/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(zone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

@@ -47,8 +47,9 @@ impl BatchWebhooks {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/batch-webhooks?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/batch-webhooks?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,8 +60,7 @@ impl BatchWebhooks {
      * Configure a webhook that will fire whenever any batch request completes processing.
      */
     pub async fn post(&self, body: &crate::types::BatchWebhook) -> Result<crate::types::Webhooks> {
-        let url = "/batch-webhooks".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/batch-webhooks", None);
         self.client
             .post(
                 &url,
@@ -96,12 +96,14 @@ impl BatchWebhooks {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/batch-webhooks/{}?{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}?{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -116,11 +118,13 @@ impl BatchWebhooks {
      * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
      */
     pub async fn delete(&self, batch_webhook_id: &str) -> Result<()> {
-        let url = format!(
-            "/batch-webhooks/{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -139,11 +143,13 @@ impl BatchWebhooks {
         batch_webhook_id: &str,
         body: &crate::types::BatchWebhook,
     ) -> Result<crate::types::Webhooks> {
-        let url = format!(
-            "/batch-webhooks/{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

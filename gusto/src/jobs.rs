@@ -20,11 +20,13 @@ impl Jobs {
      * Get a job.
      */
     pub async fn get(&self, job_id: &str) -> Result<crate::types::Job> {
-        let url = format!(
-            "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -39,11 +41,13 @@ impl Jobs {
         job_id: &str,
         body: &crate::types::PutJobRequest,
     ) -> Result<crate::types::Job> {
-        let url = format!(
-            "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -60,11 +64,13 @@ impl Jobs {
      * Deletes a specific job that an employee holds.
      */
     pub async fn delete(&self, job_id: &str) -> Result<()> {
-        let url = format!(
-            "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -75,11 +81,13 @@ impl Jobs {
      * Get all of the jobs that an employee holds.
      */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
-        let url = format!(
-            "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/jobs",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -92,9 +100,12 @@ impl Jobs {
      * Get all of the jobs that an employee holds.
      */
     pub async fn get_all_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
-        let url = format!(
-            "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/jobs",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -110,11 +121,13 @@ impl Jobs {
         employee_id: &str,
         body: &crate::types::PostJobRequest,
     ) -> Result<crate::types::Job> {
-        let url = format!(
-            "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/jobs",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -137,11 +150,13 @@ impl Jobs {
         job_id: &str,
         body: &crate::types::PostJobCompensationsRequest,
     ) -> Result<crate::types::Compensation> {
-        let url = format!(
-            "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}/compensations",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

@@ -24,11 +24,13 @@ impl UserSchemas {
      * * `app_instance_id: &str`
      */
     pub async fn get_application(&self, app_instance_id: &str) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/apps/{}/default",
+                crate::progenitor_support::encode_path(app_instance_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,11 +49,13 @@ impl UserSchemas {
         app_instance_id: &str,
         body: &crate::types::UserSchema,
     ) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/apps/{}/default",
+                crate::progenitor_support::encode_path(app_instance_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -72,11 +76,13 @@ impl UserSchemas {
      * * `schema_id: &str`
      */
     pub async fn get(&self, schema_id: &str) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/{}",
+                crate::progenitor_support::encode_path(schema_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -93,11 +99,13 @@ impl UserSchemas {
         schema_id: &str,
         body: &crate::types::UserSchema,
     ) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/{}",
+                crate::progenitor_support::encode_path(schema_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

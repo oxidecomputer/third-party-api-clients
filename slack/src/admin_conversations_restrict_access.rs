@@ -20,8 +20,9 @@ impl AdminConversationsRestrictAccess {
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.addGroup>
      */
     pub async fn add_group(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.restrictAccess.addGroup".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin.conversations.restrictAccess.addGroup", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -52,8 +53,10 @@ impl AdminConversationsRestrictAccess {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.conversations.restrictAccess.listGroups?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin.conversations.restrictAccess.listGroups?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -64,8 +67,9 @@ impl AdminConversationsRestrictAccess {
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup>
      */
     pub async fn remove_group(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.restrictAccess.removeGroup".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin.conversations.restrictAccess.removeGroup", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

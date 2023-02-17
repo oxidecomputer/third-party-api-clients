@@ -26,8 +26,7 @@ impl RoomsAccount {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get_zr_account_profile(&self) -> Result<crate::types::UpdateZrAccProfileRequest> {
-        let url = "/rooms/account_profile".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/rooms/account_profile", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,8 +46,7 @@ impl RoomsAccount {
         &self,
         body: &crate::types::UpdateZrAccProfileRequest,
     ) -> Result<crate::types::Domains> {
-        let url = "/rooms/account_profile".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/rooms/account_profile", None);
         self.client
             .patch(
                 &url,
@@ -85,8 +83,9 @@ impl RoomsAccount {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/account_settings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/rooms/account_settings?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -117,8 +116,9 @@ impl RoomsAccount {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/account_settings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/rooms/account_settings?{}", query_), None);
         self.client
             .patch(&url, None, Some("application/json"))
             .await

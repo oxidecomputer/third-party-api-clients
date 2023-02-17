@@ -41,8 +41,9 @@ impl ContactsApiRecipients {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/contactdb/recipients?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/contactdb/recipients?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -64,8 +65,7 @@ impl ContactsApiRecipients {
         &self,
         body: &[crate::types::PostContactdbRecipientsRequest],
     ) -> Result<crate::types::ContactDbRecipientResponse> {
-        let url = "/contactdb/recipients".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/recipients", None);
         self.client
             .post(
                 &url,
@@ -88,8 +88,7 @@ impl ContactsApiRecipients {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_recipients(&self, body: &[String]) -> Result<crate::types::Help> {
-        let url = "/contactdb/recipients".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/recipients", None);
         self.client
             .delete(
                 &url,
@@ -117,8 +116,7 @@ impl ContactsApiRecipients {
         &self,
         body: &[crate::types::PatchContactdbRecipientsRequest],
     ) -> Result<crate::types::ContactDbRecipientResponse> {
-        let url = "/contactdb/recipients".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/recipients", None);
         self.client
             .patch(
                 &url,
@@ -141,8 +139,7 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_statu(
         &self,
     ) -> Result<crate::types::GetContactdbStatusResponseData> {
-        let url = "/contactdb/status".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/status", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -160,11 +157,13 @@ impl ContactsApiRecipients {
         &self,
         recipient_id: &str,
     ) -> Result<crate::types::ContactdbRecipient> {
-        let url = format!(
-            "/contactdb/recipients/{}",
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/recipients/{}",
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -184,11 +183,13 @@ impl ContactsApiRecipients {
         &self,
         recipient_id: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/contactdb/recipients/{}",
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/recipients/{}",
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -208,11 +209,13 @@ impl ContactsApiRecipients {
         &self,
         recipient_id: &str,
     ) -> Result<crate::types::GetContactdbRecipientsRecipientListsResponse> {
-        let url = format!(
-            "/contactdb/recipients/{}/lists",
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/recipients/{}/lists",
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -231,8 +234,9 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_billable_count(
         &self,
     ) -> Result<crate::types::ContactdbRecipientCount> {
-        let url = "/contactdb/recipients/billable_count".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/contactdb/recipients/billable_count", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -249,8 +253,7 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_count(
         &self,
     ) -> Result<crate::types::ContactdbRecipientCount> {
-        let url = "/contactdb/recipients/count".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/recipients/count", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -283,8 +286,9 @@ impl ContactsApiRecipients {
             query_args.push(("{field_name}".to_string(), field_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/contactdb/recipients/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/contactdb/recipients/search?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -340,8 +344,7 @@ impl ContactsApiRecipients {
         &self,
         body: &crate::types::PostContactdbRecipientsSearchRequest,
     ) -> Result<crate::types::PostContactdbRecipientsSearchResponseData> {
-        let url = "/contactdb/recipients/search".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/recipients/search", None);
         self.client
             .post(
                 &url,

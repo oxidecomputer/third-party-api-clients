@@ -43,8 +43,7 @@ impl TransactionalTemplates {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/templates?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/templates?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -62,8 +61,7 @@ impl TransactionalTemplates {
         &self,
         body: &crate::types::PostTemplatesRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = "/templates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/templates", None);
         self.client
             .post(
                 &url,
@@ -87,11 +85,13 @@ impl TransactionalTemplates {
         &self,
         template_id: &str,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -110,11 +110,13 @@ impl TransactionalTemplates {
         template_id: &str,
         body: &crate::types::PostTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -135,11 +137,13 @@ impl TransactionalTemplates {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -160,11 +164,13 @@ impl TransactionalTemplates {
         template_id: &str,
         body: &crate::types::PatchTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

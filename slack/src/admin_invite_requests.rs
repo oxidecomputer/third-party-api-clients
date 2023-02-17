@@ -27,8 +27,7 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.inviteRequests.approve".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.inviteRequests.approve", None);
         self.client
             .post(
                 &url,
@@ -52,8 +51,7 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.inviteRequests.deny".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.inviteRequests.deny", None);
         self.client
             .post(
                 &url,
@@ -93,8 +91,9 @@ impl AdminInviteRequests {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.inviteRequests.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin.inviteRequests.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

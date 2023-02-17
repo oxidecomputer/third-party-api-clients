@@ -37,8 +37,7 @@ impl Root {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

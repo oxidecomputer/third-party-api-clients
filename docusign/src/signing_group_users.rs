@@ -31,12 +31,14 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,12 +61,14 @@ impl SigningGroupUsers {
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -93,12 +97,14 @@ impl SigningGroupUsers {
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

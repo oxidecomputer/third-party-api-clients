@@ -24,8 +24,7 @@ impl ContactsApiLists {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_lists(&self) -> Result<crate::types::ListAllListsResponse> {
-        let url = "/contactdb/lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/lists", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -43,8 +42,7 @@ impl ContactsApiLists {
         &self,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ContactdbList> {
-        let url = "/contactdb/lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/lists", None);
         self.client
             .post(
                 &url,
@@ -65,8 +63,7 @@ impl ContactsApiLists {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_lists(&self, body: &[i64]) -> Result<()> {
-        let url = "/contactdb/lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/lists", None);
         self.client
             .delete(
                 &url,
@@ -91,11 +88,13 @@ impl ContactsApiLists {
         &self,
         list_id: &str,
     ) -> Result<crate::types::ContactdbList> {
-        let url = format!(
-            "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -121,12 +120,14 @@ impl ContactsApiLists {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/contactdb/lists/{}?{}",
-            crate::progenitor_support::encode_path(list_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}?{}",
+                crate::progenitor_support::encode_path(list_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -152,11 +153,13 @@ impl ContactsApiLists {
         list_id: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::PatchContactdbListsListResponse> {
-        let url = format!(
-            "/contactdb/lists/{}",
-            crate::progenitor_support::encode_path(list_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}",
+                crate::progenitor_support::encode_path(list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -193,12 +196,14 @@ impl ContactsApiLists {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/contactdb/lists/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}/recipients?{}",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -219,11 +224,13 @@ impl ContactsApiLists {
         list_id: i64,
         body: &[i64],
     ) -> Result<()> {
-        let url = format!(
-            "/contactdb/lists/{}/recipients",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}/recipients",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -248,12 +255,14 @@ impl ContactsApiLists {
         list_id: i64,
         recipient_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/contactdb/lists/{}/recipients/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}/recipients/{}",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -275,12 +284,14 @@ impl ContactsApiLists {
         recipient_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/contactdb/lists/{}/recipients/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/lists/{}/recipients/{}",
+                crate::progenitor_support::encode_path(&list_id.to_string()),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

@@ -35,8 +35,9 @@ impl LinkBranding {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/links?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/links?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -53,7 +54,7 @@ impl LinkBranding {
     pub async fn get_all_whitelabel_links(
         &self,
     ) -> Result<Vec<crate::types::LinkBranding200Response>> {
-        let url = "/whitelabel/links".to_string();
+        let url = self.client.url("/whitelabel/links", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -75,8 +76,7 @@ impl LinkBranding {
         &self,
         body: &crate::types::PostWhitelabelLinksRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
-        let url = "/whitelabel/links".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/whitelabel/links", None);
         self.client
             .post(
                 &url,
@@ -102,11 +102,13 @@ impl LinkBranding {
         &self,
         id: i64,
     ) -> Result<crate::types::PostWhitelabelLinksValidateResponse> {
-        let url = format!(
-            "/whitelabel/links/{}/validate",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/links/{}/validate",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -123,11 +125,13 @@ impl LinkBranding {
         link_id: i64,
         body: &crate::types::PostWhitelabelLinksLinkSubuserRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
-        let url = format!(
-            "/whitelabel/links/{}/subuser",
-            crate::progenitor_support::encode_path(&link_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/links/{}/subuser",
+                crate::progenitor_support::encode_path(&link_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -153,11 +157,13 @@ impl LinkBranding {
         &self,
         id: i64,
     ) -> Result<crate::types::LinkBranding200Response> {
-        let url = format!(
-            "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/links/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -176,11 +182,13 @@ impl LinkBranding {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_links(&self, id: i64) -> Result<crate::types::Help> {
-        let url = format!(
-            "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/links/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -201,11 +209,13 @@ impl LinkBranding {
         id: i64,
         body: &crate::types::PatchWhitelabelLinksRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
-        let url = format!(
-            "/whitelabel/links/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/links/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -243,8 +253,9 @@ impl LinkBranding {
             query_args.push(("domain".to_string(), domain.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/links/default?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/links/default?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -269,8 +280,9 @@ impl LinkBranding {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/links/subuser?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/links/subuser?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -297,8 +309,9 @@ impl LinkBranding {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/links/subuser?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/links/subuser?{}", query_), None);
         self.client.delete(&url, None, None).await
     }
 }

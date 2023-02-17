@@ -31,12 +31,14 @@ impl EnvelopeFormData {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EnvelopeFormDataType> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/form_data",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/form_data",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

@@ -48,8 +48,9 @@ impl MarketingCampaignsStats {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/automations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/stats/automations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -112,12 +113,14 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/automations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/automations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -156,8 +159,9 @@ impl MarketingCampaignsStats {
             query_args.push(("singlesend_ids".to_string(), singlesend_ids.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/singlesends?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/stats/singlesends?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -215,12 +219,14 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/singlesends/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/singlesends/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -265,12 +271,14 @@ impl MarketingCampaignsStats {
             query_args.push(("step_ids".to_string(), step_ids.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/automations/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/automations/{}/links?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -320,12 +328,14 @@ impl MarketingCampaignsStats {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/singlesends/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/singlesends/{}/links?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -357,8 +367,10 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/singlesends/export?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/marketing/stats/singlesends/export?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -390,8 +402,10 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/automations/export?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/marketing/stats/automations/export?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
 }

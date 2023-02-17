@@ -51,8 +51,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -87,7 +86,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stats?{}", query_);
+        let url = self.client.url(&format!("/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -136,8 +135,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/geo/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -178,7 +176,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/geo/stats?{}", query_);
+        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -231,8 +229,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/devices/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -278,7 +275,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/devices/stats?{}", query_);
+        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -316,8 +313,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/clients/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -350,7 +346,7 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/clients/stats?{}", query_);
+        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -395,12 +391,14 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(&client_type.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/clients/{}/stats?{}",
+                crate::progenitor_support::encode_path(&client_type.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -440,10 +438,13 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(&client_type.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/clients/{}/stats?{}",
+                crate::progenitor_support::encode_path(&client_type.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -496,8 +497,9 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/mailbox_providers/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/mailbox_providers/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -541,7 +543,9 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/mailbox_providers/stats?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/mailbox_providers/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -590,8 +594,9 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/browsers/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/browsers/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -632,7 +637,9 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/browsers/stats?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/browsers/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
 }

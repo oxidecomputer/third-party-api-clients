@@ -61,8 +61,7 @@ impl Rooms {
             query_args.push(("unassigned_rooms".to_string(), unassigned_rooms.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/rooms?{}", query_), None);
         let resp: crate::types::ListZoomRoomsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -103,7 +102,7 @@ impl Rooms {
             query_args.push(("unassigned_rooms".to_string(), unassigned_rooms.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms?{}", query_);
+        let url = self.client.url(&format!("/rooms?{}", query_), None);
         let mut resp: crate::types::ListZoomRoomsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -152,8 +151,7 @@ impl Rooms {
         &self,
         body: &crate::types::AddRoomRequest,
     ) -> Result<crate::types::AddRoomResponse> {
-        let url = "/rooms".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/rooms", None);
         self.client
             .post(
                 &url,
@@ -183,8 +181,10 @@ impl Rooms {
         &self,
         room_id: &str,
     ) -> Result<crate::types::GetZrProfileResponse> {
-        let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -203,8 +203,10 @@ impl Rooms {
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
     pub async fn delete_zoom(&self, room_id: &str) -> Result<crate::types::Domains> {
-        let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -228,8 +230,10 @@ impl Rooms {
         room_id: &str,
         body: &crate::types::UpdateRoomProfileRequest,
     ) -> Result<crate::types::Domains> {
-        let url = format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
+            None,
+        );
         self.client
             .patch(
                 &url,
@@ -267,12 +271,14 @@ impl Rooms {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/rooms/{}/settings?{}",
-            crate::progenitor_support::encode_path(room_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/settings?{}",
+                crate::progenitor_support::encode_path(room_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -300,12 +306,14 @@ impl Rooms {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/rooms/{}/settings?{}",
-            crate::progenitor_support::encode_path(room_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/settings?{}",
+                crate::progenitor_support::encode_path(room_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(&url, None, Some("application/json"))
             .await
@@ -331,11 +339,13 @@ impl Rooms {
         &self,
         room_id: &str,
     ) -> Result<crate::types::ListZrDevicesResponse> {
-        let url = format!(
-            "/rooms/{}/devices",
-            crate::progenitor_support::encode_path(room_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/devices",
+                crate::progenitor_support::encode_path(room_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -359,11 +369,13 @@ impl Rooms {
         room_id: &str,
         body: &crate::types::ChangeZrLocationRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/rooms/{}/location",
-            crate::progenitor_support::encode_path(room_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/location",
+                crate::progenitor_support::encode_path(room_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -390,11 +402,13 @@ impl Rooms {
      * * `id: &str` -- User's first name.
      */
     pub async fn check(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
-        let url = format!(
-            "/rooms/{}/events",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/events",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -447,8 +461,9 @@ impl Rooms {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/digital_signage?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/rooms/digital_signage?{}", query_), None);
         let resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None, None).await?;
 
@@ -484,7 +499,9 @@ impl Rooms {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/digital_signage?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/rooms/digital_signage?{}", query_), None);
         let mut resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None, None).await?;
 
@@ -533,8 +550,7 @@ impl Rooms {
      *
      */
     pub async fn manage_e_91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
-        let url = "/rooms/events".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/rooms/events", None);
         self.client
             .patch(&url, None, Some("application/json"))
             .await

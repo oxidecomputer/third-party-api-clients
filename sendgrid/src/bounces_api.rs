@@ -39,8 +39,9 @@ impl BouncesApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/bounces?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/suppression/bounces?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -65,7 +66,9 @@ impl BouncesApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/bounces?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/suppression/bounces?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -88,8 +91,7 @@ impl BouncesApi {
         &self,
         body: &crate::types::DeleteSuppressionBouncesRequest,
     ) -> Result<()> {
-        let url = "/suppression/bounces".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/suppression/bounces", None);
         self.client
             .delete(
                 &url,
@@ -113,11 +115,13 @@ impl BouncesApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
-        let url = format!(
-            "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -133,9 +137,12 @@ impl BouncesApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
-        let url = format!(
-            "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -162,12 +169,14 @@ impl BouncesApi {
             query_args.push(("email_address".to_string(), email_address.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/suppression/bounces/{}?{}",
-            crate::progenitor_support::encode_path(email),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}?{}",
+                crate::progenitor_support::encode_path(email),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

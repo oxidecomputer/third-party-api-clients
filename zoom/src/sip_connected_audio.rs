@@ -29,8 +29,7 @@ impl SipConnectedAudio {
     pub async fn list_sip_trunk_numbers(
         &self,
     ) -> Result<crate::types::ListSipTrunkNumbersResponse> {
-        let url = "/sip_trunk/numbers".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/sip_trunk/numbers", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -53,11 +52,13 @@ impl SipConnectedAudio {
         account_id: &str,
         body: &crate::types::AssignSipConfigRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/settings",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/settings",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -89,11 +90,13 @@ impl SipConnectedAudio {
         account_id: &str,
         body: &crate::types::AssignSipTrunkNumbersRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/numbers",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/numbers",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -120,11 +123,13 @@ impl SipConnectedAudio {
      * * `account_id: &str` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
      */
     pub async fn delete_all_sip_numbers(&self, account_id: &str) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/numbers",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/numbers",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -145,11 +150,13 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ListSipTrunksResponseData> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/trunks",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/trunks",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -170,11 +177,13 @@ impl SipConnectedAudio {
         account_id: &str,
         body: &crate::types::AssignSipTrunksRequestData,
     ) -> Result<crate::types::AssignSipTrunksResponseData> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/trunks",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/trunks",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -203,12 +212,14 @@ impl SipConnectedAudio {
         account_id: &str,
         trunk_id: &str,
     ) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/trunks/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(trunk_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/trunks/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(trunk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -229,11 +240,13 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ListInternalCalloutCountriesResponse> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/callout_countries",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/callout_countries",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -255,11 +268,13 @@ impl SipConnectedAudio {
         account_id: &str,
         body: &crate::types::AddCalloutCountriesRequestData,
     ) -> Result<crate::types::AddCalloutCountriesResponse> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/callout_countries",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/callout_countries",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -289,12 +304,14 @@ impl SipConnectedAudio {
         account_id: &str,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/callout_countries/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/callout_countries/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -330,12 +347,14 @@ impl SipConnectedAudio {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/accounts/{}/sip_trunk/internal_numbers?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/internal_numbers?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ListInternalNumbersResponse =
             self.client.get(&url, None, None).await?;
 
@@ -361,9 +380,12 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
     ) -> Result<Vec<crate::types::InternalNumbers>> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/internal_numbers",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/internal_numbers",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
         let mut resp: crate::types::ListInternalNumbersResponse =
             self.client.get(&url, None, None).await?;
@@ -419,11 +441,13 @@ impl SipConnectedAudio {
         account_id: &str,
         body: &crate::types::AddInternalNumbersRequest,
     ) -> Result<crate::types::AddInternalNumbersResponseData> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/internal_numbers",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/internal_numbers",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -451,12 +475,14 @@ impl SipConnectedAudio {
      * * `number_id: &str` -- Unique identifier of the phone number. This value can be retrieved by calling the List Internal Numbers API.
      */
     pub async fn delete_internal_number(&self, account_id: &str, number_id: &str) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/sip_trunk/internal_numbers/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(number_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/sip_trunk/internal_numbers/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(number_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

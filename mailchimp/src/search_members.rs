@@ -47,8 +47,9 @@ impl SearchMembers {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search-members?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/search-members?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

@@ -29,12 +29,14 @@ impl EnvelopeAttachments {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/attachments",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -55,12 +57,14 @@ impl EnvelopeAttachments {
         envelope_id: &str,
         body: &crate::types::EnvelopeAttachmentsRequest,
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/attachments",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -87,12 +91,14 @@ impl EnvelopeAttachments {
         envelope_id: &str,
         body: &crate::types::EnvelopeAttachmentsRequest,
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/attachments",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -120,13 +126,15 @@ impl EnvelopeAttachments {
         attachment_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(attachment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -149,13 +157,15 @@ impl EnvelopeAttachments {
         envelope_id: &str,
         body: &crate::types::Attachment,
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(attachment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

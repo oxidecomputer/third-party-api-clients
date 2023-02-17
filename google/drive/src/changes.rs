@@ -111,8 +111,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/changes?{}", query_), None);
         let resp: crate::types::ChangeList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -195,7 +194,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes?{}", query_);
+        let url = self.client.url(&format!("/changes?{}", query_), None);
         let mut resp: crate::types::ChangeList = self.client.get(&url, None, None).await?;
 
         let mut changes = resp.changes;
@@ -266,8 +265,9 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes/startPageToken?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/changes/startPageToken?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -370,8 +370,7 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes/watch?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/changes/watch?{}", query_), None);
         self.client
             .post(
                 &url,

@@ -57,8 +57,7 @@ impl Files {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/files?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/files?{}", query_), None);
         let resp: crate::types::GetFilesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl Files {
             query_args.push(("purpose".to_string(), purpose.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/files?{}", query_);
+        let url = self.client.url(&format!("/v1/files?{}", query_), None);
         let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -131,10 +130,10 @@ impl Files {
      * <p>All of Stripe’s officially supported Client libraries should have support for sending <code>multipart/form-data</code>.</p>
      */
     pub async fn post(&self) -> Result<crate::types::File> {
-        let url = "/v1/files".to_string();
-        let url = self
-            .client
-            .url(&url, Some(PostFilesDefaultServer::default().default_url()));
+        let url = self.client.url(
+            "/v1/files",
+            Some(PostFilesDefaultServer::default().default_url()),
+        );
         self.client
             .post(&url, None, Some("multipart/form-data"))
             .await
@@ -150,8 +149,10 @@ impl Files {
      * * `file: &str` -- The account's country.
      */
     pub async fn get(&self, file: &str) -> Result<crate::types::File> {
-        let url = format!("/v1/files/{}", crate::progenitor_support::encode_path(file),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
+            None,
+        );
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

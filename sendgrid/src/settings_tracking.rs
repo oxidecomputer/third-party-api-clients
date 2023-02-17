@@ -24,8 +24,7 @@ impl SettingsTracking {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings(&self) -> Result<crate::types::GetTrackingSettingsResponse> {
-        let url = "/tracking_settings".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -44,8 +43,7 @@ impl SettingsTracking {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings_click(&self) -> Result<crate::types::ClickTracking> {
-        let url = "/tracking_settings/click".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/click", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -67,8 +65,7 @@ impl SettingsTracking {
         &self,
         body: &crate::types::PatchTrackingSettingsOpenRequest,
     ) -> Result<crate::types::ClickTracking> {
-        let url = "/tracking_settings/click".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/click", None);
         self.client
             .patch(
                 &url,
@@ -96,8 +93,7 @@ impl SettingsTracking {
     pub async fn get_tracking_settings_google_analytic(
         &self,
     ) -> Result<crate::types::GoogleAnalyticsSettings> {
-        let url = "/tracking_settings/google_analytics".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/google_analytics", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -119,8 +115,7 @@ impl SettingsTracking {
         &self,
         body: &crate::types::GoogleAnalyticsSettings,
     ) -> Result<crate::types::GoogleAnalyticsSettings> {
-        let url = "/tracking_settings/google_analytics".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/google_analytics", None);
         self.client
             .patch(
                 &url,
@@ -149,8 +144,7 @@ impl SettingsTracking {
     pub async fn get_tracking_settings_open(
         &self,
     ) -> Result<crate::types::GetTrackingSettingsOpenResponse> {
-        let url = "/tracking_settings/open".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/open", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -174,8 +168,7 @@ impl SettingsTracking {
         &self,
         body: &crate::types::PatchTrackingSettingsOpenRequest,
     ) -> Result<crate::types::GetTrackingSettingsOpenResponse> {
-        let url = "/tracking_settings/open".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/open", None);
         self.client
             .patch(
                 &url,
@@ -200,8 +193,7 @@ impl SettingsTracking {
     pub async fn get_tracking_settings_subscription(
         &self,
     ) -> Result<crate::types::SubscriptionTrackingSettings> {
-        let url = "/tracking_settings/subscription".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/subscription", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -221,8 +213,7 @@ impl SettingsTracking {
         &self,
         body: &crate::types::SubscriptionTrackingSettings,
     ) -> Result<crate::types::SubscriptionTrackingSettings> {
-        let url = "/tracking_settings/subscription".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_settings/subscription", None);
         self.client
             .patch(
                 &url,

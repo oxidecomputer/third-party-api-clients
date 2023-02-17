@@ -54,8 +54,9 @@ impl ImChat {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/im/chat/sessions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/im/chat/sessions?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -106,12 +107,14 @@ impl ImChat {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/im/chat/sessions/{}?{}",
-            crate::progenitor_support::encode_path(session_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/im/chat/sessions/{}?{}",
+                crate::progenitor_support::encode_path(session_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -161,12 +164,14 @@ impl ImChat {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/im/users/{}/chat/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/im/users/{}/chat/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -204,10 +209,13 @@ impl ImChat {
             query_args.push(("date".to_string(), date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/im/users/{}/chat/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/im/users/{}/chat/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::ListimmessagesResponse =
             self.client.get(&url, None, None).await?;
@@ -265,8 +273,9 @@ impl ImChat {
             query_args.push(("chat_user".to_string(), chat_user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/im/users/me/chat/messages?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/im/users/me/chat/messages?{}", query_), None);
         self.client
             .post(
                 &url,

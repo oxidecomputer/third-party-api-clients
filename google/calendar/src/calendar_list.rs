@@ -55,8 +55,9 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
         let resp: crate::types::CalendarList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -86,7 +87,9 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
         let mut resp: crate::types::CalendarList = self.client.get(&url, None, None).await?;
 
         let mut items = resp.items;
@@ -137,8 +140,9 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -191,8 +195,9 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList/watch?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList/watch?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -211,11 +216,13 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
-        let url = format!(
-            "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -239,12 +246,14 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -263,11 +272,13 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_delete(&self, calendar_id: &str) -> Result<()> {
-        let url = format!(
-            "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -291,12 +302,14 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

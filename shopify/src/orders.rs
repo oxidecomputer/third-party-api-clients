@@ -61,8 +61,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -114,8 +116,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -167,8 +171,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -220,8 +226,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -273,8 +281,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -326,8 +336,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/checkouts/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/checkouts/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -446,8 +458,9 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/orders.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/orders.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -481,8 +494,7 @@ impl Orders {
     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-01
     */
     pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-01/orders.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/orders.json", None);
         self.client
             .post(
                 &url,
@@ -509,12 +521,14 @@ impl Orders {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -533,11 +547,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -558,11 +574,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202001_delete_param(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -638,8 +656,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/orders/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/orders/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -658,11 +678,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/close.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/close.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -687,11 +709,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -759,12 +783,14 @@ impl Orders {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/cancel.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/cancel.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -889,8 +915,9 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/orders.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/orders.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -924,8 +951,7 @@ impl Orders {
     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-04
     */
     pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-04/orders.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/orders.json", None);
         self.client
             .post(
                 &url,
@@ -952,12 +978,14 @@ impl Orders {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -976,11 +1004,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1001,11 +1031,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202004_delete_param(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1081,8 +1113,10 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/orders/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/orders/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1101,11 +1135,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/close.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/close.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1130,11 +1166,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1202,12 +1240,14 @@ impl Orders {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/cancel.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/cancel.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1332,8 +1372,9 @@ impl Orders {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/orders.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/orders.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1348,11 +1389,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202001_get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1371,11 +1414,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1401,12 +1446,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1431,12 +1478,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1466,12 +1515,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1486,11 +1537,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202004_get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1509,11 +1562,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1539,12 +1594,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1569,12 +1626,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1604,12 +1663,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1624,11 +1685,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202007_get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1647,11 +1710,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1677,12 +1742,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1707,12 +1774,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1742,12 +1811,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1762,11 +1833,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1781,11 +1854,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn create_param_risks(&self, order_id: &str, body: &serde_json::Value) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1807,12 +1882,14 @@ impl Orders {
      * * `risk_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_param_risks_risk(&self, order_id: &str, risk_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1837,12 +1914,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1868,12 +1947,14 @@ impl Orders {
     * * `risk_id: &str` -- storefront_access_token_id.
     */
     pub async fn delete_param_risks_risk(&self, order_id: &str, risk_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1888,11 +1969,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202101_get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1911,11 +1994,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1941,12 +2026,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1971,12 +2058,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -2006,12 +2095,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2026,11 +2117,13 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_unstable_get_param_risk(&self, order_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2049,11 +2142,13 @@ impl Orders {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/risks.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/risks.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2079,12 +2174,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2109,12 +2206,14 @@ impl Orders {
         risk_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -2144,12 +2243,14 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/risks/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(risk_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/risks/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(risk_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2186,12 +2287,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2294,12 +2397,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2338,13 +2443,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2417,12 +2524,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2465,12 +2574,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2573,12 +2684,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2617,13 +2730,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2696,12 +2811,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2744,12 +2861,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2852,12 +2971,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2896,13 +3017,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2975,12 +3098,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3023,12 +3148,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3131,12 +3258,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3175,13 +3304,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3254,12 +3385,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3302,12 +3435,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3410,12 +3545,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3454,13 +3591,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3533,12 +3672,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3581,12 +3722,14 @@ impl Orders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3689,12 +3832,14 @@ impl Orders {
             query_args.push(("transactions".to_string(), transactions.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/refunds.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/refunds.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -3733,13 +3878,15 @@ impl Orders {
             query_args.push(("in_shop_currency".to_string(), in_shop_currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/refunds/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(refund_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/refunds/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(refund_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -3812,12 +3959,14 @@ impl Orders {
             query_args.push(("shipping".to_string(), shipping.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/refunds/calculate.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/refunds/calculate.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

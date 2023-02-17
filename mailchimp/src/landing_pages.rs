@@ -52,8 +52,7 @@ impl LandingPages {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/landing-pages?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/landing-pages?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -77,8 +76,7 @@ impl LandingPages {
             query_args.push(("use_default_list".to_string(), use_default_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/landing-pages?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/landing-pages?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -114,12 +112,14 @@ impl LandingPages {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/landing-pages/{}?{}",
-            crate::progenitor_support::encode_path(page_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}?{}",
+                crate::progenitor_support::encode_path(page_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -134,11 +134,13 @@ impl LandingPages {
      * * `page_id: &str` -- The unique id for the page.
      */
     pub async fn delete(&self, page_id: &str) -> Result<()> {
-        let url = format!(
-            "/landing-pages/{}",
-            crate::progenitor_support::encode_path(page_id),
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}",
+                crate::progenitor_support::encode_path(page_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -157,11 +159,13 @@ impl LandingPages {
         page_id: &str,
         body: &crate::types::LandingPageDataType,
     ) -> Result<crate::types::LandingPage> {
-        let url = format!(
-            "/landing-pages/{}",
-            crate::progenitor_support::encode_path(page_id),
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}",
+                crate::progenitor_support::encode_path(page_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -182,11 +186,13 @@ impl LandingPages {
      * * `page_id: &str` -- The unique id for the page.
      */
     pub async fn post_actions_publish(&self, page_id: &str) -> Result<crate::types::LandingPage> {
-        let url = format!(
-            "/landing-pages/{}/actions/publish",
-            crate::progenitor_support::encode_path(page_id),
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}/actions/publish",
+                crate::progenitor_support::encode_path(page_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -201,11 +207,13 @@ impl LandingPages {
      * * `page_id: &str` -- The unique id for the page.
      */
     pub async fn post_actions_unpublish(&self, page_id: &str) -> Result<()> {
-        let url = format!(
-            "/landing-pages/{}/actions/unpublish",
-            crate::progenitor_support::encode_path(page_id),
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}/actions/unpublish",
+                crate::progenitor_support::encode_path(page_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -235,12 +243,14 @@ impl LandingPages {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/landing-pages/{}/content?{}",
-            crate::progenitor_support::encode_path(page_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/landing-pages/{}/content?{}",
+                crate::progenitor_support::encode_path(page_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

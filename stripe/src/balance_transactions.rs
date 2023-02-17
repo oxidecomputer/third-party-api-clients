@@ -65,8 +65,9 @@ impl BalanceTransactions {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance_transactions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/balance_transactions?{}", query_), None);
         let resp: crate::types::BalanceTransactionsList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -106,7 +107,9 @@ impl BalanceTransactions {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance_transactions?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/balance_transactions?{}", query_), None);
         let mut resp: crate::types::BalanceTransactionsList =
             self.client.get(&url, None, None).await?;
 
@@ -159,11 +162,13 @@ impl BalanceTransactions {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
-        let url = format!(
-            "/v1/balance_transactions/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/balance_transactions/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

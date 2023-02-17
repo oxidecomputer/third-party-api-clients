@@ -247,14 +247,8 @@ pub fn generate_files(
             let (fn_params_str, query_params) =
                 get_fn_params(ts, o, parameters, false, op.parameters.clone(), proper_name)?;
 
-            /*
-             * Generate the URL for the request.
-             */
-            let tmp = parse(p)?;
-            let mut template = tmp.compile(query_params);
-
-            // If there is exactly one alternative server defined, then switch to it
-            if o.servers.len() == 1 {
+            // Generate the server to send the request to
+            let server_arg = if o.servers.len() == 1 {
                 let servers = generate_servers(&o.servers, &to_pascal_case(&op_id));
                 let server_type = servers.top_level_type.unwrap();
 
@@ -262,12 +256,16 @@ pub fn generate_files(
                     out.add_head(server_out);
                 }
 
-                template.push_str(
-                    &format!("let url = self.client.url(&url, Some({server_type}::default().default_url()));")
-                );
+                format!("Some({server_type}::default().default_url())")
             } else {
-                template.push_str("let url = self.client.url(&url, None);");
-            }
+                "None".to_string()
+            };
+
+            /*
+             * Generate the URL for the request.
+             */
+            let tmp = parse(p)?;
+            let template = tmp.compile(query_params, &server_arg);
 
             /*
              * Get the response type.
@@ -398,7 +396,7 @@ pub fn generate_files(
                     get_fn_params(ts, o, parameters, true, op.parameters.clone(), proper_name)?;
 
                 let tmp = parse(p)?;
-                let template = tmp.compile(query_params);
+                let template = tmp.compile(query_params, &server_arg);
 
                 let fn_inner = get_fn_inner(
                     proper_name,

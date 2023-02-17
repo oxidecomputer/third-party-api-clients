@@ -30,12 +30,14 @@ impl CustomerJourneys {
         step_id: i64,
         body: &crate::types::SubscriberInAutomationQueue,
     ) -> Result<()> {
-        let url = format!(
-            "/customer-journeys/journeys/{}/steps/{}/actions/trigger",
-            crate::progenitor_support::encode_path(&journey_id.to_string()),
-            crate::progenitor_support::encode_path(&step_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/customer-journeys/journeys/{}/steps/{}/actions/trigger",
+                crate::progenitor_support::encode_path(&journey_id.to_string()),
+                crate::progenitor_support::encode_path(&step_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

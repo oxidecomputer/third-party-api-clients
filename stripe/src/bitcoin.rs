@@ -56,8 +56,9 @@ impl Bitcoin {
             query_args.push(("uncaptured_funds".to_string(), uncaptured_funds.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bitcoin/receivers?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/bitcoin/receivers?{}", query_), None);
         let resp: crate::types::GetBitcoinReceiversResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -90,7 +91,9 @@ impl Bitcoin {
             query_args.push(("uncaptured_funds".to_string(), uncaptured_funds.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bitcoin/receivers?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/bitcoin/receivers?{}", query_), None);
         let mut resp: crate::types::GetBitcoinReceiversResponse =
             self.client.get(&url, None, None).await?;
 
@@ -141,11 +144,13 @@ impl Bitcoin {
      * * `id: &str` -- The account's country.
      */
     pub async fn get_receiver(&self, id: &str) -> Result<crate::types::BitcoinReceiver> {
-        let url = format!(
-            "/v1/bitcoin/receivers/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/bitcoin/receivers/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -186,12 +191,14 @@ impl Bitcoin {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(receiver),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/bitcoin/receivers/{}/transactions?{}",
+                crate::progenitor_support::encode_path(receiver),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Transactions = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -217,10 +224,13 @@ impl Bitcoin {
             query_args.push(("customer".to_string(), customer.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(receiver),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/bitcoin/receivers/{}/transactions?{}",
+                crate::progenitor_support::encode_path(receiver),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::Transactions = self.client.get(&url, None, None).await?;
 
@@ -299,8 +309,9 @@ impl Bitcoin {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bitcoin/transactions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/bitcoin/transactions?{}", query_), None);
         let resp: crate::types::Transactions = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -329,7 +340,9 @@ impl Bitcoin {
             query_args.push(("receiver".to_string(), receiver.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bitcoin/transactions?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/bitcoin/transactions?{}", query_), None);
         let mut resp: crate::types::Transactions = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;

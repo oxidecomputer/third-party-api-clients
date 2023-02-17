@@ -24,8 +24,7 @@ impl Reactions {
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/reactions.add".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/reactions.add", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -71,8 +70,7 @@ impl Reactions {
             query_args.push(("timestamp".to_string(), timestamp.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reactions.get?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/reactions.get?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -121,8 +119,9 @@ impl Reactions {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reactions.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/reactions.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -137,8 +136,7 @@ impl Reactions {
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/reactions.remove".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/reactions.remove", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

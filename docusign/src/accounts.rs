@@ -147,8 +147,7 @@ impl Accounts {
         &self,
         body: &crate::types::NewAccountDefinition,
     ) -> Result<crate::types::NewAccountSummary> {
-        let url = "/v2.1/accounts".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/accounts", None);
         self.client
             .post(
                 &url,
@@ -165,8 +164,7 @@ impl Accounts {
      * Retrieves the account provisioning information for the account.
      */
     pub async fn get_provisioning(&self) -> Result<crate::types::ProvisioningInformation> {
-        let url = "/v2.1/accounts/provisioning".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/accounts/provisioning", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -198,12 +196,14 @@ impl Accounts {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -218,11 +218,13 @@ impl Accounts {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -254,12 +256,14 @@ impl Accounts {
             query_args.push(("include_charges".to_string(), include_charges.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/billing_charges?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_charges?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -280,12 +284,14 @@ impl Accounts {
         recipient_part: &str,
         body: &crate::types::CaptiveRecipientInformation,
     ) -> Result<crate::types::CaptiveRecipientInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/captive_recipients/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(recipient_part),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/captive_recipients/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(recipient_part),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -316,12 +322,14 @@ impl Accounts {
             query_args.push(("email".to_string(), email.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/recipient_names?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/recipient_names?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -339,11 +347,13 @@ impl Accounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -362,11 +372,13 @@ impl Accounts {
         account_id: &str,
         body: &crate::types::AccountSettingsInformation,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -392,11 +404,13 @@ impl Accounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::EnvelopePurgeConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/envelope_purge_configuration",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/envelope_purge_configuration",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -419,11 +433,13 @@ impl Accounts {
         account_id: &str,
         body: &crate::types::EnvelopePurgeConfiguration,
     ) -> Result<crate::types::EnvelopePurgeConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/envelope_purge_configuration",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/envelope_purge_configuration",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -447,11 +463,13 @@ impl Accounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::NotificationDefaultsData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/notification_defaults",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/notification_defaults",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -470,11 +488,13 @@ impl Accounts {
         account_id: &str,
         body: &crate::types::NotificationDefaultsData,
     ) -> Result<crate::types::NotificationDefaultsData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/notification_defaults",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/notification_defaults",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -565,12 +585,14 @@ impl Accounts {
             query_args.push(("user_ids".to_string(), user_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/shared_access?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/shared_access?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -625,12 +647,14 @@ impl Accounts {
             query_args.push(("user_ids".to_string(), user_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/shared_access?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/shared_access?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -660,11 +684,13 @@ impl Accounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::SupportedLanguages> {
-        let url = format!(
-            "/v2.1/accounts/{}/supported_languages",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/supported_languages",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -682,11 +708,13 @@ impl Accounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::FileTypeList> {
-        let url = format!(
-            "/v2.1/accounts/{}/unsupported_file_types",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/unsupported_file_types",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -706,12 +734,14 @@ impl Accounts {
         organization_id: &str,
         result_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/organization_exports/{}/account_settings/{}",
-            crate::progenitor_support::encode_path(organization_id),
-            crate::progenitor_support::encode_path(result_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/organization_exports/{}/account_settings/{}",
+                crate::progenitor_support::encode_path(organization_id),
+                crate::progenitor_support::encode_path(result_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

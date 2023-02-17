@@ -58,12 +58,14 @@ impl BulkSend {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -89,12 +91,14 @@ impl BulkSend {
         account_id: &str,
         bulk_send_batch_id: &str,
     ) -> Result<crate::types::BulkSendBatchStatus> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_batch_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -115,12 +119,14 @@ impl BulkSend {
         bulk_send_batch_id: &str,
         body: &crate::types::BulkSendBatchRequest,
     ) -> Result<crate::types::BulkSendBatchStatus> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_batch_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -144,11 +150,13 @@ impl BulkSend {
         &self,
         account_id: &str,
     ) -> Result<crate::types::BulkSendingListSummaries> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -193,11 +201,13 @@ impl BulkSend {
         account_id: &str,
         body: &crate::types::BulkSendingList,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -223,12 +233,14 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -249,12 +261,14 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendingList,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -280,12 +294,14 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
     ) -> Result<crate::types::BulkSendingListSummaries> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -343,12 +359,14 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
     ) -> Result<crate::types::BulkSendResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}/send",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}/send",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -412,12 +430,14 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
     ) -> Result<crate::types::BulkSendTestResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}/test",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}/test",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

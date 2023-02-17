@@ -53,8 +53,7 @@ impl Transfers {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/transfers?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
         let resp: crate::types::TransferList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl Transfers {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/transfers?{}", query_);
+        let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
         let mut resp: crate::types::TransferList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -129,8 +128,7 @@ impl Transfers {
      * <p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Transfer> {
-        let url = "/v1/transfers".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/transfers", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -166,12 +164,14 @@ impl Transfers {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/transfers/{}/reversals?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}/reversals?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Reversals = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -188,9 +188,12 @@ impl Transfers {
      * <p>You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional reversals.</p>
      */
     pub async fn get_all_reversals(&self, id: &str) -> Result<Vec<crate::types::TransferReversal>> {
-        let url = format!(
-            "/v1/transfers/{}/reversals",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}/reversals",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
         let mut resp: crate::types::Reversals = self.client.get(&url, None, None).await?;
 
@@ -244,11 +247,13 @@ impl Transfers {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_reversal(&self, id: &str) -> Result<crate::types::TransferReversal> {
-        let url = format!(
-            "/v1/transfers/{}/reversals",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}/reversals",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -264,11 +269,13 @@ impl Transfers {
      * * `transfer: &str` -- The account's country.
      */
     pub async fn get(&self, transfer: &str) -> Result<crate::types::Transfer> {
-        let url = format!(
-            "/v1/transfers/{}",
-            crate::progenitor_support::encode_path(transfer),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}",
+                crate::progenitor_support::encode_path(transfer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -285,11 +292,13 @@ impl Transfers {
      * * `transfer: &str` -- The account's country.
      */
     pub async fn post_transfers(&self, transfer: &str) -> Result<crate::types::Transfer> {
-        let url = format!(
-            "/v1/transfers/{}",
-            crate::progenitor_support::encode_path(transfer),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}",
+                crate::progenitor_support::encode_path(transfer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -310,12 +319,14 @@ impl Transfers {
         id: &str,
         transfer: &str,
     ) -> Result<crate::types::TransferReversal> {
-        let url = format!(
-            "/v1/transfers/{}/reversals/{}",
-            crate::progenitor_support::encode_path(transfer),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}/reversals/{}",
+                crate::progenitor_support::encode_path(transfer),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -337,12 +348,14 @@ impl Transfers {
         id: &str,
         transfer: &str,
     ) -> Result<crate::types::TransferReversal> {
-        let url = format!(
-            "/v1/transfers/{}/reversals/{}",
-            crate::progenitor_support::encode_path(transfer),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/transfers/{}/reversals/{}",
+                crate::progenitor_support::encode_path(transfer),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

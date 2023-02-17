@@ -126,12 +126,14 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Events = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -211,10 +213,13 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::Events = self.client.get(&url, None, None).await?;
 
@@ -299,12 +304,14 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -345,12 +352,14 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/import?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/import?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -394,12 +403,14 @@ impl Events {
             query_args.push(("text".to_string(), text.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/quickAdd?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/quickAdd?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -517,12 +528,14 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/watch?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/watch?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -559,13 +572,15 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -623,13 +638,15 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -670,13 +687,15 @@ impl Events {
             query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -734,13 +753,15 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -807,13 +828,15 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/instances?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Events = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -857,11 +880,14 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/instances?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::Events = self.client.get(&url, None, None).await?;
 
@@ -931,13 +957,15 @@ impl Events {
             query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/move?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/move?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

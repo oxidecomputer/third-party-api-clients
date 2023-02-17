@@ -23,8 +23,7 @@ impl Sessions {
         &self,
         body: &crate::types::CreateSessionRequest,
     ) -> Result<crate::types::Session> {
-        let url = "/api/v1/sessions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/api/v1/sessions", None);
         self.client
             .post(
                 &url,
@@ -43,11 +42,13 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn get(&self, session_id: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -62,11 +63,13 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn end(&self, session_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -81,11 +84,13 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn refresh(&self, session_id: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/api/v1/sessions/{}/lifecycle/refresh",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}/lifecycle/refresh",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

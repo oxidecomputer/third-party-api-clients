@@ -22,8 +22,7 @@ impl Gitignore {
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
     pub async fn get_all_templates(&self) -> Result<Vec<String>> {
-        let url = "/gitignore/templates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/gitignore/templates", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -38,7 +37,7 @@ impl Gitignore {
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
     pub async fn get_all_all_templates(&self) -> Result<Vec<String>> {
-        let url = "/gitignore/templates".to_string();
+        let url = self.client.url("/gitignore/templates", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -56,11 +55,13 @@ impl Gitignore {
      * * `name: &str`
      */
     pub async fn get_template(&self, name: &str) -> Result<crate::types::GitignoreTemplate> {
-        let url = format!(
-            "/gitignore/templates/{}",
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/gitignore/templates/{}",
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

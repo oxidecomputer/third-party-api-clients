@@ -22,11 +22,13 @@ impl Asps {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn list(&self, user_key: &str) -> Result<crate::types::Asps> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/asps",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/asps",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -40,12 +42,14 @@ impl Asps {
      * * `code_id: i64` -- The unique ID of the ASP.
      */
     pub async fn get(&self, user_key: &str, code_id: i64) -> Result<crate::types::Asp> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/asps/{}",
-            crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(&code_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/asps/{}",
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&code_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,12 +63,14 @@ impl Asps {
      * * `code_id: i64` -- The unique ID of the ASP to be deleted.
      */
     pub async fn delete(&self, user_key: &str, code_id: i64) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/asps/{}",
-            crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(&code_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/asps/{}",
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(&code_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

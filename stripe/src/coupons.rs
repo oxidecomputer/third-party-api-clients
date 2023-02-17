@@ -43,8 +43,7 @@ impl Coupons {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/coupons?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/coupons?{}", query_), None);
         let resp: crate::types::GetCouponsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -61,7 +60,7 @@ impl Coupons {
      * <p>Returns a list of your coupons.</p>
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Coupon>> {
-        let url = "/v1/coupons".to_string();
+        let url = self.client.url("/v1/coupons", None);
         let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -108,8 +107,7 @@ impl Coupons {
      * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any invoice’s subtotal. For example, an invoice with a subtotal of <currency>100</currency> will have a final total of <currency>0</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it and an invoice with a subtotal of <currency>300</currency> will have a final total of <currency>100</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Coupon> {
-        let url = "/v1/coupons".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/coupons", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -125,11 +123,13 @@ impl Coupons {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, coupon: &str) -> Result<crate::types::Coupon> {
-        let url = format!(
-            "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+        let url = self.client.url(
+            &format!(
+                "/v1/coupons/{}",
+                crate::progenitor_support::encode_path(coupon),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -144,11 +144,13 @@ impl Coupons {
      * * `coupon: &str` -- The account's country.
      */
     pub async fn post_coupons(&self, coupon: &str) -> Result<crate::types::Coupon> {
-        let url = format!(
-            "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+        let url = self.client.url(
+            &format!(
+                "/v1/coupons/{}",
+                crate::progenitor_support::encode_path(coupon),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -163,11 +165,13 @@ impl Coupons {
      * * `coupon: &str` -- The account's country.
      */
     pub async fn delete(&self, coupon: &str) -> Result<crate::types::DeletedCoupon> {
-        let url = format!(
-            "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+        let url = self.client.url(
+            &format!(
+                "/v1/coupons/{}",
+                crate::progenitor_support::encode_path(coupon),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

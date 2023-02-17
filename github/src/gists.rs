@@ -44,8 +44,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/gists?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -68,7 +67,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists?{}", query_);
+        let url = self.client.url(&format!("/gists?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -86,8 +85,7 @@ impl Gists {
         &self,
         body: &crate::types::GistsCreateRequest,
     ) -> Result<crate::types::GistSimple> {
-        let url = "/gists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/gists", None);
         self.client
             .post(
                 &url,
@@ -130,8 +128,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists/public?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/gists/public?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -156,7 +153,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists/public?{}", query_);
+        let url = self.client.url(&format!("/gists/public?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -191,8 +188,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists/starred?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/gists/starred?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -215,7 +211,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gists/starred?{}", query_);
+        let url = self.client.url(&format!("/gists/starred?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -232,8 +228,10 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn get(&self, gist_id: &str) -> Result<crate::types::GistSimple> {
-        let url = format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -250,8 +248,10 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn delete(&self, gist_id: &str) -> Result<()> {
-        let url = format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -272,8 +272,10 @@ impl Gists {
         gist_id: &str,
         body: &crate::types::GistsUpdateRequest,
     ) -> Result<crate::types::GistSimple> {
-        let url = format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
+            None,
+        );
         self.client
             .patch(
                 &url,
@@ -311,12 +313,14 @@ impl Gists {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/gists/{}/comments?{}",
-            crate::progenitor_support::encode_path(gist_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments?{}",
+                crate::progenitor_support::encode_path(gist_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -331,9 +335,12 @@ impl Gists {
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
      */
     pub async fn list_all_comments(&self, gist_id: &str) -> Result<Vec<crate::types::GistComment>> {
-        let url = format!(
-            "/gists/{}/comments",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -355,11 +362,13 @@ impl Gists {
         gist_id: &str,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::GistComment> {
-        let url = format!(
-            "/gists/{}/comments",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -387,12 +396,14 @@ impl Gists {
         gist_id: &str,
         comment_id: i64,
     ) -> Result<crate::types::GistComment> {
-        let url = format!(
-            "/gists/{}/comments/{}",
-            crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments/{}",
+                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -410,12 +421,14 @@ impl Gists {
      * * `comment_id: i64` -- comment_id parameter.
      */
     pub async fn delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
-        let url = format!(
-            "/gists/{}/comments/{}",
-            crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments/{}",
+                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -438,12 +451,14 @@ impl Gists {
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::GistComment> {
-        let url = format!(
-            "/gists/{}/comments/{}",
-            crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/comments/{}",
+                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -481,12 +496,14 @@ impl Gists {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/gists/{}/commits?{}",
-            crate::progenitor_support::encode_path(gist_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/commits?{}",
+                crate::progenitor_support::encode_path(gist_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -501,9 +518,12 @@ impl Gists {
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
      */
     pub async fn list_all_commits(&self, gist_id: &str) -> Result<Vec<crate::types::GistCommit>> {
-        let url = format!(
-            "/gists/{}/commits",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/commits",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -536,12 +556,14 @@ impl Gists {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/gists/{}/forks?{}",
-            crate::progenitor_support::encode_path(gist_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/forks?{}",
+                crate::progenitor_support::encode_path(gist_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -556,9 +578,12 @@ impl Gists {
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
      */
     pub async fn list_all_forks(&self, gist_id: &str) -> Result<Vec<crate::types::GistSimple>> {
-        let url = format!(
-            "/gists/{}/forks",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/forks",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -576,11 +601,13 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn fork(&self, gist_id: &str) -> Result<crate::types::BaseGist> {
-        let url = format!(
-            "/gists/{}/forks",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/forks",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -597,11 +624,13 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn check_is_starred(&self, gist_id: &str) -> Result<()> {
-        let url = format!(
-            "/gists/{}/star",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/star",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -618,11 +647,13 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn star(&self, gist_id: &str) -> Result<()> {
-        let url = format!(
-            "/gists/{}/star",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/star",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -639,11 +670,13 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn unstar(&self, gist_id: &str) -> Result<()> {
-        let url = format!(
-            "/gists/{}/star",
-            crate::progenitor_support::encode_path(gist_id),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/star",
+                crate::progenitor_support::encode_path(gist_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -661,12 +694,14 @@ impl Gists {
      * * `sha: &str`
      */
     pub async fn get_revision(&self, gist_id: &str, sha: &str) -> Result<crate::types::GistSimple> {
-        let url = format!(
-            "/gists/{}/{}",
-            crate::progenitor_support::encode_path(gist_id),
-            crate::progenitor_support::encode_path(sha),
+        let url = self.client.url(
+            &format!(
+                "/gists/{}/{}",
+                crate::progenitor_support::encode_path(gist_id),
+                crate::progenitor_support::encode_path(sha),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -703,12 +738,14 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/gists?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/gists?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -732,10 +769,13 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/gists?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/gists?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }

@@ -43,8 +43,9 @@ impl Team {
             query_args.push(("page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/team.accessLogs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/team.accessLogs?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -65,8 +66,9 @@ impl Team {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/team.billableInfo?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/team.billableInfo?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -87,8 +89,7 @@ impl Team {
             query_args.push(("team".to_string(), team.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/team.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/team.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -137,8 +138,9 @@ impl Team {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/team.integrationLogs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/team.integrationLogs?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

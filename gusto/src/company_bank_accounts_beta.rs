@@ -25,11 +25,13 @@ impl CompanyBankAccountsBeta {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,9 +49,12 @@ impl CompanyBankAccountsBeta {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -67,11 +72,13 @@ impl CompanyBankAccountsBeta {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyBankAccountsRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -95,12 +102,14 @@ impl CompanyBankAccountsBeta {
         bank_account_uuid: &str,
         body: &crate::types::PutCompanyBankAccountsVerifyRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts/{}/verify",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(bank_account_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts/{}/verify",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(bank_account_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

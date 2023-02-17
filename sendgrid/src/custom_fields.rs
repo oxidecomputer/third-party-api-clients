@@ -22,8 +22,7 @@ impl CustomFields {
     pub async fn get_mc_field_definitions(
         &self,
     ) -> Result<crate::types::GetMcFieldDefinitionsResponse> {
-        let url = "/marketing/field_definitions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/field_definitions", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -43,8 +42,7 @@ impl CustomFields {
         &self,
         body: &crate::types::PostMcFieldDefinitionsRequest,
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
-        let url = "/marketing/field_definitions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .post(
                 &url,
@@ -63,11 +61,13 @@ impl CustomFields {
      * You cand delete only Custom Fields; Reserved Fields cannot be deleted.
      */
     pub async fn delete_mc_field_definitions_custom(&self, custom_field_id: &str) -> Result<()> {
-        let url = format!(
-            "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/field_definitions/{}",
+                crate::progenitor_support::encode_path(custom_field_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -84,11 +84,13 @@ impl CustomFields {
         custom_field_id: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
-        let url = format!(
-            "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/field_definitions/{}",
+                crate::progenitor_support::encode_path(custom_field_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

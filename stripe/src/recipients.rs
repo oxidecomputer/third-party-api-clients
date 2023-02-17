@@ -53,8 +53,7 @@ impl Recipients {
             query_args.push(("verified".to_string(), verified.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/recipients?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/recipients?{}", query_), None);
         let resp: crate::types::GetRecipientsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl Recipients {
             query_args.push(("verified".to_string(), verified.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/recipients?{}", query_);
+        let url = self.client.url(&format!("/v1/recipients?{}", query_), None);
         let mut resp: crate::types::GetRecipientsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -131,8 +130,7 @@ impl Recipients {
      * Also verifies the recipient’s bank account information or debit card, if either is provided.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Recipient> {
-        let url = "/v1/recipients".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/recipients", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -148,11 +146,13 @@ impl Recipients {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::GetRecipientsResponseAnyOf> {
-        let url = format!(
-            "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/recipients/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -171,11 +171,13 @@ impl Recipients {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_recipients(&self, id: &str) -> Result<crate::types::Recipient> {
-        let url = format!(
-            "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/recipients/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -190,11 +192,13 @@ impl Recipients {
      * * `id: &str` -- The account's country.
      */
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedRecipient> {
-        let url = format!(
-            "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/recipients/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

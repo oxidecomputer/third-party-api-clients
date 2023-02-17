@@ -22,8 +22,7 @@ impl CodesOfConduct {
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
     pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
-        let url = "/codes_of_conduct".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/codes_of_conduct", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -38,7 +37,7 @@ impl CodesOfConduct {
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
     pub async fn get_all_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
-        let url = "/codes_of_conduct".to_string();
+        let url = self.client.url("/codes_of_conduct", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -55,11 +54,13 @@ impl CodesOfConduct {
      * * `key: &str`
      */
     pub async fn get_conduct_code(&self, key: &str) -> Result<crate::types::CodeOfConduct> {
-        let url = format!(
-            "/codes_of_conduct/{}",
-            crate::progenitor_support::encode_path(key),
+        let url = self.client.url(
+            &format!(
+                "/codes_of_conduct/{}",
+                crate::progenitor_support::encode_path(key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -83,12 +84,14 @@ impl CodesOfConduct {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::CodeOfConduct> {
-        let url = format!(
-            "/repos/{}/{}/community/code_of_conduct",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/community/code_of_conduct",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

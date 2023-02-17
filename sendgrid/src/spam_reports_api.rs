@@ -48,8 +48,9 @@ impl SpamReportsApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/spam_reports?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/suppression/spam_reports?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -78,7 +79,9 @@ impl SpamReportsApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/spam_reports?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/suppression/spam_reports?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -103,8 +106,7 @@ impl SpamReportsApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/suppression/spam_reports".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/suppression/spam_reports", None);
         self.client
             .delete(
                 &url,
@@ -128,11 +130,13 @@ impl SpamReportsApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
-        let url = format!(
-            "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/spam_reports/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -148,9 +152,12 @@ impl SpamReportsApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
-        let url = format!(
-            "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/spam_reports/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -171,11 +178,13 @@ impl SpamReportsApi {
         &self,
         email: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/spam_reports/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

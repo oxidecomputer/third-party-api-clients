@@ -39,8 +39,9 @@ impl SingleSends {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/singlesends?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/singlesends?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -56,8 +57,7 @@ impl SingleSends {
         &self,
         body: &crate::types::SinglesendRequest,
     ) -> Result<crate::types::SinglesendResponseAllOf> {
-        let url = "/marketing/singlesends".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/singlesends", None);
         self.client
             .post(
                 &url,
@@ -87,8 +87,9 @@ impl SingleSends {
             query_args.push(("ids".to_string(), ids.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/singlesends?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/singlesends?{}", query_), None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -104,11 +105,13 @@ impl SingleSends {
         &self,
         id: &str,
     ) -> Result<crate::types::SinglesendResponseAllOf> {
-        let url = format!(
-            "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -127,11 +130,13 @@ impl SingleSends {
         id: &str,
         body: &crate::types::PostMarketingSinglesendsRequest,
     ) -> Result<crate::types::SinglesendResponseAllOf> {
-        let url = format!(
-            "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -152,11 +157,13 @@ impl SingleSends {
      * Please note that a `DELETE` request is permanent, and your Single Send will not be recoverable after deletion.
      */
     pub async fn delete_marketing_singlesends_single_sends(&self, id: &str) -> Result<()> {
-        let url = format!(
-            "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -173,11 +180,13 @@ impl SingleSends {
         id: &str,
         body: &crate::types::SinglesendRequest,
     ) -> Result<crate::types::SinglesendResponseAllOf> {
-        let url = format!(
-            "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -228,8 +237,9 @@ impl SingleSends {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/singlesends/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/singlesends/search?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -252,11 +262,13 @@ impl SingleSends {
         id: &str,
         body: &crate::types::PutMarketingSinglesendsScheduleRequest,
     ) -> Result<crate::types::PutMarketingSinglesendsScheduleResponse> {
-        let url = format!(
-            "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}/schedule",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -278,11 +290,13 @@ impl SingleSends {
         &self,
         id: &str,
     ) -> Result<crate::types::SinglesendSchedule> {
-        let url = format!(
-            "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/singlesends/{}/schedule",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -297,8 +311,7 @@ impl SingleSends {
     pub async fn get_marketing_singlesends_categories(
         &self,
     ) -> Result<crate::types::GetMarketingSinglesendsCategoriesResponse> {
-        let url = "/marketing/singlesends/categories".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/singlesends/categories", None);
         self.client.get(&url, None, None).await
     }
 }

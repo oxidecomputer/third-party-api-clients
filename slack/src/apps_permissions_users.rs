@@ -34,8 +34,9 @@ impl AppsPermissionsUsers {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/apps.permissions.users.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/apps.permissions.users.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -69,8 +70,9 @@ impl AppsPermissionsUsers {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/apps.permissions.users.request?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/apps.permissions.users.request?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

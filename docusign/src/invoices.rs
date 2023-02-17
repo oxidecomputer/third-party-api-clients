@@ -41,12 +41,14 @@ impl Invoices {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/billing_invoices?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_invoices?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -99,12 +101,14 @@ impl Invoices {
         account_id: &str,
         invoice_id: &str,
     ) -> Result<crate::types::BillingInvoice> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_invoices/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(invoice_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_invoices/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(invoice_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -124,11 +128,13 @@ impl Invoices {
         &self,
         account_id: &str,
     ) -> Result<crate::types::BillingInvoicesSummary> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_invoices_past_due",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_invoices_past_due",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

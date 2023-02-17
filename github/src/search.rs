@@ -71,8 +71,7 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/code?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/search/code?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -124,8 +123,9 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/commits?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/search/commits?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -181,8 +181,7 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/issues?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/search/issues?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -240,8 +239,7 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/labels?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/search/labels?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -298,8 +296,9 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/repositories?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/search/repositories?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -342,8 +341,7 @@ impl Search {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/topics?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/search/topics?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -396,8 +394,7 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/users?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/search/users?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

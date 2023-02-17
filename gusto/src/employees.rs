@@ -33,12 +33,14 @@ impl Employees {
             query_args.push(("include".to_string(), include.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/employees/{}?{}",
-            crate::progenitor_support::encode_path(employee_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}?{}",
+                crate::progenitor_support::encode_path(employee_id_or_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -53,11 +55,13 @@ impl Employees {
         employee_id_or_uuid: &str,
         body: &crate::types::PutEmployeesRequest,
     ) -> Result<crate::types::Employee> {
-        let url = format!(
-            "/v1/employees/{}",
-            crate::progenitor_support::encode_path(employee_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}",
+                crate::progenitor_support::encode_path(employee_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -102,12 +106,14 @@ impl Employees {
             query_args.push(("terminated".to_string(), terminated.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/employees?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/employees?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, Some("application/json")).await
     }
     /**
@@ -133,10 +139,13 @@ impl Employees {
             query_args.push(("terminated".to_string(), terminated.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/employees?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/employees?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -152,11 +161,13 @@ impl Employees {
         company_id_or_uuid: &str,
         body: &crate::types::PostEmployeesRequest,
     ) -> Result<crate::types::Employee> {
-        let url = format!(
-            "/v1/companies/{}/employees",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/employees",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -173,11 +184,13 @@ impl Employees {
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
     pub async fn get_home_address(&self, employee_id: &str) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/employees/{}/home_address",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/home_address",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -192,11 +205,13 @@ impl Employees {
         employee_id: &str,
         body: &crate::types::PutEmployeeHomeAddressRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/employees/{}/home_address",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/home_address",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

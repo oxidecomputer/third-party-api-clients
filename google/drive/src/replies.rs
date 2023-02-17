@@ -44,13 +44,15 @@ impl Replies {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ReplyList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -74,11 +76,14 @@ impl Replies {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::ReplyList = self.client.get(&url, None, None).await?;
 
@@ -127,12 +132,14 @@ impl Replies {
         comment_id: &str,
         body: &crate::types::Reply,
     ) -> Result<crate::types::Reply> {
-        let url = format!(
-            "/files/{}/comments/{}/replies",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -165,14 +172,16 @@ impl Replies {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -187,13 +196,15 @@ impl Replies {
      * * `reply_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -214,13 +225,15 @@ impl Replies {
         reply_id: &str,
         body: &crate::types::Reply,
     ) -> Result<crate::types::Reply> {
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

@@ -43,8 +43,9 @@ impl PhoneBlockedList {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/blocked_list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/phone/blocked_list?{}", query_), None);
         let resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -66,7 +67,7 @@ impl PhoneBlockedList {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
-        let url = "/phone/blocked_list".to_string();
+        let url = self.client.url("/phone/blocked_list", None);
         let mut resp: crate::types::ListBlockedResponse = self.client.get(&url, None, None).await?;
 
         let mut blocked_list = resp.blocked_list;
@@ -116,8 +117,7 @@ impl PhoneBlockedList {
         &self,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<crate::types::Groups> {
-        let url = "/phone/blocked_list".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/phone/blocked_list", None);
         self.client
             .post(
                 &url,
@@ -146,11 +146,13 @@ impl PhoneBlockedList {
         &self,
         blocked_list_id: &str,
     ) -> Result<crate::types::BlockedList> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -172,11 +174,13 @@ impl PhoneBlockedList {
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
     pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -201,11 +205,13 @@ impl PhoneBlockedList {
         blocked_list_id: &str,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

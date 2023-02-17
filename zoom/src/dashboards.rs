@@ -63,8 +63,9 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/meetings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/meetings?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -97,12 +98,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -151,12 +154,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -192,13 +197,15 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants/{}/qos?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            crate::progenitor_support::encode_path(participant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants/{}/qos?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(participant_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -241,12 +248,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants/qos?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants/qos?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -289,12 +298,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants/sharing?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants/sharing?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -344,8 +355,9 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/webinars?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/webinars?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -378,12 +390,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -431,12 +445,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -470,13 +486,15 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants/{}/qos?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            crate::progenitor_support::encode_path(participant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants/{}/qos?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(participant_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -519,12 +537,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants/qos?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants/qos?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -567,12 +587,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants/sharing?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants/sharing?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -613,8 +635,9 @@ impl Dashboards {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/zoomrooms?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/zoomrooms?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -661,12 +684,14 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/zoomrooms/{}?{}",
-            crate::progenitor_support::encode_path(zoomroom_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/zoomrooms/{}?{}",
+                crate::progenitor_support::encode_path(zoomroom_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -701,8 +726,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/crc?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/metrics/crc?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -748,8 +772,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/im?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/metrics/im?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -797,8 +820,7 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/chat?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/metrics/chat?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -834,8 +856,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/client/feedback?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/client/feedback?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -870,8 +893,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/zoomrooms/issues?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/zoomrooms/issues?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -904,8 +928,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/issues/zoomrooms?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/issues/zoomrooms?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -951,12 +976,14 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/issues/zoomrooms/{}?{}",
-            crate::progenitor_support::encode_path(zoomroom_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/issues/zoomrooms/{}?{}",
+                crate::progenitor_support::encode_path(zoomroom_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1005,12 +1032,14 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/client/feedback/{}?{}",
-            crate::progenitor_support::encode_path(feedback_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/client/feedback/{}?{}",
+                crate::progenitor_support::encode_path(feedback_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1042,8 +1071,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/metrics/client/satisfaction?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/metrics/client/satisfaction?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1107,8 +1137,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/metrics/call_logs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/phone/metrics/call_logs?{}", query_), None);
         let resp: crate::types::ListCallLogsMetricsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -1154,7 +1185,9 @@ impl Dashboards {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/metrics/call_logs?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/phone/metrics/call_logs?{}", query_), None);
         let mut resp: crate::types::ListCallLogsMetricsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -1213,11 +1246,13 @@ impl Dashboards {
         &self,
         call_id: &str,
     ) -> Result<crate::types::ListCallLogsMetricsResponse> {
-        let url = format!(
-            "/phone/metrics/call_logs/{}",
-            crate::progenitor_support::encode_path(call_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/metrics/call_logs/{}",
+                crate::progenitor_support::encode_path(call_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1238,11 +1273,13 @@ impl Dashboards {
      * * `call_id: &str` -- Unique identifier of the call.
      */
     pub async fn get_call_qo(&self, call_id: &str) -> Result<crate::types::GetCallQoSResponse> {
-        let url = format!(
-            "/phone/metrics/call_logs/{}/qos",
-            crate::progenitor_support::encode_path(call_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/metrics/call_logs/{}/qos",
+                crate::progenitor_support::encode_path(call_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1289,12 +1326,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants/satisfaction?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ParticipantFeedbackResponse =
             self.client.get(&url, None, None).await?;
 
@@ -1328,10 +1367,13 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/meetings/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/meetings/{}/participants/satisfaction?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::ParticipantFeedbackResponse =
             self.client.get(&url, None, None).await?;
@@ -1411,12 +1453,14 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants/satisfaction?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ParticipantFeedbackResponse =
             self.client.get(&url, None, None).await?;
 
@@ -1451,10 +1495,13 @@ impl Dashboards {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/metrics/webinars/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/metrics/webinars/{}/participants/satisfaction?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::ParticipantFeedbackResponse =
             self.client.get(&url, None, None).await?;

@@ -38,8 +38,9 @@ impl UsergroupsUsers {
             query_args.push(("usergroup".to_string(), usergroup.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/usergroups.users.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/usergroups.users.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -54,8 +55,7 @@ impl UsergroupsUsers {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.users.update".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/usergroups.users.update", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

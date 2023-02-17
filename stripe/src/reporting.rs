@@ -43,8 +43,9 @@ impl Reporting {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/reporting/report_runs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/reporting/report_runs?{}", query_), None);
         let resp: crate::types::GetReportingReportRunsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -64,7 +65,7 @@ impl Reporting {
         &self,
         _created: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
-        let url = "/v1/reporting/report_runs".to_string();
+        let url = self.client.url("/v1/reporting/report_runs", None);
         let mut resp: crate::types::GetReportingReportRunsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -110,8 +111,7 @@ impl Reporting {
      * <p>Creates a new object and begin running the report. (Certain report types require a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
      */
     pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
-        let url = "/v1/reporting/report_runs".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/reporting/report_runs", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -130,11 +130,13 @@ impl Reporting {
         &self,
         report_run: &str,
     ) -> Result<crate::types::ReportingReportRun> {
-        let url = format!(
-            "/v1/reporting/report_runs/{}",
-            crate::progenitor_support::encode_path(report_run),
+        let url = self.client.url(
+            &format!(
+                "/v1/reporting/report_runs/{}",
+                crate::progenitor_support::encode_path(report_run),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -149,8 +151,7 @@ impl Reporting {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
-        let url = "/v1/reporting/report_types".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/reporting/report_types", None);
         let resp: crate::types::FinancialReportingFinanceReportTypeList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -167,7 +168,7 @@ impl Reporting {
      * <p>Returns a full list of Report Types.</p>
      */
     pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
-        let url = "/v1/reporting/report_types".to_string();
+        let url = self.client.url("/v1/reporting/report_types", None);
         let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
             self.client.get(&url, None, None).await?;
 
@@ -221,11 +222,13 @@ impl Reporting {
         &self,
         report_type: &str,
     ) -> Result<crate::types::ReportingReportType> {
-        let url = format!(
-            "/v1/reporting/report_types/{}",
-            crate::progenitor_support::encode_path(report_type),
+        let url = self.client.url(
+            &format!(
+                "/v1/reporting/report_types/{}",
+                crate::progenitor_support::encode_path(report_type),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

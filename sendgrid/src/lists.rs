@@ -37,8 +37,9 @@ impl Lists {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/lists?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/lists?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -53,8 +54,7 @@ impl Lists {
      * A link to the newly created object is in `_metadata`.
      */
     pub async fn post_mc(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
-        let url = "/marketing/lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/lists", None);
         self.client
             .post(
                 &url,
@@ -74,11 +74,13 @@ impl Lists {
         &self,
         id: &str,
     ) -> Result<crate::types::GetMcListsContactsCountResponse> {
-        let url = format!(
-            "/marketing/lists/{}/contacts/count",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}/contacts/count",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -106,12 +108,14 @@ impl Lists {
             query_args.push(("contact_sample".to_string(), contact_sample.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -137,12 +141,14 @@ impl Lists {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -157,11 +163,13 @@ impl Lists {
         id: &str,
         body: &crate::types::PatchMcListsRequest,
     ) -> Result<crate::types::List> {
-        let url = format!(
-            "/marketing/lists/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -193,12 +201,14 @@ impl Lists {
             query_args.push(("contact_ids".to_string(), contact_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}/contacts?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}/contacts?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

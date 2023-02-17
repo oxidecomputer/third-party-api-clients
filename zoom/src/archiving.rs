@@ -59,8 +59,7 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/archive_files?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/archive_files?{}", query_), None);
         let resp: crate::types::ListArchivedFilesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -100,7 +99,7 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/archive_files?{}", query_);
+        let url = self.client.url(&format!("/archive_files?{}", query_), None);
         let mut resp: crate::types::ListArchivedFilesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -157,11 +156,13 @@ impl Archiving {
         &self,
         meeting_uuid: &str,
     ) -> Result<crate::types::CloudArchivedFiles> {
-        let url = format!(
-            "/past_meetings/{}/archive_files",
-            crate::progenitor_support::encode_path(meeting_uuid),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/archive_files",
+                crate::progenitor_support::encode_path(meeting_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

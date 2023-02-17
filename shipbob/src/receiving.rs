@@ -20,8 +20,7 @@ impl Receiving {
     pub async fn get_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
-        let url = "/fulfillmentCenter".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/fulfillmentCenter", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -34,7 +33,7 @@ impl Receiving {
     pub async fn get_all_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
-        let url = "/fulfillmentCenter".to_string();
+        let url = self.client.url("/fulfillmentCenter", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -47,11 +46,13 @@ impl Receiving {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrder> {
-        let url = format!(
-            "/receiving/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/receiving/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -64,11 +65,13 @@ impl Receiving {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn get_label(&self, id: i64) -> Result<bytes::Bytes> {
-        let url = format!(
-            "/receiving/{}/labels",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/receiving/{}/labels",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -80,8 +83,7 @@ impl Receiving {
         &self,
         body: &crate::types::ReceivingCreateOrderModel,
     ) -> Result<crate::types::ReceivingOrder> {
-        let url = "/receiving".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/receiving", None);
         self.client
             .post(
                 &url,
@@ -100,11 +102,13 @@ impl Receiving {
      * * `id: i64` -- Id of the receiving order to cancel.
      */
     pub async fn post_cancel(&self, id: i64) -> Result<()> {
-        let url = format!(
-            "/receiving/{}/cancel",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/receiving/{}/cancel",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

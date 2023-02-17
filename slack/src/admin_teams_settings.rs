@@ -30,8 +30,9 @@ impl AdminTeamsSettings {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.teams.settings.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin.teams.settings.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -42,8 +43,9 @@ impl AdminTeamsSettings {
      * FROM: <https://api.slack.com/methods/admin.teams.settings.setDefaultChannels>
      */
     pub async fn set_default_channels(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.settings.setDefaultChannels".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin.teams.settings.setDefaultChannels", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -60,8 +62,9 @@ impl AdminTeamsSettings {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn set_description(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.settings.setDescription".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin.teams.settings.setDescription", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -78,8 +81,9 @@ impl AdminTeamsSettings {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn set_discoverability(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.settings.setDiscoverability".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin.teams.settings.setDiscoverability", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -92,8 +96,7 @@ impl AdminTeamsSettings {
      * FROM: <https://api.slack.com/methods/admin.teams.settings.setIcon>
      */
     pub async fn set_icon(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.settings.setIcon".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.teams.settings.setIcon", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -110,8 +113,7 @@ impl AdminTeamsSettings {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn set_name(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.settings.setName".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.teams.settings.setName", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

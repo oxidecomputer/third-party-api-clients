@@ -63,8 +63,9 @@ impl PromotionCodes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/promotion_codes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/promotion_codes?{}", query_), None);
         let resp: crate::types::GetPromotionCodesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -102,7 +103,9 @@ impl PromotionCodes {
             query_args.push(("customer".to_string(), customer.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/promotion_codes?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/promotion_codes?{}", query_), None);
         let mut resp: crate::types::GetPromotionCodesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -148,8 +151,7 @@ impl PromotionCodes {
      * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PromotionCode> {
-        let url = "/v1/promotion_codes".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/promotion_codes", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -165,11 +167,13 @@ impl PromotionCodes {
      * * `promotion_code: &str` -- The account's country.
      */
     pub async fn get_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
-        let url = format!(
-            "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(promotion_code),
+        let url = self.client.url(
+            &format!(
+                "/v1/promotion_codes/{}",
+                crate::progenitor_support::encode_path(promotion_code),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -184,11 +188,13 @@ impl PromotionCodes {
      * * `promotion_code: &str` -- The account's country.
      */
     pub async fn post_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
-        let url = format!(
-            "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(promotion_code),
+        let url = self.client.url(
+            &format!(
+                "/v1/promotion_codes/{}",
+                crate::progenitor_support::encode_path(promotion_code),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

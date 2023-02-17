@@ -25,11 +25,13 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::JobApplicant>> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,9 +49,12 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::JobApplicant>> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -67,11 +72,13 @@ impl JobApplicantsBeta {
         company_id: &str,
         body: &crate::types::PostCompanyJobApplicantsRequest,
     ) -> Result<crate::types::JobApplicant> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -94,12 +101,14 @@ impl JobApplicantsBeta {
         company_id: &str,
         job_applicant_uuid: &str,
     ) -> Result<crate::types::JobApplicant> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(job_applicant_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -117,12 +126,14 @@ impl JobApplicantsBeta {
         job_applicant_uuid: &str,
         body: &crate::types::PutCompanyJobApplicantRequest,
     ) -> Result<crate::types::JobApplicant> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(job_applicant_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -145,12 +156,14 @@ impl JobApplicantsBeta {
         company_id: &str,
         job_applicant_uuid: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(job_applicant_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/job_applicants/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(job_applicant_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

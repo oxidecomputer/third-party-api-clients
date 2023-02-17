@@ -42,13 +42,15 @@ impl TemplateDocumentResponsiveHtmlPreview {
         template_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
     ) -> Result<crate::types::DocumentHtmlDefinitions> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/responsive_html_preview",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/responsive_html_preview",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

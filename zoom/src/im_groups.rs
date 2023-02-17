@@ -23,8 +23,7 @@ impl ImGroups {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get(&self) -> Result<crate::types::Domains> {
-        let url = "/im/groups".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/im/groups", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -38,8 +37,7 @@ impl ImGroups {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn create(&self, body: &crate::types::ImGroupCreateRequest) -> Result<()> {
-        let url = "/im/groups".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/im/groups", None);
         self.client
             .post(
                 &url,
@@ -64,11 +62,13 @@ impl ImGroups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn im_group(&self, group_id: &str) -> Result<crate::types::ImGroupResponseAllOf> {
-        let url = format!(
-            "/im/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -87,11 +87,13 @@ impl ImGroups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn delete(&self, group_id: &str) -> Result<()> {
-        let url = format!(
-            "/im/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -114,11 +116,13 @@ impl ImGroups {
         group_id: &str,
         body: &crate::types::ImGroupCreateRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/im/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -166,12 +170,14 @@ impl ImGroups {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/im/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}/members?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -194,11 +200,13 @@ impl ImGroups {
         group_id: &str,
         body: &crate::types::AddRoleMembersRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/im/groups/{}/members",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}/members",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -224,12 +232,14 @@ impl ImGroups {
      * * `member_id: &str` -- User's first name.
      */
     pub async fn members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
-        let url = format!(
-            "/im/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(member_id),
+        let url = self.client.url(
+            &format!(
+                "/im/groups/{}/members/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(member_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

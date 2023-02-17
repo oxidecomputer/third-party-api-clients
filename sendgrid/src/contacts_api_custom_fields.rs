@@ -26,8 +26,7 @@ impl ContactsApiCustomFields {
     pub async fn get_contactdb_custom_fields(
         &self,
     ) -> Result<crate::types::ListAllCustomFieldsResponse> {
-        let url = "/contactdb/custom_fields".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/custom_fields", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,8 +46,7 @@ impl ContactsApiCustomFields {
         &self,
         body: &crate::types::PostContactdbCustomFieldsRequest,
     ) -> Result<crate::types::ContactdbCustomFieldWithAllOf> {
-        let url = "/contactdb/custom_fields".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/custom_fields", None);
         self.client
             .post(
                 &url,
@@ -72,11 +70,13 @@ impl ContactsApiCustomFields {
         &self,
         custom_field_id: i64,
     ) -> Result<crate::types::ContactdbCustomFieldWithAllOf> {
-        let url = format!(
-            "/contactdb/custom_fields/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/custom_fields/{}",
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -94,11 +94,13 @@ impl ContactsApiCustomFields {
         &self,
         custom_field_id: i64,
     ) -> Result<crate::types::GlobalErrorResponseSchema> {
-        let url = format!(
-            "/contactdb/custom_fields/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/custom_fields/{}",
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -115,8 +117,7 @@ impl ContactsApiCustomFields {
     pub async fn get_contactdb_reserved_fields(
         &self,
     ) -> Result<crate::types::GetContactdbReservedFieldsResponse> {
-        let url = "/contactdb/reserved_fields".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/reserved_fields", None);
         self.client.get(&url, None, None).await
     }
 }

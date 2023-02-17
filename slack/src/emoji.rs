@@ -24,8 +24,7 @@ impl Emoji {
      * * `token: &str` -- Authentication token. Requires scope: `emoji:read`.
      */
     pub async fn list(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/emoji.list".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/emoji.list", None);
         self.client.get(&url, None, None).await
     }
 }

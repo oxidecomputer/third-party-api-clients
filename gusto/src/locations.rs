@@ -25,11 +25,13 @@ impl Locations {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,9 +49,12 @@ impl Locations {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -67,11 +72,13 @@ impl Locations {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyLocationsRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -88,11 +95,13 @@ impl Locations {
      * Get a location.
      */
     pub async fn get(&self, location_id: &str) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -107,11 +116,13 @@ impl Locations {
         location_id: &str,
         body: &crate::types::PutLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

@@ -82,14 +82,16 @@ impl CloudStorage {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(service_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(service_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -174,15 +176,17 @@ impl CloudStorage {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(service_id),
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(service_id),
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

@@ -51,8 +51,9 @@ impl Checkout {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/checkout/sessions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/checkout/sessions?{}", query_), None);
         let resp: crate::types::PaymentPagesCheckoutSessionList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -81,7 +82,9 @@ impl Checkout {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/checkout/sessions?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/checkout/sessions?{}", query_), None);
         let mut resp: crate::types::PaymentPagesCheckoutSessionList =
             self.client.get(&url, None, None).await?;
 
@@ -127,8 +130,7 @@ impl Checkout {
      * <p>Creates a Session object.</p>
      */
     pub async fn post_session(&self) -> Result<crate::types::Session> {
-        let url = "/v1/checkout/sessions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/checkout/sessions", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -144,11 +146,13 @@ impl Checkout {
      * * `session: &str` -- The account's country.
      */
     pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/v1/checkout/sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -168,11 +172,13 @@ impl Checkout {
         &self,
         session: &str,
     ) -> Result<crate::types::Session> {
-        let url = format!(
-            "/v1/checkout/sessions/{}/expire",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/expire",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -208,12 +214,14 @@ impl Checkout {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/checkout/sessions/{}/line_items?{}",
-            crate::progenitor_support::encode_path(session),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/line_items?{}",
+                crate::progenitor_support::encode_path(session),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -233,9 +241,12 @@ impl Checkout {
         &self,
         session: &str,
     ) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/checkout/sessions/{}/line_items",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/line_items",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
         let mut resp: crate::types::LineItems = self.client.get(&url, None, None).await?;
 

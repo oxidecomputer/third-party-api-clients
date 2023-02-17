@@ -47,8 +47,9 @@ impl ConnectedSites {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/connected-sites?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/connected-sites?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,8 +60,7 @@ impl ConnectedSites {
      * Create a new Mailchimp connected site.
      */
     pub async fn post(&self, body: &crate::types::ConnectedSite) -> Result<crate::types::Sites> {
-        let url = "/connected-sites".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/connected-sites", None);
         self.client
             .post(
                 &url,
@@ -96,12 +96,14 @@ impl ConnectedSites {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/connected-sites/{}?{}",
-            crate::progenitor_support::encode_path(connected_site_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}?{}",
+                crate::progenitor_support::encode_path(connected_site_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -116,11 +118,13 @@ impl ConnectedSites {
      * * `connected_site_id: &str` -- The unique identifier for the site.
      */
     pub async fn delete(&self, connected_site_id: &str) -> Result<()> {
-        let url = format!(
-            "/connected-sites/{}",
-            crate::progenitor_support::encode_path(connected_site_id),
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}",
+                crate::progenitor_support::encode_path(connected_site_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -138,11 +142,13 @@ impl ConnectedSites {
         &self,
         connected_site_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/connected-sites/{}/actions/verify-script-installation",
-            crate::progenitor_support::encode_path(connected_site_id),
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}/actions/verify-script-installation",
+                crate::progenitor_support::encode_path(connected_site_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

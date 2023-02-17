@@ -21,11 +21,13 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -38,11 +40,13 @@ impl SubuserMonitorSettings {
         subuser_name: &str,
         body: &crate::types::Monitor,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -61,11 +65,13 @@ impl SubuserMonitorSettings {
         subuser_name: &str,
         body: &crate::types::Monitor,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -83,11 +89,13 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

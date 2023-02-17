@@ -39,12 +39,14 @@ impl BccEmailArchive {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -68,11 +70,13 @@ impl BccEmailArchive {
         account_id: &str,
         body: &crate::types::BccEmailArchiveData,
     ) -> Result<crate::types::BccEmailArchiveData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -110,13 +114,15 @@ impl BccEmailArchive {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bcc_email_archive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bcc_email_archive_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -135,12 +141,14 @@ impl BccEmailArchive {
      * * `bcc_email_archive_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str, bcc_email_archive_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bcc_email_archive_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bcc_email_archive_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

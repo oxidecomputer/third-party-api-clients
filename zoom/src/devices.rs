@@ -48,8 +48,7 @@ impl Devices {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/h323/devices?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/h323/devices?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -63,8 +62,7 @@ impl Devices {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
      */
     pub async fn create(&self, body: &crate::types::Device) -> Result<()> {
-        let url = "/h323/devices".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/h323/devices", None);
         self.client
             .post(
                 &url,
@@ -88,11 +86,13 @@ impl Devices {
      * * `device_id: &str` -- User's first name.
      */
     pub async fn delete(&self, device_id: &str) -> Result<()> {
-        let url = format!(
-            "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/h323/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -110,11 +110,13 @@ impl Devices {
      * * `device_id: &str` -- User's first name.
      */
     pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
-        let url = format!(
-            "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/h323/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

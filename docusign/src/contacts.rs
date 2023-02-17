@@ -28,11 +28,13 @@ impl Contacts {
         account_id: &str,
         body: &crate::types::ContactModRequest,
     ) -> Result<crate::types::ContactUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/contacts",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/contacts",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -59,11 +61,13 @@ impl Contacts {
         account_id: &str,
         body: &crate::types::ContactModRequest,
     ) -> Result<crate::types::ContactUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/contacts",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/contacts",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -88,11 +92,13 @@ impl Contacts {
         account_id: &str,
         body: &crate::types::ContactModRequest,
     ) -> Result<crate::types::ContactUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/contacts",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/contacts",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -139,13 +145,15 @@ impl Contacts {
             query_args.push(("cloud_provider".to_string(), cloud_provider.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/contacts/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(contact_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/contacts/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(contact_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -165,12 +173,14 @@ impl Contacts {
         account_id: &str,
         contact_id: &str,
     ) -> Result<crate::types::ContactUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/contacts/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(contact_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/contacts/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(contact_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

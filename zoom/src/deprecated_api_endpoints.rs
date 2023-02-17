@@ -35,11 +35,13 @@ impl DeprecatedApiEndpoints {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ListPastMeetingFilesResponse> {
-        let url = format!(
-            "/past_meetings/{}/files",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/files",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -65,11 +67,13 @@ impl DeprecatedApiEndpoints {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ListPastMeetingFilesResponse> {
-        let url = format!(
-            "/past_webinars/{}/files",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/files",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

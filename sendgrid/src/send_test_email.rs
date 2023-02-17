@@ -31,8 +31,7 @@ impl SendTestEmail {
         &self,
         body: &crate::types::PostMarketingTestSendEmailRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/marketing/test/send_email".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/test/send_email", None);
         self.client
             .post(
                 &url,

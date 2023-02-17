@@ -49,8 +49,9 @@ impl SegmentingContactsBeta {
             query_args.push(("parent_list_ids".to_string(), parent_list_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/segments/2.0?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/marketing/segments/2.0?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -66,8 +67,7 @@ impl SegmentingContactsBeta {
         &self,
         body: &crate::types::SegmentWriteV2,
     ) -> Result<crate::types::SegmentResponse> {
-        let url = "/marketing/segments/2.0".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/segments/2.0", None);
         self.client
             .post(
                 &url,
@@ -97,12 +97,14 @@ impl SegmentingContactsBeta {
             query_args.push(("contacts_sample".to_string(), contacts_sample.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/segments/2.0/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}?{}",
+                crate::progenitor_support::encode_path(segment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -113,11 +115,13 @@ impl SegmentingContactsBeta {
      * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
      */
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
-        let url = format!(
-            "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -134,11 +138,13 @@ impl SegmentingContactsBeta {
         segment_id: &str,
         body: &crate::types::SegmentUpdate,
     ) -> Result<crate::types::SegmentResponse> {
-        let url = format!(
-            "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

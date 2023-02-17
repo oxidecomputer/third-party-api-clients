@@ -29,11 +29,13 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ConnectConfigResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -54,11 +56,13 @@ impl ConnectConfigurations {
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
     ) -> Result<crate::types::ConnectCustomConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -86,11 +90,13 @@ impl ConnectConfigurations {
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
     ) -> Result<crate::types::ConnectCustomConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -119,12 +125,14 @@ impl ConnectConfigurations {
         account_id: &str,
         connect_id: &str,
     ) -> Result<crate::types::ConnectConfigResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -145,12 +153,14 @@ impl ConnectConfigurations {
      * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_delete_config(&self, account_id: &str, connect_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -219,13 +229,15 @@ impl ConnectConfigurations {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}/users?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

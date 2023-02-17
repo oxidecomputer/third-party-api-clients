@@ -41,8 +41,7 @@ impl TaxCodes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/tax_codes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/tax_codes?{}", query_), None);
         let resp: crate::types::TaxProductResourceCodeList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -59,7 +58,7 @@ impl TaxCodes {
      * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
-        let url = "/v1/tax_codes".to_string();
+        let url = self.client.url("/v1/tax_codes", None);
         let mut resp: crate::types::TaxProductResourceCodeList =
             self.client.get(&url, None, None).await?;
 
@@ -110,11 +109,13 @@ impl TaxCodes {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
-        let url = format!(
-            "/v1/tax_codes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/tax_codes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

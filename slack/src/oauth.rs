@@ -52,8 +52,7 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/oauth.access?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/oauth.access?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -96,8 +95,7 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/oauth.token?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/oauth.token?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

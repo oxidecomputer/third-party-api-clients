@@ -50,12 +50,14 @@ impl Comments {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::CommentList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -85,10 +87,13 @@ impl Comments {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::CommentList = self.client.get(&url, None, None).await?;
 
@@ -135,11 +140,13 @@ impl Comments {
         file_id: &str,
         body: &crate::types::Comment,
     ) -> Result<crate::types::Comment> {
-        let url = format!(
-            "/files/{}/comments",
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments",
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -170,13 +177,15 @@ impl Comments {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -190,12 +199,14 @@ impl Comments {
      * * `comment_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, file_id: &str, comment_id: &str) -> Result<()> {
-        let url = format!(
-            "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -214,12 +225,14 @@ impl Comments {
         comment_id: &str,
         body: &crate::types::Comment,
     ) -> Result<crate::types::Comment> {
-        let url = format!(
-            "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

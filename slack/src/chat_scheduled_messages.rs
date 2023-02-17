@@ -53,8 +53,9 @@ impl ChatScheduledMessages {
             query_args.push(("oldest".to_string(), oldest.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/chat.scheduledMessages.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/chat.scheduledMessages.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

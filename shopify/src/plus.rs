@@ -51,8 +51,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -66,8 +68,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-01/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -91,11 +92,13 @@ impl Plus {
         &self,
         gift_card_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -115,11 +118,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -148,8 +153,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -168,11 +175,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -229,8 +238,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -272,8 +283,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -287,8 +300,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-04/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -312,11 +324,13 @@ impl Plus {
         &self,
         gift_card_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -336,11 +350,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -369,8 +385,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -389,11 +407,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -450,8 +470,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -493,8 +515,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -508,8 +532,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-07/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-07/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -533,11 +556,13 @@ impl Plus {
         &self,
         gift_card_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -557,11 +582,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -590,8 +617,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -610,11 +639,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -671,8 +702,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -714,8 +747,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -726,8 +761,7 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/giftcard#create-2020-10
      */
     pub async fn create_gift_cards(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-10/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -748,11 +782,13 @@ impl Plus {
      * * `gift_card_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_gift_cards_param_card(&self, gift_card_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -772,11 +808,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -805,8 +843,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -825,11 +865,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -886,8 +928,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -929,8 +973,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -944,8 +990,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2021-01/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2021-01/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -969,11 +1014,13 @@ impl Plus {
         &self,
         gift_card_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -993,11 +1040,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1026,8 +1075,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1046,11 +1097,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1107,8 +1160,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1150,8 +1205,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/gift_cards.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/gift_cards.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1165,8 +1222,7 @@ impl Plus {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/gift_cards.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/unstable/gift_cards.json", None);
         self.client
             .post(
                 &url,
@@ -1190,11 +1246,13 @@ impl Plus {
         &self,
         gift_card_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1214,11 +1272,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/gift_cards/{}/json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/gift_cards/{}/json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1247,8 +1307,10 @@ impl Plus {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/gift_cards/count.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/gift_cards/count.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1267,11 +1329,13 @@ impl Plus {
         gift_card_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/gift_cards/{}/disable.json",
-            crate::progenitor_support::encode_path(gift_card_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/gift_cards/{}/disable.json",
+                crate::progenitor_support::encode_path(gift_card_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1328,8 +1392,10 @@ impl Plus {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/gift_cards/search.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/gift_cards/search.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1354,8 +1420,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1370,11 +1437,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202001_get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1385,8 +1454,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-01
      */
     pub async fn deprecated_202001_get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/users/current.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1411,8 +1481,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1427,11 +1498,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202004_get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1442,8 +1515,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-04
      */
     pub async fn deprecated_202004_get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/users/current.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1468,8 +1542,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1484,11 +1559,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202007_get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1499,8 +1576,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-07
      */
     pub async fn deprecated_202007_get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/users/current.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1525,8 +1603,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1541,11 +1620,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1556,8 +1637,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-10
      */
     pub async fn get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/users/current.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1582,8 +1664,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1598,11 +1681,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202101_get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1613,8 +1698,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2021-01
      */
     pub async fn deprecated_202101_get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/users/current.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1639,8 +1725,9 @@ impl Plus {
             query_args.push(("page_info".to_string(), page_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/users.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/users.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1655,11 +1742,13 @@ impl Plus {
      * * `user_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_unstable_get_users_param_user(&self, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/users/{}/json",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/users/{}/json",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1670,8 +1759,9 @@ impl Plus {
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-unstable
      */
     pub async fn deprecated_unstable_get_users_current(&self) -> Result<()> {
-        let url = "/admin/api/unstable/users/current.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/users/current.json", None);
         self.client.get(&url, None, None).await
     }
 }

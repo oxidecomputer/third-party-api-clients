@@ -45,12 +45,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/team-sync/groups?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/team-sync/groups?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -82,12 +84,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -102,9 +106,12 @@ impl Teams {
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams>
      */
     pub async fn list_all(&self, org: &str) -> Result<Vec<crate::types::Team>> {
-        let url = format!(
-            "/orgs/{}/teams",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -128,11 +135,13 @@ impl Teams {
         org: &str,
         body: &crate::types::TeamsCreateRequest,
     ) -> Result<crate::types::FullTeam> {
-        let url = format!(
-            "/orgs/{}/teams",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -158,12 +167,14 @@ impl Teams {
      * * `team_slug: &str` -- team_slug parameter.
      */
     pub async fn get_by_name(&self, org: &str, team_slug: &str) -> Result<crate::types::FullTeam> {
-        let url = format!(
-            "/orgs/{}/teams/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -185,12 +196,14 @@ impl Teams {
      * * `team_slug: &str` -- team_slug parameter.
      */
     pub async fn delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -215,12 +228,14 @@ impl Teams {
         team_slug: &str,
         body: &crate::types::TeamsUpdateInOrgRequest,
     ) -> Result<crate::types::FullTeam> {
-        let url = format!(
-            "/orgs/{}/teams/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -274,13 +289,15 @@ impl Teams {
             query_args.push(("pinned".to_string(), pinned.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -311,11 +328,14 @@ impl Teams {
             query_args.push(("pinned".to_string(), pinned.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -343,12 +363,14 @@ impl Teams {
         team_slug: &str,
         body: &crate::types::TeamsCreateDiscussionInOrgRequest,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -380,13 +402,15 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -412,13 +436,15 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -445,13 +471,15 @@ impl Teams {
         discussion_number: i64,
         body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -502,14 +530,16 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -537,12 +567,15 @@ impl Teams {
             query_args.push(("direction".to_string(), direction.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -572,13 +605,15 @@ impl Teams {
         discussion_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -612,14 +647,16 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -647,14 +684,16 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -683,14 +722,16 @@ impl Teams {
         comment_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -732,13 +773,15 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/invitations?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/invitations?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -759,10 +802,13 @@ impl Teams {
         org: &str,
         team_slug: &str,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
-        let url = format!(
-            "/orgs/{}/teams/{}/invitations",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/invitations",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -807,13 +853,15 @@ impl Teams {
             query_args.push(("role".to_string(), role.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/members?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/members?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -840,11 +888,14 @@ impl Teams {
             query_args.push(("role".to_string(), role.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/members?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/members?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -878,13 +929,15 @@ impl Teams {
         team_slug: &str,
         username: &str,
     ) -> Result<crate::types::TeamMembership> {
-        let url = format!(
-            "/orgs/{}/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -919,13 +972,15 @@ impl Teams {
         username: &str,
         body: &crate::types::TeamsAddUpdateMembershipUserInOrgRequest,
     ) -> Result<crate::types::TeamMembership> {
-        let url = format!(
-            "/orgs/{}/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -961,13 +1016,15 @@ impl Teams {
         team_slug: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1003,13 +1060,15 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/projects?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1030,10 +1089,13 @@ impl Teams {
         org: &str,
         team_slug: &str,
     ) -> Result<Vec<crate::types::TeamProject>> {
-        let url = format!(
-            "/orgs/{}/teams/{}/projects",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/projects",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1060,13 +1122,15 @@ impl Teams {
         team_slug: &str,
         project_id: i64,
     ) -> Result<crate::types::TeamProject> {
-        let url = format!(
-            "/orgs/{}/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1093,13 +1157,15 @@ impl Teams {
         project_id: i64,
         body: &crate::types::ProjectsAddCollaboratorRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1131,13 +1197,15 @@ impl Teams {
         team_slug: &str,
         project_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1173,13 +1241,15 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/repos?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/repos?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1200,10 +1270,13 @@ impl Teams {
         org: &str,
         team_slug: &str,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!(
-            "/orgs/{}/teams/{}/repos",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/repos",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1236,14 +1309,16 @@ impl Teams {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::TeamRepository> {
-        let url = format!(
-            "/orgs/{}/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1274,14 +1349,16 @@ impl Teams {
         repo: &str,
         body: &crate::types::TeamsAddUpdateRepoPermissionsInOrgRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1315,14 +1392,16 @@ impl Teams {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1348,12 +1427,14 @@ impl Teams {
         org: &str,
         team_slug: &str,
     ) -> Result<crate::types::GroupMapping> {
-        let url = format!(
-            "/orgs/{}/teams/{}/team-sync/group-mappings",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/team-sync/group-mappings",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1380,12 +1461,14 @@ impl Teams {
         team_slug: &str,
         body: &crate::types::TeamsCreateUpdateIdpGroupConnectionsInOrgRequest,
     ) -> Result<crate::types::GroupMapping> {
-        let url = format!(
-            "/orgs/{}/teams/{}/team-sync/group-mappings",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/team-sync/group-mappings",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1427,13 +1510,15 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/teams/{}/teams?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/teams?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1454,10 +1539,13 @@ impl Teams {
         org: &str,
         team_slug: &str,
     ) -> Result<Vec<crate::types::Team>> {
-        let url = format!(
-            "/orgs/{}/teams/{}/teams",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/teams/{}/teams",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(team_slug),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1475,11 +1563,13 @@ impl Teams {
      * * `team_id: i64`
      */
     pub async fn get_legacy(&self, team_id: i64) -> Result<crate::types::FullTeam> {
-        let url = format!(
-            "/teams/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1500,11 +1590,13 @@ impl Teams {
      * * `team_id: i64`
      */
     pub async fn delete_legacy(&self, team_id: i64) -> Result<()> {
-        let url = format!(
-            "/teams/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1529,11 +1621,13 @@ impl Teams {
         team_id: i64,
         body: &crate::types::TeamsUpdateInOrgRequest,
     ) -> Result<crate::types::FullTeam> {
-        let url = format!(
-            "/teams/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1580,12 +1674,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/discussions?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1611,10 +1707,13 @@ impl Teams {
             query_args.push(("direction".to_string(), direction.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/discussions?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1640,11 +1739,13 @@ impl Teams {
         team_id: i64,
         body: &crate::types::TeamsCreateDiscussionInOrgRequest,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/teams/{}/discussions",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1674,12 +1775,14 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1703,12 +1806,14 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1733,12 +1838,14 @@ impl Teams {
         discussion_number: i64,
         body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
     ) -> Result<crate::types::TeamDiscussion> {
-        let url = format!(
-            "/teams/{}/discussions/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1787,13 +1894,15 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/discussions/{}/comments?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1820,11 +1929,14 @@ impl Teams {
             query_args.push(("direction".to_string(), direction.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/discussions/{}/comments?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1852,12 +1964,14 @@ impl Teams {
         discussion_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/teams/{}/discussions/{}/comments",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1889,13 +2003,15 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1921,13 +2037,15 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1954,13 +2072,15 @@ impl Teams {
         comment_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
-        let url = format!(
-            "/teams/{}/discussions/{}/comments/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/discussions/{}/comments/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -2000,12 +2120,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/invitations?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/invitations?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2025,9 +2147,12 @@ impl Teams {
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
-        let url = format!(
-            "/teams/{}/invitations",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/invitations",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -2070,12 +2195,14 @@ impl Teams {
             query_args.push(("role".to_string(), role.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/members?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/members?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2101,10 +2228,13 @@ impl Teams {
             query_args.push(("role".to_string(), role.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/members?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/members?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -2127,12 +2257,14 @@ impl Teams {
      * * `username: &str`
      */
     pub async fn get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
-        let url = format!(
-            "/teams/{}/members/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/members/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2160,12 +2292,14 @@ impl Teams {
      * * `username: &str`
      */
     pub async fn add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
-        let url = format!(
-            "/teams/{}/members/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/members/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -2191,12 +2325,14 @@ impl Teams {
      * * `username: &str`
      */
     pub async fn remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
-        let url = format!(
-            "/teams/{}/members/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/members/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2227,12 +2363,14 @@ impl Teams {
         team_id: i64,
         username: &str,
     ) -> Result<crate::types::TeamMembership> {
-        let url = format!(
-            "/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2265,12 +2403,14 @@ impl Teams {
         username: &str,
         body: &crate::types::TeamsAddUpdateMembershipUserInOrgRequest,
     ) -> Result<crate::types::TeamMembership> {
-        let url = format!(
-            "/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -2304,12 +2444,14 @@ impl Teams {
         team_id: i64,
         username: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/teams/{}/memberships/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/memberships/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2343,12 +2485,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/projects?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/projects?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2368,9 +2512,12 @@ impl Teams {
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::TeamProject>> {
-        let url = format!(
-            "/teams/{}/projects",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/projects",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -2395,12 +2542,14 @@ impl Teams {
         team_id: i64,
         project_id: i64,
     ) -> Result<crate::types::TeamProject> {
-        let url = format!(
-            "/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2425,12 +2574,14 @@ impl Teams {
         project_id: i64,
         body: &crate::types::TeamsAddUpdateProjectPermissionsLegacyRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -2456,12 +2607,14 @@ impl Teams {
      * * `project_id: i64`
      */
     pub async fn remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
-        let url = format!(
-            "/teams/{}/projects/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(&project_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/projects/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2493,12 +2646,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/repos?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/repos?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2516,9 +2671,12 @@ impl Teams {
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!(
-            "/teams/{}/repos",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/repos",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -2547,13 +2705,15 @@ impl Teams {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::TeamRepository> {
-        let url = format!(
-            "/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2582,13 +2742,15 @@ impl Teams {
         repo: &str,
         body: &crate::types::TeamsAddUpdateRepoPermissionsLegacyRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -2615,13 +2777,15 @@ impl Teams {
      * * `repo: &str`
      */
     pub async fn remove_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/teams/{}/repos/{}/{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/repos/{}/{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2645,11 +2809,13 @@ impl Teams {
         &self,
         team_id: i64,
     ) -> Result<crate::types::GroupMapping> {
-        let url = format!(
-            "/teams/{}/team-sync/group-mappings",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/team-sync/group-mappings",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2674,11 +2840,13 @@ impl Teams {
         team_id: i64,
         body: &crate::types::TeamsCreateUpdateIdpGroupConnectionsLegacyRequest,
     ) -> Result<crate::types::GroupMapping> {
-        let url = format!(
-            "/teams/{}/team-sync/group-mappings",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/team-sync/group-mappings",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -2716,12 +2884,14 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teams/{}/teams?{}",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/teams?{}",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2736,9 +2906,12 @@ impl Teams {
      * FROM: <https://docs.github.com/rest/reference/teams/#list-child-teams-legacy>
      */
     pub async fn list_all_child_legacy(&self, team_id: i64) -> Result<Vec<crate::types::Team>> {
-        let url = format!(
-            "/teams/{}/teams",
-            crate::progenitor_support::encode_path(&team_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/teams/{}/teams",
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -2769,8 +2942,7 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/teams?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/user/teams?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2785,7 +2957,7 @@ impl Teams {
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
      */
     pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::FullTeam>> {
-        let url = "/user/teams".to_string();
+        let url = self.client.url("/user/teams", None);
         self.client.get_all_pages(&url, None).await
     }
 }

@@ -43,8 +43,7 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/categories?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -69,7 +68,7 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories?{}", query_);
+        let url = self.client.url(&format!("/categories?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -128,8 +127,9 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats/sums?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/categories/stats/sums?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -180,8 +180,9 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/categories/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -220,7 +221,9 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/categories/stats?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
 }

@@ -41,8 +41,9 @@ impl CountrySpecs {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/country_specs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/country_specs?{}", query_), None);
         let resp: crate::types::GetCountrySpecsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -59,7 +60,7 @@ impl CountrySpecs {
      * <p>Lists all Country Spec objects available in the API.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CountrySpec>> {
-        let url = "/v1/country_specs".to_string();
+        let url = self.client.url("/v1/country_specs", None);
         let mut resp: crate::types::GetCountrySpecsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -110,11 +111,13 @@ impl CountrySpecs {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
-        let url = format!(
-            "/v1/country_specs/{}",
-            crate::progenitor_support::encode_path(country),
+        let url = self.client.url(
+            &format!(
+                "/v1/country_specs/{}",
+                crate::progenitor_support::encode_path(country),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

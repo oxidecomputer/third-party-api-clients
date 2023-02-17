@@ -24,8 +24,7 @@ impl AdminApps {
      * * `token: &str` -- Authentication token. Requires scope: `admin.apps:write`.
      */
     pub async fn approve(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.apps.approve".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.apps.approve", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -42,8 +41,7 @@ impl AdminApps {
      * * `token: &str` -- Authentication token. Requires scope: `admin.apps:write`.
      */
     pub async fn restrict(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.apps.restrict".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.apps.restrict", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -48,8 +48,7 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
         let resp: crate::types::TeamDriveList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -78,7 +77,7 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
         let mut resp: crate::types::TeamDriveList = self.client.get(&url, None, None).await?;
 
         let mut team_drives = resp.team_drives;
@@ -129,8 +128,7 @@ impl Teamdrives {
             query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -162,12 +160,14 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(team_drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}?{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -180,11 +180,13 @@ impl Teamdrives {
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, team_drive_id: &str) -> Result<()> {
-        let url = format!(
-            "/teamdrives/{}",
-            crate::progenitor_support::encode_path(team_drive_id),
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -211,12 +213,14 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(team_drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}?{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

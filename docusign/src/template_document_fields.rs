@@ -31,13 +31,15 @@ impl TemplateDocumentFields {
         document_id: &str,
         template_id: &str,
     ) -> Result<crate::types::DocumentFieldsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -60,13 +62,15 @@ impl TemplateDocumentFields {
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
     ) -> Result<crate::types::DocumentFieldsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -95,13 +99,15 @@ impl TemplateDocumentFields {
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
     ) -> Result<crate::types::DocumentFieldsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -130,13 +136,15 @@ impl TemplateDocumentFields {
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
     ) -> Result<crate::types::DocumentFieldsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

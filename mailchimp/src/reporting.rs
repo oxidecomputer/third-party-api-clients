@@ -57,8 +57,9 @@ impl Reporting {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reporting/facebook-ads?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/reporting/facebook-ads?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -88,12 +89,14 @@ impl Reporting {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/facebook-ads/{}?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -138,12 +141,14 @@ impl Reporting {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -173,12 +178,14 @@ impl Reporting {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/landing-pages/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/landing-pages/{}?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -216,8 +223,9 @@ impl Reporting {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reporting/landing-pages?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/reporting/landing-pages?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

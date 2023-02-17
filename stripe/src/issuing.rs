@@ -58,8 +58,9 @@ impl Issuing {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/authorizations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/authorizations?{}", query_), None);
         let resp: crate::types::GetIssuingAuthorizationsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -93,7 +94,9 @@ impl Issuing {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/authorizations?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/authorizations?{}", query_), None);
         let mut resp: crate::types::GetIssuingAuthorizationsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -147,11 +150,13 @@ impl Issuing {
         &self,
         authorization: &str,
     ) -> Result<crate::types::IssuingAuthorization> {
-        let url = format!(
-            "/v1/issuing/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/authorizations/{}",
+                crate::progenitor_support::encode_path(authorization),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -169,11 +174,13 @@ impl Issuing {
         &self,
         authorization: &str,
     ) -> Result<crate::types::IssuingAuthorization> {
-        let url = format!(
-            "/v1/issuing/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/authorizations/{}",
+                crate::progenitor_support::encode_path(authorization),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -191,11 +198,13 @@ impl Issuing {
         &self,
         authorization: &str,
     ) -> Result<crate::types::IssuingAuthorization> {
-        let url = format!(
-            "/v1/issuing/authorizations/{}/approve",
-            crate::progenitor_support::encode_path(authorization),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/authorizations/{}/approve",
+                crate::progenitor_support::encode_path(authorization),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -213,11 +222,13 @@ impl Issuing {
         &self,
         authorization: &str,
     ) -> Result<crate::types::IssuingAuthorization> {
-        let url = format!(
-            "/v1/issuing/authorizations/{}/decline",
-            crate::progenitor_support::encode_path(authorization),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/authorizations/{}/decline",
+                crate::progenitor_support::encode_path(authorization),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -273,8 +284,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/cardholders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/cardholders?{}", query_), None);
         let resp: crate::types::GetIssuingCardholdersResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -312,7 +324,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/cardholders?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/cardholders?{}", query_), None);
         let mut resp: crate::types::GetIssuingCardholdersResponse =
             self.client.get(&url, None, None).await?;
 
@@ -358,8 +372,7 @@ impl Issuing {
      * <p>Creates a new Issuing <code>Cardholder</code> object that can be issued cards.</p>
      */
     pub async fn post_cardholder(&self) -> Result<crate::types::IssuingCardholder> {
-        let url = "/v1/issuing/cardholders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/issuing/cardholders", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -378,11 +391,13 @@ impl Issuing {
         &self,
         cardholder: &str,
     ) -> Result<crate::types::IssuingCardholder> {
-        let url = format!(
-            "/v1/issuing/cardholders/{}",
-            crate::progenitor_support::encode_path(cardholder),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/cardholders/{}",
+                crate::progenitor_support::encode_path(cardholder),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -400,11 +415,13 @@ impl Issuing {
         &self,
         cardholder: &str,
     ) -> Result<crate::types::IssuingCardholder> {
-        let url = format!(
-            "/v1/issuing/cardholders/{}",
-            crate::progenitor_support::encode_path(cardholder),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/cardholders/{}",
+                crate::progenitor_support::encode_path(cardholder),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -470,8 +487,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/cards?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/cards?{}", query_), None);
         let resp: crate::types::GetIssuingCardsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -517,7 +535,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/cards?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/cards?{}", query_), None);
         let mut resp: crate::types::GetIssuingCardsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -563,8 +583,7 @@ impl Issuing {
      * <p>Creates an Issuing <code>Card</code> object.</p>
      */
     pub async fn post_card(&self) -> Result<crate::types::IssuingCard> {
-        let url = "/v1/issuing/cards".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/issuing/cards", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -580,11 +599,13 @@ impl Issuing {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
-        let url = format!(
-            "/v1/issuing/cards/{}",
-            crate::progenitor_support::encode_path(card),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/cards/{}",
+                crate::progenitor_support::encode_path(card),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -599,11 +620,13 @@ impl Issuing {
      * * `card: &str` -- The account's country.
      */
     pub async fn post_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
-        let url = format!(
-            "/v1/issuing/cards/{}",
-            crate::progenitor_support::encode_path(card),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/cards/{}",
+                crate::progenitor_support::encode_path(card),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -649,8 +672,9 @@ impl Issuing {
             query_args.push(("transaction".to_string(), transaction.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/disputes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/disputes?{}", query_), None);
         let resp: crate::types::IssuingDisputeList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -680,7 +704,9 @@ impl Issuing {
             query_args.push(("transaction".to_string(), transaction.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/disputes?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/disputes?{}", query_), None);
         let mut resp: crate::types::IssuingDisputeList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -725,8 +751,7 @@ impl Issuing {
      * <p>Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>evidence</code> object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to <a href="/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute reasons and evidence</a> for more details about evidence requirements.</p>
      */
     pub async fn post_dispute(&self) -> Result<crate::types::IssuingDispute> {
-        let url = "/v1/issuing/disputes".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/issuing/disputes", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -745,11 +770,13 @@ impl Issuing {
         &self,
         dispute: &str,
     ) -> Result<crate::types::IssuingDispute> {
-        let url = format!(
-            "/v1/issuing/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/disputes/{}",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -767,11 +794,13 @@ impl Issuing {
         &self,
         dispute: &str,
     ) -> Result<crate::types::IssuingDispute> {
-        let url = format!(
-            "/v1/issuing/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/disputes/{}",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -789,11 +818,13 @@ impl Issuing {
         &self,
         dispute: &str,
     ) -> Result<crate::types::IssuingDispute> {
-        let url = format!(
-            "/v1/issuing/disputes/{}/submit",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/disputes/{}/submit",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -829,8 +860,9 @@ impl Issuing {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/settlements?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/settlements?{}", query_), None);
         let resp: crate::types::GetIssuingSettlementsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -850,7 +882,7 @@ impl Issuing {
         &self,
         _created: &str,
     ) -> Result<Vec<crate::types::IssuingSettlement>> {
-        let url = "/v1/issuing/settlements".to_string();
+        let url = self.client.url("/v1/issuing/settlements", None);
         let mut resp: crate::types::GetIssuingSettlementsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -904,11 +936,13 @@ impl Issuing {
         &self,
         settlement: &str,
     ) -> Result<crate::types::IssuingSettlement> {
-        let url = format!(
-            "/v1/issuing/settlements/{}",
-            crate::progenitor_support::encode_path(settlement),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/settlements/{}",
+                crate::progenitor_support::encode_path(settlement),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -926,11 +960,13 @@ impl Issuing {
         &self,
         settlement: &str,
     ) -> Result<crate::types::IssuingSettlement> {
-        let url = format!(
-            "/v1/issuing/settlements/{}",
-            crate::progenitor_support::encode_path(settlement),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/settlements/{}",
+                crate::progenitor_support::encode_path(settlement),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -981,8 +1017,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/transactions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/transactions?{}", query_), None);
         let resp: crate::types::GetIssuingTransactionsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -1016,7 +1053,9 @@ impl Issuing {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuing/transactions?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuing/transactions?{}", query_), None);
         let mut resp: crate::types::GetIssuingTransactionsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -1070,11 +1109,13 @@ impl Issuing {
         &self,
         transaction: &str,
     ) -> Result<crate::types::IssuingTransaction> {
-        let url = format!(
-            "/v1/issuing/transactions/{}",
-            crate::progenitor_support::encode_path(transaction),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/transactions/{}",
+                crate::progenitor_support::encode_path(transaction),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -1092,11 +1133,13 @@ impl Issuing {
         &self,
         transaction: &str,
     ) -> Result<crate::types::IssuingTransaction> {
-        let url = format!(
-            "/v1/issuing/transactions/{}",
-            crate::progenitor_support::encode_path(transaction),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuing/transactions/{}",
+                crate::progenitor_support::encode_path(transaction),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

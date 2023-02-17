@@ -48,11 +48,13 @@ impl AdminConversationsEkm {
             query_args.push(("team_ids".to_string(), team_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin.conversations.ekm.listOriginalConnectedChannelInfo?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin.conversations.ekm.listOriginalConnectedChannelInfo?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

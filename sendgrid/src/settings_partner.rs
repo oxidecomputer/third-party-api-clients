@@ -30,8 +30,7 @@ impl SettingsPartner {
     pub async fn get_partner_settings_new_relic(
         &self,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
-        let url = "/partner_settings/new_relic".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/partner_settings/new_relic", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -53,8 +52,7 @@ impl SettingsPartner {
         &self,
         body: &crate::types::PatchPartnerSettingsNewRelicRequest,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
-        let url = "/partner_settings/new_relic".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/partner_settings/new_relic", None);
         self.client
             .patch(
                 &url,
@@ -91,8 +89,9 @@ impl SettingsPartner {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/partner_settings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/partner_settings?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

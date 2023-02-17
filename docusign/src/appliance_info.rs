@@ -27,11 +27,13 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/display_appliance_info/dynamicsystemsettings",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/display_appliance_info/dynamicsystemsettings",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -49,11 +51,13 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/display_appliance_info/templateInfo",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/display_appliance_info/templateInfo",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -73,12 +77,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -98,12 +104,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::DisplayApplianceAccount> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/account_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/account_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -123,12 +131,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -148,12 +158,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields/delete",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields/delete",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -173,12 +185,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/date_signed",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/date_signed",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -200,13 +214,15 @@ impl ApplianceInfo {
         document_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -228,13 +244,15 @@ impl ApplianceInfo {
         document_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -254,12 +272,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document_page_list",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document_page_list",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -279,12 +299,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/image",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -307,13 +329,15 @@ impl ApplianceInfo {
         envelope_id: &str,
         user_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/localepolicy/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/localepolicy/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -329,12 +353,14 @@ impl ApplianceInfo {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_page(&self, account_id: &str, envelope_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -350,12 +376,14 @@ impl ApplianceInfo {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_post_page(&self, account_id: &str, envelope_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -371,12 +399,14 @@ impl ApplianceInfo {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_page(&self, account_id: &str, envelope_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info/delete",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/page_info/delete",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -396,12 +426,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -425,13 +457,15 @@ impl ApplianceInfo {
         envelope_id: &str,
         pdf_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(pdf_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(pdf_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -451,12 +485,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -472,12 +508,14 @@ impl ApplianceInfo {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_pdf_blob(&self, account_id: &str, envelope_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -497,12 +535,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -522,12 +562,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -547,12 +589,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/recipient_denied_copy",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -572,12 +616,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ApplianceInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -597,12 +643,14 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -613,8 +661,7 @@ impl ApplianceInfo {
      *
      */
     pub async fn envelope_post_error(&self) -> Result<()> {
-        let url = "/v2.1/display_appliance_info/error".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/display_appliance_info/error", None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -625,8 +672,7 @@ impl ApplianceInfo {
      *
      */
     pub async fn envelope_post_redeem(&self) -> Result<crate::types::ApplianceInfo> {
-        let url = "/v2.1/display_appliance_info/redeem".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/display_appliance_info/redeem", None);
         self.client.post(&url, None, None).await
     }
 }

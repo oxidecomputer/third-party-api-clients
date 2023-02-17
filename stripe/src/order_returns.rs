@@ -48,8 +48,9 @@ impl OrderReturns {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/order_returns?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/order_returns?{}", query_), None);
         let resp: crate::types::Returns = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -75,7 +76,9 @@ impl OrderReturns {
             query_args.push(("order".to_string(), order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/order_returns?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/order_returns?{}", query_), None);
         let mut resp: crate::types::Returns = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -125,11 +128,13 @@ impl OrderReturns {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::OrderReturn> {
-        let url = format!(
-            "/v1/order_returns/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/order_returns/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

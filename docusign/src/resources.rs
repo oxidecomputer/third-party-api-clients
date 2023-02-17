@@ -28,8 +28,7 @@ impl Resources {
      * Example: https://demo.docusign.net/restapi/help lists the REST API operations on the DocuSign Demo system with XML and JSON request and response samples.
      */
     pub async fn service_information_get(&self) -> Result<crate::types::ResourceInformation> {
-        let url = "/v2.1".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1", None);
         self.client.get(&url, None, None).await
     }
 }

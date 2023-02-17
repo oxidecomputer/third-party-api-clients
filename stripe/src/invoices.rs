@@ -68,8 +68,7 @@ impl Invoices {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/invoices?{}", query_), None);
         let resp: crate::types::InvoicesList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -111,7 +110,7 @@ impl Invoices {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices?{}", query_);
+        let url = self.client.url(&format!("/v1/invoices?{}", query_), None);
         let mut resp: crate::types::InvoicesList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -156,8 +155,7 @@ impl Invoices {
      * <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you <a href="#finalize_invoice">finalize</a> the invoice, which allows you to <a href="#pay_invoice">pay</a> or <a href="#send_invoice">send</a> the invoice to your customers.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Invoice> {
-        let url = "/v1/invoices".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/invoices", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -194,8 +192,9 @@ impl Invoices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/invoices/search?{}", query_), None);
         let resp: crate::types::SearchResult = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -220,7 +219,9 @@ impl Invoices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices/search?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/invoices/search?{}", query_), None);
         let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -367,8 +368,9 @@ impl Invoices {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices/upcoming?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/invoices/upcoming?{}", query_), None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -492,8 +494,9 @@ impl Invoices {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices/upcoming/lines?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/invoices/upcoming/lines?{}", query_), None);
         let resp: crate::types::InvoiceLinesList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -581,7 +584,9 @@ impl Invoices {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/invoices/upcoming/lines?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/invoices/upcoming/lines?{}", query_), None);
         let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -631,11 +636,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn get(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -655,11 +662,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_invoices(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -674,11 +683,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn delete(&self, invoice: &str) -> Result<crate::types::DeletedInvoice> {
-        let url = format!(
-            "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -693,11 +704,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_finalize(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}/finalize",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/finalize",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -733,12 +746,14 @@ impl Invoices {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/invoices/{}/lines?{}",
-            crate::progenitor_support::encode_path(invoice),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/lines?{}",
+                crate::progenitor_support::encode_path(invoice),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::InvoiceLinesList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -755,9 +770,12 @@ impl Invoices {
      * <p>When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
     pub async fn get_all_lines(&self, invoice: &str) -> Result<Vec<crate::types::LineItem>> {
-        let url = format!(
-            "/v1/invoices/{}/lines",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/lines",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
         let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None, None).await?;
 
@@ -807,11 +825,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_mark_uncollectible(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}/mark_uncollectible",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/mark_uncollectible",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -826,11 +846,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_pay(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}/pay",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/pay",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -847,11 +869,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_send(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}/send",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/send",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -866,11 +890,13 @@ impl Invoices {
      * * `invoice: &str` -- The account's country.
      */
     pub async fn post_void(&self, invoice: &str) -> Result<crate::types::Invoice> {
-        let url = format!(
-            "/v1/invoices/{}/void",
-            crate::progenitor_support::encode_path(invoice),
+        let url = self.client.url(
+            &format!(
+                "/v1/invoices/{}/void",
+                crate::progenitor_support::encode_path(invoice),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -33,12 +33,14 @@ impl TemplateDocumentVisibility {
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -66,13 +68,15 @@ impl TemplateDocumentVisibility {
         recipient_id: &str,
         template_id: &str,
     ) -> Result<crate::types::DocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -97,13 +101,15 @@ impl TemplateDocumentVisibility {
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

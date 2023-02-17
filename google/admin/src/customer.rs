@@ -29,13 +29,15 @@ impl Customer {
         device_id: &str,
         command_id: &str,
     ) -> Result<crate::types::DirectoryChromeosdevicesCommand> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
-            crate::progenitor_support::encode_path(command_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(command_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -54,12 +56,14 @@ impl Customer {
         device_id: &str,
         body: &crate::types::DirectoryChromeosdevicesIssueCommandRequest,
     ) -> Result<crate::types::DirectoryChromeosdevicesIssueCommandResponse> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

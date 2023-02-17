@@ -49,12 +49,14 @@ impl Webinars {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/webinars?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/webinars?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -76,11 +78,13 @@ impl Webinars {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn create(&self, user_id: &str) -> Result<crate::types::WebinarCreateResponseAllOf> {
-        let url = format!(
-            "/users/{}/webinars",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/webinars",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, Some("application/json")).await
     }
     /**
@@ -116,12 +120,14 @@ impl Webinars {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}?{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}?{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -163,12 +169,14 @@ impl Webinars {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}?{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}?{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -195,12 +203,14 @@ impl Webinars {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}?{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}?{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(&url, None, Some("application/json"))
             .await
@@ -242,12 +252,14 @@ impl Webinars {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/past_webinars/{}/participants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/participants?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -277,9 +289,12 @@ impl Webinars {
         &self,
         webinar_id: &str,
     ) -> Result<Vec<crate::types::Participants>> {
-        let url = format!(
-            "/past_webinars/{}/participants",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/participants",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
         let mut resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None, None).await?;
@@ -335,11 +350,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::WebinarStatusRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/status",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/status",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -367,11 +384,13 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn panelist(&self, webinar_id: i64) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/webinars/{}/panelists",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/panelists",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -396,11 +415,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::WebinarPanelist,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/panelists",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/panelists",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -426,11 +447,13 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn panelists_delete(&self, webinar_id: i64) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/panelists",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/panelists",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -453,12 +476,14 @@ impl Webinars {
      * * `panelist_id: i64` -- The panelist ID or panelist email.
      */
     pub async fn panelist_delete(&self, webinar_id: i64, panelist_id: i64) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/panelists/{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            crate::progenitor_support::encode_path(&panelist_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/panelists/{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(&panelist_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -521,12 +546,14 @@ impl Webinars {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}/registrants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -556,12 +583,14 @@ impl Webinars {
             query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}/registrants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, Some("application/json")).await
     }
     /**
@@ -594,11 +623,13 @@ impl Webinars {
         webinar_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
     ) -> Result<crate::types::AddBatchRegistrantsResponse> {
-        let url = format!(
-            "/webinars/{}/batch_registrants",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/batch_registrants",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -635,12 +666,14 @@ impl Webinars {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}/registrants/status?{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants/status?{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -666,11 +699,13 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn past(&self, webinar_id: i64) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/past_webinars/{}/instances",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/instances",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -690,11 +725,13 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn poll(&self, webinar_id: i64) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/webinars/{}/polls",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/polls",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -718,11 +755,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::Poll,
     ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
-        let url = format!(
-            "/webinars/{}/polls",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/polls",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -753,12 +792,14 @@ impl Webinars {
         webinar_id: i64,
         poll_id: &str,
     ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
-        let url = format!(
-            "/webinars/{}/polls/{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/polls/{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -784,12 +825,14 @@ impl Webinars {
         poll_id: &str,
         body: &crate::types::Poll,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/polls/{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/polls/{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -816,12 +859,14 @@ impl Webinars {
      * * `poll_id: &str` -- User's first name.
      */
     pub async fn poll_delete(&self, webinar_id: i64, poll_id: &str) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/polls/{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/polls/{}",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -846,11 +891,13 @@ impl Webinars {
         &self,
         webinar_id: i64,
     ) -> Result<crate::types::WebinarRegistrantQuestions> {
-        let url = format!(
-            "/webinars/{}/registrants/questions",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants/questions",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -877,11 +924,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::WebinarRegistrantQuestions,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/registrants/questions",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants/questions",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -919,13 +968,15 @@ impl Webinars {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}/registrants/{}?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            crate::progenitor_support::encode_path(registrant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants/{}?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(registrant_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -955,13 +1006,15 @@ impl Webinars {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/webinars/{}/registrants/{}?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            crate::progenitor_support::encode_path(registrant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/registrants/{}?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                crate::progenitor_support::encode_path(registrant_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -998,12 +1051,14 @@ impl Webinars {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/past_webinars/{}/absentees?{}",
-            crate::progenitor_support::encode_path(webinar_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/absentees?{}",
+                crate::progenitor_support::encode_path(webinar_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1028,11 +1083,13 @@ impl Webinars {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::GetTrackingSourcesResponse> {
-        let url = format!(
-            "/webinars/{}/tracking_sources",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/tracking_sources",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1059,11 +1116,13 @@ impl Webinars {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
-        let url = format!(
-            "/past_webinars/{}/polls",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/polls",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1092,11 +1151,13 @@ impl Webinars {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportWebinarQaResponse> {
-        let url = format!(
-            "/past_webinars/{}/qa",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/past_webinars/{}/qa",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1115,11 +1176,13 @@ impl Webinars {
         &self,
         user_id: &str,
     ) -> Result<crate::types::ListWebinarTemplatesResponse> {
-        let url = format!(
-            "/users/{}/webinar_templates",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/webinar_templates",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1146,11 +1209,13 @@ impl Webinars {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::GetLiveStreamDetailsResponse> {
-        let url = format!(
-            "/webinars/{}/livestream",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/livestream",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1177,11 +1242,13 @@ impl Webinars {
         webinar_id: &str,
         body: &crate::types::MeetingLiveStream,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/livestream",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/livestream",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1213,11 +1280,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::WebinarLiveStreamStatus,
     ) -> Result<()> {
-        let url = format!(
-            "/webinars/{}/livestream/status",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/livestream/status",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1248,11 +1317,13 @@ impl Webinars {
         webinar_id: i64,
         body: &crate::types::InviteLink,
     ) -> Result<crate::types::InviteLinks> {
-        let url = format!(
-            "/webinars/{}/invite_links",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/webinars/{}/invite_links",
+                crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

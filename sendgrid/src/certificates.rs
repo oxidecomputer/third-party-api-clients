@@ -23,8 +23,7 @@ impl Certificates {
         &self,
         body: &crate::types::PostSsoCertificatesRequest,
     ) -> Result<crate::types::SsoCertificateBody> {
-        let url = "/sso/certificates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/sso/certificates", None);
         self.client
             .post(
                 &url,
@@ -46,11 +45,13 @@ impl Certificates {
         &self,
         integration_id: &str,
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
-        let url = format!(
-            "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(integration_id),
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}/certificates",
+                crate::progenitor_support::encode_path(integration_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -68,9 +69,12 @@ impl Certificates {
         &self,
         integration_id: &str,
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
-        let url = format!(
-            "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(integration_id),
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}/certificates",
+                crate::progenitor_support::encode_path(integration_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -82,11 +86,13 @@ impl Certificates {
      * **This endpoint allows you to retrieve an individual SSO certificate.**
      */
     pub async fn get_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
-        let url = format!(
-            "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+        let url = self.client.url(
+            &format!(
+                "/sso/certificates/{}",
+                crate::progenitor_support::encode_path(cert_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -99,11 +105,13 @@ impl Certificates {
      * You can retrieve a certificate's ID from the response provided by the "Get All SSO Integrations" endpoint.
      */
     pub async fn delete_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
-        let url = format!(
-            "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+        let url = self.client.url(
+            &format!(
+                "/sso/certificates/{}",
+                crate::progenitor_support::encode_path(cert_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -120,11 +128,13 @@ impl Certificates {
         cert_id: &str,
         body: &crate::types::PatchSsoCertificatesCertRequest,
     ) -> Result<Vec<crate::types::SsoErrorResponse>> {
-        let url = format!(
-            "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+        let url = self.client.url(
+            &format!(
+                "/sso/certificates/{}",
+                crate::progenitor_support::encode_path(cert_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

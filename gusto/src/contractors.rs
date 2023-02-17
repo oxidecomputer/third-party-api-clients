@@ -20,11 +20,13 @@ impl Contractors {
      * Get a contractor.
      */
     pub async fn get(&self, contractor_id_or_uuid: &str) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/contractors/{}",
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -39,11 +41,13 @@ impl Contractors {
         contractor_id_or_uuid: &str,
         body: &crate::types::PutComntractorRequest,
     ) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/contractors/{}",
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -63,11 +67,13 @@ impl Contractors {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -83,9 +89,12 @@ impl Contractors {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -101,11 +110,13 @@ impl Contractors {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyContractorsRequest,
     ) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

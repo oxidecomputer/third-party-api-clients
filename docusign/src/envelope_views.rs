@@ -45,12 +45,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/correct",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -77,12 +79,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/correct",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -126,12 +130,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/edit",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/edit",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -184,12 +190,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/recipient",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/recipient",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -244,12 +252,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/sender",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/sender",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -281,12 +291,14 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
     ) -> Result<crate::types::ViewUrl> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/shared",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/shared",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -316,11 +328,13 @@ impl EnvelopeViews {
         account_id: &str,
         body: &crate::types::ConsoleViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/views/console",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/views/console",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

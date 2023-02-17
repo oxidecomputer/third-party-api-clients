@@ -38,8 +38,7 @@ impl Departments {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/departments?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/departments?{}", query_), None);
         let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -55,7 +54,7 @@ impl Departments {
      * Retrieve all departments.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
-        let url = "/departments".to_string();
+        let url = self.client.url("/departments", None);
         let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -105,8 +104,7 @@ impl Departments {
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
-        let url = "/departments".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/departments", None);
         self.client
             .post(
                 &url,
@@ -127,11 +125,13 @@ impl Departments {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
-        let url = format!(
-            "/departments/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/departments/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -146,11 +146,13 @@ impl Departments {
         id: &str,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
-        let url = format!(
-            "/departments/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/departments/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

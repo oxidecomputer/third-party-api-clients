@@ -38,8 +38,9 @@ impl UsersProfile {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.profile.get?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/users.profile.get?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -54,8 +55,7 @@ impl UsersProfile {
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
      */
     pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
-        let url = "/users.profile.set".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/users.profile.set", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

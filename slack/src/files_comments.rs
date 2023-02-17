@@ -24,8 +24,7 @@ impl FilesComments {
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/files.comments.delete".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/files.comments.delete", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

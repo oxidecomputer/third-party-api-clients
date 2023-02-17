@@ -32,11 +32,13 @@ impl Billing {
      * * `account_id: &str` -- User's first name.
      */
     pub async fn account(&self, account_id: &str) -> Result<crate::types::Contact> {
-        let url = format!(
-            "/accounts/{}/billing",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -64,11 +66,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::BillingContact,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/billing",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -97,11 +101,13 @@ impl Billing {
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountPlansResponse> {
-        let url = format!(
-            "/accounts/{}/plans",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -122,11 +128,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanCreateRequestAllOf,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -158,11 +166,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::PlanBase,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/base",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/base",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -198,11 +208,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::PlanBase,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/addons",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -233,11 +245,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanAddonCreateRequestOneOf,
     ) -> Result<crate::types::AccountPlans> {
-        let url = format!(
-            "/accounts/{}/plans/addons",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -270,11 +284,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanBaseDeleteRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/base/status",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/base/status",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -305,11 +321,13 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanAddonCancelRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/addons/status",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons/status",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -334,11 +352,13 @@ impl Billing {
         &self,
         account_id: &str,
     ) -> Result<crate::types::GetPlanUsageResponse> {
-        let url = format!(
-            "/accounts/{}/plans/usage",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/usage",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -376,12 +396,14 @@ impl Billing {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/accounts/{}/billing/invoices?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing/invoices?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -403,12 +425,14 @@ impl Billing {
         account_id: &str,
         invoice_id: &str,
     ) -> Result<crate::types::GetAccountBillingInvoiceResponse> {
-        let url = format!(
-            "/accounts/{}/billing/invoices/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(invoice_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing/invoices/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(invoice_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -423,11 +447,13 @@ impl Billing {
      * * This API has a daily limit of **100 requests per account**.
      */
     pub async fn download_invoice_pdf(&self, invoice_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/download/billing/invoices/{}",
-            crate::progenitor_support::encode_path(invoice_id),
+        let url = self.client.url(
+            &format!(
+                "/api/download/billing/invoices/{}",
+                crate::progenitor_support::encode_path(invoice_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

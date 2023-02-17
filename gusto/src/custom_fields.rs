@@ -23,11 +23,13 @@ impl CustomFields {
         &self,
         employee_id: &str,
     ) -> Result<crate::types::GetEmployeeCustomFieldsResponse> {
-        let url = format!(
-            "/v1/employees/{}/custom_fields",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/custom_fields",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -41,11 +43,13 @@ impl CustomFields {
         &self,
         company_id: &str,
     ) -> Result<crate::types::GetCompanyCustomFieldsResponse> {
-        let url = format!(
-            "/v1/companies/{}/custom_fields",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/custom_fields",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

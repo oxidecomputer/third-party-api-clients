@@ -25,8 +25,7 @@ impl TrackingField {
      * * Business, Education, API or higher plan
      */
     pub async fn trackingfield_list(&self) -> Result<crate::types::Domains> {
-        let url = "/tracking_fields".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_fields", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -45,8 +44,7 @@ impl TrackingField {
         &self,
         body: &crate::types::TrackingField,
     ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
-        let url = "/tracking_fields".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/tracking_fields", None);
         self.client
             .post(
                 &url,
@@ -76,11 +74,13 @@ impl TrackingField {
         &self,
         field_id: &str,
     ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -100,11 +100,13 @@ impl TrackingField {
      * * `field_id: &str` -- The Tracking Field ID.
      */
     pub async fn trackingfield_delete(&self, field_id: &str) -> Result<()> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -128,11 +130,13 @@ impl TrackingField {
         field_id: &str,
         body: &crate::types::TrackingField,
     ) -> Result<()> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

@@ -53,8 +53,9 @@ impl ShippingRates {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/shipping_rates?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/shipping_rates?{}", query_), None);
         let resp: crate::types::ShippingResourcesRateList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +85,9 @@ impl ShippingRates {
             query_args.push(("currency".to_string(), currency.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/shipping_rates?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/shipping_rates?{}", query_), None);
         let mut resp: crate::types::ShippingResourcesRateList =
             self.client.get(&url, None, None).await?;
 
@@ -130,8 +133,7 @@ impl ShippingRates {
      * <p>Creates a new shipping rate object.</p>
      */
     pub async fn post(&self) -> Result<crate::types::ShippingRate> {
-        let url = "/v1/shipping_rates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/shipping_rates", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -150,11 +152,13 @@ impl ShippingRates {
         &self,
         shipping_rate_token: &str,
     ) -> Result<crate::types::ShippingRate> {
-        let url = format!(
-            "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(shipping_rate_token),
+        let url = self.client.url(
+            &format!(
+                "/v1/shipping_rates/{}",
+                crate::progenitor_support::encode_path(shipping_rate_token),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -172,11 +176,13 @@ impl ShippingRates {
         &self,
         shipping_rate_token: &str,
     ) -> Result<crate::types::ShippingRate> {
-        let url = format!(
-            "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(shipping_rate_token),
+        let url = self.client.url(
+            &format!(
+                "/v1/shipping_rates/{}",
+                crate::progenitor_support::encode_path(shipping_rate_token),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

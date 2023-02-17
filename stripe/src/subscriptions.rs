@@ -75,8 +75,9 @@ impl Subscriptions {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscriptions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/subscriptions?{}", query_), None);
         let resp: crate::types::Subscriptions = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -123,7 +124,9 @@ impl Subscriptions {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscriptions?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/subscriptions?{}", query_), None);
         let mut resp: crate::types::Subscriptions = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -174,8 +177,7 @@ impl Subscriptions {
      * Schedules provide the flexibility to model more complex billing configurations that change over time.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Subscription> {
-        let url = "/v1/subscriptions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/subscriptions", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -212,8 +214,9 @@ impl Subscriptions {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscriptions/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/subscriptions/search?{}", query_), None);
         let resp: crate::types::SearchResult = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -238,7 +241,9 @@ impl Subscriptions {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscriptions/search?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/subscriptions/search?{}", query_), None);
         let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -291,11 +296,13 @@ impl Subscriptions {
         &self,
         subscription_exposed_id: &str,
     ) -> Result<crate::types::Subscription> {
-        let url = format!(
-            "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(subscription_exposed_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscriptions/{}",
+                crate::progenitor_support::encode_path(subscription_exposed_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -313,11 +320,13 @@ impl Subscriptions {
         &self,
         subscription_exposed_id: &str,
     ) -> Result<crate::types::Subscription> {
-        let url = format!(
-            "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(subscription_exposed_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscriptions/{}",
+                crate::progenitor_support::encode_path(subscription_exposed_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -339,11 +348,13 @@ impl Subscriptions {
         &self,
         subscription_exposed_id: &str,
     ) -> Result<crate::types::Subscription> {
-        let url = format!(
-            "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(subscription_exposed_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscriptions/{}",
+                crate::progenitor_support::encode_path(subscription_exposed_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -361,11 +372,13 @@ impl Subscriptions {
         &self,
         subscription_exposed_id: &str,
     ) -> Result<crate::types::DeletedDiscount> {
-        let url = format!(
-            "/v1/subscriptions/{}/discount",
-            crate::progenitor_support::encode_path(subscription_exposed_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscriptions/{}/discount",
+                crate::progenitor_support::encode_path(subscription_exposed_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -75,12 +75,14 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -129,10 +131,13 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::GetChatMessagesResponse =
             self.client.get(&url, None, None).await?;
@@ -185,11 +190,13 @@ impl ChatMessages {
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
     ) -> Result<crate::types::Groups> {
-        let url = format!(
-            "/chat/users/{}/messages",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -220,12 +227,14 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::MarkMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}/status",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}/status",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -256,12 +265,14 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::ReactMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}/emoji_reactions",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}/emoji_reactions",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -306,13 +317,15 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -339,12 +352,14 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::EditMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -396,13 +411,15 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

@@ -57,12 +57,14 @@ impl Groups {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/groups?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/groups?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -81,11 +83,13 @@ impl Groups {
         account_id: &str,
         body: &crate::types::GroupInformation,
     ) -> Result<crate::types::GroupInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/groups",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -112,11 +116,13 @@ impl Groups {
         account_id: &str,
         body: &crate::types::GroupInformation,
     ) -> Result<crate::types::GroupInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/groups",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -155,11 +161,13 @@ impl Groups {
         account_id: &str,
         body: &crate::types::GroupInformation,
     ) -> Result<crate::types::GroupInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/groups",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

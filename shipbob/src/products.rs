@@ -70,8 +70,7 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/product?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/product?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -106,7 +105,7 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/product?{}", query_);
+        let url = self.client.url(&format!("/product?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -122,8 +121,7 @@ impl Products {
         &self,
         body: &crate::types::ProductsCreateProductModel,
     ) -> Result<Vec<crate::types::Product>> {
-        let url = "/product".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/product", None);
         self.client
             .post(
                 &url,
@@ -143,11 +141,13 @@ impl Products {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, product_id: i64) -> Result<crate::types::Product> {
-        let url = format!(
-            "/product/{}",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/product/{}",
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -165,11 +165,13 @@ impl Products {
         product_id: i64,
         body: &crate::types::ProductsUpdateProductModel,
     ) -> Result<Vec<crate::types::Product>> {
-        let url = format!(
-            "/product/{}",
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/product/{}",
+                crate::progenitor_support::encode_path(&product_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -191,8 +193,7 @@ impl Products {
         &self,
         body: &[crate::types::ProductsCreateProductModel],
     ) -> Result<Vec<crate::types::Product>> {
-        let url = "/product/batch".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/product/batch", None);
         self.client
             .post(
                 &url,

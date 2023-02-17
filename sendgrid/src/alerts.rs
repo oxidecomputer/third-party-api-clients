@@ -31,8 +31,7 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
-        let url = "/alerts".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/alerts", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -51,7 +50,7 @@ impl Alerts {
      * For more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
-        let url = "/alerts".to_string();
+        let url = self.client.url("/alerts", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -77,8 +76,7 @@ impl Alerts {
         &self,
         body: &crate::types::PostAlertsRequest,
     ) -> Result<crate::types::PostAlertsResponse> {
-        let url = "/alerts".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/alerts", None);
         self.client
             .post(
                 &url,
@@ -106,11 +104,13 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -131,11 +131,13 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete(&self, alert_id: i64) -> Result<crate::types::Help> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -160,11 +162,13 @@ impl Alerts {
         alert_id: i64,
         body: &crate::types::PatchAlertsAlertRequest,
     ) -> Result<crate::types::GetAlertsAlertResponse> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

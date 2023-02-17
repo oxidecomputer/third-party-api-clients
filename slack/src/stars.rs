@@ -24,8 +24,7 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/stars.add".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/stars.add", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -66,8 +65,7 @@ impl Stars {
             query_args.push(("page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stars.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/stars.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -82,8 +80,7 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/stars.remove".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/stars.remove", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

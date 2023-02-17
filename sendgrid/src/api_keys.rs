@@ -36,8 +36,7 @@ impl ApiKeys {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api_keys?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/api_keys?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -67,8 +66,7 @@ impl ApiKeys {
         &self,
         body: &crate::types::CreateApiKeysRequest,
     ) -> Result<crate::types::CreateApiKeysResponse> {
-        let url = "/api_keys".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/api_keys", None);
         self.client
             .post(
                 &url,
@@ -93,11 +91,13 @@ impl ApiKeys {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -122,11 +122,13 @@ impl ApiKeys {
         api_key_id: &str,
         body: &crate::types::PutApiKeysKeyRequest,
     ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -149,11 +151,13 @@ impl ApiKeys {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -174,11 +178,13 @@ impl ApiKeys {
         api_key_id: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ApiKeyNameId> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

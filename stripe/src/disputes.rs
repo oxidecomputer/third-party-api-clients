@@ -53,8 +53,7 @@ impl Disputes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/disputes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/disputes?{}", query_), None);
         let resp: crate::types::GetDisputesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl Disputes {
             query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/disputes?{}", query_);
+        let url = self.client.url(&format!("/v1/disputes?{}", query_), None);
         let mut resp: crate::types::GetDisputesResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -134,11 +133,13 @@ impl Disputes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, dispute: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/disputes/{}",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -155,11 +156,13 @@ impl Disputes {
      * * `dispute: &str` -- The account's country.
      */
     pub async fn post(&self, dispute: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/disputes/{}",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -176,11 +179,13 @@ impl Disputes {
      * * `dispute: &str` -- The account's country.
      */
     pub async fn post_close(&self, dispute: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/disputes/{}/close",
-            crate::progenitor_support::encode_path(dispute),
+        let url = self.client.url(
+            &format!(
+                "/v1/disputes/{}/close",
+                crate::progenitor_support::encode_path(dispute),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

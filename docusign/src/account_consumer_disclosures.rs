@@ -84,12 +84,14 @@ impl AccountConsumerDisclosures {
             query_args.push(("langCode".to_string(), lang_code.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/consumer_disclosure?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/consumer_disclosure?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -159,12 +161,14 @@ impl AccountConsumerDisclosures {
         account_id: &str,
         lang_code: &str,
     ) -> Result<crate::types::AccountConsumerDisclosures> {
-        let url = format!(
-            "/v2.1/accounts/{}/consumer_disclosure/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(lang_code),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/consumer_disclosure/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(lang_code),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -287,13 +291,15 @@ impl AccountConsumerDisclosures {
             query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/consumer_disclosure/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(lang_code),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/consumer_disclosure/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(lang_code),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

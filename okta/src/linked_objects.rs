@@ -18,8 +18,9 @@ impl LinkedObjects {
      * Success
      */
     pub async fn list_definitions(&self) -> Result<Vec<crate::types::LinkedObject>> {
-        let url = "/api/v1/meta/schemas/user/linkedObjects".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/api/v1/meta/schemas/user/linkedObjects", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -30,7 +31,9 @@ impl LinkedObjects {
      * Success
      */
     pub async fn list_all_definitions(&self) -> Result<Vec<crate::types::LinkedObject>> {
-        let url = "/api/v1/meta/schemas/user/linkedObjects".to_string();
+        let url = self
+            .client
+            .url("/api/v1/meta/schemas/user/linkedObjects", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -42,8 +45,9 @@ impl LinkedObjects {
         &self,
         body: &crate::types::LinkedObject,
     ) -> Result<crate::types::LinkedObject> {
-        let url = "/api/v1/meta/schemas/user/linkedObjects".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/api/v1/meta/schemas/user/linkedObjects", None);
         self.client
             .post(
                 &url,
@@ -65,11 +69,13 @@ impl LinkedObjects {
         &self,
         linked_object_name: &str,
     ) -> Result<crate::types::LinkedObject> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/linkedObjects/{}",
-            crate::progenitor_support::encode_path(linked_object_name),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/linkedObjects/{}",
+                crate::progenitor_support::encode_path(linked_object_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -82,11 +88,13 @@ impl LinkedObjects {
      * * `linked_object_name: &str`
      */
     pub async fn delete_definition(&self, linked_object_name: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/linkedObjects/{}",
-            crate::progenitor_support::encode_path(linked_object_name),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/linkedObjects/{}",
+                crate::progenitor_support::encode_path(linked_object_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

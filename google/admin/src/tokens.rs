@@ -22,11 +22,13 @@ impl Tokens {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn list(&self, user_key: &str) -> Result<crate::types::Tokens> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/tokens",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/tokens",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -40,12 +42,14 @@ impl Tokens {
      * * `client_id: &str` -- The Client ID of the application the token is issued to.
      */
     pub async fn get(&self, user_key: &str, client_id: &str) -> Result<crate::types::Token> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/tokens/{}",
-            crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(client_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/tokens/{}",
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(client_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -59,12 +63,14 @@ impl Tokens {
      * * `client_id: &str` -- The Client ID of the application the token is issued to.
      */
     pub async fn delete(&self, user_key: &str, client_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/tokens/{}",
-            crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(client_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/tokens/{}",
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(client_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

@@ -22,11 +22,13 @@ impl Terminations {
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Termination>> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -44,9 +46,12 @@ impl Terminations {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Termination>> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -64,11 +69,13 @@ impl Terminations {
         employee_id: &str,
         body: &crate::types::PostEmployeeTerminationsRequest,
     ) -> Result<crate::types::Termination> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

@@ -24,8 +24,10 @@ impl DesignsApi {
      * This endpoint is valuable when retrieving information stored in a field that you wish to update using a PATCH request.
      */
     pub async fn get_design(&self, id: &str) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,8 +49,10 @@ impl DesignsApi {
         id: &str,
         body: &crate::types::DesignDuplicateInput,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -67,8 +71,10 @@ impl DesignsApi {
      * Be sure to check the ID of the design you intend to delete before making this request; deleting a design is a permanent action.
      */
     pub async fn delete_design(&self, id: &str) -> Result<crate::types::Help> {
-        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -93,8 +99,10 @@ impl DesignsApi {
         id: &str,
         body: &crate::types::PutDesignRequest,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!("/designs/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .patch(
                 &url,
@@ -137,8 +145,7 @@ impl DesignsApi {
             query_args.push(("summary".to_string(), summary.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/designs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/designs?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -158,8 +165,7 @@ impl DesignsApi {
         &self,
         body: &crate::types::DesignInputAllOf,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = "/designs".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/designs", None);
         self.client
             .post(
                 &url,
@@ -183,11 +189,13 @@ impl DesignsApi {
         &self,
         id: &str,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!(
-            "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/designs/pre-builts/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -207,11 +215,13 @@ impl DesignsApi {
         id: &str,
         body: &crate::types::DesignDuplicateInput,
     ) -> Result<crate::types::DesignOutputAllOf> {
-        let url = format!(
-            "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/designs/pre-builts/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -256,8 +266,9 @@ impl DesignsApi {
             query_args.push(("summary".to_string(), summary.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/designs/pre-builts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/designs/pre-builts?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

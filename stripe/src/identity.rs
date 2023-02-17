@@ -56,8 +56,10 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_reports?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/identity/verification_reports?{}", query_),
+            None,
+        );
         let resp: crate::types::GetIdentityVerificationReportsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -90,7 +92,10 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_reports?{}", query_);
+        let url = self.client.url(
+            &format!("/v1/identity/verification_reports?{}", query_),
+            None,
+        );
         let mut resp: crate::types::GetIdentityVerificationReportsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -144,11 +149,13 @@ impl Identity {
         &self,
         report: &str,
     ) -> Result<crate::types::GelatoVerificationReport> {
-        let url = format!(
-            "/v1/identity/verification_reports/{}",
-            crate::progenitor_support::encode_path(report),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_reports/{}",
+                crate::progenitor_support::encode_path(report),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -189,8 +196,10 @@ impl Identity {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_sessions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/identity/verification_sessions?{}", query_),
+            None,
+        );
         let resp: crate::types::GetIdentityVerificationSessionsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -216,7 +225,10 @@ impl Identity {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_sessions?{}", query_);
+        let url = self.client.url(
+            &format!("/v1/identity/verification_sessions?{}", query_),
+            None,
+        );
         let mut resp: crate::types::GetIdentityVerificationSessionsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -270,8 +282,7 @@ impl Identity {
     pub async fn post_verification_session(
         &self,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = "/v1/identity/verification_sessions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/identity/verification_sessions", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -293,11 +304,13 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -318,11 +331,13 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -342,11 +357,13 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}/cancel",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}/cancel",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -382,11 +399,13 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}/redact",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}/redact",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

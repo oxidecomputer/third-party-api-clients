@@ -41,8 +41,9 @@ impl WebhookEndpoints {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/webhook_endpoints?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/webhook_endpoints?{}", query_), None);
         let resp: crate::types::GetWebhookEndpointsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -59,7 +60,7 @@ impl WebhookEndpoints {
      * <p>Returns a list of your webhook endpoints.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::WebhookEndpoint>> {
-        let url = "/v1/webhook_endpoints".to_string();
+        let url = self.client.url("/v1/webhook_endpoints", None);
         let mut resp: crate::types::GetWebhookEndpointsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -105,8 +106,7 @@ impl WebhookEndpoints {
      * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
      */
     pub async fn post(&self) -> Result<crate::types::WebhookEndpoint> {
-        let url = "/v1/webhook_endpoints".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/webhook_endpoints", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -125,11 +125,13 @@ impl WebhookEndpoints {
         &self,
         webhook_endpoint: &str,
     ) -> Result<crate::types::WebhookEndpoint> {
-        let url = format!(
-            "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+        let url = self.client.url(
+            &format!(
+                "/v1/webhook_endpoints/{}",
+                crate::progenitor_support::encode_path(webhook_endpoint),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -147,11 +149,13 @@ impl WebhookEndpoints {
         &self,
         webhook_endpoint: &str,
     ) -> Result<crate::types::WebhookEndpoint> {
-        let url = format!(
-            "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+        let url = self.client.url(
+            &format!(
+                "/v1/webhook_endpoints/{}",
+                crate::progenitor_support::encode_path(webhook_endpoint),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -169,11 +173,13 @@ impl WebhookEndpoints {
         &self,
         webhook_endpoint: &str,
     ) -> Result<crate::types::DeletedWebhookEndpoint> {
-        let url = format!(
-            "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+        let url = self.client.url(
+            &format!(
+                "/v1/webhook_endpoints/{}",
+                crate::progenitor_support::encode_path(webhook_endpoint),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

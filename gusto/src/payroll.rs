@@ -41,12 +41,14 @@ impl Payroll {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/pay_periods?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_periods?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -75,10 +77,13 @@ impl Payroll {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/pay_periods?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/pay_periods?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -131,12 +136,14 @@ impl Payroll {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/payrolls?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -182,10 +189,13 @@ impl Payroll {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/payrolls?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -203,11 +213,13 @@ impl Payroll {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyPayrollsRequest,
     ) -> Result<crate::types::PayrollData> {
-        let url = format!(
-            "/v1/companies/{}/payrolls",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -248,13 +260,15 @@ impl Payroll {
             query_args.push(("show_calculation".to_string(), show_calculation.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(payroll_id_or_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}?{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(payroll_id_or_uuid),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -270,12 +284,14 @@ impl Payroll {
         payroll_id_or_uuid: &str,
         body: &crate::types::PutCompanyPayrollsRequest,
     ) -> Result<crate::types::PayrollData> {
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(payroll_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(payroll_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -300,13 +316,15 @@ impl Payroll {
         pay_period_end_date: &str,
         body: &crate::types::PutCompanyPayrollsRequest,
     ) -> Result<crate::types::PayrollData> {
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_period_start_date),
-            crate::progenitor_support::encode_path(pay_period_end_date),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}/{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(pay_period_start_date),
+                crate::progenitor_support::encode_path(pay_period_end_date),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -327,12 +345,14 @@ impl Payroll {
      * This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation=true* and *include=taxes,benefits,deductions* params
      */
     pub async fn put_company_calculate(&self, company_id: &str, payroll_id: &str) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}/calculate",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}/calculate",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -345,12 +365,14 @@ impl Payroll {
      * Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
      */
     pub async fn put_company_submit(&self, company_id: &str, payroll_id: &str) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}/submit",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}/submit",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -368,12 +390,14 @@ impl Payroll {
         company_id: &str,
         payroll_id: &str,
     ) -> Result<crate::types::PayrollData> {
-        let url = format!(
-            "/v1/companies/{}/payrolls/{}/cancel",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payrolls/{}/cancel",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(payroll_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -387,11 +411,13 @@ impl Payroll {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<crate::types::GetCompanyPayrollReversalsResponse> {
-        let url = format!(
-            "/v1/companies/{}/payroll_reversals",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/payroll_reversals",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

@@ -33,8 +33,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -48,8 +50,7 @@ impl StoreProperties {
     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-01
     */
     pub async fn deprecated_202001_create_countries(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-01/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/countries.json", None);
         self.client
             .post(
                 &url,
@@ -66,8 +67,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-01
      */
     pub async fn deprecated_202001_get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -92,12 +94,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -119,11 +123,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -147,11 +153,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -175,8 +183,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -190,8 +200,7 @@ impl StoreProperties {
     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-04
     */
     pub async fn deprecated_202004_create_countries(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-04/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/countries.json", None);
         self.client
             .post(
                 &url,
@@ -208,8 +217,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-04
      */
     pub async fn deprecated_202004_get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -234,12 +244,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -261,11 +273,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -289,11 +303,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -317,8 +333,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -332,8 +350,7 @@ impl StoreProperties {
     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-07
     */
     pub async fn deprecated_202007_create_countries(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-07/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-07/countries.json", None);
         self.client
             .post(
                 &url,
@@ -350,8 +367,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-07
      */
     pub async fn deprecated_202007_get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -376,12 +394,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -403,11 +423,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -431,11 +453,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -459,8 +483,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -474,8 +500,7 @@ impl StoreProperties {
     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-10
     */
     pub async fn create_countries(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-10/countries.json", None);
         self.client
             .post(
                 &url,
@@ -492,8 +517,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2020-10
      */
     pub async fn get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -514,12 +540,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -541,11 +569,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -566,11 +596,13 @@ impl StoreProperties {
      * * `country_id: &str` -- storefront_access_token_id.
      */
     pub async fn delete_countries_param_country(&self, country_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -594,8 +626,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -609,8 +643,7 @@ impl StoreProperties {
     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2021-01
     */
     pub async fn deprecated_202101_create_countries(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2021-01/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2021-01/countries.json", None);
         self.client
             .post(
                 &url,
@@ -627,8 +660,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-2021-01
      */
     pub async fn deprecated_202101_get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -653,12 +687,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -680,11 +716,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -708,11 +746,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -740,8 +780,10 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/countries.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/countries.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -758,8 +800,7 @@ impl StoreProperties {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/countries.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/unstable/countries.json", None);
         self.client
             .post(
                 &url,
@@ -776,8 +817,9 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#count-unstable
      */
     pub async fn deprecated_unstable_get_countries_count(&self) -> Result<()> {
-        let url = "/admin/api/unstable/countries/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/countries/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -802,12 +844,14 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -829,11 +873,13 @@ impl StoreProperties {
         country_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -857,11 +903,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/countries/{}/json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -872,8 +920,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-01
      */
     pub async fn deprecated_202001_get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -884,8 +931,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-04
      */
     pub async fn deprecated_202004_get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -896,8 +942,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-07
      */
     pub async fn deprecated_202007_get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-07/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -908,8 +953,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2020-10
      */
     pub async fn get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-10/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -920,8 +964,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-2021-01
      */
     pub async fn deprecated_202101_get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2021-01/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -932,8 +975,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/currency#index-unstable
      */
     pub async fn deprecated_unstable_get_currencie(&self) -> Result<()> {
-        let url = "/admin/api/unstable/currencies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/unstable/currencies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -944,8 +986,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-01
      */
     pub async fn deprecated_202001_get_policie(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -956,8 +997,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-04
      */
     pub async fn deprecated_202004_get_policie(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -968,8 +1008,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-07
      */
     pub async fn deprecated_202007_get_policie(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-07/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -980,8 +1019,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2020-10
      */
     pub async fn get_policie(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-10/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -992,8 +1030,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-2021-01
      */
     pub async fn deprecated_202101_get_policie(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2021-01/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1004,8 +1041,7 @@ impl StoreProperties {
      * https://shopify.dev/docs/admin-api/rest/reference/store-properties/policy#index-unstable
      */
     pub async fn deprecated_unstable_get_policie(&self) -> Result<()> {
-        let url = "/admin/api/unstable/policies.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/unstable/policies.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1035,12 +1071,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1058,11 +1096,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1089,13 +1129,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1119,12 +1161,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1160,12 +1204,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1183,11 +1229,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1214,13 +1262,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1244,12 +1294,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1285,12 +1337,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1308,11 +1362,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1339,13 +1395,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1369,12 +1427,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1410,12 +1470,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1433,11 +1495,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1464,13 +1528,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1494,12 +1560,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1535,12 +1603,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1558,11 +1628,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1589,13 +1661,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1619,12 +1693,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1660,12 +1736,14 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/provinces.json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1683,11 +1761,13 @@ impl StoreProperties {
         &self,
         country_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(country_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/provinces/count.json",
+                crate::progenitor_support::encode_path(country_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1714,13 +1794,15 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/provinces/{}/json?{}",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1744,12 +1826,14 @@ impl StoreProperties {
         province_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(country_id),
-            crate::progenitor_support::encode_path(province_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/countries/{}/provinces/{}/json",
+                crate::progenitor_support::encode_path(country_id),
+                crate::progenitor_support::encode_path(province_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1775,8 +1859,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1796,8 +1882,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1817,8 +1905,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1838,8 +1928,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1859,8 +1951,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1880,8 +1974,10 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/shipping_zones.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/shipping_zones.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1901,8 +1997,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1922,8 +2019,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1943,8 +2041,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1964,8 +2063,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1985,8 +2085,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2006,8 +2107,9 @@ impl StoreProperties {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/shop.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/shop.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

@@ -20,11 +20,13 @@ impl Garnishments {
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Garnishment>> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -40,9 +42,12 @@ impl Garnishments {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Garnishment>> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -58,11 +63,13 @@ impl Garnishments {
         employee_id: &str,
         body: &crate::types::PostEmployeeGarnishmentsRequest,
     ) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -79,11 +86,13 @@ impl Garnishments {
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     pub async fn get(&self, garnishment_id: &str) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/garnishments/{}",
+                crate::progenitor_support::encode_path(garnishment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -98,11 +107,13 @@ impl Garnishments {
         garnishment_id: &str,
         body: &crate::types::PutGarnishmentRequest,
     ) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/garnishments/{}",
+                crate::progenitor_support::encode_path(garnishment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,

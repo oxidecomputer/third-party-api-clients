@@ -48,8 +48,7 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/drives?{}", query_), None);
         let resp: crate::types::DriveList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -78,7 +77,7 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
+        let url = self.client.url(&format!("/drives?{}", query_), None);
         let mut resp: crate::types::DriveList = self.client.get(&url, None, None).await?;
 
         let mut drives = resp.drives;
@@ -129,8 +128,7 @@ impl Drives {
             query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/drives?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -162,12 +160,14 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/drives/{}?{}",
+                crate::progenitor_support::encode_path(drive_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -180,11 +180,13 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, drive_id: &str) -> Result<()> {
-        let url = format!(
-            "/drives/{}",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -211,12 +213,14 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/drives/{}?{}",
+                crate::progenitor_support::encode_path(drive_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -235,11 +239,13 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
-        let url = format!(
-            "/drives/{}/hide",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}/hide",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -252,11 +258,13 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
-        let url = format!(
-            "/drives/{}/unhide",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}/unhide",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

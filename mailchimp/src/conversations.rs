@@ -65,8 +65,7 @@ impl Conversations {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/conversations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -96,12 +95,14 @@ impl Conversations {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/conversations/{}?{}",
-            crate::progenitor_support::encode_path(conversation_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/conversations/{}?{}",
+                crate::progenitor_support::encode_path(conversation_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -146,12 +147,14 @@ impl Conversations {
             query_args.push(("since_timestamp".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/conversations/{}/messages?{}",
-            crate::progenitor_support::encode_path(conversation_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/conversations/{}/messages?{}",
+                crate::progenitor_support::encode_path(conversation_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -183,13 +186,15 @@ impl Conversations {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/conversations/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(conversation_id),
-            crate::progenitor_support::encode_path(message_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/conversations/{}/messages/{}?{}",
+                crate::progenitor_support::encode_path(conversation_id),
+                crate::progenitor_support::encode_path(message_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

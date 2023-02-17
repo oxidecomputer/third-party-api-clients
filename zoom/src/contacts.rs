@@ -54,8 +54,7 @@ impl Contacts {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/contacts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/contacts?{}", query_), None);
         let resp: crate::types::SearchCompanyContactsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -91,7 +90,7 @@ impl Contacts {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/contacts?{}", query_);
+        let url = self.client.url(&format!("/contacts?{}", query_), None);
         let mut resp: crate::types::SearchCompanyContactsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -163,8 +162,9 @@ impl Contacts {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/chat/users/me/contacts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/chat/users/me/contacts?{}", query_), None);
         let resp: crate::types::GetUserContactsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -195,7 +195,9 @@ impl Contacts {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/chat/users/me/contacts?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/chat/users/me/contacts?{}", query_), None);
         let mut resp: crate::types::GetUserContactsResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -260,12 +262,14 @@ impl Contacts {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/me/contacts/{}?{}",
-            crate::progenitor_support::encode_path(contact_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/me/contacts/{}?{}",
+                crate::progenitor_support::encode_path(contact_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

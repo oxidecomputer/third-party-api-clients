@@ -47,8 +47,9 @@ impl CampaignFolders {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/campaign-folders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/campaign-folders?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -62,8 +63,7 @@ impl CampaignFolders {
         &self,
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::CampaignFolder> {
-        let url = "/campaign-folders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/campaign-folders", None);
         self.client
             .post(
                 &url,
@@ -99,12 +99,14 @@ impl CampaignFolders {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaign-folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaign-folders/{}?{}",
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -119,11 +121,13 @@ impl CampaignFolders {
      * * `folder_id: &str` -- The unique id for the campaign folder.
      */
     pub async fn delete(&self, folder_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/campaign-folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -142,11 +146,13 @@ impl CampaignFolders {
         folder_id: &str,
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::CampaignFolder> {
-        let url = format!(
-            "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/campaign-folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

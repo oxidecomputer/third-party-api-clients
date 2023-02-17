@@ -25,12 +25,14 @@ impl EnvelopeWorkflowDefinition {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str, envelope_id: &str) -> Result<crate::types::Workflow> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -51,12 +53,14 @@ impl EnvelopeWorkflowDefinition {
         envelope_id: &str,
         body: &crate::types::Workflow,
     ) -> Result<crate::types::Workflow> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -79,12 +83,14 @@ impl EnvelopeWorkflowDefinition {
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str, envelope_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -104,12 +110,14 @@ impl EnvelopeWorkflowDefinition {
         account_id: &str,
         template_id: &str,
     ) -> Result<crate::types::Workflow> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -130,12 +138,14 @@ impl EnvelopeWorkflowDefinition {
         template_id: &str,
         body: &crate::types::Workflow,
     ) -> Result<crate::types::Workflow> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -157,12 +167,14 @@ impl EnvelopeWorkflowDefinition {
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_template(&self, account_id: &str, template_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/workflow",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

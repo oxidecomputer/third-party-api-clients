@@ -37,12 +37,14 @@ impl Resources {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Buildings = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -56,9 +58,12 @@ impl Resources {
      * Retrieves a list of buildings for an account.
      */
     pub async fn buildings_list_all(&self, customer: &str) -> Result<Vec<crate::types::Building>> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
         let mut resp: crate::types::Buildings = self.client.get(&url, None, None).await?;
 
@@ -115,12 +120,14 @@ impl Resources {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -144,12 +151,14 @@ impl Resources {
         customer: &str,
         building_id: &str,
     ) -> Result<crate::types::Building> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(building_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -178,13 +187,15 @@ impl Resources {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(building_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -204,12 +215,14 @@ impl Resources {
      * * `building_id: &str` -- The id of the building to delete.
      */
     pub async fn buildings_delete(&self, customer: &str, building_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(building_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -238,13 +251,15 @@ impl Resources {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(building_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -288,12 +303,14 @@ impl Resources {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::CalendarResources = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -320,10 +337,13 @@ impl Resources {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::CalendarResources = self.client.get(&url, None, None).await?;
 
@@ -370,11 +390,13 @@ impl Resources {
         customer: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -398,12 +420,14 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
     ) -> Result<crate::types::CalendarResource> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(calendar_resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -422,12 +446,14 @@ impl Resources {
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(calendar_resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -447,12 +473,14 @@ impl Resources {
      * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to delete.
      */
     pub async fn calendars_delete(&self, customer: &str, calendar_resource_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(calendar_resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -471,12 +499,14 @@ impl Resources {
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/calendars/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(calendar_resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -510,12 +540,14 @@ impl Resources {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Features = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -529,9 +561,12 @@ impl Resources {
      * Retrieves a list of features for an account.
      */
     pub async fn features_list_all(&self, customer: &str) -> Result<Vec<crate::types::Feature>> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
         let mut resp: crate::types::Features = self.client.get(&url, None, None).await?;
 
@@ -578,11 +613,13 @@ impl Resources {
         customer: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -606,12 +643,14 @@ impl Resources {
         customer: &str,
         feature_key: &str,
     ) -> Result<crate::types::Feature> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(feature_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -630,12 +669,14 @@ impl Resources {
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(feature_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -655,12 +696,14 @@ impl Resources {
      * * `feature_key: &str` -- The unique ID of the feature to delete.
      */
     pub async fn features_delete(&self, customer: &str, feature_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(feature_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -679,12 +722,14 @@ impl Resources {
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(feature_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -709,12 +754,14 @@ impl Resources {
         old_name: &str,
         body: &crate::types::FeatureRename,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}/rename",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(old_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/resources/features/{}/rename",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(old_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

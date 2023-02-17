@@ -18,8 +18,7 @@ impl EphemeralKeys {
      * <p>Creates a short-lived API key for a given resource.</p>
      */
     pub async fn post(&self) -> Result<crate::types::EphemeralKey> {
-        let url = "/v1/ephemeral_keys".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/ephemeral_keys", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -34,11 +33,13 @@ impl EphemeralKeys {
      * * `key: &str` -- The account's country.
      */
     pub async fn delete_key(&self, key: &str) -> Result<crate::types::EphemeralKey> {
-        let url = format!(
-            "/v1/ephemeral_keys/{}",
-            crate::progenitor_support::encode_path(key),
+        let url = self.client.url(
+            &format!(
+                "/v1/ephemeral_keys/{}",
+                crate::progenitor_support::encode_path(key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

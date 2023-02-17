@@ -39,8 +39,7 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/events?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/events?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -55,7 +54,7 @@ impl Activity {
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events>
      */
     pub async fn list_all_public_events(&self) -> Result<Vec<crate::types::Event>> {
-        let url = "/events".to_string();
+        let url = self.client.url("/events", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -78,8 +77,7 @@ impl Activity {
      * FROM: <https://docs.github.com/rest/reference/activity#get-feeds>
      */
     pub async fn get_feeds(&self) -> Result<crate::types::Feed> {
-        let url = "/feeds".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/feeds", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -113,13 +111,15 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/networks/{}/{}/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/networks/{}/{}/events?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -138,10 +138,13 @@ impl Activity {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/networks/{}/{}/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/networks/{}/{}/events",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -192,8 +195,7 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/notifications?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/notifications?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -228,7 +230,7 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/notifications?{}", query_);
+        let url = self.client.url(&format!("/notifications?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -244,8 +246,7 @@ impl Activity {
         &self,
         body: &crate::types::ActivityMarkNotificationsAsReadRequest,
     ) -> Result<crate::types::Error> {
-        let url = "/notifications".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/notifications", None);
         self.client
             .put(
                 &url,
@@ -268,11 +269,13 @@ impl Activity {
      * * `thread_id: i64` -- thread_id parameter.
      */
     pub async fn get_thread(&self, thread_id: i64) -> Result<crate::types::Thread> {
-        let url = format!(
-            "/notifications/threads/{}",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/notifications/threads/{}",
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -289,11 +292,13 @@ impl Activity {
      * * `thread_id: i64` -- thread_id parameter.
      */
     pub async fn mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
-        let url = format!(
-            "/notifications/threads/{}",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/notifications/threads/{}",
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.patch(&url, None, None).await
     }
     /**
@@ -315,11 +320,13 @@ impl Activity {
         &self,
         thread_id: i64,
     ) -> Result<crate::types::ThreadSubscription> {
-        let url = format!(
-            "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/notifications/threads/{}/subscription",
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -344,11 +351,13 @@ impl Activity {
         thread_id: i64,
         body: &crate::types::ActivitySetThreadSubscriptionRequest,
     ) -> Result<crate::types::ThreadSubscription> {
-        let url = format!(
-            "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/notifications/threads/{}/subscription",
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -371,11 +380,13 @@ impl Activity {
      * * `thread_id: i64` -- thread_id parameter.
      */
     pub async fn delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
-        let url = format!(
-            "/notifications/threads/{}/subscription",
-            crate::progenitor_support::encode_path(&thread_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/notifications/threads/{}/subscription",
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -407,12 +418,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/events?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/events?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -427,9 +440,12 @@ impl Activity {
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
      */
     pub async fn list_all_public_org_events(&self, org: &str) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/orgs/{}/events",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/events",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -464,13 +480,15 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/events?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -489,10 +507,13 @@ impl Activity {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/repos/{}/{}/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/events",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -547,13 +568,15 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/notifications?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/notifications?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -590,11 +613,14 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/notifications?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/notifications?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -618,12 +644,14 @@ impl Activity {
         repo: &str,
         body: &crate::types::ActivityMarkRepoNotificationsAsReadRequest,
     ) -> Result<crate::types::PullsUpdateBranchResponse> {
-        let url = format!(
-            "/repos/{}/{}/notifications",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/notifications",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -665,13 +693,15 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/stargazers?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/stargazers?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -705,13 +735,15 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/subscribers?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/subscribers?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -730,10 +762,13 @@ impl Activity {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::SimpleUser>> {
-        let url = format!(
-            "/repos/{}/{}/subscribers",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/subscribers",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -756,12 +791,14 @@ impl Activity {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::RepositorySubscription> {
-        let url = format!(
-            "/repos/{}/{}/subscription",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/subscription",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -784,12 +821,14 @@ impl Activity {
         repo: &str,
         body: &crate::types::ActivitySetRepoSubscriptionRequest,
     ) -> Result<crate::types::RepositorySubscription> {
-        let url = format!(
-            "/repos/{}/{}/subscription",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/subscription",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -813,12 +852,14 @@ impl Activity {
      * * `repo: &str`
      */
     pub async fn delete_repo_subscription(&self, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/subscription",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/subscription",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -862,8 +903,7 @@ impl Activity {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/starred?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/user/starred?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -892,7 +932,7 @@ impl Activity {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/starred?{}", query_);
+        let url = self.client.url(&format!("/user/starred?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -914,12 +954,14 @@ impl Activity {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/user/starred/{}/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/user/starred/{}/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -937,12 +979,14 @@ impl Activity {
      * * `repo: &str`
      */
     pub async fn star_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/user/starred/{}/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/user/starred/{}/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -960,12 +1004,14 @@ impl Activity {
      * * `repo: &str`
      */
     pub async fn unstar_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/user/starred/{}/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/user/starred/{}/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -995,8 +1041,9 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/subscriptions?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/user/subscriptions?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1013,7 +1060,7 @@ impl Activity {
     pub async fn list_all_watched_repos_for_authenticated_user(
         &self,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = "/user/subscriptions".to_string();
+        let url = self.client.url("/user/subscriptions", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -1045,12 +1092,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/events?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1068,9 +1117,12 @@ impl Activity {
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/users/{}/events",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1105,13 +1157,15 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/events/orgs/{}?{}",
-            crate::progenitor_support::encode_path(username),
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events/orgs/{}?{}",
+                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1130,10 +1184,13 @@ impl Activity {
         username: &str,
         org: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/users/{}/events/orgs/{}",
-            crate::progenitor_support::encode_path(username),
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events/orgs/{}",
+                crate::progenitor_support::encode_path(username),
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1166,12 +1223,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/events/public?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events/public?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1189,9 +1248,12 @@ impl Activity {
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/users/{}/events/public",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/events/public",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1224,12 +1286,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/received_events?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/received_events?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1247,9 +1311,12 @@ impl Activity {
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/users/{}/received_events",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/received_events",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1282,12 +1349,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/received_events/public?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/received_events/public?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1305,9 +1374,12 @@ impl Activity {
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let url = format!(
-            "/users/{}/received_events/public",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/received_events/public",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1354,12 +1426,14 @@ impl Activity {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/starred?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/starred?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1391,12 +1465,14 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/subscriptions?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/subscriptions?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1414,9 +1490,12 @@ impl Activity {
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!(
-            "/users/{}/subscriptions",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/subscriptions",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }

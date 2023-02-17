@@ -33,8 +33,7 @@ impl Api {
             query_args.push(("foo".to_string(), foo_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api.test?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/api.test?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

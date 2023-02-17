@@ -46,8 +46,9 @@ impl ApplePay {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/apple_pay/domains?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/apple_pay/domains?{}", query_), None);
         let resp: crate::types::ApplePayDomainList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -72,7 +73,9 @@ impl ApplePay {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/apple_pay/domains?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/apple_pay/domains?{}", query_), None);
         let mut resp: crate::types::ApplePayDomainList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -117,8 +120,7 @@ impl ApplePay {
      * <p>Create an apple pay domain.</p>
      */
     pub async fn post_domain(&self) -> Result<crate::types::ApplePayDomain> {
-        let url = "/v1/apple_pay/domains".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/apple_pay/domains", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -134,11 +136,13 @@ impl ApplePay {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_domains_domain(&self, domain: &str) -> Result<crate::types::ApplePayDomain> {
-        let url = format!(
-            "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(domain),
+        let url = self.client.url(
+            &format!(
+                "/v1/apple_pay/domains/{}",
+                crate::progenitor_support::encode_path(domain),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -156,11 +160,13 @@ impl ApplePay {
         &self,
         domain: &str,
     ) -> Result<crate::types::DeletedApplePayDomain> {
-        let url = format!(
-            "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(domain),
+        let url = self.client.url(
+            &format!(
+                "/v1/apple_pay/domains/{}",
+                crate::progenitor_support::encode_path(domain),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

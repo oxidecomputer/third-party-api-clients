@@ -24,8 +24,7 @@ impl AppsPermissions {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
     pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
-        let url = "/apps.permissions.info".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/apps.permissions.info", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -54,8 +53,9 @@ impl AppsPermissions {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/apps.permissions.request?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/apps.permissions.request?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

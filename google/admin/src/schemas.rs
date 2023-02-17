@@ -22,11 +22,13 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      */
     pub async fn list(&self, customer_id: &str) -> Result<crate::types::Schemas> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas",
-            crate::progenitor_support::encode_path(customer_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas",
+                crate::progenitor_support::encode_path(customer_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -43,11 +45,13 @@ impl Schemas {
         customer_id: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas",
-            crate::progenitor_support::encode_path(customer_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas",
+                crate::progenitor_support::encode_path(customer_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -67,12 +71,14 @@ impl Schemas {
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
     pub async fn get(&self, customer_id: &str, schema_key: &str) -> Result<crate::types::Schema> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -91,12 +97,14 @@ impl Schemas {
         schema_key: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -116,12 +124,14 @@ impl Schemas {
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
     pub async fn delete(&self, customer_id: &str, schema_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -140,12 +150,14 @@ impl Schemas {
         schema_key: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/schemas/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(schema_key),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

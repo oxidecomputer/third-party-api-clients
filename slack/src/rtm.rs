@@ -41,8 +41,7 @@ impl Rtm {
             query_args.push(("presence_sub".to_string(), presence_sub.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rtm.connect?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/rtm.connect?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

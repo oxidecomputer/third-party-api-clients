@@ -34,8 +34,7 @@ impl Dialog {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/dialog.open?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/dialog.open?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

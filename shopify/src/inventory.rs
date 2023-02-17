@@ -49,8 +49,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -68,11 +70,13 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -91,11 +95,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -141,8 +147,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -160,11 +168,13 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -183,11 +193,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -233,8 +245,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -252,11 +266,13 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -275,11 +291,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -320,8 +338,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -336,11 +356,13 @@ impl Inventory {
      * * `inventory_item_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_items_param_item(&self, inventory_item_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -359,11 +381,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -409,8 +433,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -428,11 +454,13 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -451,11 +479,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -501,8 +531,10 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_items.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_items.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -520,11 +552,13 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -543,11 +577,13 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -599,8 +635,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -654,8 +692,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -704,8 +744,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels/adjust.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -761,11 +803,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -832,8 +876,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -885,8 +931,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -940,8 +988,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -990,8 +1040,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels/adjust.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1047,11 +1099,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1118,8 +1172,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1171,8 +1227,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1226,8 +1284,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1276,8 +1336,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels/adjust.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1333,11 +1395,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1404,8 +1468,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1457,8 +1523,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1512,8 +1580,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1562,8 +1632,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels/adjust.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1619,11 +1691,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1690,8 +1764,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1743,8 +1819,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -1798,8 +1876,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1848,8 +1928,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels/adjust.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -1905,11 +1987,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1976,8 +2060,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2029,8 +2115,10 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -2084,8 +2172,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            None,
+        );
         self.client.delete(&url, None, None).await
     }
     /**
@@ -2134,11 +2224,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/inventory_levels/adjust.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_levels/adjust.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2194,11 +2286,13 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -2265,8 +2359,10 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels/set.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -2283,8 +2379,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-01
      */
     pub async fn deprecated_202001_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-01/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2302,11 +2397,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2317,8 +2414,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-01
      */
     pub async fn deprecated_202001_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2336,11 +2434,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2351,8 +2451,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-04
      */
     pub async fn deprecated_202004_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-04/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2370,11 +2469,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2385,8 +2486,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-04
      */
     pub async fn deprecated_202004_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2404,11 +2506,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2419,8 +2523,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-07
      */
     pub async fn deprecated_202007_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-07/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2438,11 +2541,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2453,8 +2558,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-07
      */
     pub async fn deprecated_202007_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2472,11 +2578,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2487,8 +2595,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-10
      */
     pub async fn get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2020-10/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2503,11 +2610,13 @@ impl Inventory {
      * * `location_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_locations_param_location(&self, location_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2518,8 +2627,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-10
      */
     pub async fn get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2534,11 +2644,13 @@ impl Inventory {
      * * `location_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_locations_param_location_level(&self, location_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2549,8 +2661,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2021-01
      */
     pub async fn deprecated_202101_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/2021-01/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2568,11 +2679,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2583,8 +2696,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2021-01
      */
     pub async fn deprecated_202101_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2602,11 +2716,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2617,8 +2733,7 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-unstable
      */
     pub async fn deprecated_unstable_get_location(&self) -> Result<()> {
-        let url = "/admin/api/unstable/locations.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/api/unstable/locations.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2636,11 +2751,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2651,8 +2768,9 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-unstable
      */
     pub async fn deprecated_unstable_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/unstable/locations/count.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/locations/count.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -2670,11 +2788,13 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

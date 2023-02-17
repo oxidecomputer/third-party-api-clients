@@ -48,8 +48,7 @@ impl Cards {
             query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/cards?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/cards?{}", query_), None);
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -77,7 +76,7 @@ impl Cards {
             query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/cards?{}", query_);
+        let url = self.client.url(&format!("/cards?{}", query_), None);
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None, None).await?;
 
         let mut cards = resp.cards;
@@ -128,8 +127,10 @@ impl Cards {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
-        let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -148,8 +149,10 @@ impl Cards {
         id: &str,
         body: &crate::types::PatchResourcesCardsCardRequest,
     ) -> Result<()> {
-        let url = format!("/cards/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .patch(
                 &url,
@@ -173,8 +176,7 @@ impl Cards {
         &self,
         body: &crate::types::PostResourcesCardPhysicalRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = "/cards/deferred/physical".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/cards/deferred/physical", None);
         self.client
             .post(
                 &url,
@@ -198,8 +200,7 @@ impl Cards {
         &self,
         body: &crate::types::PostResourcesCardVirtualRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = "/cards/deferred/virtual".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/cards/deferred/virtual", None);
         self.client
             .post(
                 &url,
@@ -220,11 +221,13 @@ impl Cards {
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = format!(
-            "/cards/{}/deferred/termination",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/cards/{}/deferred/termination",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -245,11 +248,13 @@ impl Cards {
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = format!(
-            "/cards/{}/deferred/suspension",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/cards/{}/deferred/suspension",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -270,11 +275,13 @@ impl Cards {
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = format!(
-            "/cards/{}/deferred/unsuspension",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/cards/{}/deferred/unsuspension",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -298,11 +305,13 @@ impl Cards {
         &self,
         id: &str,
     ) -> Result<crate::types::GetResourcesCardsDeferredResponse> {
-        let url = format!(
-            "/cards/deferred/status/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/cards/deferred/status/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

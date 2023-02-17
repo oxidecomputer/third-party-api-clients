@@ -46,12 +46,14 @@ impl Acl {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Acl = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -74,10 +76,13 @@ impl Acl {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::Acl = self.client.get(&url, None, None).await?;
 
@@ -134,12 +139,14 @@ impl Acl {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -183,12 +190,14 @@ impl Acl {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl/watch?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl/watch?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -208,12 +217,14 @@ impl Acl {
      * * `rule_id: &str` -- ETag of the collection.
      */
     pub async fn get(&self, calendar_id: &str, rule_id: &str) -> Result<crate::types::AclRule> {
-        let url = format!(
-            "/calendars/{}/acl/{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -242,13 +253,15 @@ impl Acl {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(rule_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -268,12 +281,14 @@ impl Acl {
      * * `rule_id: &str` -- ETag of the collection.
      */
     pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> Result<()> {
-        let url = format!(
-            "/calendars/{}/acl/{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -302,13 +317,15 @@ impl Acl {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/acl/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/acl/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(rule_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

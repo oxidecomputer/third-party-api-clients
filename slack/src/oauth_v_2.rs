@@ -47,8 +47,9 @@ impl OauthV2 {
             query_args.push(("redirect_uri".to_string(), redirect_uri.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/oauth.v2.access?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/oauth.v2.access?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

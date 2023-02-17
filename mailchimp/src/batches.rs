@@ -47,8 +47,7 @@ impl Batches {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/batches?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/batches?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -62,8 +61,7 @@ impl Batches {
         &self,
         body: &crate::types::PostBatchesRequest,
     ) -> Result<crate::types::Batch> {
-        let url = "/batches".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/batches", None);
         self.client
             .post(
                 &url,
@@ -99,12 +97,14 @@ impl Batches {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/batches/{}?{}",
-            crate::progenitor_support::encode_path(batch_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/batches/{}?{}",
+                crate::progenitor_support::encode_path(batch_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -119,11 +119,13 @@ impl Batches {
      * * `batch_id: &str` -- The unique id for the batch operation.
      */
     pub async fn delete(&self, batch_id: &str) -> Result<()> {
-        let url = format!(
-            "/batches/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/batches/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

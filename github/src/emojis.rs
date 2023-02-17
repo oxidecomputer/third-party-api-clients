@@ -22,8 +22,7 @@ impl Emojis {
      * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
      */
     pub async fn get(&self) -> Result<String> {
-        let url = "/emojis".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/emojis", None);
         self.client.get(&url, None, None).await
     }
 }

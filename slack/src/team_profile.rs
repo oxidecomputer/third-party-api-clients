@@ -30,8 +30,9 @@ impl TeamProfile {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/team.profile.get?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/team.profile.get?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

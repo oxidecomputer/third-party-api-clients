@@ -24,8 +24,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.add".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/calls.add", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -42,8 +41,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.end".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/calls.end", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -66,8 +64,7 @@ impl Calls {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/calls.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/calls.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -82,8 +79,7 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn update(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.update".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/calls.update", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

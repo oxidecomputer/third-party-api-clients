@@ -28,11 +28,13 @@ impl Reports {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ReportInProductList> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -51,11 +53,13 @@ impl Reports {
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
     ) -> Result<crate::types::ReportInProductSaveResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -80,11 +84,13 @@ impl Reports {
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
     ) -> Result<crate::types::ReportInProductRunResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports/report_results",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports/report_results",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -109,11 +115,13 @@ impl Reports {
         account_id: &str,
         body: &crate::types::ReportInProductCsvRunRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports/report_results_csv",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports/report_results_csv",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -139,12 +147,14 @@ impl Reports {
         account_id: &str,
         id: &str,
     ) -> Result<crate::types::ReportInProductGet> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -165,12 +175,14 @@ impl Reports {
         id: &str,
         body: &crate::types::ReportInProductRunRequest,
     ) -> Result<crate::types::ReportInProductSaveResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -196,12 +208,14 @@ impl Reports {
         account_id: &str,
         id: &str,
     ) -> Result<crate::types::ReportInProductSaveResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/reports/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/reports/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

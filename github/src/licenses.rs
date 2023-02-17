@@ -44,8 +44,7 @@ impl Licenses {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/licenses?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/licenses?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -68,7 +67,7 @@ impl Licenses {
             query_args.push(("featured".to_string(), featured.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/licenses?{}", query_);
+        let url = self.client.url(&format!("/licenses?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -85,11 +84,13 @@ impl Licenses {
      * * `license: &str`
      */
     pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
-        let url = format!(
-            "/licenses/{}",
-            crate::progenitor_support::encode_path(license),
+        let url = self.client.url(
+            &format!(
+                "/licenses/{}",
+                crate::progenitor_support::encode_path(license),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -113,12 +114,14 @@ impl Licenses {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::LicenseContent> {
-        let url = format!(
-            "/repos/{}/{}/license",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/license",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

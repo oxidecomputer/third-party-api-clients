@@ -42,8 +42,7 @@ impl CampaignsApi {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/campaigns?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/campaigns?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -63,8 +62,7 @@ impl CampaignsApi {
         &self,
         body: &crate::types::CampaignsRequest,
     ) -> Result<crate::types::CampaignResponseAllOf> {
-        let url = "/campaigns".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/campaigns", None);
         self.client
             .post(
                 &url,
@@ -88,11 +86,13 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
     ) -> Result<crate::types::GetCampaignsCampaignResponse> {
-        let url = format!(
-            "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -107,11 +107,13 @@ impl CampaignsApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_campaigns_campaign(&self, campaign_id: i64) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -132,11 +134,13 @@ impl CampaignsApi {
         campaign_id: i64,
         body: &crate::types::UpdateACampaignRequest,
     ) -> Result<crate::types::CampaignResponseAllOf> {
-        let url = format!(
-            "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -162,11 +166,13 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
     ) -> Result<crate::types::SendACampaignResponse> {
-        let url = format!(
-            "/campaigns/{}/schedules/now",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules/now",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -184,11 +190,13 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
     ) -> Result<crate::types::ScheduleACampaignRequest> {
-        let url = format!(
-            "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -209,11 +217,13 @@ impl CampaignsApi {
         campaign_id: i64,
         body: &crate::types::ScheduleACampaignRequest,
     ) -> Result<crate::types::ScheduleACampaignResponse> {
-        let url = format!(
-            "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -237,11 +247,13 @@ impl CampaignsApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_campaigns_campaign_schedules(&self, campaign_id: i64) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -260,11 +272,13 @@ impl CampaignsApi {
         campaign_id: i64,
         body: &crate::types::ScheduleACampaignRequest,
     ) -> Result<crate::types::UpdateAScheduledCampaignResponse> {
-        let url = format!(
-            "/campaigns/{}/schedules",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -291,11 +305,13 @@ impl CampaignsApi {
         campaign_id: i64,
         body: &crate::types::SendATestCampaignRequest,
     ) -> Result<crate::types::SendATestCampaignRequest> {
-        let url = format!(
-            "/campaigns/{}/schedules/test",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/schedules/test",
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

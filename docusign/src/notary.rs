@@ -33,8 +33,9 @@ impl Notary {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2.1/current_user/notary?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v2.1/current_user/notary?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -45,8 +46,7 @@ impl Notary {
      * Updates notary information for the current user.
      */
     pub async fn put(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
-        let url = "/v2.1/current_user/notary".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .put(
                 &url,
@@ -63,8 +63,7 @@ impl Notary {
      * Registers the current user as a notary.
      */
     pub async fn post(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
-        let url = "/v2.1/current_user/notary".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .post(
                 &url,

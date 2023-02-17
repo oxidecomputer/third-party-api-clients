@@ -35,8 +35,9 @@ impl Reimbursements {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reimbursements?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/reimbursements?{}", query_), None);
         let resp: crate::types::GetReimbursementsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -51,7 +52,7 @@ impl Reimbursements {
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
-        let url = "/reimbursements".to_string();
+        let url = self.client.url("/reimbursements", None);
         let resp: crate::types::GetReimbursementsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -97,11 +98,13 @@ impl Reimbursements {
      * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Reimbursement> {
-        let url = format!(
-            "/reimbursements/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/reimbursements/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

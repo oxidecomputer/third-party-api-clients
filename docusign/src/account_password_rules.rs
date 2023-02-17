@@ -24,11 +24,13 @@ impl AccountPasswordRules {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountPasswordRulesData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/password_rules",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -49,11 +51,13 @@ impl AccountPasswordRules {
         account_id: &str,
         body: &crate::types::AccountPasswordRulesData,
     ) -> Result<crate::types::AccountPasswordRulesData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/password_rules",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -70,8 +74,7 @@ impl AccountPasswordRules {
      *
      */
     pub async fn password_rules_get(&self) -> Result<crate::types::UserPasswordRules> {
-        let url = "/v2.1/current_user/password_rules".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v2.1/current_user/password_rules", None);
         self.client.get(&url, None, None).await
     }
 }

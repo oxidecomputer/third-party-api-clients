@@ -34,12 +34,14 @@ impl CustomTabs {
             query_args.push(("custom_tab_only".to_string(), custom_tab_only.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -60,11 +62,13 @@ impl CustomTabs {
         account_id: &str,
         body: &crate::types::TabMetadata,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -90,12 +94,14 @@ impl CustomTabs {
         account_id: &str,
         custom_tab_id: &str,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -118,12 +124,14 @@ impl CustomTabs {
         custom_tab_id: &str,
         body: &crate::types::TabMetadata,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -145,12 +153,14 @@ impl CustomTabs {
      * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
      */
     pub async fn tab_delete_custom(&self, account_id: &str, custom_tab_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

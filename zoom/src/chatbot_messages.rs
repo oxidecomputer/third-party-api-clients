@@ -26,8 +26,7 @@ impl ChatbotMessages {
      * Learn more about how to authorize chatbots in the [Chatbot Authorization](https://marketplace.zoom.us/docs/guides/chatbots/authorization) guide.
      */
     pub async fn sendchatbot(&self, body: &crate::types::SendchatbotRequest) -> Result<()> {
-        let url = "/im/chat/messages".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/im/chat/messages", None);
         self.client
             .post(
                 &url,
@@ -59,11 +58,13 @@ impl ChatbotMessages {
         message_id: &str,
         body: &crate::types::EditChatbotMessageRequest,
     ) -> Result<crate::types::EditChatbotMessageResponse> {
-        let url = format!(
-            "/im/chat/messages/{}",
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/im/chat/messages/{}",
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -86,11 +87,13 @@ impl ChatbotMessages {
         message_id: &str,
         body: &crate::types::DeleteChatbotMessageRequest,
     ) -> Result<crate::types::DeleteChatbotMessageResponse> {
-        let url = format!(
-            "/im/chat/messages/{}",
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/im/chat/messages/{}",
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

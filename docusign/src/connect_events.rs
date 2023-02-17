@@ -29,11 +29,13 @@ impl ConnectEvents {
         account_id: &str,
         body: &crate::types::ConnectFailureFilter,
     ) -> Result<crate::types::ConnectFailureResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/envelopes/retry_queue",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/envelopes/retry_queue",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -59,12 +61,14 @@ impl ConnectEvents {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::ConnectFailureResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/envelopes/{}/retry_queue",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/envelopes/{}/retry_queue",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -98,12 +102,14 @@ impl ConnectEvents {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/connect/failures?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/failures?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -123,12 +129,14 @@ impl ConnectEvents {
         account_id: &str,
         failure_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/failures/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(failure_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/failures/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(failure_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -164,12 +172,14 @@ impl ConnectEvents {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/connect/logs?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/logs?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -184,11 +194,13 @@ impl ConnectEvents {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_log_delete_logs(&self, account_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/logs",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/logs",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -217,13 +229,15 @@ impl ConnectEvents {
             query_args.push(("additional_info".to_string(), additional_info.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/connect/logs/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(log_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/logs/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(log_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -240,12 +254,14 @@ impl ConnectEvents {
      * * `log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_log_delete(&self, account_id: &str, log_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/logs/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(log_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/logs/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(log_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

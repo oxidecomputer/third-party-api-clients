@@ -23,8 +23,7 @@ impl Balance {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self) -> Result<crate::types::Balance> {
-        let url = "/v1/balance".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/balance", None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -82,8 +81,9 @@ impl Balance {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance/history?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/balance/history?{}", query_), None);
         let resp: crate::types::BalanceTransactionsList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -123,7 +123,9 @@ impl Balance {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance/history?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/balance/history?{}", query_), None);
         let mut resp: crate::types::BalanceTransactionsList =
             self.client.get(&url, None, None).await?;
 
@@ -176,11 +178,13 @@ impl Balance {
      * * `id: &str` -- The account's country.
      */
     pub async fn get_history_balance(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
-        let url = format!(
-            "/v1/balance/history/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/balance/history/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

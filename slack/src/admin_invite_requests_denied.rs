@@ -43,8 +43,10 @@ impl AdminInviteRequestsDenied {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.inviteRequests.denied.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin.inviteRequests.denied.list?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
 }

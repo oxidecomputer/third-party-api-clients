@@ -15,7 +15,11 @@ pub struct Template {
 }
 
 impl Template {
-    pub fn compile(&self, query_params: BTreeMap<String, (String, String)>) -> String {
+    pub fn compile(
+        &self,
+        query_params: BTreeMap<String, (String, String)>,
+        server_arg: &str,
+    ) -> String {
         let mut out = String::new();
 
         let mut a = |s: &str| {
@@ -83,9 +87,9 @@ impl Template {
             a("let query_ = serde_urlencoded::to_string(&query_args).unwrap();");
         }
 
-        a("let url =");
+        a("let url = self.client.url(");
         if self.components.is_empty() && query_params.is_empty() {
-            a(r#""".to_string();"#);
+            a(&format!(r#""", {server_arg});"#));
 
             return out.to_string();
         }
@@ -102,7 +106,7 @@ impl Template {
         }
 
         if !has_params && query_params.is_empty() {
-            out.push('"');
+            out.push_str(r#"&""#);
             for c in self.components.iter() {
                 out.push('/');
                 match c {
@@ -110,12 +114,12 @@ impl Template {
                     Component::Parameter(_) => (),
                 }
             }
-            out.push_str("\".to_string();");
+            out.push_str(&format!(r#"".to_string(), {server_arg});"#));
 
             return out.to_string();
         }
 
-        out.push_str("format!(\"");
+        out.push_str("&format!(\"");
         for c in self.components.iter() {
             out.push('/');
             match c {
@@ -157,7 +161,7 @@ impl Template {
             out.push_str("query_");
         }
 
-        out.push_str(");\n");
+        out.push_str(&format!("), {server_arg});\n"));
 
         out
     }
@@ -291,10 +295,10 @@ mod test {
     #[test]
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
-        let out = t.compile(Default::default());
+        let out = t.compile(Default::default(), "None");
         let want = "let url =
-format!(\"/measure/{}\",
-crate::progenitor_support::encode_path(&number.to_string()),);\n";
+self.client.url(&format!(\"/measure/{}\",
+crate::progenitor_support::encode_path(&number.to_string()),), \"None\");\n";
         assert_eq!(want, &out);
         Ok(())
     }

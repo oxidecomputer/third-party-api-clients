@@ -32,13 +32,15 @@ impl EnvelopeDocumentHtmlDefinitions {
         document_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::DocumentHtmlDefinitionOriginals> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}/html_definitions",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}/html_definitions",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

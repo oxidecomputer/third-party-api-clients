@@ -20,8 +20,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.add>
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/files.remote.add".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/files.remote.add", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -48,8 +47,9 @@ impl FilesRemote {
             query_args.push(("file".to_string(), file.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files.remote.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/files.remote.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -93,8 +93,9 @@ impl FilesRemote {
             query_args.push(("ts_to".to_string(), ts_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files.remote.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/files.remote.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -105,8 +106,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.remove>
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/files.remote.remove".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/files.remote.remove", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -142,8 +142,9 @@ impl FilesRemote {
             query_args.push(("file".to_string(), file.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files.remote.share?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/files.remote.share?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -154,8 +155,7 @@ impl FilesRemote {
      * FROM: <https://api.slack.com/methods/files.remote.update>
      */
     pub async fn update(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/files.remote.update".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/files.remote.update", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

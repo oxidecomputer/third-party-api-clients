@@ -47,12 +47,14 @@ impl RoleAssignments {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::RoleAssignments = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -79,10 +81,13 @@ impl RoleAssignments {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::RoleAssignments = self.client.get(&url, None, None).await?;
 
@@ -129,11 +134,13 @@ impl RoleAssignments {
         customer: &str,
         body: &crate::types::RoleAssignment,
     ) -> Result<crate::types::RoleAssignment> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -157,12 +164,14 @@ impl RoleAssignments {
         customer: &str,
         role_assignment_id: &str,
     ) -> Result<crate::types::RoleAssignment> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(role_assignment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(role_assignment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -176,12 +185,14 @@ impl RoleAssignments {
      * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
      */
     pub async fn delete(&self, customer: &str, role_assignment_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(role_assignment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(role_assignment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

@@ -20,8 +20,7 @@ impl Domains {
      * List all verified custom Domains for the org.
      */
     pub async fn list(&self) -> Result<crate::types::DomainListResponse> {
-        let url = "/api/v1/domains".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/api/v1/domains", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -32,8 +31,7 @@ impl Domains {
      * Creates your domain.
      */
     pub async fn create(&self, body: &crate::types::Domain) -> Result<crate::types::Domain> {
-        let url = "/api/v1/domains".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/api/v1/domains", None);
         self.client
             .post(
                 &url,
@@ -54,11 +52,13 @@ impl Domains {
      * * `domain_id: &str`
      */
     pub async fn get(&self, domain_id: &str) -> Result<crate::types::Domain> {
-        let url = format!(
-            "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/domains/{}",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -73,11 +73,13 @@ impl Domains {
      * * `domain_id: &str`
      */
     pub async fn delete(&self, domain_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/domains/{}",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -96,11 +98,13 @@ impl Domains {
         domain_id: &str,
         body: &crate::types::DomainCertificate,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/domains/{}/certificate",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/domains/{}/certificate",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -121,11 +125,13 @@ impl Domains {
      * * `domain_id: &str`
      */
     pub async fn verify(&self, domain_id: &str) -> Result<crate::types::Domain> {
-        let url = format!(
-            "/api/v1/domains/{}/verify",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/domains/{}/verify",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

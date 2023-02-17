@@ -67,8 +67,7 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
         let resp: crate::types::PriceList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -108,7 +107,7 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices?{}", query_);
+        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
         let mut resp: crate::types::PriceList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -153,8 +152,7 @@ impl Prices {
      * <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PriceData> {
-        let url = "/v1/prices".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/prices", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -191,8 +189,9 @@ impl Prices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices/search?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/prices/search?{}", query_), None);
         let resp: crate::types::SearchResult = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -217,7 +216,9 @@ impl Prices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices/search?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/prices/search?{}", query_), None);
         let mut resp: crate::types::SearchResult = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -267,11 +268,13 @@ impl Prices {
      * * `price: &str` -- The account's country.
      */
     pub async fn get(&self, price: &str) -> Result<crate::types::PriceData> {
-        let url = format!(
-            "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+        let url = self.client.url(
+            &format!(
+                "/v1/prices/{}",
+                crate::progenitor_support::encode_path(price),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -286,11 +289,13 @@ impl Prices {
      * * `price: &str` -- The account's country.
      */
     pub async fn post_prices(&self, price: &str) -> Result<crate::types::PriceData> {
-        let url = format!(
-            "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+        let url = self.client.url(
+            &format!(
+                "/v1/prices/{}",
+                crate::progenitor_support::encode_path(price),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

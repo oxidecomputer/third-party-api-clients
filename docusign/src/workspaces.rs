@@ -24,11 +24,13 @@ impl Workspaces {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,11 +49,13 @@ impl Workspaces {
         account_id: &str,
         body: &crate::types::Workspace,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -77,12 +81,14 @@ impl Workspaces {
         account_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -103,12 +109,14 @@ impl Workspaces {
         workspace_id: &str,
         body: &crate::types::Workspace,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -134,12 +142,14 @@ impl Workspaces {
         account_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

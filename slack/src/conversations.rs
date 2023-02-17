@@ -24,8 +24,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/conversations.archive".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.archive", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -42,8 +41,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn close(&self) -> Result<crate::types::ConversationsCloseSuccessSchema> {
-        let url = "/conversations.close".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.close", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -60,8 +58,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn create(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
-        let url = "/conversations.create".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.create", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -112,8 +109,9 @@ impl Conversations {
             query_args.push(("oldest".to_string(), oldest.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations.history?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/conversations.history?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -150,8 +148,9 @@ impl Conversations {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations.info?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/conversations.info?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -166,8 +165,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn invite(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
-        let url = "/conversations.invite".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.invite", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -184,8 +182,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `channels:write`.
      */
     pub async fn join(&self) -> Result<crate::types::ConversationsJoinSuccessSchema> {
-        let url = "/conversations.join".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.join", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -202,8 +199,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn kick(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/conversations.kick".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.kick", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -220,8 +216,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn leave(&self) -> Result<crate::types::ConversationsLeaveSuccessSchema> {
-        let url = "/conversations.leave".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.leave", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -262,8 +257,9 @@ impl Conversations {
             query_args.push(("types".to_string(), types.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations.list?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/conversations.list?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -278,8 +274,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn mark(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/conversations.mark".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.mark", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -315,8 +310,9 @@ impl Conversations {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations.members?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/conversations.members?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -331,8 +327,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn open(&self) -> Result<crate::types::ConversationsOpenSuccessSchema> {
-        let url = "/conversations.open".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.open", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -349,8 +344,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn rename(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
-        let url = "/conversations.rename".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.rename", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -406,8 +400,9 @@ impl Conversations {
             query_args.push(("ts".to_string(), ts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/conversations.replies?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/conversations.replies?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -422,8 +417,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn set_purpose(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
-        let url = "/conversations.setPurpose".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.setPurpose", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -440,8 +434,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn set_topic(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
-        let url = "/conversations.setTopic".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.setTopic", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -458,8 +451,7 @@ impl Conversations {
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
     pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/conversations.unarchive".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/conversations.unarchive", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

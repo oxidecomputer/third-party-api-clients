@@ -35,12 +35,14 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
     ) -> Result<crate::types::Channel> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -61,12 +63,14 @@ impl ChatChannelsAccountLevel {
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
     pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -93,12 +97,14 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         body: &crate::types::Attendees,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -140,13 +146,15 @@ impl ChatChannelsAccountLevel {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/channels/{}/members?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ListChannelMembersResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -171,10 +179,13 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
     ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
         let mut resp: crate::types::ListChannelMembersResponseData =
             self.client.get(&url, None, None).await?;
@@ -231,12 +242,14 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         body: &crate::types::InviteChannelMembersRequest,
     ) -> Result<crate::types::InviteChannelMembersResponse> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -270,13 +283,15 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         member_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
-            crate::progenitor_support::encode_path(member_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+                crate::progenitor_support::encode_path(member_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

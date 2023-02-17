@@ -62,8 +62,7 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/logs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -100,7 +99,7 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/logs?{}", query_);
+        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
 }

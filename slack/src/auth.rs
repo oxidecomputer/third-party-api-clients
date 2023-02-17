@@ -30,8 +30,7 @@ impl Auth {
             query_args.push(("test".to_string(), test.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/auth.revoke?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/auth.revoke?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -46,8 +45,7 @@ impl Auth {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
     pub async fn test(&self) -> Result<crate::types::AuthTestSuccessSchema> {
-        let url = "/auth.test".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/auth.test", None);
         self.client.get(&url, None, None).await
     }
 }

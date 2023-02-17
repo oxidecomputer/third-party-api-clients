@@ -51,8 +51,9 @@ impl Radar {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
         let resp: crate::types::RadarEarlyFraudWarningList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -81,7 +82,9 @@ impl Radar {
             query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
         let mut resp: crate::types::RadarEarlyFraudWarningList =
             self.client.get(&url, None, None).await?;
 
@@ -137,11 +140,13 @@ impl Radar {
         &self,
         early_fraud_warning: &str,
     ) -> Result<crate::types::RadarEarlyFraudWarning> {
-        let url = format!(
-            "/v1/radar/early_fraud_warnings/{}",
-            crate::progenitor_support::encode_path(early_fraud_warning),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/early_fraud_warnings/{}",
+                crate::progenitor_support::encode_path(early_fraud_warning),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -187,8 +192,9 @@ impl Radar {
             query_args.push(("value_list".to_string(), value_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_list_items?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
         let resp: crate::types::ListItems = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -218,7 +224,9 @@ impl Radar {
             query_args.push(("value_list".to_string(), value_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_list_items?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
         let mut resp: crate::types::ListItems = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -263,8 +271,7 @@ impl Radar {
      * <p>Creates a new <code>ValueListItem</code> object, which is added to the specified parent value list.</p>
      */
     pub async fn post_value_list_item(&self) -> Result<crate::types::RadarListItem> {
-        let url = "/v1/radar/value_list_items".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/radar/value_list_items", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -283,11 +290,13 @@ impl Radar {
         &self,
         item: &str,
     ) -> Result<crate::types::RadarListItem> {
-        let url = format!(
-            "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_list_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -305,11 +314,13 @@ impl Radar {
         &self,
         item: &str,
     ) -> Result<crate::types::RadarListDeletedItem> {
-        let url = format!(
-            "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_list_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -355,8 +366,9 @@ impl Radar {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_lists?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_lists?{}", query_), None);
         let resp: crate::types::GetRadarValueListsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -386,7 +398,9 @@ impl Radar {
             query_args.push(("contains".to_string(), contains.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_lists?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_lists?{}", query_), None);
         let mut resp: crate::types::GetRadarValueListsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -432,8 +446,7 @@ impl Radar {
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
     pub async fn post_value_list(&self) -> Result<crate::types::RadarList> {
-        let url = "/v1/radar/value_lists".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/radar/value_lists", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -449,11 +462,13 @@ impl Radar {
      * * `value_list: &str` -- The account's country.
      */
     pub async fn get_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -468,11 +483,13 @@ impl Radar {
      * * `value_list: &str` -- The account's country.
      */
     pub async fn post_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -490,11 +507,13 @@ impl Radar {
         &self,
         value_list: &str,
     ) -> Result<crate::types::RadarListDeleted> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

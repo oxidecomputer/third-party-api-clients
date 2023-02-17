@@ -18,8 +18,7 @@ impl Sources {
      * <p>Creates a new source object.</p>
      */
     pub async fn post(&self) -> Result<crate::types::SourceData> {
-        let url = "/v1/sources".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/sources", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -41,12 +40,14 @@ impl Sources {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/sources/{}?{}",
-            crate::progenitor_support::encode_path(source),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}?{}",
+                crate::progenitor_support::encode_path(source),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -63,11 +64,13 @@ impl Sources {
      * * `source: &str` -- The account's country.
      */
     pub async fn post_sources(&self, source: &str) -> Result<crate::types::SourceData> {
-        let url = format!(
-            "/v1/sources/{}",
-            crate::progenitor_support::encode_path(source),
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}",
+                crate::progenitor_support::encode_path(source),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -88,12 +91,14 @@ impl Sources {
         mandate_notification: &str,
         source: &str,
     ) -> Result<crate::types::SourceMandateNotification> {
-        let url = format!(
-            "/v1/sources/{}/mandate_notifications/{}",
-            crate::progenitor_support::encode_path(source),
-            crate::progenitor_support::encode_path(mandate_notification),
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}/mandate_notifications/{}",
+                crate::progenitor_support::encode_path(source),
+                crate::progenitor_support::encode_path(mandate_notification),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -129,12 +134,14 @@ impl Sources {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/sources/{}/source_transactions?{}",
-            crate::progenitor_support::encode_path(source),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}/source_transactions?{}",
+                crate::progenitor_support::encode_path(source),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::ApmsSourcesSourceTransactionList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -154,9 +161,12 @@ impl Sources {
         &self,
         source: &str,
     ) -> Result<Vec<crate::types::SourceTransaction>> {
-        let url = format!(
-            "/v1/sources/{}/source_transactions",
-            crate::progenitor_support::encode_path(source),
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}/source_transactions",
+                crate::progenitor_support::encode_path(source),
+            ),
+            None,
         );
         let mut resp: crate::types::ApmsSourcesSourceTransactionList =
             self.client.get(&url, None, None).await?;
@@ -213,12 +223,14 @@ impl Sources {
         source: &str,
         source_transaction: &str,
     ) -> Result<crate::types::SourceTransaction> {
-        let url = format!(
-            "/v1/sources/{}/source_transactions/{}",
-            crate::progenitor_support::encode_path(source),
-            crate::progenitor_support::encode_path(source_transaction),
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}/source_transactions/{}",
+                crate::progenitor_support::encode_path(source),
+                crate::progenitor_support::encode_path(source_transaction),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -233,11 +245,13 @@ impl Sources {
      * * `source: &str` -- The account's country.
      */
     pub async fn post_verify(&self, source: &str) -> Result<crate::types::SourceData> {
-        let url = format!(
-            "/v1/sources/{}/verify",
-            crate::progenitor_support::encode_path(source),
+        let url = self.client.url(
+            &format!(
+                "/v1/sources/{}/verify",
+                crate::progenitor_support::encode_path(source),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

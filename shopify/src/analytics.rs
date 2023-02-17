@@ -58,8 +58,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -88,8 +89,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -120,12 +122,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -144,11 +148,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -172,11 +178,13 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -225,8 +233,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -255,8 +264,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -287,12 +297,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -311,11 +323,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -339,11 +353,13 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -392,8 +408,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -422,8 +439,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -454,12 +472,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -478,11 +498,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -506,11 +528,13 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -559,8 +583,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -589,8 +614,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -617,12 +643,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -641,11 +669,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -666,11 +696,13 @@ impl Analytics {
      * * `report_id: &str` -- storefront_access_token_id.
      */
     pub async fn delete_reports_param_report(&self, report_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -719,8 +751,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -749,8 +782,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
         self.client
             .post(
                 &url,
@@ -781,12 +815,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -805,11 +841,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -833,11 +871,13 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -886,8 +926,10 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/reports.json?{}", query_),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
     /**
@@ -916,8 +958,10 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/reports.json?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/admin/api/unstable/reports.json?{}", query_),
+            None,
+        );
         self.client
             .post(
                 &url,
@@ -948,12 +992,14 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -972,11 +1018,13 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1000,11 +1048,13 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

@@ -53,8 +53,9 @@ impl SetupIntents {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/setup_intents?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/setup_intents?{}", query_), None);
         let resp: crate::types::PaymentFlowsSetupIntentList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +85,9 @@ impl SetupIntents {
             query_args.push(("payment_method".to_string(), payment_method.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/setup_intents?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/setup_intents?{}", query_), None);
         let mut resp: crate::types::PaymentFlowsSetupIntentList =
             self.client.get(&url, None, None).await?;
 
@@ -133,8 +136,7 @@ impl SetupIntents {
      * to collect any required permissions to charge the payment method later.</p>
      */
     pub async fn post(&self) -> Result<crate::types::SetupIntent> {
-        let url = "/v1/setup_intents".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/setup_intents", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -164,12 +166,14 @@ impl SetupIntents {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/setup_intents/{}?{}",
-            crate::progenitor_support::encode_path(intent),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/setup_intents/{}?{}",
+                crate::progenitor_support::encode_path(intent),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -184,11 +188,13 @@ impl SetupIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent(&self, intent: &str) -> Result<crate::types::SetupIntent> {
-        let url = format!(
-            "/v1/setup_intents/{}",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/setup_intents/{}",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -205,11 +211,13 @@ impl SetupIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent_cancel(&self, intent: &str) -> Result<crate::types::SetupIntent> {
-        let url = format!(
-            "/v1/setup_intents/{}/cancel",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/setup_intents/{}/cancel",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -236,11 +244,13 @@ impl SetupIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent_confirm(&self, intent: &str) -> Result<crate::types::SetupIntent> {
-        let url = format!(
-            "/v1/setup_intents/{}/confirm",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/setup_intents/{}/confirm",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -258,11 +268,13 @@ impl SetupIntents {
         &self,
         intent: &str,
     ) -> Result<crate::types::SetupIntent> {
-        let url = format!(
-            "/v1/setup_intents/{}/verify_microdeposits",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/setup_intents/{}/verify_microdeposits",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

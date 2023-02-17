@@ -46,12 +46,14 @@ impl Migrations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/migrations?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -75,10 +77,13 @@ impl Migrations {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/migrations?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -100,11 +105,13 @@ impl Migrations {
         org: &str,
         body: &crate::types::MigrationsStartRequest,
     ) -> Result<crate::types::Migration> {
-        let url = format!(
-            "/orgs/{}/migrations",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -146,13 +153,15 @@ impl Migrations {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/migrations/{}?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -170,12 +179,14 @@ impl Migrations {
      * * `migration_id: i64` -- migration_id parameter.
      */
     pub async fn download_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/migrations/{}/archive",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}/archive",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -193,12 +204,14 @@ impl Migrations {
      * * `migration_id: i64` -- migration_id parameter.
      */
     pub async fn delete_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/migrations/{}/archive",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}/archive",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -222,13 +235,15 @@ impl Migrations {
         migration_id: i64,
         repo_name: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/migrations/{}/repos/{}/lock",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            crate::progenitor_support::encode_path(repo_name),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}/repos/{}/lock",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                crate::progenitor_support::encode_path(repo_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -262,13 +277,15 @@ impl Migrations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/migrations/{}/repositories?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}/repositories?{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -287,10 +304,13 @@ impl Migrations {
         org: &str,
         migration_id: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!(
-            "/orgs/{}/migrations/{}/repositories",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/migrations/{}/repositories",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -342,12 +362,14 @@ impl Migrations {
      * * `repo: &str`
      */
     pub async fn get_import_status(&self, owner: &str, repo: &str) -> Result<crate::types::Import> {
-        let url = format!(
-            "/repos/{}/{}/import",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -370,12 +392,14 @@ impl Migrations {
         repo: &str,
         body: &crate::types::MigrationsStartImportRequest,
     ) -> Result<crate::types::Import> {
-        let url = format!(
-            "/repos/{}/{}/import",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -399,12 +423,14 @@ impl Migrations {
      * * `repo: &str`
      */
     pub async fn cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/import",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -428,12 +454,14 @@ impl Migrations {
         repo: &str,
         body: &crate::types::MigrationsUpdateImportRequest,
     ) -> Result<crate::types::Import> {
-        let url = format!(
-            "/repos/{}/{}/import",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -470,13 +498,15 @@ impl Migrations {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/import/authors?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/authors?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -503,11 +533,14 @@ impl Migrations {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/import/authors?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/authors?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -533,13 +566,15 @@ impl Migrations {
         author_id: i64,
         body: &crate::types::Author,
     ) -> Result<crate::types::PorterAuthor> {
-        let url = format!(
-            "/repos/{}/{}/import/authors/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&author_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/authors/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&author_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -567,12 +602,14 @@ impl Migrations {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::PorterLargeFile>> {
-        let url = format!(
-            "/repos/{}/{}/import/large_files",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/large_files",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -591,10 +628,13 @@ impl Migrations {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::PorterLargeFile>> {
-        let url = format!(
-            "/repos/{}/{}/import/large_files",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/large_files",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -618,12 +658,14 @@ impl Migrations {
         repo: &str,
         body: &crate::types::MigrationsSetLfsPreferenceRequest,
     ) -> Result<crate::types::Import> {
-        let url = format!(
-            "/repos/{}/{}/import/lfs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/import/lfs",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -659,8 +701,9 @@ impl Migrations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/migrations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/user/migrations?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -675,7 +718,7 @@ impl Migrations {
      * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
      */
     pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
-        let url = "/user/migrations".to_string();
+        let url = self.client.url("/user/migrations", None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -691,8 +734,7 @@ impl Migrations {
         &self,
         body: &crate::types::MigrationsStartRequest,
     ) -> Result<crate::types::Migration> {
-        let url = "/user/migrations".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/user/migrations", None);
         self.client
             .post(
                 &url,
@@ -732,12 +774,14 @@ impl Migrations {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/user/migrations/{}?{}",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}?{}",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -774,11 +818,13 @@ impl Migrations {
      * * `migration_id: i64` -- migration_id parameter.
      */
     pub async fn get_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
-        let url = format!(
-            "/user/migrations/{}/archive",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}/archive",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -795,11 +841,13 @@ impl Migrations {
      * * `migration_id: i64` -- migration_id parameter.
      */
     pub async fn delete_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
-        let url = format!(
-            "/user/migrations/{}/archive",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}/archive",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -821,12 +869,14 @@ impl Migrations {
         migration_id: i64,
         repo_name: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/user/migrations/{}/repos/{}/lock",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            crate::progenitor_support::encode_path(repo_name),
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}/repos/{}/lock",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                crate::progenitor_support::encode_path(repo_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -858,12 +908,14 @@ impl Migrations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/user/migrations/{}/repositories?{}",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}/repositories?{}",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -881,9 +933,12 @@ impl Migrations {
         &self,
         migration_id: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!(
-            "/user/migrations/{}/repositories",
-            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/user/migrations/{}/repositories",
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }

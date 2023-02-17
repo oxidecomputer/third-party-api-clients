@@ -31,11 +31,13 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<crate::types::ActionsEnterprisePermissions> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -58,11 +60,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::EnterpriseAdminSetGithubActionsPermissionsRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -102,12 +106,14 @@ impl EnterpriseAdmin {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/actions/permissions/organizations?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/organizations?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -130,11 +136,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions/organizations",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/organizations",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -164,12 +172,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions/organizations/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/organizations/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -193,12 +203,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions/organizations/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/organizations/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -220,11 +232,13 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<crate::types::SelectedActions> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/selected-actions",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -247,11 +261,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::SelectedActions,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/permissions/selected-actions",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -291,12 +307,14 @@ impl EnterpriseAdmin {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -319,11 +337,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::EnterpriseAdminCreateSelfHostedRunnerGroupRequest,
     ) -> Result<crate::types::RunnerGroupsEnterprise> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -353,12 +373,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
     ) -> Result<crate::types::RunnerGroupsEnterprise> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -382,12 +404,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -412,12 +436,14 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         body: &crate::types::EnterpriseAdminUpdateSelfHostedRunnerGroupRequest,
     ) -> Result<crate::types::RunnerGroupsEnterprise> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -459,13 +485,15 @@ impl EnterpriseAdmin {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -490,12 +518,14 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         body: &crate::types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/organizations",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -527,13 +557,15 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -559,13 +591,15 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&org_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -601,13 +635,15 @@ impl EnterpriseAdmin {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/runners?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/runners?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -632,12 +668,14 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         body: &crate::types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/runners",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/runners",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -670,13 +708,15 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/runners/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/runners/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.put(&url, None, None).await
     }
     /**
@@ -702,13 +742,15 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/runners/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runner-groups/{}/runners/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -742,12 +784,14 @@ impl EnterpriseAdmin {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/actions/runners?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -769,11 +813,13 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<Vec<crate::types::RunnerApplication>> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/downloads",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -793,9 +839,12 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<Vec<crate::types::RunnerApplication>> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/downloads",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -826,11 +875,13 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<crate::types::AuthenticationToken> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/registration-token",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/registration-token",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -861,11 +912,13 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
     ) -> Result<crate::types::AuthenticationToken> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/remove-token",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/remove-token",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -889,12 +942,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_id: i64,
     ) -> Result<crate::types::Runner> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -918,12 +973,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/enterprises/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(&runner_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/actions/runners/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -988,12 +1045,14 @@ impl EnterpriseAdmin {
             query_args.push(("phrase".to_string(), phrase.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/audit-log?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/audit-log?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1033,10 +1092,13 @@ impl EnterpriseAdmin {
             query_args.push(("phrase".to_string(), phrase.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/enterprises/{}/audit-log?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/enterprises/{}/audit-log?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -1082,12 +1144,14 @@ impl EnterpriseAdmin {
             query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1110,11 +1174,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteGroupRequest,
     ) -> Result<crate::types::ScimEnterpriseGroup> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1152,13 +1218,15 @@ impl EnterpriseAdmin {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups/{}?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups/{}?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_group_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1183,12 +1251,14 @@ impl EnterpriseAdmin {
         scim_group_id: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteGroupRequest,
     ) -> Result<crate::types::ScimEnterpriseGroup> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_group_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1216,12 +1286,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_group_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_group_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1246,12 +1318,14 @@ impl EnterpriseAdmin {
         scim_group_id: &str,
         body: &crate::types::EnterpriseAdminUpdateAttributeGroupRequest,
     ) -> Result<crate::types::ScimEnterpriseGroup> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Groups/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_group_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Groups/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_group_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -1311,12 +1385,14 @@ impl EnterpriseAdmin {
             query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users?{}",
-            crate::progenitor_support::encode_path(enterprise),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users?{}",
+                crate::progenitor_support::encode_path(enterprise),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1341,11 +1417,13 @@ impl EnterpriseAdmin {
         enterprise: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteUserRequest,
     ) -> Result<crate::types::ScimEnterpriseUser> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users",
-            crate::progenitor_support::encode_path(enterprise),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users",
+                crate::progenitor_support::encode_path(enterprise),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -1373,12 +1451,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_user_id: &str,
     ) -> Result<crate::types::ScimEnterpriseUser> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -1407,12 +1487,14 @@ impl EnterpriseAdmin {
         scim_user_id: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteUserRequest,
     ) -> Result<crate::types::ScimEnterpriseUser> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -1440,12 +1522,14 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_user_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -1485,12 +1569,14 @@ impl EnterpriseAdmin {
         scim_user_id: &str,
         body: &crate::types::EnterpriseAdminUpdateAttributeUserRequest,
     ) -> Result<crate::types::ScimEnterpriseUser> {
-        let url = format!(
-            "/scim/v2/enterprises/{}/Users/{}",
-            crate::progenitor_support::encode_path(enterprise),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/enterprises/{}/Users/{}",
+                crate::progenitor_support::encode_path(enterprise),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

@@ -41,8 +41,9 @@ impl ExchangeRates {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/exchange_rates?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/exchange_rates?{}", query_), None);
         let resp: crate::types::GetExchangeRatesResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -59,7 +60,7 @@ impl ExchangeRates {
      * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::ExchangeRate>> {
-        let url = "/v1/exchange_rates".to_string();
+        let url = self.client.url("/v1/exchange_rates", None);
         let mut resp: crate::types::GetExchangeRatesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -110,11 +111,13 @@ impl ExchangeRates {
      * * `rate_id: &str` -- The account's country.
      */
     pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
-        let url = format!(
-            "/v1/exchange_rates/{}",
-            crate::progenitor_support::encode_path(rate_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/exchange_rates/{}",
+                crate::progenitor_support::encode_path(rate_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

@@ -50,8 +50,7 @@ impl Topups {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/topups?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/topups?{}", query_), None);
         let resp: crate::types::TopupList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -78,7 +77,7 @@ impl Topups {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/topups?{}", query_);
+        let url = self.client.url(&format!("/v1/topups?{}", query_), None);
         let mut resp: crate::types::TopupList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -123,8 +122,7 @@ impl Topups {
      * <p>Top up the balance of an account</p>
      */
     pub async fn post(&self) -> Result<crate::types::Topup> {
-        let url = "/v1/topups".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/topups", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -140,11 +138,13 @@ impl Topups {
      * * `topup: &str` -- The account's country.
      */
     pub async fn get(&self, topup: &str) -> Result<crate::types::Topup> {
-        let url = format!(
-            "/v1/topups/{}",
-            crate::progenitor_support::encode_path(topup),
+        let url = self.client.url(
+            &format!(
+                "/v1/topups/{}",
+                crate::progenitor_support::encode_path(topup),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -159,11 +159,13 @@ impl Topups {
      * * `topup: &str` -- The account's country.
      */
     pub async fn post_topups(&self, topup: &str) -> Result<crate::types::Topup> {
-        let url = format!(
-            "/v1/topups/{}",
-            crate::progenitor_support::encode_path(topup),
+        let url = self.client.url(
+            &format!(
+                "/v1/topups/{}",
+                crate::progenitor_support::encode_path(topup),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -178,11 +180,13 @@ impl Topups {
      * * `topup: &str` -- The account's country.
      */
     pub async fn post_cancel(&self, topup: &str) -> Result<crate::types::Topup> {
-        let url = format!(
-            "/v1/topups/{}/cancel",
-            crate::progenitor_support::encode_path(topup),
+        let url = self.client.url(
+            &format!(
+                "/v1/topups/{}/cancel",
+                crate::progenitor_support::encode_path(topup),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

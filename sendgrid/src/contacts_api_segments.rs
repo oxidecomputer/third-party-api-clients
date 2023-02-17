@@ -24,8 +24,7 @@ impl ContactsApiSegments {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_segments(&self) -> Result<crate::types::ListAllSegmentsResponse> {
-        let url = "/contactdb/segments".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/segments", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -82,8 +81,7 @@ impl ContactsApiSegments {
         &self,
         body: &crate::types::ContactdbSegments,
     ) -> Result<crate::types::ContactdbSegmentsWithAllOf> {
-        let url = "/contactdb/segments".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/contactdb/segments", None);
         self.client
             .post(
                 &url,
@@ -108,11 +106,13 @@ impl ContactsApiSegments {
         &self,
         segment_id: &str,
     ) -> Result<crate::types::ContactdbSegments> {
-        let url = format!(
-            "/contactdb/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/segments/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -140,12 +140,14 @@ impl ContactsApiSegments {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/contactdb/segments/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/contactdb/segments/{}?{}",
+                crate::progenitor_support::encode_path(segment_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,
@@ -171,11 +173,13 @@ impl ContactsApiSegments {
         segment_id: &str,
         body: &crate::types::PatchContactdbSegmentsSegmentRequest,
     ) -> Result<crate::types::ContactdbSegments> {
-        let url = format!(
-            "/contactdb/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/contactdb/segments/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -211,12 +215,14 @@ impl ContactsApiSegments {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/contactdb/segments/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/contactdb/segments/{}/recipients?{}",
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

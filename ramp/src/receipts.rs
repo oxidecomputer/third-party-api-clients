@@ -57,8 +57,7 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/receipts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/receipts?{}", query_), None);
         let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -94,7 +93,7 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/receipts?{}", query_);
+        let url = self.client.url(&format!("/receipts?{}", query_), None);
         let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -141,8 +140,10 @@ impl Receipts {
      *
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
-        let url = format!("/receipts/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/receipts/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client.get(&url, None, None).await
     }
 }

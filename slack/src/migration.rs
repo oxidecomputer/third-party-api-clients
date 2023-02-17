@@ -43,8 +43,9 @@ impl Migration {
             query_args.push(("users".to_string(), users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/migration.exchange?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/migration.exchange?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

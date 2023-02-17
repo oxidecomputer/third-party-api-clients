@@ -37,12 +37,14 @@ impl Revisions {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/revisions?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -56,9 +58,12 @@ impl Revisions {
      * Lists a file's revisions.
      */
     pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
-        let url = format!(
-            "/files/{}/revisions",
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions",
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
         let mut resp: crate::types::RevisionList = self.client.get(&url, None, None).await?;
 
@@ -116,13 +121,15 @@ impl Revisions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/revisions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -136,12 +143,14 @@ impl Revisions {
      * * `revision_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
-        let url = format!(
-            "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -160,12 +169,14 @@ impl Revisions {
         revision_id: &str,
         body: &crate::types::Revision,
     ) -> Result<crate::types::Revision> {
-        let url = format!(
-            "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

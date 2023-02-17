@@ -53,8 +53,9 @@ impl DomainAuthentication {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -87,7 +88,9 @@ impl DomainAuthentication {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -109,8 +112,7 @@ impl DomainAuthentication {
         &self,
         body: &crate::types::PostWhitelabelDomainsRequest,
     ) -> Result<crate::types::AuthenticationDomain> {
-        let url = "/whitelabel/domains".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/whitelabel/domains", None);
         self.client
             .post(
                 &url,
@@ -134,11 +136,13 @@ impl DomainAuthentication {
         &self,
         domain_id: &str,
     ) -> Result<crate::types::AuthenticationDomain> {
-        let url = format!(
-            "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -156,11 +160,13 @@ impl DomainAuthentication {
         &self,
         domain_id: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -179,11 +185,13 @@ impl DomainAuthentication {
         domain_id: &str,
         body: &crate::types::PatchWhitelabelDomainsDomainRequest,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
-        let url = format!(
-            "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}",
+                crate::progenitor_support::encode_path(domain_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -217,8 +225,9 @@ impl DomainAuthentication {
             query_args.push(("domain".to_string(), domain.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains/default?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains/default?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -243,7 +252,9 @@ impl DomainAuthentication {
             query_args.push(("domain".to_string(), domain.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains/default?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains/default?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -262,11 +273,13 @@ impl DomainAuthentication {
         id: i64,
         body: &crate::types::Ips,
     ) -> Result<crate::types::DomainAuthentication> {
-        let url = format!(
-            "/whitelabel/domains/{}/ips",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}/ips",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -291,12 +304,14 @@ impl DomainAuthentication {
         id: i64,
         ip: &str,
     ) -> Result<crate::types::DomainAuthentication> {
-        let url = format!(
-            "/whitelabel/domains/{}/ips/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
-            crate::progenitor_support::encode_path(ip),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}/ips/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+                crate::progenitor_support::encode_path(ip),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -314,11 +329,13 @@ impl DomainAuthentication {
         &self,
         id: i64,
     ) -> Result<crate::types::PostWhitelabelDomainsValidateResponse> {
-        let url = format!(
-            "/whitelabel/domains/{}/validate",
-            crate::progenitor_support::encode_path(&id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}/validate",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -343,8 +360,9 @@ impl DomainAuthentication {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains/subuser?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains/subuser?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -369,8 +387,9 @@ impl DomainAuthentication {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/domains/subuser?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/whitelabel/domains/subuser?{}", query_), None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -387,11 +406,13 @@ impl DomainAuthentication {
         domain_id: i64,
         body: &crate::types::PutUserUsernameResponse,
     ) -> Result<crate::types::DomainAuthentication> {
-        let url = format!(
-            "/whitelabel/domains/{}/subuser",
-            crate::progenitor_support::encode_path(&domain_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/domains/{}/subuser",
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

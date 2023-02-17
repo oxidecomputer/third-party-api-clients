@@ -59,8 +59,7 @@ impl Orders {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/orders?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/orders?{}", query_), None);
         let resp: crate::types::OrdersLegacyResourceOrderList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -93,7 +92,7 @@ impl Orders {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/orders?{}", query_);
+        let url = self.client.url(&format!("/v1/orders?{}", query_), None);
         let mut resp: crate::types::OrdersLegacyResourceOrderList =
             self.client.get(&url, None, None).await?;
 
@@ -139,8 +138,7 @@ impl Orders {
      * <p>Creates a new order object.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Order> {
-        let url = "/v1/orders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/orders", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -156,8 +154,10 @@ impl Orders {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Order> {
-        let url = format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -172,8 +172,10 @@ impl Orders {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_orders(&self, id: &str) -> Result<crate::types::Order> {
-        let url = format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -188,11 +190,13 @@ impl Orders {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_pay(&self, id: &str) -> Result<crate::types::Order> {
-        let url = format!(
-            "/v1/orders/{}/pay",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/orders/{}/pay",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -207,11 +211,13 @@ impl Orders {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_return(&self, id: &str) -> Result<crate::types::OrderReturn> {
-        let url = format!(
-            "/v1/orders/{}/returns",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/orders/{}/returns",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

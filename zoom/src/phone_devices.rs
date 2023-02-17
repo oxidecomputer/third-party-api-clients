@@ -48,8 +48,7 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/devices?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
         let resp: crate::types::ListPhoneDevicesResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -80,7 +79,7 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/devices?{}", query_);
+        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
         let mut resp: crate::types::ListPhoneDevicesResponseData =
             self.client.get(&url, None, None).await?;
 
@@ -131,8 +130,7 @@ impl PhoneDevices {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
-        let url = "/phone/devices".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/phone/devices", None);
         self.client
             .post(
                 &url,
@@ -159,11 +157,13 @@ impl PhoneDevices {
      * * `device_id: &str` -- Unique Identifier of the device.
      */
     pub async fn get_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -186,11 +186,13 @@ impl PhoneDevices {
      * * `device_id: &str` -- Unique Identifier of the device.
      */
     pub async fn delete_device(&self, device_id: &str) -> Result<()> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -216,11 +218,13 @@ impl PhoneDevices {
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

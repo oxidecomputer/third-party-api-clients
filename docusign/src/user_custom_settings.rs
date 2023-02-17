@@ -44,12 +44,14 @@ impl UserCustomSettings {
         account_id: &str,
         user_id: &str,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -91,12 +93,14 @@ impl UserCustomSettings {
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -134,12 +138,14 @@ impl UserCustomSettings {
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

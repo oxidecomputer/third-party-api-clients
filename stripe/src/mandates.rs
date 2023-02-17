@@ -23,11 +23,13 @@ impl Mandates {
      * * `mandate: &str` -- The account's country.
      */
     pub async fn get(&self, mandate: &str) -> Result<crate::types::Mandate> {
-        let url = format!(
-            "/v1/mandates/{}",
-            crate::progenitor_support::encode_path(mandate),
+        let url = self.client.url(
+            &format!(
+                "/v1/mandates/{}",
+                crate::progenitor_support::encode_path(mandate),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

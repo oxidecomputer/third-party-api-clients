@@ -57,12 +57,14 @@ impl Mobiledevices {
             query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/mobile?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/mobile?{}",
+                crate::progenitor_support::encode_path(customer_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::MobileDevices = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -97,10 +99,13 @@ impl Mobiledevices {
             query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/mobile?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/mobile?{}",
+                crate::progenitor_support::encode_path(customer_id),
+                query_
+            ),
+            None,
         );
         let mut resp: crate::types::MobileDevices = self.client.get(&url, None, None).await?;
 
@@ -155,13 +160,15 @@ impl Mobiledevices {
             query_args.push(("projection".to_string(), projection.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/mobile/{}?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(resource_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/mobile/{}?{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(resource_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -175,12 +182,14 @@ impl Mobiledevices {
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      */
     pub async fn delete(&self, customer_id: &str, resource_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/mobile/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/mobile/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -199,12 +208,14 @@ impl Mobiledevices {
         resource_id: &str,
         body: &crate::types::MobileDeviceAction,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/mobile/{}/action",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(resource_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/mobile/{}/action",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(resource_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

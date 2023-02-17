@@ -31,8 +31,7 @@ impl Senders {
         &self,
         body: &crate::types::PostMarketingSendersRequest,
     ) -> Result<crate::types::SenderAllOf> {
-        let url = "/marketing/senders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/marketing/senders", None);
         self.client
             .post(
                 &url,

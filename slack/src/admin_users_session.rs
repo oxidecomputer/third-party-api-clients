@@ -24,8 +24,7 @@ impl AdminUsersSession {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn invalidate(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.session.invalidate".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.users.session.invalidate", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -42,8 +41,7 @@ impl AdminUsersSession {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn reset(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.session.reset".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin.users.session.reset", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

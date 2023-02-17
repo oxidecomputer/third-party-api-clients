@@ -51,8 +51,9 @@ impl SetupAttempts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/setup_attempts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/setup_attempts?{}", query_), None);
         let resp: crate::types::PaymentFlowsSetupIntentAttemptList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -78,7 +79,9 @@ impl SetupAttempts {
             query_args.push(("setup_intent".to_string(), setup_intent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/setup_attempts?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/setup_attempts?{}", query_), None);
         let mut resp: crate::types::PaymentFlowsSetupIntentAttemptList =
             self.client.get(&url, None, None).await?;
 

@@ -53,8 +53,7 @@ impl Plans {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/plans?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/plans?{}", query_), None);
         let resp: crate::types::PlanList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -84,7 +83,7 @@ impl Plans {
             query_args.push(("product".to_string(), product.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/plans?{}", query_);
+        let url = self.client.url(&format!("/v1/plans?{}", query_), None);
         let mut resp: crate::types::PlanList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -129,8 +128,7 @@ impl Plans {
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PlanData> {
-        let url = "/v1/plans".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/plans", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -146,8 +144,10 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -162,8 +162,10 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -178,8 +180,10 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
         self.client
             .delete(&url, None, Some("application/x-www-form-urlencoded"))
             .await

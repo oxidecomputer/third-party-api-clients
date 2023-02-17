@@ -22,11 +22,13 @@ impl Domains {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
     pub async fn list(&self, customer: &str) -> Result<crate::types::Domains2> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domains",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domains",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -43,11 +45,13 @@ impl Domains {
         customer: &str,
         body: &crate::types::Domains,
     ) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domains",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domains",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -67,12 +71,14 @@ impl Domains {
      * * `domain_name: &str` -- Name of domain to be retrieved.
      */
     pub async fn get(&self, customer: &str, domain_name: &str) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domains/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domains/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -86,12 +92,14 @@ impl Domains {
      * * `domain_name: &str` -- Name of domain to be deleted.
      */
     pub async fn delete(&self, customer: &str, domain_name: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domains/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domains/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_name),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

@@ -29,12 +29,14 @@ impl TemplateCustomFields {
         account_id: &str,
         template_id: &str,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -57,12 +59,14 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .put(
                 &url,
@@ -89,12 +93,14 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -121,12 +127,14 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .delete(
                 &url,

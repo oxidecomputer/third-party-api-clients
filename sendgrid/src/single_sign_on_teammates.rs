@@ -25,8 +25,7 @@ impl SingleSignOnTeammates {
         &self,
         body: &crate::types::SsoTeammateRequestAllOf,
     ) -> Result<crate::types::SsoTeammateResponseAllOf> {
-        let url = "/sso/teammates".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/sso/teammates", None);
         self.client
             .post(
                 &url,
@@ -51,11 +50,13 @@ impl SingleSignOnTeammates {
         username: &str,
         body: &crate::types::PatchSsoTeammatesUsernameRequest,
     ) -> Result<crate::types::SsoTeammatesPatchResponseAllOf> {
-        let url = format!(
-            "/sso/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/sso/teammates/{}",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

@@ -41,8 +41,9 @@ impl Sigma {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/sigma/scheduled_query_runs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/sigma/scheduled_query_runs?{}", query_), None);
         let resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -61,7 +62,7 @@ impl Sigma {
     pub async fn get_all_scheduled_query_runs(
         &self,
     ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
-        let url = "/v1/sigma/scheduled_query_runs".to_string();
+        let url = self.client.url("/v1/sigma/scheduled_query_runs", None);
         let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -115,11 +116,13 @@ impl Sigma {
         &self,
         scheduled_query_run: &str,
     ) -> Result<crate::types::ScheduledQueryRun> {
-        let url = format!(
-            "/v1/sigma/scheduled_query_runs/{}",
-            crate::progenitor_support::encode_path(scheduled_query_run),
+        let url = self.client.url(
+            &format!(
+                "/v1/sigma/scheduled_query_runs/{}",
+                crate::progenitor_support::encode_path(scheduled_query_run),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

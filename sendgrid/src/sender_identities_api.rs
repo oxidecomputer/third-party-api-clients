@@ -24,8 +24,7 @@ impl SenderIdentitiesApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_senders(&self) -> Result<crate::types::GetSendersResponse> {
-        let url = "/senders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/senders", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -45,8 +44,7 @@ impl SenderIdentitiesApi {
         &self,
         body: &crate::types::PostSendersRequestAllOf,
     ) -> Result<crate::types::SenderAllOf> {
-        let url = "/senders".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/senders", None);
         self.client
             .post(
                 &url,
@@ -67,11 +65,13 @@ impl SenderIdentitiesApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_senders_sender(&self, sender_id: i64) -> Result<crate::types::SenderAllOf> {
-        let url = format!(
-            "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/senders/{}",
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -86,11 +86,13 @@ impl SenderIdentitiesApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_senders_sender(&self, sender_id: i64) -> Result<crate::types::Help> {
-        let url = format!(
-            "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/senders/{}",
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -113,11 +115,13 @@ impl SenderIdentitiesApi {
         sender_id: i64,
         body: &crate::types::SenderRequest,
     ) -> Result<crate::types::SenderAllOf> {
-        let url = format!(
-            "/senders/{}",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/senders/{}",
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -141,11 +145,13 @@ impl SenderIdentitiesApi {
         &self,
         sender_id: i64,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/senders/{}/resend_verification",
-            crate::progenitor_support::encode_path(&sender_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/senders/{}/resend_verification",
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
 }

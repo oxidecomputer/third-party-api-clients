@@ -48,8 +48,9 @@ impl InvalidEmailsApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/invalid_emails?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/suppression/invalid_emails?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -78,7 +79,9 @@ impl InvalidEmailsApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/invalid_emails?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/suppression/invalid_emails?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -101,8 +104,7 @@ impl InvalidEmailsApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/suppression/invalid_emails".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/suppression/invalid_emails", None);
         self.client
             .delete(
                 &url,
@@ -126,11 +128,13 @@ impl InvalidEmailsApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
-        let url = format!(
-            "/suppression/invalid_emails/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/invalid_emails/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -146,9 +150,12 @@ impl InvalidEmailsApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
-        let url = format!(
-            "/suppression/invalid_emails/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/invalid_emails/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -167,11 +174,13 @@ impl InvalidEmailsApi {
         &self,
         email: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/suppression/invalid_emails/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/invalid_emails/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

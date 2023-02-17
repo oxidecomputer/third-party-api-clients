@@ -59,12 +59,14 @@ impl SubuserStatistics {
             query_args.push(("sort_by_metric".to_string(), sort_by_metric.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/subusers/{}/stats/monthly?{}",
-            crate::progenitor_support::encode_path(subuser_name),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/stats/monthly?{}",
+                crate::progenitor_support::encode_path(subuser_name),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -118,8 +120,9 @@ impl SubuserStatistics {
             query_args.push(("subuser".to_string(), subuser.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/stats/monthly?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/subusers/stats/monthly?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -175,8 +178,9 @@ impl SubuserStatistics {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/stats/sums?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/subusers/stats/sums?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -226,8 +230,9 @@ impl SubuserStatistics {
             query_args.push(("subusers".to_string(), subusers.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/stats?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/subusers/stats?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

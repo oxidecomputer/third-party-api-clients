@@ -38,8 +38,7 @@ impl Reports {
             query_args.push(("year".to_string(), year.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/daily?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/report/daily?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -93,8 +92,7 @@ impl Reports {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/users?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/report/users?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -146,12 +144,14 @@ impl Reports {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/report/users/{}/meetings?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/report/users/{}/meetings?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -177,11 +177,13 @@ impl Reports {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
-        let url = format!(
-            "/report/meetings/{}",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/report/meetings/{}",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -225,12 +227,14 @@ impl Reports {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/report/meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/report/meetings/{}/participants?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -256,11 +260,13 @@ impl Reports {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
-        let url = format!(
-            "/report/meetings/{}/polls",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/report/meetings/{}/polls",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -285,11 +291,13 @@ impl Reports {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
-        let url = format!(
-            "/report/webinars/{}",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/report/webinars/{}",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -331,12 +339,14 @@ impl Reports {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/report/webinars/{}/participants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/report/webinars/{}/participants?{}",
+                crate::progenitor_support::encode_path(webinar_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -361,11 +371,13 @@ impl Reports {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
-        let url = format!(
-            "/report/webinars/{}/polls",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/report/webinars/{}/polls",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -392,11 +404,13 @@ impl Reports {
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportWebinarQaResponse> {
-        let url = format!(
-            "/report/webinars/{}/qa",
-            crate::progenitor_support::encode_path(webinar_id),
+        let url = self.client.url(
+            &format!(
+                "/report/webinars/{}/qa",
+                crate::progenitor_support::encode_path(webinar_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -458,8 +472,9 @@ impl Reports {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/telephone?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/report/telephone?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -492,8 +507,9 @@ impl Reports {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/cloud_recording?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/report/cloud_recording?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -544,8 +560,9 @@ impl Reports {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/operationlogs?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/report/operationlogs?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -588,8 +605,9 @@ impl Reports {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/activities?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/report/activities?{}", query_), None);
         let resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -623,7 +641,9 @@ impl Reports {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/activities?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/report/activities?{}", query_), None);
         let mut resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -672,8 +692,7 @@ impl Reports {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      */
     pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
-        let url = "/report/billing".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/report/billing", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -706,8 +725,9 @@ impl Reports {
             query_args.push(("billing_id".to_string(), billing_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/report/billing/invoices?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/report/billing/invoices?{}", query_), None);
         self.client.get(&url, None, None).await
     }
 }

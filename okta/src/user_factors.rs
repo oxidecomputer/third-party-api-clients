@@ -22,11 +22,13 @@ impl UserFactors {
      * * `user_id: &str`
      */
     pub async fn list_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
-        let url = format!(
-            "/api/v1/users/{}/factors",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -37,9 +39,12 @@ impl UserFactors {
      * Enumerates all the enrolled factors for the specified user
      */
     pub async fn list_all_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
-        let url = format!(
-            "/api/v1/users/{}/factors",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -84,12 +89,14 @@ impl UserFactors {
             query_args.push(("updatePhone".to_string(), update_phone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/users/{}/factors?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -111,11 +118,13 @@ impl UserFactors {
         &self,
         user_id: &str,
     ) -> Result<Vec<crate::types::UserFactor>> {
-        let url = format!(
-            "/api/v1/users/{}/factors/catalog",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/catalog",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -129,9 +138,12 @@ impl UserFactors {
         &self,
         user_id: &str,
     ) -> Result<Vec<crate::types::UserFactor>> {
-        let url = format!(
-            "/api/v1/users/{}/factors/catalog",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/catalog",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -148,11 +160,13 @@ impl UserFactors {
         &self,
         user_id: &str,
     ) -> Result<Vec<crate::types::SecurityQuestion>> {
-        let url = format!(
-            "/api/v1/users/{}/factors/questions",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/questions",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -166,9 +180,12 @@ impl UserFactors {
         &self,
         user_id: &str,
     ) -> Result<Vec<crate::types::SecurityQuestion>> {
-        let url = format!(
-            "/api/v1/users/{}/factors/questions",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/questions",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -187,12 +204,14 @@ impl UserFactors {
         user_id: &str,
         factor_id: &str,
     ) -> Result<crate::types::UserFactor> {
-        let url = format!(
-            "/api/v1/users/{}/factors/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(factor_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -206,12 +225,14 @@ impl UserFactors {
      * * `factor_id: &str`
      */
     pub async fn delete_factor(&self, user_id: &str, factor_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/users/{}/factors/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(factor_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -232,12 +253,14 @@ impl UserFactors {
         factor_id: &str,
         body: &crate::types::ActivateFactorRequest,
     ) -> Result<crate::types::UserFactor> {
-        let url = format!(
-            "/api/v1/users/{}/factors/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(factor_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -263,13 +286,15 @@ impl UserFactors {
         factor_id: &str,
         transaction_id: &str,
     ) -> Result<crate::types::VerifyUserFactorResponse> {
-        let url = format!(
-            "/api/v1/users/{}/factors/{}/transactions/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
-            crate::progenitor_support::encode_path(transaction_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/{}/transactions/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(factor_id),
+                crate::progenitor_support::encode_path(transaction_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -308,13 +333,15 @@ impl UserFactors {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/users/{}/factors/{}/verify?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/users/{}/factors/{}/verify?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(factor_id),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

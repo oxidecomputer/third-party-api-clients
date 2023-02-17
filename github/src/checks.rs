@@ -36,12 +36,14 @@ impl Checks {
         repo: &str,
         body: &crate::types::ChecksCreateRequest,
     ) -> Result<crate::types::CheckRun> {
-        let url = format!(
-            "/repos/{}/{}/check-runs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-runs",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -73,13 +75,15 @@ impl Checks {
         repo: &str,
         check_run_id: i64,
     ) -> Result<crate::types::CheckRun> {
-        let url = format!(
-            "/repos/{}/{}/check-runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-runs/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -106,13 +110,15 @@ impl Checks {
         check_run_id: i64,
         body: &crate::types::ChecksUpdateRequest,
     ) -> Result<crate::types::CheckRun> {
-        let url = format!(
-            "/repos/{}/{}/check-runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-runs/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -154,14 +160,16 @@ impl Checks {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/check-runs/{}/annotations?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-runs/{}/annotations?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -181,11 +189,14 @@ impl Checks {
         repo: &str,
         check_run_id: i64,
     ) -> Result<Vec<crate::types::CheckAnnotation>> {
-        let url = format!(
-            "/repos/{}/{}/check-runs/{}/annotations",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-runs/{}/annotations",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
+            ),
+            None,
         );
         self.client.get_all_pages(&url, None).await
     }
@@ -211,12 +222,14 @@ impl Checks {
         repo: &str,
         body: &crate::types::ChecksCreateSuiteRequest,
     ) -> Result<crate::types::CheckSuiteData> {
-        let url = format!(
-            "/repos/{}/{}/check-suites",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-suites",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,
@@ -245,12 +258,14 @@ impl Checks {
         repo: &str,
         body: &crate::types::Preferences,
     ) -> Result<crate::types::CheckSuitePreference> {
-        let url = format!(
-            "/repos/{}/{}/check-suites/preferences",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-suites/preferences",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,
@@ -282,13 +297,15 @@ impl Checks {
         repo: &str,
         check_suite_id: i64,
     ) -> Result<crate::types::CheckSuiteData> {
-        let url = format!(
-            "/repos/{}/{}/check-suites/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-suites/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -343,14 +360,16 @@ impl Checks {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/check-suites/{}/check-runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-suites/{}/check-runs?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -376,13 +395,15 @@ impl Checks {
         repo: &str,
         check_suite_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/check-suites/{}/rerequest",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/check-suites/{}/rerequest",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.post(&url, None, None).await
     }
     /**
@@ -442,14 +463,16 @@ impl Checks {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/commits/{}/check-runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/commits/{}/check-runs?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -497,14 +520,16 @@ impl Checks {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/commits/{}/check-suites?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(ref_),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
 }

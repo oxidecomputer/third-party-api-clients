@@ -51,8 +51,10 @@ impl BillingPortal {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/billing_portal/configurations?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(
+            &format!("/v1/billing_portal/configurations?{}", query_),
+            None,
+        );
         let resp: crate::types::GetBillingPortalConfigurationsResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -81,7 +83,10 @@ impl BillingPortal {
             query_args.push(("is_default".to_string(), is_default.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/billing_portal/configurations?{}", query_);
+        let url = self.client.url(
+            &format!("/v1/billing_portal/configurations?{}", query_),
+            None,
+        );
         let mut resp: crate::types::GetBillingPortalConfigurationsResponse =
             self.client.get(&url, None, None).await?;
 
@@ -127,8 +132,7 @@ impl BillingPortal {
      * <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
      */
     pub async fn post_configuration(&self) -> Result<crate::types::PortalConfiguration> {
-        let url = "/v1/billing_portal/configurations".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/billing_portal/configurations", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -147,11 +151,13 @@ impl BillingPortal {
         &self,
         configuration: &str,
     ) -> Result<crate::types::PortalConfiguration> {
-        let url = format!(
-            "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(configuration),
+        let url = self.client.url(
+            &format!(
+                "/v1/billing_portal/configurations/{}",
+                crate::progenitor_support::encode_path(configuration),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -169,11 +175,13 @@ impl BillingPortal {
         &self,
         configuration: &str,
     ) -> Result<crate::types::PortalConfiguration> {
-        let url = format!(
-            "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(configuration),
+        let url = self.client.url(
+            &format!(
+                "/v1/billing_portal/configurations/{}",
+                crate::progenitor_support::encode_path(configuration),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -184,8 +192,7 @@ impl BillingPortal {
      * <p>Creates a session of the customer portal.</p>
      */
     pub async fn post_session(&self) -> Result<crate::types::PortalSession> {
-        let url = "/v1/billing_portal/sessions".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/billing_portal/sessions", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

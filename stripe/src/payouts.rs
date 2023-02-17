@@ -55,8 +55,7 @@ impl Payouts {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payouts?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/payouts?{}", query_), None);
         let resp: crate::types::PayoutList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -87,7 +86,7 @@ impl Payouts {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payouts?{}", query_);
+        let url = self.client.url(&format!("/v1/payouts?{}", query_), None);
         let mut resp: crate::types::PayoutList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -136,8 +135,7 @@ impl Payouts {
      * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The <a href="#balance_object">balance object</a> details available and pending amounts by source type.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Payout> {
-        let url = "/v1/payouts".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/payouts", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -153,11 +151,13 @@ impl Payouts {
      * * `payout: &str` -- The account's country.
      */
     pub async fn get(&self, payout: &str) -> Result<crate::types::Payout> {
-        let url = format!(
-            "/v1/payouts/{}",
-            crate::progenitor_support::encode_path(payout),
+        let url = self.client.url(
+            &format!(
+                "/v1/payouts/{}",
+                crate::progenitor_support::encode_path(payout),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -172,11 +172,13 @@ impl Payouts {
      * * `payout: &str` -- The account's country.
      */
     pub async fn post_payouts(&self, payout: &str) -> Result<crate::types::Payout> {
-        let url = format!(
-            "/v1/payouts/{}",
-            crate::progenitor_support::encode_path(payout),
+        let url = self.client.url(
+            &format!(
+                "/v1/payouts/{}",
+                crate::progenitor_support::encode_path(payout),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -191,11 +193,13 @@ impl Payouts {
      * * `payout: &str` -- The account's country.
      */
     pub async fn post_cancel(&self, payout: &str) -> Result<crate::types::Payout> {
-        let url = format!(
-            "/v1/payouts/{}/cancel",
-            crate::progenitor_support::encode_path(payout),
+        let url = self.client.url(
+            &format!(
+                "/v1/payouts/{}/cancel",
+                crate::progenitor_support::encode_path(payout),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -212,11 +216,13 @@ impl Payouts {
      * * `payout: &str` -- The account's country.
      */
     pub async fn post_reverse(&self, payout: &str) -> Result<crate::types::Payout> {
-        let url = format!(
-            "/v1/payouts/{}/reverse",
-            crate::progenitor_support::encode_path(payout),
+        let url = self.client.url(
+            &format!(
+                "/v1/payouts/{}/reverse",
+                crate::progenitor_support::encode_path(payout),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await

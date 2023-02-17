@@ -46,8 +46,9 @@ impl PaymentLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_links?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/payment_links?{}", query_), None);
         let resp: crate::types::GetPaymentLinksResponse = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -69,7 +70,9 @@ impl PaymentLinks {
             query_args.push(("active".to_string(), active.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_links?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/payment_links?{}", query_), None);
         let mut resp: crate::types::GetPaymentLinksResponse =
             self.client.get(&url, None, None).await?;
 
@@ -115,8 +118,7 @@ impl PaymentLinks {
      * <p>Creates a payment link.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PaymentLink> {
-        let url = "/v1/payment_links".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/payment_links", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -132,11 +134,13 @@ impl PaymentLinks {
      * * `payment_link: &str` -- The account's country.
      */
     pub async fn get_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
-        let url = format!(
-            "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -151,11 +155,13 @@ impl PaymentLinks {
      * * `payment_link: &str` -- The account's country.
      */
     pub async fn post_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
-        let url = format!(
-            "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -191,12 +197,14 @@ impl PaymentLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/payment_links/{}/line_items?{}",
-            crate::progenitor_support::encode_path(payment_link),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}/line_items?{}",
+                crate::progenitor_support::encode_path(payment_link),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::LineItems = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -216,9 +224,12 @@ impl PaymentLinks {
         &self,
         payment_link: &str,
     ) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/payment_links/{}/line_items",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}/line_items",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
         let mut resp: crate::types::LineItems = self.client.get(&url, None, None).await?;
 

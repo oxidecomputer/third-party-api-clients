@@ -45,8 +45,9 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/mappings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/api/v1/mappings?{}", query_), None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -69,7 +70,9 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/mappings?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/api/v1/mappings?{}", query_), None);
         self.client.get_all_pages(&url, None).await
     }
     /**
@@ -84,11 +87,13 @@ impl ProfileMappings {
      * * `mapping_id: &str`
      */
     pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
-        let url = format!(
-            "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(mapping_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/mappings/{}",
+                crate::progenitor_support::encode_path(mapping_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -107,11 +112,13 @@ impl ProfileMappings {
         mapping_id: &str,
         body: &crate::types::ProfileMapping,
     ) -> Result<crate::types::ProfileMapping> {
-        let url = format!(
-            "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(mapping_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/mappings/{}",
+                crate::progenitor_support::encode_path(mapping_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(
                 &url,

@@ -20,8 +20,7 @@ impl CurrentUser {
      * Returns information pertaining to the user associated with the provided access token.
      */
     pub async fn get_me(&self) -> Result<crate::types::CurrentUser> {
-        let url = "/v1/me".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/me", None);
         self.client.get(&url, None, None).await
     }
 }

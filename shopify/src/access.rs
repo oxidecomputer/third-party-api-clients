@@ -20,8 +20,7 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/accessscope#index-2020-10
      */
     pub async fn get_admin_oauth_scope(&self) -> Result<()> {
-        let url = "/admin/oauth/access_scopes.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/admin/oauth/access_scopes.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -32,8 +31,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-01
      */
     pub async fn deprecated_202001_get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -47,8 +47,9 @@ impl Access {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-01/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-01/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -72,11 +73,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -87,8 +90,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-04
      */
     pub async fn deprecated_202004_get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -102,8 +106,9 @@ impl Access {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-04/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-04/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -127,11 +132,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -142,8 +149,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-07
      */
     pub async fn deprecated_202007_get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -157,8 +165,9 @@ impl Access {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-07/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-07/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -182,11 +191,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -197,8 +208,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-10
      */
     pub async fn get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -209,8 +221,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#create-2020-10
      */
     pub async fn create_storefront_tokens(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2020-10/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -234,11 +247,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -249,8 +264,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2021-01
      */
     pub async fn deprecated_202101_get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -264,8 +280,9 @@ impl Access {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2021-01/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/2021-01/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -289,11 +306,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -304,8 +323,9 @@ impl Access {
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-unstable
      */
     pub async fn deprecated_unstable_get_storefront_token(&self) -> Result<()> {
-        let url = "/admin/api/unstable/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/storefront_access_tokens.json", None);
         self.client.get(&url, None, None).await
     }
     /**
@@ -319,8 +339,9 @@ impl Access {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/storefront_access_tokens.json".to_string();
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url("/admin/api/unstable/storefront_access_tokens.json", None);
         self.client
             .post(
                 &url,
@@ -344,11 +365,13 @@ impl Access {
         &self,
         storefront_access_token_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/storefront_access_tokens/{}/json",
+                crate::progenitor_support::encode_path(storefront_access_token_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
 }

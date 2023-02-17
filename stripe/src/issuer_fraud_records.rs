@@ -46,8 +46,9 @@ impl IssuerFraudRecords {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuer_fraud_records?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
         let resp: crate::types::RadarIssuerFraudRecordList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -69,7 +70,9 @@ impl IssuerFraudRecords {
             query_args.push(("charge".to_string(), charge.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/issuer_fraud_records?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
         let mut resp: crate::types::RadarIssuerFraudRecordList =
             self.client.get(&url, None, None).await?;
 
@@ -125,11 +128,13 @@ impl IssuerFraudRecords {
         &self,
         issuer_fraud_record: &str,
     ) -> Result<crate::types::IssuerFraudRecord> {
-        let url = format!(
-            "/v1/issuer_fraud_records/{}",
-            crate::progenitor_support::encode_path(issuer_fraud_record),
+        let url = self.client.url(
+            &format!(
+                "/v1/issuer_fraud_records/{}",
+                crate::progenitor_support::encode_path(issuer_fraud_record),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await

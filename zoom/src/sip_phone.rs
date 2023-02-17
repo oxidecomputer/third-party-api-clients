@@ -55,8 +55,7 @@ impl SipPhone {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sip_phones?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/sip_phones?{}", query_), None);
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -82,7 +81,7 @@ impl SipPhone {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sip_phones?{}", query_);
+        let url = self.client.url(&format!("/sip_phones?{}", query_), None);
         let mut resp: crate::types::ListSipPhonesResponse =
             self.client.get(&url, None, None).await?;
 
@@ -131,8 +130,7 @@ impl SipPhone {
      *
      */
     pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
-        let url = "/sip_phones".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/sip_phones", None);
         self.client
             .post(
                 &url,
@@ -158,11 +156,13 @@ impl SipPhone {
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. It can be retrieved from the List SIP Phones API.
      */
     pub async fn delete(&self, phone_id: &str) -> Result<()> {
-        let url = format!(
-            "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+        let url = self.client.url(
+            &format!(
+                "/sip_phones/{}",
+                crate::progenitor_support::encode_path(phone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client.delete(&url, None, None).await
     }
     /**
@@ -186,11 +186,13 @@ impl SipPhone {
         phone_id: &str,
         body: &crate::types::UpdateSipPhoneRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+        let url = self.client.url(
+            &format!(
+                "/sip_phones/{}",
+                crate::progenitor_support::encode_path(phone_id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .patch(
                 &url,

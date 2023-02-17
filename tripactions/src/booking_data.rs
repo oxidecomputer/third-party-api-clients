@@ -67,8 +67,7 @@ impl BookingData {
             query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bookings?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
         let resp: crate::types::BookingReportResponse = self.client.get(&url, None, None).await?;
 
         // Return our response data.
@@ -112,7 +111,7 @@ impl BookingData {
             query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/bookings?{}", query_);
+        let url = self.client.url(&format!("/v1/bookings?{}", query_), None);
 
         let mut resp: crate::types::BookingReportResponse = if !url.contains('?') {
             self.client

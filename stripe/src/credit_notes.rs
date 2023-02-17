@@ -51,8 +51,9 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes?{}", query_), None);
         let resp: crate::types::CreditNotesList = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -81,7 +82,9 @@ impl CreditNotes {
             query_args.push(("invoice".to_string(), invoice.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes?{}", query_), None);
         let mut resp: crate::types::CreditNotesList = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -139,8 +142,7 @@ impl CreditNotes {
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
     pub async fn post(&self) -> Result<crate::types::CreditNote> {
-        let url = "/v1/credit_notes".to_string();
-        let url = self.client.url(&url, None);
+        let url = self.client.url("/v1/credit_notes", None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -206,8 +208,9 @@ impl CreditNotes {
             query_args.push(("refund_amount".to_string(), refund_amount.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview?{}", query_), None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -288,8 +291,9 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview/lines?{}", query_);
-        let url = self.client.url(&url, None);
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
         let resp: crate::types::Lines = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -347,7 +351,9 @@ impl CreditNotes {
             query_args.push(("refund_amount".to_string(), refund_amount.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview/lines?{}", query_);
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
         let mut resp: crate::types::Lines = self.client.get(&url, None, None).await?;
 
         let mut data = resp.data;
@@ -417,12 +423,14 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/credit_notes/{}/lines?{}",
-            crate::progenitor_support::encode_path(credit_note),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/lines?{}",
+                crate::progenitor_support::encode_path(credit_note),
+                query_
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         let resp: crate::types::Lines = self
             .client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
@@ -442,9 +450,12 @@ impl CreditNotes {
         &self,
         credit_note: &str,
     ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
-        let url = format!(
-            "/v1/credit_notes/{}/lines",
-            crate::progenitor_support::encode_path(credit_note),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/lines",
+                crate::progenitor_support::encode_path(credit_note),
+            ),
+            None,
         );
         let mut resp: crate::types::Lines = self.client.get(&url, None, None).await?;
 
@@ -495,11 +506,13 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .get(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -514,11 +527,13 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_credit_notes(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
@@ -533,11 +548,13 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_void(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}/void",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/void",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-        let url = self.client.url(&url, None);
         self.client
             .post(&url, None, Some("application/x-www-form-urlencoded"))
             .await
