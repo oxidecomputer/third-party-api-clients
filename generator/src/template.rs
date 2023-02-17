@@ -326,7 +326,7 @@ pub fn generate_docs_github(
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of `auth::Credentials`.
 //!
-//! ```
+//! ```rust
 //! use {name}::{{auth::Credentials, Client}};
 //!
 //! let {docs_proper_name} = Client::new(
@@ -359,7 +359,7 @@ pub fn generate_docs_github(
 //!
 //! Here is an example:
 //!
-//! ```
+//! ```rust
 //! use {name}::{{auth::Credentials, Client}};
 //! #[cfg(feature = "httpcache")]
 //! use {name}::http_cache::HttpCache;

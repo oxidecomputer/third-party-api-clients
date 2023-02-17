@@ -43,7 +43,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of `auth::Credentials`.
 //!
-//! ```
+//! ```rust
 //! use octorust::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
@@ -76,7 +76,7 @@
 //!
 //! Here is an example:
 //!
-//! ```
+//! ```rust
 //! use octorust::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::HttpCache;

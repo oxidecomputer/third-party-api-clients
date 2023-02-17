@@ -45,7 +45,7 @@ octorust = "0.2.2"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of `auth::Credentials`.
 
-```
+```rust
 use octorust::{auth::Credentials, Client};
 
 let github = Client::new(
@@ -78,7 +78,7 @@ Then use the `Client::custom` constructor to provide a cache implementation.
 
 Here is an example:
 
-```
+```rust
 use octorust::{auth::Credentials, Client};
 #[cfg(feature = "httpcache")]
 use octorust::http_cache::HttpCache;
