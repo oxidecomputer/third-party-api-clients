@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sheets = "0.5.1"
+//! sheets = "0.6.0"
 //! ```
 //!
 //! ## Basic example

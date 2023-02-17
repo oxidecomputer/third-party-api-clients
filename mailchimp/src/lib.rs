@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! mailchimp-api = "0.3.1"
+//! mailchimp-api = "0.4.0"
 //! ```
 //!
 //! ## Basic example

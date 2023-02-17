@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-dolladollabills = "0.3.1"
+dolladollabills = "0.4.0"
 ```
 
 ## Basic example
