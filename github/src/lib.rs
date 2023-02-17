@@ -55,7 +55,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.2.2/octorust/struct.Client.html#method.host) method.
+//! [Client#host_override](https://docs.rs/octorust/0.2.2/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -86,7 +86,6 @@
 //!
 //! #[cfg(not(feature = "httpcache"))]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -96,7 +95,6 @@
 //!
 //! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -145,7 +143,6 @@
 //!
 //! #[cfg(not(feature = "httpcache"))]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
@@ -153,7 +150,6 @@
 //!
 //! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
