@@ -33,17 +33,24 @@ impl TemplateDocumentVisibility {
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns document visibility for a template recipient.
      *
@@ -63,16 +70,25 @@ impl TemplateDocumentVisibility {
         recipient_id: &str,
         template_id: &str,
     ) -> Result<crate::types::DocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates document visibility for a template recipient.
      *
@@ -95,15 +111,23 @@ impl TemplateDocumentVisibility {
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

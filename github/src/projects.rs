@@ -46,15 +46,24 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List organization projects.
      *
@@ -76,15 +85,24 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an organization project.
      *
@@ -103,16 +121,23 @@ impl Projects {
         org: &str,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/orgs/{}/projects",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/projects",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a project card.
      *
@@ -127,14 +152,23 @@ impl Projects {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn get_card(&self, card_id: i64) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(card_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(card_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a project card.
      *
@@ -149,14 +183,23 @@ impl Projects {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn delete_card(&self, card_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(card_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(card_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an existing project card.
      *
@@ -175,16 +218,23 @@ impl Projects {
         card_id: i64,
         body: &crate::types::ProjectsUpdateCardRequest,
     ) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/cards/{}",
-            crate::progenitor_support::encode_path(card_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}",
+                crate::progenitor_support::encode_path(card_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Move a project card.
      *
@@ -203,16 +253,23 @@ impl Projects {
         card_id: i64,
         body: &crate::types::ProjectsMoveCardRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/columns/cards/{}/moves",
-            crate::progenitor_support::encode_path(card_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/cards/{}/moves",
+                crate::progenitor_support::encode_path(card_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a project column.
      *
@@ -227,14 +284,23 @@ impl Projects {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn get_column(&self, column_id: i64) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(column_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(column_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a project column.
      *
@@ -249,14 +315,23 @@ impl Projects {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn delete_column(&self, column_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(column_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(column_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an existing project column.
      *
@@ -275,16 +350,23 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
     ) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/columns/{}",
-            crate::progenitor_support::encode_path(column_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}",
+                crate::progenitor_support::encode_path(column_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List project cards.
      *
@@ -319,15 +401,24 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/columns/{}/cards?{}",
-            crate::progenitor_support::encode_path(column_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards?{}",
+                crate::progenitor_support::encode_path(column_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List project cards.
      *
@@ -349,15 +440,24 @@ impl Projects {
             query_args.push(("archived_state".to_string(), archived_state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/columns/{}/cards?{}",
-            crate::progenitor_support::encode_path(column_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards?{}",
+                crate::progenitor_support::encode_path(column_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a project card.
      *
@@ -376,16 +476,23 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsCreateCardRequestOneOf,
     ) -> Result<crate::types::ProjectCard> {
-        let url = format!(
-            "/projects/columns/{}/cards",
-            crate::progenitor_support::encode_path(column_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/cards",
+                crate::progenitor_support::encode_path(column_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Move a project column.
      *
@@ -404,16 +511,23 @@ impl Projects {
         column_id: i64,
         body: &crate::types::ProjectsMoveColumnRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/columns/{}/moves",
-            crate::progenitor_support::encode_path(column_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/columns/{}/moves",
+                crate::progenitor_support::encode_path(column_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a project.
      *
@@ -428,14 +542,23 @@ impl Projects {
      * * `project_id: i64`
      */
     pub async fn get(&self, project_id: i64) -> Result<crate::types::Project> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(project_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(project_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a project.
      *
@@ -450,14 +573,23 @@ impl Projects {
      * * `project_id: i64`
      */
     pub async fn delete(&self, project_id: i64) -> Result<()> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(project_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(project_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a project.
      *
@@ -476,16 +608,23 @@ impl Projects {
         project_id: i64,
         body: &crate::types::ProjectsUpdateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/projects/{}",
-            crate::progenitor_support::encode_path(project_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}",
+                crate::progenitor_support::encode_path(project_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List project collaborators.
      *
@@ -523,15 +662,24 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/collaborators?{}",
-            crate::progenitor_support::encode_path(project_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators?{}",
+                crate::progenitor_support::encode_path(project_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List project collaborators.
      *
@@ -553,15 +701,24 @@ impl Projects {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/collaborators?{}",
-            crate::progenitor_support::encode_path(project_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators?{}",
+                crate::progenitor_support::encode_path(project_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add project collaborator.
      *
@@ -582,17 +739,24 @@ impl Projects {
         username: &str,
         body: &crate::types::ProjectsAddCollaboratorRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/projects/{}/collaborators/{}",
-            crate::progenitor_support::encode_path(project_id),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}",
+                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove user as a collaborator.
      *
@@ -608,15 +772,24 @@ impl Projects {
      * * `username: &str`
      */
     pub async fn remove_collaborator(&self, project_id: i64, username: &str) -> Result<()> {
-        let url = format!(
-            "/projects/{}/collaborators/{}",
-            crate::progenitor_support::encode_path(project_id),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}",
+                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get project permission for a user.
      *
@@ -636,15 +809,24 @@ impl Projects {
         project_id: i64,
         username: &str,
     ) -> Result<crate::types::RepositoryCollaboratorPermission> {
-        let url = format!(
-            "/projects/{}/collaborators/{}/permission",
-            crate::progenitor_support::encode_path(project_id),
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/collaborators/{}/permission",
+                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List project columns.
      *
@@ -674,15 +856,24 @@ impl Projects {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/projects/{}/columns?{}",
-            crate::progenitor_support::encode_path(project_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns?{}",
+                crate::progenitor_support::encode_path(project_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List project columns.
      *
@@ -698,14 +889,23 @@ impl Projects {
         &self,
         project_id: i64,
     ) -> Result<Vec<crate::types::ProjectColumn>> {
-        let url = format!(
-            "/projects/{}/columns",
-            crate::progenitor_support::encode_path(project_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns",
+                crate::progenitor_support::encode_path(project_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a project column.
      *
@@ -724,16 +924,23 @@ impl Projects {
         project_id: i64,
         body: &crate::types::ProjectsUpdateColumnRequest,
     ) -> Result<crate::types::ProjectColumn> {
-        let url = format!(
-            "/projects/{}/columns",
-            crate::progenitor_support::encode_path(project_id),
+        let url = self.client.url(
+            &format!(
+                "/projects/{}/columns",
+                crate::progenitor_support::encode_path(project_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List repository projects.
      *
@@ -770,16 +977,25 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List repository projects.
      *
@@ -802,16 +1018,25 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a repository project.
      *
@@ -832,17 +1057,24 @@ impl Projects {
         repo: &str,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = format!(
-            "/repos/{}/{}/projects",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/projects",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Create a user project.
      *
@@ -856,12 +1088,17 @@ impl Projects {
         &self,
         body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
-        let url = "/user/projects".to_string();
+        let url = self.client.url("/user/projects", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List user projects.
      *
@@ -896,15 +1133,24 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projects?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List user projects.
      *
@@ -926,12 +1172,22 @@ impl Projects {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/projects?{}",
+                crate::progenitor_support::encode_path(username),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

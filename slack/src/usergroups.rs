@@ -24,10 +24,17 @@ impl Usergroups {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn create(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.create".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/usergroups.create", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/usergroups.disable` endpoint.
      *
@@ -40,10 +47,17 @@ impl Usergroups {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn disable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.disable".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/usergroups.disable", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/usergroups.enable` endpoint.
      *
@@ -56,10 +70,17 @@ impl Usergroups {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn enable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.enable".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/usergroups.enable", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/usergroups.list` endpoint.
      *
@@ -91,11 +112,19 @@ impl Usergroups {
             query_args.push(("include_users".to_string(), include_users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/usergroups.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/usergroups.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/usergroups.update` endpoint.
      *
@@ -108,7 +137,15 @@ impl Usergroups {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.update".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/usergroups.update", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

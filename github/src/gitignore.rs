@@ -22,10 +22,17 @@ impl Gitignore {
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
     pub async fn get_all_templates(&self) -> Result<Vec<String>> {
-        let url = "/gitignore/templates".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/gitignore/templates", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all gitignore templates.
      *
@@ -38,10 +45,17 @@ impl Gitignore {
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
     pub async fn get_all_all_templates(&self) -> Result<Vec<String>> {
-        let url = "/gitignore/templates".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/gitignore/templates", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a gitignore template.
      *
@@ -57,11 +71,21 @@ impl Gitignore {
      * * `name: &str`
      */
     pub async fn get_template(&self, name: &str) -> Result<crate::types::GitignoreTemplate> {
-        let url = format!(
-            "/gitignore/templates/{}",
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/gitignore/templates/{}",
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

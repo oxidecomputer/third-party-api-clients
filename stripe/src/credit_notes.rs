@@ -51,14 +51,23 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes?{}", query_);
-
-        let resp: crate::types::CreditNotesList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes?{}", query_), None);
+        let resp: crate::types::CreditNotesList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes` endpoint.
      *
@@ -79,9 +88,19 @@ impl CreditNotes {
             query_args.push(("invoice".to_string(), invoice.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes?{}", query_);
-
-        let mut resp: crate::types::CreditNotesList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes?{}", query_), None);
+        let mut resp: crate::types::CreditNotesList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -102,12 +121,24 @@ impl CreditNotes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -119,7 +150,6 @@ impl CreditNotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/credit_notes` endpoint.
      *
@@ -139,10 +169,17 @@ impl CreditNotes {
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
     pub async fn post(&self) -> Result<crate::types::CreditNote> {
-        let url = "/v1/credit_notes".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/credit_notes", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/preview` endpoint.
      *
@@ -204,11 +241,19 @@ impl CreditNotes {
             query_args.push(("refund_amount".to_string(), refund_amount.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
      *
@@ -285,14 +330,23 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview/lines?{}", query_);
-
-        let resp: crate::types::Lines = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
+        let resp: crate::types::Lines = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
      *
@@ -342,9 +396,19 @@ impl CreditNotes {
             query_args.push(("refund_amount".to_string(), refund_amount.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/credit_notes/preview/lines?{}", query_);
-
-        let mut resp: crate::types::Lines = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/credit_notes/preview/lines?{}", query_), None);
+        let mut resp: crate::types::Lines = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -365,12 +429,24 @@ impl CreditNotes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -382,7 +458,6 @@ impl CreditNotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
      *
@@ -414,18 +489,28 @@ impl CreditNotes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/credit_notes/{}/lines?{}",
-            crate::progenitor_support::encode_path(credit_note),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/lines?{}",
+                crate::progenitor_support::encode_path(credit_note),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::Lines = self.client.get(&url, None).await?;
+        let resp: crate::types::Lines = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
      *
@@ -437,12 +522,23 @@ impl CreditNotes {
         &self,
         credit_note: &str,
     ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
-        let url = format!(
-            "/v1/credit_notes/{}/lines",
-            crate::progenitor_support::encode_path(credit_note),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/lines",
+                crate::progenitor_support::encode_path(credit_note),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::Lines = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Lines = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -463,12 +559,24 @@ impl CreditNotes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -480,7 +588,6 @@ impl CreditNotes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/credit_notes/{id}` endpoint.
      *
@@ -492,14 +599,23 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/credit_notes/{id}` endpoint.
      *
@@ -510,14 +626,23 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_credit_notes(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/credit_notes/{id}/void` endpoint.
      *
@@ -528,11 +653,21 @@ impl CreditNotes {
      * * `id: &str` -- The account's country.
      */
     pub async fn post_void(&self, id: &str) -> Result<crate::types::CreditNote> {
-        let url = format!(
-            "/v1/credit_notes/{}/void",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/credit_notes/{}/void",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

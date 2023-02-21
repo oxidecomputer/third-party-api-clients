@@ -41,14 +41,21 @@ impl TaxCodes {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/tax_codes?{}", query_);
-
-        let resp: crate::types::TaxProductResourceCodeList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/tax_codes?{}", query_), None);
+        let resp: crate::types::TaxProductResourceCodeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/tax_codes` endpoint.
      *
@@ -57,9 +64,17 @@ impl TaxCodes {
      * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
-        let url = "/v1/tax_codes".to_string();
-        let mut resp: crate::types::TaxProductResourceCodeList =
-            self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/tax_codes", None);
+        let mut resp: crate::types::TaxProductResourceCodeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -80,12 +95,24 @@ impl TaxCodes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -97,7 +124,6 @@ impl TaxCodes {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/tax_codes/{id}` endpoint.
      *
@@ -109,11 +135,21 @@ impl TaxCodes {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
-        let url = format!(
-            "/v1/tax_codes/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/tax_codes/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

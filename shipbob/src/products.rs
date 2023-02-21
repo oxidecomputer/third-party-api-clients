@@ -70,11 +70,17 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/product?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/product?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get multiple products.
      *
@@ -107,11 +113,17 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/product?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/product?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add a single product to the store.
      *
@@ -125,12 +137,17 @@ impl Products {
         &self,
         body: &crate::types::ProductsCreateProductModel,
     ) -> Result<Vec<crate::types::Product>> {
-        let url = "/product".to_string();
+        let url = self.client.url("/product", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a single product.
      *
@@ -142,14 +159,23 @@ impl Products {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, product_id: i64) -> Result<crate::types::Product> {
-        let url = format!(
-            "/product/{}",
-            crate::progenitor_support::encode_path(product_id),
+        let url = self.client.url(
+            &format!(
+                "/product/{}",
+                crate::progenitor_support::encode_path(product_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Modify a single product.
      *
@@ -165,16 +191,23 @@ impl Products {
         product_id: i64,
         body: &crate::types::ProductsUpdateProductModel,
     ) -> Result<Vec<crate::types::Product>> {
-        let url = format!(
-            "/product/{}",
-            crate::progenitor_support::encode_path(product_id),
+        let url = self.client.url(
+            &format!(
+                "/product/{}",
+                crate::progenitor_support::encode_path(product_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Add multiple products to the store.
      *
@@ -188,9 +221,15 @@ impl Products {
         &self,
         body: &[crate::types::ProductsCreateProductModel],
     ) -> Result<Vec<crate::types::Product>> {
-        let url = "/product/batch".to_string();
+        let url = self.client.url("/product/batch", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
 }

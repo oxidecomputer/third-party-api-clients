@@ -41,14 +41,23 @@ impl ExchangeRates {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/exchange_rates?{}", query_);
-
-        let resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/exchange_rates?{}", query_), None);
+        let resp: crate::types::GetExchangeRatesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
      *
@@ -57,8 +66,17 @@ impl ExchangeRates {
      * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::ExchangeRate>> {
-        let url = "/v1/exchange_rates".to_string();
-        let mut resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/exchange_rates", None);
+        let mut resp: crate::types::GetExchangeRatesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -79,12 +97,24 @@ impl ExchangeRates {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -96,7 +126,6 @@ impl ExchangeRates {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/exchange_rates/{rate_id}` endpoint.
      *
@@ -108,11 +137,21 @@ impl ExchangeRates {
      * * `rate_id: &str` -- The account's country.
      */
     pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
-        let url = format!(
-            "/v1/exchange_rates/{}",
-            crate::progenitor_support::encode_path(rate_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/exchange_rates/{}",
+                crate::progenitor_support::encode_path(rate_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

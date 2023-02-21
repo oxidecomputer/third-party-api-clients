@@ -26,10 +26,17 @@ impl IpAccessManagement {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_access_settings_whitelist(&self) -> Result<crate::types::IpAccessResponse> {
-        let url = "/access_settings/whitelist".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/access_settings/whitelist", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add one or more IPs to the allow list.
      *
@@ -47,12 +54,17 @@ impl IpAccessManagement {
         &self,
         body: &crate::types::PostAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::IpAccessResponse> {
-        let url = "/access_settings/whitelist".to_string();
+        let url = self.client.url("/access_settings/whitelist", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove one or more IPs from the allow list.
      *
@@ -72,12 +84,17 @@ impl IpAccessManagement {
         &self,
         body: &crate::types::DeleteAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/access_settings/whitelist".to_string();
+        let url = self.client.url("/access_settings/whitelist", None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve all recent access attempts.
      *
@@ -99,11 +116,19 @@ impl IpAccessManagement {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/access_settings/activity?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/access_settings/activity?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific allowed IP.
      *
@@ -121,14 +146,23 @@ impl IpAccessManagement {
         &self,
         rule_id: &str,
     ) -> Result<crate::types::IpAccessResponse> {
-        let url = format!(
-            "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/access_settings/whitelist/{}",
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Remove a specific IP from the allowed list.
      *
@@ -146,11 +180,21 @@ impl IpAccessManagement {
         &self,
         rule_id: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/access_settings/whitelist/{}",
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

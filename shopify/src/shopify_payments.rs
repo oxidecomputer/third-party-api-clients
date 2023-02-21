@@ -20,10 +20,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-01
      */
     pub async fn deprecated_202001_get_balance(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-01/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves the account's current balance.
      *
@@ -32,10 +41,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-04
      */
     pub async fn deprecated_202004_get_balance(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-04/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves the account's current balance.
      *
@@ -44,10 +62,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-07
      */
     pub async fn deprecated_202007_get_balance(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-07/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves the account's current balance.
      *
@@ -56,10 +83,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2020-10
      */
     pub async fn get_balance(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-10/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves the account's current balance.
      *
@@ -68,10 +104,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-2021-01
      */
     pub async fn deprecated_202101_get_balance(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2021-01/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves the account's current balance.
      *
@@ -80,10 +125,19 @@ impl ShopifyPayments {
      * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/balance#show-unstable
      */
     pub async fn deprecated_unstable_get_balance(&self) -> Result<()> {
-        let url = "/admin/api/unstable/shopify_payments/balance.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/unstable/shopify_payments/balance.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -120,14 +174,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/shopify_payments/disputes.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/shopify_payments/disputes.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single dispute by ID.
      *
@@ -143,14 +206,23 @@ impl ShopifyPayments {
         &self,
         dispute_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/shopify_payments/disputes/{}/json",
-            crate::progenitor_support::encode_path(dispute_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/shopify_payments/disputes/{}/json",
+                crate::progenitor_support::encode_path(dispute_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -187,14 +259,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/shopify_payments/disputes.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/shopify_payments/disputes.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -241,14 +322,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -261,14 +351,23 @@ impl ShopifyPayments {
      * * `payout_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202001_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -315,14 +414,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -335,14 +443,23 @@ impl ShopifyPayments {
      * * `payout_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202004_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -389,14 +506,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -409,14 +535,23 @@ impl ShopifyPayments {
      * * `payout_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202007_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -463,14 +598,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -483,14 +627,23 @@ impl ShopifyPayments {
      * * `payout_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -537,14 +690,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -557,14 +719,23 @@ impl ShopifyPayments {
      * * `payout_id: &str` -- storefront_access_token_id.
      */
     pub async fn deprecated_202101_get_payouts_param_payout(&self, payout_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
               Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
@@ -611,14 +782,23 @@ impl ShopifyPayments {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/shopify_payments/payouts.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/shopify_payments/payouts.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single payout by id.
      *
@@ -634,14 +814,23 @@ impl ShopifyPayments {
         &self,
         payout_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/shopify_payments/payouts/{}/json",
-            crate::progenitor_support::encode_path(payout_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/shopify_payments/payouts/{}/json",
+                crate::progenitor_support::encode_path(payout_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of all balance transactions ordered by processing
     time, with the most recent being first.
@@ -684,11 +873,21 @@ impl ShopifyPayments {
             query_args.push(("test".to_string(), test.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/shopify_payments/balance/transactions.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/shopify_payments/balance/transactions.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

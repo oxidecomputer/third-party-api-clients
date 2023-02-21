@@ -57,11 +57,17 @@ impl FacebookAds {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/facebook-ads?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/facebook-ads?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get facebook ad info.
      *
@@ -89,12 +95,22 @@ impl FacebookAds {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/facebook-ads/{}?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

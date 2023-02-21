@@ -43,14 +43,21 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/accounts?{}", query_);
-
-        let resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/accounts?{}", query_), None);
+        let resp: crate::types::GetAccountsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts` endpoint.
      *
@@ -59,8 +66,17 @@ impl Accounts {
      * <p>Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>. If you’re not a platform, the list is empty.</p>
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Account>> {
-        let url = "/v1/accounts".to_string();
-        let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/accounts", None);
+        let mut resp: crate::types::GetAccountsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -81,12 +97,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -98,7 +126,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts` endpoint.
      *
@@ -106,10 +133,17 @@ impl Accounts {
      * To do this, you’ll first need to <a href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.</p>
      */
     pub async fn post(&self) -> Result<crate::types::Account> {
-        let url = "/v1/accounts".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/accounts", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}` endpoint.
      *
@@ -121,14 +155,23 @@ impl Accounts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}` endpoint.
      *
@@ -141,14 +184,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_accounts(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}` endpoint.
      *
@@ -163,14 +215,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn delete(&self, account: &str) -> Result<crate::types::DeletedAccount> {
-        let url = format!(
-            "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/bank_accounts` endpoint.
      *
@@ -181,14 +242,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_bank(&self, account: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -201,15 +271,24 @@ impl Accounts {
      * * `id: &str` -- The account's country.
      */
     pub async fn get_bank(&self, account: &str, id: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -227,15 +306,24 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/bank_accounts/{id}` endpoint.
      *
@@ -251,15 +339,24 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/bank_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities` endpoint.
      *
@@ -271,17 +368,27 @@ impl Accounts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_capabilities(&self, account: &str) -> Result<Vec<crate::types::Capability>> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+        let resp: crate::types::ListAccountCapability = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities` endpoint.
      *
@@ -293,12 +400,23 @@ impl Accounts {
         &self,
         account: &str,
     ) -> Result<Vec<crate::types::Capability>> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListAccountCapability = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -319,12 +437,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -336,7 +466,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/capabilities/{capability}` endpoint.
      *
@@ -353,15 +482,24 @@ impl Accounts {
         account: &str,
         capability: &str,
     ) -> Result<crate::types::Capability> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(capability),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/capabilities/{capability}` endpoint.
      *
@@ -377,15 +515,24 @@ impl Accounts {
         account: &str,
         capability: &str,
     ) -> Result<crate::types::Capability> {
-        let url = format!(
-            "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/capabilities/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(capability),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -417,18 +564,28 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/external_accounts?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+        let resp: crate::types::ExternalAccounts = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -437,12 +594,23 @@ impl Accounts {
      * <p>List external accounts for an account.</p>
      */
     pub async fn get_all_external(&self, account: &str) -> Result<Vec<crate::types::DataAnyOf>> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ExternalAccounts = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -463,12 +631,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -480,7 +660,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/external_accounts` endpoint.
      *
@@ -491,14 +670,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_external(&self, account: &str) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -515,15 +703,24 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -541,15 +738,24 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/external_accounts/{id}` endpoint.
      *
@@ -565,15 +771,24 @@ impl Accounts {
         account: &str,
         id: &str,
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
-        let url = format!(
-            "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/external_accounts/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/login_links` endpoint.
      *
@@ -586,14 +801,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_login_link(&self, account: &str) -> Result<crate::types::LoginLink> {
-        let url = format!(
-            "/v1/accounts/{}/login_links",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/login_links",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -627,18 +851,28 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/people?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -651,12 +885,23 @@ impl Accounts {
         account: &str,
         _relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
-        let url = format!(
-            "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -677,12 +922,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -694,7 +951,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/people` endpoint.
      *
@@ -705,14 +961,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_people(&self, account: &str) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -729,15 +994,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -753,15 +1027,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/people/{person}` endpoint.
      *
@@ -777,15 +1060,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::DeletedPerson> {
-        let url = format!(
-            "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/people/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -819,18 +1111,28 @@ impl Accounts {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/accounts/{}/persons?{}",
-            crate::progenitor_support::encode_path(account),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons?{}",
+                crate::progenitor_support::encode_path(account),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -843,12 +1145,23 @@ impl Accounts {
         account: &str,
         _relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
-        let url = format!(
-            "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetAccountPeopleResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -869,12 +1182,24 @@ impl Accounts {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -886,7 +1211,6 @@ impl Accounts {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/persons` endpoint.
      *
@@ -897,14 +1221,23 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_person(&self, account: &str) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -921,15 +1254,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -945,15 +1287,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::Person> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/accounts/{account}/persons/{person}` endpoint.
      *
@@ -969,15 +1320,24 @@ impl Accounts {
         account: &str,
         person: &str,
     ) -> Result<crate::types::DeletedPerson> {
-        let url = format!(
-            "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/persons/{}",
+                crate::progenitor_support::encode_path(account),
+                crate::progenitor_support::encode_path(person),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/accounts/{account}/reject` endpoint.
      *
@@ -990,11 +1350,21 @@ impl Accounts {
      * * `account: &str` -- The account's country.
      */
     pub async fn post_reject(&self, account: &str) -> Result<crate::types::Account> {
-        let url = format!(
-            "/v1/accounts/{}/reject",
-            crate::progenitor_support::encode_path(account),
+        let url = self.client.url(
+            &format!(
+                "/v1/accounts/{}/reject",
+                crate::progenitor_support::encode_path(account),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

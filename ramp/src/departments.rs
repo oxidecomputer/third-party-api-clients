@@ -38,14 +38,21 @@ impl Departments {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/departments?{}", query_);
-
-        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/departments?{}", query_), None);
+        let resp: crate::types::GetDepartmentsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List departments.
      *
@@ -56,8 +63,17 @@ impl Departments {
      * Retrieve all departments.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
-        let url = "/departments".to_string();
-        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/departments", None);
+        let resp: crate::types::GetDepartmentsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -67,8 +83,11 @@ impl Departments {
             match self
                 .client
                 .get::<crate::types::GetDepartmentsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -94,7 +113,6 @@ impl Departments {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Create department.
      *
@@ -106,12 +124,17 @@ impl Departments {
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
-        let url = "/departments".to_string();
+        let url = self.client.url("/departments", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * GET a department.
      *
@@ -124,14 +147,23 @@ impl Departments {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
-        let url = format!(
-            "/departments/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/departments/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update department.
      *
@@ -144,13 +176,21 @@ impl Departments {
         id: &str,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
-        let url = format!(
-            "/departments/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/departments/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

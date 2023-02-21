@@ -53,14 +53,21 @@ impl FileLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/file_links?{}", query_);
-
-        let resp: crate::types::Links = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/file_links?{}", query_), None);
+        let resp: crate::types::Links = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/file_links` endpoint.
      *
@@ -82,9 +89,17 @@ impl FileLinks {
             query_args.push(("file".to_string(), file.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/file_links?{}", query_);
-
-        let mut resp: crate::types::Links = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/file_links?{}", query_), None);
+        let mut resp: crate::types::Links = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -105,12 +120,24 @@ impl FileLinks {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -122,17 +149,23 @@ impl FileLinks {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/file_links` endpoint.
      *
      * <p>Creates a new file link object.</p>
      */
     pub async fn post(&self) -> Result<crate::types::FileLink> {
-        let url = "/v1/file_links".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/file_links", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/file_links/{link}` endpoint.
      *
@@ -144,14 +177,23 @@ impl FileLinks {
      * * `link: &str` -- The account's country.
      */
     pub async fn get_link(&self, link: &str) -> Result<crate::types::FileLink> {
-        let url = format!(
-            "/v1/file_links/{}",
-            crate::progenitor_support::encode_path(link),
+        let url = self.client.url(
+            &format!(
+                "/v1/file_links/{}",
+                crate::progenitor_support::encode_path(link),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/file_links/{link}` endpoint.
      *
@@ -162,11 +204,21 @@ impl FileLinks {
      * * `link: &str` -- The account's country.
      */
     pub async fn post_link(&self, link: &str) -> Result<crate::types::FileLink> {
-        let url = format!(
-            "/v1/file_links/{}",
-            crate::progenitor_support::encode_path(link),
+        let url = self.client.url(
+            &format!(
+                "/v1/file_links/{}",
+                crate::progenitor_support::encode_path(link),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

@@ -1,7 +1,7 @@
 [package]
 name = "sendgrid-api"
 description = "A fully generated & opinionated API client for the SendGrid API."
-version = "0.3.1"
+version = "0.4.0"
 documentation = "https://docs.rs/sendgrid-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/sendgrid"
 readme = "README.md"
@@ -48,6 +48,8 @@ tokio = { version = "1.25.0", features = ["full"] }
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
+rand = "0.8.5"
+rsa = "0.8.1"
 tokio = { version = "1.25.0", features = ["test-util"] }
 wiremock = "0.5.17"
 

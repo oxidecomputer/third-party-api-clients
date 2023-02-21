@@ -126,18 +126,28 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::Events = self.client.get(&url, None).await?;
+        let resp: crate::types::Events = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events` endpoint.
      *
@@ -212,13 +222,24 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::Events = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Events = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -228,12 +249,24 @@ impl Events {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -249,7 +282,6 @@ impl Events {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events` endpoint.
      *
@@ -302,17 +334,24 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/import` endpoint.
      *
@@ -345,17 +384,24 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/import?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/import?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/quickAdd` endpoint.
      *
@@ -391,15 +437,24 @@ impl Events {
             query_args.push(("text".to_string(), text.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/quickAdd?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/quickAdd?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/watch` endpoint.
      *
@@ -515,17 +570,24 @@ impl Events {
             query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/watch?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/watch?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -554,16 +616,25 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -619,18 +690,25 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -663,16 +741,25 @@ impl Events {
             query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/calendars/{calendarId}/events/{eventId}` endpoint.
      *
@@ -728,18 +815,25 @@ impl Events {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
      *
@@ -798,19 +892,29 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/instances?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::Events = self.client.get(&url, None).await?;
+        let resp: crate::types::Events = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
      *
@@ -849,14 +953,25 @@ impl Events {
             query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/instances?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::Events = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Events = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -866,12 +981,24 @@ impl Events {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -887,7 +1014,6 @@ impl Events {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/events/{eventId}/move` endpoint.
      *
@@ -925,13 +1051,23 @@ impl Events {
             query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/calendars/{}/events/{}/move?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/events/{}/move?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

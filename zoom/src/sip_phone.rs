@@ -55,14 +55,21 @@ impl SipPhone {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sip_phones?{}", query_);
-
-        let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/sip_phones?{}", query_), None);
+        let resp: crate::types::ListSipPhonesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.phones.to_vec())
     }
-
     /**
      * List SIP phones.
      *
@@ -83,9 +90,17 @@ impl SipPhone {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sip_phones?{}", query_);
-
-        let mut resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/sip_phones?{}", query_), None);
+        let mut resp: crate::types::ListSipPhonesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut phones = resp.phones;
         let mut page = resp.next_page_token;
@@ -96,12 +111,24 @@ impl SipPhone {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -117,7 +144,6 @@ impl SipPhone {
         // Return our response data.
         Ok(phones)
     }
-
     /**
      * Enable SIP phone.
      *
@@ -133,12 +159,17 @@ impl SipPhone {
      *
      */
     pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
-        let url = "/sip_phones".to_string();
+        let url = self.client.url("/sip_phones", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete SIP phone.
      *
@@ -156,14 +187,23 @@ impl SipPhone {
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. It can be retrieved from the List SIP Phones API.
      */
     pub async fn delete(&self, phone_id: &str) -> Result<()> {
-        let url = format!(
-            "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+        let url = self.client.url(
+            &format!(
+                "/sip_phones/{}",
+                crate::progenitor_support::encode_path(phone_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update SIP phone.
      *
@@ -185,13 +225,21 @@ impl SipPhone {
         phone_id: &str,
         body: &crate::types::UpdateSipPhoneRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+        let url = self.client.url(
+            &format!(
+                "/sip_phones/{}",
+                crate::progenitor_support::encode_path(phone_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

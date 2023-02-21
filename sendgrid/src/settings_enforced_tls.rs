@@ -28,10 +28,17 @@ impl SettingsEnforcedTls {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user(&self) -> Result<crate::types::EnforcedTlsRequestResponse> {
-        let url = "/user/settings/enforced_tls".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/settings/enforced_tls", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Enforced TLS settings.
      *
@@ -51,9 +58,15 @@ impl SettingsEnforcedTls {
         &self,
         body: &crate::types::EnforcedTlsRequestResponse,
     ) -> Result<crate::types::EnforcedTlsRequestResponse> {
-        let url = "/user/settings/enforced_tls".to_string();
+        let url = self.client.url("/user/settings/enforced_tls", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -24,14 +24,23 @@ impl Workspaces {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a Workspace.
      *
@@ -48,16 +57,23 @@ impl Workspaces {
         account_id: &str,
         body: &crate::types::Workspace,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get Workspace.
      *
@@ -75,15 +91,24 @@ impl Workspaces {
         account_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Workspace.
      *
@@ -102,17 +127,24 @@ impl Workspaces {
         workspace_id: &str,
         body: &crate::types::Workspace,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Delete Workspace.
      *
@@ -130,12 +162,22 @@ impl Workspaces {
         account_id: &str,
         workspace_id: &str,
     ) -> Result<crate::types::Workspace> {
-        let url = format!(
-            "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/workspaces/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(workspace_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

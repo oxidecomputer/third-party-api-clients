@@ -104,11 +104,17 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/issues?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/issues?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List issues assigned to the authenticated user.
      *
@@ -173,11 +179,17 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/issues?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/issues?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List organization issues assigned to the authenticated user.
      *
@@ -249,15 +261,24 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/issues?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/issues?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List organization issues assigned to the authenticated user.
      *
@@ -304,15 +325,24 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/orgs/{}/issues?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/issues?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List assignees.
      *
@@ -344,16 +374,25 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/assignees?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/assignees?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List assignees.
      *
@@ -370,15 +409,24 @@ impl Issues {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::SimpleUser>> {
-        let url = format!(
-            "/repos/{}/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/assignees",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Check if a user can be assigned.
      *
@@ -404,16 +452,25 @@ impl Issues {
         repo: &str,
         assignee: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/assignees/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(assignee),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/assignees/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(assignee),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List repository issues.
      *
@@ -497,16 +554,25 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List repository issues.
      *
@@ -566,16 +632,25 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an issue.
      *
@@ -598,17 +673,24 @@ impl Issues {
         repo: &str,
         body: &crate::types::IssuesCreateRequest,
     ) -> Result<crate::types::Issue> {
-        let url = format!(
-            "/repos/{}/{}/issues",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List issue comments for a repository.
      *
@@ -657,16 +739,25 @@ impl Issues {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List issue comments for a repository.
      *
@@ -697,16 +788,25 @@ impl Issues {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get an issue comment.
      *
@@ -728,16 +828,25 @@ impl Issues {
         repo: &str,
         comment_id: i64,
     ) -> Result<crate::types::IssueComment> {
-        let url = format!(
-            "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete an issue comment.
      *
@@ -754,16 +863,25 @@ impl Issues {
      * * `comment_id: i64` -- comment_id parameter.
      */
     pub async fn delete_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an issue comment.
      *
@@ -786,18 +904,25 @@ impl Issues {
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::IssueComment> {
-        let url = format!(
-            "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List issue events for a repository.
      *
@@ -829,16 +954,25 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/events?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List issue events for a repository.
      *
@@ -855,15 +989,24 @@ impl Issues {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::IssueEvent>> {
-        let url = format!(
-            "/repos/{}/{}/issues/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/events",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get an issue event.
      *
@@ -885,16 +1028,25 @@ impl Issues {
         repo: &str,
         event_id: i64,
     ) -> Result<crate::types::IssueEvent> {
-        let url = format!(
-            "/repos/{}/{}/issues/events/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/events/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get an issue.
      *
@@ -926,16 +1078,25 @@ impl Issues {
         repo: &str,
         issue_number: i64,
     ) -> Result<crate::types::Issue> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an issue.
      *
@@ -958,18 +1119,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesUpdateRequest,
     ) -> Result<crate::types::Issue> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Add assignees to an issue.
      *
@@ -992,18 +1160,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesAddAssigneesRequest,
     ) -> Result<crate::types::IssueSimple> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/assignees",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove assignees from an issue.
      *
@@ -1026,18 +1201,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesAddAssigneesRequest,
     ) -> Result<crate::types::IssueSimple> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/assignees",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List issue comments.
      *
@@ -1076,17 +1258,26 @@ impl Issues {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List issue comments.
      *
@@ -1110,17 +1301,26 @@ impl Issues {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an issue comment.
      *
@@ -1143,18 +1343,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::IssueComment> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/comments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/comments",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List issue events.
      *
@@ -1188,17 +1395,26 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/{}/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/events?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List issue events.
      *
@@ -1216,16 +1432,25 @@ impl Issues {
         repo: &str,
         issue_number: i64,
     ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/events",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List labels for an issue.
      *
@@ -1259,17 +1484,26 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List labels for an issue.
      *
@@ -1287,16 +1521,25 @@ impl Issues {
         repo: &str,
         issue_number: i64,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set labels for an issue.
      *
@@ -1319,18 +1562,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesSetLabelsRequestAnyOf,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Add labels to an issue.
      *
@@ -1353,18 +1603,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesAddLabelsRequestOneOf,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove all labels from an issue.
      *
@@ -1386,16 +1643,25 @@ impl Issues {
         repo: &str,
         issue_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Remove a label from an issue.
      *
@@ -1419,17 +1685,26 @@ impl Issues {
         issue_number: i64,
         name: &str,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/labels/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Lock an issue.
      *
@@ -1454,18 +1729,25 @@ impl Issues {
         issue_number: i64,
         body: &crate::types::IssuesLockRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/lock",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/lock",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Unlock an issue.
      *
@@ -1482,16 +1764,25 @@ impl Issues {
      * * `issue_number: i64` -- issue_number parameter.
      */
     pub async fn unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/lock",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/lock",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List timeline events for an issue.
      *
@@ -1525,17 +1816,26 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/issues/{}/timeline?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/timeline?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List timeline events for an issue.
      *
@@ -1553,16 +1853,25 @@ impl Issues {
         repo: &str,
         issue_number: i64,
     ) -> Result<Vec<crate::types::Data>> {
-        let url = format!(
-            "/repos/{}/{}/issues/{}/timeline",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(issue_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/issues/{}/timeline",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(issue_number),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List labels for a repository.
      *
@@ -1594,16 +1903,25 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List labels for a repository.
      *
@@ -1620,15 +1938,24 @@ impl Issues {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a label.
      *
@@ -1649,17 +1976,24 @@ impl Issues {
         repo: &str,
         body: &crate::types::IssuesCreateLabelRequest,
     ) -> Result<crate::types::Label> {
-        let url = format!(
-            "/repos/{}/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a label.
      *
@@ -1681,16 +2015,25 @@ impl Issues {
         repo: &str,
         name: &str,
     ) -> Result<crate::types::Label> {
-        let url = format!(
-            "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a label.
      *
@@ -1707,16 +2050,25 @@ impl Issues {
      * * `name: &str`
      */
     pub async fn delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a label.
      *
@@ -1739,18 +2091,25 @@ impl Issues {
         name: &str,
         body: &crate::types::IssuesUpdateLabelRequest,
     ) -> Result<crate::types::Label> {
-        let url = format!(
-            "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/labels/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List milestones.
      *
@@ -1799,16 +2158,25 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/milestones?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List milestones.
      *
@@ -1839,16 +2207,25 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/milestones?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a milestone.
      *
@@ -1869,17 +2246,24 @@ impl Issues {
         repo: &str,
         body: &crate::types::IssuesCreateMilestoneRequest,
     ) -> Result<crate::types::Milestone> {
-        let url = format!(
-            "/repos/{}/{}/milestones",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a milestone.
      *
@@ -1901,16 +2285,25 @@ impl Issues {
         repo: &str,
         milestone_number: i64,
     ) -> Result<crate::types::Milestone> {
-        let url = format!(
-            "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(milestone_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(milestone_number),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a milestone.
      *
@@ -1932,16 +2325,25 @@ impl Issues {
         repo: &str,
         milestone_number: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(milestone_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(milestone_number),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a milestone.
      *
@@ -1964,18 +2366,25 @@ impl Issues {
         milestone_number: i64,
         body: &crate::types::IssuesCreateMilestoneRequest,
     ) -> Result<crate::types::Milestone> {
-        let url = format!(
-            "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(milestone_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(milestone_number),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List labels for issues in a milestone.
      *
@@ -2009,17 +2418,26 @@ impl Issues {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/milestones/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(milestone_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones/{}/labels?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(milestone_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List labels for issues in a milestone.
      *
@@ -2037,16 +2455,25 @@ impl Issues {
         repo: &str,
         milestone_number: i64,
     ) -> Result<Vec<crate::types::Label>> {
-        let url = format!(
-            "/repos/{}/{}/milestones/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(milestone_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/milestones/{}/labels",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(milestone_number),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List user account issues assigned to the authenticated user.
      *
@@ -2116,11 +2543,17 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/issues?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/user/issues?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List user account issues assigned to the authenticated user.
      *
@@ -2166,8 +2599,15 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/user/issues?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/user/issues?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

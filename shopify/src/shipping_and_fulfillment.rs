@@ -45,14 +45,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders on a shop for a specific app.
      *
@@ -86,14 +95,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders on a shop for a specific app.
      *
@@ -127,14 +145,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders on a shop for a specific app.
      *
@@ -168,14 +195,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders on a shop for a specific app.
      *
@@ -209,14 +245,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders on a shop for a specific app.
      *
@@ -250,14 +295,23 @@ impl ShippingAndFulfillment {
             query_args.push(("location_ids".to_string(), location_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/assigned_fulfillment_orders.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/assigned_fulfillment_orders.json?{}",
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -281,17 +335,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -315,17 +376,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -349,17 +417,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -383,17 +458,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -417,17 +499,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -451,17 +540,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -485,17 +581,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -519,17 +622,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -553,17 +663,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -587,17 +704,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -621,17 +745,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -655,17 +786,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -689,17 +827,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -723,17 +868,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -757,17 +909,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a cancellation request to the fulfillment service of a fulfillment order.
      *
@@ -791,17 +950,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/cancellation_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/cancellation_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -825,17 +991,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
      *
@@ -859,17 +1032,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/cancellation_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -878,10 +1058,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-01
      */
     pub async fn deprecated_202001_get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-01/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -893,12 +1082,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-01/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-01/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -914,14 +1110,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -938,16 +1143,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -963,14 +1175,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -979,10 +1200,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-04
      */
     pub async fn deprecated_202004_get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-04/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -994,12 +1224,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-04/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-04/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -1015,14 +1252,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -1039,16 +1285,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -1064,14 +1317,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -1080,10 +1342,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-07
      */
     pub async fn deprecated_202007_get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-07/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -1095,12 +1366,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-07/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-07/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -1116,14 +1394,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -1140,16 +1427,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -1165,14 +1459,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -1181,10 +1484,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-10
      */
     pub async fn get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-10/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -1193,12 +1505,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-10
      */
     pub async fn create_carrier_services(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-10/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -1211,14 +1530,23 @@ impl ShippingAndFulfillment {
      * * `carrier_service_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_carrier_services_param_service(&self, carrier_service_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -1235,16 +1563,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -1260,14 +1595,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -1276,10 +1620,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2021-01
      */
     pub async fn deprecated_202101_get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2021-01/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -1291,12 +1644,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2021-01/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2021-01/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -1312,14 +1672,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -1336,16 +1705,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -1361,14 +1737,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of carrier services.
      *
@@ -1377,10 +1762,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-unstable
      */
     pub async fn deprecated_unstable_get_carrier_service(&self) -> Result<()> {
-        let url = "/admin/api/unstable/carrier_services.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/unstable/carrier_services.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a carrier service.
      *
@@ -1392,12 +1786,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/carrier_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/unstable/carrier_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single carrier service by its ID.
      *
@@ -1413,14 +1814,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a carrier service. Only the app that creates a carrier service can update it.
      *
@@ -1437,16 +1847,23 @@ impl ShippingAndFulfillment {
         carrier_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a carrier service.
      *
@@ -1462,14 +1879,23 @@ impl ShippingAndFulfillment {
         &self,
         carrier_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/carrier_services/{}/json",
-            crate::progenitor_support::encode_path(carrier_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/carrier_services/{}/json",
+                crate::progenitor_support::encode_path(carrier_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1523,15 +1949,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -1570,16 +2005,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -1596,14 +2038,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -1641,15 +2092,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -1674,16 +2134,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -1702,17 +2171,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -1724,12 +2200,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-01/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-01/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -1746,16 +2229,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -1774,17 +2264,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -1803,17 +2300,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -1832,17 +2336,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -1859,16 +2370,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1922,15 +2440,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -1969,16 +2496,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -1995,14 +2529,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -2040,15 +2583,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -2073,16 +2625,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -2101,17 +2662,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -2123,12 +2691,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-04/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-04/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -2145,16 +2720,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -2173,17 +2755,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -2202,17 +2791,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -2231,17 +2827,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -2258,16 +2861,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2321,15 +2931,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -2368,16 +2987,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -2394,14 +3020,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -2439,15 +3074,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -2472,16 +3116,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -2500,17 +3153,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -2522,12 +3182,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-07/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-07/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -2544,16 +3211,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -2572,17 +3246,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -2601,17 +3282,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -2630,17 +3318,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -2657,16 +3352,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2720,15 +3422,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -2767,16 +3478,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -2793,14 +3511,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -2838,15 +3565,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -2871,16 +3607,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -2899,17 +3644,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -2918,12 +3670,19 @@ impl ShippingAndFulfillment {
      * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-10
      */
     pub async fn create_fulfillments(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-10/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -2940,16 +3699,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -2968,17 +3734,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -2997,17 +3770,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -3026,17 +3806,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -3053,16 +3840,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3116,15 +3910,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -3163,16 +3966,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -3189,14 +3999,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -3234,15 +4053,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -3267,16 +4095,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -3295,17 +4132,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -3317,12 +4161,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2021-01/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2021-01/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -3339,16 +4190,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -3367,17 +4225,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -3396,17 +4261,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -3425,17 +4297,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -3452,16 +4331,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -3515,15 +4401,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Create a fulfillment for the specified order and line items.
               The fulfillment's status depends on the line items in the order:
@@ -3562,16 +4457,23 @@ impl ShippingAndFulfillment {
         order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves fulfillments associated with a fulfillment order.
      *
@@ -3588,14 +4490,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/fulfillments.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/fulfillments.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of fulfillments associated with a specific order.
      *
@@ -3633,15 +4544,24 @@ impl ShippingAndFulfillment {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/count.json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/count.json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific fulfillment.
      *
@@ -3666,16 +4586,25 @@ impl ShippingAndFulfillment {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/json?{}",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/json?{}",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update information associated with a fulfillment.
      *
@@ -3694,17 +4623,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
      *
@@ -3716,12 +4652,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/fulfillments.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/unstable/fulfillments.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Updates the tracking information for a fulfillment.
      *
@@ -3738,16 +4681,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillments/{}/update_tracking.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillments/{}/update_tracking.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as complete.
      *
@@ -3766,17 +4716,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/complete.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/complete.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark a fulfillment as open.
      *
@@ -3795,17 +4752,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/open.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/open.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a fulfillment for a specific order ID.
      *
@@ -3824,17 +4788,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancels a fulfillment.
      *
@@ -3851,16 +4822,23 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillments/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillments/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -3880,15 +4858,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -3907,17 +4894,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -3938,16 +4932,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -3967,16 +4970,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -3996,15 +5008,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -4023,17 +5044,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -4054,16 +5082,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -4083,16 +5120,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -4112,15 +5158,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -4139,17 +5194,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -4170,16 +5232,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -4199,16 +5270,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -4228,15 +5308,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -4255,17 +5344,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -4286,16 +5382,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -4315,16 +5420,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -4344,15 +5458,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -4371,17 +5494,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -4402,16 +5532,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -4431,16 +5570,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment events for a specific fulfillment.
      *
@@ -4460,15 +5608,24 @@ impl ShippingAndFulfillment {
         order_id: &str,
         fulfillment_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a fulfillment event.
      *
@@ -4487,17 +5644,24 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/events.json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a specific fulfillment event.
      *
@@ -4518,16 +5682,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a fulfillment event.
      *
@@ -4547,16 +5720,25 @@ impl ShippingAndFulfillment {
         fulfillment_id: &str,
         event_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
-            crate::progenitor_support::encode_path(order_id),
-            crate::progenitor_support::encode_path(fulfillment_id),
-            crate::progenitor_support::encode_path(event_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillments/{}/events/{}/json",
+                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(fulfillment_id),
+                crate::progenitor_support::encode_path(event_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -4573,14 +5755,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -4596,14 +5787,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -4620,16 +5820,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -4654,17 +5861,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -4688,17 +5902,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -4715,14 +5936,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -4738,14 +5968,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -4762,16 +6001,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -4796,17 +6042,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -4830,17 +6083,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -4857,14 +6117,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -4880,14 +6149,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -4904,16 +6182,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -4938,17 +6223,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -4972,17 +6264,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -4999,14 +6298,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -5022,14 +6330,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -5046,16 +6363,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -5080,17 +6404,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -5114,17 +6445,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -5141,14 +6479,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -5164,14 +6511,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -5188,16 +6544,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -5222,17 +6585,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -5256,17 +6626,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
               This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
@@ -5284,16 +6661,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/open.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/open.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
               This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
@@ -5311,16 +6695,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/reschedule.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/reschedule.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of fulfillment orders for a specific order.
      *
@@ -5337,14 +6728,23 @@ impl ShippingAndFulfillment {
         &self,
         order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/orders/{}/fulfillment_orders.json",
-            crate::progenitor_support::encode_path(order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/orders/{}/fulfillment_orders.json",
+                crate::progenitor_support::encode_path(order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a specific fulfillment order.
      *
@@ -5360,14 +6760,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Marks a fulfillment order as cancelled.
      *
@@ -5384,16 +6793,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/cancel.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/cancel.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Releases the fulfillment order holds for a specific order. Fulfillment orders are created
               with an ON_HOLD status if the channel that created the order has a fulfillment hold policy.
@@ -5416,16 +6832,23 @@ impl ShippingAndFulfillment {
             query_args.push(("order_id".to_string(), order_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/release_hold.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/release_hold.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
             is unable to ship any remaining items and intends to close the fulfillment order.
@@ -5450,17 +6873,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/close.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/close.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Moves a fulfillment order from one merchant managed location to another merchant managed location.
      *
@@ -5484,17 +6914,24 @@ impl ShippingAndFulfillment {
             query_args.push(("new_location_id".to_string(), new_location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/move.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/move.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
               This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
@@ -5512,16 +6949,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/open.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/open.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
               This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
@@ -5539,16 +6983,23 @@ impl ShippingAndFulfillment {
         fulfillment_order_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/reschedule.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/reschedule.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -5580,17 +7031,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5614,17 +7072,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5648,17 +7113,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -5690,17 +7162,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5724,17 +7203,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5758,17 +7244,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -5800,17 +7293,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5834,17 +7334,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5868,17 +7375,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -5910,17 +7424,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5944,17 +7465,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -5978,17 +7506,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -6020,17 +7555,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -6054,17 +7596,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -6088,17 +7637,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Sends a fulfillment request to the fulfillment service of a fulfillment order.
      *
@@ -6130,17 +7686,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -6164,17 +7727,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/accept.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
      *
@@ -6198,17 +7768,24 @@ impl ShippingAndFulfillment {
             query_args.push(("message".to_string(), message.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/fulfillment_request/reject.json?{}",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get tracking numbers for orders.
      *
@@ -6234,11 +7811,19 @@ impl ShippingAndFulfillment {
             query_args.push(("shop".to_string(), shop.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/fetch_tracking_numbers?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/fetch_tracking_numbers?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get inventory levels.
      *
@@ -6274,11 +7859,17 @@ impl ShippingAndFulfillment {
             query_args.push(("timestamp".to_string(), timestamp.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/fetch_stock?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/fetch_stock?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6297,11 +7888,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6316,12 +7916,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-01/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-01/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6337,14 +7944,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6361,16 +7977,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6386,14 +8009,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6412,11 +8044,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6431,12 +8072,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-04/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-04/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6452,14 +8100,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6476,16 +8133,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6501,14 +8165,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6527,11 +8200,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6546,12 +8228,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2020-07/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-07/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6567,14 +8256,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6591,16 +8289,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6616,14 +8321,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6642,11 +8356,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6658,12 +8381,19 @@ impl ShippingAndFulfillment {
     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#create-2020-10
     */
     pub async fn create_fulfillment_services(&self, body: &serde_json::Value) -> Result<()> {
-        let url = "/admin/api/2020-10/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2020-10/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6679,14 +8409,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6703,16 +8442,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6728,14 +8474,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6754,11 +8509,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6773,12 +8537,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/2021-01/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/2021-01/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6794,14 +8565,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6818,16 +8598,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6843,14 +8630,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6869,11 +8665,20 @@ impl ShippingAndFulfillment {
             query_args.push(("scope".to_string(), scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/fulfillment_services.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/fulfillment_services.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
               Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
@@ -6888,12 +8693,19 @@ impl ShippingAndFulfillment {
         &self,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = "/admin/api/unstable/fulfillment_services.json".to_string();
+        let url = self
+            .client
+            .url("/admin/api/unstable/fulfillment_services.json", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6909,14 +8721,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -6933,16 +8754,23 @@ impl ShippingAndFulfillment {
         fulfillment_service_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * .
      *
@@ -6958,14 +8786,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_service_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_services/{}/json",
-            crate::progenitor_support::encode_path(fulfillment_service_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_services/{}/json",
+                crate::progenitor_support::encode_path(fulfillment_service_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -6983,14 +8820,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -7008,14 +8854,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -7033,14 +8888,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -7058,14 +8922,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -7083,14 +8956,23 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
               The resulting list is sorted alphabetically in ascending order by location name.
@@ -7108,11 +8990,21 @@ impl ShippingAndFulfillment {
         &self,
         fulfillment_order_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/fulfillment_orders/{}/locations_for_move.json",
-            crate::progenitor_support::encode_path(fulfillment_order_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/fulfillment_orders/{}/locations_for_move.json",
+                crate::progenitor_support::encode_path(fulfillment_order_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

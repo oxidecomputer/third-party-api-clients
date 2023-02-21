@@ -25,10 +25,17 @@ impl TrackingField {
      * * Business, Education, API or higher plan
      */
     pub async fn trackingfield_list(&self) -> Result<crate::types::Domains> {
-        let url = "/tracking_fields".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/tracking_fields", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a tracking field.
      *
@@ -45,12 +52,17 @@ impl TrackingField {
         &self,
         body: &crate::types::TrackingField,
     ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
-        let url = "/tracking_fields".to_string();
+        let url = self.client.url("/tracking_fields", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a tracking field.
      *
@@ -72,14 +84,23 @@ impl TrackingField {
         &self,
         field_id: &str,
     ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a tracking field.
      *
@@ -97,14 +118,23 @@ impl TrackingField {
      * * `field_id: &str` -- The Tracking Field ID.
      */
     pub async fn trackingfield_delete(&self, field_id: &str) -> Result<()> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a tracking field.
      *
@@ -126,13 +156,21 @@ impl TrackingField {
         field_id: &str,
         body: &crate::types::TrackingField,
     ) -> Result<()> {
-        let url = format!(
-            "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+        let url = self.client.url(
+            &format!(
+                "/tracking_fields/{}",
+                crate::progenitor_support::encode_path(field_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -43,17 +43,26 @@ impl TemplateBulkRecipients {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds or replaces the bulk recipients list in a template.
      *
@@ -76,18 +85,25 @@ impl TemplateBulkRecipients {
         template_id: &str,
         body: &crate::types::BulkRecipientsRequest,
     ) -> Result<crate::types::BulkRecipientsSummaryResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes the bulk recipient list on a template.
      *
@@ -107,13 +123,23 @@ impl TemplateBulkRecipients {
         recipient_id: &str,
         template_id: &str,
     ) -> Result<crate::types::BulkRecipientsUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

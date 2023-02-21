@@ -53,14 +53,21 @@ impl Plans {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/plans?{}", query_);
-
-        let resp: crate::types::PlanList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/plans?{}", query_), None);
+        let resp: crate::types::PlanList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/plans` endpoint.
      *
@@ -82,9 +89,17 @@ impl Plans {
             query_args.push(("product".to_string(), product.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/plans?{}", query_);
-
-        let mut resp: crate::types::PlanList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/plans?{}", query_), None);
+        let mut resp: crate::types::PlanList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -105,12 +120,24 @@ impl Plans {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -122,17 +149,23 @@ impl Plans {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/plans` endpoint.
      *
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PlanData> {
-        let url = "/v1/plans".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/plans", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/plans/{plan}` endpoint.
      *
@@ -144,11 +177,20 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/plans/{plan}` endpoint.
      *
@@ -159,11 +201,20 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-
-        self.client.post(&url, None).await
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/plans/{plan}` endpoint.
      *
@@ -174,8 +225,18 @@ impl Plans {
      * * `plan: &str` -- The account's country.
      */
     pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
-        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

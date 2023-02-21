@@ -32,14 +32,23 @@ impl Billing {
      * * `account_id: &str` -- User's first name.
      */
     pub async fn account(&self, account_id: &str) -> Result<crate::types::Contact> {
-        let url = format!(
-            "/accounts/{}/billing",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update billing information.
      *
@@ -65,16 +74,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::BillingContact,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/billing",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get plan Information.
      *
@@ -95,14 +111,23 @@ impl Billing {
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountPlansResponse> {
-        let url = format!(
-            "/accounts/{}/plans",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Subscribe plans.
      *
@@ -121,16 +146,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanCreateRequestAllOf,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update a base plan.
      *
@@ -154,16 +186,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::PlanBase,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/base",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/base",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update an additional plan.
      *
@@ -191,16 +230,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::PlanBase,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/addons",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Subscribe additional plan.
      *
@@ -223,16 +269,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanAddonCreateRequestOneOf,
     ) -> Result<crate::types::AccountPlans> {
-        let url = format!(
-            "/accounts/{}/plans/addons",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel a base plan.
      *
@@ -257,16 +310,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanBaseDeleteRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/base/status",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/base/status",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel additional plans.
      *
@@ -289,16 +349,23 @@ impl Billing {
         account_id: &str,
         body: &crate::types::AccountPlanAddonCancelRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/accounts/{}/plans/addons/status",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/addons/status",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get plan usage.
      *
@@ -315,14 +382,23 @@ impl Billing {
         &self,
         account_id: &str,
     ) -> Result<crate::types::GetPlanUsageResponse> {
-        let url = format!(
-            "/accounts/{}/plans/usage",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/plans/usage",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List billing invoices.
      *
@@ -358,15 +434,24 @@ impl Billing {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/accounts/{}/billing/invoices?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing/invoices?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get invoice details.
      *
@@ -386,15 +471,24 @@ impl Billing {
         account_id: &str,
         invoice_id: &str,
     ) -> Result<crate::types::GetAccountBillingInvoiceResponse> {
-        let url = format!(
-            "/accounts/{}/billing/invoices/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(invoice_id),
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/billing/invoices/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(invoice_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Download an invoice file.
      *
@@ -407,11 +501,21 @@ impl Billing {
      * * This API has a daily limit of **100 requests per account**.
      */
     pub async fn download_invoice_pdf(&self, invoice_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/download/billing/invoices/{}",
-            crate::progenitor_support::encode_path(invoice_id),
+        let url = self.client.url(
+            &format!(
+                "/api/download/billing/invoices/{}",
+                crate::progenitor_support::encode_path(invoice_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -24,14 +24,23 @@ impl AccountWatermarks {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn watermark_get(&self, account_id: &str) -> Result<crate::types::Watermark> {
-        let url = format!(
-            "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/watermark",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update watermark information.
      *
@@ -48,16 +57,23 @@ impl AccountWatermarks {
         account_id: &str,
         body: &crate::types::Watermark,
     ) -> Result<crate::types::Watermark> {
-        let url = format!(
-            "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/watermark",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get watermark preview.
      *
@@ -74,13 +90,21 @@ impl AccountWatermarks {
         account_id: &str,
         body: &crate::types::Watermark,
     ) -> Result<crate::types::Watermark> {
-        let url = format!(
-            "/v2.1/accounts/{}/watermark/preview",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/watermark/preview",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

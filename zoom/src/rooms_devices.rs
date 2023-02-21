@@ -34,14 +34,22 @@ impl RoomsDevices {
         device_id: &str,
         body: &crate::types::ChangeZoomRoomsAppVersionRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/rooms/{}/devices/{}/app_version",
-            crate::progenitor_support::encode_path(room_id),
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/{}/devices/{}/app_version",
+                crate::progenitor_support::encode_path(room_id),
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

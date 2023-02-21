@@ -38,14 +38,21 @@ impl Locations {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/locations?{}", query_);
-
-        let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/locations?{}", query_), None);
+        let resp: crate::types::GetLocationResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List locations.
      *
@@ -56,8 +63,17 @@ impl Locations {
      * Retrieves all locations for your business.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Location>> {
-        let url = "/locations".to_string();
-        let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/locations", None);
+        let resp: crate::types::GetLocationResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -67,8 +83,11 @@ impl Locations {
             match self
                 .client
                 .get::<crate::types::GetLocationResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -94,7 +113,6 @@ impl Locations {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Create new location.
      *
@@ -110,12 +128,17 @@ impl Locations {
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = "/locations".to_string();
+        let url = self.client.url("/locations", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * GET a location.
      *
@@ -128,11 +151,20 @@ impl Locations {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
-        let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update location.
      *
@@ -145,10 +177,18 @@ impl Locations {
         id: &str,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!("/locations/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(
+            &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -68,7 +68,7 @@ const RECORDED_MEETINGS: &str = r#"{
 
 #[test]
 fn test_deserialize_recorded_meetings() {
-    let deserialized: crate::types::GetAccountCloudRecordingResponse =
+    let deserialized: zoom_api::types::GetAccountCloudRecordingResponse =
         serde_json::from_str(RECORDED_MEETINGS).unwrap();
     println!("recorded_meetings = {:?}", deserialized);
 

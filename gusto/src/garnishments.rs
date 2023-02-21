@@ -20,14 +20,23 @@ impl Garnishments {
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Garnishment>> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get garnishments for an employee.
      *
@@ -41,14 +50,23 @@ impl Garnishments {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Garnishment>> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a garnishment.
      *
@@ -61,16 +79,23 @@ impl Garnishments {
         employee_id: &str,
         body: &crate::types::PostEmployeeGarnishmentsRequest,
     ) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/garnishments",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a garnishment.
      *
@@ -79,14 +104,23 @@ impl Garnishments {
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     pub async fn get(&self, garnishment_id: &str) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/garnishments/{}",
+                crate::progenitor_support::encode_path(garnishment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a garnishment.
      *
@@ -99,13 +133,21 @@ impl Garnishments {
         garnishment_id: &str,
         body: &crate::types::PutGarnishmentRequest,
     ) -> Result<crate::types::Garnishment> {
-        let url = format!(
-            "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/garnishments/{}",
+                crate::progenitor_support::encode_path(garnishment_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

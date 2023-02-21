@@ -43,11 +43,17 @@ impl TransactionalTemplates {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/templates?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/templates?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a transactional template.
      *
@@ -63,12 +69,17 @@ impl TransactionalTemplates {
         &self,
         body: &crate::types::PostTemplatesRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = "/templates".to_string();
+        let url = self.client.url("/templates", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve a single transactional template.
      *
@@ -84,14 +95,23 @@ impl TransactionalTemplates {
         &self,
         template_id: &str,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Duplicate a transactional template.
      *
@@ -108,16 +128,23 @@ impl TransactionalTemplates {
         template_id: &str,
         body: &crate::types::PostTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a template.
      *
@@ -130,14 +157,23 @@ impl TransactionalTemplates {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Edit a transactional template.
      *
@@ -156,13 +192,21 @@ impl TransactionalTemplates {
         template_id: &str,
         body: &crate::types::PatchTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -18,10 +18,17 @@ impl Features {
      * Success
      */
     pub async fn list(&self) -> Result<Vec<crate::types::Feature>> {
-        let url = "/api/v1/features".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/api/v1/features", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features` endpoint.
      *
@@ -30,10 +37,17 @@ impl Features {
      * Success
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Feature>> {
-        let url = "/api/v1/features".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/api/v1/features", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}` endpoint.
      *
@@ -44,14 +58,23 @@ impl Features {
      * * `feature_id: &str`
      */
     pub async fn get(&self, feature_id: &str) -> Result<crate::types::Feature> {
-        let url = format!(
-            "/api/v1/features/{}",
-            crate::progenitor_support::encode_path(feature_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}",
+                crate::progenitor_support::encode_path(feature_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
      *
@@ -62,14 +85,23 @@ impl Features {
      * * `feature_id: &str`
      */
     pub async fn list_dependencies(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
-        let url = format!(
-            "/api/v1/features/{}/dependencies",
-            crate::progenitor_support::encode_path(feature_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}/dependencies",
+                crate::progenitor_support::encode_path(feature_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
      *
@@ -81,14 +113,23 @@ impl Features {
         &self,
         feature_id: &str,
     ) -> Result<Vec<crate::types::Feature>> {
-        let url = format!(
-            "/api/v1/features/{}/dependencies",
-            crate::progenitor_support::encode_path(feature_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}/dependencies",
+                crate::progenitor_support::encode_path(feature_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
      *
@@ -99,14 +140,23 @@ impl Features {
      * * `feature_id: &str`
      */
     pub async fn list_dependents(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
-        let url = format!(
-            "/api/v1/features/{}/dependents",
-            crate::progenitor_support::encode_path(feature_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}/dependents",
+                crate::progenitor_support::encode_path(feature_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
      *
@@ -118,14 +168,23 @@ impl Features {
         &self,
         feature_id: &str,
     ) -> Result<Vec<crate::types::Feature>> {
-        let url = format!(
-            "/api/v1/features/{}/dependents",
-            crate::progenitor_support::encode_path(feature_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}/dependents",
+                crate::progenitor_support::encode_path(feature_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/features/{featureId}/{lifecycle}` endpoint.
      *
@@ -148,13 +207,23 @@ impl Features {
             query_args.push(("mode".to_string(), mode.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/features/{}/{}?{}",
-            crate::progenitor_support::encode_path(feature_id),
-            crate::progenitor_support::encode_path(lifecycle),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/features/{}/{}?{}",
+                crate::progenitor_support::encode_path(feature_id),
+                crate::progenitor_support::encode_path(lifecycle),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

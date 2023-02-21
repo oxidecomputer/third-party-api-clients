@@ -56,16 +56,25 @@ impl EnvelopeRecipients {
             query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates recipients in a draft envelope or corrects recipient information for an in-process envelope.
      *
@@ -133,18 +142,25 @@ impl EnvelopeRecipients {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Adds one or more recipients to an envelope.
      *
@@ -172,18 +188,25 @@ impl EnvelopeRecipients {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes recipients from an envelope.
      *
@@ -204,17 +227,24 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         body: &crate::types::EnvelopeRecipients,
     ) -> Result<crate::types::EnvelopeRecipients> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Updates document visibility for recipients.
      *
@@ -235,17 +265,24 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         body: &crate::types::DocumentVisibilityList,
     ) -> Result<crate::types::DocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes a recipient from an envelope.
      *
@@ -267,16 +304,25 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         recipient_id: &str,
     ) -> Result<crate::types::EnvelopeRecipients> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a resource token for a sender to request ID Evidence data. .
      *
@@ -296,16 +342,25 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         recipient_id: &str,
     ) -> Result<crate::types::ProofServiceResourceToken> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/identity_proof_token",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/identity_proof_token",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create the link to the page for manually reviewing IDs.
      *
@@ -338,16 +393,25 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         recipient_id: &str,
     ) -> Result<crate::types::ViewUrl> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/views/identity_manual_review",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/views/identity_manual_review",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates an envelope recipient preview.
      *
@@ -368,14 +432,22 @@ impl EnvelopeRecipients {
         envelope_id: &str,
         body: &crate::types::RecipientPreviewRequest,
     ) -> Result<crate::types::ViewUrl> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/recipient_preview",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/recipient_preview",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

@@ -42,11 +42,17 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/webhook?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/webhook?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Webhooks.
      *
@@ -65,11 +71,17 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/webhook?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/webhook?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription.
      *
@@ -83,12 +95,17 @@ impl Webhooks {
         &self,
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
     ) -> Result<crate::types::Webhook> {
-        let url = "/webhook".to_string();
+        let url = self.client.url("/webhook", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete an existing webhook subscription.
      *
@@ -99,8 +116,18 @@ impl Webhooks {
      * * `id: i64` -- Unique id of the channel.
      */
     pub async fn delete(&self, id: i64) -> Result<()> {
-        let url = format!("/webhook/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/webhook/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

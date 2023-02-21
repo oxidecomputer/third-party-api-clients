@@ -26,10 +26,17 @@ impl Tsp {
      * * A Pro or a higher plan.
      */
     pub async fn get(&self) -> Result<crate::types::TspResponse> {
-        let url = "/tsp".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/tsp", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update account's TSP information.
      *
@@ -44,12 +51,17 @@ impl Tsp {
      *
      */
     pub async fn update(&self, body: &crate::types::TspUpdateRequest) -> Result<()> {
-        let url = "/tsp".to_string();
+        let url = self.client.url("/tsp", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List user's TSP accounts.
      *
@@ -65,14 +77,23 @@ impl Tsp {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn user_ts_ps(&self, user_id: &str) -> Result<crate::types::UserTsPsResponse> {
-        let url = format!(
-            "/users/{}/tsp",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add a user's TSP account.
      *
@@ -93,16 +114,23 @@ impl Tsp {
         user_id: &str,
         body: &crate::types::TspAccountsList,
     ) -> Result<crate::types::TspAccountsList> {
-        let url = format!(
-            "/users/{}/tsp",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a user's TSP account.
      *
@@ -121,15 +149,24 @@ impl Tsp {
      *  `3` - SIP Connected Audio.
      */
     pub async fn user(&self, user_id: &str, tsp_id: &str) -> Result<crate::types::TspAccount> {
-        let url = format!(
-            "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(tsp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a user's TSP account.
      *
@@ -148,15 +185,24 @@ impl Tsp {
      *  `3` - SIP Connected Audio.
      */
     pub async fn user_delete(&self, user_id: &str, tsp_id: &str) -> Result<()> {
-        let url = format!(
-            "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(tsp_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a TSP account.
      *
@@ -180,17 +226,24 @@ impl Tsp {
         tsp_id: &str,
         body: &crate::types::TspAccountData,
     ) -> Result<()> {
-        let url = format!(
-            "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(tsp_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Set global dial-in URL for a TSP user.
      *
@@ -211,13 +264,21 @@ impl Tsp {
         user_id: &str,
         body: &crate::types::TspGlobalDialIn,
     ) -> Result<()> {
-        let url = format!(
-            "/users/{}/tsp/settings",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/tsp/settings",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -20,14 +20,23 @@ impl Companies {
      * Get a company.
      */
     pub async fn get(&self, company_id_or_uuid: &str) -> Result<crate::types::Company> {
-        let url = format!(
-            "/v1/companies/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a partner managed company (Beta).
      *
@@ -63,12 +72,17 @@ impl Companies {
         &self,
         body: &crate::types::PostPartnerManagedCompaniesRequest,
     ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
-        let url = "/v1/partner_managed_companies".to_string();
+        let url = self.client.url("/v1/partner_managed_companies", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Create a company.
      *
@@ -98,9 +112,15 @@ impl Companies {
         &self,
         body: &crate::types::PostProvisionRequest,
     ) -> Result<crate::types::PostProvisionResponse> {
-        let url = "/v1/provision".to_string();
+        let url = self.client.url("/v1/provision", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

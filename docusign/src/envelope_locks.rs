@@ -41,15 +41,24 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EnvelopeLocks> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/lock",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an envelope lock.
      *
@@ -90,17 +99,24 @@ impl EnvelopeLocks {
         envelope_id: &str,
         body: &crate::types::LockRequest,
     ) -> Result<crate::types::EnvelopeLocks> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/lock",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Locks an envelope.
      *
@@ -175,17 +191,24 @@ impl EnvelopeLocks {
         envelope_id: &str,
         body: &crate::types::LockRequest,
     ) -> Result<crate::types::EnvelopeLocks> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/lock",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes an envelope lock.
      *
@@ -219,12 +242,22 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EnvelopeLocks> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/lock",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

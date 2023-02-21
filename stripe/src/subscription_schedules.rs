@@ -59,15 +59,23 @@ impl SubscriptionSchedules {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_schedules?{}", query_);
-
-        let resp: crate::types::GetSubscriptionSchedulesResponse =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_schedules?{}", query_), None);
+        let resp: crate::types::GetSubscriptionSchedulesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_schedules` endpoint.
      *
@@ -92,10 +100,19 @@ impl SubscriptionSchedules {
             query_args.push(("scheduled".to_string(), scheduled.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_schedules?{}", query_);
-
-        let mut resp: crate::types::GetSubscriptionSchedulesResponse =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_schedules?{}", query_), None);
+        let mut resp: crate::types::GetSubscriptionSchedulesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -116,12 +133,24 @@ impl SubscriptionSchedules {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -133,17 +162,23 @@ impl SubscriptionSchedules {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_schedules` endpoint.
      *
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
     pub async fn post(&self) -> Result<crate::types::SubscriptionSchedule> {
-        let url = "/v1/subscription_schedules".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/subscription_schedules", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_schedules/{schedule}` endpoint.
      *
@@ -155,14 +190,23 @@ impl SubscriptionSchedules {
      * * `schedule: &str` -- The account's country.
      */
     pub async fn get_schedule(&self, schedule: &str) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_schedules/{schedule}` endpoint.
      *
@@ -176,14 +220,23 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_schedules/{schedule}/cancel` endpoint.
      *
@@ -197,14 +250,23 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}/cancel",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}/cancel",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_schedules/{schedule}/release` endpoint.
      *
@@ -218,11 +280,21 @@ impl SubscriptionSchedules {
         &self,
         schedule: &str,
     ) -> Result<crate::types::SubscriptionSchedule> {
-        let url = format!(
-            "/v1/subscription_schedules/{}/release",
-            crate::progenitor_support::encode_path(schedule),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_schedules/{}/release",
+                crate::progenitor_support::encode_path(schedule),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

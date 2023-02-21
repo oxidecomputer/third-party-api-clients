@@ -55,16 +55,25 @@ impl SecretScanning {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/secret-scanning/alerts?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List secret scanning alerts for a repository.
      *
@@ -93,16 +102,25 @@ impl SecretScanning {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/secret-scanning/alerts?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a secret scanning alert.
      *
@@ -126,16 +144,25 @@ impl SecretScanning {
         repo: &str,
         alert_number: i64,
     ) -> Result<crate::types::SecretScanningAlert> {
-        let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/secret-scanning/alerts/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a secret scanning alert.
      *
@@ -160,15 +187,23 @@ impl SecretScanning {
         alert_number: i64,
         body: &crate::types::SecretScanningUpdateAlertRequest,
     ) -> Result<crate::types::SecretScanningAlert> {
-        let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/secret-scanning/alerts/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

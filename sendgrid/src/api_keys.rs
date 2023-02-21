@@ -36,11 +36,17 @@ impl ApiKeys {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api_keys?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/api_keys?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create API keys.
      *
@@ -68,12 +74,17 @@ impl ApiKeys {
         &self,
         body: &crate::types::CreateApiKeysRequest,
     ) -> Result<crate::types::CreateApiKeysResponse> {
-        let url = "/api_keys".to_string();
+        let url = self.client.url("/api_keys", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve an existing API Key.
      *
@@ -90,14 +101,23 @@ impl ApiKeys {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update API key name and scopes.
      *
@@ -120,16 +140,23 @@ impl ApiKeys {
         api_key_id: &str,
         body: &crate::types::PutApiKeysKeyRequest,
     ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete API keys.
      *
@@ -144,14 +171,23 @@ impl ApiKeys {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update API key name.
      *
@@ -170,13 +206,21 @@ impl ApiKeys {
         api_key_id: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ApiKeyNameId> {
-        let url = format!(
-            "/api_keys/{}",
-            crate::progenitor_support::encode_path(api_key_id),
+        let url = self.client.url(
+            &format!(
+                "/api_keys/{}",
+                crate::progenitor_support::encode_path(api_key_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

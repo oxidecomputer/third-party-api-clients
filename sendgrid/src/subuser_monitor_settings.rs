@@ -21,14 +21,23 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Monitor Settings for a subuser.
      *
@@ -39,16 +48,23 @@ impl SubuserMonitorSettings {
         subuser_name: &str,
         body: &crate::types::Monitor,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Create monitor settings.
      *
@@ -59,16 +75,23 @@ impl SubuserMonitorSettings {
         subuser_name: &str,
         body: &crate::types::Monitor,
     ) -> Result<crate::types::Monitor> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Delete monitor settings.
      *
@@ -78,11 +101,21 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}/monitor",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/monitor",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

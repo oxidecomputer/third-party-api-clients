@@ -40,11 +40,17 @@ impl SettingsMail {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/mail_settings?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/mail_settings?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve address whitelist mail settings.
      *
@@ -63,10 +69,17 @@ impl SettingsMail {
     pub async fn get_mail_settings_address_whitelist(
         &self,
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
-        let url = "/mail_settings/address_whitelist".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/address_whitelist", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update address whitelist mail settings.
      *
@@ -92,12 +105,17 @@ impl SettingsMail {
         &self,
         body: &crate::types::PatchMailSettingsAddressWhitelistRequest,
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
-        let url = "/mail_settings/address_whitelist".to_string();
+        let url = self.client.url("/mail_settings/address_whitelist", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve footer mail settings.
      *
@@ -114,10 +132,17 @@ impl SettingsMail {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_footer(&self) -> Result<crate::types::MailSettingsFooter> {
-        let url = "/mail_settings/footer".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/footer", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update footer mail settings.
      *
@@ -137,12 +162,17 @@ impl SettingsMail {
         &self,
         body: &crate::types::MailSettingsFooter,
     ) -> Result<crate::types::MailSettingsFooter> {
-        let url = "/mail_settings/footer".to_string();
+        let url = self.client.url("/mail_settings/footer", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve forward spam mail settings.
      *
@@ -159,10 +189,17 @@ impl SettingsMail {
     pub async fn get_mail_settings_forward_spam(
         &self,
     ) -> Result<crate::types::MailSettingsForwardSpam> {
-        let url = "/mail_settings/forward_spam".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/forward_spam", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update forward spam mail settings.
      *
@@ -193,12 +230,17 @@ impl SettingsMail {
         &self,
         body: &crate::types::MailSettingsForwardSpam,
     ) -> Result<crate::types::MailSettingsForwardSpam> {
-        let url = "/mail_settings/forward_spam".to_string();
+        let url = self.client.url("/mail_settings/forward_spam", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve legacy template mail settings.
      *
@@ -215,10 +257,17 @@ impl SettingsMail {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_template(&self) -> Result<crate::types::MailSettingsTemplate> {
-        let url = "/mail_settings/template".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/template", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update template mail settings.
      *
@@ -238,12 +287,17 @@ impl SettingsMail {
         &self,
         body: &crate::types::PatchMailSettingsTemplateRequest,
     ) -> Result<crate::types::PatchMailSettingsTemplateResponse> {
-        let url = "/mail_settings/template".to_string();
+        let url = self.client.url("/mail_settings/template", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve bounce purge mail settings.
      *
@@ -266,10 +320,17 @@ impl SettingsMail {
     pub async fn get_mail_settings_bounce_purge(
         &self,
     ) -> Result<crate::types::MailSettingsBouncePurge> {
-        let url = "/mail_settings/bounce_purge".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/bounce_purge", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update bounce purge mail settings.
      *
@@ -293,12 +354,17 @@ impl SettingsMail {
         &self,
         body: &crate::types::MailSettingsBouncePurge,
     ) -> Result<crate::types::MailSettingsBouncePurge> {
-        let url = "/mail_settings/bounce_purge".to_string();
+        let url = self.client.url("/mail_settings/bounce_purge", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve forward bounce mail settings.
      *
@@ -315,10 +381,17 @@ impl SettingsMail {
     pub async fn get_mail_settings_forward_bounce(
         &self,
     ) -> Result<crate::types::MailSettingsForwardBounce> {
-        let url = "/mail_settings/forward_bounce".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/mail_settings/forward_bounce", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update forward bounce mail settings.
      *
@@ -338,9 +411,15 @@ impl SettingsMail {
         &self,
         body: &crate::types::MailSettingsForwardBounce,
     ) -> Result<crate::types::MailSettingsForwardBounce> {
-        let url = "/mail_settings/forward_bounce".to_string();
+        let url = self.client.url("/mail_settings/forward_bounce", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

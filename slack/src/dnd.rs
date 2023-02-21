@@ -24,10 +24,17 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
     pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/dnd.endDnd".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/dnd.endDnd", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/dnd.endSnooze` endpoint.
      *
@@ -40,10 +47,17 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
     pub async fn end_snooze(&self) -> Result<crate::types::DndEndSnoozeSchema> {
-        let url = "/dnd.endSnooze".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/dnd.endSnooze", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/dnd.info` endpoint.
      *
@@ -62,11 +76,17 @@ impl Dnd {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/dnd.info?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/dnd.info?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/dnd.setSnooze` endpoint.
      *
@@ -75,10 +95,17 @@ impl Dnd {
      * FROM: <https://api.slack.com/methods/dnd.setSnooze>
      */
     pub async fn set_snooze(&self) -> Result<crate::types::DndSetSnoozeSchema> {
-        let url = "/dnd.setSnooze".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/dnd.setSnooze", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/dnd.teamInfo` endpoint.
      *
@@ -97,8 +124,15 @@ impl Dnd {
             query_args.push(("users".to_string(), users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/dnd.teamInfo?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/dnd.teamInfo?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

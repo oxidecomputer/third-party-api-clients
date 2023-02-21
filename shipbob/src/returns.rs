@@ -23,11 +23,20 @@ impl Returns {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReturnOrder> {
-        let url = format!("/return/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/return/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Modify Return Order.
      *
@@ -43,13 +52,20 @@ impl Returns {
         id: i64,
         body: &crate::types::ReturnsCreateReturn,
     ) -> Result<crate::types::ReturnOrder> {
-        let url = format!("/return/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(
+            &format!("/return/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get Return Orders.
      *
@@ -130,11 +146,17 @@ impl Returns {
             query_args.push(("TrackingNumbers".to_string(), tracking_numbers.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/return?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/return?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Return Orders.
      *
@@ -193,11 +215,17 @@ impl Returns {
             query_args.push(("TrackingNumbers".to_string(), tracking_numbers.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/return?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/return?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create Return Order.
      *
@@ -211,12 +239,17 @@ impl Returns {
         &self,
         body: &crate::types::ReturnsCreateReturn,
     ) -> Result<crate::types::ReturnOrder> {
-        let url = "/return".to_string();
+        let url = self.client.url("/return", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json-patch+json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel Return Order.
      *
@@ -228,14 +261,23 @@ impl Returns {
      * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnOrder> {
-        let url = format!(
-            "/return/{}/cancel",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/return/{}/cancel",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get One Return's status history.
      *
@@ -250,11 +292,21 @@ impl Returns {
         &self,
         id: i64,
     ) -> Result<crate::types::ReturnOrderStatusHistory> {
-        let url = format!(
-            "/return/{}/statushistory",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/return/{}/statushistory",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

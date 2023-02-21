@@ -60,11 +60,17 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/apps?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Applications.
      *
@@ -98,11 +104,17 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/apps?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add Application.
      *
@@ -125,13 +137,17 @@ impl Applications {
             query_args.push(("activate".to_string(), activate.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/apps?{}", query_);
-
+        let url = self.client.url(&format!("/api/v1/apps?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get Application.
      *
@@ -150,15 +166,24 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Application.
      *
@@ -175,16 +200,23 @@ impl Applications {
         app_id: &str,
         body: &crate::types::Application,
     ) -> Result<crate::types::Application> {
-        let url = format!(
-            "/api/v1/apps/{}",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Delete Application.
      *
@@ -197,14 +229,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn delete(&self, app_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Certificate Signing Requests for Application.
      *
@@ -217,14 +258,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn list_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Certificate Signing Requests for Application.
      *
@@ -235,14 +285,23 @@ impl Applications {
      * Enumerates Certificate Signing Requests for an application
      */
     pub async fn list_all_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Generate Certificate Signing Request for Application.
      *
@@ -259,16 +318,23 @@ impl Applications {
         app_id: &str,
         body: &crate::types::CsrMetadata,
     ) -> Result<crate::types::Csr> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/csrs/{csrId}` endpoint.
      *
@@ -278,15 +344,24 @@ impl Applications {
      * * `csr_id: &str`
      */
     pub async fn get_csr_for(&self, app_id: &str, csr_id: &str) -> Result<crate::types::Csr> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/credentials/csrs/{csrId}` endpoint.
      *
@@ -296,15 +371,24 @@ impl Applications {
      * * `csr_id: &str`
      */
     pub async fn revoke_csr_from(&self, app_id: &str, csr_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish` endpoint.
      *
@@ -318,15 +402,24 @@ impl Applications {
         app_id: &str,
         csr_id: &str,
     ) -> Result<crate::types::JsonWebKey> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/csrs/{}/lifecycle/publish",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/csrs/{}/lifecycle/publish",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Key Credentials for Application.
      *
@@ -339,14 +432,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn list_keys(&self, app_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/keys",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Key Credentials for Application.
      *
@@ -357,14 +459,23 @@ impl Applications {
      * Enumerates key credentials for an application
      */
     pub async fn list_all_keys(&self, app_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/keys",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/apps/{appId}/credentials/keys/generate` endpoint.
      *
@@ -385,15 +496,24 @@ impl Applications {
             query_args.push(("validityYears".to_string(), validity_years.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/credentials/keys/generate?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/keys/generate?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Key Credential for Application.
      *
@@ -407,15 +527,24 @@ impl Applications {
      * * `key_id: &str`
      */
     pub async fn get_key(&self, app_id: &str, key_id: &str) -> Result<crate::types::JsonWebKey> {
-        let url = format!(
-            "/api/v1/apps/{}/credentials/keys/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(key_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/keys/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(key_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Clone Application Key Credential.
      *
@@ -440,16 +569,25 @@ impl Applications {
             query_args.push(("targetAid".to_string(), target_aid.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/credentials/keys/{}/clone?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(key_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/credentials/keys/{}/clone?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(key_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/grants` endpoint.
      *
@@ -470,15 +608,24 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/grants?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/grants?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/grants` endpoint.
      *
@@ -496,15 +643,24 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/grants?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/grants?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/apps/{appId}/grants` endpoint.
      *
@@ -519,16 +675,23 @@ impl Applications {
         app_id: &str,
         body: &crate::types::OAuth2ScopeConsentGrant,
     ) -> Result<crate::types::OAuth2ScopeConsentGrant> {
-        let url = format!(
-            "/api/v1/apps/{}/grants",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/grants",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/grants/{grantId}` endpoint.
      *
@@ -551,16 +714,25 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/grants/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(grant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/grants/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(grant_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/grants/{grantId}` endpoint.
      *
@@ -572,15 +744,24 @@ impl Applications {
      * * `grant_id: &str`
      */
     pub async fn revoke_scope_consent_grant(&self, app_id: &str, grant_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/grants/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(grant_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/grants/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(grant_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Groups Assigned to Application.
      *
@@ -618,15 +799,24 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/groups?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/groups?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Groups Assigned to Application.
      *
@@ -650,15 +840,24 @@ impl Applications {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/groups?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/groups?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Assigned Group for Application.
      *
@@ -683,16 +882,25 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/groups/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/groups/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Assign Group to Application.
      *
@@ -711,17 +919,24 @@ impl Applications {
         group_id: &str,
         body: &crate::types::ApplicationGroupAssignment,
     ) -> Result<crate::types::ApplicationGroupAssignment> {
-        let url = format!(
-            "/api/v1/apps/{}/groups/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/groups/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove Group from Application.
      *
@@ -735,15 +950,24 @@ impl Applications {
      * * `group_id: &str`
      */
     pub async fn delete_group_assignment(&self, app_id: &str, group_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/groups/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/groups/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Activate Application.
      *
@@ -756,14 +980,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn activate(&self, app_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deactivate Application.
      *
@@ -776,14 +1009,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn deactivate(&self, app_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/tokens` endpoint.
      *
@@ -814,15 +1056,24 @@ impl Applications {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/tokens?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/tokens?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/tokens` endpoint.
      *
@@ -840,15 +1091,24 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/tokens?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/tokens?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/tokens` endpoint.
      *
@@ -859,14 +1119,23 @@ impl Applications {
      * * `app_id: &str`
      */
     pub async fn revoke_o_auth_2_tokens_for(&self, app_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/tokens",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/tokens",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/apps/{appId}/tokens/{tokenId}` endpoint.
      *
@@ -889,16 +1158,25 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/tokens/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(token_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/tokens/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(token_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/apps/{appId}/tokens/{tokenId}` endpoint.
      *
@@ -910,15 +1188,24 @@ impl Applications {
      * * `token_id: &str`
      */
     pub async fn revoke_o_auth_2_token_for(&self, app_id: &str, token_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/apps/{}/tokens/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(token_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/tokens/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(token_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Users Assigned to Application.
      *
@@ -966,15 +1253,24 @@ impl Applications {
             query_args.push(("query_scope".to_string(), query_scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/users?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Users Assigned to Application.
      *
@@ -1006,15 +1302,24 @@ impl Applications {
             query_args.push(("query_scope".to_string(), query_scope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/users?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Assign User to Application for SSO & Provisioning.
      *
@@ -1031,16 +1336,23 @@ impl Applications {
         app_id: &str,
         body: &crate::types::AppUser,
     ) -> Result<crate::types::AppUser> {
-        let url = format!(
-            "/api/v1/apps/{}/users",
-            crate::progenitor_support::encode_path(app_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users",
+                crate::progenitor_support::encode_path(app_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get Assigned User for Application.
      *
@@ -1065,16 +1377,25 @@ impl Applications {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/users/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Application Profile for Assigned User.
      *
@@ -1093,17 +1414,24 @@ impl Applications {
         user_id: &str,
         body: &crate::types::AppUser,
     ) -> Result<crate::types::AppUser> {
-        let url = format!(
-            "/api/v1/apps/{}/users/{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users/{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Remove User from Application.
      *
@@ -1123,13 +1451,23 @@ impl Applications {
             query_args.push(("sendEmail".to_string(), send_email.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/apps/{}/users/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/apps/{}/users/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

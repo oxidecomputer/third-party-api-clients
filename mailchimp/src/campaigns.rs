@@ -102,11 +102,17 @@ impl Campaigns {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/campaigns?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/campaigns?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add campaign.
      *
@@ -118,12 +124,17 @@ impl Campaigns {
         &self,
         body: &crate::types::CreatedCampaign,
     ) -> Result<crate::types::Campaign> {
-        let url = "/campaigns".to_string();
+        let url = self.client.url("/campaigns", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get campaign info.
      *
@@ -151,15 +162,24 @@ impl Campaigns {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaigns/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete campaign.
      *
@@ -172,14 +192,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn delete(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update campaign settings.
      *
@@ -196,16 +225,23 @@ impl Campaigns {
         campaign_id: &str,
         body: &crate::types::CampaignData,
     ) -> Result<crate::types::Campaign> {
-        let url = format!(
-            "/campaigns/{}",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Cancel campaign.
      *
@@ -218,14 +254,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn post_actions_cancel_send(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/cancel-send",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/cancel-send",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Replicate campaign.
      *
@@ -241,14 +286,23 @@ impl Campaigns {
         &self,
         campaign_id: &str,
     ) -> Result<crate::types::CampaignDataType> {
-        let url = format!(
-            "/campaigns/{}/actions/replicate",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/replicate",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Send campaign.
      *
@@ -261,14 +315,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn post_actions_send(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/send",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/send",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Schedule campaign.
      *
@@ -285,16 +348,23 @@ impl Campaigns {
         campaign_id: &str,
         body: &crate::types::PostCampaignsActionsScheduleRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/schedule",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/schedule",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Unschedule campaign.
      *
@@ -307,14 +377,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn post_actions_unschedule(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/unschedule",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/unschedule",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Send test email.
      *
@@ -331,16 +410,23 @@ impl Campaigns {
         campaign_id: &str,
         body: &crate::types::PostCampaignsActionsTestRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/test",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/test",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Pause rss campaign.
      *
@@ -353,14 +439,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn post_actions_pause(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/pause",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/pause",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Resume rss campaign.
      *
@@ -373,14 +468,23 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
     pub async fn post_actions_resume(&self, campaign_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/actions/resume",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/resume",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Resend campaign.
      *
@@ -396,14 +500,23 @@ impl Campaigns {
         &self,
         campaign_id: &str,
     ) -> Result<crate::types::CampaignDataType> {
-        let url = format!(
-            "/campaigns/{}/actions/create-resend",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/actions/create-resend",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get campaign content.
      *
@@ -431,15 +544,24 @@ impl Campaigns {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaigns/{}/content?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/content?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set campaign content.
      *
@@ -456,16 +578,23 @@ impl Campaigns {
         campaign_id: &str,
         body: &crate::types::CampaignContentData,
     ) -> Result<crate::types::CampaignContent> {
-        let url = format!(
-            "/campaigns/{}/content",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/content",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List campaign feedback.
      *
@@ -493,15 +622,24 @@ impl Campaigns {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaigns/{}/feedback?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/feedback?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add campaign feedback.
      *
@@ -518,16 +656,23 @@ impl Campaigns {
         campaign_id: &str,
         body: &crate::types::CampaignFeedback,
     ) -> Result<crate::types::CampaignFeedbackData> {
-        let url = format!(
-            "/campaigns/{}/feedback",
-            crate::progenitor_support::encode_path(campaign_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/feedback",
+                crate::progenitor_support::encode_path(campaign_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get campaign feedback message.
      *
@@ -557,16 +702,25 @@ impl Campaigns {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaigns/{}/feedback/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(feedback_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/feedback/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete campaign feedback message.
      *
@@ -580,15 +734,24 @@ impl Campaigns {
      * * `feedback_id: &str` -- The unique id for the feedback message.
      */
     pub async fn delete_feedback(&self, campaign_id: &str, feedback_id: &str) -> Result<()> {
-        let url = format!(
-            "/campaigns/{}/feedback/{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(feedback_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/feedback/{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update campaign feedback message.
      *
@@ -607,17 +770,24 @@ impl Campaigns {
         feedback_id: &str,
         body: &crate::types::CampaignFeedbackDataType,
     ) -> Result<crate::types::CampaignFeedbackData> {
-        let url = format!(
-            "/campaigns/{}/feedback/{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(feedback_id),
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/feedback/{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(feedback_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get campaign send checklist.
      *
@@ -645,12 +815,22 @@ impl Campaigns {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/campaigns/{}/send-checklist?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/campaigns/{}/send-checklist?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

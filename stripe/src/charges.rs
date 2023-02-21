@@ -58,14 +58,21 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges?{}", query_);
-
-        let resp: crate::types::Charges = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
+        let resp: crate::types::Charges = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges` endpoint.
      *
@@ -91,9 +98,17 @@ impl Charges {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges?{}", query_);
-
-        let mut resp: crate::types::Charges = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/charges?{}", query_), None);
+        let mut resp: crate::types::Charges = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -114,12 +129,24 @@ impl Charges {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -131,17 +158,23 @@ impl Charges {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges` endpoint.
      *
      * <p>To charge a credit card or other payment source, you create a <code>Charge</code> object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).</p>
      */
     pub async fn post(&self) -> Result<crate::types::Charge> {
-        let url = "/v1/charges".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/charges", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/search` endpoint.
      *
@@ -174,14 +207,23 @@ impl Charges {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges/search?{}", query_);
-
-        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/charges/search?{}", query_), None);
+        let resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/search` endpoint.
      *
@@ -198,9 +240,19 @@ impl Charges {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/charges/search?{}", query_);
-
-        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/charges/search?{}", query_), None);
+        let mut resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -221,12 +273,24 @@ impl Charges {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -238,7 +302,6 @@ impl Charges {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/{charge}` endpoint.
      *
@@ -250,14 +313,23 @@ impl Charges {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}` endpoint.
      *
@@ -268,14 +340,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_charges(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/capture` endpoint.
      *
@@ -288,14 +369,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_capture(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}/capture",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/capture",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/{charge}/dispute` endpoint.
      *
@@ -307,14 +397,23 @@ impl Charges {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/dispute` endpoint.
      *
@@ -325,14 +424,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/dispute/close` endpoint.
      *
@@ -343,14 +451,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_dispute_close(&self, charge: &str) -> Result<crate::types::Dispute> {
-        let url = format!(
-            "/v1/charges/{}/dispute/close",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/dispute/close",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/refund` endpoint.
      *
@@ -371,14 +488,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_refund(&self, charge: &str) -> Result<crate::types::Charge> {
-        let url = format!(
-            "/v1/charges/{}/refund",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refund",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/{charge}/refunds` endpoint.
      *
@@ -410,18 +536,28 @@ impl Charges {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/charges/{}/refunds?{}",
-            crate::progenitor_support::encode_path(charge),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds?{}",
+                crate::progenitor_support::encode_path(charge),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::RefundList = self.client.get(&url, None).await?;
+        let resp: crate::types::RefundList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/{charge}/refunds` endpoint.
      *
@@ -430,12 +566,23 @@ impl Charges {
      * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
      */
     pub async fn get_all_refunds(&self, charge: &str) -> Result<Vec<crate::types::Refund>> {
-        let url = format!(
-            "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::RefundList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::RefundList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -456,12 +603,24 @@ impl Charges {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -473,7 +632,6 @@ impl Charges {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/refunds` endpoint.
      *
@@ -484,14 +642,23 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      */
     pub async fn post_refund_charges(&self, charge: &str) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds",
+                crate::progenitor_support::encode_path(charge),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/charges/{charge}/refunds/{refund}` endpoint.
      *
@@ -508,15 +675,24 @@ impl Charges {
         charge: &str,
         refund: &str,
     ) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds/{}",
+                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(refund),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/charges/{charge}/refunds/{refund}` endpoint.
      *
@@ -532,12 +708,22 @@ impl Charges {
         charge: &str,
         refund: &str,
     ) -> Result<crate::types::Refund> {
-        let url = format!(
-            "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+        let url = self.client.url(
+            &format!(
+                "/v1/charges/{}/refunds/{}",
+                crate::progenitor_support::encode_path(charge),
+                crate::progenitor_support::encode_path(refund),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

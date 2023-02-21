@@ -24,10 +24,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.archive".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.archive", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.convertToPrivate` endpoint.
      *
@@ -40,10 +47,19 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn convert_private(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.convertToPrivate".to_string();
-        self.client.post(&url, None).await
+        let url = self
+            .client
+            .url("/admin.conversations.convertToPrivate", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.create` endpoint.
      *
@@ -56,10 +72,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn create(&self) -> Result<crate::types::AdminConversationsCreateSchema> {
-        let url = "/admin.conversations.create".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.create", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.delete` endpoint.
      *
@@ -72,10 +95,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.delete".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.delete", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.disconnectShared` endpoint.
      *
@@ -88,10 +118,19 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn disconnect_shared(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.disconnectShared".to_string();
-        self.client.post(&url, None).await
+        let url = self
+            .client
+            .url("/admin.conversations.disconnectShared", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.getConversationPrefs` endpoint.
      *
@@ -113,11 +152,20 @@ impl AdminConversations {
             query_args.push(("channel_id".to_string(), channel_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.conversations.getConversationPrefs?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin.conversations.getConversationPrefs?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.getTeams` endpoint.
      *
@@ -149,11 +197,19 @@ impl AdminConversations {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.conversations.getTeams?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.conversations.getTeams?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.invite` endpoint.
      *
@@ -166,10 +222,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.invite".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.invite", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.rename` endpoint.
      *
@@ -182,10 +245,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.rename".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.rename", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.conversations.search` endpoint.
      *
@@ -240,11 +310,19 @@ impl AdminConversations {
             query_args.push(("team_ids".to_string(), team_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.conversations.search?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.conversations.search?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.setConversationPrefs` endpoint.
      *
@@ -257,10 +335,19 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn set_conversation_prefs(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.setConversationPrefs".to_string();
-        self.client.post(&url, None).await
+        let url = self
+            .client
+            .url("/admin.conversations.setConversationPrefs", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.setTeams` endpoint.
      *
@@ -273,10 +360,17 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn set_teams(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.setTeams".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.setTeams", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.conversations.unarchive` endpoint.
      *
@@ -289,7 +383,15 @@ impl AdminConversations {
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
     pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.conversations.unarchive".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.conversations.unarchive", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

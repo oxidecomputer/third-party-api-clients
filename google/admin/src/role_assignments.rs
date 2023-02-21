@@ -47,18 +47,28 @@ impl RoleAssignments {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::RoleAssignments = self.client.get(&url, None).await?;
+        let resp: crate::types::RoleAssignments = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
      *
@@ -80,13 +90,24 @@ impl RoleAssignments {
             query_args.push(("userKey".to_string(), user_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::RoleAssignments = self.client.get(&url, None).await?;
+        let mut resp: crate::types::RoleAssignments = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -96,12 +117,24 @@ impl RoleAssignments {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -117,7 +150,6 @@ impl RoleAssignments {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
      *
@@ -132,16 +164,23 @@ impl RoleAssignments {
         customer: &str,
         body: &crate::types::RoleAssignment,
     ) -> Result<crate::types::RoleAssignment> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
      *
@@ -157,15 +196,24 @@ impl RoleAssignments {
         customer: &str,
         role_assignment_id: &str,
     ) -> Result<crate::types::RoleAssignment> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(role_assignment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(role_assignment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
      *
@@ -177,12 +225,22 @@ impl RoleAssignments {
      * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
      */
     pub async fn delete(&self, customer: &str, role_assignment_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/roleassignments/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(role_assignment_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/roleassignments/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(role_assignment_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

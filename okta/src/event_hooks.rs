@@ -18,10 +18,17 @@ impl EventHooks {
      * Success
      */
     pub async fn list(&self) -> Result<Vec<crate::types::EventHook>> {
-        let url = "/api/v1/eventHooks".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/api/v1/eventHooks", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/eventHooks` endpoint.
      *
@@ -30,22 +37,34 @@ impl EventHooks {
      * Success
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::EventHook>> {
-        let url = "/api/v1/eventHooks".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/api/v1/eventHooks", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/eventHooks` endpoint.
      *
      * Success
      */
     pub async fn create(&self, body: &crate::types::EventHook) -> Result<crate::types::EventHook> {
-        let url = "/api/v1/eventHooks".to_string();
+        let url = self.client.url("/api/v1/eventHooks", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/eventHooks/{eventHookId}` endpoint.
      *
@@ -56,14 +75,23 @@ impl EventHooks {
      * * `event_hook_id: &str`
      */
     pub async fn get(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
-        let url = format!(
-            "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/eventHooks/{eventHookId}` endpoint.
      *
@@ -78,16 +106,23 @@ impl EventHooks {
         event_hook_id: &str,
         body: &crate::types::EventHook,
     ) -> Result<crate::types::EventHook> {
-        let url = format!(
-            "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/eventHooks/{eventHookId}` endpoint.
      *
@@ -98,14 +133,23 @@ impl EventHooks {
      * * `event_hook_id: &str`
      */
     pub async fn delete(&self, event_hook_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/eventHooks/{eventHookId}/lifecycle/activate` endpoint.
      *
@@ -116,14 +160,23 @@ impl EventHooks {
      * * `event_hook_id: &str`
      */
     pub async fn activate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
-        let url = format!(
-            "/api/v1/eventHooks/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/eventHooks/{eventHookId}/lifecycle/deactivate` endpoint.
      *
@@ -134,14 +187,23 @@ impl EventHooks {
      * * `event_hook_id: &str`
      */
     pub async fn deactivate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
-        let url = format!(
-            "/api/v1/eventHooks/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/eventHooks/{eventHookId}/lifecycle/verify` endpoint.
      *
@@ -152,11 +214,21 @@ impl EventHooks {
      * * `event_hook_id: &str`
      */
     pub async fn verify(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
-        let url = format!(
-            "/api/v1/eventHooks/{}/lifecycle/verify",
-            crate::progenitor_support::encode_path(event_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/eventHooks/{}/lifecycle/verify",
+                crate::progenitor_support::encode_path(event_hook_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

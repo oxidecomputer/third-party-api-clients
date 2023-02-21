@@ -75,18 +75,28 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetChatMessagesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.messages.to_vec())
     }
-
     /**
      * List user's chat messages.
      *
@@ -130,13 +140,24 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetChatMessagesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut messages = resp.messages;
         let mut page = resp.next_page_token;
@@ -147,12 +168,24 @@ impl ChatMessages {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -168,7 +201,6 @@ impl ChatMessages {
         // Return our response data.
         Ok(messages)
     }
-
     /**
      * Send a chat message.
      *
@@ -187,16 +219,23 @@ impl ChatMessages {
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
     ) -> Result<crate::types::Groups> {
-        let url = format!(
-            "/chat/users/{}/messages",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Mark message read or unread.
      *
@@ -219,17 +258,24 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::MarkMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}/status",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}/status",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * React to a chat message.
      *
@@ -252,17 +298,24 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::ReactMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}/emoji_reactions",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}/emoji_reactions",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a message.
      *
@@ -299,16 +352,25 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a message.
      *
@@ -333,17 +395,24 @@ impl ChatMessages {
         message_id: &str,
         body: &crate::types::EditMessageRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/messages/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a message.
      *
@@ -387,13 +456,23 @@ impl ChatMessages {
             query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(message_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/messages/{}?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(message_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

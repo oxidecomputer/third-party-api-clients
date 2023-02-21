@@ -33,17 +33,26 @@ impl TemplateDocumentTabs {
         page_number: &str,
         template_id: &str,
     ) -> Result<crate::types::TemplateDocumentTabs> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/tabs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+                crate::progenitor_support::encode_path(page_number),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Returns tabs on the document.
      *
@@ -72,17 +81,26 @@ impl TemplateDocumentTabs {
             query_args.push(("page_numbers".to_string(), page_numbers.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/tabs?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/tabs?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the tabs for a template.
      *
@@ -103,18 +121,25 @@ impl TemplateDocumentTabs {
         template_id: &str,
         body: &crate::types::TemplateTabs,
     ) -> Result<crate::types::Tabs> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Create Template Document Tabs.
      *
@@ -135,18 +160,25 @@ impl TemplateDocumentTabs {
         template_id: &str,
         body: &crate::types::TemplateTabs,
     ) -> Result<crate::types::Tabs> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes tabs from an envelope document.
      *
@@ -167,15 +199,23 @@ impl TemplateDocumentTabs {
         template_id: &str,
         body: &crate::types::TemplateTabs,
     ) -> Result<crate::types::Tabs> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

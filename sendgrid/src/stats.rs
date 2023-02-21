@@ -51,11 +51,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve global email statistics.
      *
@@ -88,11 +94,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by country and state/province.
      *
@@ -139,11 +151,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/geo/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by country and state/province.
      *
@@ -182,11 +200,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/geo/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/geo/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by device type.
      *
@@ -237,11 +261,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/devices/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by device type.
      *
@@ -285,11 +315,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/devices/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/devices/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by client type.
      *
@@ -325,11 +361,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/clients/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by client type.
      *
@@ -360,11 +402,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/clients/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/clients/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve stats by a specific client type.
      *
@@ -407,15 +455,24 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(client_type),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/clients/{}/stats?{}",
+                crate::progenitor_support::encode_path(client_type),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve stats by a specific client type.
      *
@@ -453,15 +510,24 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/clients/{}/stats?{}",
-            crate::progenitor_support::encode_path(client_type),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/clients/{}/stats?{}",
+                crate::progenitor_support::encode_path(client_type),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by mailbox provider.
      *
@@ -511,11 +577,19 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/mailbox_providers/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/mailbox_providers/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by mailbox provider.
      *
@@ -557,11 +631,19 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/mailbox_providers/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/mailbox_providers/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by browser.
      *
@@ -608,11 +690,19 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/browsers/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/browsers/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve email statistics by browser.
      *
@@ -651,8 +741,17 @@ impl Stats {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/browsers/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/browsers/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -45,11 +45,19 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/mappings?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/mappings?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/mappings` endpoint.
      *
@@ -70,11 +78,19 @@ impl ProfileMappings {
             query_args.push(("targetId".to_string(), target_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/mappings?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/mappings?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Profile Mapping.
      *
@@ -87,14 +103,23 @@ impl ProfileMappings {
      * * `mapping_id: &str`
      */
     pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
-        let url = format!(
-            "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(mapping_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/mappings/{}",
+                crate::progenitor_support::encode_path(mapping_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Profile Mapping.
      *
@@ -111,13 +136,21 @@ impl ProfileMappings {
         mapping_id: &str,
         body: &crate::types::ProfileMapping,
     ) -> Result<crate::types::ProfileMapping> {
-        let url = format!(
-            "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(mapping_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/mappings/{}",
+                crate::progenitor_support::encode_path(mapping_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

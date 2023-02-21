@@ -24,14 +24,23 @@ impl UserSchemas {
      * * `app_instance_id: &str`
      */
     pub async fn get_application(&self, app_instance_id: &str) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/apps/{}/default",
+                crate::progenitor_support::encode_path(app_instance_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Partial updates on the User Profile properties of the Application User Schema.
      *
@@ -48,16 +57,23 @@ impl UserSchemas {
         app_instance_id: &str,
         body: &crate::types::UserSchema,
     ) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/apps/{}/default",
+                crate::progenitor_support::encode_path(app_instance_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Fetches the schema for a Schema Id.
      *
@@ -70,14 +86,23 @@ impl UserSchemas {
      * * `schema_id: &str`
      */
     pub async fn get(&self, schema_id: &str) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/{}",
+                crate::progenitor_support::encode_path(schema_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
      *
@@ -92,13 +117,21 @@ impl UserSchemas {
         schema_id: &str,
         body: &crate::types::UserSchema,
     ) -> Result<crate::types::UserSchema> {
-        let url = format!(
-            "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/schemas/user/{}",
+                crate::progenitor_support::encode_path(schema_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

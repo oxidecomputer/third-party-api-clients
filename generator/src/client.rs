@@ -1,5 +1,7 @@
 use inflector::cases::snakecase::to_snake_case;
 
+use crate::struct_name;
+
 /*
  * Declare the client object:
  */
@@ -7,6 +9,7 @@ pub const GITHUB_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API
 #[derive(Clone)]
 pub struct Client {
     host: String,
+    host_override: Option<String>,
     agent: String,
     client: reqwest_middleware::ClientWithMiddleware,
     credentials: Option<crate::auth::Credentials>,
@@ -20,32 +23,23 @@ impl Client {
         A: Into<String>,
         C: Into<Option<crate::auth::Credentials>>,
     {
-        Self::host(DEFAULT_HOST, agent, credentials)
-    }
-
-    pub fn host<H, A, C>(host: H, agent: A, credentials: C) -> Result<Self>
-    where
-        H: Into<String>,
-        A: Into<String>,
-        C: Into<Option<crate::auth::Credentials>>,
-    {
         let http = reqwest::Client::builder().build()?;
         let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
-                let client = reqwest_middleware::ClientBuilder::new(http)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware::default())
-                    // Retry failed requests.
-                    .with(
-                        reqwest_conditional_middleware::ConditionalMiddleware::new(
-                            reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
-                            |req: &reqwest::Request| req.try_clone().is_some()
-                        )
-                    )
-                    .build();
+        let client = reqwest_middleware::ClientBuilder::new(http)
+            // Trace HTTP requests. See the tracing crate to make use of these traces.
+            .with(reqwest_tracing::TracingMiddleware::default())
+            // Retry failed requests.
+            .with(
+                reqwest_conditional_middleware::ConditionalMiddleware::new(
+                    reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                    |req: &reqwest::Request| req.try_clone().is_some()
+                )
+            )
+            .build();
+
         #[cfg(feature = "httpcache")]
         {
             Ok(Self::custom(
-                host,
                 agent,
                 credentials,
                 client,
@@ -54,25 +48,24 @@ impl Client {
         }
         #[cfg(not(feature = "httpcache"))]
         {
-            Ok(Self::custom(host, agent, credentials, client))
+            Ok(Self::custom(agent, credentials, client))
         }
     }
 
     #[cfg(feature = "httpcache")]
-    pub fn custom<H, A, CR>(
-        host: H,
+    pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
         http: reqwest_middleware::ClientWithMiddleware,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
-        H: Into<String>,
         A: Into<String>,
         CR: Into<Option<crate::auth::Credentials>>,
     {
         Self {
-            host: host.into(),
+            host: RootDefaultServer::default().default_url().to_string(),
+            host_override: None,
             agent: agent.into(),
             client: http,
             credentials: credentials.into(),
@@ -81,18 +74,42 @@ impl Client {
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest_middleware::ClientWithMiddleware) -> Self
+    pub fn custom<A, CR>(agent: A, credentials: CR, http: reqwest_middleware::ClientWithMiddleware) -> Self
     where
-        H: Into<String>,
         A: Into<String>,
         CR: Into<Option<crate::auth::Credentials>>,
     {
         Self {
-            host: host.into(),
+            host: RootDefaultServer::default().default_url().to_string(),
+            host_override: None,
             agent: agent.into(),
             client: http,
             credentials: credentials.into(),
         }
+    }
+
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
+    where
+        H: ToString,
+    {
+        self.host_override = Some(host.to_string());
+        self
+    }
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self
+    {
+        self.host_override = None;
+        self
+    }
+
+    pub fn get_host_override(&self) -> Option<&str> {
+        self.host_override.as_deref()
+    }
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
+        format!("{}{}", self.get_host_override().or(host).unwrap_or(self.host.as_str()), path)
     }
 
     pub fn set_credentials<CR>(&mut self, credentials: CR)
@@ -183,7 +200,7 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<crate::utils::NextLink>, Out)>
@@ -211,6 +228,10 @@ impl Client {
             req
         };
 
+        if let Some(content_type) = &message.content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type.clone());
+        }
+
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
@@ -221,7 +242,7 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        if let Some(body) = body {
+        if let Some(body) = message.body {
             req = req.body(body);
         }
         let response = req.send().await?;
@@ -314,38 +335,38 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
+        let (_ , r) = self.request(method, uri, message, media_type, authentication).await?;
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.get_media(uri, crate::utils::MediaType::Json, message).await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Option<reqwest::Body>) -> Result<D>
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::GET,
-            &(self.host.clone() + uri),
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -358,8 +379,8 @@ impl Client {
     {
         self.request(
             http::Method::GET,
-            &(self.host.clone() + uri),
-            None,
+            &uri,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
@@ -372,13 +393,13 @@ impl Client {
         self.request(
             http::Method::GET,
             url.as_str(),
-            None,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -386,14 +407,14 @@ impl Client {
             uri,
             message,
             crate::utils::MediaType::Json,
-             crate::auth::AuthenticationConstraint::Unconstrained,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
     async fn post_media<D>(
         &self,
         uri: &str,
-        message: Option<reqwest::Body>,
+        message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
@@ -402,60 +423,60 @@ impl Client {
     {
         self.request_entity(
             http::Method::POST,
-            &(self.host.clone() + uri),
+            &uri,
             message,
             media,
             authentication,
         ).await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn patch_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::PATCH,
-            &(self.host.clone() + uri),
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.patch_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.put_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn put_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::PUT,
-            &(self.host.clone() + uri),
+            &uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::DELETE,
-            &(self.host.clone() + uri),
+            &uri,
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -492,8 +513,9 @@ pub fn generate_client_generic_token(
     token_endpoint: &str,
     user_consent_endpoint: &str,
     add_post_header: &str,
+    servers: &GeneratedServers,
 ) -> String {
-    let mut new_from_env = basic_new_from_env(proper_name, add_post_header);
+    let mut new_from_env = basic_new_from_env(proper_name, add_post_header, servers);
     if proper_name.starts_with("Google") {
         new_from_env = GOOGLE_NEW_FROM_ENV_TEMPLATE.to_string();
     }
@@ -540,6 +562,10 @@ pub fn generate_client_generic_token(
 
     let token_auth_template = get_token_auth_template(consent_pattern);
 
+    let server_block = servers.server_block();
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
+
     format!(
         r#"use std::sync::Arc;
 use std::convert::TryInto;
@@ -551,10 +577,13 @@ use tokio::sync::RwLock;
 const TOKEN_ENDPOINT: &str = "https://{}";
 const USER_CONSENT_ENDPOINT: &str = "https://{}";
 
+{server_block}
+
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
     host: String,
+    host_override: Option<String>,
     token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
@@ -589,6 +618,7 @@ impl Client {{
         token: T,
         refresh_token: Q,
         {}
+        {server_arg}
     ) -> Self
     where
         I: ToString,
@@ -615,8 +645,11 @@ impl Client {{
                     )
                     .build();
 
+                {server_to_host}
+
                 Client {{
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -690,14 +723,28 @@ impl Client {{
         seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid))
     }}
 
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {{
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
+        self.host_override = Some(host.to_string());
+        self
+    }}
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self
+    {{
+        self.host_override = None;
+        self
+    }}
+
+    pub fn get_host_override(&self) -> Option<&str> {{
+        self.host_override.as_deref()
+    }}
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
+        format!("{{}}{{}}", self.get_host_override().or(host).unwrap_or(self.host.as_str()), path)
     }}
 
     {}
@@ -721,7 +768,11 @@ impl Client {{
     )
 }
 
-fn basic_new_from_env(proper_name: &str, add_post_header: &str) -> String {
+fn basic_new_from_env(
+    proper_name: &str,
+    add_post_header: &str,
+    servers: &GeneratedServers,
+) -> String {
     let add_post_header_type = if !add_post_header.is_empty() {
         ", P".to_string()
     } else {
@@ -743,6 +794,9 @@ fn basic_new_from_env(proper_name: &str, add_post_header: &str) -> String {
         "".to_string()
     };
 
+    let server_arg = servers.server_arg();
+    let server_param = servers.server_param();
+
     format!(
         r#"
 /// Create a new Client struct from environment variables. It
@@ -751,7 +805,7 @@ fn basic_new_from_env(proper_name: &str, add_post_header: &str) -> String {
 /// given a valid API key and your requests will work.
 /// We pass in the token and refresh token to the client so if you are storing
 /// it in a database, you can get it first.
-pub fn new_from_env<T, R{}>(token: T, refresh_token: R{}) -> Self
+pub fn new_from_env<T, R{}>(token: T, refresh_token: R{}, {server_arg}) -> Self
 where
     T: ToString,
     R: ToString,
@@ -768,6 +822,7 @@ where
         token,
         refresh_token,
         {}
+        {server_param}
     )
 }}"#,
         add_post_header_type,
@@ -817,8 +872,11 @@ where
                 )
                 .build();
 
+            let host = RootDefaultServer::default().default_url().to_string();
+
             Client {
-                host: DEFAULT_HOST.to_string(),
+                host,
+                host_override: None,
                 client_id: secret.client_id.to_string(),
                 client_secret: secret.client_secret.to_string(),
                 redirect_uri: secret.redirect_uris[0].to_string(),
@@ -836,14 +894,30 @@ where
 }
 "#;
 
-pub fn generate_client_generic_api_key(proper_name: &str, add_post_header: &str) -> String {
+pub fn generate_client_generic_api_key(
+    proper_name: &str,
+    add_post_header: &str,
+    servers: &GeneratedServers,
+) -> String {
+    let server_block = if servers.count > 0 {
+        servers.output.as_deref().unwrap()
+    } else {
+        ""
+    };
+
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
+
     format!(
         r#"use std::env;
+
+{server_block}
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
     host: String,
+    host_override: Option<String>,
     token: String,
 
     client: reqwest_middleware::ClientWithMiddleware,
@@ -855,6 +929,7 @@ impl Client {{
     /// given a valid API key your requests will work.
     pub fn new<T>(
         token: T,
+        {server_arg}
     ) -> Self
     where
         T: ToString,
@@ -875,8 +950,11 @@ impl Client {{
                     )
                     .build();
 
+                {server_to_host}
+
                 Client {{
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     token: token.to_string(),
 
                     client,
@@ -886,15 +964,29 @@ impl Client {{
         }}
     }}
 
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {{
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
-     }}
+        self.host_override = Some(host.to_string());
+        self
+    }}
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self
+    {{
+        self.host_override = None;
+        self
+    }}
+
+    pub fn get_host_override(&self) -> Option<&str> {{
+        self.host_override.as_deref()
+    }}
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
+        format!("{{}}{{}}", self.get_host_override().or(host).unwrap_or(self.host.as_str()), path)
+    }}
 
     /// Create a new Client struct from environment variables. It
     /// takes a type that can convert into
@@ -963,12 +1055,12 @@ async fn request<Out>(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body).await?;
+    let response = self.request_raw(method, uri, message).await?;
 
     let status = response.status();
 
@@ -1001,12 +1093,12 @@ async fn request_with_links<Out>(
     &self,
     method: http::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<(Option<crate::utils::NextLink>, Out)>
 where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let response = self.request_raw(method, uri, body).await?;
+    let response = self.request_raw(method, uri, message).await?;
 
     let status = response.status();
     let link = response
@@ -1052,12 +1144,7 @@ async fn post_form<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1118,12 +1205,7 @@ async fn request_with_accept_mime<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1183,12 +1265,7 @@ async fn request_with_mime<Out>(
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1256,31 +1333,31 @@ async fn request_entity<D>(
     &self,
     method: http::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     let r = self
-        .request(method, uri, body)
+        .request(method, uri, message)
         .await?;
     Ok(r)
 }}
 
 #[allow(dead_code)]
-async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+async fn get<D>(&self, uri: &str,  message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     self.request_entity(
         http::Method::GET,
-        &(self.host.to_string() + uri),
+        uri,
         message,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
+async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1321,8 +1398,8 @@ where
 {{
     self.request_with_links(
         http::Method::GET,
-        &(self.host.to_string() + uri),
-        None,
+        uri,
+        Message::default(),
     ).await
 }}
 
@@ -1334,54 +1411,54 @@ where
     self.request_with_links(
         http::Method::GET,
         url.as_str(),
-        None,
+        Message::default(),
     ).await
 }}
 
 #[allow(dead_code)]
-async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     self.request_entity(
         http::Method::POST,
-        &(self.host.to_string() + uri),
+        uri,
         message,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     self.request_entity(
         http::Method::PATCH,
-        &(self.host.to_string() + uri),
+        uri,
         message,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     self.request_entity(
         http::Method::PUT,
-        &(self.host.to_string() + uri),
+        uri,
         message,
     ).await
 }}
 
 #[allow(dead_code)]
-async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
     self.request_entity(
         http::Method::DELETE,
-        &(self.host.to_string() + uri),
+        uri,
         message,
     ).await
 }}"#,
@@ -1405,15 +1482,10 @@ async fn request_raw(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<reqwest::Response>
 {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
     let instance = <&Client>::clone(&self);
     let mut req = instance.client.request(method.clone(), url);
     // Set the default headers.
@@ -1421,15 +1493,24 @@ async fn request_raw(
         reqwest::header::ACCEPT,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
+
+    if let Some(content_type) = &message.content_type {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_str(content_type).unwrap(),
+        );
+    }} else {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+    }}
+
     {}
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
-    if let Some(body) = body {{
+    if let Some(body) = message.body {{
         req = req.body(body);
     }}
     Ok(req.send().await?)
@@ -1456,14 +1537,9 @@ async fn make_request(
     &self,
     method: &reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<reqwest::Request> {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
+    let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
 
@@ -1474,17 +1550,26 @@ async fn make_request(
         reqwest::header::ACCEPT,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
+
+    if let Some(content_type) = &message.content_type {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_str(content_type).unwrap(),
+        );
+    }} else {{
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+    }}
+
     {}
 
     if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
 
-    if let Some(body) = body {{
+    if let Some(body) = message.body {{
         req = req.body(body);
     }}
 
@@ -1495,7 +1580,7 @@ async fn request_raw(
     &self,
     method: reqwest::Method,
     uri: &str,
-    body: Option<reqwest::Body>,
+    message: Message,
 ) -> Result<reqwest::Response> {{
     if self.auto_refresh {{
         let expired = self.is_expired().await;
@@ -1524,7 +1609,7 @@ async fn request_raw(
         }}
     }}
 
-    let req = self.make_request(&method, uri, body).await?;
+    let req = self.make_request(&method, uri, message).await?;
     let resp = self.client.execute(req).await?;
 
     Ok(resp)
@@ -1678,10 +1763,21 @@ pub fn generate_client_generic_client_credentials(
     proper_name: &str,
     token_endpoint: &str,
     add_post_header: &str,
+    servers: &GeneratedServers,
 ) -> String {
+    let server_block = if servers.count > 0 {
+        servers.output.as_deref().unwrap()
+    } else {
+        ""
+    };
+
+    let server_arg = servers.server_arg();
+    let server_to_host = servers.host_from_server();
+
     format!(
         r#"use std::env;
 
+{server_block}
 
 const TOKEN_ENDPOINT: &str = "https://{}";
 
@@ -1689,6 +1785,7 @@ const TOKEN_ENDPOINT: &str = "https://{}";
 #[derive(Clone)]
 pub struct Client {{
     host: String,
+    host_override: Option<String>,
     token: String,
     client_id: String,
     client_secret: String,
@@ -1705,6 +1802,7 @@ impl Client {{
         client_id: I,
         client_secret: K,
         token: T,
+        {server_arg}
     ) -> Self
     where
         I: ToString,
@@ -1727,8 +1825,11 @@ impl Client {{
                     )
                     .build();
 
+                {server_to_host}
+
                 Client {{
-                    host: DEFAULT_HOST.to_string(),
+                    host,
+                    host_override: None,
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     token: token.to_string(),
@@ -1739,15 +1840,29 @@ impl Client {{
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
         }}
     }}
-
-    /// Override the default host for the client.
-    pub fn with_host<H>(&self, host: H) -> Self
+    
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
     where
         H: ToString,
     {{
-        let mut c = self.clone();
-        c.host = host.to_string();
-        c
+        self.host_override = Some(host.to_string());
+        self
+    }}
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self
+    {{
+        self.host_override = None;
+        self
+    }}
+
+    pub fn get_host_override(&self) -> Option<&str> {{
+        self.host_override.as_deref()
+    }}
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {{
+        format!("{{}}{{}}", self.get_host_override().or(host).unwrap_or(self.host.as_str()), path)
     }}
 
     /// Create a new Client struct from environment variables. It
@@ -1822,3 +1937,149 @@ pub struct AccessToken {
     )]
     pub scope: String,
 }"#;
+
+#[derive(Clone, Debug, Default)]
+pub struct GeneratedServers {
+    pub count: u64,
+    pub output: Option<String>,
+    pub top_level_type: Option<String>,
+}
+
+impl GeneratedServers {
+    pub fn server_block(&self) -> &str {
+        self.output.as_deref().unwrap_or("")
+    }
+
+    pub fn server_arg(&self) -> String {
+        if self.count > 1 {
+            format!(
+                "server: impl Into<{}>,",
+                self.top_level_type.as_ref().unwrap()
+            )
+        } else {
+            String::new()
+        }
+    }
+
+    pub fn server_param(&self) -> String {
+        if self.count > 1 {
+            "server,".to_string()
+        } else {
+            String::new()
+        }
+    }
+
+    pub fn host_from_server(&self) -> String {
+        if self.count > 1 {
+            String::from("let host = server.into().default_url().to_string();")
+        } else if self.count == 1 {
+            format!(
+                "let host = {}::default().default_url().to_string();",
+                self.top_level_type.as_ref().unwrap()
+            )
+        } else {
+            String::from("let host = FALLBACK_HOST.to_string();")
+        }
+    }
+}
+
+pub fn generate_servers(servers: &[openapiv3::Server], server_prefix: &str) -> GeneratedServers {
+    if servers.len() > 1 {
+        let mut server_variants = String::new();
+        let mut server_branches = String::new();
+        let mut server_structs = String::new();
+        let mut server_into = String::new();
+
+        let server_enum = format!("{server_prefix}DefaultServers");
+
+        for server in servers {
+            if let Some(description) = &server.description {
+                let server_name = struct_name(&format!("{server_prefix}{}Server", description));
+                let server_struct = generate_server(&server_name, server);
+
+                server_variants.push_str(&format!("{server_name}({server_name}),\n"));
+
+                server_branches.push_str(&format!(
+                    "Self::{server_name}(inner) => inner.default_url(),\n"
+                ));
+
+                server_structs.push_str(&format!("{server_struct}\n"));
+
+                server_into.push_str(&format!(
+                    r#"impl From<{server_name}> for {server_enum} {{
+    fn from(server: {server_name}) -> Self {{
+        Self::{server_name}(server)
+    }}
+}}
+"#
+                ));
+            } else {
+                panic!("If multiple servers are present, they must have descriptions")
+            }
+        }
+
+        GeneratedServers {
+            count: servers.len() as u64,
+            output: Some(format!(
+                r#"
+pub enum {server_enum} {{
+    {server_variants}
+}}
+
+impl {server_enum} {{
+    pub fn default_url(&self) -> &str {{
+        match self {{
+            {server_branches}
+        }}
+    }}
+}}
+
+{server_structs}
+
+{server_into}
+"#
+            )),
+            top_level_type: Some(server_enum),
+        }
+    } else if servers.len() == 1 {
+        let server = &servers[0];
+        let server_struct_name = format!("{server_prefix}DefaultServer");
+        let server_struct = generate_server(&server_struct_name, server);
+
+        GeneratedServers {
+            count: servers.len() as u64,
+            output: Some(server_struct),
+            top_level_type: Some(server_struct_name),
+        }
+    } else {
+        GeneratedServers::default()
+    }
+}
+
+// TODO: Only default server urls are supported
+fn generate_server(server_name: &str, server: &openapiv3::Server) -> String {
+    let mut url = server.url.clone();
+
+    if let Some(variables) = &server.variables {
+        for (variable_name, variable) in variables {
+            let key = format!(r#"{{{variable_name}}}"#);
+            url = url.replace(&key, &variable.default);
+        }
+    };
+
+    let server_struct = format!(
+        r#"
+#[derive(Debug, Default, Clone)]
+pub struct {server_name} {{
+}}
+
+impl {server_name} {{
+    pub fn default_url(&self) -> &str {{
+        "{url}"
+    }}
+}}
+"#
+    );
+
+    server_struct
+}

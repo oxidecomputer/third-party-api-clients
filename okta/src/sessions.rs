@@ -23,12 +23,17 @@ impl Sessions {
         &self,
         body: &crate::types::CreateSessionRequest,
     ) -> Result<crate::types::Session> {
-        let url = "/api/v1/sessions".to_string();
+        let url = self.client.url("/api/v1/sessions", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/sessions/{sessionId}` endpoint.
      *
@@ -39,14 +44,23 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn get(&self, session_id: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Close Session.
      *
@@ -59,14 +73,23 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn end(&self, session_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Refresh Session.
      *
@@ -79,11 +102,21 @@ impl Sessions {
      * * `session_id: &str`
      */
     pub async fn refresh(&self, session_id: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/api/v1/sessions/{}/lifecycle/refresh",
-            crate::progenitor_support::encode_path(session_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/sessions/{}/lifecycle/refresh",
+                crate::progenitor_support::encode_path(session_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

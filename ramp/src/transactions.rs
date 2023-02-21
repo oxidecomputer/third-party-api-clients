@@ -120,14 +120,21 @@ impl Transactions {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/transactions?{}", query_);
-
-        let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/transactions?{}", query_), None);
+        let resp: crate::types::GetTransactionResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List transactions.
      *
@@ -210,9 +217,17 @@ impl Transactions {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/transactions?{}", query_);
-
-        let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/transactions?{}", query_), None);
+        let resp: crate::types::GetTransactionResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -222,8 +237,11 @@ impl Transactions {
             match self
                 .client
                 .get::<crate::types::GetTransactionResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -249,7 +267,6 @@ impl Transactions {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * GET a transaction.
      *
@@ -262,11 +279,21 @@ impl Transactions {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get_resource(&self, id: &str) -> Result<crate::types::Data> {
-        let url = format!(
-            "/transactions/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/transactions/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

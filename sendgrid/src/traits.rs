@@ -68,7 +68,10 @@ impl MailOps for crate::mail_send::MailSend {
             .request_raw(
                 reqwest::Method::POST,
                 "/mail/send",
-                Some(reqwest::Body::from(serde_json::to_vec(&mail).unwrap())),
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(&mail).unwrap())),
+                    content_type: None,
+                },
             )
             .await?;
 

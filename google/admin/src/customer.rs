@@ -29,16 +29,25 @@ impl Customer {
         device_id: &str,
         command_id: &str,
     ) -> Result<crate::types::DirectoryChromeosdevicesCommand> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
-            crate::progenitor_support::encode_path(command_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(device_id),
+                crate::progenitor_support::encode_path(command_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}:issueCommand` endpoint.
      *
@@ -55,14 +64,22 @@ impl Customer {
         device_id: &str,
         body: &crate::types::DirectoryChromeosdevicesIssueCommandRequest,
     ) -> Result<crate::types::DirectoryChromeosdevicesIssueCommandResponse> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

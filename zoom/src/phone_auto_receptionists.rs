@@ -35,16 +35,23 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         body: &crate::types::UpdateAutoReceptionistRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Assign phone numbers.
      *
@@ -69,16 +76,23 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         body: &crate::types::AddByocNumberResponse,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Unassign all phone numbers.
      *
@@ -98,14 +112,23 @@ impl PhoneAutoReceptionists {
         &self,
         auto_receptionist_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Unassign a phone number.
      *
@@ -131,15 +154,24 @@ impl PhoneAutoReceptionists {
         auto_receptionist_id: &str,
         phone_number_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/auto_receptionists/{}/phone_numbers/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
-            crate::progenitor_support::encode_path(phone_number_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/auto_receptionists/{}/phone_numbers/{}",
+                crate::progenitor_support::encode_path(auto_receptionist_id),
+                crate::progenitor_support::encode_path(phone_number_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add an auto receptionist.
      *
@@ -158,9 +190,15 @@ impl PhoneAutoReceptionists {
         &self,
         body: &crate::types::AddAutoReceptionistRequest,
     ) -> Result<crate::types::AddAutoReceptionistResponse> {
-        let url = "/phone/auto_receptionists".to_string();
+        let url = self.client.url("/phone/auto_receptionists", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

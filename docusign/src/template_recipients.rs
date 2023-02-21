@@ -49,16 +49,25 @@ impl TemplateRecipients {
             query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates recipients in a template.
      *
@@ -88,18 +97,25 @@ impl TemplateRecipients {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Adds tabs for a recipient.
      *
@@ -127,18 +143,25 @@ impl TemplateRecipients {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes recipients from a template.
      *
@@ -157,17 +180,24 @@ impl TemplateRecipients {
         template_id: &str,
         body: &crate::types::TemplateRecipientsData,
     ) -> Result<crate::types::Recipients> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes the specified recipient file from a template.
      *
@@ -188,18 +218,25 @@ impl TemplateRecipients {
         template_id: &str,
         body: &crate::types::TemplateRecipientsData,
     ) -> Result<crate::types::Recipients> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/recipients/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/recipients/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Creates a template recipient preview.
      *
@@ -220,14 +257,22 @@ impl TemplateRecipients {
         template_id: &str,
         body: &crate::types::RecipientPreviewRequest,
     ) -> Result<crate::types::ViewUrl> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/views/recipient_preview",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/views/recipient_preview",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

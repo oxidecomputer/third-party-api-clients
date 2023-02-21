@@ -71,16 +71,25 @@ impl CodeScanning {
             query_args.push(("tool_name".to_string(), tool_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List code scanning alerts for a repository.
      *
@@ -123,16 +132,25 @@ impl CodeScanning {
             query_args.push(("tool_name".to_string(), tool_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a code scanning alert.
      *
@@ -157,16 +175,25 @@ impl CodeScanning {
         repo: &str,
         alert_number: i64,
     ) -> Result<crate::types::CodeScanningAlert> {
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a code scanning alert.
      *
@@ -189,18 +216,25 @@ impl CodeScanning {
         alert_number: i64,
         body: &crate::types::CodeScanningUpdateAlertRequest,
     ) -> Result<crate::types::CodeScanningAlert> {
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List instances of a code scanning alert.
      *
@@ -239,17 +273,26 @@ impl CodeScanning {
             query_args.push(("ref".to_string(), ref_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List instances of a code scanning alert.
      *
@@ -273,17 +316,26 @@ impl CodeScanning {
             query_args.push(("ref".to_string(), ref_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(alert_number),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(alert_number),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List code scanning analyses for a repository.
      *
@@ -350,16 +402,25 @@ impl CodeScanning {
             query_args.push(("tool_name".to_string(), tool_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/analyses?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/analyses?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List code scanning analyses for a repository.
      *
@@ -409,16 +470,25 @@ impl CodeScanning {
             query_args.push(("tool_name".to_string(), tool_name.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/analyses?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/analyses?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a code scanning analysis for a repository.
      *
@@ -460,16 +530,25 @@ impl CodeScanning {
         repo: &str,
         analysis_id: i64,
     ) -> Result<crate::types::CodeScanningAnalysis> {
-        let url = format!(
-            "/repos/{}/{}/code-scanning/analyses/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(analysis_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/analyses/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(analysis_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a code scanning analysis from a repository.
      *
@@ -561,17 +640,26 @@ impl CodeScanning {
             query_args.push(("confirm_delete".to_string(), confirm_delete.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/code-scanning/analyses/{}?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(analysis_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/analyses/{}?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(analysis_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Upload an analysis as SARIF data.
      *
@@ -608,17 +696,24 @@ impl CodeScanning {
         repo: &str,
         body: &crate::types::CodeScanningUploadSarifRequest,
     ) -> Result<crate::types::CodeScanningSarifsReceipt> {
-        let url = format!(
-            "/repos/{}/{}/code-scanning/sarifs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/sarifs",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get information about a SARIF upload.
      *
@@ -640,13 +735,23 @@ impl CodeScanning {
         repo: &str,
         sarif_id: &str,
     ) -> Result<crate::types::CodeScanningSarifsStatus> {
-        let url = format!(
-            "/repos/{}/{}/code-scanning/sarifs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(sarif_id),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/code-scanning/sarifs/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(sarif_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

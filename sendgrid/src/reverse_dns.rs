@@ -49,11 +49,19 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/ips?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/whitelabel/ips?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all reverse DNS records.
      *
@@ -82,11 +90,19 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/ips?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/whitelabel/ips?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set up reverse DNS.
      *
@@ -102,12 +118,17 @@ impl ReverseDns {
         &self,
         body: &crate::types::PostWhitelabelIpsRequest,
     ) -> Result<crate::types::ReverseDns> {
-        let url = "/whitelabel/ips".to_string();
+        let url = self.client.url("/whitelabel/ips", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Validate a reverse DNS record.
      *
@@ -129,14 +150,23 @@ impl ReverseDns {
         &self,
         id: &str,
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
-        let url = format!(
-            "/whitelabel/ips/{}/validate",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}/validate",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a reverse DNS record.
      *
@@ -151,14 +181,23 @@ impl ReverseDns {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
-        let url = format!(
-            "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a reverse DNS record.
      *
@@ -175,11 +214,21 @@ impl ReverseDns {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/whitelabel/ips/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

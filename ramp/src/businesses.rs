@@ -24,10 +24,17 @@ impl Businesses {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get_resources_busine(&self) -> Result<crate::types::Business> {
-        let url = "/business".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/business", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * GET current info about a business.
      *
@@ -42,7 +49,15 @@ impl Businesses {
     pub async fn get_resources_business_current(
         &self,
     ) -> Result<crate::types::BusinessCurrentStatus> {
-        let url = "/business/balance".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/business/balance", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

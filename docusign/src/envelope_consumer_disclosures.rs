@@ -88,17 +88,26 @@ impl EnvelopeConsumerDisclosures {
             query_args.push(("langCode".to_string(), lang_code.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets the Electronic Record and Signature Disclosure for a specific envelope recipient.
      *
@@ -215,14 +224,24 @@ impl EnvelopeConsumerDisclosures {
         lang_code: &str,
         recipient_id: &str,
     ) -> Result<crate::types::ConsumerDisclosure> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
-            crate::progenitor_support::encode_path(lang_code),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+                crate::progenitor_support::encode_path(lang_code),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

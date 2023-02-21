@@ -33,15 +33,24 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/{groupUniqueId}` endpoint.
      *
@@ -64,17 +73,24 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `PATCH` to the `/{groupUniqueId}` endpoint.
      *
@@ -97,14 +113,22 @@ impl Groups {
             query_args.push(("alt".to_string(), alt.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/{}?{}",
+                crate::progenitor_support::encode_path(group_unique_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

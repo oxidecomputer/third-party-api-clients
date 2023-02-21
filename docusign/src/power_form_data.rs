@@ -62,13 +62,23 @@ impl PowerFormData {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/powerforms/{}/form_data?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(power_form_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/powerforms/{}/form_data?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(power_form_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

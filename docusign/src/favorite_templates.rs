@@ -24,14 +24,23 @@ impl FavoriteTemplates {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::FavoriteTemplatesInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/favorite_templates",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Sets a template as a favorite.
     .
@@ -49,16 +58,23 @@ impl FavoriteTemplates {
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
     ) -> Result<crate::types::FavoriteTemplatesInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/favorite_templates",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Unfavorites a template.
      *
@@ -75,13 +91,21 @@ impl FavoriteTemplates {
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
     ) -> Result<crate::types::FavoriteTemplatesInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/favorite_templates",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

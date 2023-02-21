@@ -39,15 +39,24 @@ impl BccEmailArchive {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a BCC email archive configuration.
      *
@@ -69,16 +78,23 @@ impl BccEmailArchive {
         account_id: &str,
         body: &crate::types::BccEmailArchiveData,
     ) -> Result<crate::types::BccEmailArchiveData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Gets a BCC email archive configuration and its history.
      *
@@ -108,16 +124,25 @@ impl BccEmailArchive {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bcc_email_archive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bcc_email_archive_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a BCC email archive configuration.
      *
@@ -134,12 +159,22 @@ impl BccEmailArchive {
      * * `bcc_email_archive_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str, bcc_email_archive_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/bcc_email_archives/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bcc_email_archive_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/bcc_email_archives/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bcc_email_archive_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

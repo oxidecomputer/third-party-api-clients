@@ -29,14 +29,23 @@ impl EarningType {
         &self,
         company_id: &str,
     ) -> Result<crate::types::EarningTypeListResponse> {
-        let url = format!(
-            "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a custom earning type.
      *
@@ -51,16 +60,23 @@ impl EarningType {
         company_id: &str,
         body: &crate::types::PostCompanyEarningTypesRequest,
     ) -> Result<crate::types::EarningType> {
-        let url = format!(
-            "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update an earning type.
      *
@@ -74,17 +90,24 @@ impl EarningType {
         earning_type_uuid: &str,
         body: &crate::types::PutCompanyEarningTypeRequest,
     ) -> Result<crate::types::EarningType> {
-        let url = format!(
-            "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deactivate an earning type.
      *
@@ -97,12 +120,22 @@ impl EarningType {
         company_id: &str,
         earning_type_uuid: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/earning_types/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(earning_type_uuid),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

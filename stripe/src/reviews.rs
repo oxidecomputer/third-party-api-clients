@@ -43,14 +43,21 @@ impl Reviews {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/reviews?{}", query_);
-
-        let resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/reviews?{}", query_), None);
+        let resp: crate::types::GetReviewsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reviews` endpoint.
      *
@@ -59,8 +66,17 @@ impl Reviews {
      * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
      */
     pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Review>> {
-        let url = "/v1/reviews".to_string();
-        let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/reviews", None);
+        let mut resp: crate::types::GetReviewsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -81,12 +97,24 @@ impl Reviews {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -98,7 +126,6 @@ impl Reviews {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reviews/{review}` endpoint.
      *
@@ -110,14 +137,23 @@ impl Reviews {
      * * `review: &str` -- The account's country.
      */
     pub async fn get(&self, review: &str) -> Result<crate::types::Review> {
-        let url = format!(
-            "/v1/reviews/{}",
-            crate::progenitor_support::encode_path(review),
+        let url = self.client.url(
+            &format!(
+                "/v1/reviews/{}",
+                crate::progenitor_support::encode_path(review),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/reviews/{review}/approve` endpoint.
      *
@@ -128,11 +164,21 @@ impl Reviews {
      * * `review: &str` -- The account's country.
      */
     pub async fn post_approve(&self, review: &str) -> Result<crate::types::Review> {
-        let url = format!(
-            "/v1/reviews/{}/approve",
-            crate::progenitor_support::encode_path(review),
+        let url = self.client.url(
+            &format!(
+                "/v1/reviews/{}/approve",
+                crate::progenitor_support::encode_path(review),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

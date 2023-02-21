@@ -111,14 +111,21 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes?{}", query_);
-
-        let resp: crate::types::ChangeList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/changes?{}", query_), None);
+        let resp: crate::types::ChangeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.changes.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/changes` endpoint.
      *
@@ -196,9 +203,17 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes?{}", query_);
-
-        let mut resp: crate::types::ChangeList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/changes?{}", query_), None);
+        let mut resp: crate::types::ChangeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut changes = resp.changes;
         let mut page = resp.next_page_token;
@@ -208,12 +223,24 @@ impl Changes {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -229,7 +256,6 @@ impl Changes {
         // Return our response data.
         Ok(changes)
     }
-
     /**
      * This function performs a `GET` to the `/changes/startPageToken` endpoint.
      *
@@ -269,11 +295,19 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes/startPageToken?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/changes/startPageToken?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/changes/watch` endpoint.
      *
@@ -374,10 +408,15 @@ impl Changes {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/changes/watch?{}", query_);
-
+        let url = self.client.url(&format!("/changes/watch?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

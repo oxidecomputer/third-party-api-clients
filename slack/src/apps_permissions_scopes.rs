@@ -24,7 +24,15 @@ impl AppsPermissionsScopes {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
     pub async fn list(&self) -> Result<crate::types::ApiPermissionsScopesListSuccessSchema> {
-        let url = "/apps.permissions.scopes.list".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/apps.permissions.scopes.list", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

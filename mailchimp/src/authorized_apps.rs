@@ -47,11 +47,19 @@ impl AuthorizedApps {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/authorized-apps?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/authorized-apps?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get authorized app info.
      *
@@ -79,12 +87,22 @@ impl AuthorizedApps {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/authorized-apps/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/authorized-apps/{}?{}",
+                crate::progenitor_support::encode_path(app_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

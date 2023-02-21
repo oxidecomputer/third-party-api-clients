@@ -31,16 +31,25 @@ impl EnvelopeDocumentVisibility {
         envelope_id: &str,
         recipient_id: &str,
     ) -> Result<crate::types::DocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates document visibility for a recipient.
      *
@@ -63,15 +72,23 @@ impl EnvelopeDocumentVisibility {
         recipient_id: &str,
         body: &crate::types::DocumentVisibilityList,
     ) -> Result<crate::types::DocumentVisibilityList> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(recipient_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

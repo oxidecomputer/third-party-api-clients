@@ -46,14 +46,23 @@ impl PaymentLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_links?{}", query_);
-
-        let resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_links?{}", query_), None);
+        let resp: crate::types::GetPaymentLinksResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links` endpoint.
      *
@@ -67,9 +76,19 @@ impl PaymentLinks {
             query_args.push(("active".to_string(), active.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_links?{}", query_);
-
-        let mut resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_links?{}", query_), None);
+        let mut resp: crate::types::GetPaymentLinksResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -90,12 +109,24 @@ impl PaymentLinks {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -107,17 +138,23 @@ impl PaymentLinks {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_links` endpoint.
      *
      * <p>Creates a payment link.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PaymentLink> {
-        let url = "/v1/payment_links".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/payment_links", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}` endpoint.
      *
@@ -129,14 +166,23 @@ impl PaymentLinks {
      * * `payment_link: &str` -- The account's country.
      */
     pub async fn get_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
-        let url = format!(
-            "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_links/{payment_link}` endpoint.
      *
@@ -147,14 +193,23 @@ impl PaymentLinks {
      * * `payment_link: &str` -- The account's country.
      */
     pub async fn post_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
-        let url = format!(
-            "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
      *
@@ -186,18 +241,28 @@ impl PaymentLinks {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/payment_links/{}/line_items?{}",
-            crate::progenitor_support::encode_path(payment_link),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}/line_items?{}",
+                crate::progenitor_support::encode_path(payment_link),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+        let resp: crate::types::LineItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
      *
@@ -209,12 +274,23 @@ impl PaymentLinks {
         &self,
         payment_link: &str,
     ) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/payment_links/{}/line_items",
-            crate::progenitor_support::encode_path(payment_link),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_links/{}/line_items",
+                crate::progenitor_support::encode_path(payment_link),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+        let mut resp: crate::types::LineItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -235,12 +311,24 @@ impl PaymentLinks {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 

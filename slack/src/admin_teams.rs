@@ -24,10 +24,17 @@ impl AdminTeams {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn create(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.teams.create".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.teams.create", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.teams.list` endpoint.
      *
@@ -50,8 +57,17 @@ impl AdminTeams {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.teams.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.teams.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

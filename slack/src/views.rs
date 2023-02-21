@@ -34,11 +34,17 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/views.open?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/views.open?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/views.publish` endpoint.
      *
@@ -70,11 +76,17 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/views.publish?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/views.publish?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/views.push` endpoint.
      *
@@ -97,11 +109,17 @@ impl Views {
             query_args.push(("view".to_string(), view.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/views.push?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/views.push?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/views.update` endpoint.
      *
@@ -138,8 +156,15 @@ impl Views {
             query_args.push(("view_id".to_string(), view_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/views.update?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/views.update?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

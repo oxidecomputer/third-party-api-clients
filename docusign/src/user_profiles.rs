@@ -28,15 +28,24 @@ impl UserProfiles {
      *   .
      */
     pub async fn get(&self, account_id: &str, user_id: &str) -> Result<crate::types::UserProfile> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/profile",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the user profile information for the specified user.
      *
@@ -58,14 +67,22 @@ impl UserProfiles {
         user_id: &str,
         body: &crate::types::UserProfile,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/profile",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -59,14 +59,21 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/archive_files?{}", query_);
-
-        let resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/archive_files?{}", query_), None);
+        let resp: crate::types::ListArchivedFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.meetings.to_vec())
     }
-
     /**
      * List archived files.
      *
@@ -100,9 +107,17 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/archive_files?{}", query_);
-
-        let mut resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/archive_files?{}", query_), None);
+        let mut resp: crate::types::ListArchivedFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut meetings = resp.meetings;
         let mut page = resp.next_page_token;
@@ -113,12 +128,24 @@ impl Archiving {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -134,7 +161,6 @@ impl Archiving {
         // Return our response data.
         Ok(meetings)
     }
-
     /**
      * Get meeting archived files.
      *
@@ -158,11 +184,21 @@ impl Archiving {
         &self,
         meeting_uuid: &str,
     ) -> Result<crate::types::CloudArchivedFiles> {
-        let url = format!(
-            "/past_meetings/{}/archive_files",
-            crate::progenitor_support::encode_path(meeting_uuid),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/archive_files",
+                crate::progenitor_support::encode_path(meeting_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

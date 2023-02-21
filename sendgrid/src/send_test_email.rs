@@ -31,9 +31,15 @@ impl SendTestEmail {
         &self,
         body: &crate::types::PostMarketingTestSendEmailRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/marketing/test/send_email".to_string();
+        let url = self.client.url("/marketing/test/send_email", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

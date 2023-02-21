@@ -22,10 +22,17 @@ impl CodesOfConduct {
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
     pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
-        let url = "/codes_of_conduct".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/codes_of_conduct", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all codes of conduct.
      *
@@ -38,10 +45,17 @@ impl CodesOfConduct {
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
     pub async fn get_all_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
-        let url = "/codes_of_conduct".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/codes_of_conduct", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a code of conduct.
      *
@@ -56,14 +70,23 @@ impl CodesOfConduct {
      * * `key: &str`
      */
     pub async fn get_conduct_code(&self, key: &str) -> Result<crate::types::CodeOfConduct> {
-        let url = format!(
-            "/codes_of_conduct/{}",
-            crate::progenitor_support::encode_path(key),
+        let url = self.client.url(
+            &format!(
+                "/codes_of_conduct/{}",
+                crate::progenitor_support::encode_path(key),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get the code of conduct for a repository.
      *
@@ -85,12 +108,22 @@ impl CodesOfConduct {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::CodeOfConduct> {
-        let url = format!(
-            "/repos/{}/{}/community/code_of_conduct",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/community/code_of_conduct",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

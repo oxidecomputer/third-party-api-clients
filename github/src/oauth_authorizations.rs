@@ -46,11 +46,19 @@ impl OauthAuthorizations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/applications/grants?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/applications/grants?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List your grants.
      *
@@ -73,11 +81,19 @@ impl OauthAuthorizations {
             query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/applications/grants?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/applications/grants?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a single grant.
      *
@@ -92,14 +108,23 @@ impl OauthAuthorizations {
      * * `grant_id: i64` -- grant_id parameter.
      */
     pub async fn get_grant(&self, grant_id: i64) -> Result<crate::types::ApplicationGrant> {
-        let url = format!(
-            "/applications/grants/{}",
-            crate::progenitor_support::encode_path(grant_id),
+        let url = self.client.url(
+            &format!(
+                "/applications/grants/{}",
+                crate::progenitor_support::encode_path(grant_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a grant.
      *
@@ -116,14 +141,23 @@ impl OauthAuthorizations {
      * * `grant_id: i64` -- grant_id parameter.
      */
     pub async fn delete_grant(&self, grant_id: i64) -> Result<()> {
-        let url = format!(
-            "/applications/grants/{}",
-            crate::progenitor_support::encode_path(grant_id),
+        let url = self.client.url(
+            &format!(
+                "/applications/grants/{}",
+                crate::progenitor_support::encode_path(grant_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List your authorizations.
      *
@@ -156,11 +190,19 @@ impl OauthAuthorizations {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/authorizations?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/authorizations?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List your authorizations.
      *
@@ -181,11 +223,19 @@ impl OauthAuthorizations {
             query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/authorizations?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/authorizations?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new authorization.
      *
@@ -209,12 +259,17 @@ impl OauthAuthorizations {
         &self,
         body: &crate::types::OauthAuthorizationsCreateAuthorizationRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = "/authorizations".to_string();
+        let url = self.client.url("/authorizations", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get-or-create an authorization for a specific app.
      *
@@ -241,16 +296,23 @@ impl OauthAuthorizations {
         client_id: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/clients/{}",
-            crate::progenitor_support::encode_path(client_id),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/clients/{}",
+                crate::progenitor_support::encode_path(client_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get-or-create an authorization for a specific app and fingerprint.
      *
@@ -277,17 +339,24 @@ impl OauthAuthorizations {
         fingerprint: &str,
         body: &crate::types::OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/clients/{}/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(fingerprint),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/clients/{}/{}",
+                crate::progenitor_support::encode_path(client_id),
+                crate::progenitor_support::encode_path(fingerprint),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a single authorization.
      *
@@ -305,14 +374,23 @@ impl OauthAuthorizations {
         &self,
         authorization_id: i64,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization_id),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(authorization_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete an authorization.
      *
@@ -327,14 +405,23 @@ impl OauthAuthorizations {
      * * `authorization_id: i64` -- authorization_id parameter.
      */
     pub async fn delete_authorization(&self, authorization_id: i64) -> Result<()> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization_id),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(authorization_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an existing authorization.
      *
@@ -357,13 +444,21 @@ impl OauthAuthorizations {
         authorization_id: i64,
         body: &crate::types::OauthAuthorizationsUpdateAuthorizationRequest,
     ) -> Result<crate::types::Authorization> {
-        let url = format!(
-            "/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization_id),
+        let url = self.client.url(
+            &format!(
+                "/authorizations/{}",
+                crate::progenitor_support::encode_path(authorization_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }
