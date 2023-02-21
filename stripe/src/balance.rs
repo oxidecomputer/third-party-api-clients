@@ -23,10 +23,17 @@ impl Balance {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get(&self) -> Result<crate::types::Balance> {
-        let url = "/v1/balance".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/v1/balance", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/balance/history` endpoint.
      *
@@ -80,14 +87,23 @@ impl Balance {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance/history?{}", query_);
-
-        let resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/balance/history?{}", query_), None);
+        let resp: crate::types::BalanceTransactionsList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/balance/history` endpoint.
      *
@@ -119,9 +135,19 @@ impl Balance {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance/history?{}", query_);
-
-        let mut resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/balance/history?{}", query_), None);
+        let mut resp: crate::types::BalanceTransactionsList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -142,12 +168,24 @@ impl Balance {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -159,7 +197,6 @@ impl Balance {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/balance/history/{id}` endpoint.
      *
@@ -173,11 +210,21 @@ impl Balance {
      * * `id: &str` -- The account's country.
      */
     pub async fn get_history_balance(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
-        let url = format!(
-            "/v1/balance/history/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/balance/history/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

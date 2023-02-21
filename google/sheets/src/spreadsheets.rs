@@ -21,12 +21,17 @@ impl Spreadsheets {
         &self,
         body: &crate::types::Spreadsheet,
     ) -> Result<crate::types::Spreadsheet> {
-        let url = "/v4/spreadsheets".to_string();
+        let url = self.client.url("/v4/spreadsheets", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}` endpoint.
      *
@@ -52,15 +57,24 @@ impl Spreadsheets {
             query_args.push(("ranges".to_string(), ranges.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v4/spreadsheets/{}?{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}?{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}` endpoint.
      *
@@ -76,15 +90,24 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         metadata_id: i64,
     ) -> Result<crate::types::DeveloperMetadata> {
-        let url = format!(
-            "/v4/spreadsheets/{}/developerMetadata/{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(&metadata_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/developerMetadata/{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&metadata_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/developerMetadata:search` endpoint.
      *
@@ -99,16 +122,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::SearchDeveloperMetadataRequest,
     ) -> Result<crate::types::SearchDeveloperMetadataResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/developerMetadata:search",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/developerMetadata:search",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo` endpoint.
      *
@@ -125,17 +155,24 @@ impl Spreadsheets {
         sheet_id: i64,
         body: &crate::types::CopySheetAnotherSpreadsheetRequest,
     ) -> Result<crate::types::SheetProperties> {
-        let url = format!(
-            "/v4/spreadsheets/{}/sheets/{}/copyTo",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(&sheet_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/sheets/{}/copyTo",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(&sheet_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}` endpoint.
      *
@@ -174,16 +211,25 @@ impl Spreadsheets {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v4/spreadsheets/{}/values/{}?{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(range),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values/{}?{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(range),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}` endpoint.
      *
@@ -234,18 +280,25 @@ impl Spreadsheets {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v4/spreadsheets/{}/values/{}?{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(range),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values/{}?{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(range),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}:append` endpoint.
      *
@@ -304,18 +357,25 @@ impl Spreadsheets {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v4/spreadsheets/{}/values/{}/append?{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(range),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values/{}/append?{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(range),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values/{range}:clear` endpoint.
      *
@@ -332,17 +392,24 @@ impl Spreadsheets {
         range: &str,
         body: &crate::types::ClearValuesRequest,
     ) -> Result<crate::types::ClearValuesResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values/{}/clear",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            crate::progenitor_support::encode_path(range),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values/{}/clear",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                crate::progenitor_support::encode_path(range),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchClear` endpoint.
      *
@@ -357,16 +424,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchClearValuesRequest,
     ) -> Result<crate::types::BatchClearValuesResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchClear",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchClear",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter` endpoint.
      *
@@ -381,16 +455,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchClearValuesByDataFilterRequest,
     ) -> Result<crate::types::BatchClearValuesByDataFilterResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchClearByDataFilter",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchClearByDataFilter",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/v4/spreadsheets/{spreadsheetId}/values:batchGet` endpoint.
      *
@@ -432,15 +513,24 @@ impl Spreadsheets {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchGet?{}",
-            crate::progenitor_support::encode_path(spreadsheet_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchGet?{}",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter` endpoint.
      *
@@ -455,16 +545,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchGetValuesByDataFilterRequest,
     ) -> Result<crate::types::BatchGetValuesByDataFilterResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchGetByDataFilter",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchGetByDataFilter",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchUpdate` endpoint.
      *
@@ -479,16 +576,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateValuesRequest,
     ) -> Result<crate::types::BatchUpdateValuesResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchUpdate",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchUpdate",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter` endpoint.
      *
@@ -503,16 +607,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateValuesByDataFilterRequest,
     ) -> Result<crate::types::BatchUpdateValuesByDataFilterResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/values:batchUpdateByDataFilter",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/values:batchUpdateByDataFilter",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}:batchUpdate` endpoint.
      *
@@ -527,16 +638,23 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateSpreadsheetRequest,
     ) -> Result<crate::types::BatchUpdateSpreadsheetResponse> {
-        let url = format!(
-            "/v4/spreadsheets/{}/batchUpdate",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/batchUpdate",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v4/spreadsheets/{spreadsheetId}:getByDataFilter` endpoint.
      *
@@ -551,13 +669,21 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         body: &crate::types::GetSpreadsheetByDataFilterRequest,
     ) -> Result<crate::types::Spreadsheet> {
-        let url = format!(
-            "/v4/spreadsheets/{}/getByDataFilter",
-            crate::progenitor_support::encode_path(spreadsheet_id),
+        let url = self.client.url(
+            &format!(
+                "/v4/spreadsheets/{}/getByDataFilter",
+                crate::progenitor_support::encode_path(spreadsheet_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

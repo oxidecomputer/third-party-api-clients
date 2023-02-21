@@ -18,12 +18,17 @@ impl Calendars {
      * Creates a secondary calendar.
      */
     pub async fn insert(&self, body: &crate::types::Calendar) -> Result<crate::types::Calendar> {
-        let url = "/calendars".to_string();
+        let url = self.client.url("/calendars", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}` endpoint.
      *
@@ -34,14 +39,23 @@ impl Calendars {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn get(&self, calendar_id: &str) -> Result<crate::types::Calendar> {
-        let url = format!(
-            "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/calendars/{calendarId}` endpoint.
      *
@@ -56,16 +70,23 @@ impl Calendars {
         calendar_id: &str,
         body: &crate::types::Calendar,
     ) -> Result<crate::types::Calendar> {
-        let url = format!(
-            "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/calendars/{calendarId}` endpoint.
      *
@@ -76,14 +97,23 @@ impl Calendars {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn delete(&self, calendar_id: &str) -> Result<()> {
-        let url = format!(
-            "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/calendars/{calendarId}` endpoint.
      *
@@ -98,16 +128,23 @@ impl Calendars {
         calendar_id: &str,
         body: &crate::types::Calendar,
     ) -> Result<crate::types::Calendar> {
-        let url = format!(
-            "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/clear` endpoint.
      *
@@ -118,11 +155,21 @@ impl Calendars {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn clear(&self, calendar_id: &str) -> Result<()> {
-        let url = format!(
-            "/calendars/{}/clear",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/calendars/{}/clear",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

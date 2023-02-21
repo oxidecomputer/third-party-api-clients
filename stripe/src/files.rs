@@ -2,6 +2,15 @@ use anyhow::Result;
 
 use crate::Client;
 
+#[derive(Debug, Default, Clone)]
+pub struct PostFilesDefaultServer {}
+
+impl PostFilesDefaultServer {
+    pub fn default_url(&self) -> &str {
+        "https://files.stripe.com/"
+    }
+}
+
 pub struct Files {
     pub client: Client,
 }
@@ -48,14 +57,21 @@ impl Files {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/files?{}", query_);
-
-        let resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/files?{}", query_), None);
+        let resp: crate::types::GetFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/files` endpoint.
      *
@@ -73,9 +89,17 @@ impl Files {
             query_args.push(("purpose".to_string(), purpose.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/files?{}", query_);
-
-        let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/files?{}", query_), None);
+        let mut resp: crate::types::GetFilesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -96,12 +120,24 @@ impl Files {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -113,7 +149,6 @@ impl Files {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/files` endpoint.
      *
@@ -122,10 +157,20 @@ impl Files {
      * <p>All of Stripe’s officially supported Client libraries should have support for sending <code>multipart/form-data</code>.</p>
      */
     pub async fn post(&self) -> Result<crate::types::File> {
-        let url = "/v1/files".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url(
+            "/v1/files",
+            Some(PostFilesDefaultServer::default().default_url()),
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("multipart/form-data".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/files/{file}` endpoint.
      *
@@ -137,8 +182,18 @@ impl Files {
      * * `file: &str` -- The account's country.
      */
     pub async fn get(&self, file: &str) -> Result<crate::types::File> {
-        let url = format!("/v1/files/{}", crate::progenitor_support::encode_path(file),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

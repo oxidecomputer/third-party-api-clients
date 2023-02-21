@@ -67,11 +67,17 @@ impl IpAddresses {
             query_args.push(("subuser".to_string(), subuser.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/ips?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/ips?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all IP addresses.
      *
@@ -116,11 +122,17 @@ impl IpAddresses {
             query_args.push(("subuser".to_string(), subuser.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/ips?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/ips?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add IPs.
      *
@@ -132,12 +144,17 @@ impl IpAddresses {
         &self,
         body: &crate::types::PostIpsRequest,
     ) -> Result<crate::types::PostIpsResponseData> {
-        let url = "/ips".to_string();
+        let url = self.client.url("/ips", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get remaining IPs count.
      *
@@ -146,10 +163,17 @@ impl IpAddresses {
      * **This endpoint gets amount of IP Addresses that can still be created during a given period and the price of those IPs.**
      */
     pub async fn get_ips_remaining(&self) -> Result<crate::types::GetIpsRemainingResponse> {
-        let url = "/ips/remaining".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/ips/remaining", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all assigned IPs.
      *
@@ -160,10 +184,17 @@ impl IpAddresses {
      * A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
      */
     pub async fn get_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
-        let url = "/ips/assigned".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/ips/assigned", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all assigned IPs.
      *
@@ -176,10 +207,17 @@ impl IpAddresses {
      * A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
      */
     pub async fn get_all_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
-        let url = "/ips/assigned".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/ips/assigned", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all IP pools an IP address belongs to.
      *
@@ -195,11 +233,21 @@ impl IpAddresses {
         &self,
         ip_address: &str,
     ) -> Result<crate::types::GetIpsIpAddressResponse> {
-        let url = format!(
-            "/ips/{}",
-            crate::progenitor_support::encode_path(ip_address),
+        let url = self.client.url(
+            &format!(
+                "/ips/{}",
+                crate::progenitor_support::encode_path(ip_address),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

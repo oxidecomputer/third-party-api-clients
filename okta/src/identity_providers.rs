@@ -47,11 +47,17 @@ impl IdentityProviders {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/idps?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/api/v1/idps?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Identity Providers.
      *
@@ -74,11 +80,17 @@ impl IdentityProviders {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/idps?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/api/v1/idps?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add Identity Provider.
      *
@@ -90,12 +102,17 @@ impl IdentityProviders {
         &self,
         body: &crate::types::IdentityProvider,
     ) -> Result<crate::types::IdentityProvider> {
-        let url = "/api/v1/idps".to_string();
+        let url = self.client.url("/api/v1/idps", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * List Keys.
      *
@@ -121,11 +138,19 @@ impl IdentityProviders {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/idps/credentials/keys?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/idps/credentials/keys?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Keys.
      *
@@ -136,10 +161,17 @@ impl IdentityProviders {
      * Enumerates IdP key credentials.
      */
     pub async fn list_all_keys(&self) -> Result<Vec<crate::types::JsonWebKey>> {
-        let url = "/api/v1/idps/credentials/keys".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/api/v1/idps/credentials/keys", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add X.509 Certificate Public Key.
      *
@@ -151,12 +183,17 @@ impl IdentityProviders {
         &self,
         body: &crate::types::JsonWebKey,
     ) -> Result<crate::types::JsonWebKey> {
-        let url = "/api/v1/idps/credentials/keys".to_string();
+        let url = self.client.url("/api/v1/idps/credentials/keys", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get Key.
      *
@@ -169,14 +206,23 @@ impl IdentityProviders {
      * * `key_id: &str`
      */
     pub async fn get_key(&self, key_id: &str) -> Result<crate::types::JsonWebKey> {
-        let url = format!(
-            "/api/v1/idps/credentials/keys/{}",
-            crate::progenitor_support::encode_path(key_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/credentials/keys/{}",
+                crate::progenitor_support::encode_path(key_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete Key.
      *
@@ -189,14 +235,23 @@ impl IdentityProviders {
      * * `key_id: &str`
      */
     pub async fn delete_key(&self, key_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/idps/credentials/keys/{}",
-            crate::progenitor_support::encode_path(key_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/credentials/keys/{}",
+                crate::progenitor_support::encode_path(key_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Identity Provider.
      *
@@ -209,14 +264,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn get(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
-        let url = format!(
-            "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Identity Provider.
      *
@@ -233,16 +297,23 @@ impl IdentityProviders {
         idp_id: &str,
         body: &crate::types::IdentityProvider,
     ) -> Result<crate::types::IdentityProvider> {
-        let url = format!(
-            "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Delete Identity Provider.
      *
@@ -255,14 +326,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn delete(&self, idp_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Certificate Signing Requests for IdP.
      *
@@ -275,14 +355,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn list_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Certificate Signing Requests for IdP.
      *
@@ -293,14 +382,23 @@ impl IdentityProviders {
      * Enumerates Certificate Signing Requests for an IdP
      */
     pub async fn list_all_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Generate Certificate Signing Request for IdP.
      *
@@ -317,16 +415,23 @@ impl IdentityProviders {
         idp_id: &str,
         body: &crate::types::CsrMetadata,
     ) -> Result<crate::types::Csr> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/csrs/{csrId}` endpoint.
      *
@@ -338,15 +443,24 @@ impl IdentityProviders {
      * * `csr_id: &str`
      */
     pub async fn get_csr_for(&self, idp_id: &str, csr_id: &str) -> Result<crate::types::Csr> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/idps/{idpId}/credentials/csrs/{csrId}` endpoint.
      *
@@ -358,15 +472,24 @@ impl IdentityProviders {
      * * `csr_id: &str`
      */
     pub async fn revoke_csr_for(&self, idp_id: &str, csr_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish` endpoint.
      *
@@ -382,15 +505,24 @@ impl IdentityProviders {
         idp_id: &str,
         csr_id: &str,
     ) -> Result<crate::types::JsonWebKey> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(csr_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(csr_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Signing Key Credentials for IdP.
      *
@@ -403,14 +535,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn list_signing_keys(&self, idp_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/keys",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Signing Key Credentials for IdP.
      *
@@ -424,14 +565,23 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
     ) -> Result<Vec<crate::types::JsonWebKey>> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/keys",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Generate New IdP Signing Key Credential.
      *
@@ -454,15 +604,24 @@ impl IdentityProviders {
             query_args.push(("validityYears".to_string(), validity_years.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/idps/{}/credentials/keys/generate?{}",
-            crate::progenitor_support::encode_path(idp_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/keys/generate?{}",
+                crate::progenitor_support::encode_path(idp_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Signing Key Credential for IdP.
      *
@@ -480,15 +639,24 @@ impl IdentityProviders {
         idp_id: &str,
         key_id: &str,
     ) -> Result<crate::types::JsonWebKey> {
-        let url = format!(
-            "/api/v1/idps/{}/credentials/keys/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(key_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/keys/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(key_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Clone Signing Key Credential for IdP.
      *
@@ -513,16 +681,25 @@ impl IdentityProviders {
             query_args.push(("targetIdpId".to_string(), target_idp_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/idps/{}/credentials/keys/{}/clone?{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(key_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/credentials/keys/{}/clone?{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(key_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Activate Identity Provider.
      *
@@ -535,14 +712,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn activate(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
-        let url = format!(
-            "/api/v1/idps/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deactivate Identity Provider.
      *
@@ -555,14 +741,23 @@ impl IdentityProviders {
      * * `idp_id: &str`
      */
     pub async fn deactivate(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
-        let url = format!(
-            "/api/v1/idps/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Find Users.
      *
@@ -578,14 +773,23 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
     ) -> Result<Vec<crate::types::IdentityProviderApplicationUser>> {
-        let url = format!(
-            "/api/v1/idps/{}/users",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Find Users.
      *
@@ -599,14 +803,23 @@ impl IdentityProviders {
         &self,
         idp_id: &str,
     ) -> Result<Vec<crate::types::IdentityProviderApplicationUser>> {
-        let url = format!(
-            "/api/v1/idps/{}/users",
-            crate::progenitor_support::encode_path(idp_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users",
+                crate::progenitor_support::encode_path(idp_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/users/{userId}` endpoint.
      *
@@ -622,15 +835,24 @@ impl IdentityProviders {
         idp_id: &str,
         user_id: &str,
     ) -> Result<crate::types::IdentityProviderApplicationUser> {
-        let url = format!(
-            "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Link a user to a Social IdP without a transaction.
      *
@@ -649,17 +871,24 @@ impl IdentityProviders {
         user_id: &str,
         body: &crate::types::UserIdentityProviderLinkRequest,
     ) -> Result<crate::types::IdentityProviderApplicationUser> {
-        let url = format!(
-            "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Unlink User from IdP.
      *
@@ -673,15 +902,24 @@ impl IdentityProviders {
      * * `user_id: &str`
      */
     pub async fn unlink_user_from(&self, idp_id: &str, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users/{}",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Social Authentication Token Operation.
      *
@@ -699,15 +937,24 @@ impl IdentityProviders {
         idp_id: &str,
         user_id: &str,
     ) -> Result<Vec<crate::types::SocialAuthToken>> {
-        let url = format!(
-            "/api/v1/idps/{}/users/{}/credentials/tokens",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users/{}/credentials/tokens",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Social Authentication Token Operation.
      *
@@ -722,12 +969,22 @@ impl IdentityProviders {
         idp_id: &str,
         user_id: &str,
     ) -> Result<Vec<crate::types::SocialAuthToken>> {
-        let url = format!(
-            "/api/v1/idps/{}/users/{}/credentials/tokens",
-            crate::progenitor_support::encode_path(idp_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/idps/{}/users/{}/credentials/tokens",
+                crate::progenitor_support::encode_path(idp_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

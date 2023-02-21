@@ -38,15 +38,23 @@ impl DocumentResponsiveHtmlPreview {
         envelope_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
     ) -> Result<crate::types::DocumentHtmlDefinitions> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}/responsive_html_preview",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}/responsive_html_preview",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

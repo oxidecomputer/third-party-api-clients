@@ -24,14 +24,23 @@ impl AccountPasswordRules {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountPasswordRulesData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/password_rules",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the password rules for an account.
      *
@@ -50,16 +59,23 @@ impl AccountPasswordRules {
         account_id: &str,
         body: &crate::types::AccountPasswordRulesData,
     ) -> Result<crate::types::AccountPasswordRulesData> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/password_rules",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Gets membership account password rules.
      *
@@ -68,7 +84,15 @@ impl AccountPasswordRules {
      *
      */
     pub async fn password_rules_get(&self) -> Result<crate::types::UserPasswordRules> {
-        let url = "/v2.1/current_user/password_rules".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/v2.1/current_user/password_rules", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

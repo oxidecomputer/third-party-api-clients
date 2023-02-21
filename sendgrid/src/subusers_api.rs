@@ -44,11 +44,17 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/subusers?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List all Subusers.
      *
@@ -73,11 +79,17 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/subusers?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create Subuser.
      *
@@ -89,12 +101,17 @@ impl SubusersApi {
         &self,
         body: &crate::types::PostSubusersRequest,
     ) -> Result<crate::types::SubuserPost> {
-        let url = "/subusers".to_string();
+        let url = self.client.url("/subusers", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a subuser.
      *
@@ -108,14 +125,23 @@ impl SubusersApi {
         &self,
         subuser_name: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Enable/disable a subuser.
      *
@@ -128,16 +154,23 @@ impl SubusersApi {
         subuser_name: &str,
         body: &crate::types::PatchSubusersSubuserNameRequest,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/subusers/{}",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve Subuser Reputations.
      *
@@ -160,11 +193,19 @@ impl SubusersApi {
             query_args.push(("usernames".to_string(), usernames.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/reputations?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/subusers/reputations?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve Subuser Reputations.
      *
@@ -185,11 +226,19 @@ impl SubusersApi {
             query_args.push(("usernames".to_string(), usernames.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/subusers/reputations?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/subusers/reputations?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update IPs assigned to a subuser.
      *
@@ -209,13 +258,21 @@ impl SubusersApi {
         subuser_name: &str,
         body: &[std::net::Ipv4Addr],
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
-        let url = format!(
-            "/subusers/{}/ips",
-            crate::progenitor_support::encode_path(subuser_name),
+        let url = self.client.url(
+            &format!(
+                "/subusers/{}/ips",
+                crate::progenitor_support::encode_path(subuser_name),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

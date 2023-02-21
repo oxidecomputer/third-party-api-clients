@@ -65,14 +65,23 @@ impl BalanceTransactions {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance_transactions?{}", query_);
-
-        let resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/balance_transactions?{}", query_), None);
+        let resp: crate::types::BalanceTransactionsList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/balance_transactions` endpoint.
      *
@@ -104,9 +113,19 @@ impl BalanceTransactions {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/balance_transactions?{}", query_);
-
-        let mut resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/balance_transactions?{}", query_), None);
+        let mut resp: crate::types::BalanceTransactionsList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -127,12 +146,24 @@ impl BalanceTransactions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -144,7 +175,6 @@ impl BalanceTransactions {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/balance_transactions/{id}` endpoint.
      *
@@ -158,11 +188,21 @@ impl BalanceTransactions {
      * * `id: &str` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
-        let url = format!(
-            "/v1/balance_transactions/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/v1/balance_transactions/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

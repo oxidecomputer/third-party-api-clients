@@ -30,8 +30,15 @@ impl Bots {
             query_args.push(("bot".to_string(), bot.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/bots.info?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/bots.info?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

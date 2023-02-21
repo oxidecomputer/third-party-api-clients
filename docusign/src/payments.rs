@@ -41,15 +41,24 @@ impl Payments {
             query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/billing_payments?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_payments?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Posts a payment to a past due invoice.
      *
@@ -73,16 +82,23 @@ impl Payments {
         account_id: &str,
         body: &crate::types::BillingPaymentRequest,
     ) -> Result<crate::types::BillingPaymentResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_payments",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_payments",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Gets billing payment information for a specific payment.
      *
@@ -102,12 +118,22 @@ impl Payments {
         account_id: &str,
         payment_id: &str,
     ) -> Result<crate::types::BillingPaymentItem> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_payments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(payment_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_payments/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(payment_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

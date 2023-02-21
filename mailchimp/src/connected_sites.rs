@@ -47,11 +47,19 @@ impl ConnectedSites {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/connected-sites?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/connected-sites?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add connected site.
      *
@@ -60,12 +68,17 @@ impl ConnectedSites {
      * Create a new Mailchimp connected site.
      */
     pub async fn post(&self, body: &crate::types::ConnectedSite) -> Result<crate::types::Sites> {
-        let url = "/connected-sites".to_string();
+        let url = self.client.url("/connected-sites", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get connected site.
      *
@@ -93,15 +106,24 @@ impl ConnectedSites {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/connected-sites/{}?{}",
-            crate::progenitor_support::encode_path(connected_site_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}?{}",
+                crate::progenitor_support::encode_path(connected_site_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete connected site.
      *
@@ -114,14 +136,23 @@ impl ConnectedSites {
      * * `connected_site_id: &str` -- The unique identifier for the site.
      */
     pub async fn delete(&self, connected_site_id: &str) -> Result<()> {
-        let url = format!(
-            "/connected-sites/{}",
-            crate::progenitor_support::encode_path(connected_site_id),
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}",
+                crate::progenitor_support::encode_path(connected_site_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Verify connected site script.
      *
@@ -137,11 +168,21 @@ impl ConnectedSites {
         &self,
         connected_site_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/connected-sites/{}/actions/verify-script-installation",
-            crate::progenitor_support::encode_path(connected_site_id),
+        let url = self.client.url(
+            &format!(
+                "/connected-sites/{}/actions/verify-script-installation",
+                crate::progenitor_support::encode_path(connected_site_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -25,14 +25,23 @@ impl Locations {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get company locations.
      *
@@ -48,14 +57,23 @@ impl Locations {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a company location.
      *
@@ -70,16 +88,23 @@ impl Locations {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyLocationsRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/locations",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a location.
      *
@@ -88,14 +113,23 @@ impl Locations {
      * Get a location.
      */
     pub async fn get(&self, location_id: &str) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a location.
      *
@@ -108,13 +142,21 @@ impl Locations {
         location_id: &str,
         body: &crate::types::PutLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = format!(
-            "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -105,15 +105,24 @@ impl Users {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Changes one or more users in the specified account.
      *
@@ -130,16 +139,23 @@ impl Users {
         account_id: &str,
         body: &crate::types::UserInformationList,
     ) -> Result<crate::types::UserInformationList> {
-        let url = format!(
-            "/v2.1/accounts/{}/users",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Adds new users to the specified account.
      *
@@ -214,16 +230,23 @@ impl Users {
         account_id: &str,
         body: &crate::types::NewUsersDefinition,
     ) -> Result<crate::types::NewUsersSummary> {
-        let url = format!(
-            "/v2.1/accounts/{}/users",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Removes users account privileges.
      *
@@ -249,17 +272,24 @@ impl Users {
             query_args.push(("delete".to_string(), delete.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets the user information for a specified user.
      *
@@ -292,16 +322,25 @@ impl Users {
             query_args.push(("email".to_string(), email.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates user information for the specified user.
      *
@@ -321,17 +360,24 @@ impl Users {
         user_id: &str,
         body: &crate::types::UserInformation,
     ) -> Result<crate::types::UserInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves the user profile image for the specified user.
      *
@@ -361,16 +407,25 @@ impl Users {
             query_args.push(("encoding".to_string(), encoding.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/profile/image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/profile/image?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the user profile image for a specified user.
      *
@@ -387,15 +442,24 @@ impl Users {
      *   .
      */
     pub async fn profile_image_put(&self, account_id: &str, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/profile/image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/profile/image",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes the user profile image for the specified user.
      *
@@ -412,15 +476,24 @@ impl Users {
      *   .
      */
     pub async fn profile_image_delete(&self, account_id: &str, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/profile/image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/profile/image",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets the user account settings for a specified user.
      *
@@ -449,15 +522,24 @@ impl Users {
         account_id: &str,
         user_id: &str,
     ) -> Result<crate::types::UserSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the user account settings for a specified user.
      *
@@ -477,14 +559,22 @@ impl Users {
         user_id: &str,
         body: &crate::types::UserSettingsInformation,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

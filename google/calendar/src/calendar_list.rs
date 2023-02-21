@@ -55,14 +55,23 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
-
-        let resp: crate::types::CalendarList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
+        let resp: crate::types::CalendarList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/users/me/calendarList` endpoint.
      *
@@ -87,9 +96,19 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
-
-        let mut resp: crate::types::CalendarList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
+        let mut resp: crate::types::CalendarList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -99,12 +118,24 @@ impl CalendarList {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -120,7 +151,6 @@ impl CalendarList {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/users/me/calendarList` endpoint.
      *
@@ -140,13 +170,19 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/users/me/calendarList/watch` endpoint.
      *
@@ -191,13 +227,19 @@ impl CalendarList {
             query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/calendarList/watch?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/users/me/calendarList/watch?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/users/me/calendarList/{calendarId}` endpoint.
      *
@@ -208,14 +250,23 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
-        let url = format!(
-            "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/users/me/calendarList/{calendarId}` endpoint.
      *
@@ -237,17 +288,24 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/users/me/calendarList/{calendarId}` endpoint.
      *
@@ -258,14 +316,23 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_delete(&self, calendar_id: &str) -> Result<()> {
-        let url = format!(
-            "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}",
+                crate::progenitor_support::encode_path(calendar_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/users/me/calendarList/{calendarId}` endpoint.
      *
@@ -287,14 +354,22 @@ impl CalendarList {
             query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/me/calendarList/{}?{}",
+                crate::progenitor_support::encode_path(calendar_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

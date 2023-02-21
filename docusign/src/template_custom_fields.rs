@@ -29,15 +29,24 @@ impl TemplateCustomFields {
         account_id: &str,
         template_id: &str,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates envelope custom fields in a template.
      *
@@ -58,17 +67,24 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Creates custom document fields in an existing template document.
      *
@@ -87,17 +103,24 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes envelope custom fields in a template.
      *
@@ -116,14 +139,22 @@ impl TemplateCustomFields {
         template_id: &str,
         body: &crate::types::TemplateCustomFieldsData,
     ) -> Result<crate::types::CustomFields> {
-        let url = format!(
-            "/v2.1/accounts/{}/templates/{}/custom_fields",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/templates/{}/custom_fields",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

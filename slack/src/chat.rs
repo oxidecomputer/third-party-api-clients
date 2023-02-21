@@ -24,10 +24,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn delete(&self) -> Result<crate::types::ChatDeleteSuccessSchema> {
-        let url = "/chat.delete".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.delete", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.deleteScheduledMessage` endpoint.
      *
@@ -40,10 +47,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn delete_scheduled_message(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/chat.deleteScheduledMessage".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.deleteScheduledMessage", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/chat.getPermalink` endpoint.
      *
@@ -70,11 +84,19 @@ impl Chat {
             query_args.push(("message_ts".to_string(), message_ts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/chat.getPermalink?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/chat.getPermalink?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.meMessage` endpoint.
      *
@@ -87,10 +109,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn me_message(&self) -> Result<crate::types::ChatMeMessageSchema> {
-        let url = "/chat.meMessage".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.meMessage", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.postEphemeral` endpoint.
      *
@@ -103,10 +132,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn post_ephemeral(&self) -> Result<crate::types::ChatPostEphemeralSuccessSchema> {
-        let url = "/chat.postEphemeral".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.postEphemeral", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.postMessage` endpoint.
      *
@@ -119,10 +155,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn post_message(&self) -> Result<crate::types::ChatPostMessageSuccessSchema> {
-        let url = "/chat.postMessage".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.postMessage", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.scheduleMessage` endpoint.
      *
@@ -135,10 +178,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn schedule_message(&self) -> Result<crate::types::ChatScheduleMessageSuccessSchema> {
-        let url = "/chat.scheduleMessage".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.scheduleMessage", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.unfurl` endpoint.
      *
@@ -151,10 +201,17 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `links:write`.
      */
     pub async fn unfurl(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/chat.unfurl".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.unfurl", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/chat.update` endpoint.
      *
@@ -167,7 +224,15 @@ impl Chat {
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
     pub async fn update(&self) -> Result<crate::types::ChatUpdateSuccessSchema> {
-        let url = "/chat.update".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/chat.update", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

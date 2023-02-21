@@ -22,10 +22,17 @@ impl CustomFields {
     pub async fn get_mc_field_definitions(
         &self,
     ) -> Result<crate::types::GetMcFieldDefinitionsResponse> {
-        let url = "/marketing/field_definitions".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/marketing/field_definitions", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create Custom Field Definition.
      *
@@ -43,12 +50,17 @@ impl CustomFields {
         &self,
         body: &crate::types::PostMcFieldDefinitionsRequest,
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
-        let url = "/marketing/field_definitions".to_string();
+        let url = self.client.url("/marketing/field_definitions", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete Custom Field Definition.
      *
@@ -59,14 +71,23 @@ impl CustomFields {
      * You cand delete only Custom Fields; Reserved Fields cannot be deleted.
      */
     pub async fn delete_mc_field_definitions_custom(&self, custom_field_id: &str) -> Result<()> {
-        let url = format!(
-            "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/field_definitions/{}",
+                crate::progenitor_support::encode_path(custom_field_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Custom Field Definition.
      *
@@ -81,13 +102,21 @@ impl CustomFields {
         custom_field_id: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
-        let url = format!(
-            "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(custom_field_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/field_definitions/{}",
+                crate::progenitor_support::encode_path(custom_field_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

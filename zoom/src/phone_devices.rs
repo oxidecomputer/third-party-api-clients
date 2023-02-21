@@ -48,14 +48,21 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/devices?{}", query_);
-
-        let resp: crate::types::ListPhoneDevicesResponseData = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
+        let resp: crate::types::ListPhoneDevicesResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.devices.to_vec())
     }
-
     /**
      * List devices.
      *
@@ -80,10 +87,17 @@ impl PhoneDevices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/devices?{}", query_);
-
-        let mut resp: crate::types::ListPhoneDevicesResponseData =
-            self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/phone/devices?{}", query_), None);
+        let mut resp: crate::types::ListPhoneDevicesResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut devices = resp.devices;
         let mut page = resp.next_page_token;
@@ -94,12 +108,24 @@ impl PhoneDevices {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -115,7 +141,6 @@ impl PhoneDevices {
         // Return our response data.
         Ok(devices)
     }
-
     /**
      * Add a device.
      *
@@ -133,12 +158,17 @@ impl PhoneDevices {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
-        let url = "/phone/devices".to_string();
+        let url = self.client.url("/phone/devices", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get device details.
      *
@@ -157,14 +187,23 @@ impl PhoneDevices {
      * * `device_id: &str` -- Unique Identifier of the device.
      */
     pub async fn get_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a device.
      *
@@ -185,14 +224,23 @@ impl PhoneDevices {
      * * `device_id: &str` -- Unique Identifier of the device.
      */
     pub async fn delete_device(&self, device_id: &str) -> Result<()> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a device.
      *
@@ -216,13 +264,21 @@ impl PhoneDevices {
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

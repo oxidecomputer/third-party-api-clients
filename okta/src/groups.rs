@@ -52,11 +52,17 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/groups?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/api/v1/groups?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Groups.
      *
@@ -83,11 +89,17 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/groups?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/api/v1/groups?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add Group.
      *
@@ -96,12 +108,17 @@ impl Groups {
      * Adds a new group with `OKTA_GROUP` type to your organization.
      */
     pub async fn create(&self, body: &crate::types::Group) -> Result<crate::types::Group> {
-        let url = "/api/v1/groups".to_string();
+        let url = self.client.url("/api/v1/groups", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * List Group Rules.
      *
@@ -137,11 +154,19 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/groups/rules?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/groups/rules?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Group Rules.
      *
@@ -164,11 +189,19 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/groups/rules?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/groups/rules?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create Group Rule.
      *
@@ -180,12 +213,17 @@ impl Groups {
         &self,
         body: &crate::types::GroupRule,
     ) -> Result<crate::types::GroupRule> {
-        let url = "/api/v1/groups/rules".to_string();
+        let url = self.client.url("/api/v1/groups/rules", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get Group Rule.
      *
@@ -204,15 +242,24 @@ impl Groups {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/rules/{}?{}",
-            crate::progenitor_support::encode_path(rule_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/rules/{}?{}",
+                crate::progenitor_support::encode_path(rule_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/groups/rules/{ruleId}` endpoint.
      *
@@ -227,16 +274,23 @@ impl Groups {
         rule_id: &str,
         body: &crate::types::GroupRule,
     ) -> Result<crate::types::GroupRule> {
-        let url = format!(
-            "/api/v1/groups/rules/{}",
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/rules/{}",
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Delete a group Rule.
      *
@@ -255,15 +309,24 @@ impl Groups {
             query_args.push(("removeUsers".to_string(), remove_users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/rules/{}?{}",
-            crate::progenitor_support::encode_path(rule_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/rules/{}?{}",
+                crate::progenitor_support::encode_path(rule_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Activate a group Rule.
      *
@@ -276,14 +339,23 @@ impl Groups {
      * * `rule_id: &str`
      */
     pub async fn activate_rule(&self, rule_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/rules/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/rules/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deactivate a group Rule.
      *
@@ -296,14 +368,23 @@ impl Groups {
      * * `rule_id: &str`
      */
     pub async fn deactivate_rule(&self, rule_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/rules/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(rule_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/rules/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(rule_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Group Rules.
      *
@@ -316,14 +397,23 @@ impl Groups {
      * * `group_id: &str`
      */
     pub async fn get(&self, group_id: &str) -> Result<crate::types::Group> {
-        let url = format!(
-            "/api/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Group.
      *
@@ -340,16 +430,23 @@ impl Groups {
         group_id: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let url = format!(
-            "/api/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Remove Group.
      *
@@ -362,14 +459,23 @@ impl Groups {
      * * `group_id: &str`
      */
     pub async fn delete(&self, group_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Assigned Applications.
      *
@@ -397,15 +503,24 @@ impl Groups {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/apps?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/apps?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Assigned Applications.
      *
@@ -419,14 +534,23 @@ impl Groups {
         &self,
         group_id: &str,
     ) -> Result<Vec<crate::types::Application>> {
-        let url = format!(
-            "/api/v1/groups/{}/apps",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/apps",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles` endpoint.
      *
@@ -447,15 +571,24 @@ impl Groups {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/roles?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles` endpoint.
      *
@@ -473,15 +606,24 @@ impl Groups {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/roles?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/groups/{groupId}/roles` endpoint.
      *
@@ -506,17 +648,24 @@ impl Groups {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/roles?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles/{roleId}` endpoint.
      *
@@ -528,15 +677,24 @@ impl Groups {
      * * `role_id: &str`
      */
     pub async fn get_role(&self, group_id: &str, role_id: &str) -> Result<crate::types::Role> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/roles/{roleId}` endpoint.
      *
@@ -548,15 +706,24 @@ impl Groups {
      * * `role_id: &str`
      */
     pub async fn remove_role_from(&self, group_id: &str, role_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps` endpoint.
      *
@@ -584,16 +751,25 @@ impl Groups {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps?{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps?{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps` endpoint.
      *
@@ -606,15 +782,24 @@ impl Groups {
         group_id: &str,
         role_id: &str,
     ) -> Result<Vec<crate::types::CatalogApplication>> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}` endpoint.
      *
@@ -632,16 +817,25 @@ impl Groups {
         role_id: &str,
         app_name: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(app_name),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(app_name),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}` endpoint.
      *
@@ -659,16 +853,25 @@ impl Groups {
         role_id: &str,
         app_name: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(app_name),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(app_name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add App Instance Target to App Administrator Role given to a Group.
      *
@@ -690,17 +893,26 @@ impl Groups {
         app_name: &str,
         application_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(app_name),
-            crate::progenitor_support::encode_path(application_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(app_name),
+                crate::progenitor_support::encode_path(application_id),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Remove App Instance Target to App Administrator Role given to a Group.
      *
@@ -722,17 +934,26 @@ impl Groups {
         app_name: &str,
         application_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(app_name),
-            crate::progenitor_support::encode_path(application_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(app_name),
+                crate::progenitor_support::encode_path(application_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups` endpoint.
      *
@@ -760,16 +981,25 @@ impl Groups {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/groups?{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/groups?{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups` endpoint.
      *
@@ -782,15 +1012,24 @@ impl Groups {
         group_id: &str,
         role_id: &str,
     ) -> Result<Vec<crate::types::Group>> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/groups",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/groups",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}` endpoint.
      *
@@ -808,16 +1047,25 @@ impl Groups {
         role_id: &str,
         target_group_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(target_group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(target_group_id),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}` endpoint.
      *
@@ -835,16 +1083,25 @@ impl Groups {
         role_id: &str,
         target_group_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(role_id),
-            crate::progenitor_support::encode_path(target_group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/roles/{}/targets/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(role_id),
+                crate::progenitor_support::encode_path(target_group_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Group Members.
      *
@@ -872,15 +1129,24 @@ impl Groups {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/api/v1/groups/{}/users?{}",
-            crate::progenitor_support::encode_path(group_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/users?{}",
+                crate::progenitor_support::encode_path(group_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List Group Members.
      *
@@ -891,14 +1157,23 @@ impl Groups {
      * Enumerates all users that are a member of a group.
      */
     pub async fn list_all_users(&self, group_id: &str) -> Result<Vec<crate::types::User>> {
-        let url = format!(
-            "/api/v1/groups/{}/users",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/users",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add User to Group.
      *
@@ -912,15 +1187,24 @@ impl Groups {
      * * `user_id: &str`
      */
     pub async fn add_user(&self, group_id: &str, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/users/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/users/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Remove User from Group.
      *
@@ -934,12 +1218,22 @@ impl Groups {
      * * `user_id: &str`
      */
     pub async fn remove_user_from(&self, group_id: &str, user_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/groups/{}/users/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/groups/{}/users/{}",
+                crate::progenitor_support::encode_path(group_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

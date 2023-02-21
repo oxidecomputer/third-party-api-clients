@@ -38,11 +38,19 @@ impl UsersProfile {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.profile.get?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/users.profile.get?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/users.profile.set` endpoint.
      *
@@ -55,7 +63,15 @@ impl UsersProfile {
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
      */
     pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
-        let url = "/users.profile.set".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/users.profile.set", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

@@ -55,12 +55,12 @@ async fn refreshes_installation_token_once() {
         .await;
 
     let token_generator = InstallationTokenGenerator::new(INSTALLATION_ID, jwt);
-    let client = Client::host(
-        server.uri(),
+    let mut client = Client::new(
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
     )
     .expect("Client creation should succeed");
+    client.with_host_override(server.uri());
 
     // Request zen twice at the same time.
     let meta = client.meta();

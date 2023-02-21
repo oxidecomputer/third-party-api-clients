@@ -35,12 +35,17 @@ impl SettingsInboundParse {
         &self,
         body: &crate::types::ParseSetting,
     ) -> Result<crate::types::ParseSetting> {
-        let url = "/user/webhooks/parse/settings".to_string();
+        let url = self.client.url("/user/webhooks/parse/settings", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Retrieve a specific parse setting.
      *
@@ -58,14 +63,23 @@ impl SettingsInboundParse {
         &self,
         hostname: &str,
     ) -> Result<crate::types::ParseSetting> {
-        let url = format!(
-            "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(hostname),
+        let url = self.client.url(
+            &format!(
+                "/user/webhooks/parse/settings/{}",
+                crate::progenitor_support::encode_path(hostname),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a parse setting.
      *
@@ -83,14 +97,23 @@ impl SettingsInboundParse {
         &self,
         hostname: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(hostname),
+        let url = self.client.url(
+            &format!(
+                "/user/webhooks/parse/settings/{}",
+                crate::progenitor_support::encode_path(hostname),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a parse setting.
      *
@@ -109,13 +132,21 @@ impl SettingsInboundParse {
         hostname: &str,
         body: &crate::types::ParseSetting,
     ) -> Result<crate::types::ParseSetting> {
-        let url = format!(
-            "/user/webhooks/parse/settings/{}",
-            crate::progenitor_support::encode_path(hostname),
+        let url = self.client.url(
+            &format!(
+                "/user/webhooks/parse/settings/{}",
+                crate::progenitor_support::encode_path(hostname),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

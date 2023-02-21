@@ -48,14 +48,23 @@ impl PaymentIntents {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_intents?{}", query_);
-
-        let resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_intents?{}", query_), None);
+        let resp: crate::types::PaymentFlowsIntentList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_intents` endpoint.
      *
@@ -73,9 +82,19 @@ impl PaymentIntents {
             query_args.push(("customer".to_string(), customer.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_intents?{}", query_);
-
-        let mut resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_intents?{}", query_), None);
+        let mut resp: crate::types::PaymentFlowsIntentList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -96,12 +115,24 @@ impl PaymentIntents {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -113,7 +144,6 @@ impl PaymentIntents {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents` endpoint.
      *
@@ -129,10 +159,17 @@ impl PaymentIntents {
      * is supplied.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PaymentIntent> {
-        let url = "/v1/payment_intents".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/payment_intents", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_intents/search` endpoint.
      *
@@ -165,14 +202,23 @@ impl PaymentIntents {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_intents/search?{}", query_);
-
-        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_intents/search?{}", query_), None);
+        let resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_intents/search` endpoint.
      *
@@ -189,9 +235,19 @@ impl PaymentIntents {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/payment_intents/search?{}", query_);
-
-        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/payment_intents/search?{}", query_), None);
+        let mut resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -212,12 +268,24 @@ impl PaymentIntents {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -229,7 +297,6 @@ impl PaymentIntents {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/payment_intents/{intent}` endpoint.
      *
@@ -255,15 +322,24 @@ impl PaymentIntents {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/payment_intents/{}?{}",
-            crate::progenitor_support::encode_path(intent),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}?{}",
+                crate::progenitor_support::encode_path(intent),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}` endpoint.
      *
@@ -280,14 +356,23 @@ impl PaymentIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
-        let url = format!(
-            "/v1/payment_intents/{}",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/cancel` endpoint.
      *
@@ -302,14 +387,23 @@ impl PaymentIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent_cancel(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
-        let url = format!(
-            "/v1/payment_intents/{}/cancel",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}/cancel",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/capture` endpoint.
      *
@@ -324,14 +418,23 @@ impl PaymentIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent_capture(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
-        let url = format!(
-            "/v1/payment_intents/{}/capture",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}/capture",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/confirm` endpoint.
      *
@@ -366,14 +469,23 @@ impl PaymentIntents {
      * * `intent: &str` -- The account's country.
      */
     pub async fn post_intent_confirm(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
-        let url = format!(
-            "/v1/payment_intents/{}/confirm",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}/confirm",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/payment_intents/{intent}/verify_microdeposits` endpoint.
      *
@@ -387,11 +499,21 @@ impl PaymentIntents {
         &self,
         intent: &str,
     ) -> Result<crate::types::PaymentIntent> {
-        let url = format!(
-            "/v1/payment_intents/{}/verify_microdeposits",
-            crate::progenitor_support::encode_path(intent),
+        let url = self.client.url(
+            &format!(
+                "/v1/payment_intents/{}/verify_microdeposits",
+                crate::progenitor_support::encode_path(intent),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

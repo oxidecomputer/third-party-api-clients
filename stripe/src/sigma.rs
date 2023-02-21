@@ -41,15 +41,23 @@ impl Sigma {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/sigma/scheduled_query_runs?{}", query_);
-
-        let resp: crate::types::GetSigmaScheduledQueryRunsResponse =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/sigma/scheduled_query_runs?{}", query_), None);
+        let resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sigma/scheduled_query_runs` endpoint.
      *
@@ -60,9 +68,17 @@ impl Sigma {
     pub async fn get_all_scheduled_query_runs(
         &self,
     ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
-        let url = "/v1/sigma/scheduled_query_runs".to_string();
-        let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/sigma/scheduled_query_runs", None);
+        let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -83,12 +99,24 @@ impl Sigma {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -100,7 +128,6 @@ impl Sigma {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/sigma/scheduled_query_runs/{scheduled_query_run}` endpoint.
      *
@@ -115,11 +142,21 @@ impl Sigma {
         &self,
         scheduled_query_run: &str,
     ) -> Result<crate::types::ScheduledQueryRun> {
-        let url = format!(
-            "/v1/sigma/scheduled_query_runs/{}",
-            crate::progenitor_support::encode_path(scheduled_query_run),
+        let url = self.client.url(
+            &format!(
+                "/v1/sigma/scheduled_query_runs/{}",
+                crate::progenitor_support::encode_path(scheduled_query_run),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

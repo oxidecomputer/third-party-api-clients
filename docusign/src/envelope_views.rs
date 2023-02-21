@@ -45,17 +45,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/correct",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Revokes the correction view URL to the Envelope UI.
      *
@@ -74,17 +81,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/correct",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a URL to the edit view UI.
      *
@@ -120,17 +134,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/edit",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/edit",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a URL to the recipient view UI.
      *
@@ -175,17 +196,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/recipient",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/recipient",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a URL to the sender view UI.
      *
@@ -232,17 +260,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/sender",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/sender",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a URL to the shared recipient view UI for an envelope.
      *
@@ -266,17 +301,24 @@ impl EnvelopeViews {
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
     ) -> Result<crate::types::ViewUrl> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/views/shared",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/views/shared",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a URL to the authentication view UI.
      *
@@ -298,13 +340,21 @@ impl EnvelopeViews {
         account_id: &str,
         body: &crate::types::ConsoleViewRequest,
     ) -> Result<crate::types::EnvelopeViews> {
-        let url = format!(
-            "/v2.1/accounts/{}/views/console",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/views/console",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

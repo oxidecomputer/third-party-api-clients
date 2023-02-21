@@ -48,11 +48,19 @@ impl MarketingCampaignsStats {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/automations?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/marketing/stats/automations?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Automation Stats by ID.
      *
@@ -113,15 +121,24 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/automations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/automations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get All Single Sends Stats.
      *
@@ -158,11 +175,19 @@ impl MarketingCampaignsStats {
             query_args.push(("singlesend_ids".to_string(), singlesend_ids.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/singlesends?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/marketing/stats/singlesends?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Single Send Stats by ID.
      *
@@ -218,15 +243,24 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/singlesends/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/singlesends/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Automation Click Tracking Stats by ID.
      *
@@ -269,15 +303,24 @@ impl MarketingCampaignsStats {
             query_args.push(("step_ids".to_string(), step_ids.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/automations/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/automations/{}/links?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Single Send Click Tracking Stats by ID.
      *
@@ -325,15 +368,24 @@ impl MarketingCampaignsStats {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/stats/singlesends/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/stats/singlesends/{}/links?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Export Single Send Stats.
      *
@@ -363,11 +415,20 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/singlesends/export?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/marketing/stats/singlesends/export?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Export Automation Stats.
      *
@@ -397,8 +458,18 @@ impl MarketingCampaignsStats {
             query_args.push(("timezone".to_string(), timezone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/stats/automations/export?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/marketing/stats/automations/export?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

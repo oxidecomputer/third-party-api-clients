@@ -37,15 +37,24 @@ impl Orgunits {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits?{}",
+                crate::progenitor_support::encode_path(customer_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/orgunits` endpoint.
      *
@@ -60,16 +69,23 @@ impl Orgunits {
         customer_id: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits",
-            crate::progenitor_support::encode_path(customer_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits",
+                crate::progenitor_support::encode_path(customer_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/orgunits/{orgUnitPath}` endpoint.
      *
@@ -85,15 +101,24 @@ impl Orgunits {
         customer_id: &str,
         org_unit_path: &str,
     ) -> Result<crate::types::OrgUnit> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/customer/{customerId}/orgunits/{orgUnitPath}` endpoint.
      *
@@ -110,17 +135,24 @@ impl Orgunits {
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/orgunits/{orgUnitPath}` endpoint.
      *
@@ -132,15 +164,24 @@ impl Orgunits {
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
     pub async fn delete(&self, customer_id: &str, org_unit_path: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customerId}/orgunits/{orgUnitPath}` endpoint.
      *
@@ -157,14 +198,22 @@ impl Orgunits {
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/orgunits/{}",
+                crate::progenitor_support::encode_path(customer_id),
+                crate::progenitor_support::encode_path(org_unit_path),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

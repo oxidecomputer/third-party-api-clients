@@ -24,10 +24,17 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/stars.add".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/stars.add", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/stars.list` endpoint.
      *
@@ -64,11 +71,17 @@ impl Stars {
             query_args.push(("page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/stars.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/stars.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/stars.remove` endpoint.
      *
@@ -81,7 +94,15 @@ impl Stars {
      * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/stars.remove".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/stars.remove", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

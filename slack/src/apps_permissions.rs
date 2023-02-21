@@ -24,10 +24,17 @@ impl AppsPermissions {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
     pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
-        let url = "/apps.permissions.info".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/apps.permissions.info", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/apps.permissions.request` endpoint.
      *
@@ -54,8 +61,17 @@ impl AppsPermissions {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/apps.permissions.request?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/apps.permissions.request?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

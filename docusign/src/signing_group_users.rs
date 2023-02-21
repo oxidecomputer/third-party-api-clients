@@ -31,15 +31,24 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds members to a signing group. .
      *
@@ -60,17 +69,24 @@ impl SigningGroupUsers {
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes  one or more members from a signing group.
      *
@@ -91,14 +107,22 @@ impl SigningGroupUsers {
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
     ) -> Result<crate::types::SigningGroupUsersData> {
-        let url = format!(
-            "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/signing_groups/{}/users",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(signing_group_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

@@ -37,18 +37,28 @@ impl Revisions {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/revisions?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::RevisionList = self.client.get(&url, None).await?;
+        let resp: crate::types::RevisionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.revisions.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
      *
@@ -57,12 +67,23 @@ impl Revisions {
      * Lists a file's revisions.
      */
     pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
-        let url = format!(
-            "/files/{}/revisions",
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions",
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::RevisionList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::RevisionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut revisions = resp.revisions;
         let mut page = resp.next_page_token;
@@ -72,12 +93,24 @@ impl Revisions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -93,7 +126,6 @@ impl Revisions {
         // Return our response data.
         Ok(revisions)
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -119,16 +151,25 @@ impl Revisions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/revisions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -140,15 +181,24 @@ impl Revisions {
      * * `revision_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
-        let url = format!(
-            "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
      *
@@ -165,14 +215,22 @@ impl Revisions {
         revision_id: &str,
         body: &crate::types::Revision,
     ) -> Result<crate::types::Revision> {
-        let url = format!(
-            "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/revisions/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(revision_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

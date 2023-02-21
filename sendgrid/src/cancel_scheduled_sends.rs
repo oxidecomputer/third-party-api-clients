@@ -28,10 +28,17 @@ impl CancelScheduledSends {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn post_mail_batch(&self) -> Result<crate::types::MailBatchId> {
-        let url = "/mail/batch".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/mail/batch", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all scheduled sends.
      *
@@ -48,10 +55,17 @@ impl CancelScheduledSends {
     pub async fn get_user_scheduled_sends(
         &self,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
-        let url = "/user/scheduled_sends".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/scheduled_sends", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all scheduled sends.
      *
@@ -66,10 +80,17 @@ impl CancelScheduledSends {
     pub async fn get_all_user_scheduled_sends(
         &self,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
-        let url = "/user/scheduled_sends".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/user/scheduled_sends", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Cancel or pause a scheduled send.
      *
@@ -91,12 +112,17 @@ impl CancelScheduledSends {
         &self,
         body: &crate::types::CancelPauseAScheduledSendRequest,
     ) -> Result<crate::types::UserScheduledSendStatusAllOf> {
-        let url = "/user/scheduled_sends".to_string();
+        let url = self.client.url("/user/scheduled_sends", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Validate batch ID.
      *
@@ -115,14 +141,23 @@ impl CancelScheduledSends {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_batch(&self, batch_id: &str) -> Result<crate::types::MailBatchId> {
-        let url = format!(
-            "/mail/batch/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/mail/batch/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve scheduled send.
      *
@@ -138,14 +173,23 @@ impl CancelScheduledSends {
         &self,
         batch_id: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
-        let url = format!(
-            "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/user/scheduled_sends/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve scheduled send.
      *
@@ -159,14 +203,23 @@ impl CancelScheduledSends {
         &self,
         batch_id: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
-        let url = format!(
-            "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/user/scheduled_sends/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a cancellation or pause from a scheduled send.
      *
@@ -181,14 +234,23 @@ impl CancelScheduledSends {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_user_scheduled_sends_batch(&self, batch_id: &str) -> Result<()> {
-        let url = format!(
-            "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/user/scheduled_sends/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a scheduled send.
      *
@@ -207,13 +269,21 @@ impl CancelScheduledSends {
         batch_id: &str,
         body: &crate::types::UserScheduledSendStatus,
     ) -> Result<()> {
-        let url = format!(
-            "/user/scheduled_sends/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/user/scheduled_sends/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

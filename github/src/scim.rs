@@ -67,15 +67,24 @@ impl Scim {
             query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/scim/v2/organizations/{}/Users?{}",
-            crate::progenitor_support::encode_path(org),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users?{}",
+                crate::progenitor_support::encode_path(org),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Provision and invite a SCIM user.
      *
@@ -94,16 +103,23 @@ impl Scim {
         org: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
     ) -> Result<crate::types::ScimUser> {
-        let url = format!(
-            "/scim/v2/organizations/{}/Users",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get SCIM provisioning information for a user.
      *
@@ -123,15 +139,24 @@ impl Scim {
         org: &str,
         scim_user_id: &str,
     ) -> Result<crate::types::ScimUser> {
-        let url = format!(
-            "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a provisioned organization membership.
      *
@@ -156,17 +181,24 @@ impl Scim {
         scim_user_id: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
     ) -> Result<crate::types::ScimUser> {
-        let url = format!(
-            "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a SCIM user from an organization.
      *
@@ -182,15 +214,24 @@ impl Scim {
      * * `scim_user_id: &str` -- scim_user_id parameter.
      */
     pub async fn delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
-        let url = format!(
-            "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an attribute for a SCIM user.
      *
@@ -226,14 +267,22 @@ impl Scim {
         scim_user_id: &str,
         body: &crate::types::ScimUpdateAttributeUserRequest,
     ) -> Result<crate::types::ScimUser> {
-        let url = format!(
-            "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+        let url = self.client.url(
+            &format!(
+                "/scim/v2/organizations/{}/Users/{}",
+                crate::progenitor_support::encode_path(org),
+                crate::progenitor_support::encode_path(scim_user_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

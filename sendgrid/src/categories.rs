@@ -43,11 +43,17 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/categories?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all categories.
      *
@@ -70,11 +76,17 @@ impl Categories {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/categories?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?].
      *
@@ -131,11 +143,19 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats/sums?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/categories/stats/sums?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve Email Statistics for Categories.
      *
@@ -184,11 +204,19 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/categories/stats?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve Email Statistics for Categories.
      *
@@ -225,8 +253,17 @@ impl Categories {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/categories/stats?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/categories/stats?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

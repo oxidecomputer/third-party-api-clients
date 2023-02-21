@@ -32,11 +32,17 @@ impl SuppressionsUnsubscribeGroups {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/asm/groups?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/asm/groups?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all suppression groups associated with the user.
      *
@@ -54,11 +60,17 @@ impl SuppressionsUnsubscribeGroups {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/asm/groups?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/asm/groups?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new suppression group.
      *
@@ -76,12 +88,17 @@ impl SuppressionsUnsubscribeGroups {
         &self,
         body: &crate::types::SuppressionGroupRequestBase,
     ) -> Result<crate::types::PostAsmGroupsResponse> {
-        let url = "/asm/groups".to_string();
+        let url = self.client.url("/asm/groups", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get information on a single suppression group.
      *
@@ -97,14 +114,23 @@ impl SuppressionsUnsubscribeGroups {
         &self,
         group_id: &str,
     ) -> Result<crate::types::GetAsmGroupsGroupResponseAllOf> {
-        let url = format!(
-            "/asm/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/asm/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a Suppression Group.
      *
@@ -121,14 +147,23 @@ impl SuppressionsUnsubscribeGroups {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_asm_groups_group(&self, group_id: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/asm/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/asm/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a suppression group.
      *
@@ -145,13 +180,21 @@ impl SuppressionsUnsubscribeGroups {
         group_id: &str,
         body: &crate::types::SuppressionGroupRequestBase,
     ) -> Result<crate::types::SuppressionGroup> {
-        let url = format!(
-            "/asm/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+        let url = self.client.url(
+            &format!(
+                "/asm/groups/{}",
+                crate::progenitor_support::encode_path(group_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

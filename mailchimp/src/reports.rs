@@ -62,11 +62,17 @@ impl Reports {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reports?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/reports?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get campaign report.
      *
@@ -94,15 +100,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List abuse reports.
      *
@@ -130,15 +145,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/abuse-reports?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/abuse-reports?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get abuse report.
      *
@@ -168,16 +192,25 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/abuse-reports/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/abuse-reports/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List campaign feedback.
      *
@@ -205,15 +238,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/advice?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/advice?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List campaign details.
      *
@@ -251,15 +293,24 @@ impl Reports {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/click-details?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/click-details?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get campaign link details.
      *
@@ -289,16 +340,25 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/click-details/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(link_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/click-details/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List clicked link subscribers.
      *
@@ -338,16 +398,25 @@ impl Reports {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/click-details/{}/members?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(link_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/click-details/{}/members?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get clicked link subscriber.
      *
@@ -379,17 +448,26 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/click-details/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(link_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/click-details/{}/members/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(link_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List campaign open details.
      *
@@ -432,15 +510,24 @@ impl Reports {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/open-details?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/open-details?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get opened campaign subscriber.
      *
@@ -470,16 +557,25 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/open-details/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/open-details/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List domain performance stats.
      *
@@ -507,15 +603,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/domain-performance?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/domain-performance?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List EepURL activity.
      *
@@ -543,15 +648,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/eepurl?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/eepurl?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List email activity.
      *
@@ -594,15 +708,24 @@ impl Reports {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/email-activity?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/email-activity?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get subscriber email activity.
      *
@@ -637,16 +760,25 @@ impl Reports {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/email-activity/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/email-activity/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List top open activities.
      *
@@ -684,15 +816,24 @@ impl Reports {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/locations?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/locations?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List campaign recipients.
      *
@@ -730,15 +871,24 @@ impl Reports {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/sent-to?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/sent-to?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get campaign recipient info.
      *
@@ -768,16 +918,25 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/sent-to/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/sent-to/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List child campaign reports.
      *
@@ -805,15 +964,24 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/sub-reports?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/sub-reports?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List unsubscribed members.
      *
@@ -851,15 +1019,24 @@ impl Reports {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/unsubscribed?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/unsubscribed?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get unsubscribed member.
      *
@@ -889,16 +1066,25 @@ impl Reports {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/unsubscribed/{}?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            crate::progenitor_support::encode_path(subscriber_hash),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/unsubscribed/{}?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(subscriber_hash),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List campaign product activity.
      *
@@ -941,12 +1127,22 @@ impl Reports {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reports/{}/ecommerce-product-activity?{}",
-            crate::progenitor_support::encode_path(campaign_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reports/{}/ecommerce-product-activity?{}",
+                crate::progenitor_support::encode_path(campaign_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

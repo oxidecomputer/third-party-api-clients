@@ -27,14 +27,23 @@ impl AccountTabSettings {
         &self,
         account_id: &str,
     ) -> Result<crate::types::TabAccountSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/tabs",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Modifies tab settings for specified account.
      *
@@ -51,13 +60,21 @@ impl AccountTabSettings {
         account_id: &str,
         body: &crate::types::TabAccountSettings,
     ) -> Result<crate::types::TabAccountSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/settings/tabs",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

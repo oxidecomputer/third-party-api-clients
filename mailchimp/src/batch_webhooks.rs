@@ -47,11 +47,19 @@ impl BatchWebhooks {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/batch-webhooks?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/batch-webhooks?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add batch webhook.
      *
@@ -60,12 +68,17 @@ impl BatchWebhooks {
      * Configure a webhook that will fire whenever any batch request completes processing.
      */
     pub async fn post(&self, body: &crate::types::BatchWebhook) -> Result<crate::types::Webhooks> {
-        let url = "/batch-webhooks".to_string();
+        let url = self.client.url("/batch-webhooks", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get batch webhook info.
      *
@@ -93,15 +106,24 @@ impl BatchWebhooks {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/batch-webhooks/{}?{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}?{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete batch webhook.
      *
@@ -114,14 +136,23 @@ impl BatchWebhooks {
      * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
      */
     pub async fn delete(&self, batch_webhook_id: &str) -> Result<()> {
-        let url = format!(
-            "/batch-webhooks/{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update batch webhook.
      *
@@ -138,13 +169,21 @@ impl BatchWebhooks {
         batch_webhook_id: &str,
         body: &crate::types::BatchWebhook,
     ) -> Result<crate::types::Webhooks> {
-        let url = format!(
-            "/batch-webhooks/{}",
-            crate::progenitor_support::encode_path(batch_webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/batch-webhooks/{}",
+                crate::progenitor_support::encode_path(batch_webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

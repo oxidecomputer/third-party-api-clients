@@ -70,16 +70,25 @@ impl Pulls {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List pull requests.
      *
@@ -118,16 +127,25 @@ impl Pulls {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a pull request.
      *
@@ -154,17 +172,24 @@ impl Pulls {
         repo: &str,
         body: &crate::types::PullsCreateRequest,
     ) -> Result<crate::types::PullRequestData> {
-        let url = format!(
-            "/repos/{}/{}/pulls",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List review comments in a repository.
      *
@@ -213,16 +238,25 @@ impl Pulls {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List review comments in a repository.
      *
@@ -253,16 +287,25 @@ impl Pulls {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a review comment for a pull request.
      *
@@ -284,16 +327,25 @@ impl Pulls {
         repo: &str,
         comment_id: i64,
     ) -> Result<crate::types::PullRequestReviewComment> {
-        let url = format!(
-            "/repos/{}/{}/pulls/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a review comment for a pull request.
      *
@@ -315,16 +367,25 @@ impl Pulls {
         repo: &str,
         comment_id: i64,
     ) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/pulls/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a review comment for a pull request.
      *
@@ -347,18 +408,25 @@ impl Pulls {
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewComment> {
-        let url = format!(
-            "/repos/{}/{}/pulls/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/comments/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a pull request.
      *
@@ -394,16 +462,25 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
     ) -> Result<crate::types::PullRequestData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a pull request.
      *
@@ -428,18 +505,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsUpdateRequest,
     ) -> Result<crate::types::PullRequestData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List review comments on a pull request.
      *
@@ -490,17 +574,26 @@ impl Pulls {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List review comments on a pull request.
      *
@@ -532,17 +625,26 @@ impl Pulls {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a review comment for a pull request.
      *
@@ -572,18 +674,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsCreateReviewCommentRequest,
     ) -> Result<crate::types::PullRequestReviewComment> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/comments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/comments",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Create a reply for a review comment.
      *
@@ -610,19 +719,26 @@ impl Pulls {
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewComment> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/comments/{}/replies",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&comment_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/comments/{}/replies",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List commits on a pull request.
      *
@@ -656,17 +772,26 @@ impl Pulls {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/commits?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/commits?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List commits on a pull request.
      *
@@ -684,16 +809,25 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
     ) -> Result<Vec<crate::types::CommitDataType>> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/commits",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/commits",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List pull requests files.
      *
@@ -727,17 +861,26 @@ impl Pulls {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/files?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/files?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List pull requests files.
      *
@@ -755,16 +898,25 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
     ) -> Result<Vec<crate::types::DiffEntry>> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/files",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/files",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Check if a pull request has been merged.
      *
@@ -781,16 +933,25 @@ impl Pulls {
      * * `pull_number: i64`
      */
     pub async fn check_if_merged(&self, owner: &str, repo: &str, pull_number: i64) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/merge",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/merge",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Merge a pull request.
      *
@@ -813,18 +974,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsMergeRequest,
     ) -> Result<crate::types::PullRequestMergeResult> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/merge",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/merge",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List requested reviewers for a pull request.
      *
@@ -858,17 +1026,26 @@ impl Pulls {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/requested_reviewers?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Request reviewers for a pull request.
      *
@@ -891,18 +1068,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsRequestReviewers,
     ) -> Result<crate::types::PullRequestSimple> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/requested_reviewers",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove requested reviewers from a pull request.
      *
@@ -925,18 +1109,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsRemoveRequestedReviewersRequest,
     ) -> Result<crate::types::PullRequestSimple> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/requested_reviewers",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List reviews for a pull request.
      *
@@ -970,17 +1161,26 @@ impl Pulls {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List reviews for a pull request.
      *
@@ -998,16 +1198,25 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewData>> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a review for a pull request.
      *
@@ -1036,18 +1245,25 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsCreateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a review for a pull request.
      *
@@ -1071,17 +1287,26 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a review for a pull request.
      *
@@ -1106,19 +1331,26 @@ impl Pulls {
         review_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a pending review for a pull request.
      *
@@ -1142,17 +1374,26 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List comments for a pull request review.
      *
@@ -1188,18 +1429,27 @@ impl Pulls {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}/comments?{}",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List comments for a pull request review.
      *
@@ -1218,17 +1468,26 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
     ) -> Result<Vec<crate::types::ReviewComment>> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}/comments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}/comments",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Dismiss a review for a pull request.
      *
@@ -1253,19 +1512,26 @@ impl Pulls {
         review_id: i64,
         body: &crate::types::PullsDismissReviewRequest,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Submit a review for a pull request.
      *
@@ -1290,19 +1556,26 @@ impl Pulls {
         review_id: i64,
         body: &crate::types::PullsSubmitReviewRequest,
     ) -> Result<crate::types::PullRequestReviewData> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
-            crate::progenitor_support::encode_path(&review_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/reviews/{}/events",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update a pull request branch.
      *
@@ -1325,15 +1598,23 @@ impl Pulls {
         pull_number: i64,
         body: &crate::types::PullsUpdateBranchRequest,
     ) -> Result<crate::types::PullsUpdateBranchResponse> {
-        let url = format!(
-            "/repos/{}/{}/pulls/{}/update-branch",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/pulls/{}/update-branch",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

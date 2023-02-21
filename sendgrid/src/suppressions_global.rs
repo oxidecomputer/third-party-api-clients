@@ -27,12 +27,17 @@ impl SuppressionsGlobal {
         &self,
         body: &crate::types::SuppressionsRequestBody,
     ) -> Result<crate::types::SuppressionsRequestBody> {
-        let url = "/asm/suppressions/global".to_string();
+        let url = self.client.url("/asm/suppressions/global", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Retrieve all global suppressions.
      *
@@ -69,11 +74,19 @@ impl SuppressionsGlobal {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/unsubscribes?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/unsubscribes?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all global suppressions.
      *
@@ -100,11 +113,19 @@ impl SuppressionsGlobal {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/unsubscribes?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/unsubscribes?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a Global Suppression.
      *
@@ -122,14 +143,23 @@ impl SuppressionsGlobal {
         &self,
         email: &str,
     ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
-        let url = format!(
-            "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/asm/suppressions/global/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a Global Suppression.
      *
@@ -144,11 +174,21 @@ impl SuppressionsGlobal {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/asm/suppressions/global/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

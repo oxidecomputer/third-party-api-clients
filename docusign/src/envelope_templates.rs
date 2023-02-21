@@ -43,17 +43,26 @@ impl EnvelopeTemplates {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds templates to a document in an  envelope.
      *
@@ -84,19 +93,26 @@ impl EnvelopeTemplates {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes a template from a document in an existing envelope.
      *
@@ -118,17 +134,26 @@ impl EnvelopeTemplates {
         envelope_id: &str,
         template_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get List of Templates used in an Envelope.
      *
@@ -154,16 +179,25 @@ impl EnvelopeTemplates {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/templates?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds templates to an envelope.
      *
@@ -192,15 +226,23 @@ impl EnvelopeTemplates {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/templates?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

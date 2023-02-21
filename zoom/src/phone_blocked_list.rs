@@ -43,14 +43,23 @@ impl PhoneBlockedList {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/blocked_list?{}", query_);
-
-        let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/phone/blocked_list?{}", query_), None);
+        let resp: crate::types::ListBlockedResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.blocked_list.to_vec())
     }
-
     /**
      * List blocked lists.
      *
@@ -67,8 +76,17 @@ impl PhoneBlockedList {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
-        let url = "/phone/blocked_list".to_string();
-        let mut resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/phone/blocked_list", None);
+        let mut resp: crate::types::ListBlockedResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut blocked_list = resp.blocked_list;
         let mut page = resp.next_page_token;
@@ -79,12 +97,24 @@ impl PhoneBlockedList {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -100,7 +130,6 @@ impl PhoneBlockedList {
         // Return our response data.
         Ok(blocked_list)
     }
-
     /**
      * Create a blocked list.
      *
@@ -118,12 +147,17 @@ impl PhoneBlockedList {
         &self,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<crate::types::Groups> {
-        let url = "/phone/blocked_list".to_string();
+        let url = self.client.url("/phone/blocked_list", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get blocked list details.
      *
@@ -144,14 +178,23 @@ impl PhoneBlockedList {
         &self,
         blocked_list_id: &str,
     ) -> Result<crate::types::BlockedList> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a blocked list.
      *
@@ -171,14 +214,23 @@ impl PhoneBlockedList {
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
     pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a blocked list.
      *
@@ -201,13 +253,21 @@ impl PhoneBlockedList {
         blocked_list_id: &str,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(blocked_list_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/blocked_list/{}",
+                crate::progenitor_support::encode_path(blocked_list_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

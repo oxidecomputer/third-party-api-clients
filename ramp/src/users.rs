@@ -24,11 +24,20 @@ impl Users {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::User> {
-        let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Suspend a user.
      *
@@ -37,11 +46,20 @@ impl Users {
      * Suspends a user. Does not delete the user's cards. Currently this action is not reversible.
      */
     pub async fn delete(&self, id: &str) -> Result<()> {
-        let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Modify Existing User.
      *
@@ -50,13 +68,20 @@ impl Users {
      * Modify information about a user.
      */
     pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersRequest) -> Result<()> {
-        let url = format!("/users/{}", crate::progenitor_support::encode_path(id),);
-
+        let url = self.client.url(
+            &format!("/users/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List users.
      *
@@ -93,14 +118,21 @@ impl Users {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users?{}", query_);
-
-        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/users?{}", query_), None);
+        let resp: crate::types::GetUsersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List users.
      *
@@ -123,9 +155,17 @@ impl Users {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users?{}", query_);
-
-        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/users?{}", query_), None);
+        let resp: crate::types::GetUsersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -135,8 +175,11 @@ impl Users {
             match self
                 .client
                 .get::<crate::types::GetUsersResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -162,7 +205,6 @@ impl Users {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Invite a new user.
      *
@@ -174,12 +216,17 @@ impl Users {
         &self,
         body: &crate::types::PostUsersDeferredRequest,
     ) -> Result<crate::types::User> {
-        let url = "/users/deferred".to_string();
+        let url = self.client.url("/users/deferred", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get status of a deferred user task.
      *
@@ -191,11 +238,21 @@ impl Users {
         &self,
         id: &str,
     ) -> Result<crate::types::GetUsersDeferredStatusResponse> {
-        let url = format!(
-            "/users/deferred/status/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/users/deferred/status/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

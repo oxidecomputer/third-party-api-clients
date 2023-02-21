@@ -39,11 +39,19 @@ impl BouncesApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/bounces?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/bounces?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all bounces.
      *
@@ -66,11 +74,19 @@ impl BouncesApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/bounces?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/bounces?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete bounces.
      *
@@ -91,12 +107,17 @@ impl BouncesApi {
         &self,
         body: &crate::types::DeleteSuppressionBouncesRequest,
     ) -> Result<()> {
-        let url = "/suppression/bounces".to_string();
+        let url = self.client.url("/suppression/bounces", None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve a Bounce.
      *
@@ -112,14 +133,23 @@ impl BouncesApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
-        let url = format!(
-            "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a Bounce.
      *
@@ -133,14 +163,23 @@ impl BouncesApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
-        let url = format!(
-            "/suppression/bounces/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a bounce.
      *
@@ -164,14 +203,22 @@ impl BouncesApi {
             query_args.push(("email_address".to_string(), email_address.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/suppression/bounces/{}?{}",
-            crate::progenitor_support::encode_path(email),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/suppression/bounces/{}?{}",
+                crate::progenitor_support::encode_path(email),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

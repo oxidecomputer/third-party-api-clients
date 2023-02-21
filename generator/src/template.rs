@@ -15,7 +15,11 @@ pub struct Template {
 }
 
 impl Template {
-    pub fn compile(&self, query_params: BTreeMap<String, (String, String)>) -> String {
+    pub fn compile(
+        &self,
+        query_params: BTreeMap<String, (String, String)>,
+        server_arg: &str,
+    ) -> String {
         let mut out = String::new();
 
         let mut a = |s: &str| {
@@ -83,9 +87,9 @@ impl Template {
             a("let query_ = serde_urlencoded::to_string(&query_args).unwrap();");
         }
 
-        a("let url =");
+        a("let url = self.client.url(");
         if self.components.is_empty() && query_params.is_empty() {
-            a(r#""".to_string();"#);
+            a(&format!(r#""", {server_arg});"#));
 
             return out.to_string();
         }
@@ -102,7 +106,7 @@ impl Template {
         }
 
         if !has_params && query_params.is_empty() {
-            out.push('"');
+            out.push_str(r#"&""#);
             for c in self.components.iter() {
                 out.push('/');
                 match c {
@@ -110,12 +114,12 @@ impl Template {
                     Component::Parameter(_) => (),
                 }
             }
-            out.push_str("\".to_string();");
+            out.push_str(&format!(r#"".to_string(), {server_arg});"#));
 
             return out.to_string();
         }
 
-        out.push_str("format!(\"");
+        out.push_str("&format!(\"");
         for c in self.components.iter() {
             out.push('/');
             match c {
@@ -157,7 +161,7 @@ impl Template {
             out.push_str("query_");
         }
 
-        out.push_str(");\n");
+        out.push_str(&format!("), {server_arg});\n"));
 
         out
     }
@@ -291,10 +295,11 @@ mod test {
     #[test]
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
-        let out = t.compile(Default::default());
-        let want = "let url =
-format!(\"/measure/{}\",
-crate::progenitor_support::encode_path(&number.to_string()),);\n";
+        let out = t.compile(Default::default(), "None");
+        let want = r#"let url = self.client.url(
+&format!("/measure/{}",
+crate::progenitor_support::encode_path(&number.to_string()),), None);
+"#;
         assert_eq!(want, &out);
         Ok(())
     }
@@ -305,19 +310,20 @@ pub fn generate_docs_github(
     name: &str,
     version: &str,
     proper_name: &str,
-    host: &str,
+    _host: &str,
     spec_link: &str,
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    let docs_proper_name = proper_name.to_lowercase();
 
     format!(
-        r#"{}
+        r#"{info}
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
-//! {} = "{}"
+//! {name} = "{version}"
 //! ```
 //!
 //! ## Basic example
@@ -325,10 +331,10 @@ pub fn generate_docs_github(
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of `auth::Credentials`.
 //!
-//! ```
-//! use {}::{{auth::Credentials, Client}};
+//! ```rust
+//! use {name}::{{auth::Credentials, Client}};
 //!
-//! let {} = Client::new(
+//! let {docs_proper_name} = Client::new(
 //!   String::from("user-agent-name"),
 //!   Credentials::Token(
 //!     String::from("personal-access-token")
@@ -337,7 +343,7 @@ pub fn generate_docs_github(
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/{}/{}/{}/struct.Client.html#method.host) method.
+//! [Client#host_override](https://docs.rs/{name}/{version}/{name}/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -351,24 +357,23 @@ pub fn generate_docs_github(
 //!
 //! ```toml
 //! [dependencies]
-//! {} = {{ version = "{}", features = ["httpcache"] }}
+//! {name} = {{ version = "{version}", features = ["httpcache"] }}
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
 //!
 //! Here is an example:
 //!
-//! ```
-//! use {}::{{auth::Credentials, Client}};
+//! ```rust
+//! use {name}::{{auth::Credentials, Client}};
 //! #[cfg(feature = "httpcache")]
-//! use {}::http_cache::HttpCache;
+//! use {name}::http_cache::HttpCache;
 //!
 //! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
 //!
 //! #[cfg(not(feature = "httpcache"))]
-//! let {} = Client::custom(
-//!     "https://{}",
+//! let {docs_proper_name} = Client::custom(
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -377,8 +382,7 @@ pub fn generate_docs_github(
 //! );
 //!
 //! #[cfg(feature = "httpcache")]
-//! let {} = Client::custom(
-//!     "https://{}",
+//! let {docs_proper_name} = Client::custom(
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -396,9 +400,9 @@ pub fn generate_docs_github(
 //! ```rust
 //! use std::env;
 //!
-//! use {}::{{Client, auth::{{Credentials, InstallationTokenGenerator, JWTCredentials}}}};
+//! use {name}::{{Client, auth::{{Credentials, InstallationTokenGenerator, JWTCredentials}}}};
 //! #[cfg(feature = "httpcache")]
-//! use {}::http_cache::FileBasedCache;
+//! use {name}::http_cache::FileBasedCache;
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -426,16 +430,14 @@ pub fn generate_docs_github(
 //! let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 //!
 //! #[cfg(not(feature = "httpcache"))]
-//! let {} = Client::custom(
-//!     "https://{}",
+//! let {docs_proper_name} = Client::custom(
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
 //! );
 //!
 //! #[cfg(feature = "httpcache")]
-//! let {} = Client::custom(
-//!     "https://{}",
+//! let {docs_proper_name} = Client::custom(
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
@@ -449,29 +451,7 @@ pub fn generate_docs_github(
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
-//!"#,
-        info,
-        name,
-        version,
-        name,
-        proper_name.to_lowercase(),
-        name,
-        version,
-        name,
-        name,
-        version,
-        name,
-        name,
-        proper_name.to_lowercase(),
-        host,
-        proper_name.to_lowercase(),
-        host,
-        name,
-        name,
-        proper_name.to_lowercase(),
-        host,
-        proper_name.to_lowercase(),
-        host,
+//!"#
     )
 }
 

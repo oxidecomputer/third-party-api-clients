@@ -31,10 +31,17 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
-        let url = "/alerts".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/alerts", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all alerts.
      *
@@ -51,10 +58,17 @@ impl Alerts {
      * For more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
-        let url = "/alerts".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/alerts", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new Alert.
      *
@@ -78,12 +92,17 @@ impl Alerts {
         &self,
         body: &crate::types::PostAlertsRequest,
     ) -> Result<crate::types::PostAlertsResponse> {
-        let url = "/alerts".to_string();
+        let url = self.client.url("/alerts", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve a specific alert.
      *
@@ -103,14 +122,23 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete an alert.
      *
@@ -129,14 +157,23 @@ impl Alerts {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete(&self, alert_id: i64) -> Result<crate::types::Help> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an alert.
      *
@@ -159,13 +196,21 @@ impl Alerts {
         alert_id: i64,
         body: &crate::types::PatchAlertsAlertRequest,
     ) -> Result<crate::types::GetAlertsAlertResponse> {
-        let url = format!(
-            "/alerts/{}",
-            crate::progenitor_support::encode_path(&alert_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/alerts/{}",
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

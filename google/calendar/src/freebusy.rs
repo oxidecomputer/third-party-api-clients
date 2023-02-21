@@ -21,9 +21,15 @@ impl Freebusy {
         &self,
         body: &crate::types::FreeBusyRequest,
     ) -> Result<crate::types::FreeBusyResponse> {
-        let url = "/freeBusy".to_string();
+        let url = self.client.url("/freeBusy", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

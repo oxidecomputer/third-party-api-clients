@@ -33,11 +33,19 @@ impl RequestLogs {
             query_args.push(("encoding".to_string(), encoding.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2.1/diagnostics/request_logs?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/v2.1/diagnostics/request_logs?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes the request log files.
      *
@@ -46,10 +54,17 @@ impl RequestLogs {
      * Deletes the request log files.
      */
     pub async fn api_delete_logs(&self) -> Result<()> {
-        let url = "/v2.1/diagnostics/request_logs".to_string();
-        self.client.delete(&url, None).await
+        let url = self.client.url("/v2.1/diagnostics/request_logs", None);
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets a request logging log file.
      *
@@ -68,14 +83,23 @@ impl RequestLogs {
      * * `request_log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn api_get(&self, request_log_id: &str) -> Result<bytes::Bytes> {
-        let url = format!(
-            "/v2.1/diagnostics/request_logs/{}",
-            crate::progenitor_support::encode_path(request_log_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/diagnostics/request_logs/{}",
+                crate::progenitor_support::encode_path(request_log_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets the API request logging settings.
      *
@@ -87,10 +111,17 @@ impl RequestLogs {
      * The response includes the current API request logging setting for the user, along with the maximum log entries and remaining log entries.
      */
     pub async fn api_get_setting(&self) -> Result<crate::types::DiagnosticsSettingsInformation> {
-        let url = "/v2.1/diagnostics/settings".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/v2.1/diagnostics/settings", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Enables or disables API request logging for troubleshooting.
      *
@@ -113,9 +144,15 @@ impl RequestLogs {
         &self,
         body: &crate::types::DiagnosticsSettingsInformation,
     ) -> Result<crate::types::DiagnosticsSettingsInformation> {
-        let url = "/v2.1/diagnostics/settings".to_string();
+        let url = self.client.url("/v2.1/diagnostics/settings", None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

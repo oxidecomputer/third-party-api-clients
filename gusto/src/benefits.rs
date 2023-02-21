@@ -22,10 +22,17 @@ impl Benefits {
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
     pub async fn get_page(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
-        let url = "/v1/benefits".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/v1/benefits", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all benefits supported by Gusto.
      *
@@ -38,10 +45,17 @@ impl Benefits {
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
-        let url = "/v1/benefits".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/v1/benefits", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a supported benefit by ID.
      *
@@ -52,14 +66,23 @@ impl Benefits {
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
     pub async fn get(&self, benefit_id: &str) -> Result<crate::types::SupportedBenefit> {
-        let url = format!(
-            "/v1/benefits/{}",
-            crate::progenitor_support::encode_path(benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/benefits/{}",
+                crate::progenitor_support::encode_path(benefit_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get benefits for a company.
      *
@@ -70,14 +93,23 @@ impl Benefits {
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
     pub async fn get_company(&self, company_id: &str) -> Result<Vec<crate::types::CompanyBenefit>> {
-        let url = format!(
-            "/v1/companies/{}/company_benefits",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/company_benefits",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get benefits for a company.
      *
@@ -93,14 +125,23 @@ impl Benefits {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::CompanyBenefit>> {
-        let url = format!(
-            "/v1/companies/{}/company_benefits",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/company_benefits",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a company benefit.
      *
@@ -115,16 +156,23 @@ impl Benefits {
         company_id: &str,
         body: &crate::types::PostCompanyBenefitsRequest,
     ) -> Result<crate::types::CompanyBenefit> {
-        let url = format!(
-            "/v1/companies/{}/company_benefits",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/company_benefits",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a company benefit.
      *
@@ -138,14 +186,23 @@ impl Benefits {
         &self,
         company_benefit_id: &str,
     ) -> Result<crate::types::CompanyBenefit> {
-        let url = format!(
-            "/v1/company_benefits/{}",
-            crate::progenitor_support::encode_path(company_benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/company_benefits/{}",
+                crate::progenitor_support::encode_path(company_benefit_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a company benefit.
      *
@@ -160,16 +217,23 @@ impl Benefits {
         company_benefit_id: &str,
         body: &crate::types::PutCompanyBenefitRequest,
     ) -> Result<crate::types::CompanyBenefit> {
-        let url = format!(
-            "/v1/company_benefits/{}",
-            crate::progenitor_support::encode_path(company_benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/company_benefits/{}",
+                crate::progenitor_support::encode_path(company_benefit_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get an employee's benefits.
      *
@@ -183,14 +247,23 @@ impl Benefits {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
-        let url = format!(
-            "/v1/employees/{}/employee_benefits",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/employee_benefits",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get an employee's benefits.
      *
@@ -206,14 +279,23 @@ impl Benefits {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
-        let url = format!(
-            "/v1/employees/{}/employee_benefits",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/employee_benefits",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an employee benefit.
      *
@@ -226,16 +308,23 @@ impl Benefits {
         employee_id: &str,
         body: &crate::types::PostEmployeeBenefitsRequest,
     ) -> Result<crate::types::EmployeeBenefit> {
-        let url = format!(
-            "/v1/employees/{}/employee_benefits",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/employee_benefits",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Year-to-date Benefit Amounts from Different Company.
      *
@@ -248,16 +337,23 @@ impl Benefits {
         employee_id: &str,
         body: &crate::types::PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/v1/employees/{}/ytd_benefit_amounts_from_different_company",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/ytd_benefit_amounts_from_different_company",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get an employee benefit.
      *
@@ -269,14 +365,23 @@ impl Benefits {
         &self,
         employee_benefit_id: &str,
     ) -> Result<crate::types::EmployeeBenefit> {
-        let url = format!(
-            "/v1/employee_benefits/{}",
-            crate::progenitor_support::encode_path(employee_benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employee_benefits/{}",
+                crate::progenitor_support::encode_path(employee_benefit_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an employee benefit.
      *
@@ -289,16 +394,23 @@ impl Benefits {
         employee_benefit_id: &str,
         body: &crate::types::PutEmployeeBenefitRequest,
     ) -> Result<crate::types::EmployeeBenefit> {
-        let url = format!(
-            "/v1/employee_benefits/{}",
-            crate::progenitor_support::encode_path(employee_benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employee_benefits/{}",
+                crate::progenitor_support::encode_path(employee_benefit_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete an employee benefit.
      *
@@ -307,11 +419,21 @@ impl Benefits {
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
     pub async fn delete_employee(&self, employee_benefit_id: &str) -> Result<()> {
-        let url = format!(
-            "/v1/employee_benefits/{}",
-            crate::progenitor_support::encode_path(employee_benefit_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employee_benefits/{}",
+                crate::progenitor_support::encode_path(employee_benefit_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

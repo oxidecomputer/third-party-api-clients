@@ -81,14 +81,23 @@ impl Users {
             query_args.push(("viewType".to_string(), view_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/directory/v1/users?{}", query_);
-
-        let resp: crate::types::Users = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/admin/directory/v1/users?{}", query_), None);
+        let resp: crate::types::Users = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.users.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
      *
@@ -137,9 +146,19 @@ impl Users {
             query_args.push(("viewType".to_string(), view_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/directory/v1/users?{}", query_);
-
-        let mut resp: crate::types::Users = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/admin/directory/v1/users?{}", query_), None);
+        let mut resp: crate::types::Users = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut users = resp.users;
         let mut page = resp.next_page_token;
@@ -149,12 +168,24 @@ impl Users {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -170,19 +201,23 @@ impl Users {
         // Return our response data.
         Ok(users)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users` endpoint.
      *
      * Creates a user.
      */
     pub async fn insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
-        let url = "/admin/directory/v1/users".to_string();
+        let url = self.client.url("/admin/directory/v1/users", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/watch` endpoint.
      *
@@ -253,13 +288,19 @@ impl Users {
             query_args.push(("viewType".to_string(), view_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/directory/v1/users/watch?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/directory/v1/users/watch?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -286,15 +327,24 @@ impl Users {
             query_args.push(("viewType".to_string(), view_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/users/{}?{}",
-            crate::progenitor_support::encode_path(user_key),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}?{}",
+                crate::progenitor_support::encode_path(user_key),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -309,16 +359,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::User,
     ) -> Result<crate::types::User> {
-        let url = format!(
-            "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -329,14 +386,23 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn delete(&self, user_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}` endpoint.
      *
@@ -351,16 +417,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::User,
     ) -> Result<crate::types::User> {
-        let url = format!(
-            "/admin/directory/v1/users/{}",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
      *
@@ -381,15 +454,24 @@ impl Users {
             query_args.push(("event".to_string(), event.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/users/{}/aliases?{}",
-            crate::progenitor_support::encode_path(user_key),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/aliases?{}",
+                crate::progenitor_support::encode_path(user_key),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases` endpoint.
      *
@@ -404,16 +486,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::Alias,
     ) -> Result<crate::types::Alias> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/aliases",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/aliases",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/aliases/watch` endpoint.
      *
@@ -435,17 +524,24 @@ impl Users {
             query_args.push(("event".to_string(), event.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/users/{}/aliases/watch?{}",
-            crate::progenitor_support::encode_path(user_key),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/aliases/watch?{}",
+                crate::progenitor_support::encode_path(user_key),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/aliases/{alias}` endpoint.
      *
@@ -457,15 +553,24 @@ impl Users {
      * * `alias: &str` -- The alias to be removed.
      */
     pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/aliases/{}",
-            crate::progenitor_support::encode_path(user_key),
-            crate::progenitor_support::encode_path(alias),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/aliases/{}",
+                crate::progenitor_support::encode_path(user_key),
+                crate::progenitor_support::encode_path(alias),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/makeAdmin` endpoint.
      *
@@ -480,16 +585,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::UserMakeAdmin,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/makeAdmin",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/makeAdmin",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -500,14 +612,23 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_get(&self, user_key: &str) -> Result<crate::types::UserPhoto> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/photos/thumbnail",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -522,16 +643,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::UserPhoto,
     ) -> Result<crate::types::UserPhoto> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/photos/thumbnail",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -542,14 +670,23 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn photos_delete(&self, user_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/photos/thumbnail",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/users/{userKey}/photos/thumbnail` endpoint.
      *
@@ -564,16 +701,23 @@ impl Users {
         user_key: &str,
         body: &crate::types::UserPhoto,
     ) -> Result<crate::types::UserPhoto> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/photos/thumbnail",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/photos/thumbnail",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/signOut` endpoint.
      *
@@ -584,14 +728,23 @@ impl Users {
      * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn sign_out(&self, user_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/signOut",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/signOut",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/users/{userKey}/undelete` endpoint.
      *
@@ -602,13 +755,21 @@ impl Users {
      * * `user_key: &str` -- The immutable id of the user.
      */
     pub async fn undelete(&self, user_key: &str, body: &crate::types::UserUndelete) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/users/{}/undelete",
-            crate::progenitor_support::encode_path(user_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/users/{}/undelete",
+                crate::progenitor_support::encode_path(user_key),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

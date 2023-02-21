@@ -27,15 +27,24 @@ impl Members {
         group_key: &str,
         member_key: &str,
     ) -> Result<crate::types::MembersHasMember> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/hasMember/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/hasMember/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(member_key),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
      *
@@ -74,18 +83,28 @@ impl Members {
             query_args.push(("roles".to_string(), roles.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_key),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members?{}",
+                crate::progenitor_support::encode_path(group_key),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::Members = self.client.get(&url, None).await?;
+        let resp: crate::types::Members = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.members.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
      *
@@ -110,13 +129,24 @@ impl Members {
             query_args.push(("roles".to_string(), roles.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_key),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members?{}",
+                crate::progenitor_support::encode_path(group_key),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::Members = self.client.get(&url, None).await?;
+        let mut resp: crate::types::Members = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -126,12 +156,24 @@ impl Members {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -147,7 +189,6 @@ impl Members {
         // Return our response data.
         Ok(members)
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
      *
@@ -162,16 +203,23 @@ impl Members {
         group_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members",
-            crate::progenitor_support::encode_path(group_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members",
+                crate::progenitor_support::encode_path(group_key),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
      *
@@ -183,15 +231,24 @@ impl Members {
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn get(&self, group_key: &str, member_key: &str) -> Result<crate::types::Member> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(member_key),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
      *
@@ -208,17 +265,24 @@ impl Members {
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(member_key),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
      *
@@ -230,15 +294,24 @@ impl Members {
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn delete(&self, group_key: &str, member_key: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(member_key),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
      *
@@ -255,14 +328,22 @@ impl Members {
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/groups/{}/members/{}",
+                crate::progenitor_support::encode_path(group_key),
+                crate::progenitor_support::encode_path(member_key),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -45,14 +45,21 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
-
-        let resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
+        let resp: crate::types::ListFoldersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.folders.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v2/folders` endpoint.
      *
@@ -73,9 +80,17 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
-
-        let mut resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
+        let mut resp: crate::types::ListFoldersResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut folders = resp.folders;
         let mut page = resp.next_page_token;
@@ -85,12 +100,24 @@ impl Folders {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -106,7 +133,6 @@ impl Folders {
         // Return our response data.
         Ok(folders)
     }
-
     /**
      * This function performs a `POST` to the `/v2/folders` endpoint.
      *
@@ -126,13 +152,17 @@ impl Folders {
             query_args.push(("parent".to_string(), parent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2/folders?{}", query_);
-
+        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/folders:search` endpoint.
      *
@@ -142,16 +172,21 @@ impl Folders {
         &self,
         body: &crate::types::SearchFoldersRequest,
     ) -> Result<Vec<crate::types::Folder>> {
-        let url = "/v2/folders:search".to_string();
+        let url = self.client.url("/v2/folders:search", None);
         let resp: crate::types::SearchFoldersResponse = self
             .client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await?;
 
         // Return our response data.
         Ok(resp.folders.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v2/{name}` endpoint.
      *
@@ -162,11 +197,20 @@ impl Folders {
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
-        let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v2/{name}` endpoint.
      *
@@ -177,11 +221,20 @@ impl Folders {
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
-        let url = format!("/v2/{}", crate::progenitor_support::encode_path(name),);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/v2/{name}` endpoint.
      *
@@ -203,17 +256,24 @@ impl Folders {
             query_args.push(("updateMask".to_string(), update_mask.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2/{}?{}",
-            crate::progenitor_support::encode_path(name),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2/{}?{}",
+                crate::progenitor_support::encode_path(name),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{name}:move` endpoint.
      *
@@ -228,13 +288,20 @@ impl Folders {
         name: &str,
         body: &crate::types::MoveFolderRequest,
     ) -> Result<crate::types::Operation> {
-        let url = format!("/v2/{}/move", crate::progenitor_support::encode_path(name),);
-
+        let url = self.client.url(
+            &format!("/v2/{}/move", crate::progenitor_support::encode_path(name),),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{name}:undelete` endpoint.
      *
@@ -249,16 +316,23 @@ impl Folders {
         name: &str,
         body: &crate::types::MoveProjectMetadata,
     ) -> Result<crate::types::Folder> {
-        let url = format!(
-            "/v2/{}/undelete",
-            crate::progenitor_support::encode_path(name),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/undelete",
+                crate::progenitor_support::encode_path(name),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:getIamPolicy` endpoint.
      *
@@ -273,16 +347,23 @@ impl Folders {
         resource: &str,
         body: &crate::types::GetIamPolicyRequest,
     ) -> Result<crate::types::Policy> {
-        let url = format!(
-            "/v2/{}/getIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/getIamPolicy",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:setIamPolicy` endpoint.
      *
@@ -297,16 +378,23 @@ impl Folders {
         resource: &str,
         body: &crate::types::SetIamPolicyRequest,
     ) -> Result<crate::types::Policy> {
-        let url = format!(
-            "/v2/{}/setIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/setIamPolicy",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/v2/{resource}:testIamPermissions` endpoint.
      *
@@ -321,13 +409,21 @@ impl Folders {
         resource: &str,
         body: &crate::types::TestIamPermissionsRequest,
     ) -> Result<crate::types::TestIamPermissionsResponse> {
-        let url = format!(
-            "/v2/{}/testIamPermissions",
-            crate::progenitor_support::encode_path(resource),
+        let url = self.client.url(
+            &format!(
+                "/v2/{}/testIamPermissions",
+                crate::progenitor_support::encode_path(resource),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

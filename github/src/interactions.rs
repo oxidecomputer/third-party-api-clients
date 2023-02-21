@@ -29,14 +29,23 @@ impl Interactions {
         &self,
         org: &str,
     ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
-        let url = format!(
-            "/orgs/{}/interaction-limits",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/interaction-limits",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set interaction restrictions for an organization.
      *
@@ -55,16 +64,23 @@ impl Interactions {
         org: &str,
         body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimits> {
-        let url = format!(
-            "/orgs/{}/interaction-limits",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/interaction-limits",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove interaction restrictions for an organization.
      *
@@ -79,14 +95,23 @@ impl Interactions {
      * * `org: &str`
      */
     pub async fn remove_restrictions_for_org(&self, org: &str) -> Result<()> {
-        let url = format!(
-            "/orgs/{}/interaction-limits",
-            crate::progenitor_support::encode_path(org),
+        let url = self.client.url(
+            &format!(
+                "/orgs/{}/interaction-limits",
+                crate::progenitor_support::encode_path(org),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get interaction restrictions for a repository.
      *
@@ -106,15 +131,24 @@ impl Interactions {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
-        let url = format!(
-            "/repos/{}/{}/interaction-limits",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/interaction-limits",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set interaction restrictions for a repository.
      *
@@ -135,17 +169,24 @@ impl Interactions {
         repo: &str,
         body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimits> {
-        let url = format!(
-            "/repos/{}/{}/interaction-limits",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/interaction-limits",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove interaction restrictions for a repository.
      *
@@ -161,15 +202,24 @@ impl Interactions {
      * * `repo: &str`
      */
     pub async fn remove_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<()> {
-        let url = format!(
-            "/repos/{}/{}/interaction-limits",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/interaction-limits",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get interaction restrictions for your public repositories.
      *
@@ -182,10 +232,17 @@ impl Interactions {
     pub async fn get_restrictions_for_authenticated_user(
         &self,
     ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
-        let url = "/user/interaction-limits".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/interaction-limits", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Set interaction restrictions for your public repositories.
      *
@@ -199,12 +256,17 @@ impl Interactions {
         &self,
         body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimits> {
-        let url = "/user/interaction-limits".to_string();
+        let url = self.client.url("/user/interaction-limits", None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove interaction restrictions from your public repositories.
      *
@@ -215,7 +277,15 @@ impl Interactions {
      * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories>
      */
     pub async fn remove_restrictions_for_authenticated_user(&self) -> Result<()> {
-        let url = "/user/interaction-limits".to_string();
-        self.client.delete(&url, None).await
+        let url = self.client.url("/user/interaction-limits", None);
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

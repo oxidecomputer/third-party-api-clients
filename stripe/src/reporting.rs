@@ -43,15 +43,23 @@ impl Reporting {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/reporting/report_runs?{}", query_);
-
-        let resp: crate::types::GetReportingReportRunsResponse =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/reporting/report_runs?{}", query_), None);
+        let resp: crate::types::GetReportingReportRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_runs` endpoint.
      *
@@ -63,9 +71,17 @@ impl Reporting {
         &self,
         _created: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
-        let url = "/v1/reporting/report_runs".to_string();
-        let mut resp: crate::types::GetReportingReportRunsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/reporting/report_runs", None);
+        let mut resp: crate::types::GetReportingReportRunsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -86,12 +102,24 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -103,17 +131,23 @@ impl Reporting {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/reporting/report_runs` endpoint.
      *
      * <p>Creates a new object and begin running the report. (Certain report types require a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
      */
     pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
-        let url = "/v1/reporting/report_runs".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/reporting/report_runs", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_runs/{report_run}` endpoint.
      *
@@ -128,14 +162,23 @@ impl Reporting {
         &self,
         report_run: &str,
     ) -> Result<crate::types::ReportingReportRun> {
-        let url = format!(
-            "/v1/reporting/report_runs/{}",
-            crate::progenitor_support::encode_path(report_run),
+        let url = self.client.url(
+            &format!(
+                "/v1/reporting/report_runs/{}",
+                crate::progenitor_support::encode_path(report_run),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
      *
@@ -146,14 +189,21 @@ impl Reporting {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
     pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
-        let url = "/v1/reporting/report_types".to_string();
-        let resp: crate::types::FinancialReportingFinanceReportTypeList =
-            self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/reporting/report_types", None);
+        let resp: crate::types::FinancialReportingFinanceReportTypeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
      *
@@ -162,9 +212,17 @@ impl Reporting {
      * <p>Returns a full list of Report Types.</p>
      */
     pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
-        let url = "/v1/reporting/report_types".to_string();
-        let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
-            self.client.get(&url, None).await?;
+        let url = self.client.url("/v1/reporting/report_types", None);
+        let mut resp: crate::types::FinancialReportingFinanceReportTypeList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -185,12 +243,24 @@ impl Reporting {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -202,7 +272,6 @@ impl Reporting {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/reporting/report_types/{report_type}` endpoint.
      *
@@ -217,11 +286,21 @@ impl Reporting {
         &self,
         report_type: &str,
     ) -> Result<crate::types::ReportingReportType> {
-        let url = format!(
-            "/v1/reporting/report_types/{}",
-            crate::progenitor_support::encode_path(report_type),
+        let url = self.client.url(
+            &format!(
+                "/v1/reporting/report_types/{}",
+                crate::progenitor_support::encode_path(report_type),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

@@ -48,11 +48,17 @@ impl Devices {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/h323/devices?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/h323/devices?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a H.323/SIP device.
      *
@@ -64,12 +70,17 @@ impl Devices {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
      */
     pub async fn create(&self, body: &crate::types::Device) -> Result<()> {
-        let url = "/h323/devices".to_string();
+        let url = self.client.url("/h323/devices", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a H.323/SIP device.
      *
@@ -85,14 +96,23 @@ impl Devices {
      * * `device_id: &str` -- User's first name.
      */
     pub async fn delete(&self, device_id: &str) -> Result<()> {
-        let url = format!(
-            "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/h323/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a H.323/SIP device.
      *
@@ -108,13 +128,21 @@ impl Devices {
      * * `device_id: &str` -- User's first name.
      */
     pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
-        let url = format!(
-            "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+        let url = self.client.url(
+            &format!(
+                "/h323/devices/{}",
+                crate::progenitor_support::encode_path(device_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

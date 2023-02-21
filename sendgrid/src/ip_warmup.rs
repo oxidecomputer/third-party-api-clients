@@ -20,10 +20,17 @@ impl IpWarmup {
      * **This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**
      */
     pub async fn get_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
-        let url = "/ips/warmup".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/ips/warmup", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all IPs currently in warmup.
      *
@@ -34,10 +41,17 @@ impl IpWarmup {
      * **This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**
      */
     pub async fn get_all_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
-        let url = "/ips/warmup".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/ips/warmup", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Start warming up an IP address.
      *
@@ -49,12 +63,17 @@ impl IpWarmup {
         &self,
         body: &crate::types::PostIpsWarmupRequest,
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
-        let url = "/ips/warmup".to_string();
+        let url = self.client.url("/ips/warmup", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve the warmup status for a specific IP address.
      *
@@ -68,14 +87,23 @@ impl IpWarmup {
         &self,
         ip_address: &str,
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
-        let url = format!(
-            "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+        let url = self.client.url(
+            &format!(
+                "/ips/warmup/{}",
+                crate::progenitor_support::encode_path(ip_address),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve the warmup status for a specific IP address.
      *
@@ -91,14 +119,23 @@ impl IpWarmup {
         &self,
         ip_address: &str,
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
-        let url = format!(
-            "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+        let url = self.client.url(
+            &format!(
+                "/ips/warmup/{}",
+                crate::progenitor_support::encode_path(ip_address),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Stop warming up an IP address.
      *
@@ -112,11 +149,21 @@ impl IpWarmup {
         &self,
         ip_address: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(ip_address),
+        let url = self.client.url(
+            &format!(
+                "/ips/warmup/{}",
+                crate::progenitor_support::encode_path(ip_address),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

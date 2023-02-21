@@ -58,11 +58,19 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -89,13 +97,19 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/reports.json?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -118,15 +132,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -143,16 +166,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -168,14 +198,23 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -222,11 +261,19 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -253,13 +300,19 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/reports.json?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -282,15 +335,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -307,16 +369,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -332,14 +401,23 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -386,11 +464,19 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -417,13 +503,19 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/reports.json?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -446,15 +538,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -471,16 +572,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -496,14 +604,23 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -550,11 +667,19 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -581,13 +706,19 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/reports.json?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -606,15 +737,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -631,16 +771,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -653,14 +800,23 @@ impl Analytics {
      * * `report_id: &str` -- storefront_access_token_id.
      */
     pub async fn delete_reports_param_report(&self, report_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -707,11 +863,19 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -738,13 +902,19 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/reports.json?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -767,15 +937,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -792,16 +971,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -817,14 +1003,23 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of reports. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -871,11 +1066,20 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/reports.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/reports.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new report.
      *
@@ -902,13 +1106,20 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/reports.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/unstable/reports.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a single report created by your app.
      *
@@ -931,15 +1142,24 @@ impl Analytics {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(report_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json?{}",
+                crate::progenitor_support::encode_path(report_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a report.
      *
@@ -956,16 +1176,23 @@ impl Analytics {
         report_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Deletes a report.
      *
@@ -981,11 +1208,21 @@ impl Analytics {
         &self,
         report_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(report_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/reports/{}/json",
+                crate::progenitor_support::encode_path(report_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

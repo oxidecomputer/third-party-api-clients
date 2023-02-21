@@ -57,14 +57,23 @@ impl RoomsLocation {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/locations?{}", query_);
-
-        let resp: crate::types::ListZrLocationsResponseData = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/rooms/locations?{}", query_), None);
+        let resp: crate::types::ListZrLocationsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.locations.to_vec())
     }
-
     /**
      * List Zoom Room locations.
      *
@@ -96,10 +105,19 @@ impl RoomsLocation {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/rooms/locations?{}", query_);
-
-        let mut resp: crate::types::ListZrLocationsResponseData =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/rooms/locations?{}", query_), None);
+        let mut resp: crate::types::ListZrLocationsResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut locations = resp.locations;
         let mut page = resp.next_page_token;
@@ -110,12 +128,24 @@ impl RoomsLocation {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -131,7 +161,6 @@ impl RoomsLocation {
         // Return our response data.
         Ok(locations)
     }
-
     /**
      * Add a location.
      *
@@ -151,12 +180,17 @@ impl RoomsLocation {
         &self,
         body: &crate::types::AddAzrLocationRequest,
     ) -> Result<crate::types::AddAzrLocationResponse> {
-        let url = "/rooms/locations".to_string();
+        let url = self.client.url("/rooms/locations", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get Zoom Room location profile.
      *
@@ -179,14 +213,23 @@ impl RoomsLocation {
         &self,
         location_id: &str,
     ) -> Result<crate::types::GetZrLocationProfileResponse> {
-        let url = format!(
-            "/rooms/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Zoom Room location profile.
      *
@@ -211,16 +254,23 @@ impl RoomsLocation {
         location_id: &str,
         body: &crate::types::GetZrLocationProfileResponse,
     ) -> Result<()> {
-        let url = format!(
-            "/rooms/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/locations/{}",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get location settings.
      *
@@ -250,15 +300,24 @@ impl RoomsLocation {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/rooms/locations/{}/settings?{}",
-            crate::progenitor_support::encode_path(location_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/rooms/locations/{}/settings?{}",
+                crate::progenitor_support::encode_path(location_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update location settings.
      *
@@ -288,15 +347,24 @@ impl RoomsLocation {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/rooms/locations/{}/settings?{}",
-            crate::progenitor_support::encode_path(location_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/rooms/locations/{}/settings?{}",
+                crate::progenitor_support::encode_path(location_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.patch(&url, None).await
+        self.client
+            .patch(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * Get Zoom Room location structure.
      *
@@ -312,10 +380,17 @@ impl RoomsLocation {
     pub async fn get_zr_location_structure(
         &self,
     ) -> Result<crate::types::GetZrLocationStructureResponse> {
-        let url = "/rooms/locations/structure".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/rooms/locations/structure", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Zoom Rooms location structure.
      *
@@ -332,12 +407,17 @@ impl RoomsLocation {
         &self,
         body: &crate::types::GetZrLocationStructureResponse,
     ) -> Result<()> {
-        let url = "/rooms/locations/structure".to_string();
+        let url = self.client.url("/rooms/locations/structure", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Change the assigned parent location.
      *
@@ -359,13 +439,21 @@ impl RoomsLocation {
         location_id: &str,
         body: &crate::types::ChangeParentLocationRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/rooms/locations/{}/location",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/rooms/locations/{}/location",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

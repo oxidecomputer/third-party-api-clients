@@ -46,14 +46,23 @@ impl SubscriptionItems {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_items?{}", query_);
-
-        let resp: crate::types::Items = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_items?{}", query_), None);
+        let resp: crate::types::Items = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_items` endpoint.
      *
@@ -67,9 +76,19 @@ impl SubscriptionItems {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/subscription_items?{}", query_);
-
-        let mut resp: crate::types::Items = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/subscription_items?{}", query_), None);
+        let mut resp: crate::types::Items = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -90,12 +109,24 @@ impl SubscriptionItems {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -107,17 +138,23 @@ impl SubscriptionItems {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_items` endpoint.
      *
      * <p>Adds a new item to an existing subscription. No existing items will be changed or replaced.</p>
      */
     pub async fn post(&self) -> Result<crate::types::SubscriptionItem> {
-        let url = "/v1/subscription_items".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/subscription_items", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_items/{item}` endpoint.
      *
@@ -129,14 +166,23 @@ impl SubscriptionItems {
      * * `item: &str` -- The account's country.
      */
     pub async fn get_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
-        let url = format!(
-            "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_items/{item}` endpoint.
      *
@@ -147,14 +193,23 @@ impl SubscriptionItems {
      * * `item: &str` -- The account's country.
      */
     pub async fn post_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
-        let url = format!(
-            "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/subscription_items/{item}` endpoint.
      *
@@ -165,14 +220,23 @@ impl SubscriptionItems {
      * * `item: &str` -- The account's country.
      */
     pub async fn delete_item(&self, item: &str) -> Result<crate::types::DeletedSubscriptionItem> {
-        let url = format!(
-            "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_items/{subscription_item}/usage_record_summaries` endpoint.
      *
@@ -206,19 +270,28 @@ impl SubscriptionItems {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/subscription_items/{}/usage_record_summaries?{}",
-            crate::progenitor_support::encode_path(subscription_item),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}/usage_record_summaries?{}",
+                crate::progenitor_support::encode_path(subscription_item),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/subscription_items/{subscription_item}/usage_record_summaries` endpoint.
      *
@@ -232,13 +305,23 @@ impl SubscriptionItems {
         &self,
         subscription_item: &str,
     ) -> Result<Vec<crate::types::UsageRecordSummary>> {
-        let url = format!(
-            "/v1/subscription_items/{}/usage_record_summaries",
-            crate::progenitor_support::encode_path(subscription_item),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}/usage_record_summaries",
+                crate::progenitor_support::encode_path(subscription_item),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
-            self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -259,12 +342,24 @@ impl SubscriptionItems {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -276,7 +371,6 @@ impl SubscriptionItems {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/subscription_items/{subscription_item}/usage_records` endpoint.
      *
@@ -296,11 +390,21 @@ impl SubscriptionItems {
         &self,
         subscription_item: &str,
     ) -> Result<crate::types::UsageRecord> {
-        let url = format!(
-            "/v1/subscription_items/{}/usage_records",
-            crate::progenitor_support::encode_path(subscription_item),
+        let url = self.client.url(
+            &format!(
+                "/v1/subscription_items/{}/usage_records",
+                crate::progenitor_support::encode_path(subscription_item),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

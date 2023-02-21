@@ -48,14 +48,21 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
-
-        let resp: crate::types::DriveList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/drives?{}", query_), None);
+        let resp: crate::types::DriveList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.drives.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/drives` endpoint.
      *
@@ -79,9 +86,17 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
-
-        let mut resp: crate::types::DriveList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/drives?{}", query_), None);
+        let mut resp: crate::types::DriveList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut drives = resp.drives;
         let mut page = resp.next_page_token;
@@ -91,12 +106,24 @@ impl Drives {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -112,7 +139,6 @@ impl Drives {
         // Return our response data.
         Ok(drives)
     }
-
     /**
      * This function performs a `POST` to the `/drives` endpoint.
      *
@@ -132,13 +158,17 @@ impl Drives {
             query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/drives?{}", query_);
-
+        let url = self.client.url(&format!("/drives?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/drives/{driveId}` endpoint.
      *
@@ -162,15 +192,24 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/drives/{}?{}",
+                crate::progenitor_support::encode_path(drive_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/drives/{driveId}` endpoint.
      *
@@ -181,14 +220,23 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, drive_id: &str) -> Result<()> {
-        let url = format!(
-            "/drives/{}",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/drives/{driveId}` endpoint.
      *
@@ -213,17 +261,24 @@ impl Drives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/drives/{}?{}",
+                crate::progenitor_support::encode_path(drive_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/drives/{driveId}/hide` endpoint.
      *
@@ -234,14 +289,23 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
-        let url = format!(
-            "/drives/{}/hide",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}/hide",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/drives/{driveId}/unhide` endpoint.
      *
@@ -252,11 +316,21 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
-        let url = format!(
-            "/drives/{}/unhide",
-            crate::progenitor_support::encode_path(drive_id),
+        let url = self.client.url(
+            &format!(
+                "/drives/{}/unhide",
+                crate::progenitor_support::encode_path(drive_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

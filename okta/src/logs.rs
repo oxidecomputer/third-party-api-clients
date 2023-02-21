@@ -62,11 +62,17 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/logs?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Fetch a list of events from your Okta organization system log.
      *
@@ -101,8 +107,15 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/logs?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

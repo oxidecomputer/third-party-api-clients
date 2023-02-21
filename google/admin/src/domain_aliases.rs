@@ -35,15 +35,24 @@ impl DomainAliases {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases?{}",
-            crate::progenitor_support::encode_path(customer),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases?{}",
+                crate::progenitor_support::encode_path(customer),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
      *
@@ -58,16 +67,23 @@ impl DomainAliases {
         customer: &str,
         body: &crate::types::DomainAlias,
     ) -> Result<crate::types::DomainAlias> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases",
-            crate::progenitor_support::encode_path(customer),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases",
+                crate::progenitor_support::encode_path(customer),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
      *
@@ -83,15 +99,24 @@ impl DomainAliases {
         customer: &str,
         domain_alias_name: &str,
     ) -> Result<crate::types::DomainAlias> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_alias_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_alias_name),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
      *
@@ -103,12 +128,22 @@ impl DomainAliases {
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
     pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
-        let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_alias_name),
+        let url = self.client.url(
+            &format!(
+                "/admin/directory/v1/customer/{}/domainaliases/{}",
+                crate::progenitor_support::encode_path(customer),
+                crate::progenitor_support::encode_path(domain_alias_name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

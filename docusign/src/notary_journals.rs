@@ -42,8 +42,18 @@ impl NotaryJournals {
             query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v2.1/current_user/notary/journals?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/v2.1/current_user/notary/journals?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

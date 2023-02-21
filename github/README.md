@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-octorust = "0.2.2"
+octorust = "0.3.0"
 ```
 
 ## Basic example
@@ -45,7 +45,7 @@ octorust = "0.2.2"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of `auth::Credentials`.
 
-```
+```rust
 use octorust::{auth::Credentials, Client};
 
 let github = Client::new(
@@ -57,7 +57,7 @@ let github = Client::new(
 ```
 
 If you are a GitHub enterprise customer, you will want to create a client with the
-[Client#host](https://docs.rs/octorust/0.2.2/octorust/struct.Client.html#method.host) method.
+[Client#host_override](https://docs.rs/octorust/0.3.0/octorust/struct.Client.html#method.host_override) method.
 
 ## Feature flags
 
@@ -71,14 +71,14 @@ To enable this, add the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-octorust = { version = "0.2.2", features = ["httpcache"] }
+octorust = { version = "0.3.0", features = ["httpcache"] }
 ```
 
 Then use the `Client::custom` constructor to provide a cache implementation.
 
 Here is an example:
 
-```
+```rust
 use octorust::{auth::Credentials, Client};
 #[cfg(feature = "httpcache")]
 use octorust::http_cache::HttpCache;
@@ -88,7 +88,6 @@ let http_cache = HttpCache::in_home_dir();
 
 #[cfg(not(feature = "httpcache"))]
 let github = Client::custom(
-    "https://api.github.com",
     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
     Credentials::Token(
       String::from("personal-access-token")
@@ -98,7 +97,6 @@ let github = Client::custom(
 
 #[cfg(feature = "httpcache")]
 let github = Client::custom(
-    "https://api.github.com",
     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
     Credentials::Token(
       String::from("personal-access-token")
@@ -147,7 +145,6 @@ let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 
 #[cfg(not(feature = "httpcache"))]
 let github = Client::custom(
-    "https://api.github.com",
     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
     Credentials::InstallationToken(token_generator),
     reqwest::Client::builder().build().unwrap(),
@@ -155,7 +152,6 @@ let github = Client::custom(
 
 #[cfg(feature = "httpcache")]
 let github = Client::custom(
-    "https://api.github.com",
     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
     Credentials::InstallationToken(token_generator),
     reqwest::Client::builder().build().unwrap(),

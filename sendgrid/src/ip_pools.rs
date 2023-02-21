@@ -20,10 +20,17 @@ impl IpPools {
      * **This endpoint allows you to get all of your IP pools.**
      */
     pub async fn get_ips_pools(&self) -> Result<Vec<crate::types::IpPoolsPoolResp>> {
-        let url = "/ips/pools".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/ips/pools", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all IP pools.
      *
@@ -34,10 +41,17 @@ impl IpPools {
      * **This endpoint allows you to get all of your IP pools.**
      */
     pub async fn get_all_ips_pools(&self) -> Result<Vec<crate::types::IpPoolsPoolResp>> {
-        let url = "/ips/pools".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/ips/pools", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an IP pool.
      *
@@ -57,12 +71,17 @@ impl IpPools {
         &self,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::IpPoolsPoolResp> {
-        let url = "/ips/pools".to_string();
+        let url = self.client.url("/ips/pools", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Add an IP address to a pool.
      *
@@ -87,16 +106,23 @@ impl IpPools {
         pool_name: &str,
         body: &crate::types::PostIpsWarmupRequest,
     ) -> Result<crate::types::GetIpsAssignedResponse> {
-        let url = format!(
-            "/ips/pools/{}/ips",
-            crate::progenitor_support::encode_path(pool_name),
+        let url = self.client.url(
+            &format!(
+                "/ips/pools/{}/ips",
+                crate::progenitor_support::encode_path(pool_name),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve all the IPs in a specified pool.
      *
@@ -108,14 +134,23 @@ impl IpPools {
         &self,
         pool_name: &str,
     ) -> Result<crate::types::GetIpsPoolsPoolNameResponse> {
-        let url = format!(
-            "/ips/pools/{}",
-            crate::progenitor_support::encode_path(pool_name),
+        let url = self.client.url(
+            &format!(
+                "/ips/pools/{}",
+                crate::progenitor_support::encode_path(pool_name),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Rename an IP pool.
      *
@@ -128,16 +163,23 @@ impl IpPools {
         pool_name: &str,
         body: &crate::types::PutIpsPoolsPoolNameRequest,
     ) -> Result<crate::types::IpPoolsPoolResp> {
-        let url = format!(
-            "/ips/pools/{}",
-            crate::progenitor_support::encode_path(pool_name),
+        let url = self.client.url(
+            &format!(
+                "/ips/pools/{}",
+                crate::progenitor_support::encode_path(pool_name),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete an IP pool.
      *
@@ -146,14 +188,23 @@ impl IpPools {
      * **This endpoint allows you to delete an IP pool.**
      */
     pub async fn delete_ips_pools_pool_name(&self, pool_name: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/ips/pools/{}",
-            crate::progenitor_support::encode_path(pool_name),
+        let url = self.client.url(
+            &format!(
+                "/ips/pools/{}",
+                crate::progenitor_support::encode_path(pool_name),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Remove an IP address from a pool.
      *
@@ -166,12 +217,22 @@ impl IpPools {
         pool_name: &str,
         ip: &str,
     ) -> Result<crate::types::Help> {
-        let url = format!(
-            "/ips/pools/{}/ips/{}",
-            crate::progenitor_support::encode_path(pool_name),
-            crate::progenitor_support::encode_path(ip),
+        let url = self.client.url(
+            &format!(
+                "/ips/pools/{}/ips/{}",
+                crate::progenitor_support::encode_path(pool_name),
+                crate::progenitor_support::encode_path(ip),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

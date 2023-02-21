@@ -34,11 +34,19 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sso/integrations?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/sso/integrations?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get All SSO Integrations.
      *
@@ -59,11 +67,19 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/sso/integrations?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/sso/integrations?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an SSO Integration.
      *
@@ -75,12 +91,17 @@ impl SingleSignOnSettings {
         &self,
         body: &crate::types::CreateIntegrationRequest,
     ) -> Result<crate::types::SsoIntegrationAllOf> {
-        let url = "/sso/integrations".to_string();
+        let url = self.client.url("/sso/integrations", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get an SSO Integration.
      *
@@ -104,15 +125,24 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete an SSO Integration.
      *
@@ -123,14 +153,23 @@ impl SingleSignOnSettings {
      * You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
      */
     pub async fn delete_sso_integrations(&self, id: &str) -> Result<()> {
-        let url = format!(
-            "/sso/integrations/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update an SSO Integration.
      *
@@ -155,14 +194,22 @@ impl SingleSignOnSettings {
             query_args.push(("si".to_string(), si.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/sso/integrations/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

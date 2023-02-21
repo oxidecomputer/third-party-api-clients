@@ -79,11 +79,17 @@ impl Query {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/messages?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/messages?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Filter messages by message ID.
      *
@@ -98,11 +104,21 @@ impl Query {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_messages_msg(&self, msg_id: &str) -> Result<crate::types::Message> {
-        let url = format!(
-            "/messages/{}",
-            crate::progenitor_support::encode_path(msg_id),
+        let url = self.client.url(
+            &format!(
+                "/messages/{}",
+                crate::progenitor_support::encode_path(msg_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }
