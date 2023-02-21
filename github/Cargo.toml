@@ -45,6 +45,8 @@ tokio = { version = "1.25.0", features = ["full"] }
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
+rand = "0.8.5"
+rsa = "0.8.1"
 tokio = { version = "1.25.0", features = ["test-util"] }
 wiremock = "0.5.17"
 

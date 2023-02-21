@@ -2301,8 +2301,6 @@ fn gen(
     {
         a("pub mod traits;");
     }
-    a("#[cfg(test)]");
-    a("mod tests;");
     // Hopefully there is never a "tag" named after these reserved libs.
     a("pub mod types;");
     a("#[doc(hidden)]");
@@ -3290,6 +3288,8 @@ tokio = {{ version = "1.25.0", features = ["full"] }}
 base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
+rand = "0.8.5"
+rsa = "0.8.1"
 tokio = {{ version = "1.25.0", features = ["test-util"] }}
 wiremock = "0.5.17"
 

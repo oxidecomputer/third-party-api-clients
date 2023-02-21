@@ -110,8 +110,6 @@
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub mod groups;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

@@ -152,8 +152,6 @@ pub mod search;
 pub mod stars;
 pub mod team;
 pub mod team_profile;
-#[cfg(test)]
-mod tests;
 pub mod types;
 pub mod usergroups;
 pub mod usergroups_users;

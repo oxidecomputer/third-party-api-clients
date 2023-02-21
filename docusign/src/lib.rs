@@ -2132,8 +2132,6 @@ pub mod template_views;
 ///
 ///The resource also includes a number of methods that allow you to retrieve and set the initials and signature for certain types of recipients on the document.
 pub mod templates;
-#[cfg(test)]
-mod tests;
 pub mod types;
 /// The UserCustomSettings resource provides methods that allow you to manage the custom settings for a user.
 ///

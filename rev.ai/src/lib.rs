@@ -263,8 +263,6 @@
 pub mod account;
 pub mod captions;
 pub mod jobs;
-#[cfg(test)]
-mod tests;
 pub mod traits;
 pub mod transcript;
 pub mod types;

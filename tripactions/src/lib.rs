@@ -83,8 +83,6 @@
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub mod booking_data;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

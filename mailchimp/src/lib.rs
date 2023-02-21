@@ -126,8 +126,6 @@ pub mod search_campaigns;
 pub mod search_members;
 pub mod template_folders;
 pub mod templates;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

@@ -115,8 +115,6 @@ pub mod shipping_and_fulfillment;
 pub mod shopify_payments;
 pub mod store_properties;
 pub mod tendertransaction;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

@@ -111,8 +111,6 @@
 
 pub mod folders;
 pub mod operations;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

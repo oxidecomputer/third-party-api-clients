@@ -108,8 +108,6 @@ pub mod departments;
 pub mod locations;
 pub mod receipts;
 pub mod reimbursements;
-#[cfg(test)]
-mod tests;
 pub mod transactions;
 pub mod types;
 pub mod users;

@@ -117,8 +117,6 @@ pub mod colors;
 pub mod events;
 pub mod freebusy;
 pub mod settings;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

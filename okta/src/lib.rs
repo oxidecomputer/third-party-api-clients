@@ -87,8 +87,6 @@ pub mod policies;
 pub mod profile_mappings;
 pub mod sessions;
 pub mod templates;
-#[cfg(test)]
-mod tests;
 pub mod threat_insights;
 pub mod trusted_origins;
 pub mod types;

@@ -68,8 +68,6 @@
 
 pub mod gifs;
 pub mod stickers;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

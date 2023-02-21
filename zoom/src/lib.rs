@@ -146,8 +146,6 @@ pub mod rooms_devices;
 pub mod rooms_location;
 pub mod sip_connected_audio;
 pub mod sip_phone;
-#[cfg(test)]
-mod tests;
 pub mod tracking_field;
 pub mod tsp;
 pub mod types;

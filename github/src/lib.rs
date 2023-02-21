@@ -236,8 +236,6 @@ pub mod search;
 pub mod secret_scanning;
 /// Interact with GitHub Teams.
 pub mod teams;
-#[cfg(test)]
-mod tests;
 pub mod types;
 /// Interact with and view information about users and also current user.
 pub mod users;

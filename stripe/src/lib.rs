@@ -122,8 +122,6 @@ pub mod tax_codes;
 pub mod tax_rates;
 pub mod terminal;
 pub mod test_helpers;
-#[cfg(test)]
-mod tests;
 pub mod three_d_secure;
 pub mod tokens;
 pub mod topups;

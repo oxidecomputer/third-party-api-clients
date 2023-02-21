@@ -148,8 +148,6 @@ pub mod receiving;
 ///
 /// * If you choose to provide a requested action (it is an optional field), only provide one requested action per inventory item. So if  you have more than 1 quantity of a given item being returned within the same box, all quantities of the item have to have the same action associated with them. If you don’t provide a requested action, it will default to the action the User set for that inventory item in the ShipBob Merchant portal.
 pub mod returns;
-#[cfg(test)]
-mod tests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;

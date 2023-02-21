@@ -125,8 +125,6 @@ pub mod resources;
 pub mod role_assignments;
 pub mod roles;
 pub mod schemas;
-#[cfg(test)]
-mod tests;
 pub mod tokens;
 pub mod two_step_verification;
 pub mod types;

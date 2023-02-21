@@ -119,8 +119,6 @@ pub mod permissions;
 pub mod replies;
 pub mod revisions;
 pub mod teamdrives;
-#[cfg(test)]
-mod tests;
 pub mod traits;
 pub mod types;
 #[doc(hidden)]
