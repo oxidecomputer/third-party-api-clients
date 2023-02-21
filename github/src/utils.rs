@@ -50,7 +50,6 @@ pub fn get_header_values(
 /// See [this doc](https://developer.github.com/v3/media/) for more for more information
 #[derive(Clone, Copy)]
 pub enum MediaType {
-    Binary,
     /// Return json (the default)
     Json,
     /// Return json in preview form
@@ -66,7 +65,6 @@ impl Default for MediaType {
 impl From<MediaType> for mime::Mime {
     fn from(media: MediaType) -> mime::Mime {
         match media {
-            MediaType::Binary => "application/octet-stream".parse().unwrap(),
             MediaType::Json => "application/vnd.github.v3+json".parse().unwrap(),
             MediaType::Preview(codename) => {
                 format!("application/vnd.github.{}-preview+json", codename)
