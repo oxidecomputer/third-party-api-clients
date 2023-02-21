@@ -78,15 +78,24 @@ impl CloudRecording {
             query_args.push(("trash_type".to_string(), trash_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/recordings?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/recordings?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get meeting recordings.
      *
@@ -122,15 +131,24 @@ impl CloudRecording {
             query_args.push(("ttl".to_string(), ttl.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/recordings?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete meeting recordings.
      *
@@ -163,15 +181,24 @@ impl CloudRecording {
             query_args.push(("action".to_string(), action.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/recordings?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a meeting recording file.
      *
@@ -202,16 +229,25 @@ impl CloudRecording {
             query_args.push(("action".to_string(), action.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/recordings/{}?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            crate::progenitor_support::encode_path(recording_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/{}?{}",
+                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(recording_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Recover meeting recordings.
      *
@@ -237,16 +273,23 @@ impl CloudRecording {
         meeting_id: &str,
         body: &crate::types::RecordingStatusUpdateBodyRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/recordings/status",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/status",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Recover a single recording.
      *
@@ -273,17 +316,24 @@ impl CloudRecording {
         recording_id: &str,
         body: &crate::types::RecordingStatusUpdateBodyRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/recordings/{}/status",
-            crate::progenitor_support::encode_path(meeting_id),
-            crate::progenitor_support::encode_path(recording_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/{}/status",
+                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(recording_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get meeting recording settings.
      *
@@ -306,14 +356,23 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::RecordingSettings> {
-        let url = format!(
-            "/meetings/{}/recordings/settings",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/settings",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update meeting recording settings.
      *
@@ -337,16 +396,23 @@ impl CloudRecording {
         meeting_id: &str,
         body: &crate::types::RecordingSettings,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/recordings/settings",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/settings",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List recording registrants.
      *
@@ -395,15 +461,24 @@ impl CloudRecording {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/recordings/registrants?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/registrants?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a recording registrant.
      *
@@ -428,14 +503,23 @@ impl CloudRecording {
         &self,
         meeting_id: i64,
     ) -> Result<crate::types::MeetingRecordingRegistrantCreateResponse> {
-        let url = format!(
-            "/meetings/{}/recordings/registrants",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/registrants",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * Update registrant's status.
      *
@@ -460,16 +544,23 @@ impl CloudRecording {
         meeting_id: i64,
         body: &crate::types::RecordingRegistrantStatus,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/recordings/registrants/status",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/registrants/status",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get registration questions.
      *
@@ -495,14 +586,23 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::RecordingRegistrantQuestionsData> {
-        let url = format!(
-            "/meetings/{}/recordings/registrants/questions",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/registrants/questions",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update registration questions.
      *
@@ -528,16 +628,23 @@ impl CloudRecording {
         meeting_id: &str,
         body: &crate::types::RecordingRegistrantQuestionsData,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/recordings/registrants/questions",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/recordings/registrants/questions",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List recordings of an account.
      *
@@ -586,19 +693,28 @@ impl CloudRecording {
             query_args.push(("to".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/accounts/{}/recordings?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/recordings?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::GetAccountCloudRecordingResponse =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::GetAccountCloudRecordingResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.meetings.to_vec())
     }
-
     /**
      * List recordings of an account.
      *
@@ -633,14 +749,24 @@ impl CloudRecording {
             query_args.push(("to".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/accounts/{}/recordings?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/accounts/{}/recordings?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::GetAccountCloudRecordingResponse =
-            self.client.get(&url, None).await?;
+        let mut resp: crate::types::GetAccountCloudRecordingResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut meetings = resp.meetings;
         let mut page = resp.next_page_token;
@@ -651,12 +777,24 @@ impl CloudRecording {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 

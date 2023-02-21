@@ -24,10 +24,17 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn add(&self) -> Result<crate::types::RemindersAddSchema> {
-        let url = "/reminders.add".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/reminders.add", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/reminders.complete` endpoint.
      *
@@ -40,10 +47,17 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn complete(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/reminders.complete".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/reminders.complete", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/reminders.delete` endpoint.
      *
@@ -56,10 +70,17 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
     pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/reminders.delete".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/reminders.delete", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/reminders.info` endpoint.
      *
@@ -78,11 +99,19 @@ impl Reminders {
             query_args.push(("reminder".to_string(), reminder.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reminders.info?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/reminders.info?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/reminders.list` endpoint.
      *
@@ -95,7 +124,15 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      */
     pub async fn list(&self) -> Result<crate::types::RemindersListSchema> {
-        let url = "/reminders.list".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/reminders.list", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

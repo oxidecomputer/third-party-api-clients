@@ -29,14 +29,23 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
     ) -> Result<crate::types::ConnectConfigResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a specified Connect configuration.
      *
@@ -55,16 +64,23 @@ impl ConnectConfigurations {
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
     ) -> Result<crate::types::ConnectCustomConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Creates a connect configuration for the specified account.
      *
@@ -84,16 +100,23 @@ impl ConnectConfigurations {
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
     ) -> Result<crate::types::ConnectCustomConfiguration> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets the details about a Connect configuration.
      *
@@ -114,15 +137,24 @@ impl ConnectConfigurations {
         account_id: &str,
         connect_id: &str,
     ) -> Result<crate::types::ConnectConfigResults> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes the specified connect configuration.
      *
@@ -141,15 +173,24 @@ impl ConnectConfigurations {
      * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_delete_config(&self, account_id: &str, connect_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Returns users from the configured Connect service.
      *
@@ -216,13 +257,23 @@ impl ConnectConfigurations {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/connect/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/connect/{}/users?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(connect_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

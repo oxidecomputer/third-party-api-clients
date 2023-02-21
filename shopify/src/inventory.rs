@@ -49,11 +49,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -69,14 +78,23 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -93,16 +111,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of inventory items. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -140,11 +165,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -160,14 +194,23 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -184,16 +227,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of inventory items. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -231,11 +281,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -251,14 +310,23 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -275,16 +343,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of inventory items. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -317,11 +392,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -334,14 +418,23 @@ impl Inventory {
      * * `inventory_item_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_items_param_item(&self, inventory_item_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -358,16 +451,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of inventory items. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -405,11 +505,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -425,14 +534,23 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -449,16 +567,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of inventory items. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -496,11 +621,20 @@ impl Inventory {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_items.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_items.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single inventory item by ID.
      *
@@ -516,14 +650,23 @@ impl Inventory {
         &self,
         inventory_item_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing inventory item.
      *
@@ -540,16 +683,23 @@ impl Inventory {
         inventory_item_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_items/{}/json",
+                crate::progenitor_support::encode_path(inventory_item_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -593,11 +743,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -649,11 +808,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -700,13 +868,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels/adjust.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -754,16 +929,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -822,13 +1004,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -872,11 +1061,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -928,11 +1126,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -979,13 +1186,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels/adjust.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -1033,16 +1247,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -1101,13 +1322,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -1151,11 +1379,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -1207,11 +1444,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -1258,13 +1504,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels/adjust.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -1312,16 +1565,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -1380,13 +1640,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -1430,11 +1697,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -1486,11 +1762,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -1537,13 +1822,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels/adjust.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -1591,16 +1883,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -1659,13 +1958,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -1709,11 +2015,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -1765,11 +2080,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -1816,13 +2140,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels/adjust.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels/adjust.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -1870,16 +2201,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -1938,13 +2276,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Retrieves a list of inventory levels.
               You must include inventory_item_ids, location_ids, or both as filter parameters.
@@ -1988,11 +2333,20 @@ impl Inventory {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Deletes an inventory level of an inventory item at a location.
               Deleting an inventory level for an inventory item removes that item from the specified location.
@@ -2044,11 +2398,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels.json?{}", query_);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adjusts the inventory level of an inventory item at a single location.
      *
@@ -2095,16 +2458,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/inventory_levels/adjust.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_levels/adjust.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Connects an inventory item to a location by creating an inventory level at that location.
             When connecting inventory items to locations, it's important to understand the rules around
@@ -2152,16 +2522,23 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/inventory_levels/connect.json?{}",
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/inventory_levels/connect.json?{}",
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
     * Sets the inventory level for an inventory item at a location.
               If the specified location is not connected, it will be automatically connected first.
@@ -2220,13 +2597,20 @@ impl Inventory {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/inventory_levels/set.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/unstable/inventory_levels/set.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2235,10 +2619,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-01
      */
     pub async fn deprecated_202001_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/2020-01/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2254,14 +2645,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2270,10 +2670,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-01
      */
     pub async fn deprecated_202001_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-01/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-01/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2289,14 +2698,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2305,10 +2723,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-04
      */
     pub async fn deprecated_202004_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/2020-04/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2324,14 +2749,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2340,10 +2774,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-04
      */
     pub async fn deprecated_202004_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-04/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-04/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2359,14 +2802,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2375,10 +2827,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-07
      */
     pub async fn deprecated_202007_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/2020-07/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2394,14 +2853,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2410,10 +2878,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-07
      */
     pub async fn deprecated_202007_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-07/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-07/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2429,14 +2906,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2445,10 +2931,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2020-10
      */
     pub async fn get_location(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/2020-10/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2461,14 +2954,23 @@ impl Inventory {
      * * `location_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_locations_param_location(&self, location_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2477,10 +2979,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2020-10
      */
     pub async fn get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2020-10/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2020-10/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2493,14 +3004,23 @@ impl Inventory {
      * * `location_id: &str` -- storefront_access_token_id.
      */
     pub async fn get_locations_param_location_level(&self, location_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2509,10 +3029,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-2021-01
      */
     pub async fn deprecated_202101_get_location(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/2021-01/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2528,14 +3055,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2544,10 +3080,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-2021-01
      */
     pub async fn deprecated_202101_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/2021-01/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/2021-01/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2563,14 +3108,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of locations.
      *
@@ -2579,10 +3133,17 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#index-unstable
      */
     pub async fn deprecated_unstable_get_location(&self) -> Result<()> {
-        let url = "/admin/api/unstable/locations.json".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/admin/api/unstable/locations.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single location by its ID.
      *
@@ -2598,14 +3159,23 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/locations/{}/json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of locations.
      *
@@ -2614,10 +3184,19 @@ impl Inventory {
      * https://shopify.dev/docs/admin-api/rest/reference/inventory/location#count-unstable
      */
     pub async fn deprecated_unstable_get_locations_count(&self) -> Result<()> {
-        let url = "/admin/api/unstable/locations/count.json".to_string();
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url("/admin/api/unstable/locations/count.json", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of inventory levels for a location. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -2633,11 +3212,21 @@ impl Inventory {
         &self,
         location_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/locations/{}/inventory_levels.json",
+                crate::progenitor_support::encode_path(location_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -30,11 +30,17 @@ impl Gifs {
             query_args.push(("ids".to_string(), ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gifs?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/gifs?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Random GIF.
      *
@@ -57,11 +63,17 @@ impl Gifs {
             query_args.push(("tag".to_string(), tag.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gifs/random?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/gifs/random?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search GIFs.
      *
@@ -103,11 +115,17 @@ impl Gifs {
             query_args.push(("rating".to_string(), rating.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gifs/search?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/gifs/search?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Translate phrase to GIF.
      *
@@ -126,11 +144,19 @@ impl Gifs {
             query_args.push(("s".to_string(), s.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gifs/translate?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/gifs/translate?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Trending GIFs.
      *
@@ -162,11 +188,17 @@ impl Gifs {
             query_args.push(("rating".to_string(), rating.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/gifs/trending?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/gifs/trending?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get GIF by Id.
      *
@@ -180,11 +212,21 @@ impl Gifs {
      * * `gif_id: i64` -- Filters results by specified GIF ID.
      */
     pub async fn get_gifs(&self, gif_id: i64) -> Result<crate::types::RandomGifResponse> {
-        let url = format!(
-            "/gifs/{}",
-            crate::progenitor_support::encode_path(&gif_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/gifs/{}",
+                crate::progenitor_support::encode_path(&gif_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

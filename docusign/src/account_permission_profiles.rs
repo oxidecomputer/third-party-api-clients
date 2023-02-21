@@ -42,15 +42,24 @@ impl AccountPermissionProfiles {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/permission_profiles?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/permission_profiles?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a new permission profile for an account.
      *
@@ -74,17 +83,24 @@ impl AccountPermissionProfiles {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/permission_profiles?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/permission_profiles?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Returns a permission profile for an account.
      *
@@ -115,16 +131,25 @@ impl AccountPermissionProfiles {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/permission_profiles/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(permission_profile_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/permission_profiles/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(permission_profile_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a permission profile.
      *
@@ -156,18 +181,25 @@ impl AccountPermissionProfiles {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/permission_profiles/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(permission_profile_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/permission_profiles/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(permission_profile_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes a permission profile from an account.
      *
@@ -200,13 +232,23 @@ impl AccountPermissionProfiles {
             query_args.push(("move_users_to".to_string(), move_users_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/permission_profiles/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(permission_profile_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/permission_profiles/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(permission_profile_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

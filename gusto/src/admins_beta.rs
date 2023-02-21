@@ -22,14 +22,23 @@ impl AdminsBeta {
      * Returns a list of all the admins at a company
      */
     pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all the admins at a company.
      *
@@ -45,14 +54,23 @@ impl AdminsBeta {
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::Admin>> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an admin for the company.
      *
@@ -67,13 +85,21 @@ impl AdminsBeta {
         company_id: &str,
         body: &crate::types::PostCompanyAdminsRequest,
     ) -> Result<crate::types::Admin> {
-        let url = format!(
-            "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/admins",
+                crate::progenitor_support::encode_path(company_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

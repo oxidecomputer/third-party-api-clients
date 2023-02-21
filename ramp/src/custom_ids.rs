@@ -22,10 +22,17 @@ impl CustomIds {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomProviderResponse> {
-        let url = "/custom-id-provider".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/custom-id-provider", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a Custom ID provider.
      *
@@ -38,10 +45,17 @@ impl CustomIds {
      * * `authorization_bearer_111111111111: &str` -- The OAuth2 token header.
      */
     pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
-        let url = "/custom-id-provider".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/custom-id-provider", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * .
      *
@@ -53,12 +67,19 @@ impl CustomIds {
         &self,
         body: &crate::types::GetCustomProviderResponse,
     ) -> Result<()> {
-        let url = "/custom-id-provider/application-link".to_string();
+        let url = self
+            .client
+            .url("/custom-id-provider/application-link", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Convert custom id to ramp id.
      *
@@ -75,15 +96,24 @@ impl CustomIds {
         entity_type: &str,
         custom_id: &str,
     ) -> Result<crate::types::GetEntityTypeCustomRampResponse> {
-        let url = format!(
-            "/custom-id-provider/{}/{}/ramp-id",
-            crate::progenitor_support::encode_path(entity_type),
-            crate::progenitor_support::encode_path(custom_id),
+        let url = self.client.url(
+            &format!(
+                "/custom-id-provider/{}/{}/ramp-id",
+                crate::progenitor_support::encode_path(entity_type),
+                crate::progenitor_support::encode_path(custom_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Convert ramp id to custom id.
      *
@@ -98,15 +128,24 @@ impl CustomIds {
         entity_type: &str,
         ramp_id: &str,
     ) -> Result<crate::types::GetEntityTypeRampCustomResponse> {
-        let url = format!(
-            "/custom-id-provider/{}/{}/custom-id",
-            crate::progenitor_support::encode_path(entity_type),
-            crate::progenitor_support::encode_path(ramp_id),
+        let url = self.client.url(
+            &format!(
+                "/custom-id-provider/{}/{}/custom-id",
+                crate::progenitor_support::encode_path(entity_type),
+                crate::progenitor_support::encode_path(ramp_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create custom id link.
      *
@@ -119,13 +158,21 @@ impl CustomIds {
         entity_type: &str,
         body: &crate::types::PostCustomProviderEntityTypeLinkRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/custom-id-provider/{}/custom-id-link",
-            crate::progenitor_support::encode_path(entity_type),
+        let url = self.client.url(
+            &format!(
+                "/custom-id-provider/{}/custom-id-link",
+                crate::progenitor_support::encode_path(entity_type),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -1,13 +1,29 @@
 use std::collections::BTreeMap;
 
 use anyhow::{bail, Result};
-use inflector::cases::snakecase::to_snake_case;
+use inflector::cases::{pascalcase::to_pascal_case, snakecase::to_snake_case};
 
 use crate::{
-    clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name,
-    path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType, ParameterDataExt,
-    ReferenceOrExt, TypeId, TypeSpace,
+    clean_fn_name, clean_name, client::generate_servers, get_parameter_data, make_plural,
+    oid_to_object_name, path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType,
+    ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
 };
+
+#[derive(Debug, Default)]
+pub struct FileOutput {
+    pub head: String,
+    pub impl_content: String,
+}
+
+impl FileOutput {
+    fn add_head(&mut self, head: &str) {
+        self.head.push_str(head);
+    }
+
+    fn add_content(&mut self, content: &str) {
+        self.impl_content.push_str(content);
+    }
+}
 
 /*
  * Generate a function for each Operation.
@@ -17,8 +33,8 @@ pub fn generate_files(
     proper_name: &str,
     ts: &mut TypeSpace,
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
-) -> Result<BTreeMap<String, String>> {
-    let mut tag_files: BTreeMap<String, String> = Default::default();
+) -> Result<BTreeMap<String, FileOutput>> {
+    let mut tag_files: BTreeMap<String, FileOutput> = Default::default();
 
     let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
@@ -74,69 +90,74 @@ pub fn generate_files(
 
             let oid = clean_fn_name(proper_name, &od, &tag);
 
-            let mut out = String::new();
-            if let Some(o) = tag_files.get(&tag) {
-                out = o.to_string();
-            }
+            let out = tag_files.entry(tag.clone()).or_default();
 
-            let mut a = |s: &str| {
-                out.push_str(s);
-                out.push('\n');
-            };
+            let print_fn = |docs: &str,
+                            bounds: &Vec<String>,
+                            fn_params_str: &Vec<String>,
+                            body_param: &Option<String>,
+                            response_type: &str,
+                            template: &str,
+                            fn_inner: &str,
+                            fn_name: &str| {
+                let mut content = String::new();
 
-            let mut print_fn = |docs: &str,
-                                bounds: &Vec<String>,
-                                fn_params_str: &Vec<String>,
-                                body_param: &Option<String>,
-                                response_type: &str,
-                                template: &str,
-                                fn_inner: &str,
-                                fn_name: &str| {
                 // Print the function docs.
-                a(docs);
+                content.push_str(docs);
 
                 // For this one function, we need it to be recursive since this is how you get
                 // an access token when authenicating on behalf of an app with a JWT.
                 if fn_name == "create_installation_access_token" {
-                    a("#[async_recursion::async_recursion]");
+                    content.push_str("#[async_recursion::async_recursion]");
                 }
 
                 if bounds.is_empty() {
-                    a(&format!("pub async fn {}(", fn_name,));
+                    content.push_str(&format!("pub async fn {}(", fn_name,));
                 } else {
-                    a(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
+                    content.push_str(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
                 }
-                a("&self,");
+                content.push_str("&self,");
 
                 if !fn_params_str.is_empty() {
-                    a(&fn_params_str.join(" "));
+                    content.push_str(&fn_params_str.join(" "));
                 }
 
                 if let Some(bp) = &body_param {
-                    a(&format!("body: {}", bp));
+                    content.push_str(&format!("body: {}", bp));
                 }
 
-                a(&format!(") -> Result<{}> {{", response_type));
+                content.push_str(&format!(") -> Result<{}> {{", response_type));
 
-                a(template);
+                content.push_str(template);
 
-                a(fn_inner);
+                content.push_str(fn_inner);
 
-                a("}");
-                a("");
+                content.push('}');
+                content.push_str("");
+
+                content
             };
 
             let docs = get_fn_docs(o, m, p, parameters, ts)?;
 
             let mut bounds: Vec<String> = Vec::new();
 
+            let mut body_content_type_header = None;
+
+            // println!("{:?} {:?}", o.summary, o.request_body);
+
             let (body_param, body_func) = if let Some(b) = &o.request_body {
                 if let Ok(b) = b.item() {
                     if b.is_binary()? {
+                        let (ct, _) = b.content.first().unwrap();
+                        body_content_type_header = Some(ct.to_string());
+
                         bounds.push("B: Into<reqwest::Body>".to_string());
                         (Some("B".to_string()), Some("body".to_string()))
                     } else {
                         let (ct, mt) = b.content.first().unwrap();
+                        body_content_type_header = Some(ct.to_string());
+
                         if ct == "application/json"
                             || ct == "application/octet-stream"
                             || ct.contains("application/json")
@@ -218,17 +239,33 @@ pub fn generate_files(
                 (None, None)
             };
 
+            // println!("{body_content_type_header:?}");
+
             /*
              * Get the function parameters.
              */
             let (fn_params_str, query_params) =
                 get_fn_params(ts, o, parameters, false, op.parameters.clone(), proper_name)?;
 
+            // Generate the server to send the request to
+            let server_arg = if o.servers.len() == 1 {
+                let servers = generate_servers(&o.servers, &to_pascal_case(&op_id));
+                let server_type = servers.top_level_type.unwrap();
+
+                if let Some(server_out) = &servers.output {
+                    out.add_head(server_out);
+                }
+
+                format!("Some({server_type}::default().default_url())")
+            } else {
+                "None".to_string()
+            };
+
             /*
              * Generate the URL for the request.
              */
             let tmp = parse(p)?;
-            let template = tmp.compile(query_params);
+            let template = tmp.compile(query_params, &server_arg);
 
             /*
              * Get the response type.
@@ -256,6 +293,7 @@ pub fn generate_files(
                 &inner_response_type,
                 &pagination_property,
                 false,
+                body_content_type_header.as_deref(),
             )?;
 
             // TODO: don't special case this.
@@ -272,7 +310,7 @@ pub fn generate_files(
                 if let crate::TypeDetails::OneOf(one_of, _) = &te.details {
                     for itid in one_of {
                         let rt = ts.render_type(itid, false)?;
-                        print_fn(
+                        out.add_content(&print_fn(
                             &docs,
                             &bounds,
                             &fn_params_str,
@@ -285,7 +323,7 @@ pub fn generate_files(
                                 oid.trim_start_matches(&tag).trim_start_matches('_'),
                                 to_snake_case(&rt.replace("crate::types::", ""))
                             ))),
-                        );
+                        ));
                     }
                 }
             }
@@ -333,7 +371,7 @@ pub fn generate_files(
             fn_names.push(fn_name.clone() + &tag);
 
             // Print our standard function.
-            print_fn(
+            out.add_content(&print_fn(
                 &docs,
                 &bounds,
                 &fn_params_str,
@@ -342,7 +380,7 @@ pub fn generate_files(
                 &template,
                 &fn_inner,
                 &fn_name,
-            );
+            ));
 
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
@@ -358,7 +396,7 @@ pub fn generate_files(
                     get_fn_params(ts, o, parameters, true, op.parameters.clone(), proper_name)?;
 
                 let tmp = parse(p)?;
-                let template = tmp.compile(query_params);
+                let template = tmp.compile(query_params, &server_arg);
 
                 let fn_inner = get_fn_inner(
                     proper_name,
@@ -369,6 +407,7 @@ pub fn generate_files(
                     &inner_response_type,
                     &pagination_property,
                     true,
+                    body_content_type_header.as_deref(),
                 )?;
 
                 let mut fn_name = oid
@@ -410,7 +449,7 @@ pub fn generate_files(
                 fn_names.push(fn_name.clone() + &tag);
 
                 // Now let's print the new function.
-                print_fn(
+                out.add_content(&print_fn(
                     &docs,
                     &bounds,
                     &fn_params_str,
@@ -419,11 +458,11 @@ pub fn generate_files(
                     &template,
                     &fn_inner,
                     &fn_name,
-                );
+                ));
             }
 
             // Add this to our map of functions based on the tag name.
-            tag_files.insert(tag, out.to_string());
+            // tag_files.insert(tag, out.to_string());
 
             Ok(())
         };
@@ -796,6 +835,7 @@ fn get_fn_inner(
     inner_response_type: &str,
     pagination_property: &str,
     all_pages: bool,
+    content_type: Option<&str>,
 ) -> Result<String> {
     let body = if let Some(f) = &body_func {
         if f == "json" {
@@ -807,12 +847,16 @@ fn get_fn_inner(
         "None"
     };
 
+    let content_type = content_type
+        .map(|c| format!(r#"Some("{c}".to_string())"#))
+        .unwrap_or_else(|| String::from("None"));
+
     if all_pages && pagination_property.is_empty() {
-        return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+        return Ok(format!("self.client.get_all_pages(&url, crate::Message {{ body: {}, content_type: None }}).await", body));
     } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut has_more = resp.has_more;
@@ -831,9 +875,9 @@ fn get_fn_inner(
                 }}
 
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
 
@@ -864,7 +908,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -872,9 +916,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while !page.is_empty() {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
 
@@ -907,14 +951,14 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let resp: {} = self.client.{}(&url, {}).await?;
+            r#"let resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.page.next.to_string();
 
             // Paginate if we should.
             while !page.is_empty() {{
-                match self.client.{}::<{}>(page.trim_start_matches(crate::DEFAULT_HOST), {}).await {{
+                match self.client.{}::<{}>(page.trim_start_matches(&self.client.host), crate::Message {{ body: {}, content_type: None }}).await {{
                     Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 
@@ -955,9 +999,9 @@ fn get_fn_inner(
         let inner = format!(
             r#"
             let mut resp: {} = if !url.contains('?') {{
-                self.client.{}(&format!("{{}}?page=0&size=100", url), {}).await?
+                self.client.{}(&format!("{{}}?page=0&size=100", url), crate::Message {{ body: {}, content_type: None }}).await?
             }} else {{
-                self.client.{}(&format!("{{}}&page=0&size=100", url), {}).await?
+                self.client.{}(&format!("{{}}&page=0&size=100", url), crate::Message {{ body: {}, content_type: None }}).await?
             }};
 
             let mut {} = resp.{};
@@ -966,9 +1010,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while page <= (resp.page.total_pages - 1) {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -998,7 +1042,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Zoom" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let mut resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: None }}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -1007,9 +1051,9 @@ fn get_fn_inner(
             while !page.is_empty() {{
                 // Check if we already have URL params and need to concat the token.
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), crate::Message {{ body: {}, content_type: None }}).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -1055,7 +1099,7 @@ fn get_fn_inner(
     {
         if inner_response_type.is_empty() {
             return Ok(format!(
-                "self.client.{}(&url, {}).await",
+                "self.client.{}(&url, crate::Message {{ body: {}, content_type: {content_type} }} ).await",
                 m.to_lowercase(),
                 body
             ));
@@ -1069,7 +1113,7 @@ fn get_fn_inner(
 
         // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
-            r#"let resp: {} = self.client.{}(&url, {}).await?;
+            r#"let resp: {} = self.client.{}(&url, crate::Message {{ body: {}, content_type: {content_type} }}).await?;
 
                 // Return our response data.
                 Ok(resp.{}{})"#,
@@ -1085,13 +1129,17 @@ fn get_fn_inner(
         bail!("function {} should be authenticated", oid);
     }
 
-    Ok(r#"self.client.post_media(
+    Ok(format!(
+        r#"self.client.post_media(
             &url,
-            Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+            crate::Message {{
+                body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                content_type: {content_type},
+            }},
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::JWT,
         ).await"#
-        .to_string())
+    ))
 }
 
 fn get_fn_docs(

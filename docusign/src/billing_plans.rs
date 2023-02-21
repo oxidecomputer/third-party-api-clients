@@ -59,15 +59,24 @@ impl BillingPlans {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an account billing plan.
      *
@@ -94,17 +103,24 @@ impl BillingPlans {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get credit card information.
      *
@@ -120,14 +136,23 @@ impl BillingPlans {
         &self,
         account_id: &str,
     ) -> Result<crate::types::CreditCardInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan/credit_card",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan/credit_card",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Returns downgrade plan information for the specified account.
      *
@@ -143,14 +168,23 @@ impl BillingPlans {
         &self,
         account_id: &str,
     ) -> Result<crate::types::DowngradRequestBillingInfoResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan/downgrade",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan/downgrade",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Queues downgrade billing plan request for an account.
      *
@@ -167,16 +201,23 @@ impl BillingPlans {
         account_id: &str,
         body: &crate::types::DowngradeBillingPlanInformation,
     ) -> Result<crate::types::DowngradePlanUpdateResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan/downgrade",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan/downgrade",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Reserverd: Purchase additional envelopes.
      *
@@ -193,16 +234,23 @@ impl BillingPlans {
         account_id: &str,
         body: &crate::types::PurchasedEnvelopesInformation,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/billing_plan/purchased_envelopes",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/billing_plan/purchased_envelopes",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Gets a list of available billing plans.
      *
@@ -211,10 +259,17 @@ impl BillingPlans {
      * Retrieves a list of the billing plans associated with a distributor.
      */
     pub async fn get_billing_plans(&self) -> Result<crate::types::BillingPlansResponse> {
-        let url = "/v2.1/billing_plans".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/v2.1/billing_plans", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets billing plan details.
      *
@@ -230,11 +285,21 @@ impl BillingPlans {
         &self,
         billing_plan_id: &str,
     ) -> Result<crate::types::BillingPlanResponse> {
-        let url = format!(
-            "/v2.1/billing_plans/{}",
-            crate::progenitor_support::encode_path(billing_plan_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/billing_plans/{}",
+                crate::progenitor_support::encode_path(billing_plan_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

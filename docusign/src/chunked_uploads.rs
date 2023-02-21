@@ -28,16 +28,23 @@ impl ChunkedUploads {
         account_id: &str,
         body: &crate::types::ChunkedUploadRequest,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/chunked_uploads",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/chunked_uploads",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Retrieves metadata about a chunked upload.
      *
@@ -64,16 +71,25 @@ impl ChunkedUploads {
             query_args.push(("include".to_string(), include.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/chunked_uploads/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(chunked_upload_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Commit a chunked upload.
      *
@@ -102,16 +118,25 @@ impl ChunkedUploads {
             query_args.push(("action".to_string(), action.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/chunked_uploads/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(chunked_upload_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a chunked upload.
      *
@@ -137,15 +162,24 @@ impl ChunkedUploads {
         account_id: &str,
         chunked_upload_id: &str,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/chunked_uploads/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/chunked_uploads/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(chunked_upload_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add a chunk to an existing chunked upload.
      *
@@ -182,15 +216,23 @@ impl ChunkedUploads {
         chunked_upload_part_seq: &str,
         body: &crate::types::ChunkedUploadRequest,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/chunked_uploads/{}/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
-            crate::progenitor_support::encode_path(chunked_upload_part_seq),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/chunked_uploads/{}/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(chunked_upload_id),
+                crate::progenitor_support::encode_path(chunked_upload_part_seq),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

@@ -67,14 +67,21 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices?{}", query_);
-
-        let resp: crate::types::PriceList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
+        let resp: crate::types::PriceList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/prices` endpoint.
      *
@@ -106,9 +113,17 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices?{}", query_);
-
-        let mut resp: crate::types::PriceList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
+        let mut resp: crate::types::PriceList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -129,12 +144,24 @@ impl Prices {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -146,17 +173,23 @@ impl Prices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/prices` endpoint.
      *
      * <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
      */
     pub async fn post(&self) -> Result<crate::types::PriceData> {
-        let url = "/v1/prices".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/prices", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/prices/search` endpoint.
      *
@@ -189,14 +222,23 @@ impl Prices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices/search?{}", query_);
-
-        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/prices/search?{}", query_), None);
+        let resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/prices/search` endpoint.
      *
@@ -213,9 +255,19 @@ impl Prices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/prices/search?{}", query_);
-
-        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/prices/search?{}", query_), None);
+        let mut resp: crate::types::SearchResult = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -236,12 +288,24 @@ impl Prices {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -253,7 +317,6 @@ impl Prices {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/prices/{price}` endpoint.
      *
@@ -265,14 +328,23 @@ impl Prices {
      * * `price: &str` -- The account's country.
      */
     pub async fn get(&self, price: &str) -> Result<crate::types::PriceData> {
-        let url = format!(
-            "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+        let url = self.client.url(
+            &format!(
+                "/v1/prices/{}",
+                crate::progenitor_support::encode_path(price),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/prices/{price}` endpoint.
      *
@@ -283,11 +355,21 @@ impl Prices {
      * * `price: &str` -- The account's country.
      */
     pub async fn post_prices(&self, price: &str) -> Result<crate::types::PriceData> {
-        let url = format!(
-            "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+        let url = self.client.url(
+            &format!(
+                "/v1/prices/{}",
+                crate::progenitor_support::encode_path(price),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

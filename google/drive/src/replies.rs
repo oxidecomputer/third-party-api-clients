@@ -44,19 +44,29 @@ impl Replies {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::ReplyList = self.client.get(&url, None).await?;
+        let resp: crate::types::ReplyList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.replies.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
      *
@@ -75,14 +85,25 @@ impl Replies {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::ReplyList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::ReplyList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut replies = resp.replies;
         let mut page = resp.next_page_token;
@@ -92,12 +113,24 @@ impl Replies {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -113,7 +146,6 @@ impl Replies {
         // Return our response data.
         Ok(replies)
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
      *
@@ -130,17 +162,24 @@ impl Replies {
         comment_id: &str,
         body: &crate::types::Reply,
     ) -> Result<crate::types::Reply> {
-        let url = format!(
-            "/files/{}/comments/{}/replies",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
      *
@@ -165,17 +204,26 @@ impl Replies {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
      *
@@ -188,16 +236,25 @@ impl Replies {
      * * `reply_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
      *
@@ -216,15 +273,23 @@ impl Replies {
         reply_id: &str,
         body: &crate::types::Reply,
     ) -> Result<crate::types::Reply> {
-        let url = format!(
-            "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+        let url = self.client.url(
+            &format!(
+                "/files/{}/comments/{}/replies/{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(reply_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

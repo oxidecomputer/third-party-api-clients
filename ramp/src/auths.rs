@@ -53,7 +53,15 @@ impl Auths {
      * * `authorization: &str` -- Basic \<base64-encoded client_id:client_secret\>.
      */
     pub async fn post_token(&self) -> Result<crate::types::OAuth2Token> {
-        let url = "/token".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/token", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

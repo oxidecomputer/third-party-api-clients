@@ -20,10 +20,17 @@ impl ThreatInsights {
     pub async fn get_current_configuration(
         &self,
     ) -> Result<crate::types::ThreatInsightConfiguration> {
-        let url = "/api/v1/threats/configuration".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/api/v1/threats/configuration", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/threats/configuration` endpoint.
      *
@@ -33,9 +40,15 @@ impl ThreatInsights {
         &self,
         body: &crate::types::ThreatInsightConfiguration,
     ) -> Result<crate::types::ThreatInsightConfiguration> {
-        let url = "/api/v1/threats/configuration".to_string();
+        let url = self.client.url("/api/v1/threats/configuration", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

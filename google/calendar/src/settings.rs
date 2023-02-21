@@ -39,14 +39,23 @@ impl Settings {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/settings?{}", query_);
-
-        let resp: crate::types::Settings = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/users/me/settings?{}", query_), None);
+        let resp: crate::types::Settings = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.items.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/users/me/settings` endpoint.
      *
@@ -55,8 +64,17 @@ impl Settings {
      * Returns all user settings for the authenticated user.
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
-        let url = "/users/me/settings".to_string();
-        let mut resp: crate::types::Settings = self.client.get(&url, None).await?;
+        let url = self.client.url("/users/me/settings", None);
+        let mut resp: crate::types::Settings = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -66,12 +84,24 @@ impl Settings {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -87,7 +117,6 @@ impl Settings {
         // Return our response data.
         Ok(items)
     }
-
     /**
      * This function performs a `POST` to the `/users/me/settings/watch` endpoint.
      *
@@ -116,13 +145,19 @@ impl Settings {
             query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users/me/settings/watch?{}", query_);
-
+        let url = self
+            .client
+            .url(&format!("/users/me/settings/watch?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/users/me/settings/{setting}` endpoint.
      *
@@ -133,11 +168,21 @@ impl Settings {
      * * `setting: &str` -- The id of the user setting.
      */
     pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
-        let url = format!(
-            "/users/me/settings/{}",
-            crate::progenitor_support::encode_path(setting),
+        let url = self.client.url(
+            &format!(
+                "/users/me/settings/{}",
+                crate::progenitor_support::encode_path(setting),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

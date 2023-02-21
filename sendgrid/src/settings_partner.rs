@@ -30,10 +30,17 @@ impl SettingsPartner {
     pub async fn get_partner_settings_new_relic(
         &self,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
-        let url = "/partner_settings/new_relic".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/partner_settings/new_relic", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates New Relic partner settings.
      *
@@ -53,12 +60,17 @@ impl SettingsPartner {
         &self,
         body: &crate::types::PatchPartnerSettingsNewRelicRequest,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
-        let url = "/partner_settings/new_relic".to_string();
+        let url = self.client.url("/partner_settings/new_relic", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Returns a list of all partner settings.
      *
@@ -87,8 +99,17 @@ impl SettingsPartner {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/partner_settings?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/partner_settings?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

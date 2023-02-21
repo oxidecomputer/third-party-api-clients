@@ -38,14 +38,21 @@ impl CardPrograms {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/card-programs?{}", query_);
-
-        let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/card-programs?{}", query_), None);
+        let resp: crate::types::GetCardProgramsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.card_programs.to_vec())
     }
-
     /**
      * List card programs.
      *
@@ -56,8 +63,17 @@ impl CardPrograms {
      * Retrieve all card programs.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
-        let url = "/card-programs".to_string();
-        let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/card-programs", None);
+        let resp: crate::types::GetCardProgramsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut card_programs = resp.card_programs;
         let mut page = resp.page.next.to_string();
@@ -67,8 +83,11 @@ impl CardPrograms {
             match self
                 .client
                 .get::<crate::types::GetCardProgramsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -94,7 +113,6 @@ impl CardPrograms {
         // Return our response data.
         Ok(card_programs)
     }
-
     /**
      * Create a card program.
      *
@@ -110,12 +128,17 @@ impl CardPrograms {
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
     ) -> Result<crate::types::CardProgram> {
-        let url = "/card-programs".to_string();
+        let url = self.client.url("/card-programs", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * GET a card program.
      *
@@ -128,11 +151,21 @@ impl CardPrograms {
      * * `authorization: &str` -- The OAuth2 token header.
      */
     pub async fn get_program(&self, id: &str) -> Result<crate::types::CardProgram> {
-        let url = format!(
-            "/card-programs/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/card-programs/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

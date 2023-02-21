@@ -93,11 +93,17 @@ impl Templates {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/templates?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/templates?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add template.
      *
@@ -109,12 +115,17 @@ impl Templates {
         &self,
         body: &crate::types::TemplateInstance,
     ) -> Result<crate::types::Templates> {
-        let url = "/templates".to_string();
+        let url = self.client.url("/templates", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get template info.
      *
@@ -142,15 +153,24 @@ impl Templates {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/templates/{}?{}",
-            crate::progenitor_support::encode_path(template_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/templates/{}?{}",
+                crate::progenitor_support::encode_path(template_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete template.
      *
@@ -163,14 +183,23 @@ impl Templates {
      * * `template_id: &str` -- The unique id for the template.
      */
     pub async fn delete(&self, template_id: &str) -> Result<()> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update template.
      *
@@ -187,16 +216,23 @@ impl Templates {
         template_id: &str,
         body: &crate::types::TemplateInstance,
     ) -> Result<crate::types::Templates> {
-        let url = format!(
-            "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * View default content.
      *
@@ -224,12 +260,22 @@ impl Templates {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/templates/{}/default-content?{}",
-            crate::progenitor_support::encode_path(template_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/default-content?{}",
+                crate::progenitor_support::encode_path(template_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

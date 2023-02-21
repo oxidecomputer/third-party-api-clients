@@ -25,14 +25,23 @@ impl CompanyBankAccountsBeta {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all company bank accounts.
      *
@@ -48,14 +57,23 @@ impl CompanyBankAccountsBeta {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a company bank account.
      *
@@ -70,16 +88,23 @@ impl CompanyBankAccountsBeta {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyBankAccountsRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Verify a company bank account.
      *
@@ -95,14 +120,22 @@ impl CompanyBankAccountsBeta {
         bank_account_uuid: &str,
         body: &crate::types::PutCompanyBankAccountsVerifyRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
-        let url = format!(
-            "/v1/companies/{}/bank_accounts/{}/verify",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(bank_account_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/bank_accounts/{}/verify",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+                crate::progenitor_support::encode_path(bank_account_uuid),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

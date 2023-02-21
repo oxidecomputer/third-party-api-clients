@@ -18,10 +18,17 @@ impl UserTypes {
      * Fetches all User Types in your org
      */
     pub async fn list(&self) -> Result<Vec<crate::types::UserType>> {
-        let url = "/api/v1/meta/types/user".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/api/v1/meta/types/user", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/meta/types/user` endpoint.
      *
@@ -30,22 +37,34 @@ impl UserTypes {
      * Fetches all User Types in your org
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::UserType>> {
-        let url = "/api/v1/meta/types/user".to_string();
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url("/api/v1/meta/types/user", None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/meta/types/user` endpoint.
      *
      * Creates a new User Type. A default User Type is automatically created along with your org, and you may add another 9 User Types for a maximum of 10.
      */
     pub async fn create(&self, body: &crate::types::UserType) -> Result<crate::types::UserType> {
-        let url = "/api/v1/meta/types/user".to_string();
+        let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/meta/types/user/{typeId}` endpoint.
      *
@@ -56,14 +75,23 @@ impl UserTypes {
      * * `type_id: &str`
      */
     pub async fn get(&self, type_id: &str) -> Result<crate::types::UserType> {
-        let url = format!(
-            "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/types/user/{}",
+                crate::progenitor_support::encode_path(type_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/meta/types/user/{typeId}` endpoint.
      *
@@ -78,16 +106,23 @@ impl UserTypes {
         type_id: &str,
         body: &crate::types::UserType,
     ) -> Result<crate::types::UserType> {
-        let url = format!(
-            "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/types/user/{}",
+                crate::progenitor_support::encode_path(type_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/meta/types/user/{typeId}` endpoint.
      *
@@ -102,16 +137,23 @@ impl UserTypes {
         type_id: &str,
         body: &crate::types::UserType,
     ) -> Result<crate::types::UserType> {
-        let url = format!(
-            "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/types/user/{}",
+                crate::progenitor_support::encode_path(type_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/meta/types/user/{typeId}` endpoint.
      *
@@ -122,11 +164,21 @@ impl UserTypes {
      * * `type_id: &str`
      */
     pub async fn delete(&self, type_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/meta/types/user/{}",
+                crate::progenitor_support::encode_path(type_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

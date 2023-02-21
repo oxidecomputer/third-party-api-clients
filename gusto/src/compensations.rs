@@ -23,14 +23,23 @@ impl Compensations {
      *
      */
     pub async fn get(&self, compensation_id: &str) -> Result<crate::types::Compensation> {
-        let url = format!(
-            "/v1/compensations/{}",
-            crate::progenitor_support::encode_path(compensation_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/compensations/{}",
+                crate::progenitor_support::encode_path(compensation_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a compensation.
      *
@@ -45,16 +54,23 @@ impl Compensations {
         compensation_id: &str,
         body: &crate::types::PutCompensationRequest,
     ) -> Result<crate::types::Compensation> {
-        let url = format!(
-            "/v1/compensations/{}",
-            crate::progenitor_support::encode_path(compensation_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/compensations/{}",
+                crate::progenitor_support::encode_path(compensation_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get compensations for a job.
      *
@@ -67,14 +83,23 @@ impl Compensations {
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
     pub async fn get_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
-        let url = format!(
-            "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}/compensations",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get compensations for a job.
      *
@@ -89,11 +114,21 @@ impl Compensations {
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
     pub async fn get_all_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
-        let url = format!(
-            "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/jobs/{}/compensations",
+                crate::progenitor_support::encode_path(job_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

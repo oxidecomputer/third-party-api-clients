@@ -43,14 +43,21 @@ impl PhoneSite {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/phone/sites?{}", query_);
-
-        let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/phone/sites?{}", query_), None);
+        let resp: crate::types::ListPhoneSitesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.sites.to_vec())
     }
-
     /**
      * List phone sites.
      *
@@ -67,8 +74,17 @@ impl PhoneSite {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Sites>> {
-        let url = "/phone/sites".to_string();
-        let mut resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/phone/sites", None);
+        let mut resp: crate::types::ListPhoneSitesResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut sites = resp.sites;
         let mut page = resp.next_page_token;
@@ -79,12 +95,24 @@ impl PhoneSite {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -100,7 +128,6 @@ impl PhoneSite {
         // Return our response data.
         Ok(sites)
     }
-
     /**
      * Create a phone site.
      *
@@ -120,12 +147,17 @@ impl PhoneSite {
         &self,
         body: &crate::types::CreatePhoneSiteRequest,
     ) -> Result<crate::types::Site> {
-        let url = "/phone/sites".to_string();
+        let url = self.client.url("/phone/sites", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get phone site details.
      *
@@ -147,14 +179,23 @@ impl PhoneSite {
      * * `site_id: &str` -- Unique Identifier of the Site.
      */
     pub async fn get_site(&self, site_id: &str) -> Result<crate::types::GetSiteResponse> {
-        let url = format!(
-            "/phone/sites/{}",
-            crate::progenitor_support::encode_path(site_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/sites/{}",
+                crate::progenitor_support::encode_path(site_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a phone site.
      *
@@ -182,15 +223,24 @@ impl PhoneSite {
             query_args.push(("transfer_site_id".to_string(), transfer_site_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/phone/sites/{}?{}",
-            crate::progenitor_support::encode_path(site_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/phone/sites/{}?{}",
+                crate::progenitor_support::encode_path(site_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update phone site details.
      *
@@ -215,13 +265,21 @@ impl PhoneSite {
         site_id: &str,
         body: &crate::types::UpdateSiteDetailsRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/phone/sites/{}",
-            crate::progenitor_support::encode_path(site_id),
+        let url = self.client.url(
+            &format!(
+                "/phone/sites/{}",
+                crate::progenitor_support::encode_path(site_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

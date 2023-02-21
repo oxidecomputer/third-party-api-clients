@@ -67,16 +67,25 @@ impl EnvelopeDocuments {
             query_args.push(("shared_user_id".to_string(), shared_user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds one or more documents to an existing envelope document.
      *
@@ -104,17 +113,24 @@ impl EnvelopeDocuments {
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes documents from a draft envelope.
      *
@@ -156,17 +172,24 @@ impl EnvelopeDocuments {
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets a document from an envelope.
      *
@@ -240,17 +263,26 @@ impl EnvelopeDocuments {
             query_args.push(("watermark".to_string(), watermark.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds a document to an existing draft envelope.
      *
@@ -286,13 +318,23 @@ impl EnvelopeDocuments {
         document_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EnvelopeDocument> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/documents/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/documents/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+                crate::progenitor_support::encode_path(document_id),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

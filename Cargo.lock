@@ -295,7 +295,7 @@ dependencies = [
 
 [[package]]
 name = "docusign"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -313,12 +313,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -331,7 +333,7 @@ dependencies = [
 
 [[package]]
 name = "dolladollabills"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -349,12 +351,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -618,7 +622,7 @@ checksum = "f0a01e0497841a3b2db4f8afa483cce65f7e96a3498bd6c541734792aeac8fe7"
 
 [[package]]
 name = "giphy-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -636,12 +640,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -654,7 +660,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -672,12 +678,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -691,7 +699,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -709,12 +717,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -728,7 +738,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -746,12 +756,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -765,7 +777,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -783,12 +795,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -802,7 +816,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -820,12 +834,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -839,7 +855,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -857,12 +873,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -1166,7 +1184,7 @@ dependencies = [
 
 [[package]]
 name = "mailchimp-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1184,12 +1202,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -1376,7 +1396,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1411,7 +1431,7 @@ dependencies = [
 
 [[package]]
 name = "okta"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1429,12 +1449,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -1665,7 +1687,7 @@ dependencies = [
 
 [[package]]
 name = "ramp-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1683,12 +1705,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -1941,7 +1965,7 @@ dependencies = [
 
 [[package]]
 name = "revai"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1959,12 +1983,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2140,7 +2166,7 @@ dependencies = [
 
 [[package]]
 name = "sendgrid-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2158,12 +2184,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2263,7 +2291,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2281,12 +2309,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2300,7 +2330,7 @@ dependencies = [
 
 [[package]]
 name = "shipbob"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2318,12 +2348,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2336,7 +2368,7 @@ dependencies = [
 
 [[package]]
 name = "shopify"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2354,12 +2386,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2409,7 +2443,7 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 
 [[package]]
 name = "slack-chat-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2427,12 +2461,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -2719,7 +2755,7 @@ dependencies = [
 
 [[package]]
 name = "tripactions"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2737,12 +2773,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",
@@ -3171,7 +3209,7 @@ checksum = "c394b5bd0c6f669e7275d9c20aa90ae064cb22e75a1cad54e1b34088034b149f"
 
 [[package]]
 name = "zoom-api"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -3189,12 +3227,14 @@ dependencies = [
  "openssl",
  "pem",
  "percent-encoding",
+ "rand 0.8.5",
  "reqwest",
  "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
  "ring",
+ "rsa",
  "schemars",
  "serde",
  "serde_json",

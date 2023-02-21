@@ -35,14 +35,23 @@ impl Reimbursements {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reimbursements?{}", query_);
-
-        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/reimbursements?{}", query_), None);
+        let resp: crate::types::GetReimbursementsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List Reimbursements.
      *
@@ -51,8 +60,17 @@ impl Reimbursements {
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
-        let url = "/reimbursements".to_string();
-        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url("/reimbursements", None);
+        let resp: crate::types::GetReimbursementsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -62,8 +80,11 @@ impl Reimbursements {
             match self
                 .client
                 .get::<crate::types::GetReimbursementsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -89,18 +110,27 @@ impl Reimbursements {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Get details for one reimbursement.
      *
      * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Reimbursement> {
-        let url = format!(
-            "/reimbursements/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/reimbursements/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

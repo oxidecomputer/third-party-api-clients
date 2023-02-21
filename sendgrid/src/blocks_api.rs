@@ -48,11 +48,19 @@ impl BlocksApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/blocks?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/blocks?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve all blocks.
      *
@@ -79,11 +87,19 @@ impl BlocksApi {
             query_args.push(("start_time".to_string(), start_time.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/suppression/blocks?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/suppression/blocks?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete blocks.
      *
@@ -104,12 +120,17 @@ impl BlocksApi {
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/suppression/blocks".to_string();
+        let url = self.client.url("/suppression/blocks", None);
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve a specific block.
      *
@@ -125,14 +146,23 @@ impl BlocksApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
-        let url = format!(
-            "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/blocks/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific block.
      *
@@ -146,14 +176,23 @@ impl BlocksApi {
         &self,
         email: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
-        let url = format!(
-            "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/blocks/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a specific block.
      *
@@ -166,11 +205,21 @@ impl BlocksApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn delete_suppression_blocks_email(&self, email: &str) -> Result<crate::types::Help> {
-        let url = format!(
-            "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(email),
+        let url = self.client.url(
+            &format!(
+                "/suppression/blocks/{}",
+                crate::progenitor_support::encode_path(email),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

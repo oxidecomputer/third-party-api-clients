@@ -51,15 +51,23 @@ impl Checkout {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/checkout/sessions?{}", query_);
-
-        let resp: crate::types::PaymentPagesCheckoutSessionList =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/checkout/sessions?{}", query_), None);
+        let resp: crate::types::PaymentPagesCheckoutSessionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
      *
@@ -80,10 +88,19 @@ impl Checkout {
             query_args.push(("subscription".to_string(), subscription.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/checkout/sessions?{}", query_);
-
-        let mut resp: crate::types::PaymentPagesCheckoutSessionList =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/checkout/sessions?{}", query_), None);
+        let mut resp: crate::types::PaymentPagesCheckoutSessionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -104,12 +121,24 @@ impl Checkout {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -121,17 +150,23 @@ impl Checkout {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/checkout/sessions` endpoint.
      *
      * <p>Creates a Session object.</p>
      */
     pub async fn post_session(&self) -> Result<crate::types::Session> {
-        let url = "/v1/checkout/sessions".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/checkout/sessions", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}` endpoint.
      *
@@ -143,14 +178,23 @@ impl Checkout {
      * * `session: &str` -- The account's country.
      */
     pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
-        let url = format!(
-            "/v1/checkout/sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/checkout/sessions/{session}/expire` endpoint.
      *
@@ -166,14 +210,23 @@ impl Checkout {
         &self,
         session: &str,
     ) -> Result<crate::types::Session> {
-        let url = format!(
-            "/v1/checkout/sessions/{}/expire",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/expire",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
      *
@@ -205,18 +258,28 @@ impl Checkout {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/checkout/sessions/{}/line_items?{}",
-            crate::progenitor_support::encode_path(session),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/line_items?{}",
+                crate::progenitor_support::encode_path(session),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+        let resp: crate::types::LineItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
      *
@@ -228,12 +291,23 @@ impl Checkout {
         &self,
         session: &str,
     ) -> Result<Vec<crate::types::Item>> {
-        let url = format!(
-            "/v1/checkout/sessions/{}/line_items",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/checkout/sessions/{}/line_items",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+        let mut resp: crate::types::LineItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -254,12 +328,24 @@ impl Checkout {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 

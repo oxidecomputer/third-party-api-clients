@@ -53,15 +53,24 @@ impl Meetings {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/users/{}/meetings?{}",
-            crate::progenitor_support::encode_path(user_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/users/{}/meetings?{}",
+                crate::progenitor_support::encode_path(user_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a meeting.
      *
@@ -89,16 +98,23 @@ impl Meetings {
         user_id: &str,
         body: &crate::types::MeetingCreate,
     ) -> Result<crate::types::MeetingCreateResponseAllOf> {
-        let url = format!(
-            "/users/{}/meetings",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/meetings",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a meeting.
      *
@@ -136,15 +152,24 @@ impl Meetings {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a meeting.
      *
@@ -194,15 +219,24 @@ impl Meetings {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a meeting.
      *
@@ -230,17 +264,24 @@ impl Meetings {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update meeting status.
      *
@@ -261,16 +302,23 @@ impl Meetings {
         meeting_id: i64,
         body: &crate::types::MeetingStatusRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/status",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/status",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List meeting registrants.
      *
@@ -321,15 +369,24 @@ impl Meetings {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/registrants?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add meeting registrant.
      *
@@ -360,15 +417,24 @@ impl Meetings {
             query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/registrants?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/json".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * Delete a meeting registrant.
      *
@@ -396,16 +462,25 @@ impl Meetings {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/registrants/{}?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(registrant_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants/{}?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(registrant_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update registrant's status.
      *
@@ -433,17 +508,24 @@ impl Meetings {
             query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/meetings/{}/registrants/status?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants/status?{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get past meeting details.
      *
@@ -465,14 +547,23 @@ impl Meetings {
         &self,
         meeting_uuid: &str,
     ) -> Result<crate::types::PastMeetingDetailsResponse> {
-        let url = format!(
-            "/past_meetings/{}",
-            crate::progenitor_support::encode_path(meeting_uuid),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}",
+                crate::progenitor_support::encode_path(meeting_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get past meeting participants.
      *
@@ -510,15 +601,24 @@ impl Meetings {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/past_meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(meeting_uuid),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/participants?{}",
+                crate::progenitor_support::encode_path(meeting_uuid),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List ended meeting instances.
      *
@@ -536,14 +636,23 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn past(&self, meeting_id: i64) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/past_meetings/{}/instances",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/instances",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List meeting polls.
      *
@@ -564,14 +673,23 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn poll(&self, meeting_id: i64) -> Result<crate::types::Domains> {
-        let url = format!(
-            "/meetings/{}/polls",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/polls",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a meeting poll.
      *
@@ -597,16 +715,23 @@ impl Meetings {
         meeting_id: i64,
         body: &crate::types::Poll,
     ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
-        let url = format!(
-            "/meetings/{}/polls",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/polls",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a meeting poll.
      *
@@ -632,15 +757,24 @@ impl Meetings {
         meeting_id: i64,
         poll_id: &str,
     ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
-        let url = format!(
-            "/meetings/{}/polls/{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/polls/{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a meeting poll.
      *
@@ -666,17 +800,24 @@ impl Meetings {
         poll_id: &str,
         body: &crate::types::Poll,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/polls/{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/polls/{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a meeting poll.
      *
@@ -698,15 +839,24 @@ impl Meetings {
      * * `poll_id: &str` -- User's first name.
      */
     pub async fn poll_delete(&self, meeting_id: i64, poll_id: &str) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/polls/{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/polls/{}",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+                crate::progenitor_support::encode_path(poll_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List registration questions .
      *
@@ -730,14 +880,23 @@ impl Meetings {
         &self,
         meeting_id: i64,
     ) -> Result<crate::types::MeetingRegistrantQuestionsData> {
-        let url = format!(
-            "/meetings/{}/registrants/questions",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants/questions",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update registration questions.
      *
@@ -761,16 +920,23 @@ impl Meetings {
         meeting_id: i64,
         body: &crate::types::MeetingRegistrantQuestionsData,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/registrants/questions",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/registrants/questions",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get meeting invitation.
      *
@@ -790,14 +956,23 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn invitation(&self, meeting_id: i64) -> Result<crate::types::MeetingInvitation> {
-        let url = format!(
-            "/meetings/{}/invitation",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/invitation",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get live stream details.
      *
@@ -822,14 +997,23 @@ impl Meetings {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::GetLiveStreamDetailsResponse> {
-        let url = format!(
-            "/meetings/{}/livestream",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/livestream",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a live stream.
      *
@@ -853,16 +1037,23 @@ impl Meetings {
         meeting_id: &str,
         body: &crate::types::MeetingLiveStream,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/livestream",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/livestream",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Update Live Stream Status.
      *
@@ -887,16 +1078,23 @@ impl Meetings {
         meeting_id: i64,
         body: &crate::types::MeetingLiveStreamStatus,
     ) -> Result<()> {
-        let url = format!(
-            "/meetings/{}/livestream/status",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/livestream/status",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List past meeting's poll results.
      *
@@ -920,14 +1118,23 @@ impl Meetings {
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
-        let url = format!(
-            "/past_meetings/{}/polls",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/past_meetings/{}/polls",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Perform batch registration.
      *
@@ -958,16 +1165,23 @@ impl Meetings {
         meeting_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
     ) -> Result<crate::types::AddBatchRegistrantsResponse> {
-        let url = format!(
-            "/meetings/{}/batch_registrants",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/batch_registrants",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Use in-Meeting recording controls.
      *
@@ -992,16 +1206,23 @@ impl Meetings {
         meeting_id: &str,
         body: &crate::types::InMeetingRecordingControlRequest,
     ) -> Result<()> {
-        let url = format!(
-            "/live_meetings/{}/events",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/live_meetings/{}/events",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get meeting quality score.
      *
@@ -1010,10 +1231,17 @@ impl Meetings {
      * Get the quality scores of a meeting.
      */
     pub async fn quality_score(&self) -> Result<crate::types::Domains> {
-        let url = "/metrics/quality".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/metrics/quality", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Perform batch poll creation.
      *
@@ -1037,16 +1265,23 @@ impl Meetings {
         meeting_id: &str,
         body: &crate::types::CreateBatchPollsRequest,
     ) -> Result<crate::types::CreateBatchPollsResponse> {
-        let url = format!(
-            "/meetings/{}/batch_polls",
-            crate::progenitor_support::encode_path(meeting_id),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/batch_polls",
+                crate::progenitor_support::encode_path(meeting_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List meeting templates.
      *
@@ -1065,14 +1300,23 @@ impl Meetings {
         &self,
         user_id: &str,
     ) -> Result<crate::types::ListMeetingTemplatesResponseData> {
-        let url = format!(
-            "/users/{}/meeting_templates",
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/users/{}/meeting_templates",
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create meeting's invite links.
      *
@@ -1093,13 +1337,21 @@ impl Meetings {
         meeting_id: i64,
         body: &crate::types::InviteLink,
     ) -> Result<crate::types::InviteLinks> {
-        let url = format!(
-            "/meetings/{}/invite_links",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+        let url = self.client.url(
+            &format!(
+                "/meetings/{}/invite_links",
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

@@ -28,16 +28,23 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions",
-            crate::progenitor_support::encode_path(template_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions",
+                crate::progenitor_support::encode_path(template_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Activate a transactional template version.
      *
@@ -54,15 +61,24 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}/activate",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}/activate",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve a specific transactional template version.
      *
@@ -79,15 +95,24 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a transactional template version.
      *
@@ -104,15 +129,24 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Edit a transactional template version.
      *
@@ -130,14 +164,22 @@ impl TransactionalTemplatesVersions {
         version_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
-        let url = format!(
-            "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(version_id),
+        let url = self.client.url(
+            &format!(
+                "/templates/{}/versions/{}",
+                crate::progenitor_support::encode_path(template_id),
+                crate::progenitor_support::encode_path(version_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

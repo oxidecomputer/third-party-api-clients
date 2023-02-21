@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-giphy-api = "0.3.1"
+giphy-api = "0.4.0"
 ```
 
 ## Basic example

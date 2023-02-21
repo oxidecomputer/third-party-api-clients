@@ -27,11 +27,19 @@ impl InlineHooks {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/inlineHooks?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/inlineHooks?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/inlineHooks` endpoint.
      *
@@ -45,11 +53,19 @@ impl InlineHooks {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/inlineHooks?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/api/v1/inlineHooks?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/inlineHooks` endpoint.
      *
@@ -59,12 +75,17 @@ impl InlineHooks {
         &self,
         body: &crate::types::InlineHook,
     ) -> Result<crate::types::InlineHook> {
-        let url = "/api/v1/inlineHooks".to_string();
+        let url = self.client.url("/api/v1/inlineHooks", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/api/v1/inlineHooks/{inlineHookId}` endpoint.
      *
@@ -75,14 +96,23 @@ impl InlineHooks {
      * * `inline_hook_id: &str`
      */
     pub async fn get(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PUT` to the `/api/v1/inlineHooks/{inlineHookId}` endpoint.
      *
@@ -97,16 +127,23 @@ impl InlineHooks {
         inline_hook_id: &str,
         body: &crate::types::InlineHook,
     ) -> Result<crate::types::InlineHook> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `DELETE` to the `/api/v1/inlineHooks/{inlineHookId}` endpoint.
      *
@@ -117,14 +154,23 @@ impl InlineHooks {
      * * `inline_hook_id: &str`
      */
     pub async fn delete(&self, inline_hook_id: &str) -> Result<()> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/inlineHooks/{inlineHookId}/execute` endpoint.
      *
@@ -139,16 +185,23 @@ impl InlineHooks {
         inline_hook_id: &str,
         body: &crate::types::Links,
     ) -> Result<crate::types::InlineHookResponse> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}/execute",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}/execute",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/inlineHooks/{inlineHookId}/lifecycle/activate` endpoint.
      *
@@ -159,14 +212,23 @@ impl InlineHooks {
      * * `inline_hook_id: &str`
      */
     pub async fn activate(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}/lifecycle/activate",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/api/v1/inlineHooks/{inlineHookId}/lifecycle/deactivate` endpoint.
      *
@@ -177,11 +239,21 @@ impl InlineHooks {
      * * `inline_hook_id: &str`
      */
     pub async fn deactivate(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
-        let url = format!(
-            "/api/v1/inlineHooks/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(inline_hook_id),
+        let url = self.client.url(
+            &format!(
+                "/api/v1/inlineHooks/{}/lifecycle/deactivate",
+                crate::progenitor_support::encode_path(inline_hook_id),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

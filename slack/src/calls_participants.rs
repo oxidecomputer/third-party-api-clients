@@ -24,10 +24,17 @@ impl CallsParticipants {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.participants.add".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/calls.participants.add", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/calls.participants.remove` endpoint.
      *
@@ -40,7 +47,15 @@ impl CallsParticipants {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.participants.remove".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/calls.participants.remove", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

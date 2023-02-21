@@ -18,7 +18,15 @@ impl AccountLinks {
      * <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
      */
     pub async fn post(&self) -> Result<crate::types::AccountLink> {
-        let url = "/v1/account_links".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/account_links", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

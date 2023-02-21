@@ -57,11 +57,19 @@ impl Reporting {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reporting/facebook-ads?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/reporting/facebook-ads?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get facebook ad report.
      *
@@ -89,15 +97,24 @@ impl Reporting {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/facebook-ads/{}?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List facebook ecommerce report.
      *
@@ -140,15 +157,24 @@ impl Reporting {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get landing page report.
      *
@@ -176,15 +202,24 @@ impl Reporting {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/reporting/landing-pages/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/reporting/landing-pages/{}?{}",
+                crate::progenitor_support::encode_path(outreach_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * List landing pages reports.
      *
@@ -220,8 +255,17 @@ impl Reporting {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reporting/landing-pages?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/reporting/landing-pages?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

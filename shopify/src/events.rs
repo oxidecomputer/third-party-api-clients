@@ -63,11 +63,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -86,15 +94,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -120,11 +137,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of events. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -176,11 +202,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -199,15 +233,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -233,11 +276,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of events. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -289,11 +341,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -312,15 +372,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -346,11 +415,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of events. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -402,11 +480,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -425,15 +511,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -455,11 +550,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of events. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -511,11 +615,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -534,15 +646,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -568,11 +689,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of events. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -624,11 +754,19 @@ impl Events {
             query_args.push(("verb".to_string(), verb.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/events.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/events.json?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single event by its ID.
      *
@@ -647,15 +785,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/events/{}/json?{}",
-            crate::progenitor_support::encode_path(event_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/events/{}/json?{}",
+                crate::progenitor_support::encode_path(event_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a count of events.
      *
@@ -681,11 +828,20 @@ impl Events {
             query_args.push(("created_at_min".to_string(), created_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/events/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/events/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -748,11 +904,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -775,13 +940,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -808,11 +980,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-01/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-01/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -835,15 +1016,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-01/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -860,16 +1050,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -885,14 +1082,23 @@ impl Events {
         &self,
         webhook_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-01/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -955,11 +1161,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -982,13 +1197,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -1015,11 +1237,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-04/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-04/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -1042,15 +1273,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-04/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -1067,16 +1307,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -1092,14 +1339,23 @@ impl Events {
         &self,
         webhook_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-04/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-04/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1162,11 +1418,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -1189,13 +1454,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -1222,11 +1494,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-07/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-07/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -1249,15 +1530,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-07/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -1274,16 +1564,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -1299,14 +1596,23 @@ impl Events {
         &self,
         webhook_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-07/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-07/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1369,11 +1675,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -1392,13 +1707,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -1421,11 +1743,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2020-10/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2020-10/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -1444,15 +1775,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2020-10/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -1469,16 +1809,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -1491,14 +1838,23 @@ impl Events {
      * * `webhook_id: &str` -- storefront_access_token_id.
      */
     pub async fn delete_webhooks_param_webhook(&self, webhook_id: &str) -> Result<()> {
-        let url = format!(
-            "/admin/api/2020-10/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2020-10/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1561,11 +1917,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -1588,13 +1953,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -1621,11 +1993,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/2021-01/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/2021-01/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -1648,15 +2029,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/2021-01/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -1673,16 +2063,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -1698,14 +2095,23 @@ impl Events {
         &self,
         webhook_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/2021-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/2021-01/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a list of webhooks. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
@@ -1768,11 +2174,20 @@ impl Events {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/webhooks.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/webhooks.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a new webhook subscription by specifying both an address and a topic.
      *
@@ -1795,13 +2210,20 @@ impl Events {
             query_args.push(("format".to_string(), format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/webhooks.json?{}", query_);
-
+        let url = self.client.url(
+            &format!("/admin/api/unstable/webhooks.json?{}", query_),
+            None,
+        );
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieves a count of existing webhook subscriptions.
      *
@@ -1828,11 +2250,20 @@ impl Events {
             query_args.push(("topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin/api/unstable/webhooks/count.json?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/admin/api/unstable/webhooks/count.json?{}", query_),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieves a single webhook subscription.
      *
@@ -1855,15 +2286,24 @@ impl Events {
             query_args.push(("fields".to_string(), fields.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/admin/api/unstable/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(webhook_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/webhooks/{}/json?{}",
+                crate::progenitor_support::encode_path(webhook_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a webhook subscription's topic or address URIs.
      *
@@ -1880,16 +2320,23 @@ impl Events {
         webhook_id: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Delete a webhook subscription.
      *
@@ -1905,11 +2352,21 @@ impl Events {
         &self,
         webhook_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/admin/api/unstable/webhooks/{}/json",
-            crate::progenitor_support::encode_path(webhook_id),
+        let url = self.client.url(
+            &format!(
+                "/admin/api/unstable/webhooks/{}/json",
+                crate::progenitor_support::encode_path(webhook_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

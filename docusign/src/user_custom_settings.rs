@@ -44,15 +44,24 @@ impl UserCustomSettings {
         account_id: &str,
         user_id: &str,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Adds or updates custom user settings for the specified user.
      *
@@ -92,17 +101,24 @@ impl UserCustomSettings {
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes custom user settings for a specified user.
      *
@@ -132,14 +148,22 @@ impl UserCustomSettings {
         user_id: &str,
         body: &crate::types::CustomSettingsInformation,
     ) -> Result<crate::types::CustomSettingsInformation> {
-        let url = format!(
-            "/v2.1/accounts/{}/users/{}/custom_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/users/{}/custom_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(user_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

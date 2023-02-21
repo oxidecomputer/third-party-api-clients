@@ -25,12 +25,17 @@ impl SingleSignOnTeammates {
         &self,
         body: &crate::types::SsoTeammateRequestAllOf,
     ) -> Result<crate::types::SsoTeammateResponseAllOf> {
-        let url = "/sso/teammates".to_string();
+        let url = self.client.url("/sso/teammates", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Edit an SSO Teammate.
      *
@@ -47,13 +52,21 @@ impl SingleSignOnTeammates {
         username: &str,
         body: &crate::types::PatchSsoTeammatesUsernameRequest,
     ) -> Result<crate::types::SsoTeammatesPatchResponseAllOf> {
-        let url = format!(
-            "/sso/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+        let url = self.client.url(
+            &format!(
+                "/sso/teammates/{}",
+                crate::progenitor_support::encode_path(username),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

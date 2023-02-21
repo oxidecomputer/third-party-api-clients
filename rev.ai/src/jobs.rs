@@ -37,11 +37,17 @@ impl Jobs {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/jobs?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/jobs?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get List of Jobs.
      *
@@ -60,11 +66,17 @@ impl Jobs {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/jobs?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/jobs?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Submit Transcription Job.
      *
@@ -76,12 +88,17 @@ impl Jobs {
         &self,
         body: &crate::types::SubmitJobMediaUrlOptionsAllOf,
     ) -> Result<crate::types::JobAllOf> {
-        let url = "/jobs".to_string();
+        let url = self.client.url("/jobs", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get Job By Id.
      *
@@ -90,11 +107,20 @@ impl Jobs {
      * Returns information about a transcription job
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::JobAllOf> {
-        let url = format!("/jobs/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete Job by Id.
      *
@@ -103,8 +129,18 @@ impl Jobs {
      * Deletes a transcription job. All data related to the job, such as input media and transcript, will be permanently deleted. A job can only be deleted once it's completed (either with success or failure).
      */
     pub async fn delete(&self, id: &str) -> Result<()> {
-        let url = format!("/jobs/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.delete(&url, None).await
+        let url = self.client.url(
+            &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

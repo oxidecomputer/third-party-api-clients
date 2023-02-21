@@ -49,7 +49,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     #[cfg(not(feature = "httpcache"))]
     let github = Client::custom(
-        "https://api.github.com",
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
         client,
@@ -57,7 +56,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     #[cfg(feature = "httpcache")]
     let github = Client::custom(
-        "https://api.github.com",
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
         client,

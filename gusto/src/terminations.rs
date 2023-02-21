@@ -22,14 +22,23 @@ impl Terminations {
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Termination>> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get terminations for an employee.
      *
@@ -45,14 +54,23 @@ impl Terminations {
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Termination>> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create an employee termination.
      *
@@ -67,13 +85,21 @@ impl Terminations {
         employee_id: &str,
         body: &crate::types::PostEmployeeTerminationsRequest,
     ) -> Result<crate::types::Termination> {
-        let url = format!(
-            "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+        let url = self.client.url(
+            &format!(
+                "/v1/employees/{}/terminations",
+                crate::progenitor_support::encode_path(employee_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

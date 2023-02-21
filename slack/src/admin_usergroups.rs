@@ -24,10 +24,17 @@ impl AdminUsergroups {
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
     pub async fn add_channels(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.usergroups.addChannels".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.usergroups.addChannels", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.usergroups.addTeams` endpoint.
      *
@@ -40,10 +47,17 @@ impl AdminUsergroups {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
     pub async fn add_teams(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.usergroups.addTeams".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.usergroups.addTeams", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.usergroups.listChannels` endpoint.
      *
@@ -78,11 +92,19 @@ impl AdminUsergroups {
             query_args.push(("usergroup_id".to_string(), usergroup_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.usergroups.listChannels?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.usergroups.listChannels?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.usergroups.removeChannels` endpoint.
      *
@@ -95,7 +117,15 @@ impl AdminUsergroups {
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
     pub async fn remove_channels(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.usergroups.removeChannels".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.usergroups.removeChannels", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

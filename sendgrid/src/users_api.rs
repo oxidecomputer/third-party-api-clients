@@ -22,10 +22,17 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_profile(&self) -> Result<crate::types::GetUserProfileResponse> {
-        let url = "/user/profile".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/profile", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a user's profile.
      *
@@ -43,12 +50,17 @@ impl UsersApi {
         &self,
         body: &crate::types::UserProfile,
     ) -> Result<crate::types::UserProfile> {
-        let url = "/user/profile".to_string();
+        let url = self.client.url("/user/profile", None);
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get a user's account information.
      *
@@ -63,10 +75,17 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_account(&self) -> Result<crate::types::GetUserAccountResponse> {
-        let url = "/user/account".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/account", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Retrieve your account email address.
      *
@@ -79,10 +98,17 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_email(&self) -> Result<crate::types::GetUserEmailResponse> {
-        let url = "/user/email".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/email", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update your account email address.
      *
@@ -98,12 +124,17 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserEmailRequest,
     ) -> Result<crate::types::GetUserEmailResponse> {
-        let url = "/user/email".to_string();
+        let url = self.client.url("/user/email", None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve your username.
      *
@@ -116,10 +147,17 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_username(&self) -> Result<crate::types::Users> {
-        let url = "/user/username".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/username", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update your username.
      *
@@ -135,12 +173,17 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserUsernameRequest,
     ) -> Result<crate::types::PutUserUsernameResponse> {
-        let url = "/user/username".to_string();
+        let url = self.client.url("/user/username", None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Retrieve your credit balance.
      *
@@ -155,10 +198,17 @@ impl UsersApi {
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_credits(&self) -> Result<crate::types::GetUserCreditsResponse> {
-        let url = "/user/credits".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/user/credits", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update your password.
      *
@@ -174,9 +224,15 @@ impl UsersApi {
         &self,
         body: &crate::types::PutUserPasswordRequest,
     ) -> Result<crate::types::Help> {
-        let url = "/user/password".to_string();
+        let url = self.client.url("/user/password", None);
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

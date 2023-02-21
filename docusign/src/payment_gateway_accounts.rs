@@ -27,11 +27,21 @@ impl PaymentGatewayAccounts {
         &self,
         account_id: &str,
     ) -> Result<crate::types::PaymentGatewayAccountsInfo> {
-        let url = format!(
-            "/v2.1/accounts/{}/payment_gateway_accounts",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/payment_gateway_accounts",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

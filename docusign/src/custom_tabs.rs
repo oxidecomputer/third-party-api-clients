@@ -34,15 +34,24 @@ impl CustomTabs {
             query_args.push(("custom_tab_only".to_string(), custom_tab_only.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a custom tab.
      *
@@ -61,16 +70,23 @@ impl CustomTabs {
         account_id: &str,
         body: &crate::types::TabMetadata,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets custom tab information.
      *
@@ -88,15 +104,24 @@ impl CustomTabs {
         account_id: &str,
         custom_tab_id: &str,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
     * Updates custom tab information.
 
@@ -117,17 +142,24 @@ impl CustomTabs {
         custom_tab_id: &str,
         body: &crate::types::TabMetadata,
     ) -> Result<crate::types::TabMetadata> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes custom tab information.
      *
@@ -141,12 +173,22 @@ impl CustomTabs {
      * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
      */
     pub async fn tab_delete_custom(&self, account_id: &str, custom_tab_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/tab_definitions/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(custom_tab_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

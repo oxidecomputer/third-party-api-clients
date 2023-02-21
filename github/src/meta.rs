@@ -22,11 +22,17 @@ impl Meta {
      * FROM: <https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint>
      */
     pub async fn root(&self) -> Result<crate::types::MetaRootResponse> {
-        let url = "".to_string();
-
-        self.client.get(&url, None).await
+        let url = self.client.url("", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get GitHub meta information.
      *
@@ -39,10 +45,17 @@ impl Meta {
      * FROM: <https://docs.github.com/rest/reference/meta#get-github-meta-information>
      */
     pub async fn get(&self) -> Result<crate::types::ApiOverview> {
-        let url = "/meta".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/meta", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get Octocat.
      *
@@ -62,11 +75,17 @@ impl Meta {
             query_args.push(("s".to_string(), s.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/octocat?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/octocat?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get the Zen of GitHub.
      *
@@ -75,7 +94,15 @@ impl Meta {
      * Get a random sentence from the Zen of GitHub
      */
     pub async fn get_zen(&self) -> Result<String> {
-        let url = "/zen".to_string();
-        self.client.get(&url, None).await
+        let url = self.client.url("/zen", None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

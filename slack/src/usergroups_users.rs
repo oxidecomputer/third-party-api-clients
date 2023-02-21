@@ -38,11 +38,19 @@ impl UsergroupsUsers {
             query_args.push(("usergroup".to_string(), usergroup.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/usergroups.users.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/usergroups.users.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/usergroups.users.update` endpoint.
      *
@@ -55,7 +63,15 @@ impl UsergroupsUsers {
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
     pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
-        let url = "/usergroups.users.update".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/usergroups.users.update", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

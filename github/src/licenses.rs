@@ -44,11 +44,17 @@ impl Licenses {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/licenses?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/licenses?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get all commonly used licenses.
      *
@@ -69,11 +75,17 @@ impl Licenses {
             query_args.push(("featured".to_string(), featured.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/licenses?{}", query_);
-
-        self.client.get_all_pages(&url, None).await
+        let url = self.client.url(&format!("/licenses?{}", query_), None);
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a license.
      *
@@ -88,14 +100,23 @@ impl Licenses {
      * * `license: &str`
      */
     pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
-        let url = format!(
-            "/licenses/{}",
-            crate::progenitor_support::encode_path(license),
+        let url = self.client.url(
+            &format!(
+                "/licenses/{}",
+                crate::progenitor_support::encode_path(license),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get the license for a repository.
      *
@@ -117,12 +138,22 @@ impl Licenses {
         owner: &str,
         repo: &str,
     ) -> Result<crate::types::LicenseContent> {
-        let url = format!(
-            "/repos/{}/{}/license",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/license",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -18,10 +18,17 @@ impl ThreeDSecure {
      * <p>Initiate 3D Secure authentication.</p>
      */
     pub async fn post_3d_secure(&self) -> Result<crate::types::ThreeDSecure> {
-        let url = "/v1/3d_secure".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/3d_secure", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/3d_secure/{three_d_secure}` endpoint.
      *
@@ -36,11 +43,21 @@ impl ThreeDSecure {
         &self,
         three_d_secure: &str,
     ) -> Result<crate::types::ThreeDSecure> {
-        let url = format!(
-            "/v1/3d_secure/{}",
-            crate::progenitor_support::encode_path(three_d_secure),
+        let url = self.client.url(
+            &format!(
+                "/v1/3d_secure/{}",
+                crate::progenitor_support::encode_path(three_d_secure),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

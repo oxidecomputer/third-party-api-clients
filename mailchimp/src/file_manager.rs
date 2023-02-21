@@ -80,11 +80,19 @@ impl FileManager {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/file-manager/files?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/file-manager/files?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add file.
      *
@@ -93,12 +101,17 @@ impl FileManager {
      * Upload a new image or file to the File Manager.
      */
     pub async fn post(&self, body: &crate::types::GalleryFile) -> Result<crate::types::Files> {
-        let url = "/file-manager/files".to_string();
+        let url = self.client.url("/file-manager/files", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get file.
      *
@@ -126,15 +139,24 @@ impl FileManager {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/file-manager/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/file-manager/files/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete file.
      *
@@ -147,14 +169,23 @@ impl FileManager {
      * * `file_id: &str` -- The unique id for the File Manager file.
      */
     pub async fn delete_files(&self, file_id: &str) -> Result<()> {
-        let url = format!(
-            "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/file-manager/files/{}",
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update file.
      *
@@ -171,16 +202,23 @@ impl FileManager {
         file_id: &str,
         body: &crate::types::GalleryFileData,
     ) -> Result<crate::types::Files> {
-        let url = format!(
-            "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+        let url = self.client.url(
+            &format!(
+                "/file-manager/files/{}",
+                crate::progenitor_support::encode_path(file_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * List folders.
      *
@@ -234,11 +272,19 @@ impl FileManager {
             query_args.push(("since_created_at".to_string(), since_created_at.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/file-manager/folders?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/file-manager/folders?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Add folder.
      *
@@ -250,12 +296,17 @@ impl FileManager {
         &self,
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
-        let url = "/file-manager/folders".to_string();
+        let url = self.client.url("/file-manager/folders", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get folder.
      *
@@ -283,15 +334,24 @@ impl FileManager {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/file-manager/folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/file-manager/folders/{}?{}",
+                crate::progenitor_support::encode_path(folder_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete folder.
      *
@@ -304,14 +364,23 @@ impl FileManager {
      * * `folder_id: &str` -- The unique id for the File Manager folder.
      */
     pub async fn delete_folders(&self, folder_id: &str) -> Result<()> {
-        let url = format!(
-            "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/file-manager/folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update folder.
      *
@@ -328,13 +397,21 @@ impl FileManager {
         folder_id: &str,
         body: &crate::types::GalleryFolder,
     ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
-        let url = format!(
-            "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+        let url = self.client.url(
+            &format!(
+                "/file-manager/folders/{}",
+                crate::progenitor_support::encode_path(folder_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

@@ -49,11 +49,19 @@ impl SegmentingContactsBeta {
             query_args.push(("parent_list_ids".to_string(), parent_list_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/segments/2.0?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/marketing/segments/2.0?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create Segment.
      *
@@ -67,12 +75,17 @@ impl SegmentingContactsBeta {
         &self,
         body: &crate::types::SegmentWriteV2,
     ) -> Result<crate::types::SegmentResponse> {
-        let url = "/marketing/segments/2.0".to_string();
+        let url = self.client.url("/marketing/segments/2.0", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Get Segment by ID.
      *
@@ -94,15 +107,24 @@ impl SegmentingContactsBeta {
             query_args.push(("contacts_sample".to_string(), contacts_sample.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/segments/2.0/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}?{}",
+                crate::progenitor_support::encode_path(segment_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete segment.
      *
@@ -111,14 +133,23 @@ impl SegmentingContactsBeta {
      * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
      */
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
-        let url = format!(
-            "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update Segment.
      *
@@ -133,13 +164,21 @@ impl SegmentingContactsBeta {
         segment_id: &str,
         body: &crate::types::SegmentUpdate,
     ) -> Result<crate::types::SegmentResponse> {
-        let url = format!(
-            "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/segments/2.0/{}",
+                crate::progenitor_support::encode_path(segment_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

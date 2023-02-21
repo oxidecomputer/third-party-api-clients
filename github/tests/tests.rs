@@ -1,5 +1,5 @@
 use rand::RngCore;
-use rsa::{RsaPrivateKey, pkcs1::EncodeRsaPrivateKey};
+use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
 use std::{mem, time::Duration};
 
 use wiremock::{
@@ -7,25 +7,29 @@ use wiremock::{
     Mock, MockServer, ResponseTemplate,
 };
 
-use crate::{
+use octorust::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     types::InstallationToken,
     Client,
 };
 
-pub(crate) fn app_id() -> u64 {
+fn app_id() -> u64 {
     let mut rng = rand::thread_rng();
     rng.next_u64()
 }
 
-pub(crate) fn installation_id() -> u64 {
+fn installation_id() -> u64 {
     let mut rng = rand::thread_rng();
     rng.next_u64()
 }
 
-pub(crate) fn private_key() -> Vec<u8> {
+fn private_key() -> Vec<u8> {
     let mut rng = rand::thread_rng();
-    let private_key = RsaPrivateKey::new(&mut rng, 2048).unwrap().to_pkcs1_der().unwrap().to_bytes();
+    let private_key = RsaPrivateKey::new(&mut rng, 2048)
+        .unwrap()
+        .to_pkcs1_der()
+        .unwrap()
+        .to_bytes();
     private_key.to_vec()
 }
 
@@ -35,8 +39,7 @@ async fn refreshes_installation_token_once() {
 
     let server = MockServer::start().await;
 
-    let jwt =
-        JWTCredentials::new(app_id(), private_key()).expect("JWT creation should succeed");
+    let jwt = JWTCredentials::new(app_id(), private_key()).expect("JWT creation should succeed");
 
     // The JWT should be used to retrieve an installation token only once, even if requesting the
     // the token takes long enough for a second task to ask for one.
@@ -71,12 +74,12 @@ async fn refreshes_installation_token_once() {
         .await;
 
     let token_generator = InstallationTokenGenerator::new(installation_id, jwt);
-    let client = Client::host(
-        server.uri(),
+    let mut client = Client::new(
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
     )
     .expect("Client creation should succeed");
+    client.with_host_override(server.uri());
 
     // Request zen twice at the same time.
     let meta = client.meta();

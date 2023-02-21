@@ -20,14 +20,23 @@ impl Contractors {
      * Get a contractor.
      */
     pub async fn get(&self, contractor_id_or_uuid: &str) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/contractors/{}",
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a contractor.
      *
@@ -40,16 +49,23 @@ impl Contractors {
         contractor_id_or_uuid: &str,
         body: &crate::types::PutComntractorRequest,
     ) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/contractors/{}",
+                crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get contractors of a company.
      *
@@ -61,14 +77,23 @@ impl Contractors {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get contractors of a company.
      *
@@ -82,14 +107,23 @@ impl Contractors {
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get_all_pages(&url, None).await
+        self.client
+            .get_all_pages(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a contractor.
      *
@@ -102,13 +136,21 @@ impl Contractors {
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyContractorsRequest,
     ) -> Result<crate::types::Contractor> {
-        let url = format!(
-            "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractors",
+                crate::progenitor_support::encode_path(company_id_or_uuid),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

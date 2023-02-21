@@ -71,11 +71,17 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/code?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/search/code?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search commits.
      *
@@ -125,11 +131,19 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/commits?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/search/commits?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search issues and pull requests.
      *
@@ -183,11 +197,17 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/issues?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/search/issues?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search labels.
      *
@@ -243,11 +263,17 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/labels?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/search/labels?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search repositories.
      *
@@ -302,11 +328,19 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/repositories?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/search/repositories?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search topics.
      *
@@ -347,11 +381,17 @@ impl Search {
             query_args.push(("q".to_string(), q.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/topics?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/search/topics?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Search users.
      *
@@ -402,8 +442,15 @@ impl Search {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/search/users?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/search/users?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

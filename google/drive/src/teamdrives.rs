@@ -48,14 +48,21 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
-
-        let resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
+        let resp: crate::types::TeamDriveList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.team_drives.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/teamdrives` endpoint.
      *
@@ -79,9 +86,17 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
-
-        let mut resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
+        let mut resp: crate::types::TeamDriveList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut team_drives = resp.team_drives;
         let mut page = resp.next_page_token;
@@ -91,12 +106,24 @@ impl Teamdrives {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -112,7 +139,6 @@ impl Teamdrives {
         // Return our response data.
         Ok(team_drives)
     }
-
     /**
      * This function performs a `POST` to the `/teamdrives` endpoint.
      *
@@ -132,13 +158,17 @@ impl Teamdrives {
             query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/teamdrives?{}", query_);
-
+        let url = self.client.url(&format!("/teamdrives?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -162,15 +192,24 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(team_drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}?{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -181,14 +220,23 @@ impl Teamdrives {
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
     pub async fn delete(&self, team_drive_id: &str) -> Result<()> {
-        let url = format!(
-            "/teamdrives/{}",
-            crate::progenitor_support::encode_path(team_drive_id),
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/teamdrives/{teamDriveId}` endpoint.
      *
@@ -213,14 +261,22 @@ impl Teamdrives {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(team_drive_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/teamdrives/{}?{}",
+                crate::progenitor_support::encode_path(team_drive_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

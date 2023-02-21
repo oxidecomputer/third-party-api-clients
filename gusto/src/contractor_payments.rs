@@ -38,15 +38,24 @@ impl ContractorPayments {
             query_args.push(("start_date".to_string(), start_date.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/contractor_payments?{}",
-            crate::progenitor_support::encode_path(company_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractor_payments?{}",
+                crate::progenitor_support::encode_path(company_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create a contractor payment (Beta).
      *
@@ -95,15 +104,24 @@ impl ContractorPayments {
             query_args.push(("wage".to_string(), wage.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v1/companies/{}/contractor_payments?{}",
-            crate::progenitor_support::encode_path(company_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractor_payments?{}",
+                crate::progenitor_support::encode_path(company_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a single contractor payment.
      *
@@ -116,15 +134,24 @@ impl ContractorPayments {
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
     ) -> Result<crate::types::ContractorPayment> {
-        let url = format!(
-            "/v1/companies/{}/contractor_payments/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractor_payments/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Cancel a contractor payment (Beta).
      *
@@ -139,12 +166,22 @@ impl ContractorPayments {
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v1/companies/{}/contractor_payments/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
+        let url = self.client.url(
+            &format!(
+                "/v1/companies/{}/contractor_payments/{}",
+                crate::progenitor_support::encode_path(company_id),
+                crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

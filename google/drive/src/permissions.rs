@@ -69,18 +69,28 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::PermissionList = self.client.get(&url, None).await?;
+        let resp: crate::types::PermissionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.permissions.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions` endpoint.
      *
@@ -122,13 +132,24 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        let mut resp: crate::types::PermissionList = self.client.get(&url, None).await?;
+        let mut resp: crate::types::PermissionList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut permissions = resp.permissions;
         let mut page = resp.next_page_token;
@@ -138,12 +159,24 @@ impl Permissions {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -159,7 +192,6 @@ impl Permissions {
         // Return our response data.
         Ok(permissions)
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/permissions` endpoint.
      *
@@ -228,17 +260,24 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -280,16 +319,25 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(permission_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -331,16 +379,25 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(permission_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}/permissions/{permissionId}` endpoint.
      *
@@ -399,15 +456,23 @@ impl Permissions {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/permissions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(permission_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/permissions/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                crate::progenitor_support::encode_path(permission_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

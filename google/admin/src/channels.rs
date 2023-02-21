@@ -18,9 +18,15 @@ impl Channels {
      * Stops watching resources through this channel.
      */
     pub async fn admin_stop(&self, body: &crate::types::Channel) -> Result<()> {
-        let url = "/admin/directory_v1/channels/stop".to_string();
+        let url = self.client.url("/admin/directory_v1/channels/stop", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

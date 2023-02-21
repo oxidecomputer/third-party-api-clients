@@ -35,15 +35,24 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
     ) -> Result<crate::types::Channel> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a channel.
      *
@@ -62,15 +71,24 @@ impl ChatChannelsAccountLevel {
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
     pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update a channel.
      *
@@ -95,17 +113,24 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         body: &crate::types::Attendees,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * List channel members.
      *
@@ -139,20 +164,29 @@ impl ChatChannelsAccountLevel {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/chat/users/{}/channels/{}/members?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members?{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+                query_
+            ),
+            None,
         );
-
-        let resp: crate::types::ListChannelMembersResponseData =
-            self.client.get(&url, None).await?;
+        let resp: crate::types::ListChannelMembersResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.members.to_vec())
     }
-
     /**
      * List channel members.
      *
@@ -171,14 +205,24 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
     ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-
-        let mut resp: crate::types::ListChannelMembersResponseData =
-            self.client.get(&url, None).await?;
+        let mut resp: crate::types::ListChannelMembersResponseData = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -189,12 +233,24 @@ impl ChatChannelsAccountLevel {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}?next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", url, page), None)
+                    .get(
+                        &format!("{}&next_page_token={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -210,7 +266,6 @@ impl ChatChannelsAccountLevel {
         // Return our response data.
         Ok(members)
     }
-
     /**
      * Invite channel members.
      *
@@ -233,17 +288,24 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         body: &crate::types::InviteChannelMembersRequest,
     ) -> Result<crate::types::InviteChannelMembersResponse> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove a member.
      *
@@ -269,13 +331,23 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         member_id: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/chat/users/{}/channels/{}/members/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(channel_id),
-            crate::progenitor_support::encode_path(member_id),
+        let url = self.client.url(
+            &format!(
+                "/chat/users/{}/channels/{}/members/{}",
+                crate::progenitor_support::encode_path(user_id),
+                crate::progenitor_support::encode_path(channel_id),
+                crate::progenitor_support::encode_path(member_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

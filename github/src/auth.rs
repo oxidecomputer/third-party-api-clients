@@ -231,10 +231,30 @@ impl PartialEq for InstallationTokenGenerator {
 
 #[cfg(test)]
 mod tests {
-    use std::time::Duration;
     use super::*;
+    use rand::RngCore;
+    use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
+    use std::time::Duration;
 
-    use crate::tests::{app_id, installation_id, private_key};
+    fn app_id() -> u64 {
+        let mut rng = rand::thread_rng();
+        rng.next_u64()
+    }
+
+    fn installation_id() -> u64 {
+        let mut rng = rand::thread_rng();
+        rng.next_u64()
+    }
+
+    fn private_key() -> Vec<u8> {
+        let mut rng = rand::thread_rng();
+        let private_key = RsaPrivateKey::new(&mut rng, 2048)
+            .unwrap()
+            .to_pkcs1_der()
+            .unwrap()
+            .to_bytes();
+        private_key.to_vec()
+    }
 
     #[tokio::test(start_paused = true)]
     async fn jwt_credentials_refreshes_when_necessary() {

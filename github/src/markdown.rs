@@ -22,12 +22,17 @@ impl Markdown {
      * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document>
      */
     pub async fn render(&self, body: &crate::types::MarkdownRenderRequest) -> Result<String> {
-        let url = "/markdown".to_string();
+        let url = self.client.url("/markdown", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Render a Markdown document in raw mode.
      *
@@ -38,7 +43,15 @@ impl Markdown {
      * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document-in-raw-mode>
      */
     pub async fn render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
-        let url = "/markdown/raw".to_string();
-        self.client.post(&url, Some(body.into())).await
+        let url = self.client.url("/markdown/raw", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(body.into()),
+                    content_type: Some("text/plain".to_string()),
+                },
+            )
+            .await
     }
 }

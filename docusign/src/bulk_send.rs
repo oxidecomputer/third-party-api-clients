@@ -58,15 +58,24 @@ impl BulkSend {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets the status of a specific bulk send batch.
      *
@@ -90,15 +99,24 @@ impl BulkSend {
         account_id: &str,
         bulk_send_batch_id: &str,
     ) -> Result<crate::types::BulkSendBatchStatus> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_batch_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a specific bulk send batch status.
      *
@@ -117,17 +135,24 @@ impl BulkSend {
         bulk_send_batch_id: &str,
         body: &crate::types::BulkSendBatchRequest,
     ) -> Result<crate::types::BulkSendBatchStatus> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_batch/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_batch_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_batch/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_batch_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Gets bulk send lists.
      *
@@ -143,14 +168,23 @@ impl BulkSend {
         &self,
         account_id: &str,
     ) -> Result<crate::types::BulkSendingListSummaries> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a bulk send list.
      *
@@ -193,16 +227,23 @@ impl BulkSend {
         account_id: &str,
         body: &crate::types::BulkSendingList,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets a specific bulk send list.
      *
@@ -220,15 +261,24 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a bulk send list.
      *
@@ -247,17 +297,24 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendingList,
     ) -> Result<crate::types::BulkSendingList> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes a bulk send list.
      *
@@ -275,15 +332,24 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
     ) -> Result<crate::types::BulkSendingListSummaries> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates a bulk send request.
      *
@@ -339,17 +405,24 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
     ) -> Result<crate::types::BulkSendResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}/send",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}/send",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Creates a bulk send test.
      *
@@ -405,14 +478,22 @@ impl BulkSend {
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
     ) -> Result<crate::types::BulkSendTestResponse> {
-        let url = format!(
-            "/v2.1/accounts/{}/bulk_send_lists/{}/test",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(bulk_send_list_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/bulk_send_lists/{}/test",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(bulk_send_list_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
 }

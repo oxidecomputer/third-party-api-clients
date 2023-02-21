@@ -27,12 +27,17 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.inviteRequests.approve".to_string();
+        let url = self.client.url("/admin.inviteRequests.approve", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.inviteRequests.deny` endpoint.
      *
@@ -48,12 +53,17 @@ impl AdminInviteRequests {
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.inviteRequests.deny".to_string();
+        let url = self.client.url("/admin.inviteRequests.deny", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.inviteRequests.list` endpoint.
      *
@@ -85,8 +95,17 @@ impl AdminInviteRequests {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.inviteRequests.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.inviteRequests.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

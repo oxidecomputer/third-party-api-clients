@@ -51,14 +51,23 @@ impl Radar {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
-
-        let resp: crate::types::RadarEarlyFraudWarningList = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
+        let resp: crate::types::RadarEarlyFraudWarningList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings` endpoint.
      *
@@ -79,10 +88,19 @@ impl Radar {
             query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
-
-        let mut resp: crate::types::RadarEarlyFraudWarningList =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
+        let mut resp: crate::types::RadarEarlyFraudWarningList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -103,12 +121,24 @@ impl Radar {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -120,7 +150,6 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings/{early_fraud_warning}` endpoint.
      *
@@ -137,14 +166,23 @@ impl Radar {
         &self,
         early_fraud_warning: &str,
     ) -> Result<crate::types::RadarEarlyFraudWarning> {
-        let url = format!(
-            "/v1/radar/early_fraud_warnings/{}",
-            crate::progenitor_support::encode_path(early_fraud_warning),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/early_fraud_warnings/{}",
+                crate::progenitor_support::encode_path(early_fraud_warning),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
      *
@@ -186,14 +224,23 @@ impl Radar {
             query_args.push(("value_list".to_string(), value_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_list_items?{}", query_);
-
-        let resp: crate::types::ListItems = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
+        let resp: crate::types::ListItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
      *
@@ -215,9 +262,19 @@ impl Radar {
             query_args.push(("value_list".to_string(), value_list.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_list_items?{}", query_);
-
-        let mut resp: crate::types::ListItems = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
+        let mut resp: crate::types::ListItems = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -238,12 +295,24 @@ impl Radar {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -255,17 +324,23 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_list_items` endpoint.
      *
      * <p>Creates a new <code>ValueListItem</code> object, which is added to the specified parent value list.</p>
      */
     pub async fn post_value_list_item(&self) -> Result<crate::types::RadarListItem> {
-        let url = "/v1/radar/value_list_items".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/radar/value_list_items", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items/{item}` endpoint.
      *
@@ -280,14 +355,23 @@ impl Radar {
         &self,
         item: &str,
     ) -> Result<crate::types::RadarListItem> {
-        let url = format!(
-            "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_list_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/radar/value_list_items/{item}` endpoint.
      *
@@ -301,14 +385,23 @@ impl Radar {
         &self,
         item: &str,
     ) -> Result<crate::types::RadarListDeletedItem> {
-        let url = format!(
-            "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_list_items/{}",
+                crate::progenitor_support::encode_path(item),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
      *
@@ -350,14 +443,23 @@ impl Radar {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_lists?{}", query_);
-
-        let resp: crate::types::GetRadarValueListsResponse = self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_lists?{}", query_), None);
+        let resp: crate::types::GetRadarValueListsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
      *
@@ -379,10 +481,19 @@ impl Radar {
             query_args.push(("contains".to_string(), contains.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/radar/value_lists?{}", query_);
-
-        let mut resp: crate::types::GetRadarValueListsResponse =
-            self.client.get(&url, None).await?;
+        let url = self
+            .client
+            .url(&format!("/v1/radar/value_lists?{}", query_), None);
+        let mut resp: crate::types::GetRadarValueListsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -403,12 +514,24 @@ impl Radar {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -420,17 +543,23 @@ impl Radar {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_lists` endpoint.
      *
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
     pub async fn post_value_list(&self) -> Result<crate::types::RadarList> {
-        let url = "/v1/radar/value_lists".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/radar/value_lists", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -442,14 +571,23 @@ impl Radar {
      * * `value_list: &str` -- The account's country.
      */
     pub async fn get_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -460,14 +598,23 @@ impl Radar {
      * * `value_list: &str` -- The account's country.
      */
     pub async fn post_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/v1/radar/value_lists/{value_list}` endpoint.
      *
@@ -481,11 +628,21 @@ impl Radar {
         &self,
         value_list: &str,
     ) -> Result<crate::types::RadarListDeleted> {
-        let url = format!(
-            "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+        let url = self.client.url(
+            &format!(
+                "/v1/radar/value_lists/{}",
+                crate::progenitor_support::encode_path(value_list),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

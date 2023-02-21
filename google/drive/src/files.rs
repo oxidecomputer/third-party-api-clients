@@ -106,14 +106,21 @@ impl Files {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files?{}", query_);
-
-        let resp: crate::types::FileList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/files?{}", query_), None);
+        let resp: crate::types::FileList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.files.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/files` endpoint.
      *
@@ -185,9 +192,17 @@ impl Files {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files?{}", query_);
-
-        let mut resp: crate::types::FileList = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/files?{}", query_), None);
+        let mut resp: crate::types::FileList = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut files = resp.files;
         let mut page = resp.next_page_token;
@@ -197,12 +212,24 @@ impl Files {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}?pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .get(
+                        &format!("{}&pageToken={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -218,7 +245,6 @@ impl Files {
         // Return our response data.
         Ok(files)
     }
-
     /**
      * This function performs a `POST` to the `/files` endpoint.
      *
@@ -287,13 +313,17 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files?{}", query_);
-
+        let url = self.client.url(&format!("/files?{}", query_), None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/octet-stream".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/generateIds` endpoint.
      *
@@ -322,11 +352,19 @@ impl Files {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/files/generateIds?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/files/generateIds?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/trash` endpoint.
      *
@@ -337,10 +375,17 @@ impl Files {
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
     pub async fn empty_trash(&self) -> Result<()> {
-        let url = "/files/trash".to_string();
-        self.client.delete(&url, None).await
+        let url = self.client.url("/files/trash", None);
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}` endpoint.
      *
@@ -388,15 +433,24 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `DELETE` to the `/files/{fileId}` endpoint.
      *
@@ -429,15 +483,24 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `PATCH` to the `/files/{fileId}` endpoint.
      *
@@ -510,17 +573,24 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/octet-stream".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/copy` endpoint.
      *
@@ -583,17 +653,24 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/copy?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/copy?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * This function performs a `GET` to the `/files/{fileId}/export` endpoint.
      *
@@ -610,15 +687,24 @@ impl Files {
             query_args.push(("mimeType".to_string(), mime_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/export?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/export?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/files/{fileId}/watch` endpoint.
      *
@@ -667,14 +753,22 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/files/{}/watch?{}",
-            crate::progenitor_support::encode_path(file_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/files/{}/watch?{}",
+                crate::progenitor_support::encode_path(file_id),
+                query_
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
 }

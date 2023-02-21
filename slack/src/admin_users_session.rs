@@ -24,10 +24,17 @@ impl AdminUsersSession {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn invalidate(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.session.invalidate".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.session.invalidate", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.session.reset` endpoint.
      *
@@ -40,7 +47,15 @@ impl AdminUsersSession {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn reset(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.session.reset".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.session.reset", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

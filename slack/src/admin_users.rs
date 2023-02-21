@@ -24,10 +24,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.assign".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.assign", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.invite` endpoint.
      *
@@ -40,10 +47,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.invite".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.invite", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.users.list` endpoint.
      *
@@ -75,11 +89,19 @@ impl AdminUsers {
             query_args.push(("team_id".to_string(), team_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.users.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.users.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.remove` endpoint.
      *
@@ -92,10 +114,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.remove".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.remove", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.setAdmin` endpoint.
      *
@@ -108,10 +137,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.setAdmin".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.setAdmin", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.setExpiration` endpoint.
      *
@@ -124,10 +160,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.setExpiration".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.setExpiration", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.setOwner` endpoint.
      *
@@ -140,10 +183,17 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.setOwner".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.setOwner", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.users.setRegular` endpoint.
      *
@@ -156,7 +206,15 @@ impl AdminUsers {
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
     pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.users.setRegular".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.users.setRegular", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

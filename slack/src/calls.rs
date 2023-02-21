@@ -24,10 +24,17 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.add".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/calls.add", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/calls.end` endpoint.
      *
@@ -40,10 +47,17 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.end".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/calls.end", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/calls.info` endpoint.
      *
@@ -62,11 +76,17 @@ impl Calls {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/calls.info?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/calls.info?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/calls.update` endpoint.
      *
@@ -79,7 +99,15 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
     pub async fn update(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/calls.update".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/calls.update", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

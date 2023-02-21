@@ -37,8 +37,15 @@ impl Root {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

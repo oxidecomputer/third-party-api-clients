@@ -37,11 +37,19 @@ impl Lists {
             query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/marketing/lists?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/marketing/lists?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Create List.
      *
@@ -54,12 +62,17 @@ impl Lists {
      * A link to the newly created object is in `_metadata`.
      */
     pub async fn post_mc(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
-        let url = "/marketing/lists".to_string();
+        let url = self.client.url("/marketing/lists", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get List Contact Count.
      *
@@ -71,14 +84,23 @@ impl Lists {
         &self,
         id: &str,
     ) -> Result<crate::types::GetMcListsContactsCountResponse> {
-        let url = format!(
-            "/marketing/lists/{}/contacts/count",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}/contacts/count",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Get a List by ID.
      *
@@ -104,15 +126,24 @@ impl Lists {
             query_args.push(("contact_sample".to_string(), contact_sample.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete a list.
      *
@@ -136,15 +167,24 @@ impl Lists {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Update List.
      *
@@ -157,16 +197,23 @@ impl Lists {
         id: &str,
         body: &crate::types::PatchMcListsRequest,
     ) -> Result<crate::types::List> {
-        let url = format!(
-            "/marketing/lists/{}",
-            crate::progenitor_support::encode_path(id),
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}",
+                crate::progenitor_support::encode_path(id),
+            ),
+            None,
         );
-
         self.client
-            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .patch(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Remove Contacts from a List.
      *
@@ -190,12 +237,22 @@ impl Lists {
             query_args.push(("contact_ids".to_string(), contact_ids.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/marketing/lists/{}/contacts?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/marketing/lists/{}/contacts?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

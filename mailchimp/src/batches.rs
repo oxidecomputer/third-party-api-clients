@@ -47,11 +47,17 @@ impl Batches {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/batches?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/batches?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Start batch operation.
      *
@@ -63,12 +69,17 @@ impl Batches {
         &self,
         body: &crate::types::PostBatchesRequest,
     ) -> Result<crate::types::Batch> {
-        let url = "/batches".to_string();
+        let url = self.client.url("/batches", None);
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: Some("application/json".to_string()),
+                },
+            )
             .await
     }
-
     /**
      * Get batch operation status.
      *
@@ -96,15 +107,24 @@ impl Batches {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/batches/{}?{}",
-            crate::progenitor_support::encode_path(batch_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/batches/{}?{}",
+                crate::progenitor_support::encode_path(batch_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Delete batch request.
      *
@@ -117,11 +137,21 @@ impl Batches {
      * * `batch_id: &str` -- The unique id for the batch operation.
      */
     pub async fn delete(&self, batch_id: &str) -> Result<()> {
-        let url = format!(
-            "/batches/{}",
-            crate::progenitor_support::encode_path(batch_id),
+        let url = self.client.url(
+            &format!(
+                "/batches/{}",
+                crate::progenitor_support::encode_path(batch_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.2.2"
+//! octorust = "0.3.0"
 //! ```
 //!
 //! ## Basic example
@@ -43,7 +43,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of `auth::Credentials`.
 //!
-//! ```
+//! ```rust
 //! use octorust::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
@@ -55,7 +55,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.2.2/octorust/struct.Client.html#method.host) method.
+//! [Client#host_override](https://docs.rs/octorust/0.3.0/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -69,14 +69,14 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.2.2", features = ["httpcache"] }
+//! octorust = { version = "0.3.0", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
 //!
 //! Here is an example:
 //!
-//! ```
+//! ```rust
 //! use octorust::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::HttpCache;
@@ -86,7 +86,6 @@
 //!
 //! #[cfg(not(feature = "httpcache"))]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -96,7 +95,6 @@
 //!
 //! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -145,7 +143,6 @@
 //!
 //! #[cfg(not(feature = "httpcache"))]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
@@ -153,7 +150,6 @@
 //!
 //! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
-//!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
@@ -240,8 +236,6 @@ pub mod search;
 pub mod secret_scanning;
 /// Interact with GitHub Teams.
 pub mod teams;
-#[cfg(test)]
-mod tests;
 pub mod types;
 /// Interact with and view information about users and also current user.
 pub mod users;
@@ -250,7 +244,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.github.com";
+pub const FALLBACK_HOST: &str = "https://api.github.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -272,10 +266,26 @@ mod progenitor_support {
     }
 }
 
+#[derive(Debug, Default)]
+pub(crate) struct Message {
+    pub body: Option<reqwest::Body>,
+    pub content_type: Option<String>,
+}
+
+#[derive(Debug, Default, Clone)]
+pub struct RootDefaultServer {}
+
+impl RootDefaultServer {
+    pub fn default_url(&self) -> &str {
+        "https://api.github.com"
+    }
+}
+
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     host: String,
+    host_override: Option<String>,
     agent: String,
     client: reqwest_middleware::ClientWithMiddleware,
     credentials: Option<crate::auth::Credentials>,
@@ -286,15 +296,6 @@ pub struct Client {
 impl Client {
     pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
     where
-        A: Into<String>,
-        C: Into<Option<crate::auth::Credentials>>,
-    {
-        Self::host(DEFAULT_HOST, agent, credentials)
-    }
-
-    pub fn host<H, A, C>(host: H, agent: A, credentials: C) -> Result<Self>
-    where
-        H: Into<String>,
         A: Into<String>,
         C: Into<Option<crate::auth::Credentials>>,
     {
@@ -310,10 +311,10 @@ impl Client {
                 |req: &reqwest::Request| req.try_clone().is_some(),
             ))
             .build();
+
         #[cfg(feature = "httpcache")]
         {
             Ok(Self::custom(
-                host,
                 agent,
                 credentials,
                 client,
@@ -322,25 +323,24 @@ impl Client {
         }
         #[cfg(not(feature = "httpcache"))]
         {
-            Ok(Self::custom(host, agent, credentials, client))
+            Ok(Self::custom(agent, credentials, client))
         }
     }
 
     #[cfg(feature = "httpcache")]
-    pub fn custom<H, A, CR>(
-        host: H,
+    pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
         http: reqwest_middleware::ClientWithMiddleware,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
-        H: Into<String>,
         A: Into<String>,
         CR: Into<Option<crate::auth::Credentials>>,
     {
         Self {
-            host: host.into(),
+            host: RootDefaultServer::default().default_url().to_string(),
+            host_override: None,
             agent: agent.into(),
             client: http,
             credentials: credentials.into(),
@@ -349,23 +349,51 @@ impl Client {
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(
-        host: H,
+    pub fn custom<A, CR>(
         agent: A,
         credentials: CR,
         http: reqwest_middleware::ClientWithMiddleware,
     ) -> Self
     where
-        H: Into<String>,
         A: Into<String>,
         CR: Into<Option<crate::auth::Credentials>>,
     {
         Self {
-            host: host.into(),
+            host: RootDefaultServer::default().default_url().to_string(),
+            host_override: None,
             agent: agent.into(),
             client: http,
             credentials: credentials.into(),
         }
+    }
+
+    /// Override the host for all endpoins in the client.
+    pub fn with_host_override<H>(&mut self, host: H) -> &mut Self
+    where
+        H: ToString,
+    {
+        self.host_override = Some(host.to_string());
+        self
+    }
+
+    /// Disables the global host override for the client.
+    pub fn remove_host_override(&mut self) -> &mut Self {
+        self.host_override = None;
+        self
+    }
+
+    pub fn get_host_override(&self) -> Option<&str> {
+        self.host_override.as_deref()
+    }
+
+    pub(crate) fn url(&self, path: &str, host: Option<&str>) -> String {
+        format!(
+            "{}{}",
+            self.get_host_override()
+                .or(host)
+                .unwrap_or(self.host.as_str()),
+            path
+        )
     }
 
     pub fn set_credentials<CR>(&mut self, credentials: CR)
@@ -462,7 +490,7 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
@@ -490,6 +518,10 @@ impl Client {
             req
         };
 
+        if let Some(content_type) = &message.content_type {
+            req = req.header(http::header::CONTENT_TYPE, content_type.clone());
+        }
+
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
@@ -503,7 +535,7 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        if let Some(body) = body {
+        if let Some(body) = message.body {
             req = req.body(body);
         }
         let response = req.send().await?;
@@ -613,7 +645,7 @@ impl Client {
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<reqwest::Body>,
+        message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
@@ -621,12 +653,12 @@ impl Client {
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_, r) = self
-            .request(method, uri, body, media_type, authentication)
+            .request(method, uri, message, media_type, authentication)
             .await?;
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -638,14 +670,14 @@ impl Client {
         &self,
         uri: &str,
         media: crate::utils::MediaType,
-        message: Option<reqwest::Body>,
+        message: Message,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::GET,
-            &(self.host.clone() + uri),
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -653,7 +685,7 @@ impl Client {
         .await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str, _message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -666,8 +698,8 @@ impl Client {
     {
         self.request(
             http::Method::GET,
-            &(self.host.clone() + uri),
-            None,
+            uri,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
         )
@@ -684,14 +716,14 @@ impl Client {
         self.request(
             http::Method::GET,
             url.as_str(),
-            None,
+            Message::default(),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
     }
 
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -707,27 +739,21 @@ impl Client {
     async fn post_media<D>(
         &self,
         uri: &str,
-        message: Option<reqwest::Body>,
+        message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::POST,
-            &(self.host.clone() + uri),
-            message,
-            media,
-            authentication,
-        )
-        .await
+        self.request_entity(http::Method::POST, uri, message, media, authentication)
+            .await
     }
 
     async fn patch_media<D>(
         &self,
         uri: &str,
-        message: Option<reqwest::Body>,
+        message: Message,
         media: crate::utils::MediaType,
     ) -> Result<D>
     where
@@ -735,7 +761,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PATCH,
-            &(self.host.clone() + uri),
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -743,7 +769,7 @@ impl Client {
         .await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -751,7 +777,7 @@ impl Client {
             .await
     }
 
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -762,7 +788,7 @@ impl Client {
     async fn put_media<D>(
         &self,
         uri: &str,
-        message: Option<reqwest::Body>,
+        message: Message,
         media: crate::utils::MediaType,
     ) -> Result<D>
     where
@@ -770,7 +796,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::PUT,
-            &(self.host.clone() + uri),
+            uri,
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
@@ -778,13 +804,13 @@ impl Client {
         .await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::DELETE,
-            &(self.host.clone() + uri),
+            uri,
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,

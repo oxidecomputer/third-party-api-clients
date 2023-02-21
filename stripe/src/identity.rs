@@ -56,15 +56,24 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_reports?{}", query_);
-
-        let resp: crate::types::GetIdentityVerificationReportsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url(
+            &format!("/v1/identity/verification_reports?{}", query_),
+            None,
+        );
+        let resp: crate::types::GetIdentityVerificationReportsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/identity/verification_reports` endpoint.
      *
@@ -89,10 +98,20 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_reports?{}", query_);
-
-        let mut resp: crate::types::GetIdentityVerificationReportsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url(
+            &format!("/v1/identity/verification_reports?{}", query_),
+            None,
+        );
+        let mut resp: crate::types::GetIdentityVerificationReportsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -113,12 +132,24 @@ impl Identity {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -130,7 +161,6 @@ impl Identity {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/identity/verification_reports/{report}` endpoint.
      *
@@ -145,14 +175,23 @@ impl Identity {
         &self,
         report: &str,
     ) -> Result<crate::types::GelatoVerificationReport> {
-        let url = format!(
-            "/v1/identity/verification_reports/{}",
-            crate::progenitor_support::encode_path(report),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_reports/{}",
+                crate::progenitor_support::encode_path(report),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/identity/verification_sessions` endpoint.
      *
@@ -189,15 +228,24 @@ impl Identity {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_sessions?{}", query_);
-
-        let resp: crate::types::GetIdentityVerificationSessionsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url(
+            &format!("/v1/identity/verification_sessions?{}", query_),
+            None,
+        );
+        let resp: crate::types::GetIdentityVerificationSessionsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * This function performs a `GET` to the `/v1/identity/verification_sessions` endpoint.
      *
@@ -215,10 +263,20 @@ impl Identity {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/v1/identity/verification_sessions?{}", query_);
-
-        let mut resp: crate::types::GetIdentityVerificationSessionsResponse =
-            self.client.get(&url, None).await?;
+        let url = self.client.url(
+            &format!("/v1/identity/verification_sessions?{}", query_),
+            None,
+        );
+        let mut resp: crate::types::GetIdentityVerificationSessionsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut has_more = resp.has_more;
@@ -239,12 +297,24 @@ impl Identity {
             if !url.contains('?') {
                 resp = self
                     .client
-                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .get(
+                        &format!("{}?startng_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .get(
+                        &format!("{}&starting_after={}", url, page),
+                        crate::Message {
+                            body: None,
+                            content_type: None,
+                        },
+                    )
                     .await?;
             }
 
@@ -256,7 +326,6 @@ impl Identity {
         // Return our response data.
         Ok(data.to_vec())
     }
-
     /**
      * This function performs a `POST` to the `/v1/identity/verification_sessions` endpoint.
      *
@@ -271,10 +340,17 @@ impl Identity {
     pub async fn post_verification_session(
         &self,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = "/v1/identity/verification_sessions".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/v1/identity/verification_sessions", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/v1/identity/verification_sessions/{session}` endpoint.
      *
@@ -292,14 +368,23 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/identity/verification_sessions/{session}` endpoint.
      *
@@ -316,14 +401,23 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/identity/verification_sessions/{session}/cancel` endpoint.
      *
@@ -339,14 +433,23 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}/cancel",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}/cancel",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/v1/identity/verification_sessions/{session}/redact` endpoint.
      *
@@ -378,11 +481,21 @@ impl Identity {
         &self,
         session: &str,
     ) -> Result<crate::types::GelatoVerificationSession> {
-        let url = format!(
-            "/v1/identity/verification_sessions/{}/redact",
-            crate::progenitor_support::encode_path(session),
+        let url = self.client.url(
+            &format!(
+                "/v1/identity/verification_sessions/{}/redact",
+                crate::progenitor_support::encode_path(session),
+            ),
+            None,
         );
-
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

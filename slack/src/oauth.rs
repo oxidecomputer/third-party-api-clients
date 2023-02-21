@@ -52,11 +52,17 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/oauth.access?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/oauth.access?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/oauth.token` endpoint.
      *
@@ -97,8 +103,15 @@ impl Oauth {
             query_args.push(("single_channel".to_string(), single_channel.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/oauth.token?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(&format!("/oauth.token?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

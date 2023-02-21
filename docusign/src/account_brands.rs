@@ -44,15 +44,24 @@ impl AccountBrands {
             query_args.push(("include_logos".to_string(), include_logos.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/brands?{}",
-            crate::progenitor_support::encode_path(account_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands?{}",
+                crate::progenitor_support::encode_path(account_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Creates one or more brand profiles for an account.
      *
@@ -75,16 +84,23 @@ impl AccountBrands {
         account_id: &str,
         body: &crate::types::Brand,
     ) -> Result<crate::types::AccountBrands> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes one or more brand profiles.
      *
@@ -103,16 +119,23 @@ impl AccountBrands {
         account_id: &str,
         body: &crate::types::BrandsRequest,
     ) -> Result<crate::types::AccountBrands> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands",
-            crate::progenitor_support::encode_path(account_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands",
+                crate::progenitor_support::encode_path(account_id),
+            ),
+            None,
         );
-
         self.client
-            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .delete(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Gets information about a brand.
      *
@@ -147,16 +170,25 @@ impl AccountBrands {
             query_args.push(("include_logos".to_string(), include_logos.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates an existing brand.
      *
@@ -177,17 +209,24 @@ impl AccountBrands {
         brand_id: &str,
         body: &crate::types::Brand,
     ) -> Result<crate::types::Brand> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes a brand.
      *
@@ -203,15 +242,24 @@ impl AccountBrands {
      * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_delete(&self, account_id: &str, brand_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Exports a brand.
      *
@@ -227,15 +275,24 @@ impl AccountBrands {
      * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_export_get_file(&self, account_id: &str, brand_id: &str) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/file",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/file",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Gets a brand logo.
      *
@@ -257,16 +314,25 @@ impl AccountBrands {
         brand_id: &str,
         logo_type: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/logos/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            crate::progenitor_support::encode_path(logo_type),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/logos/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a brand logo.
      *
@@ -293,16 +359,25 @@ impl AccountBrands {
         logo_type: &str,
         body: bytes::Bytes,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/logos/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            crate::progenitor_support::encode_path(logo_type),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/logos/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
+            ),
+            None,
         );
-
-        self.client.put(&url, Some(body.into())).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(body.into()),
+                    content_type: Some("image/png".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * Deletes a brand logo.
      *
@@ -324,16 +399,25 @@ impl AccountBrands {
         brand_id: &str,
         logo_type: &str,
     ) -> Result<()> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/logos/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            crate::progenitor_support::encode_path(logo_type),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/logos/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(logo_type),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Returns metadata about the branding resources for an account.
      *
@@ -353,15 +437,24 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
     ) -> Result<crate::types::BrandResourcesList> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/resources",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/resources",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Returns a branding resource file.
      *
@@ -404,17 +497,26 @@ impl AccountBrands {
             query_args.push(("return_master".to_string(), return_master.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/resources/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            crate::progenitor_support::encode_path(resource_content_type),
-            query_
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/resources/{}?{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(resource_content_type),
+                query_
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates a branding resource file.
      *
@@ -449,13 +551,23 @@ impl AccountBrands {
         brand_id: &str,
         resource_content_type: &str,
     ) -> Result<crate::types::BrandResources> {
-        let url = format!(
-            "/v2.1/accounts/{}/brands/{}/resources/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(brand_id),
-            crate::progenitor_support::encode_path(resource_content_type),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/brands/{}/resources/{}",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(brand_id),
+                crate::progenitor_support::encode_path(resource_content_type),
+            ),
+            None,
         );
-
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("multipart/form-data".to_string()),
+                },
+            )
+            .await
     }
 }

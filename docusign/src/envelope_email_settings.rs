@@ -29,15 +29,24 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
-        self.client.get(&url, None).await
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * Updates the email setting overrides for an envelope.
      *
@@ -58,17 +67,24 @@ impl EnvelopeEmailSettings {
         envelope_id: &str,
         body: &crate::types::EmailSettings,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .put(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Adds email setting overrides to an envelope.
      *
@@ -89,17 +105,24 @@ impl EnvelopeEmailSettings {
         envelope_id: &str,
         body: &crate::types::EmailSettings,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
         self.client
-            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .post(
+                &url,
+                crate::Message {
+                    body: Some(reqwest::Body::from(serde_json::to_vec(body)?)),
+                    content_type: None,
+                },
+            )
             .await
     }
-
     /**
      * Deletes the email setting overrides for an envelope.
      *
@@ -117,12 +140,22 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
     ) -> Result<crate::types::EmailSettings> {
-        let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/email_settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+        let url = self.client.url(
+            &format!(
+                "/v2.1/accounts/{}/envelopes/{}/email_settings",
+                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(envelope_id),
+            ),
+            None,
         );
-
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }

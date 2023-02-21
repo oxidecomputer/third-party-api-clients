@@ -20,10 +20,17 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.add>
      */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.emoji.add".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.emoji.add", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.emoji.addAlias` endpoint.
      *
@@ -32,10 +39,17 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.addAlias>
      */
     pub async fn add_alias(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.emoji.addAlias".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.emoji.addAlias", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `GET` to the `/admin.emoji.list` endpoint.
      *
@@ -58,11 +72,19 @@ impl AdminEmoji {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/admin.emoji.list?{}", query_);
-
-        self.client.get(&url, None).await
+        let url = self
+            .client
+            .url(&format!("/admin.emoji.list?{}", query_), None);
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.emoji.remove` endpoint.
      *
@@ -71,10 +93,17 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.remove>
      */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.emoji.remove".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.emoji.remove", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
-
     /**
      * This function performs a `POST` to the `/admin.emoji.rename` endpoint.
      *
@@ -83,7 +112,15 @@ impl AdminEmoji {
      * FROM: <https://api.slack.com/methods/admin.emoji.rename>
      */
     pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
-        let url = "/admin.emoji.rename".to_string();
-        self.client.post(&url, None).await
+        let url = self.client.url("/admin.emoji.rename", None);
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: Some("application/x-www-form-urlencoded".to_string()),
+                },
+            )
+            .await
     }
 }

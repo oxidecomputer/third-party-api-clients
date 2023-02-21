@@ -57,14 +57,21 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/receipts?{}", query_);
-
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/receipts?{}", query_), None);
+        let resp: crate::types::GetReceiptsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         // Return our response data.
         Ok(resp.data.to_vec())
     }
-
     /**
      * List receipts.
      *
@@ -95,9 +102,17 @@ impl Receipts {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/receipts?{}", query_);
-
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
+        let url = self.client.url(&format!("/receipts?{}", query_), None);
+        let resp: crate::types::GetReceiptsResponse = self
+            .client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next.to_string();
@@ -107,8 +122,11 @@ impl Receipts {
             match self
                 .client
                 .get::<crate::types::GetReceiptsResponse>(
-                    page.trim_start_matches(crate::DEFAULT_HOST),
-                    None,
+                    page.trim_start_matches(&self.client.host),
+                    crate::Message {
+                        body: None,
+                        content_type: None,
+                    },
                 )
                 .await
             {
@@ -134,7 +152,6 @@ impl Receipts {
         // Return our response data.
         Ok(data)
     }
-
     /**
      * Get details for one receipt.
      *
@@ -143,8 +160,18 @@ impl Receipts {
      *
      */
     pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
-        let url = format!("/receipts/{}", crate::progenitor_support::encode_path(id),);
-
-        self.client.get(&url, None).await
+        let url = self.client.url(
+            &format!("/receipts/{}", crate::progenitor_support::encode_path(id),),
+            None,
+        );
+        self.client
+            .get(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
     }
 }
