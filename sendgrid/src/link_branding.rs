@@ -123,7 +123,7 @@ impl LinkBranding {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}/validate",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -154,7 +154,7 @@ impl LinkBranding {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}/subuser",
-                crate::progenitor_support::encode_path(link_id),
+                crate::progenitor_support::encode_path(&link_id.to_string()),
             ),
             None,
         );
@@ -188,7 +188,7 @@ impl LinkBranding {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -221,7 +221,7 @@ impl LinkBranding {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -256,7 +256,7 @@ impl LinkBranding {
         let url = self.client.url(
             &format!(
                 "/whitelabel/links/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

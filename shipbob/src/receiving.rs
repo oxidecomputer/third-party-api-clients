@@ -63,7 +63,10 @@ impl Receiving {
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrder> {
         let url = self.client.url(
-            &format!("/receiving/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/receiving/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -89,7 +92,7 @@ impl Receiving {
         let url = self.client.url(
             &format!(
                 "/receiving/{}/labels",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -136,7 +139,7 @@ impl Receiving {
         let url = self.client.url(
             &format!(
                 "/receiving/{}/cancel",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

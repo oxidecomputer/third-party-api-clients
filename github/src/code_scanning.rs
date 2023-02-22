@@ -180,7 +180,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/alerts/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(alert_number),
+                crate::progenitor_support::encode_path(&alert_number.to_string()),
             ),
             None,
         );
@@ -221,7 +221,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/alerts/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(alert_number),
+                crate::progenitor_support::encode_path(&alert_number.to_string()),
             ),
             None,
         );
@@ -278,7 +278,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(alert_number),
+                crate::progenitor_support::encode_path(&alert_number.to_string()),
                 query_
             ),
             None,
@@ -321,7 +321,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(alert_number),
+                crate::progenitor_support::encode_path(&alert_number.to_string()),
                 query_
             ),
             None,
@@ -535,7 +535,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/analyses/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(analysis_id),
+                crate::progenitor_support::encode_path(&analysis_id.to_string()),
             ),
             None,
         );
@@ -645,7 +645,7 @@ impl CodeScanning {
                 "/repos/{}/{}/code-scanning/analyses/{}?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(analysis_id),
+                crate::progenitor_support::encode_path(&analysis_id.to_string()),
                 query_
             ),
             None,

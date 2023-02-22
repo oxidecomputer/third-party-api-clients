@@ -155,7 +155,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(card_id),
+                crate::progenitor_support::encode_path(&card_id.to_string()),
             ),
             None,
         );
@@ -186,7 +186,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(card_id),
+                crate::progenitor_support::encode_path(&card_id.to_string()),
             ),
             None,
         );
@@ -221,7 +221,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}",
-                crate::progenitor_support::encode_path(card_id),
+                crate::progenitor_support::encode_path(&card_id.to_string()),
             ),
             None,
         );
@@ -256,7 +256,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/cards/{}/moves",
-                crate::progenitor_support::encode_path(card_id),
+                crate::progenitor_support::encode_path(&card_id.to_string()),
             ),
             None,
         );
@@ -287,7 +287,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
             ),
             None,
         );
@@ -318,7 +318,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
             ),
             None,
         );
@@ -353,7 +353,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
             ),
             None,
         );
@@ -404,7 +404,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/cards?{}",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
                 query_
             ),
             None,
@@ -443,7 +443,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/cards?{}",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
                 query_
             ),
             None,
@@ -479,7 +479,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/cards",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
             ),
             None,
         );
@@ -514,7 +514,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/columns/{}/moves",
-                crate::progenitor_support::encode_path(column_id),
+                crate::progenitor_support::encode_path(&column_id.to_string()),
             ),
             None,
         );
@@ -545,7 +545,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
         );
@@ -576,7 +576,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
         );
@@ -611,7 +611,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
         );
@@ -665,7 +665,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators?{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 query_
             ),
             None,
@@ -704,7 +704,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators?{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 query_
             ),
             None,
@@ -742,7 +742,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 crate::progenitor_support::encode_path(username),
             ),
             None,
@@ -775,7 +775,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 crate::progenitor_support::encode_path(username),
             ),
             None,
@@ -812,7 +812,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/collaborators/{}/permission",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 crate::progenitor_support::encode_path(username),
             ),
             None,
@@ -859,7 +859,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/columns?{}",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
                 query_
             ),
             None,
@@ -892,7 +892,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/columns",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
         );
@@ -927,7 +927,7 @@ impl Projects {
         let url = self.client.url(
             &format!(
                 "/projects/{}/columns",
-                crate::progenitor_support::encode_path(project_id),
+                crate::progenitor_support::encode_path(&project_id.to_string()),
             ),
             None,
         );

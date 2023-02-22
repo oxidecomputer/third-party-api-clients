@@ -125,7 +125,7 @@ impl Alerts {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",
-                crate::progenitor_support::encode_path(alert_id),
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
             ),
             None,
         );
@@ -160,7 +160,7 @@ impl Alerts {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",
-                crate::progenitor_support::encode_path(alert_id),
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
             ),
             None,
         );
@@ -199,7 +199,7 @@ impl Alerts {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",
-                crate::progenitor_support::encode_path(alert_id),
+                crate::progenitor_support::encode_path(&alert_id.to_string()),
             ),
             None,
         );

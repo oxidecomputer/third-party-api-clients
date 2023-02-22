@@ -458,7 +458,7 @@ impl Stats {
         let url = self.client.url(
             &format!(
                 "/clients/{}/stats?{}",
-                crate::progenitor_support::encode_path(client_type),
+                crate::progenitor_support::encode_path(&client_type.to_string()),
                 query_
             ),
             None,
@@ -513,7 +513,7 @@ impl Stats {
         let url = self.client.url(
             &format!(
                 "/clients/{}/stats?{}",
-                crate::progenitor_support::encode_path(client_type),
+                crate::progenitor_support::encode_path(&client_type.to_string()),
                 query_
             ),
             None,

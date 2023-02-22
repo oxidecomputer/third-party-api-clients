@@ -240,7 +240,7 @@ impl ContactsApiSegments {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}/recipients?{}",
-                crate::progenitor_support::encode_path(segment_id),
+                crate::progenitor_support::encode_path(&segment_id.to_string()),
                 query_
             ),
             None,

@@ -328,7 +328,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}/ips",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -361,7 +361,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}/ips/{}",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
                 crate::progenitor_support::encode_path(ip),
             ),
             None,
@@ -394,7 +394,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}/validate",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -495,7 +495,7 @@ impl DomainAuthentication {
         let url = self.client.url(
             &format!(
                 "/whitelabel/domains/{}/subuser",
-                crate::progenitor_support::encode_path(domain_id),
+                crate::progenitor_support::encode_path(&domain_id.to_string()),
             ),
             None,
         );

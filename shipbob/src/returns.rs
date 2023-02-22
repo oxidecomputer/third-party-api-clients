@@ -24,7 +24,10 @@ impl Returns {
      */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = self.client.url(
-            &format!("/return/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/return/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -53,7 +56,10 @@ impl Returns {
         body: &crate::types::ReturnsCreateReturn,
     ) -> Result<crate::types::ReturnOrder> {
         let url = self.client.url(
-            &format!("/return/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/return/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client
@@ -264,7 +270,7 @@ impl Returns {
         let url = self.client.url(
             &format!(
                 "/return/{}/cancel",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );
@@ -295,7 +301,7 @@ impl Returns {
         let url = self.client.url(
             &format!(
                 "/return/{}/statushistory",
-                crate::progenitor_support::encode_path(id),
+                crate::progenitor_support::encode_path(&id.to_string()),
             ),
             None,
         );

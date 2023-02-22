@@ -2387,8 +2387,8 @@ fn gen(
     a("        .add(b'}');");
     a("");
     a("    #[allow(dead_code)]");
-    a("    pub(crate) fn encode_path<S>(pc: S) -> String where S: ToString {");
-    a("        utf8_percent_encode(pc.to_string().as_str(), PATH_SET).to_string()");
+    a("    pub(crate) fn encode_path(pc: &str) -> String {");
+    a("        utf8_percent_encode(pc, PATH_SET).to_string()");
     a("    }");
     a("}");
     a("");

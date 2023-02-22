@@ -535,7 +535,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/credential-authorizations/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(credential_id),
+                crate::progenitor_support::encode_path(&credential_id.to_string()),
             ),
             None,
         );
@@ -758,7 +758,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -791,7 +791,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -829,7 +829,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -868,7 +868,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/config",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -908,7 +908,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/config",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -957,7 +957,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/deliveries?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
                 query_
             ),
             None,
@@ -998,7 +998,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/deliveries?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
                 query_
             ),
             None,
@@ -1038,8 +1038,8 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
-                crate::progenitor_support::encode_path(delivery_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
+                crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
             None,
         );
@@ -1078,8 +1078,8 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}/attempts",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
-                crate::progenitor_support::encode_path(delivery_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
+                crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
             None,
         );
@@ -1112,7 +1112,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/hooks/{}/pings",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(hook_id),
+                crate::progenitor_support::encode_path(&hook_id.to_string()),
             ),
             None,
         );
@@ -1310,7 +1310,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/invitations/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(invitation_id),
+                crate::progenitor_support::encode_path(&invitation_id.to_string()),
             ),
             None,
         );
@@ -1359,7 +1359,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/invitations/{}/teams?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(invitation_id),
+                crate::progenitor_support::encode_path(&invitation_id.to_string()),
                 query_
             ),
             None,
@@ -1394,7 +1394,7 @@ impl Orgs {
             &format!(
                 "/orgs/{}/invitations/{}/teams",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(invitation_id),
+                crate::progenitor_support::encode_path(&invitation_id.to_string()),
             ),
             None,
         );

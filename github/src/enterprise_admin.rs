@@ -196,7 +196,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/permissions/organizations/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(org_id),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
             ),
             None,
         );
@@ -235,7 +235,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/permissions/organizations/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(org_id),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
             ),
             None,
         );
@@ -433,7 +433,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -472,7 +472,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -512,7 +512,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -563,7 +563,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
                 query_
             ),
             None,
@@ -604,7 +604,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -645,8 +645,8 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(org_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
             ),
             None,
         );
@@ -687,8 +687,8 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(org_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&org_id.to_string()),
             ),
             None,
         );
@@ -739,7 +739,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners?{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
                 query_
             ),
             None,
@@ -780,7 +780,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -822,8 +822,8 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -864,8 +864,8 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -1112,7 +1112,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -1151,7 +1151,7 @@ impl EnterpriseAdmin {
             &format!(
                 "/enterprises/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(enterprise),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );

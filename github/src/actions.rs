@@ -199,7 +199,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/permissions/repositories/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -238,7 +238,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/permissions/repositories/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -446,7 +446,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -487,7 +487,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -529,7 +529,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -582,7 +582,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
                 query_
             ),
             None,
@@ -625,7 +625,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -670,8 +670,8 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -715,8 +715,8 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -769,7 +769,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
                 query_
             ),
             None,
@@ -812,7 +812,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             ),
             None,
         );
@@ -857,8 +857,8 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -902,8 +902,8 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_group_id),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_group_id.to_string()),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -1150,7 +1150,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -1189,7 +1189,7 @@ impl Actions {
             &format!(
                 "/orgs/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -1577,7 +1577,7 @@ impl Actions {
                 "/orgs/{}/actions/secrets/{}/repositories/{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(secret_name),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -1617,7 +1617,7 @@ impl Actions {
                 "/orgs/{}/actions/secrets/{}/repositories/{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(secret_name),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -1707,7 +1707,7 @@ impl Actions {
                 "/repos/{}/{}/actions/artifacts/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(artifact_id),
+                crate::progenitor_support::encode_path(&artifact_id.to_string()),
             ),
             None,
         );
@@ -1742,7 +1742,7 @@ impl Actions {
                 "/repos/{}/{}/actions/artifacts/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(artifact_id),
+                crate::progenitor_support::encode_path(&artifact_id.to_string()),
             ),
             None,
         );
@@ -1787,7 +1787,7 @@ impl Actions {
                 "/repos/{}/{}/actions/artifacts/{}/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(artifact_id),
+                crate::progenitor_support::encode_path(&artifact_id.to_string()),
                 crate::progenitor_support::encode_path(archive_format),
             ),
             None,
@@ -1828,7 +1828,7 @@ impl Actions {
                 "/repos/{}/{}/actions/jobs/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );
@@ -1871,7 +1871,7 @@ impl Actions {
                 "/repos/{}/{}/actions/jobs/{}/logs",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(job_id),
+                crate::progenitor_support::encode_path(&job_id.to_string()),
             ),
             None,
         );
@@ -2296,7 +2296,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -2339,7 +2339,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runners/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(runner_id),
+                crate::progenitor_support::encode_path(&runner_id.to_string()),
             ),
             None,
         );
@@ -2456,7 +2456,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2493,7 +2493,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2533,7 +2533,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/approvals",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2569,7 +2569,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/approvals",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2606,7 +2606,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/approve",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2658,7 +2658,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/artifacts?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
                 query_
             ),
             None,
@@ -2694,7 +2694,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/cancel",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2753,7 +2753,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/jobs?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
                 query_
             ),
             None,
@@ -2797,7 +2797,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/logs",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2837,7 +2837,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/logs",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2879,7 +2879,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2917,7 +2917,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2960,7 +2960,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -2995,7 +2995,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/rerun",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -3037,7 +3037,7 @@ impl Actions {
                 "/repos/{}/{}/actions/runs/{}/timing",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(run_id),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
             ),
             None,
         );
@@ -3698,7 +3698,7 @@ impl Actions {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets?{}",
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
                 crate::progenitor_support::encode_path(environment_name),
                 query_
             ),
@@ -3736,7 +3736,7 @@ impl Actions {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/public-key",
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
                 crate::progenitor_support::encode_path(environment_name),
             ),
             None,
@@ -3775,7 +3775,7 @@ impl Actions {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
                 crate::progenitor_support::encode_path(environment_name),
                 crate::progenitor_support::encode_path(secret_name),
             ),
@@ -3890,7 +3890,7 @@ impl Actions {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
                 crate::progenitor_support::encode_path(environment_name),
                 crate::progenitor_support::encode_path(secret_name),
             ),
@@ -3930,7 +3930,7 @@ impl Actions {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
                 crate::progenitor_support::encode_path(environment_name),
                 crate::progenitor_support::encode_path(secret_name),
             ),

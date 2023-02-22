@@ -78,7 +78,7 @@ impl SenderIdentitiesApi {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
-                crate::progenitor_support::encode_path(sender_id),
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
             ),
             None,
         );
@@ -107,7 +107,7 @@ impl SenderIdentitiesApi {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
-                crate::progenitor_support::encode_path(sender_id),
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
             ),
             None,
         );
@@ -144,7 +144,7 @@ impl SenderIdentitiesApi {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
-                crate::progenitor_support::encode_path(sender_id),
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
             ),
             None,
         );
@@ -176,7 +176,7 @@ impl SenderIdentitiesApi {
         let url = self.client.url(
             &format!(
                 "/senders/{}/resend_verification",
-                crate::progenitor_support::encode_path(sender_id),
+                crate::progenitor_support::encode_path(&sender_id.to_string()),
             ),
             None,
         );

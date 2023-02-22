@@ -91,11 +91,8 @@ mod progenitor_support {
         .add(b'}');
 
     #[allow(dead_code)]
-    pub(crate) fn encode_path<S>(pc: S) -> String
-    where
-        S: ToString,
-    {
-        utf8_percent_encode(pc.to_string().as_str(), PATH_SET).to_string()
+    pub(crate) fn encode_path(pc: &str) -> String {
+        utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
 

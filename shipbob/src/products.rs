@@ -162,7 +162,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/product/{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -194,7 +194,7 @@ impl Products {
         let url = self.client.url(
             &format!(
                 "/product/{}",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );

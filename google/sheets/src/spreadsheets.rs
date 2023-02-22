@@ -94,7 +94,7 @@ impl Spreadsheets {
             &format!(
                 "/v4/spreadsheets/{}/developerMetadata/{}",
                 crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(metadata_id),
+                crate::progenitor_support::encode_path(&metadata_id.to_string()),
             ),
             None,
         );
@@ -159,7 +159,7 @@ impl Spreadsheets {
             &format!(
                 "/v4/spreadsheets/{}/sheets/{}/copyTo",
                 crate::progenitor_support::encode_path(spreadsheet_id),
-                crate::progenitor_support::encode_path(sheet_id),
+                crate::progenitor_support::encode_path(&sheet_id.to_string()),
             ),
             None,
         );

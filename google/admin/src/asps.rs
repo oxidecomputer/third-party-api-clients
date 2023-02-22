@@ -54,7 +54,7 @@ impl Asps {
             &format!(
                 "/admin/directory/v1/users/{}/asps/{}",
                 crate::progenitor_support::encode_path(user_key),
-                crate::progenitor_support::encode_path(code_id),
+                crate::progenitor_support::encode_path(&code_id.to_string()),
             ),
             None,
         );
@@ -83,7 +83,7 @@ impl Asps {
             &format!(
                 "/admin/directory/v1/users/{}/asps/{}",
                 crate::progenitor_support::encode_path(user_key),
-                crate::progenitor_support::encode_path(code_id),
+                crate::progenitor_support::encode_path(&code_id.to_string()),
             ),
             None,
         );

@@ -155,7 +155,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -222,7 +222,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -267,7 +267,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -305,7 +305,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/status",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -372,7 +372,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -420,7 +420,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -465,7 +465,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/{}?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 crate::progenitor_support::encode_path(registrant_id),
                 query_
             ),
@@ -511,7 +511,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/status?{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 query_
             ),
             None,
@@ -639,7 +639,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/instances",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -676,7 +676,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -718,7 +718,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -760,7 +760,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 crate::progenitor_support::encode_path(poll_id),
             ),
             None,
@@ -803,7 +803,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 crate::progenitor_support::encode_path(poll_id),
             ),
             None,
@@ -842,7 +842,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/polls/{}",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
                 crate::progenitor_support::encode_path(poll_id),
             ),
             None,
@@ -883,7 +883,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/questions",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -923,7 +923,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/registrants/questions",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -959,7 +959,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/invitation",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -1081,7 +1081,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/livestream/status",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );
@@ -1340,7 +1340,7 @@ impl Meetings {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/invite_links",
-                crate::progenitor_support::encode_path(meeting_id),
+                crate::progenitor_support::encode_path(&meeting_id.to_string()),
             ),
             None,
         );

@@ -223,7 +223,7 @@ impl ContactsApiLists {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients?{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 query_
             ),
             None,
@@ -259,7 +259,7 @@ impl ContactsApiLists {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
             ),
             None,
         );
@@ -292,7 +292,7 @@ impl ContactsApiLists {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients/{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 crate::progenitor_support::encode_path(recipient_id),
             ),
             None,
@@ -329,7 +329,7 @@ impl ContactsApiLists {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients/{}",
-                crate::progenitor_support::encode_path(list_id),
+                crate::progenitor_support::encode_path(&list_id.to_string()),
                 crate::progenitor_support::encode_path(recipient_id),
             ),
             None,

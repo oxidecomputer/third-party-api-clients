@@ -117,7 +117,10 @@ impl Webhooks {
      */
     pub async fn delete(&self, id: i64) -> Result<()> {
         let url = self.client.url(
-            &format!("/webhook/{}", crate::progenitor_support::encode_path(id),),
+            &format!(
+                "/webhook/{}",
+                crate::progenitor_support::encode_path(&id.to_string()),
+            ),
             None,
         );
         self.client

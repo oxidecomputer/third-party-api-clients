@@ -705,7 +705,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/gpg_keys/{}",
-                crate::progenitor_support::encode_path(gpg_key_id),
+                crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
             ),
             None,
         );
@@ -736,7 +736,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/gpg_keys/{}",
-                crate::progenitor_support::encode_path(gpg_key_id),
+                crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
             ),
             None,
         );
@@ -857,7 +857,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/keys/{}",
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );
@@ -888,7 +888,7 @@ impl Users {
         let url = self.client.url(
             &format!(
                 "/user/keys/{}",
-                crate::progenitor_support::encode_path(key_id),
+                crate::progenitor_support::encode_path(&key_id.to_string()),
             ),
             None,
         );

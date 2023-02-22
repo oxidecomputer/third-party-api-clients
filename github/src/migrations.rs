@@ -175,7 +175,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
             None,
@@ -209,7 +209,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}/archive",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );
@@ -242,7 +242,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}/archive",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );
@@ -281,7 +281,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}/repos/{}/lock",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 crate::progenitor_support::encode_path(repo_name),
             ),
             None,
@@ -331,7 +331,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}/repositories?{}",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
             None,
@@ -366,7 +366,7 @@ impl Migrations {
             &format!(
                 "/orgs/{}/migrations/{}/repositories",
                 crate::progenitor_support::encode_path(org),
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );
@@ -673,7 +673,7 @@ impl Migrations {
                 "/repos/{}/{}/import/authors/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(author_id),
+                crate::progenitor_support::encode_path(&author_id.to_string()),
             ),
             None,
         );
@@ -917,7 +917,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}?{}",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
             None,
@@ -969,7 +969,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/archive",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );
@@ -1000,7 +1000,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/archive",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );
@@ -1036,7 +1036,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/repos/{}/lock",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 crate::progenitor_support::encode_path(repo_name),
             ),
             None,
@@ -1083,7 +1083,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/repositories?{}",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
                 query_
             ),
             None,
@@ -1116,7 +1116,7 @@ impl Migrations {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/repositories",
-                crate::progenitor_support::encode_path(migration_id),
+                crate::progenitor_support::encode_path(&migration_id.to_string()),
             ),
             None,
         );

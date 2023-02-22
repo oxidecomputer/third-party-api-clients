@@ -217,7 +217,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/hook/deliveries/{}",
-                crate::progenitor_support::encode_path(delivery_id),
+                crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
             None,
         );
@@ -250,7 +250,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/hook/deliveries/{}/attempts",
-                crate::progenitor_support::encode_path(delivery_id),
+                crate::progenitor_support::encode_path(&delivery_id.to_string()),
             ),
             None,
         );
@@ -377,7 +377,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
             ),
             None,
         );
@@ -410,7 +410,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
             ),
             None,
         );
@@ -448,7 +448,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/access_tokens",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
             ),
             None,
         );
@@ -483,7 +483,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/suspended",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
             ),
             None,
         );
@@ -516,7 +516,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/suspended",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
             ),
             None,
         );
@@ -983,7 +983,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/accounts/{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -1110,7 +1110,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/plans/{}/accounts?{}",
-                crate::progenitor_support::encode_path(plan_id),
+                crate::progenitor_support::encode_path(&plan_id.to_string()),
                 query_
             ),
             None,
@@ -1155,7 +1155,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/plans/{}/accounts?{}",
-                crate::progenitor_support::encode_path(plan_id),
+                crate::progenitor_support::encode_path(&plan_id.to_string()),
                 query_
             ),
             None,
@@ -1192,7 +1192,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/stubbed/accounts/{}",
-                crate::progenitor_support::encode_path(account_id),
+                crate::progenitor_support::encode_path(&account_id.to_string()),
             ),
             None,
         );
@@ -1322,7 +1322,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/stubbed/plans/{}/accounts?{}",
-                crate::progenitor_support::encode_path(plan_id),
+                crate::progenitor_support::encode_path(&plan_id.to_string()),
                 query_
             ),
             None,
@@ -1367,7 +1367,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/stubbed/plans/{}/accounts?{}",
-                crate::progenitor_support::encode_path(plan_id),
+                crate::progenitor_support::encode_path(&plan_id.to_string()),
                 query_
             ),
             None,
@@ -1446,7 +1446,7 @@ impl Apps {
                 "/repos/{}/{}/content_references/{}/attachments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(content_reference_id),
+                crate::progenitor_support::encode_path(&content_reference_id.to_string()),
             ),
             None,
         );
@@ -1583,7 +1583,7 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/user/installations/{}/repositories?{}",
-                crate::progenitor_support::encode_path(installation_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
                 query_
             ),
             None,
@@ -1622,8 +1622,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/user/installations/{}/repositories/{}",
-                crate::progenitor_support::encode_path(installation_id),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );
@@ -1661,8 +1661,8 @@ impl Apps {
         let url = self.client.url(
             &format!(
                 "/user/installations/{}/repositories/{}",
-                crate::progenitor_support::encode_path(installation_id),
-                crate::progenitor_support::encode_path(repository_id),
+                crate::progenitor_support::encode_path(&installation_id.to_string()),
+                crate::progenitor_support::encode_path(&repository_id.to_string()),
             ),
             None,
         );

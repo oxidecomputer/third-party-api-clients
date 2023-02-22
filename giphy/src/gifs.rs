@@ -213,7 +213,10 @@ impl Gifs {
      */
     pub async fn get_gifs(&self, gif_id: i64) -> Result<crate::types::RandomGifResponse> {
         let url = self.client.url(
-            &format!("/gifs/{}", crate::progenitor_support::encode_path(gif_id),),
+            &format!(
+                "/gifs/{}",
+                crate::progenitor_support::encode_path(&gif_id.to_string()),
+            ),
             None,
         );
         self.client

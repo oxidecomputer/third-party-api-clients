@@ -99,7 +99,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -128,7 +128,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -163,7 +163,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -197,7 +197,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules/now",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -229,7 +229,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -264,7 +264,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -296,7 +296,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -329,7 +329,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );
@@ -364,7 +364,7 @@ impl CampaignsApi {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules/test",
-                crate::progenitor_support::encode_path(campaign_id),
+                crate::progenitor_support::encode_path(&campaign_id.to_string()),
             ),
             None,
         );

@@ -25,7 +25,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/inventory/{}",
-                crate::progenitor_support::encode_path(inventory_id),
+                crate::progenitor_support::encode_path(&inventory_id.to_string()),
             ),
             None,
         );
@@ -161,7 +161,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/product/{}/inventory",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );
@@ -186,7 +186,7 @@ impl Inventory {
         let url = self.client.url(
             &format!(
                 "/product/{}/inventory",
-                crate::progenitor_support::encode_path(product_id),
+                crate::progenitor_support::encode_path(&product_id.to_string()),
             ),
             None,
         );

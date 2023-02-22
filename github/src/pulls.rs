@@ -332,7 +332,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -372,7 +372,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -413,7 +413,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -467,7 +467,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -510,7 +510,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -579,7 +579,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/comments?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -630,7 +630,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/comments?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -679,7 +679,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/comments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -724,8 +724,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/comments/{}/replies",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -777,7 +777,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/commits?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -814,7 +814,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/commits",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -866,7 +866,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/files?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -903,7 +903,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/files",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -938,7 +938,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/merge",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -979,7 +979,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/merge",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -1031,7 +1031,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/requested_reviewers?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -1073,7 +1073,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -1114,7 +1114,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -1166,7 +1166,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
                 query_
             ),
             None,
@@ -1203,7 +1203,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -1250,7 +1250,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );
@@ -1292,8 +1292,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1336,8 +1336,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1379,8 +1379,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1434,8 +1434,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}/comments?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
                 query_
             ),
             None,
@@ -1473,8 +1473,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}/comments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1517,8 +1517,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1561,8 +1561,8 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/reviews/{}/events",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
-                crate::progenitor_support::encode_path(review_id),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
+                crate::progenitor_support::encode_path(&review_id.to_string()),
             ),
             None,
         );
@@ -1603,7 +1603,7 @@ impl Pulls {
                 "/repos/{}/{}/pulls/{}/update-branch",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(pull_number),
+                crate::progenitor_support::encode_path(&pull_number.to_string()),
             ),
             None,
         );

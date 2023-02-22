@@ -833,7 +833,7 @@ impl Issues {
                 "/repos/{}/{}/issues/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -868,7 +868,7 @@ impl Issues {
                 "/repos/{}/{}/issues/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -909,7 +909,7 @@ impl Issues {
                 "/repos/{}/{}/issues/comments/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -1033,7 +1033,7 @@ impl Issues {
                 "/repos/{}/{}/issues/events/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(event_id),
+                crate::progenitor_support::encode_path(&event_id.to_string()),
             ),
             None,
         );
@@ -1083,7 +1083,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1124,7 +1124,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1165,7 +1165,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/assignees",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1206,7 +1206,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/assignees",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1263,7 +1263,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/comments?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -1306,7 +1306,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/comments?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -1348,7 +1348,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/comments",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1400,7 +1400,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/events?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -1437,7 +1437,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/events",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1489,7 +1489,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -1526,7 +1526,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1567,7 +1567,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1608,7 +1608,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1648,7 +1648,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1690,7 +1690,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/labels/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 crate::progenitor_support::encode_path(name),
             ),
             None,
@@ -1734,7 +1734,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/lock",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1769,7 +1769,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/lock",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -1821,7 +1821,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/timeline?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -1858,7 +1858,7 @@ impl Issues {
                 "/repos/{}/{}/issues/{}/timeline",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -2290,7 +2290,7 @@ impl Issues {
                 "/repos/{}/{}/milestones/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(milestone_number),
+                crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
         );
@@ -2330,7 +2330,7 @@ impl Issues {
                 "/repos/{}/{}/milestones/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(milestone_number),
+                crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
         );
@@ -2371,7 +2371,7 @@ impl Issues {
                 "/repos/{}/{}/milestones/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(milestone_number),
+                crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
         );
@@ -2423,7 +2423,7 @@ impl Issues {
                 "/repos/{}/{}/milestones/{}/labels?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(milestone_number),
+                crate::progenitor_support::encode_path(&milestone_number.to_string()),
                 query_
             ),
             None,
@@ -2460,7 +2460,7 @@ impl Issues {
                 "/repos/{}/{}/milestones/{}/labels",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(milestone_number),
+                crate::progenitor_support::encode_path(&milestone_number.to_string()),
             ),
             None,
         );

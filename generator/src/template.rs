@@ -145,12 +145,12 @@ impl Template {
                     || n == "use"
                 {
                     out.push_str(&format!(
-                        "crate::progenitor_support::encode_path({}_),",
+                        "crate::progenitor_support::encode_path(&{}_.to_string()),",
                         to_snake_case(n)
                     ));
                 } else {
                     out.push_str(&format!(
-                        "crate::progenitor_support::encode_path({}),",
+                        "crate::progenitor_support::encode_path(&{}.to_string()),",
                         to_snake_case(n)
                     ));
                 }
@@ -298,7 +298,7 @@ mod test {
         let out = t.compile(Default::default(), "None");
         let want = r#"let url = self.client.url(
 &format!("/measure/{}",
-crate::progenitor_support::encode_path(number),), None);
+crate::progenitor_support::encode_path(&number.to_string()),), None);
 "#;
         assert_eq!(want, &out);
         Ok(())

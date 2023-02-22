@@ -59,8 +59,8 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
                 query_
             ),
             None,
@@ -106,8 +106,8 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
                 query_
             ),
             None,
@@ -153,8 +153,8 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
             ),
             None,
         );
@@ -200,9 +200,9 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -261,7 +261,7 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
             None,
@@ -306,7 +306,7 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
             None,
@@ -350,7 +350,7 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/reactions",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
         );
@@ -394,8 +394,8 @@ impl Reactions {
                 "/orgs/{}/teams/{}/discussions/{}/reactions/{}",
                 crate::progenitor_support::encode_path(org),
                 crate::progenitor_support::encode_path(team_slug),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -428,7 +428,7 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/reactions/{}",
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -485,7 +485,7 @@ impl Reactions {
                 "/repos/{}/{}/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -528,7 +528,7 @@ impl Reactions {
                 "/repos/{}/{}/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -570,7 +570,7 @@ impl Reactions {
                 "/repos/{}/{}/comments/{}/reactions",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -614,8 +614,8 @@ impl Reactions {
                 "/repos/{}/{}/comments/{}/reactions/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -672,7 +672,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -715,7 +715,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -757,7 +757,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/comments/{}/reactions",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -801,8 +801,8 @@ impl Reactions {
                 "/repos/{}/{}/issues/comments/{}/reactions/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -859,7 +859,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -902,7 +902,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
                 query_
             ),
             None,
@@ -944,7 +944,7 @@ impl Reactions {
                 "/repos/{}/{}/issues/{}/reactions",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
             ),
             None,
         );
@@ -988,8 +988,8 @@ impl Reactions {
                 "/repos/{}/{}/issues/{}/reactions/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(issue_number),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&issue_number.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -1046,7 +1046,7 @@ impl Reactions {
                 "/repos/{}/{}/pulls/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -1089,7 +1089,7 @@ impl Reactions {
                 "/repos/{}/{}/pulls/comments/{}/reactions?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
                 query_
             ),
             None,
@@ -1131,7 +1131,7 @@ impl Reactions {
                 "/repos/{}/{}/pulls/comments/{}/reactions",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
             ),
             None,
         );
@@ -1175,8 +1175,8 @@ impl Reactions {
                 "/repos/{}/{}/pulls/comments/{}/reactions/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(comment_id),
-                crate::progenitor_support::encode_path(reaction_id),
+                crate::progenitor_support::encode_path(&comment_id.to_string()),
+                crate::progenitor_support::encode_path(&reaction_id.to_string()),
             ),
             None,
         );
@@ -1217,7 +1217,7 @@ impl Reactions {
                 "/repos/{}/{}/releases/{}/reactions",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(release_id),
+                crate::progenitor_support::encode_path(&release_id.to_string()),
             ),
             None,
         );
@@ -1274,9 +1274,9 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}/reactions?{}",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
                 query_
             ),
             None,
@@ -1319,9 +1319,9 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}/reactions?{}",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
                 query_
             ),
             None,
@@ -1363,9 +1363,9 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}/reactions",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
-                crate::progenitor_support::encode_path(comment_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
+                crate::progenitor_support::encode_path(&comment_number.to_string()),
             ),
             None,
         );
@@ -1420,8 +1420,8 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/reactions?{}",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
             None,
@@ -1463,8 +1463,8 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/reactions?{}",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
                 query_
             ),
             None,
@@ -1504,8 +1504,8 @@ impl Reactions {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/reactions",
-                crate::progenitor_support::encode_path(team_id),
-                crate::progenitor_support::encode_path(discussion_number),
+                crate::progenitor_support::encode_path(&team_id.to_string()),
+                crate::progenitor_support::encode_path(&discussion_number.to_string()),
             ),
             None,
         );

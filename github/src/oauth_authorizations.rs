@@ -111,7 +111,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/applications/grants/{}",
-                crate::progenitor_support::encode_path(grant_id),
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
             ),
             None,
         );
@@ -144,7 +144,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/applications/grants/{}",
-                crate::progenitor_support::encode_path(grant_id),
+                crate::progenitor_support::encode_path(&grant_id.to_string()),
             ),
             None,
         );
@@ -377,7 +377,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",
-                crate::progenitor_support::encode_path(authorization_id),
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
             ),
             None,
         );
@@ -408,7 +408,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",
-                crate::progenitor_support::encode_path(authorization_id),
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
             ),
             None,
         );
@@ -447,7 +447,7 @@ impl OauthAuthorizations {
         let url = self.client.url(
             &format!(
                 "/authorizations/{}",
-                crate::progenitor_support::encode_path(authorization_id),
+                crate::progenitor_support::encode_path(&authorization_id.to_string()),
             ),
             None,
         );

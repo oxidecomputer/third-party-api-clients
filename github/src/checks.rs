@@ -82,7 +82,7 @@ impl Checks {
                 "/repos/{}/{}/check-runs/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_run_id),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
         );
@@ -125,7 +125,7 @@ impl Checks {
                 "/repos/{}/{}/check-runs/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_run_id),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
         );
@@ -177,7 +177,7 @@ impl Checks {
                 "/repos/{}/{}/check-runs/{}/annotations?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_run_id),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
                 query_
             ),
             None,
@@ -214,7 +214,7 @@ impl Checks {
                 "/repos/{}/{}/check-runs/{}/annotations",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_run_id),
+                crate::progenitor_support::encode_path(&check_run_id.to_string()),
             ),
             None,
         );
@@ -334,7 +334,7 @@ impl Checks {
                 "/repos/{}/{}/check-suites/{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_suite_id),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             ),
             None,
         );
@@ -405,7 +405,7 @@ impl Checks {
                 "/repos/{}/{}/check-suites/{}/check-runs?{}",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_suite_id),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
                 query_
             ),
             None,
@@ -448,7 +448,7 @@ impl Checks {
                 "/repos/{}/{}/check-suites/{}/rerequest",
                 crate::progenitor_support::encode_path(owner),
                 crate::progenitor_support::encode_path(repo),
-                crate::progenitor_support::encode_path(check_suite_id),
+                crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             ),
             None,
         );

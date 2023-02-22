@@ -33,8 +33,8 @@ impl CustomerJourneys {
         let url = self.client.url(
             &format!(
                 "/customer-journeys/journeys/{}/steps/{}/actions/trigger",
-                crate::progenitor_support::encode_path(journey_id),
-                crate::progenitor_support::encode_path(step_id),
+                crate::progenitor_support::encode_path(&journey_id.to_string()),
+                crate::progenitor_support::encode_path(&step_id.to_string()),
             ),
             None,
         );

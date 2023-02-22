@@ -83,7 +83,7 @@ impl ContactsApiCustomFields {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
-                crate::progenitor_support::encode_path(custom_field_id),
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
             ),
             None,
         );
@@ -115,7 +115,7 @@ impl ContactsApiCustomFields {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
-                crate::progenitor_support::encode_path(custom_field_id),
+                crate::progenitor_support::encode_path(&custom_field_id.to_string()),
             ),
             None,
         );

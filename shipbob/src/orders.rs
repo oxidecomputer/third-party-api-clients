@@ -55,7 +55,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -256,7 +256,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/cancel",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -283,7 +283,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/storeOrderJson",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -314,7 +314,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/storeOrderJson",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -347,8 +347,8 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -382,7 +382,7 @@ impl Orders {
             &format!(
                 "/order/{}/shipment/{}/cancel",
                 crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -415,8 +415,8 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/timeline",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -445,8 +445,8 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/timeline",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -474,7 +474,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -502,7 +502,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment",
-                crate::progenitor_support::encode_path(order_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
             ),
             None,
         );
@@ -535,8 +535,8 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/logs",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -565,8 +565,8 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/logs",
-                crate::progenitor_support::encode_path(order_id),
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&order_id.to_string()),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -597,7 +597,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -628,7 +628,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/cancel",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -683,7 +683,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/timeline",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -711,7 +711,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/timeline",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -742,7 +742,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/logs",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );
@@ -770,7 +770,7 @@ impl Orders {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/logs",
-                crate::progenitor_support::encode_path(shipment_id),
+                crate::progenitor_support::encode_path(&shipment_id.to_string()),
             ),
             None,
         );

@@ -330,7 +330,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}",
-                crate::progenitor_support::encode_path(thread_id),
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
             ),
             None,
         );
@@ -361,7 +361,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}",
-                crate::progenitor_support::encode_path(thread_id),
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
             ),
             None,
         );
@@ -397,7 +397,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
-                crate::progenitor_support::encode_path(thread_id),
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
             ),
             None,
         );
@@ -436,7 +436,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
-                crate::progenitor_support::encode_path(thread_id),
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
             ),
             None,
         );
@@ -467,7 +467,7 @@ impl Activity {
         let url = self.client.url(
             &format!(
                 "/notifications/threads/{}/subscription",
-                crate::progenitor_support::encode_path(thread_id),
+                crate::progenitor_support::encode_path(&thread_id.to_string()),
             ),
             None,
         );
