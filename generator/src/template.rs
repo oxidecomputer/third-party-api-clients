@@ -300,7 +300,6 @@ mod test {
 &format!("/measure/{}",
 crate::progenitor_support::encode_path(number),), None);
 "#;
-
         assert_eq!(want, &out);
         Ok(())
     }
