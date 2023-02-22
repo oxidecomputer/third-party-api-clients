@@ -13,14 +13,14 @@ use octorust::{
     Client,
 };
 
-fn app_id() -> u64 {
+fn app_id() -> i64 {
     let mut rng = rand::thread_rng();
-    rng.next_u64()
+    rng.next_u32() as i64
 }
 
-fn installation_id() -> u64 {
+fn installation_id() -> i64 {
     let mut rng = rand::thread_rng();
-    rng.next_u64()
+    rng.next_u32() as i64
 }
 
 fn private_key() -> Vec<u8> {
@@ -34,7 +34,7 @@ fn private_key() -> Vec<u8> {
 }
 
 #[tokio::test]
-async fn refreshes_installation_token_once() {
+async fn test_refreshes_installation_token_once() {
     let installation_id = installation_id();
 
     let server = MockServer::start().await;
