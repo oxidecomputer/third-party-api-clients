@@ -14,14 +14,14 @@ use octorust::{
     Client,
 };
 
-fn app_id() -> u64 {
+fn app_id() -> i64 {
     let mut rng = rand::thread_rng();
-    rng.next_u64()
+    rng.next_u32() as i64
 }
 
-fn installation_id() -> u64 {
+fn installation_id() -> i64 {
     let mut rng = rand::thread_rng();
-    rng.next_u64()
+    rng.next_u32() as i64
 }
 
 fn private_key() -> Vec<u8> {

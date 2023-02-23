@@ -83,7 +83,7 @@ impl fmt::Debug for Credentials {
 /// even though JWTCredentials is not mutable.
 #[derive(Clone)]
 pub struct JWTCredentials {
-    pub app_id: u64,
+    pub app_id: i64,
     /// DER RSA key. Generate with
     /// `openssl rsa -in private_rsa_key.pem -outform DER -out private_rsa_key.der`
     pub private_key: Vec<u8>,
@@ -91,7 +91,7 @@ pub struct JWTCredentials {
 }
 
 impl JWTCredentials {
-    pub fn new(app_id: u64, private_key: Vec<u8>) -> Result<JWTCredentials> {
+    pub fn new(app_id: i64, private_key: Vec<u8>) -> Result<JWTCredentials> {
         let creds = ExpiringJWTCredential::calculate(app_id, &private_key)?;
 
         Ok(JWTCredentials {
@@ -129,11 +129,11 @@ struct ExpiringJWTCredential {
 struct JWTCredentialClaim {
     iat: u64,
     exp: u64,
-    iss: u64,
+    iss: i64,
 }
 
 impl ExpiringJWTCredential {
-    fn calculate(app_id: u64, private_key: &[u8]) -> Result<ExpiringJWTCredential> {
+    fn calculate(app_id: i64, private_key: &[u8]) -> Result<ExpiringJWTCredential> {
         // SystemTime can go backwards, Instant can't, so always use
         // Instant for ensuring regular cycling.
         let created_at = tokio::time::Instant::now();
@@ -195,13 +195,13 @@ impl ExpiringInstallationToken {
 /// The RwLock<Option> access key is for interior mutability.
 #[derive(Debug, Clone)]
 pub struct InstallationTokenGenerator {
-    pub installation_id: u64,
+    pub installation_id: i64,
     pub jwt_credential: Box<Credentials>,
     pub(crate) access_key: Arc<RwLock<Option<ExpiringInstallationToken>>>,
 }
 
 impl InstallationTokenGenerator {
-    pub fn new(installation_id: u64, creds: JWTCredentials) -> InstallationTokenGenerator {
+    pub fn new(installation_id: i64, creds: JWTCredentials) -> InstallationTokenGenerator {
         InstallationTokenGenerator {
             installation_id,
             jwt_credential: Box::new(Credentials::JWT(creds)),
@@ -236,14 +236,14 @@ mod tests {
     use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
     use std::time::Duration;
 
-    fn app_id() -> u64 {
+    fn app_id() -> i64 {
         let mut rng = rand::thread_rng();
-        rng.next_u64()
+        rng.next_u32() as i64
     }
 
-    fn installation_id() -> u64 {
+    fn installation_id() -> i64 {
         let mut rng = rand::thread_rng();
-        rng.next_u64()
+        rng.next_u32() as i64
     }
 
     fn private_key() -> Vec<u8> {
