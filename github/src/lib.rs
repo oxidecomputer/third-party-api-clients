@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.3.0"
+//! octorust = "0.3.1"
 //! ```
 //!
 //! ## Basic example
@@ -55,7 +55,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host_override](https://docs.rs/octorust/0.3.0/octorust/struct.Client.html#method.host_override) method.
+//! [Client#host_override](https://docs.rs/octorust/0.3.1/octorust/struct.Client.html#method.host_override) method.
 //!
 //! ## Feature flags
 //!
@@ -69,7 +69,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.3.0", features = ["httpcache"] }
+//! octorust = { version = "0.3.1", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -464,7 +464,7 @@ impl Client {
                         let token = self
                             .apps()
                             .create_installation_access_token(
-                                apptoken.installation_id as i64,
+                                apptoken.installation_id,
                                 &types::AppsCreateInstallationAccessTokenRequest {
                                     permissions: Default::default(),
                                     repositories: Default::default(),

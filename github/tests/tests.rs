@@ -3,9 +3,9 @@ use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
 use std::{mem, time::Duration};
 
 use wiremock::{
+    http::{HeaderName, HeaderValue},
     matchers::{bearer_token, header, method, path, query_param},
     Mock, MockServer, ResponseTemplate,
-    http::{HeaderName, HeaderValue},
 };
 
 use octorust::{
@@ -78,17 +78,17 @@ async fn test_follows_next_links_during_unfold() {
 
     let server = MockServer::start().await;
     let auth_response = ResponseTemplate::new(200)
-    .set_delay(Duration::from_secs(1))
-    .set_body_json(InstallationToken {
-        token: "test-token".to_owned(),
-        expires_at: Default::default(),
-        has_multiple_single_files: Default::default(),
-        permissions: Default::default(),
-        repositories: Default::default(),
-        repository_selection: Default::default(),
-        single_file: Default::default(),
-        single_file_paths: Default::default(),
-    });
+        .set_delay(Duration::from_secs(1))
+        .set_body_json(InstallationToken {
+            token: "test-token".to_owned(),
+            expires_at: Default::default(),
+            has_multiple_single_files: Default::default(),
+            permissions: Default::default(),
+            repositories: Default::default(),
+            repository_selection: Default::default(),
+            single_file: Default::default(),
+            single_file_paths: Default::default(),
+        });
 
     Mock::given(method("POST"))
         .and(path(format!(
@@ -104,7 +104,10 @@ async fn test_follows_next_links_during_unfold() {
 
     let with_next = ResponseTemplate::new(200)
         .set_delay(Duration::from_secs(1))
-        .append_header(HeaderName::from_bytes("link".as_bytes().to_vec()).unwrap(), HeaderValue::from_bytes(next_url.into_bytes()).unwrap())
+        .append_header(
+            HeaderName::from_bytes("link".as_bytes().to_vec()).unwrap(),
+            HeaderValue::from_bytes(next_url.into_bytes()).unwrap(),
+        )
         .set_body_json(vec![empty_issue(), empty_issue()]);
 
     let without_next = ResponseTemplate::new(200)
@@ -112,9 +115,7 @@ async fn test_follows_next_links_during_unfold() {
         .set_body_json(vec![empty_issue()]);
 
     Mock::given(method("GET"))
-        .and(path(format!(
-            "/issues"
-        )))
+        .and(path("/issues".to_string()))
         .and(query_param("direction", "asc"))
         .and(query_param("filter", "all"))
         .and(query_param("sort", "created"))
@@ -126,9 +127,7 @@ async fn test_follows_next_links_during_unfold() {
         .await;
 
     Mock::given(method("GET"))
-        .and(path(format!(
-            "/issues"
-        )))
+        .and(path("/issues".to_string()))
         .and(query_param("per_page", "100"))
         .and(query_param("page", "2"))
         .respond_with(without_next)
@@ -145,19 +144,21 @@ async fn test_follows_next_links_during_unfold() {
     .expect("Client creation should succeed");
     client.with_host_override(server.uri());
 
-    let res = client.issues().list_all(
-        octorust::types::Filter::All,
-        octorust::types::IssuesListState::All,
-        "",
-        octorust::types::IssuesListSort::Created,
-        octorust::types::Order::Asc,
-        None,
-        false,
-        false,
-        false,
-        false
-    )
-    .await;
+    let res = client
+        .issues()
+        .list_all(
+            octorust::types::Filter::All,
+            octorust::types::IssuesListState::All,
+            "",
+            octorust::types::IssuesListSort::Created,
+            octorust::types::Order::Asc,
+            None,
+            false,
+            false,
+            false,
+            false,
+        )
+        .await;
 
     mem::drop(server);
 

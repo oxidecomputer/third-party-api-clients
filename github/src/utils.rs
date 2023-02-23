@@ -113,7 +113,6 @@ use std::{fmt, str::FromStr};
 use parse_link_header::LinkMap;
 use serde::de::{self, Visitor};
 
-#[derive(Debug)]
 pub struct NextLink(pub String);
 
 pub fn next_link(l: &LinkMap) -> Option<NextLink> {
