@@ -1,22 +1,13 @@
 const TEMPLATE: &str = r#"use std::{fmt, str::FromStr};
 
+use parse_link_header::LinkMap;
 use serde::de::{self, Visitor};
 
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
-}
+pub struct NextLink(pub String);
 
+pub fn next_link(l: &LinkMap) -> Option<NextLink> {
+    l.get(&Some("next".to_string())).map(|link| link.raw_uri.to_string()).map(NextLink)
+}
 
 pub mod date_format {
     use chrono::{NaiveDate};
@@ -643,6 +634,22 @@ pub mod deserialize_null_vector {
         Ok(Default::default())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::next_link;
+
+    #[test]
+    fn test_hyperx_next_link_compat() {
+        let value = "<https://previous-link>; rel=\"prev\", <https://next-link>; rel=\"next\", <https://last-link>; rel=\"last\", <https://first-link>; rel=\"first\"";
+
+        let link = parse_link_header::parse(value).unwrap();
+        let next = next_link(&link).unwrap().0;
+
+        assert_eq!("https://next-link", next);
+    }
+}
+
 "#;
 
 const GITHUB_TEMPLATE: &str = r#"//const X_GITHUB_REQUEST_ID: &str = "x-github-request-id";
@@ -709,6 +716,15 @@ impl Default for MediaType {
     }
 }
 
+impl std::fmt::Display for MediaType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            MediaType::Json => write!(f, "application/vnd.github.v3+json"),
+            MediaType::Preview(codename) => write!(f, "application/vnd.github.{}-preview+json", codename)
+        }
+    }
+}
+
 impl From<MediaType> for mime::Mime {
     fn from(media: MediaType) -> mime::Mime {
         match media {
@@ -720,6 +736,26 @@ impl From<MediaType> for mime::Mime {
                         panic!("could not parse media type for preview {}", codename)
                     })
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod github_tests {
+    use super::MediaType;
+
+    #[test]
+    fn test_hyperx_qitem_compat() {
+        let tests = [
+            (MediaType::Json, "application/vnd.github.v3+json"),
+            (MediaType::Preview("test-value"), "application/vnd.github.test-value-preview+json")
+        ];
+
+        for (media_type, header) in tests {
+            assert_eq!(
+                header,
+                media_type.to_string(),
+            )
         }
     }
 }

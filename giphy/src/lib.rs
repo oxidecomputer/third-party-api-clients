@@ -288,7 +288,7 @@ impl Client {
         method: http::Method,
         uri: &str,
         message: Message,
-    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    ) -> Result<(Option<crate::utils::NextLink>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -299,7 +299,9 @@ impl Client {
             .headers()
             .get(http::header::LINK)
             .and_then(|l| l.to_str().ok())
-            .and_then(|l| l.parse().ok());
+            .and_then(|l| parse_link_header::parse(l).ok())
+            .as_ref()
+            .and_then(crate::utils::next_link);
 
         let response_body = response.bytes().await?;
 
@@ -572,8 +574,8 @@ impl Client {
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {
-                let url = reqwest::Url::parse(&url)?;
+            if let Some(url) = link.as_ref() {
+                let url = reqwest::Url::parse(&url.0)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;
                 items = new_items;
@@ -584,7 +586,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -596,7 +598,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    ) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

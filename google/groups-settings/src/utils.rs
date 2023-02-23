@@ -1,20 +1,14 @@
 use std::{fmt, str::FromStr};
 
+use parse_link_header::LinkMap;
 use serde::de::{self, Visitor};
 
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
+pub struct NextLink(pub String);
+
+pub fn next_link(l: &LinkMap) -> Option<NextLink> {
+    l.get(&Some("next".to_string()))
+        .map(|link| link.raw_uri.to_string())
+        .map(NextLink)
 }
 
 pub mod date_format {
@@ -636,5 +630,20 @@ pub mod deserialize_null_vector {
         }
 
         Ok(Default::default())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::next_link;
+
+    #[test]
+    fn test_hyperx_next_link_compat() {
+        let value = "<https://previous-link>; rel=\"prev\", <https://next-link>; rel=\"next\", <https://last-link>; rel=\"last\", <https://first-link>; rel=\"first\"";
+
+        let link = parse_link_header::parse(value).unwrap();
+        let next = next_link(&link).unwrap().0;
+
+        assert_eq!("https://next-link", next);
     }
 }

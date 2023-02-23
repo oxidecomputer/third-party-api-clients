@@ -305,12 +305,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -343,12 +343,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -632,12 +632,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -670,12 +670,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -709,12 +709,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -748,12 +748,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -787,12 +787,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -826,12 +826,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -865,12 +865,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -1033,22 +1033,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hyperx"
-version = "1.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5617e92fc2f2501c3e2bc6ce547cad841adba2bae5b921c7e52510beca6d084c"
-dependencies = [
- "base64",
- "bytes",
- "http",
- "httpdate",
- "language-tags",
- "mime",
- "percent-encoding",
- "unicase",
-]
-
-[[package]]
 name = "idna"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1136,12 +1120,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "language-tags"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4345964bb142484797b161f473a503a434de77149dd8c7427788c6e13379388"
-
-[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1194,12 +1172,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -1404,12 +1382,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -1441,12 +1419,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -1566,6 +1544,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "parse_link_header"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3687fe9debbbf2a019f381a8bc6b42049b22647449b39af54b3013985c0cf6de"
+dependencies = [
+ "http",
+ "lazy_static",
+ "regex",
+]
+
+[[package]]
 name = "pem"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1585,9 +1574,9 @@ dependencies = [
 
 [[package]]
 name = "percent-encoding"
-version = "2.1.0"
+version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4fd5641d01c8f18a23da7b6fe29298ff4b55afcccdf78973b24cf3175fee32e"
+checksum = "478c572c3d73181ff3c2539045f6eb99e5491218eae919370993b890cdbdd98e"
 
 [[package]]
 name = "pin-project"
@@ -1697,12 +1686,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -1975,12 +1964,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2176,12 +2165,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2301,12 +2290,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2340,12 +2329,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2378,12 +2367,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2453,12 +2442,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -2765,12 +2754,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
@@ -3219,12 +3208,12 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "log",
  "mime",
  "nom_pem",
  "openssl",
+ "parse_link_header",
  "pem",
  "percent-encoding",
  "rand 0.8.5",
