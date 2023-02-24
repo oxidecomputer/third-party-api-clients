@@ -126,7 +126,7 @@ pub fn generate_files(
                     content.push_str(&format!("body: {}", bp));
                 }
 
-                content.push_str(&format!(") -> Result<{}> {{", response_type));
+                content.push_str(&format!(") -> ClientResult<{}> {{", response_type));
 
                 content.push_str(template);
 

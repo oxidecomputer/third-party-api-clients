@@ -5,7 +5,38 @@ use crate::struct_name;
 /*
  * Declare the client object:
  */
-pub const GITHUB_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API client.
+pub const GITHUB_TEMPLATE: &str = r#"/// Errors returned by the client
+#[derive(Debug, Error)]
+pub enum ClientError {
+    /// Ratelimited
+    #[error("Rate limited for the next {duration} seconds")]
+    RateLimited{
+        duration: u64,
+    },
+    /// URL Parsing Error
+    #[error(transparent)]
+    UrlParserError(#[from] url::ParseError),
+    /// Serde JSON parsing error
+    #[error(transparent)]
+    SerdeJsonError(#[from] serde_json::Error),
+    /// Errors returned by reqwest
+    #[error(transparent)]
+    ReqwestError(#[from] reqwest::Error),
+    /// Errors returned by reqwest middleware
+    #[error(transparent)]
+    ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
+    /// Generic HTTP Error
+    #[error("HTTP Error. Code: {status}, message: {error}")]
+    HttpError {
+        status: http::StatusCode,
+        error: String,
+    },
+    /// Generic errors returned by the API.
+    #[error(transparent)]
+    GenericError(#[from] anyhow::Error),
+}
+
+/// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     host: String,
@@ -18,7 +49,7 @@ pub struct Client {
 }
 
 impl Client {
-    pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
+    pub fn new<A, C>(agent: A, credentials: C) -> ClientResult<Self>
     where
         A: Into<String>,
         C: Into<Option<crate::auth::Credentials>>,
@@ -140,25 +171,23 @@ impl Client {
         &self,
         uri: &str,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(reqwest::Url, Option<String>)> {
-        let parsed_url = uri.parse::<reqwest::Url>();
+    ) -> ClientResult<(reqwest::Url, Option<String>)> {
+        let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
         match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
-                .map(|mut u| {
-                    u.query_pairs_mut()
+            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
+                parsed_url.query_pairs_mut()
                         .append_pair("client_id", id)
                         .append_pair("client_secret", secret);
-                    (u, None)
-                })
-                .map_err(Error::from),
+                Ok((parsed_url, None))
+            },
             Some(&crate::auth::Credentials::Token(ref token)) => {
                 let auth = format!("token {}", token);
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
             Some(&crate::auth::Credentials::JWT(ref jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
             Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
@@ -190,9 +219,9 @@ impl Client {
                     }
                 };
                 let auth = format!("token {}", token);
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
-            None => parsed_url.map(|u| (u, None)).map_err(Error::from),
+            None => Ok((parsed_url, None)),
         }
     }
 
@@ -203,7 +232,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(Option<crate::utils::NextLink>, Out)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -287,11 +316,11 @@ impl Client {
             }
 
             let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map(|out| (next_link, out)).map_err(Error::from)
+            Ok((next_link, parsed_response))
         } else if status == http::StatusCode::NOT_MODIFIED {
                 // only supported case is when client provides if-none-match
                 // header when cargo builds with --cfg feature="httpcache"
@@ -317,13 +346,13 @@ impl Client {
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
                         .as_secs();
-                    anyhow!("rate limit exceeded, will reset in {} seconds", u64::from(reset).saturating_sub(now))
+                    ClientError::RateLimited{duration: u64::from(reset).saturating_sub(now)}
                 },
                 _ => {
                     if response_body.is_empty() {
-                        anyhow!("code: {}, empty response", status)
+                        ClientError::HttpError{status: status, error: "empty response".into()}
                     } else {
-                        anyhow!("code: {}, error: {:?}", status, String::from_utf8_lossy(&response_body),)
+                        ClientError::HttpError{status: status, error: String::from_utf8_lossy(&response_body).into()}
                     }
                 }
             };
@@ -338,7 +367,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -346,14 +375,14 @@ impl Client {
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.get_media(uri, crate::utils::MediaType::Json, message).await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Message) -> Result<D>
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -366,14 +395,14 @@ impl Client {
         ).await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.unfold(uri).await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    async fn get_pages<D>(&self, uri: &str) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -386,7 +415,7 @@ impl Client {
         ).await
     }
 
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -399,7 +428,7 @@ impl Client {
         ).await
     }
 
-    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -417,7 +446,7 @@ impl Client {
         message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -430,7 +459,7 @@ impl Client {
         ).await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
+    async fn patch_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -443,21 +472,21 @@ impl Client {
         ).await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.patch_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.put_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> Result<D>
+    async fn put_media<D>(&self, uri: &str, message: Message, media: crate::utils::MediaType) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -470,7 +499,7 @@ impl Client {
         ).await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -487,7 +516,7 @@ impl Client {
     async fn unfold<D>(
         &self,
         uri: &str,
-    ) -> Result<Vec<D>>
+    ) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -1056,7 +1085,7 @@ async fn request<Out>(
     method: reqwest::Method,
     uri: &str,
     message: Message,
-) -> Result<Out>
+) -> ClientResult<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1094,7 +1123,7 @@ async fn request_with_links<Out>(
     method: http::Method,
     uri: &str,
     message: Message,
-) -> Result<(Option<crate::utils::NextLink>, Out)>
+) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
 where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1140,7 +1169,7 @@ async fn post_form<Out>(
     &self,
     uri: &str,
     form: reqwest::multipart::Form,
-) -> Result<Out>
+) -> ClientResult<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1201,7 +1230,7 @@ async fn request_with_accept_mime<Out>(
     method: reqwest::Method,
     uri: &str,
     accept_mime_type: &str,
-) -> Result<Out>
+) -> ClientResult<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1261,7 +1290,7 @@ async fn request_with_mime<Out>(
     uri: &str,
     content: &[u8],
     mime_type: &str,
-) -> Result<Out>
+) -> ClientResult<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1334,7 +1363,7 @@ async fn request_entity<D>(
     method: http::Method,
     uri: &str,
     message: Message,
-) -> Result<D>
+) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1345,7 +1374,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn get<D>(&self, uri: &str,  message: Message) -> Result<D>
+async fn get<D>(&self, uri: &str,  message: Message) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1357,7 +1386,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> Result<Vec<D>>
+async fn get_all_pages<D>(&self, uri: &str,  _message: Message) -> ClientResult<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1370,7 +1399,7 @@ where
 async fn unfold<D>(
     &self,
     uri: &str,
-) -> Result<Vec<D>>
+) -> ClientResult<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1392,7 +1421,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+async fn get_pages<D>(&self, uri: &str) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1404,7 +1433,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+async fn get_pages_url<D>(&self, url: &reqwest::Url) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1416,7 +1445,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
+async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1428,7 +1457,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
+async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1440,7 +1469,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
+async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1452,7 +1481,7 @@ where
 }}
 
 #[allow(dead_code)]
-async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
+async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
 {{
@@ -1472,7 +1501,7 @@ fn get_shared_raw_functions_without_refresh(bearer: &str, post_header_args: &str
 async fn url_and_auth(
     &self,
     uri: &str,
-) -> Result<(reqwest::Url, Option<String>)> {{
+) -> ClientResult<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
     let auth = format!("{} {{}}", self.token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
@@ -1483,7 +1512,7 @@ async fn request_raw(
     method: reqwest::Method,
     uri: &str,
     message: Message,
-) -> Result<reqwest::Response>
+) -> ClientResult<reqwest::Response>
 {{
     let (url, auth) = self.url_and_auth(uri).await?;
     let instance = <&Client>::clone(&self);
@@ -1526,7 +1555,7 @@ fn get_shared_raw_functions_with_refresh(bearer: &str, post_header_args: &str) -
 async fn url_and_auth(
     &self,
     uri: &str,
-) -> Result<(reqwest::Url, Option<String>)> {{
+) -> ClientResult<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
 
     let auth = format!("{} {{}}", self.token.read().await.access_token);
@@ -1538,7 +1567,7 @@ async fn make_request(
     method: &reqwest::Method,
     uri: &str,
     message: Message,
-) -> Result<reqwest::Request> {{
+) -> ClientResult<reqwest::Request> {{
     let (url, auth) = self.url_and_auth(uri).await?;
 
     let instance = <&Client>::clone(&self);
@@ -1581,7 +1610,7 @@ async fn request_raw(
     method: reqwest::Method,
     uri: &str,
     message: Message,
-) -> Result<reqwest::Response> {{
+) -> ClientResult<reqwest::Response> {{
     if self.auto_refresh {{
         let expired = self.is_expired().await;
 
@@ -1641,7 +1670,7 @@ pub fn user_consent_url(&self, scopes: &[String]) -> String {{
 
 /// Refresh an access token from a refresh token. Client must have a refresh token
 /// for this to work.
-pub async fn refresh_access_token(&self) -> Result<AccessToken> {{
+pub async fn refresh_access_token(&self) -> ClientResult<AccessToken> {{
     let response = {{
         let refresh_token = &self.token.read().await.refresh_token;
 
@@ -1688,7 +1717,7 @@ pub async fn refresh_access_token(&self) -> Result<AccessToken> {{
 
 /// Get an access token from the code returned by the URL paramter sent to the
 /// redirect URL.
-pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {{
+pub async fn get_access_token(&mut self, code: &str, state: &str) -> ClientResult<AccessToken> {{
     let mut headers = reqwest::header::HeaderMap::new();
     headers.append(
         reqwest::header::ACCEPT,
@@ -1730,7 +1759,7 @@ pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<Acce
 const CLIENT_AUTH_TEMPLATE: &str = r#"
 /// Get an access token from the code returned by the URL paramter sent to the
 /// redirect URL.
-pub async fn get_access_token(&mut self) -> Result<AccessToken> {
+pub async fn get_access_token(&mut self) -> ClientResult<AccessToken> {
     let mut headers = reqwest::header::HeaderMap::new();
     headers.append(
         reqwest::header::ACCEPT,

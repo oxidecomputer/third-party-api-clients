@@ -1,6 +1,6 @@
 use rand::RngCore;
 use rsa::{pkcs1::EncodeRsaPrivateKey, RsaPrivateKey};
-use std::{mem, time::Duration};
+use std::{mem, time::Duration, time::SystemTime};
 
 use wiremock::{
     http::{HeaderName, HeaderValue},
@@ -11,7 +11,7 @@ use wiremock::{
 use octorust::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     types::InstallationToken,
-    Client,
+    Client, ClientError,
 };
 
 fn app_id() -> i64 {
@@ -222,4 +222,84 @@ async fn test_refreshes_installation_token_once() {
 
     // Ensure the requests both completed successfully.
     result.expect("Should get zen successfully");
+}
+
+#[tokio::test]
+async fn test_ratelimit_error() {
+    let installation_id = installation_id();
+
+    let server = MockServer::start().await;
+
+    let jwt = JWTCredentials::new(app_id(), private_key()).expect("JWT creation should succeed");
+
+    // The JWT should be used to retrieve an installation token only once, even if requesting the
+    // the token takes long enough for a second task to ask for one.
+    let auth_response = ResponseTemplate::new(200)
+        .set_delay(Duration::from_secs(1))
+        .set_body_json(InstallationToken {
+            token: "test-token".to_owned(),
+            expires_at: Default::default(),
+            has_multiple_single_files: Default::default(),
+            permissions: Default::default(),
+            repositories: Default::default(),
+            repository_selection: Default::default(),
+            single_file: Default::default(),
+            single_file_paths: Default::default(),
+        });
+    Mock::given(method("POST"))
+        .and(path(format!(
+            "/app/installations/{installation_id}/access_tokens"
+        )))
+        .and(bearer_token(jwt.token()))
+        .respond_with(auth_response)
+        .expect(1)
+        .mount(&server)
+        .await;
+
+    // We'll use the zen endpoint just to exercise the rate limit error.
+    let now = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .unwrap()
+        + Duration::from_secs(60);
+    Mock::given(method("GET"))
+        .and(path("/zen"))
+        .and(header("authorization", "token test-token"))
+        .respond_with(
+            ResponseTemplate::new(400)
+                .append_header("x-ratelimit-remaining", "0")
+                .append_header("x-ratelimit-reset", format!("{}", now.as_secs()).as_str()),
+        )
+        .mount(&server)
+        .await;
+
+    let token_generator = InstallationTokenGenerator::new(installation_id, jwt);
+    let mut client = Client::new(
+        concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
+        Credentials::InstallationToken(token_generator),
+    )
+    .expect("Client creation should succeed");
+    client.with_host_override(server.uri());
+
+    // Request zen.
+    let result = client.meta().get_zen().await;
+
+    // Drop the server now because the server gives more useful errors on authentication failure.
+    mem::drop(server);
+
+    // Ensure the request failed.
+    let err = result.expect_err("get zen should fail");
+    if let ClientError::RateLimited { duration } = err {
+        /*
+        We should expect a duration of 60, but between the delay in the auth request and
+        possible change of seconds between the computation of `now` and the actual call,
+        this should be returning 59 most of the time, and 58 when the second changes.
+        */
+        assert!(
+            (58..=60).contains(&duration),
+            "duration {} is not within range",
+            duration
+        );
+    } else {
+        unreachable!("Expected Ratelimiting error, got {:?}", err)
+    }
 }

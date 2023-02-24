@@ -2350,7 +2350,18 @@ fn gen(
 
     a("");
 
-    a("use anyhow::{anyhow, Error, Result};");
+    match proper_name {
+        // Add here project names that were converted to thiserror
+        "GitHub" => {
+            a("use thiserror::Error;");
+            a("type ClientResult<T> = Result<T, ClientError>;");
+        }
+        _ => {
+            a("use anyhow::{anyhow, Error, Result};");
+            a("type ClientResult<T> = Result<T>;");
+        }
+    }
+
     a("");
 
     a(&format!(
@@ -3282,6 +3293,7 @@ serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
+thiserror = "1"
 tokio = {{ version = "1.25.0", features = ["full"] }}
 
 [dev-dependencies]
@@ -3403,8 +3415,10 @@ rustdoc-args = ["--cfg", "docsrs"]
                         tagrs.push(format!("{}.rs", to_snake_case(&clean_name(&f))));
 
                         let output = format!(
-                            r#"use anyhow::Result;
+                            r#"#[allow(unused_imports)]
+use anyhow::Result;
 
+use crate::ClientResult;
 use crate::Client;
 
 {}
