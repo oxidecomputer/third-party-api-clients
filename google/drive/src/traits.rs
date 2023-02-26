@@ -1,5 +1,8 @@
 #![allow(clippy::field_reassign_with_default)]
-use anyhow::{anyhow, Result};
+use anyhow::anyhow;
+
+use crate::ClientError;
+use crate::ClientResult;
 
 #[async_trait::async_trait]
 pub trait PermissionOps {
@@ -28,7 +31,7 @@ pub trait PermissionOps {
         type_: &str,
         use_domain_admin_access: bool,
         send_notification_email: bool,
-    ) -> Result<crate::types::Permission>;
+    ) -> ClientResult<crate::types::Permission>;
 }
 
 #[async_trait::async_trait]
@@ -58,7 +61,7 @@ impl PermissionOps for crate::permissions::Permissions {
         type_: &str,
         use_domain_admin_access: bool,
         send_notification_email: bool,
-    ) -> Result<crate::types::Permission> {
+    ) -> ClientResult<crate::types::Permission> {
         // First let's check if the permission already exists.
         // List all the permissions for a file.
         let perms = self
@@ -121,7 +124,7 @@ pub trait FileOps {
         drive_id: &str,
         parent_id: &str,
         name: &str,
-    ) -> Result<Vec<crate::types::File>>;
+    ) -> ClientResult<Vec<crate::types::File>>;
 
     /// Create or update a file in a drive.
     /// If the file already exists, it will update it.
@@ -133,19 +136,25 @@ pub trait FileOps {
         name: &str,
         mime_type: &str,
         contents: &[u8],
-    ) -> Result<crate::types::File>;
+    ) -> ClientResult<crate::types::File>;
 
     /// Download a file by it's ID.
-    async fn download_by_id(&self, id: &str) -> Result<bytes::Bytes>;
+    async fn download_by_id(&self, id: &str) -> ClientResult<bytes::Bytes>;
 
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
-    async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String>;
+    async fn create_folder(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> ClientResult<String>;
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
-    async fn get_contents_by_id(&self, id: &str) -> Result<String>;
+    async fn get_contents_by_id(&self, id: &str) -> ClientResult<String>;
 
     /// Delete a file by its name.
-    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()>;
+    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str)
+        -> ClientResult<()>;
 }
 
 #[async_trait::async_trait]
@@ -156,7 +165,7 @@ impl FileOps for crate::files::Files {
         drive_id: &str,
         parent_id: &str,
         name: &str,
-    ) -> Result<Vec<crate::types::File>> {
+    ) -> ClientResult<Vec<crate::types::File>> {
         let mut query = format!("name = '{}'", name);
         if !parent_id.is_empty() {
             query = format!("{} and '{}' in parents", query, parent_id);
@@ -188,7 +197,7 @@ impl FileOps for crate::files::Files {
         name: &str,
         mime_type: &str,
         contents: &[u8],
-    ) -> Result<crate::types::File> {
+    ) -> ClientResult<crate::types::File> {
         // Create the file.
         let mut f: crate::types::File = Default::default();
         let mut method = reqwest::Method::POST;
@@ -255,7 +264,7 @@ impl FileOps for crate::files::Files {
         // Get the "Location" header.
         let location = match resp.headers().get("Location") {
             Some(location) => location.to_str()?,
-            None => anyhow::bail!("No Location header"),
+            None => return Err(ClientError::GenericError(anyhow!("No Location header"))),
         };
 
         // Now upload the file to that location.
@@ -265,7 +274,7 @@ impl FileOps for crate::files::Files {
     }
 
     /// Download a file by it's ID.
-    async fn download_by_id(&self, id: &str) -> Result<bytes::Bytes> {
+    async fn download_by_id(&self, id: &str) -> ClientResult<bytes::Bytes> {
         let resp = self
             .client
             .request_raw(
@@ -279,7 +288,12 @@ impl FileOps for crate::files::Files {
     }
 
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
-    async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String> {
+    async fn create_folder(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> ClientResult<String> {
         let folder_mime_type = "application/vnd.google-apps.folder";
         let mut file: crate::types::File = Default::default();
         // Set the name,
@@ -338,7 +352,7 @@ impl FileOps for crate::files::Files {
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
     // TODO: make binary content work in the actual library.
-    async fn get_contents_by_id(&self, id: &str) -> Result<String> {
+    async fn get_contents_by_id(&self, id: &str) -> ClientResult<String> {
         let mut query_ = String::new();
         let query_args = vec!["mime_type=text/plain".to_string()];
         for (i, n) in query_args.iter().enumerate() {
@@ -361,7 +375,12 @@ impl FileOps for crate::files::Files {
     }
 
     /// Delete a file by its name.
-    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()> {
+    async fn delete_by_name(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> ClientResult<()> {
         // Check if the file exists.
         let files = self
             .get_by_name(drive_id, parent_id, name)
@@ -385,13 +404,13 @@ impl FileOps for crate::files::Files {
 #[async_trait::async_trait]
 pub trait DriveOps {
     /// Get a drive by it's name.
-    async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive>;
+    async fn get_by_name(&self, name: &str) -> ClientResult<crate::types::Drive>;
 }
 
 #[async_trait::async_trait]
 impl DriveOps for crate::drives::Drives {
     /// Get a drive by it's name.
-    async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive> {
+    async fn get_by_name(&self, name: &str) -> ClientResult<crate::types::Drive> {
         let drives = self
             .list_all(
                 //&format!("name = '{}'", name), // query
@@ -405,6 +424,9 @@ impl DriveOps for crate::drives::Drives {
             }
         }
 
-        Err(anyhow!("could not find drive with name: {:?}", name))
+        Err(ClientError::GenericError(anyhow!(
+            "could not find drive with name: {:?}",
+            name
+        )))
     }
 }

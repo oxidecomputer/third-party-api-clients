@@ -5,38 +5,7 @@ use crate::struct_name;
 /*
  * Declare the client object:
  */
-pub const GITHUB_TEMPLATE: &str = r#"/// Errors returned by the client
-#[derive(Debug, Error)]
-pub enum ClientError {
-    /// Ratelimited
-    #[error("Rate limited for the next {duration} seconds")]
-    RateLimited{
-        duration: u64,
-    },
-    /// URL Parsing Error
-    #[error(transparent)]
-    UrlParserError(#[from] url::ParseError),
-    /// Serde JSON parsing error
-    #[error(transparent)]
-    SerdeJsonError(#[from] serde_json::Error),
-    /// Errors returned by reqwest
-    #[error(transparent)]
-    ReqwestError(#[from] reqwest::Error),
-    /// Errors returned by reqwest middleware
-    #[error(transparent)]
-    ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
-    /// Generic HTTP Error
-    #[error("HTTP Error. Code: {status}, message: {error}")]
-    HttpError {
-        status: http::StatusCode,
-        error: String,
-    },
-    /// Generic errors returned by the API.
-    #[error(transparent)]
-    GenericError(#[from] anyhow::Error),
-}
-
-/// Entrypoint for interacting with the API client.
+pub const GITHUB_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     host: String,
@@ -1098,20 +1067,16 @@ async fn request<Out>(
     if status.is_success() {{
         log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
-            serde_json::from_str("null")
+            serde_json::from_str("null")?
         }} else {{
-            serde_json::from_slice::<Out>(&response_body)
+            serde_json::from_slice::<Out>(&response_body)?
         }};
-        parsed_response.map_err(Error::from)
+        Ok(parsed_response)
     }} else {{
         let error = if response_body.is_empty() {{
-            anyhow!("code: {{}}, empty response", status)
+            ClientError::HttpError{{status: status, error: "empty response".into()}}
         }} else {{
-            anyhow!(
-                "code: {{}}, error: {{:?}}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            )
+            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1144,20 +1109,16 @@ where
         log::debug!("Received successful response. Read payload.");
 
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
-            serde_json::from_str("null")
+            serde_json::from_str("null")?
         }} else {{
-            serde_json::from_slice::<Out>(&response_body)
+            serde_json::from_slice::<Out>(&response_body)?
         }};
-        parsed_response.map(|out| (link, out)).map_err(Error::from)
+        Ok((link, parsed_response))
     }} else {{
         let error = if response_body.is_empty() {{
-            anyhow!("code: {{}}, empty response", status)
+            ClientError::HttpError{{status: status, error: "empty response".into()}}
         }} else {{
-            anyhow!(
-                "code: {{}}, error: {{:?}}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            )
+            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
         }};
         Err(error)
     }}
@@ -1200,23 +1161,20 @@ async fn post_form<Out>(
     if status.is_success() {{
         log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
-            serde_json::from_str("null")
+            serde_json::from_str("null")?
         }} else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {{
             // Parse the output as a string.
-            serde_json::from_value(serde_json::json!(&String::from_utf8(response_body.to_vec())?))
+            let s = String::from_utf8(response_body.to_vec())?;
+            serde_json::from_value(serde_json::json!(&s))?
         }} else {{
-            serde_json::from_slice::<Out>(&response_body)
+            serde_json::from_slice::<Out>(&response_body)?
         }};
-        parsed_response.map_err(Error::from)
+        Ok(parsed_response)
     }} else {{
         let error = if response_body.is_empty() {{
-            anyhow!("code: {{}}, empty response", status)
+            ClientError::HttpError{{status: status, error: "empty response".into()}}
         }} else {{
-            anyhow!(
-                "code: {{}}, error: {{:?}}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            )
+            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1259,23 +1217,20 @@ async fn request_with_accept_mime<Out>(
     if status.is_success() {{
         log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
-            serde_json::from_str("null")
+            serde_json::from_str("null")?
         }} else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {{
             // Parse the output as a string.
-            serde_json::from_value(serde_json::json!(&String::from_utf8(response_body.to_vec())?))
+            let s = String::from_utf8(response_body.to_vec())?;
+            serde_json::from_value(serde_json::json!(&s))?
         }} else {{
-            serde_json::from_slice::<Out>(&response_body)
+            serde_json::from_slice::<Out>(&response_body)?
         }};
-        parsed_response.map_err(Error::from)
+        Ok(parsed_response)
     }} else {{
         let error = if response_body.is_empty() {{
-            anyhow!("code: {{}}, empty response", status)
+            ClientError::HttpError{{status: status, error: "empty response".into()}}
         }} else {{
-            anyhow!(
-                "code: {{}}, error: {{:?}}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            )
+            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1338,20 +1293,16 @@ async fn request_with_mime<Out>(
     if status.is_success() {{
         log::debug!("Received successful response. Read payload.");
         let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
-            serde_json::from_str("null")
+            serde_json::from_str("null")?
         }} else {{
-            serde_json::from_slice::<Out>(&response_body)
+            serde_json::from_slice::<Out>(&response_body)?
         }};
-        parsed_response.map_err(Error::from)
+        Ok(parsed_response)
     }} else {{
         let error = if response_body.is_empty() {{
-            anyhow!("code: {{}}, empty response", status)
+            ClientError::HttpError{{status: status, error: "empty response".into()}}
         }} else {{
-            anyhow!(
-                "code: {{}}, error: {{:?}}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            )
+            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1502,9 +1453,9 @@ async fn url_and_auth(
     &self,
     uri: &str,
 ) -> ClientResult<(reqwest::Url, Option<String>)> {{
-    let parsed_url = uri.parse::<reqwest::Url>();
+    let parsed_url = uri.parse::<reqwest::Url>()?;
     let auth = format!("{} {{}}", self.token);
-    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+    Ok((parsed_url, Some(auth)))
 }}
 
 async fn request_raw(
@@ -1556,10 +1507,10 @@ async fn url_and_auth(
     &self,
     uri: &str,
 ) -> ClientResult<(reqwest::Url, Option<String>)> {{
-    let parsed_url = uri.parse::<reqwest::Url>();
+    let parsed_url = uri.parse::<reqwest::Url>()?;
 
     let auth = format!("{} {{}}", self.token.read().await.access_token);
-    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+    Ok((parsed_url, Some(auth)))
 }}
 
 async fn make_request(
@@ -1675,7 +1626,7 @@ pub async fn refresh_access_token(&self) -> ClientResult<AccessToken> {{
         let refresh_token = &self.token.read().await.refresh_token;
 
         if refresh_token.is_empty() {{
-            anyhow!("refresh token cannot be empty");
+            return Err(ClientError::EmptyRefreshToken);
         }}
 
         let mut headers = reqwest::header::HeaderMap::new();

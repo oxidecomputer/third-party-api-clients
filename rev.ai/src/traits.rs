@@ -1,17 +1,17 @@
-use anyhow::Result;
+use crate::ClientResult;
 
 #[async_trait::async_trait]
 pub trait JobOps {
     /// Send a plain text email.
     ///
     /// This is a nicer experience than using `post`.
-    async fn post(&self, b: bytes::Bytes) -> Result<crate::types::Job>;
+    async fn post(&self, b: bytes::Bytes) -> ClientResult<crate::types::Job>;
 }
 
 #[async_trait::async_trait]
 impl JobOps for crate::jobs::Jobs {
     /// Create a job.
-    async fn post(&self, b: bytes::Bytes) -> Result<crate::types::Job> {
+    async fn post(&self, b: bytes::Bytes) -> ClientResult<crate::types::Job> {
         let form = reqwest::multipart::Form::new()
             .part(
                 "media",
