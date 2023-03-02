@@ -116,6 +116,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 
 [[package]]
+name = "base64"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a4a4ddaa51a5bc52a6948f74c06d20aaaddb71924eab79b8c97a8c556e942d6a"
+
+[[package]]
 name = "base64ct"
 version = "1.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -300,7 +306,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -338,7 +344,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -395,6 +401,27 @@ name = "english-numbers"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4e4f5d6e192964d498b45abee72ca445e91909094bc8e8791259e82c2a0d1aa6"
+
+[[package]]
+name = "errno"
+version = "0.2.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
+dependencies = [
+ "errno-dragonfly",
+ "libc",
+ "winapi",
+]
+
+[[package]]
+name = "errno-dragonfly"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
+dependencies = [
+ "cc",
+ "libc",
+]
 
 [[package]]
 name = "event-listener"
@@ -627,7 +654,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -665,7 +692,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -704,7 +732,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -743,7 +772,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -782,7 +812,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -821,7 +852,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -860,7 +892,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -955,7 +987,7 @@ checksum = "6e9b187a72d63adbfba487f48095306ac823049cb504ee195541e91c7775f5ad"
 dependencies = [
  "anyhow",
  "async-channel",
- "base64",
+ "base64 0.13.0",
  "futures-lite",
  "http",
  "infer",
@@ -1070,6 +1102,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "io-lifetimes"
+version = "1.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1abeb7a0dd0f8181267ff8adc397075586500b81b28a73e8a0208b00fc170fb3"
+dependencies = [
+ "libc",
+ "windows-sys 0.45.0",
+]
+
+[[package]]
 name = "ipnet"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1111,7 +1153,7 @@ version = "8.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aa4b4af834c6cfd35d8763d359661b90f2e45d8f750a0849156c7f4671af09c"
 dependencies = [
- "base64",
+ "base64 0.13.0",
  "pem",
  "ring",
  "serde",
@@ -1130,15 +1172,21 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.132"
+version = "0.2.139"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8371e4e5341c3a96db127eb2465ac681ced4c433e01dd0e938adbef26ba93ba5"
+checksum = "201de327520df007757c1f0adce6e827fe8562fbc28bfd9c15571c66ca1f5f79"
 
 [[package]]
 name = "libm"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "348108ab3fba42ec82ff6e9564fc4ca0247bdccdc68dd8af9764bbc79c3c8ffb"
+
+[[package]]
+name = "linux-raw-sys"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f051f77a7c8e6957c0696eac88f26b0117e54f52d3fc682ab19397a8812846a4"
 
 [[package]]
 name = "lock_api"
@@ -1167,7 +1215,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1250,9 +1298,9 @@ dependencies = [
 
 [[package]]
 name = "native-tls"
-version = "0.2.8"
+version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "48ba9f7719b5a0f42f338907614285fb5fd70e53858141f69898a1fb7203b24d"
+checksum = "07226173c32f2926027b63cce4bcd8076c3552846cbe7925f3aaffeac0a3b92e"
 dependencies = [
  "lazy_static",
  "libc",
@@ -1378,7 +1426,7 @@ version = "0.3.1"
 dependencies = [
  "anyhow",
  "async-recursion",
- "base64",
+ "base64 0.13.0",
  "chrono",
  "dirs",
  "http",
@@ -1414,7 +1462,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1560,7 +1608,7 @@ version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "03c64931a1a212348ec4f3b4362585eca7159d0d09cbdf4a7f74f02173596fd4"
 dependencies = [
- "base64",
+ "base64 0.13.0",
 ]
 
 [[package]]
@@ -1681,7 +1729,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1820,21 +1868,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a3f87b73ce11b1619a3c6332f45341e0047173771e8b8b73f87bfeefb7b56244"
 
 [[package]]
-name = "remove_dir_all"
-version = "0.5.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
-dependencies = [
- "winapi",
-]
-
-[[package]]
 name = "reqwest"
-version = "0.11.11"
+version = "0.11.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b75aa69a3f06bbcc66ede33af2af253c6f7a86b1ca0033f60c580a27074fbf92"
+checksum = "21eed90ec8570952d53b772ecf8f206aa1ec9a3d76b2521c56c42973f2d91ee9"
 dependencies = [
- "base64",
+ "base64 0.21.0",
  "bytes",
  "encoding_rs",
  "futures-core",
@@ -1847,11 +1886,11 @@ dependencies = [
  "hyper-tls",
  "ipnet",
  "js-sys",
- "lazy_static",
  "log",
  "mime",
  "mime_guess",
  "native-tls",
+ "once_cell",
  "percent-encoding",
  "pin-project-lite",
  "rustls",
@@ -1959,7 +1998,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2032,6 +2071,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7ef03e0a2b150c7a90d01faf6254c9c48a41e95fb2a8c2ac1c6f0d2b9aefc342"
 
 [[package]]
+name = "rustix"
+version = "0.36.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f43abb88211988493c1abb44a70efa56ff0ce98f233b7b276146f1f3f7ba9644"
+dependencies = [
+ "bitflags",
+ "errno",
+ "io-lifetimes",
+ "libc",
+ "linux-raw-sys",
+ "windows-sys 0.45.0",
+]
+
+[[package]]
 name = "rustls"
 version = "0.20.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2061,7 +2114,7 @@ version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0864aeff53f8c05aa08d86e5ef839d3dfcf07aeba2db32f12db0ef716e87bd55"
 dependencies = [
- "base64",
+ "base64 0.13.0",
 ]
 
 [[package]]
@@ -2160,7 +2213,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2285,7 +2338,8 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2324,7 +2378,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2362,7 +2416,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2437,7 +2491,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2528,16 +2582,15 @@ dependencies = [
 
 [[package]]
 name = "tempfile"
-version = "3.2.0"
+version = "3.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dac1c663cfc93810f88aed9b8941d48cabf856a1b111c29a40439018d870eb22"
+checksum = "af18f7ae1acd354b992402e9ec5864359d693cd8a79dcbef59f76891701c1e95"
 dependencies = [
  "cfg-if",
- "libc",
- "rand 0.8.5",
+ "fastrand",
  "redox_syscall",
- "remove_dir_all",
- "winapi",
+ "rustix",
+ "windows-sys 0.42.0",
 ]
 
 [[package]]
@@ -2749,7 +2802,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",
@@ -3061,6 +3114,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows-sys"
+version = "0.45.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75283be5efb2831d37ea142365f009c02ec203cd29a3ebecbc093d52315b66d0"
+dependencies = [
+ "windows-targets",
+]
+
+[[package]]
+name = "windows-targets"
+version = "0.42.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8e2522491fbfcd58cc84d47aeb2958948c4b8982e9a2d8a2a35bbaed431390e7"
+dependencies = [
+ "windows_aarch64_gnullvm",
+ "windows_aarch64_msvc 0.42.1",
+ "windows_i686_gnu 0.42.1",
+ "windows_i686_msvc 0.42.1",
+ "windows_x86_64_gnu 0.42.1",
+ "windows_x86_64_gnullvm",
+ "windows_x86_64_msvc 0.42.1",
+]
+
+[[package]]
 name = "windows_aarch64_gnullvm"
 version = "0.42.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3149,7 +3226,7 @@ checksum = "12316b50eb725e22b2f6b9c4cbede5b7b89984274d113a7440c86e5c3fc6f99b"
 dependencies = [
  "assert-json-diff",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "deadpool",
  "futures",
  "futures-timer",
@@ -3171,7 +3248,7 @@ checksum = "f8cb398cca4dedd0203666d7c3e7a089d14557be759efd57ab75f067949276e7"
 dependencies = [
  "anyhow",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "futures",
  "http",
  "hyper",
@@ -3203,7 +3280,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64",
+ "base64 0.13.0",
  "bytes",
  "chrono",
  "dirs",

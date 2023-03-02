@@ -612,7 +612,7 @@ impl Client {
                         .as_secs();
                     anyhow!(
                         "rate limit exceeded, will reset in {} seconds",
-                        u64::from(reset) - now
+                        u64::from(reset).saturating_sub(now)
                     )
                 }
                 _ => {
