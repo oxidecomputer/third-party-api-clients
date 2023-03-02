@@ -39,6 +39,16 @@ impl dyn HttpCache {
         dir.push(".github/cache");
         Box::new(FileBasedCache::new(dir))
     }
+
+    pub fn in_dir(path: &Path) -> BoxedHttpCache {
+        if path.is_dir() {
+            let mut path = path.to_owned();
+            path.push(".github/cache");
+            Box::new(FileBasedCache::new(path))
+        } else {
+            panic!("Expected a dir");
+        }
+    }
 }
 
 impl Clone for BoxedHttpCache {
