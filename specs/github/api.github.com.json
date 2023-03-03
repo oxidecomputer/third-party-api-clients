@@ -19505,6 +19505,52 @@
         }
       }
     },
+    "/repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs": {
+      "post": {
+        "summary": "Re-run failed jobs from a workflow run",
+        "description": "Re-run all of the failed jobs and their dependent jobs in a workflow run using the `id` of the workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint.",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "actions/re-run-workflow-failed-jobs",
+        "externalDocs": {
+          "description": "API method documentation",
+          "url": "https://docs.github.com/rest/reference/actions#re-run-workflow-failed-jobs"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/owner"
+          },
+          {
+            "$ref": "#/components/parameters/repo"
+          },
+          {
+            "$ref": "#/components/parameters/run-id"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-github": {
+          "githubCloudOnly": false,
+          "enabledForGitHubApps": true,
+          "category": "actions",
+          "subcategory": "workflow-runs"
+        }
+      }
+    },
     "/repos/{owner}/{repo}/actions/runs/{run_id}/timing": {
       "get": {
         "summary": "Get workflow run usage",
