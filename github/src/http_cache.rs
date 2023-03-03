@@ -35,9 +35,17 @@ impl dyn HttpCache {
     }
 
     pub fn in_home_dir() -> BoxedHttpCache {
-        let mut dir = dirs::home_dir().expect("Expected a home dir");
-        dir.push(".github/cache");
-        Box::new(FileBasedCache::new(dir))
+        Self::in_dir(&dirs::home_dir().expect("Expected a home dir"))
+    }
+
+    pub fn in_dir(path: &Path) -> BoxedHttpCache {
+        if path.is_dir() {
+            let mut path = path.to_owned();
+            path.push(".github/cache");
+            Box::new(FileBasedCache::new(path))
+        } else {
+            panic!("Expected a dir");
+        }
     }
 }
 
