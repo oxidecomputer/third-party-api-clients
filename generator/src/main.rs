@@ -3233,7 +3233,7 @@ uuid = { version = "1.1", features = ["serde", "v4"] }"#
 
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
-base64 = "^0.13"
+base64 = "^0.21"
 yup-oauth2 = "^8""#
                     .to_string();
             }
@@ -3271,7 +3271,7 @@ openssl = {{ version = "0.10", default-features = false, optional = true }}
 parse_link_header = "0.3.3"
 pem = {{ version = "1.1.0",  default-features = false, optional = true }}
 percent-encoding = "2.2"
-reqwest = {{ version = "0.11.11", default-features = false, features = ["json", "multipart"] }}
+reqwest = {{ version = "0.11.14", default-features = false, features = ["json", "multipart"] }}
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
