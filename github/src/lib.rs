@@ -631,6 +631,67 @@ impl Client {
         }
     }
 
+    pub async fn get_url(&self, uri: &str) -> Result<bytes::Bytes, Error> {
+        let authentication = crate::auth::AuthenticationConstraint::Unconstrained;
+
+        let (url, auth) = self.url_and_auth(uri, authentication).await?;
+
+        let instance = <&Client>::clone(&self);
+
+        let mut req = instance.client.request(http::Method::GET, url);
+
+        req = req.header(http::header::USER_AGENT, &*instance.agent);
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        let response = req.send().await?;
+
+        #[cfg(not(feature = "httpcache"))]
+        let (remaining, reset) = crate::utils::get_header_values(response.headers());
+
+        #[cfg(feature = "httpcache")]
+        let (remaining, reset, etag) = crate::utils::get_header_values(response.headers());
+
+        let status = response.status();
+        /*
+                let link = response
+                    .headers()
+                    .get(http::header::LINK)
+                    .and_then(|l| l.to_str().ok())
+                    .and_then(|l| l.parse().ok());
+        */
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {
+            log::debug!("Received successful response. Read payload.");
+
+            Ok(response_body)
+        } else {
+            let error = match (remaining, reset) {
+                (Some(remaining), Some(reset)) if remaining == 0 => {
+                    let now = std::time::SystemTime::now()
+                        .duration_since(std::time::UNIX_EPOCH)
+                        .unwrap()
+                        .as_secs();
+                    anyhow!(
+                        "rate limit exceeded, will reset in {} seconds",
+                        u64::from(reset) - now
+                    )
+                }
+                _ => {
+                    if response_body.is_empty() {
+                        anyhow!("code: {}, empty response", status)
+                    } else {
+                        anyhow!("code: {}, error: {:?}", status, response_body,)
+                    }
+                }
+            };
+            Err(error)
+        }
+    }
+
     async fn request_entity<D>(
         &self,
         method: http::Method,
