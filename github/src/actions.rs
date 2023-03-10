@@ -3010,6 +3010,46 @@ impl Actions {
             .await
     }
     /**
+     * Re-run failed jobs from a workflow run.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs` endpoint.
+     *
+     * Re-run all of the failed jobs and their dependent jobs in a workflow run using the `id` of the workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#re-run-workflow-failed-jobs>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `run_id: i64` -- The id of the workflow run.
+     */
+    pub async fn re_run_workflow_failed_jobs(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<()> {
+        let url = self.client.url(
+            &format!(
+                "/repos/{}/{}/actions/runs/{}/rerun-failed-jobs",
+                crate::progenitor_support::encode_path(owner),
+                crate::progenitor_support::encode_path(repo),
+                crate::progenitor_support::encode_path(&run_id.to_string()),
+            ),
+            None,
+        );
+        self.client
+            .post(
+                &url,
+                crate::Message {
+                    body: None,
+                    content_type: None,
+                },
+            )
+            .await
+    }
+    /**
      * Get workflow run usage.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/timing` endpoint.
