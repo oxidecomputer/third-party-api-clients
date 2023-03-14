@@ -2387,7 +2387,10 @@ pub enum ClientError {"#);
             #[error("Rate limited for the next {duration} seconds")]
             RateLimited{
                 duration: u64,
-            },"#);
+            },
+            /// JWT errors from auth.rs
+            #[error(transparent)]
+            JsonWebTokenError(#[from] jsonwebtoken::errors::Error),"#);
         }
         TemplateType::GenericApiKey | TemplateType::GenericClientCredentials => {
             a(r#"/// utf8 convertion error
@@ -2407,7 +2410,11 @@ pub enum ClientError {"#);
 
     // Google Drive only due to traits.rs
     if proper_name == "Google Drive" {
-        a(r#"/// str convertion error
+        a(r#"
+        /// Google Drive not found
+        #[error("{name:?}: Drive not found")]
+        DriveNotFound{name: String},
+        /// str convertion error
         #[error(transparent)]
         ToStrError(#[from] reqwest::header::ToStrError),"#);
     }
@@ -2433,9 +2440,6 @@ pub enum ClientError {"#);
         status: http::StatusCode,
         error: String,
     },
-    /// Generic errors returned by the API.
-    #[error(transparent)]
-    GenericError(#[from] anyhow::Error),
 }
 "#);
 
@@ -3346,7 +3350,6 @@ native-tls = ["reqwest/default-tls", "openssl"]
 rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 
 [dependencies]
-anyhow = "1"
 async-recursion = "^1.0"
 chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}

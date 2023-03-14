@@ -1,6 +1,4 @@
 #![allow(clippy::field_reassign_with_default)]
-use anyhow::anyhow;
-
 use crate::ClientError;
 use crate::ClientResult;
 
@@ -262,10 +260,14 @@ impl FileOps for crate::files::Files {
             .await?;
 
         // Get the "Location" header.
-        let location = match resp.headers().get("Location") {
-            Some(location) => location.to_str()?,
-            None => return Err(ClientError::GenericError(anyhow!("No Location header"))),
-        };
+        let location = resp
+            .headers()
+            .get("Location")
+            .ok_or(ClientError::HttpError {
+                status: resp.status(),
+                error: "Missing Location header".to_string(),
+            })?
+            .to_str()?;
 
         // Now upload the file to that location.
         self.client
@@ -424,9 +426,8 @@ impl DriveOps for crate::drives::Drives {
             }
         }
 
-        Err(ClientError::GenericError(anyhow!(
-            "could not find drive with name: {:?}",
-            name
-        )))
+        Err(ClientError::DriveNotFound {
+            name: name.to_string(),
+        })
     }
 }
