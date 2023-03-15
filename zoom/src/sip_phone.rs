@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SipPhone {
     pub client: Client,
@@ -40,7 +39,7 @@ impl SipPhone {
         search_key: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Phones>> {
+    ) -> ClientResult<Vec<crate::types::Phones>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -84,7 +83,7 @@ impl SipPhone {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
      */
-    pub async fn list_all(&self, search_key: &str) -> Result<Vec<crate::types::Phones>> {
+    pub async fn list_all(&self, search_key: &str) -> ClientResult<Vec<crate::types::Phones>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !search_key.is_empty() {
             query_args.push(("search_key".to_string(), search_key.to_string()));
@@ -158,7 +157,7 @@ impl SipPhone {
      *
      *
      */
-    pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> ClientResult<()> {
         let url = self.client.url("/sip_phones", None);
         self.client
             .post(
@@ -186,7 +185,7 @@ impl SipPhone {
      *
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. It can be retrieved from the List SIP Phones API.
      */
-    pub async fn delete(&self, phone_id: &str) -> Result<()> {
+    pub async fn delete(&self, phone_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",
@@ -224,7 +223,7 @@ impl SipPhone {
         &self,
         phone_id: &str,
         body: &crate::types::UpdateSipPhoneRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Privileges {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Privileges {
      *
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn list(&self, customer: &str) -> Result<crate::types::Privileges> {
+    pub async fn list(&self, customer: &str) -> ClientResult<crate::types::Privileges> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/ALL/privileges",

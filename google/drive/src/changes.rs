@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Changes {
     pub client: Client,
@@ -48,7 +47,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<Vec<crate::types::Change>> {
+    ) -> ClientResult<Vec<crate::types::Change>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -146,7 +145,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<Vec<crate::types::Change>> {
+    ) -> ClientResult<Vec<crate::types::Change>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -274,7 +273,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<crate::types::StartPageToken> {
+    ) -> ClientResult<crate::types::StartPageToken> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -345,7 +344,7 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));

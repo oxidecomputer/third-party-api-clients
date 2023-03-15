@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TrackingField {
     pub client: Client,
@@ -24,7 +23,7 @@ impl TrackingField {
      * **Prerequisites:**
      * * Business, Education, API or higher plan
      */
-    pub async fn trackingfield_list(&self) -> Result<crate::types::Domains> {
+    pub async fn trackingfield_list(&self) -> ClientResult<crate::types::Domains> {
         let url = self.client.url("/tracking_fields", None);
         self.client
             .get(
@@ -51,7 +50,7 @@ impl TrackingField {
     pub async fn trackingfield_create(
         &self,
         body: &crate::types::TrackingField,
-    ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
+    ) -> ClientResult<crate::types::TrackingfieldGetResponseAllOf> {
         let url = self.client.url("/tracking_fields", None);
         self.client
             .post(
@@ -83,7 +82,7 @@ impl TrackingField {
     pub async fn trackingfield_get(
         &self,
         field_id: &str,
-    ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
+    ) -> ClientResult<crate::types::TrackingfieldGetResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",
@@ -117,7 +116,7 @@ impl TrackingField {
      *
      * * `field_id: &str` -- The Tracking Field ID.
      */
-    pub async fn trackingfield_delete(&self, field_id: &str) -> Result<()> {
+    pub async fn trackingfield_delete(&self, field_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",
@@ -155,7 +154,7 @@ impl TrackingField {
         &self,
         field_id: &str,
         body: &crate::types::TrackingField,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",

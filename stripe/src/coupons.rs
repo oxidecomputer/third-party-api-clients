@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Coupons {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Coupons {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Coupon>> {
+    ) -> ClientResult<Vec<crate::types::Coupon>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -65,7 +64,7 @@ impl Coupons {
      *
      * <p>Returns a list of your coupons.</p>
      */
-    pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Coupon>> {
+    pub async fn get_all(&self, _created: &str) -> ClientResult<Vec<crate::types::Coupon>> {
         let url = self.client.url("/v1/coupons", None);
         let mut resp: crate::types::GetCouponsResponse = self
             .client
@@ -133,7 +132,7 @@ impl Coupons {
      *
      * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any invoice’s subtotal. For example, an invoice with a subtotal of <currency>100</currency> will have a final total of <currency>0</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it and an invoice with a subtotal of <currency>300</currency> will have a final total of <currency>100</currency> if a coupon with an <code>amount_off</code> of <amount>200</amount> is applied to it.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Coupon> {
+    pub async fn post(&self) -> ClientResult<crate::types::Coupon> {
         let url = self.client.url("/v1/coupons", None);
         self.client
             .post(
@@ -155,7 +154,7 @@ impl Coupons {
      * * `coupon: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self, coupon: &str) -> Result<crate::types::Coupon> {
+    pub async fn get(&self, coupon: &str) -> ClientResult<crate::types::Coupon> {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",
@@ -182,7 +181,7 @@ impl Coupons {
      *
      * * `coupon: &str` -- The account's country.
      */
-    pub async fn post_coupons(&self, coupon: &str) -> Result<crate::types::Coupon> {
+    pub async fn post_coupons(&self, coupon: &str) -> ClientResult<crate::types::Coupon> {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",
@@ -209,7 +208,7 @@ impl Coupons {
      *
      * * `coupon: &str` -- The account's country.
      */
-    pub async fn delete(&self, coupon: &str) -> Result<crate::types::DeletedCoupon> {
+    pub async fn delete(&self, coupon: &str) -> ClientResult<crate::types::DeletedCoupon> {
         let url = self.client.url(
             &format!(
                 "/v1/coupons/{}",

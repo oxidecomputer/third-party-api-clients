@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Usergroups {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn create(&self) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn create(&self) -> ClientResult<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.create", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn disable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn disable(&self) -> ClientResult<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.disable", None);
         self.client
             .post(
@@ -69,7 +68,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn enable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn enable(&self) -> ClientResult<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.enable", None);
         self.client
             .post(
@@ -100,7 +99,7 @@ impl Usergroups {
         include_users: bool,
         include_count: bool,
         include_disabled: bool,
-    ) -> Result<crate::types::UsergroupsListSchema> {
+    ) -> ClientResult<crate::types::UsergroupsListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_count {
             query_args.push(("include_count".to_string(), include_count.to_string()));
@@ -136,7 +135,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn update(&self) -> ClientResult<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.update", None);
         self.client
             .post(

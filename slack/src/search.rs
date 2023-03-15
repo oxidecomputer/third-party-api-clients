@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Search {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Search {
         query: &str,
         sort: &str,
         sort_dir: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

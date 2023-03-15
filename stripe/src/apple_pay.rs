@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ApplePay {
     pub client: Client,
@@ -31,7 +30,7 @@ impl ApplePay {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::ApplePayDomain>> {
+    ) -> ClientResult<Vec<crate::types::ApplePayDomain>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain_name.is_empty() {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
@@ -73,7 +72,7 @@ impl ApplePay {
     pub async fn get_all_domains(
         &self,
         domain_name: &str,
-    ) -> Result<Vec<crate::types::ApplePayDomain>> {
+    ) -> ClientResult<Vec<crate::types::ApplePayDomain>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain_name.is_empty() {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
@@ -146,7 +145,7 @@ impl ApplePay {
      *
      * <p>Create an apple pay domain.</p>
      */
-    pub async fn post_domain(&self) -> Result<crate::types::ApplePayDomain> {
+    pub async fn post_domain(&self) -> ClientResult<crate::types::ApplePayDomain> {
         let url = self.client.url("/v1/apple_pay/domains", None);
         self.client
             .post(
@@ -168,7 +167,10 @@ impl ApplePay {
      * * `domain: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_domains_domain(&self, domain: &str) -> Result<crate::types::ApplePayDomain> {
+    pub async fn get_domains_domain(
+        &self,
+        domain: &str,
+    ) -> ClientResult<crate::types::ApplePayDomain> {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",
@@ -198,7 +200,7 @@ impl ApplePay {
     pub async fn delete_domains_domain(
         &self,
         domain: &str,
-    ) -> Result<crate::types::DeletedApplePayDomain> {
+    ) -> ClientResult<crate::types::DeletedApplePayDomain> {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",

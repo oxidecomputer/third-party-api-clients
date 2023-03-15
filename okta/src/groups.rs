@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Groups {
     pub client: Client,
@@ -34,7 +33,7 @@ impl Groups {
         after: &str,
         limit: i64,
         expand: &str,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -77,7 +76,7 @@ impl Groups {
         q: &str,
         search: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -107,7 +106,7 @@ impl Groups {
      *
      * Adds a new group with `OKTA_GROUP` type to your organization.
      */
-    pub async fn create(&self, body: &crate::types::Group) -> Result<crate::types::Group> {
+    pub async fn create(&self, body: &crate::types::Group) -> ClientResult<crate::types::Group> {
         let url = self.client.url("/api/v1/groups", None);
         self.client
             .post(
@@ -139,7 +138,7 @@ impl Groups {
         after: &str,
         search: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::GroupRule>> {
+    ) -> ClientResult<Vec<crate::types::GroupRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -180,7 +179,7 @@ impl Groups {
         &self,
         search: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::GroupRule>> {
+    ) -> ClientResult<Vec<crate::types::GroupRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -212,7 +211,7 @@ impl Groups {
     pub async fn create_rule(
         &self,
         body: &crate::types::GroupRule,
-    ) -> Result<crate::types::GroupRule> {
+    ) -> ClientResult<crate::types::GroupRule> {
         let url = self.client.url("/api/v1/groups/rules", None);
         self.client
             .post(
@@ -236,7 +235,11 @@ impl Groups {
      * * `rule_id: &str`
      * * `expand: &str`
      */
-    pub async fn get_rule(&self, rule_id: &str, expand: &str) -> Result<crate::types::GroupRule> {
+    pub async fn get_rule(
+        &self,
+        rule_id: &str,
+        expand: &str,
+    ) -> ClientResult<crate::types::GroupRule> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -273,7 +276,7 @@ impl Groups {
         &self,
         rule_id: &str,
         body: &crate::types::GroupRule,
-    ) -> Result<crate::types::GroupRule> {
+    ) -> ClientResult<crate::types::GroupRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/rules/{}",
@@ -303,7 +306,7 @@ impl Groups {
      * * `rule_id: &str`
      * * `remove_users: bool` -- Indicates whether to keep or remove users from groups assigned by this rule.
      */
-    pub async fn delete_rule(&self, rule_id: &str, remove_users: bool) -> Result<()> {
+    pub async fn delete_rule(&self, rule_id: &str, remove_users: bool) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if remove_users {
             query_args.push(("removeUsers".to_string(), remove_users.to_string()));
@@ -338,7 +341,7 @@ impl Groups {
      *
      * * `rule_id: &str`
      */
-    pub async fn activate_rule(&self, rule_id: &str) -> Result<()> {
+    pub async fn activate_rule(&self, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/rules/{}/lifecycle/activate",
@@ -367,7 +370,7 @@ impl Groups {
      *
      * * `rule_id: &str`
      */
-    pub async fn deactivate_rule(&self, rule_id: &str) -> Result<()> {
+    pub async fn deactivate_rule(&self, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/rules/{}/lifecycle/deactivate",
@@ -396,7 +399,7 @@ impl Groups {
      *
      * * `group_id: &str`
      */
-    pub async fn get(&self, group_id: &str) -> Result<crate::types::Group> {
+    pub async fn get(&self, group_id: &str) -> ClientResult<crate::types::Group> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}",
@@ -429,7 +432,7 @@ impl Groups {
         &self,
         group_id: &str,
         body: &crate::types::Group,
-    ) -> Result<crate::types::Group> {
+    ) -> ClientResult<crate::types::Group> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}",
@@ -458,7 +461,7 @@ impl Groups {
      *
      * * `group_id: &str`
      */
-    pub async fn delete(&self, group_id: &str) -> Result<()> {
+    pub async fn delete(&self, group_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}",
@@ -494,7 +497,7 @@ impl Groups {
         group_id: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::Application>> {
+    ) -> ClientResult<Vec<crate::types::Application>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -533,7 +536,7 @@ impl Groups {
     pub async fn list_all_assigned_applications_fors(
         &self,
         group_id: &str,
-    ) -> Result<Vec<crate::types::Application>> {
+    ) -> ClientResult<Vec<crate::types::Application>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/apps",
@@ -565,7 +568,7 @@ impl Groups {
         &self,
         group_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::Role>> {
+    ) -> ClientResult<Vec<crate::types::Role>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -600,7 +603,7 @@ impl Groups {
         &self,
         group_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::Role>> {
+    ) -> ClientResult<Vec<crate::types::Role>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -639,7 +642,7 @@ impl Groups {
         group_id: &str,
         disable_notifications: &str,
         body: &crate::types::AssignRoleRequest,
-    ) -> Result<crate::types::Role> {
+    ) -> ClientResult<crate::types::Role> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !disable_notifications.is_empty() {
             query_args.push((
@@ -676,7 +679,11 @@ impl Groups {
      * * `group_id: &str`
      * * `role_id: &str`
      */
-    pub async fn get_role(&self, group_id: &str, role_id: &str) -> Result<crate::types::Role> {
+    pub async fn get_role(
+        &self,
+        group_id: &str,
+        role_id: &str,
+    ) -> ClientResult<crate::types::Role> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}",
@@ -705,7 +712,7 @@ impl Groups {
      * * `group_id: &str`
      * * `role_id: &str`
      */
-    pub async fn remove_role_from(&self, group_id: &str, role_id: &str) -> Result<()> {
+    pub async fn remove_role_from(&self, group_id: &str, role_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}",
@@ -742,7 +749,7 @@ impl Groups {
         role_id: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::CatalogApplication>> {
+    ) -> ClientResult<Vec<crate::types::CatalogApplication>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -781,7 +788,7 @@ impl Groups {
         &self,
         group_id: &str,
         role_id: &str,
-    ) -> Result<Vec<crate::types::CatalogApplication>> {
+    ) -> ClientResult<Vec<crate::types::CatalogApplication>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/catalog/apps",
@@ -816,7 +823,7 @@ impl Groups {
         group_id: &str,
         role_id: &str,
         app_name: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
@@ -852,7 +859,7 @@ impl Groups {
         group_id: &str,
         role_id: &str,
         app_name: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}",
@@ -892,7 +899,7 @@ impl Groups {
         role_id: &str,
         app_name: &str,
         application_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
@@ -933,7 +940,7 @@ impl Groups {
         role_id: &str,
         app_name: &str,
         application_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/catalog/apps/{}/{}",
@@ -972,7 +979,7 @@ impl Groups {
         role_id: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1011,7 +1018,7 @@ impl Groups {
         &self,
         group_id: &str,
         role_id: &str,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/groups",
@@ -1046,7 +1053,7 @@ impl Groups {
         group_id: &str,
         role_id: &str,
         target_group_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/groups/{}",
@@ -1082,7 +1089,7 @@ impl Groups {
         group_id: &str,
         role_id: &str,
         target_group_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/roles/{}/targets/groups/{}",
@@ -1120,7 +1127,7 @@ impl Groups {
         group_id: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> ClientResult<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1156,7 +1163,7 @@ impl Groups {
      *
      * Enumerates all users that are a member of a group.
      */
-    pub async fn list_all_users(&self, group_id: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_users(&self, group_id: &str) -> ClientResult<Vec<crate::types::User>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/users",
@@ -1186,7 +1193,7 @@ impl Groups {
      * * `group_id: &str`
      * * `user_id: &str`
      */
-    pub async fn add_user(&self, group_id: &str, user_id: &str) -> Result<()> {
+    pub async fn add_user(&self, group_id: &str, user_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/users/{}",
@@ -1217,7 +1224,7 @@ impl Groups {
      * * `group_id: &str`
      * * `user_id: &str`
      */
-    pub async fn remove_user_from(&self, group_id: &str, user_id: &str) -> Result<()> {
+    pub async fn remove_user_from(&self, group_id: &str, user_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/groups/{}/users/{}",

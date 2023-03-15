@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Benefits {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get_page(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
+    pub async fn get_page(&self) -> ClientResult<Vec<crate::types::SupportedBenefit>> {
         let url = self.client.url("/v1/benefits", None);
         self.client
             .get(
@@ -44,7 +43,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::SupportedBenefit>> {
         let url = self.client.url("/v1/benefits", None);
         self.client
             .get_all_pages(
@@ -65,7 +64,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get(&self, benefit_id: &str) -> Result<crate::types::SupportedBenefit> {
+    pub async fn get(&self, benefit_id: &str) -> ClientResult<crate::types::SupportedBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/benefits/{}",
@@ -92,7 +91,10 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_company(&self, company_id: &str) -> Result<Vec<crate::types::CompanyBenefit>> {
+    pub async fn get_company(
+        &self,
+        company_id: &str,
+    ) -> ClientResult<Vec<crate::types::CompanyBenefit>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
@@ -124,7 +126,7 @@ impl Benefits {
     pub async fn get_all_company(
         &self,
         company_id: &str,
-    ) -> Result<Vec<crate::types::CompanyBenefit>> {
+    ) -> ClientResult<Vec<crate::types::CompanyBenefit>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
@@ -155,7 +157,7 @@ impl Benefits {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyBenefitsRequest,
-    ) -> Result<crate::types::CompanyBenefit> {
+    ) -> ClientResult<crate::types::CompanyBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/company_benefits",
@@ -185,7 +187,7 @@ impl Benefits {
     pub async fn get_company_benefits(
         &self,
         company_benefit_id: &str,
-    ) -> Result<crate::types::CompanyBenefit> {
+    ) -> ClientResult<crate::types::CompanyBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/company_benefits/{}",
@@ -216,7 +218,7 @@ impl Benefits {
         &self,
         company_benefit_id: &str,
         body: &crate::types::PutCompanyBenefitRequest,
-    ) -> Result<crate::types::CompanyBenefit> {
+    ) -> ClientResult<crate::types::CompanyBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/company_benefits/{}",
@@ -246,7 +248,7 @@ impl Benefits {
     pub async fn get_employee(
         &self,
         employee_id: &str,
-    ) -> Result<Vec<crate::types::EmployeeBenefit>> {
+    ) -> ClientResult<Vec<crate::types::EmployeeBenefit>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
@@ -278,7 +280,7 @@ impl Benefits {
     pub async fn get_all_employee(
         &self,
         employee_id: &str,
-    ) -> Result<Vec<crate::types::EmployeeBenefit>> {
+    ) -> ClientResult<Vec<crate::types::EmployeeBenefit>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
@@ -307,7 +309,7 @@ impl Benefits {
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeBenefitsRequest,
-    ) -> Result<crate::types::EmployeeBenefit> {
+    ) -> ClientResult<crate::types::EmployeeBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/employee_benefits",
@@ -336,7 +338,7 @@ impl Benefits {
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/ytd_benefit_amounts_from_different_company",
@@ -364,7 +366,7 @@ impl Benefits {
     pub async fn get_employee_benefits(
         &self,
         employee_benefit_id: &str,
-    ) -> Result<crate::types::EmployeeBenefit> {
+    ) -> ClientResult<crate::types::EmployeeBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",
@@ -393,7 +395,7 @@ impl Benefits {
         &self,
         employee_benefit_id: &str,
         body: &crate::types::PutEmployeeBenefitRequest,
-    ) -> Result<crate::types::EmployeeBenefit> {
+    ) -> ClientResult<crate::types::EmployeeBenefit> {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",
@@ -418,7 +420,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn delete_employee(&self, employee_benefit_id: &str) -> Result<()> {
+    pub async fn delete_employee(&self, employee_benefit_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/employee_benefits/{}",

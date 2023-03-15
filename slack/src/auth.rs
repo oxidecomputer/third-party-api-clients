@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Auth {
     pub client: Client,
@@ -24,7 +23,7 @@ impl Auth {
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      * * `test: bool` -- Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked.
      */
-    pub async fn revoke(&self, test: bool) -> Result<crate::types::AuthRevokeSchema> {
+    pub async fn revoke(&self, test: bool) -> ClientResult<crate::types::AuthRevokeSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if test {
             query_args.push(("test".to_string(), test.to_string()));
@@ -52,7 +51,7 @@ impl Auth {
      *
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
-    pub async fn test(&self) -> Result<crate::types::AuthTestSuccessSchema> {
+    pub async fn test(&self) -> ClientResult<crate::types::AuthTestSuccessSchema> {
         let url = self.client.url("/auth.test", None);
         self.client
             .get(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Products {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Products {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -64,7 +63,10 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/collect#create-2020-01
      */
-    pub async fn deprecated_202001_create_collects(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202001_create_collects(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-01/collects.json", None);
         self.client
             .post(
@@ -92,7 +94,7 @@ impl Products {
         &self,
         collect_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -130,7 +132,7 @@ impl Products {
     pub async fn deprecated_202001_delete_collects_param_collect(
         &self,
         collect_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collects/{}/json",
@@ -159,7 +161,10 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn deprecated_202001_get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn deprecated_202001_get_collects_count(
+        &self,
+        collection_id: i64,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -198,7 +203,7 @@ impl Products {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -231,7 +236,10 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/collect#create-2020-04
      */
-    pub async fn deprecated_202004_create_collects(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202004_create_collects(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-04/collects.json", None);
         self.client
             .post(
@@ -259,7 +267,7 @@ impl Products {
         &self,
         collect_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -297,7 +305,7 @@ impl Products {
     pub async fn deprecated_202004_delete_collects_param_collect(
         &self,
         collect_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collects/{}/json",
@@ -326,7 +334,10 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn deprecated_202004_get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn deprecated_202004_get_collects_count(
+        &self,
+        collection_id: i64,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -365,7 +376,7 @@ impl Products {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -398,7 +409,10 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/collect#create-2020-07
      */
-    pub async fn deprecated_202007_create_collects(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202007_create_collects(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-07/collects.json", None);
         self.client
             .post(
@@ -426,7 +440,7 @@ impl Products {
         &self,
         collect_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -464,7 +478,7 @@ impl Products {
     pub async fn deprecated_202007_delete_collects_param_collect(
         &self,
         collect_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collects/{}/json",
@@ -493,7 +507,10 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn deprecated_202007_get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn deprecated_202007_get_collects_count(
+        &self,
+        collection_id: i64,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -527,7 +544,7 @@ impl Products {
      * * `since_id: &str` -- Restrict results to after the specified ID.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_collect(&self, limit: &str, since_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_collect(&self, limit: &str, since_id: &str, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -560,7 +577,7 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/collect#create-2020-10
      */
-    pub async fn create_collects(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_collects(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-10/collects.json", None);
         self.client
             .post(
@@ -584,7 +601,11 @@ impl Products {
      * * `collect_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_collects_param_collect(&self, collect_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_collects_param_collect(
+        &self,
+        collect_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -619,7 +640,7 @@ impl Products {
      *
      * * `collect_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_collects_param_collect(&self, collect_id: &str) -> Result<()> {
+    pub async fn delete_collects_param_collect(&self, collect_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collects/{}/json",
@@ -648,7 +669,7 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn get_collects_count(&self, collection_id: i64) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -687,7 +708,7 @@ impl Products {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -720,7 +741,10 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/collect#create-2021-01
      */
-    pub async fn deprecated_202101_create_collects(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202101_create_collects(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2021-01/collects.json", None);
         self.client
             .post(
@@ -748,7 +772,7 @@ impl Products {
         &self,
         collect_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -786,7 +810,7 @@ impl Products {
     pub async fn deprecated_202101_delete_collects_param_collect(
         &self,
         collect_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collects/{}/json",
@@ -815,7 +839,10 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn deprecated_202101_get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn deprecated_202101_get_collects_count(
+        &self,
+        collection_id: i64,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -854,7 +881,7 @@ impl Products {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -890,7 +917,7 @@ impl Products {
     pub async fn deprecated_unstable_create_collects(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/admin/api/unstable/collects.json", None);
         self.client
             .post(
@@ -918,7 +945,7 @@ impl Products {
         &self,
         collect_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -956,7 +983,7 @@ impl Products {
     pub async fn deprecated_unstable_delete_collects_param_collect(
         &self,
         collect_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collects/{}/json",
@@ -985,7 +1012,10 @@ impl Products {
      *
      * * `collection_id: i64` -- recurring_application_charge[capped_amount].
      */
-    pub async fn deprecated_unstable_get_collects_count(&self, collection_id: i64) -> Result<()> {
+    pub async fn deprecated_unstable_get_collects_count(
+        &self,
+        collection_id: i64,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collection_id > 0 {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -1021,7 +1051,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1062,7 +1092,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1102,7 +1132,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1143,7 +1173,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1183,7 +1213,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1224,7 +1254,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1264,7 +1294,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1305,7 +1335,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1345,7 +1375,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1386,7 +1416,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1426,7 +1456,7 @@ impl Products {
         &self,
         collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1467,7 +1497,7 @@ impl Products {
         &self,
         collection_id: &str,
         limit: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1533,7 +1563,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1596,7 +1626,7 @@ impl Products {
     pub async fn deprecated_202001_create_custom_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/custom_collections.json", None);
@@ -1641,7 +1671,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -1698,7 +1728,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1737,7 +1767,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/custom_collections/{}/json",
@@ -1769,7 +1799,7 @@ impl Products {
     pub async fn deprecated_202001_delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/custom_collections/{}/json",
@@ -1829,7 +1859,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1892,7 +1922,7 @@ impl Products {
     pub async fn deprecated_202004_create_custom_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/custom_collections.json", None);
@@ -1937,7 +1967,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -1994,7 +2024,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2033,7 +2063,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/custom_collections/{}/json",
@@ -2065,7 +2095,7 @@ impl Products {
     pub async fn deprecated_202004_delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/custom_collections/{}/json",
@@ -2125,7 +2155,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2188,7 +2218,7 @@ impl Products {
     pub async fn deprecated_202007_create_custom_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/custom_collections.json", None);
@@ -2233,7 +2263,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -2290,7 +2320,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2329,7 +2359,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/custom_collections/{}/json",
@@ -2361,7 +2391,7 @@ impl Products {
     pub async fn deprecated_202007_delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/custom_collections/{}/json",
@@ -2421,7 +2451,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2481,7 +2511,7 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/customcollection#create-2020-10
      */
-    pub async fn create_custom_collections(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_custom_collections(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/custom_collections.json", None);
@@ -2526,7 +2556,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -2583,7 +2613,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2622,7 +2652,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/custom_collections/{}/json",
@@ -2654,7 +2684,7 @@ impl Products {
     pub async fn delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/custom_collections/{}/json",
@@ -2714,7 +2744,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2777,7 +2807,7 @@ impl Products {
     pub async fn deprecated_202101_create_custom_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/custom_collections.json", None);
@@ -2822,7 +2852,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -2879,7 +2909,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2918,7 +2948,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/custom_collections/{}/json",
@@ -2950,7 +2980,7 @@ impl Products {
     pub async fn deprecated_202101_delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/custom_collections/{}/json",
@@ -3010,7 +3040,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3073,7 +3103,7 @@ impl Products {
     pub async fn deprecated_unstable_create_custom_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/custom_collections.json", None);
@@ -3118,7 +3148,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -3175,7 +3205,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3214,7 +3244,7 @@ impl Products {
         &self,
         custom_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/custom_collections/{}/json",
@@ -3246,7 +3276,7 @@ impl Products {
     pub async fn deprecated_unstable_delete_custom_collections_param_collection(
         &self,
         custom_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/custom_collections/{}/json",
@@ -3323,7 +3353,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3408,7 +3438,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-01
     */
-    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-01/products.json", None);
         self.client
             .post(
@@ -3457,7 +3487,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3516,7 +3546,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202001_get_param(&self, product_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_param(
+        &self,
+        product_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3559,7 +3593,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/json",
@@ -3588,7 +3622,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/json",
@@ -3665,7 +3699,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3750,7 +3784,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-04
     */
-    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-04/products.json", None);
         self.client
             .post(
@@ -3799,7 +3833,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3858,7 +3892,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202004_get_param(&self, product_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_param(
+        &self,
+        product_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3901,7 +3939,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/json",
@@ -3930,7 +3968,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/json",
@@ -4007,7 +4045,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4092,7 +4130,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-07
     */
-    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-07/products.json", None);
         self.client
             .post(
@@ -4141,7 +4179,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4200,7 +4238,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202007_get_param(&self, product_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_param(
+        &self,
+        product_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4243,7 +4285,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/json",
@@ -4272,7 +4314,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/json",
@@ -4349,7 +4391,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4434,7 +4476,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-10
     */
-    pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-10/products.json", None);
         self.client
             .post(
@@ -4483,7 +4525,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4542,7 +4584,7 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn get_param(&self, product_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_param(&self, product_id: &str, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4581,7 +4623,11 @@ impl Products {
     *
     * * `product_id: &str` -- storefront_access_token_id.
     */
-    pub async fn update_param(&self, product_id: &str, body: &serde_json::Value) -> Result<()> {
+    pub async fn update_param(
+        &self,
+        product_id: &str,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/json",
@@ -4610,7 +4656,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/json",
@@ -4687,7 +4733,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4772,7 +4818,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2021-01
     */
-    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2021-01/products.json", None);
         self.client
             .post(
@@ -4821,7 +4867,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -4880,7 +4926,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202101_get_param(&self, product_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_param(
+        &self,
+        product_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4923,7 +4973,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/json",
@@ -4952,7 +5002,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/json",
@@ -5029,7 +5079,7 @@ impl Products {
         published_status: &str,
         fields: &str,
         presentment_currencies: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -5114,7 +5164,7 @@ impl Products {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-unstable
     */
-    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/unstable/products.json", None);
         self.client
             .post(
@@ -5163,7 +5213,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -5226,7 +5276,7 @@ impl Products {
         &self,
         product_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5269,7 +5319,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/json",
@@ -5298,7 +5348,7 @@ impl Products {
      *
      * * `product_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_delete_param(&self, product_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_delete_param(&self, product_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/json",
@@ -5334,7 +5384,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5376,7 +5426,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images.json",
@@ -5410,7 +5460,7 @@ impl Products {
         &self,
         product_id: &str,
         since_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -5452,7 +5502,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5494,7 +5544,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/{}/json",
@@ -5529,7 +5579,7 @@ impl Products {
         &self,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/products/{}/images/{}/json",
@@ -5566,7 +5616,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5608,7 +5658,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images.json",
@@ -5642,7 +5692,7 @@ impl Products {
         &self,
         product_id: &str,
         since_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -5684,7 +5734,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5726,7 +5776,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/{}/json",
@@ -5761,7 +5811,7 @@ impl Products {
         &self,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/products/{}/images/{}/json",
@@ -5798,7 +5848,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5840,7 +5890,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images.json",
@@ -5874,7 +5924,7 @@ impl Products {
         &self,
         product_id: &str,
         since_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -5916,7 +5966,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5958,7 +6008,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/{}/json",
@@ -5993,7 +6043,7 @@ impl Products {
         &self,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/products/{}/images/{}/json",
@@ -6030,7 +6080,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6072,7 +6122,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images.json",
@@ -6102,7 +6152,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn get_param_images_count(&self, product_id: &str, since_id: &str) -> Result<()> {
+    pub async fn get_param_images_count(
+        &self,
+        product_id: &str,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -6144,7 +6198,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6186,7 +6240,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/{}/json",
@@ -6217,7 +6271,11 @@ impl Products {
      * * `product_id: &str` -- storefront_access_token_id.
      * * `image_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_param_images_image(&self, product_id: &str, image_id: &str) -> Result<()> {
+    pub async fn delete_param_images_image(
+        &self,
+        product_id: &str,
+        image_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/products/{}/images/{}/json",
@@ -6254,7 +6312,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6296,7 +6354,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images.json",
@@ -6330,7 +6388,7 @@ impl Products {
         &self,
         product_id: &str,
         since_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -6372,7 +6430,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6414,7 +6472,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/{}/json",
@@ -6449,7 +6507,7 @@ impl Products {
         &self,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/products/{}/images/{}/json",
@@ -6486,7 +6544,7 @@ impl Products {
         product_id: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6528,7 +6586,7 @@ impl Products {
         &self,
         product_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images.json",
@@ -6562,7 +6620,7 @@ impl Products {
         &self,
         product_id: &str,
         since_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -6604,7 +6662,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6646,7 +6704,7 @@ impl Products {
         product_id: &str,
         image_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/{}/json",
@@ -6681,7 +6739,7 @@ impl Products {
         &self,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/products/{}/images/{}/json",
@@ -6742,7 +6800,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6805,7 +6863,7 @@ impl Products {
     pub async fn deprecated_202001_create_smart_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/smart_collections.json", None);
@@ -6850,7 +6908,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -6904,7 +6962,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6943,7 +7001,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/json",
@@ -6975,7 +7033,7 @@ impl Products {
     pub async fn deprecated_202001_delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/smart_collections/{}/json",
@@ -7014,7 +7072,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));
@@ -7083,7 +7141,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7146,7 +7204,7 @@ impl Products {
     pub async fn deprecated_202004_create_smart_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/smart_collections.json", None);
@@ -7191,7 +7249,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -7245,7 +7303,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7284,7 +7342,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/json",
@@ -7316,7 +7374,7 @@ impl Products {
     pub async fn deprecated_202004_delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/smart_collections/{}/json",
@@ -7355,7 +7413,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));
@@ -7424,7 +7482,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7487,7 +7545,7 @@ impl Products {
     pub async fn deprecated_202007_create_smart_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/smart_collections.json", None);
@@ -7532,7 +7590,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -7586,7 +7644,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7625,7 +7683,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/json",
@@ -7657,7 +7715,7 @@ impl Products {
     pub async fn deprecated_202007_delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/smart_collections/{}/json",
@@ -7696,7 +7754,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));
@@ -7765,7 +7823,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7825,7 +7883,7 @@ impl Products {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/products/smartcollection#create-2020-10
      */
-    pub async fn create_smart_collections(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_smart_collections(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/smart_collections.json", None);
@@ -7870,7 +7928,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -7924,7 +7982,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7963,7 +8021,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/json",
@@ -7995,7 +8053,7 @@ impl Products {
     pub async fn delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/smart_collections/{}/json",
@@ -8034,7 +8092,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));
@@ -8103,7 +8161,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -8166,7 +8224,7 @@ impl Products {
     pub async fn deprecated_202101_create_smart_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/smart_collections.json", None);
@@ -8211,7 +8269,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -8265,7 +8323,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -8304,7 +8362,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/json",
@@ -8336,7 +8394,7 @@ impl Products {
     pub async fn deprecated_202101_delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/smart_collections/{}/json",
@@ -8375,7 +8433,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));
@@ -8444,7 +8502,7 @@ impl Products {
         published_at_max: &str,
         published_status: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -8507,7 +8565,7 @@ impl Products {
     pub async fn deprecated_unstable_create_smart_collections(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/smart_collections.json", None);
@@ -8552,7 +8610,7 @@ impl Products {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !product_id.is_empty() {
             query_args.push(("product_id".to_string(), product_id.to_string()));
@@ -8609,7 +8667,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -8648,7 +8706,7 @@ impl Products {
         &self,
         smart_collection_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/json",
@@ -8680,7 +8738,7 @@ impl Products {
     pub async fn deprecated_unstable_delete_smart_collections_param_collection(
         &self,
         smart_collection_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/smart_collections/{}/json",
@@ -8719,7 +8777,7 @@ impl Products {
         products: &str,
         sort_order: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !products.is_empty() {
             query_args.push(("products".to_string(), products.to_string()));

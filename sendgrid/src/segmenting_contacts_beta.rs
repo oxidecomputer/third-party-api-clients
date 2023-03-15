@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SegmentingContactsBeta {
     pub client: Client,
@@ -37,7 +36,7 @@ impl SegmentingContactsBeta {
         &self,
         parent_list_ids: &str,
         no_parent_list_id: bool,
-    ) -> Result<crate::types::AllSegmentsResponse> {
+    ) -> ClientResult<crate::types::AllSegmentsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if no_parent_list_id {
             query_args.push((
@@ -74,7 +73,7 @@ impl SegmentingContactsBeta {
     pub async fn post_segment(
         &self,
         body: &crate::types::SegmentWriteV2,
-    ) -> Result<crate::types::SegmentResponse> {
+    ) -> ClientResult<crate::types::SegmentResponse> {
         let url = self.client.url("/marketing/segments/2.0", None);
         self.client
             .post(
@@ -101,7 +100,7 @@ impl SegmentingContactsBeta {
         &self,
         segment_id: &str,
         contacts_sample: bool,
-    ) -> Result<crate::types::SegmentResponse> {
+    ) -> ClientResult<crate::types::SegmentResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if contacts_sample {
             query_args.push(("contacts_sample".to_string(), contacts_sample.to_string()));
@@ -132,7 +131,7 @@ impl SegmentingContactsBeta {
      *
      * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
      */
-    pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
+    pub async fn delete_segments_segment(&self, segment_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/2.0/{}",
@@ -163,7 +162,7 @@ impl SegmentingContactsBeta {
         &self,
         segment_id: &str,
         body: &crate::types::SegmentUpdate,
-    ) -> Result<crate::types::SegmentResponse> {
+    ) -> ClientResult<crate::types::SegmentResponse> {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/2.0/{}",

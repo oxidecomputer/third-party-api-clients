@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Senders {
     pub client: Client,
@@ -30,7 +29,7 @@ impl Senders {
     pub async fn post_marketing(
         &self,
         body: &crate::types::PostMarketingSendersRequest,
-    ) -> Result<crate::types::SenderAllOf> {
+    ) -> ClientResult<crate::types::SenderAllOf> {
         let url = self.client.url("/marketing/senders", None);
         self.client
             .post(

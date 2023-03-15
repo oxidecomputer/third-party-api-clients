@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EventHooks {
     pub client: Client,
@@ -17,7 +16,7 @@ impl EventHooks {
      *
      * Success
      */
-    pub async fn list(&self) -> Result<Vec<crate::types::EventHook>> {
+    pub async fn list(&self) -> ClientResult<Vec<crate::types::EventHook>> {
         let url = self.client.url("/api/v1/eventHooks", None);
         self.client
             .get(
@@ -36,7 +35,7 @@ impl EventHooks {
      *
      * Success
      */
-    pub async fn list_all(&self) -> Result<Vec<crate::types::EventHook>> {
+    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::EventHook>> {
         let url = self.client.url("/api/v1/eventHooks", None);
         self.client
             .get_all_pages(
@@ -53,7 +52,10 @@ impl EventHooks {
      *
      * Success
      */
-    pub async fn create(&self, body: &crate::types::EventHook) -> Result<crate::types::EventHook> {
+    pub async fn create(
+        &self,
+        body: &crate::types::EventHook,
+    ) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url("/api/v1/eventHooks", None);
         self.client
             .post(
@@ -74,7 +76,7 @@ impl EventHooks {
      *
      * * `event_hook_id: &str`
      */
-    pub async fn get(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
+    pub async fn get(&self, event_hook_id: &str) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}",
@@ -105,7 +107,7 @@ impl EventHooks {
         &self,
         event_hook_id: &str,
         body: &crate::types::EventHook,
-    ) -> Result<crate::types::EventHook> {
+    ) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}",
@@ -132,7 +134,7 @@ impl EventHooks {
      *
      * * `event_hook_id: &str`
      */
-    pub async fn delete(&self, event_hook_id: &str) -> Result<()> {
+    pub async fn delete(&self, event_hook_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}",
@@ -159,7 +161,7 @@ impl EventHooks {
      *
      * * `event_hook_id: &str`
      */
-    pub async fn activate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
+    pub async fn activate(&self, event_hook_id: &str) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}/lifecycle/activate",
@@ -186,7 +188,7 @@ impl EventHooks {
      *
      * * `event_hook_id: &str`
      */
-    pub async fn deactivate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
+    pub async fn deactivate(&self, event_hook_id: &str) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}/lifecycle/deactivate",
@@ -213,7 +215,7 @@ impl EventHooks {
      *
      * * `event_hook_id: &str`
      */
-    pub async fn verify(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
+    pub async fn verify(&self, event_hook_id: &str) -> ClientResult<crate::types::EventHook> {
         let url = self.client.url(
             &format!(
                 "/api/v1/eventHooks/{}/lifecycle/verify",

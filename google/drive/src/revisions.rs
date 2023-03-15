@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Revisions {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Revisions {
         file_id: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Revision>> {
+    ) -> ClientResult<Vec<crate::types::Revision>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -66,7 +65,7 @@ impl Revisions {
      *
      * Lists a file's revisions.
      */
-    pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
+    pub async fn list_all(&self, file_id: &str) -> ClientResult<Vec<crate::types::Revision>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions",
@@ -142,7 +141,7 @@ impl Revisions {
         file_id: &str,
         revision_id: &str,
         acknowledge_abuse: bool,
-    ) -> Result<crate::types::Revision> {
+    ) -> ClientResult<crate::types::Revision> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
@@ -180,7 +179,7 @@ impl Revisions {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `revision_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
+    pub async fn delete(&self, file_id: &str, revision_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",
@@ -214,7 +213,7 @@ impl Revisions {
         file_id: &str,
         revision_id: &str,
         body: &crate::types::Revision,
-    ) -> Result<crate::types::Revision> {
+    ) -> ClientResult<crate::types::Revision> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",

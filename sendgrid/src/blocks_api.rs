@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BlocksApi {
     pub client: Client,
@@ -33,7 +32,7 @@ impl BlocksApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::BlocksResponse>> {
+    ) -> ClientResult<Vec<crate::types::BlocksResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -75,7 +74,7 @@ impl BlocksApi {
         start_time: i64,
         end_time: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::BlocksResponse>> {
+    ) -> ClientResult<Vec<crate::types::BlocksResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -119,7 +118,7 @@ impl BlocksApi {
     pub async fn delete_suppression_blocks(
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url("/suppression/blocks", None);
         self.client
             .delete(
@@ -145,7 +144,7 @@ impl BlocksApi {
     pub async fn get_suppression_blocks_email(
         &self,
         email: &str,
-    ) -> Result<Vec<crate::types::BlocksResponse>> {
+    ) -> ClientResult<Vec<crate::types::BlocksResponse>> {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",
@@ -175,7 +174,7 @@ impl BlocksApi {
     pub async fn get_all_suppression_blocks_email(
         &self,
         email: &str,
-    ) -> Result<Vec<crate::types::BlocksResponse>> {
+    ) -> ClientResult<Vec<crate::types::BlocksResponse>> {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",
@@ -204,7 +203,10 @@ impl BlocksApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_suppression_blocks_email(&self, email: &str) -> Result<crate::types::Help> {
+    pub async fn delete_suppression_blocks_email(
+        &self,
+        email: &str,
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/suppression/blocks/{}",

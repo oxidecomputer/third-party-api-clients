@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Members {
     pub client: Client,
@@ -26,7 +25,7 @@ impl Members {
         &self,
         group_key: &str,
         member_key: &str,
-    ) -> Result<crate::types::MembersHasMember> {
+    ) -> ClientResult<crate::types::MembersHasMember> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/hasMember/{}",
@@ -65,7 +64,7 @@ impl Members {
         max_results: i64,
         page_token: &str,
         roles: &str,
-    ) -> Result<Vec<crate::types::Member>> {
+    ) -> ClientResult<Vec<crate::types::Member>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
@@ -117,7 +116,7 @@ impl Members {
         group_key: &str,
         include_derived_membership: bool,
         roles: &str,
-    ) -> Result<Vec<crate::types::Member>> {
+    ) -> ClientResult<Vec<crate::types::Member>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
@@ -202,7 +201,7 @@ impl Members {
         &self,
         group_key: &str,
         body: &crate::types::Member,
-    ) -> Result<crate::types::Member> {
+    ) -> ClientResult<crate::types::Member> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members",
@@ -230,7 +229,11 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn get(&self, group_key: &str, member_key: &str) -> Result<crate::types::Member> {
+    pub async fn get(
+        &self,
+        group_key: &str,
+        member_key: &str,
+    ) -> ClientResult<crate::types::Member> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -264,7 +267,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
-    ) -> Result<crate::types::Member> {
+    ) -> ClientResult<crate::types::Member> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -293,7 +296,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn delete(&self, group_key: &str, member_key: &str) -> Result<()> {
+    pub async fn delete(&self, group_key: &str, member_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -327,7 +330,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
-    ) -> Result<crate::types::Member> {
+    ) -> ClientResult<crate::types::Member> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",

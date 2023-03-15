@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Batches {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Batches {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::BatchOperations> {
+    ) -> ClientResult<crate::types::BatchOperations> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -68,7 +67,7 @@ impl Batches {
     pub async fn post(
         &self,
         body: &crate::types::PostBatchesRequest,
-    ) -> Result<crate::types::Batch> {
+    ) -> ClientResult<crate::types::Batch> {
         let url = self.client.url("/batches", None);
         self.client
             .post(
@@ -98,7 +97,7 @@ impl Batches {
         fields: &[String],
         exclude_fields: &[String],
         batch_id: &str,
-    ) -> Result<crate::types::Batch> {
+    ) -> ClientResult<crate::types::Batch> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -136,7 +135,7 @@ impl Batches {
      *
      * * `batch_id: &str` -- The unique id for the batch operation.
      */
-    pub async fn delete(&self, batch_id: &str) -> Result<()> {
+    pub async fn delete(&self, batch_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/batches/{}",

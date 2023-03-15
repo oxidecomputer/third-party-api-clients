@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Sessions {
     pub client: Client,
@@ -22,7 +21,7 @@ impl Sessions {
     pub async fn create(
         &self,
         body: &crate::types::CreateSessionRequest,
-    ) -> Result<crate::types::Session> {
+    ) -> ClientResult<crate::types::Session> {
         let url = self.client.url("/api/v1/sessions", None);
         self.client
             .post(
@@ -43,7 +42,7 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn get(&self, session_id: &str) -> Result<crate::types::Session> {
+    pub async fn get(&self, session_id: &str) -> ClientResult<crate::types::Session> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
@@ -72,7 +71,7 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn end(&self, session_id: &str) -> Result<()> {
+    pub async fn end(&self, session_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}",
@@ -101,7 +100,7 @@ impl Sessions {
      *
      * * `session_id: &str`
      */
-    pub async fn refresh(&self, session_id: &str) -> Result<crate::types::Session> {
+    pub async fn refresh(&self, session_id: &str) -> ClientResult<crate::types::Session> {
         let url = self.client.url(
             &format!(
                 "/api/v1/sessions/{}/lifecycle/refresh",

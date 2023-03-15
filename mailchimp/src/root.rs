@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Root {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Root {
         &self,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::ApiRoot> {
+    ) -> ClientResult<crate::types::ApiRoot> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Calendars {
     pub client: Client,
@@ -17,7 +16,10 @@ impl Calendars {
      *
      * Creates a secondary calendar.
      */
-    pub async fn insert(&self, body: &crate::types::Calendar) -> Result<crate::types::Calendar> {
+    pub async fn insert(
+        &self,
+        body: &crate::types::Calendar,
+    ) -> ClientResult<crate::types::Calendar> {
         let url = self.client.url("/calendars", None);
         self.client
             .post(
@@ -38,7 +40,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn get(&self, calendar_id: &str) -> Result<crate::types::Calendar> {
+    pub async fn get(&self, calendar_id: &str) -> ClientResult<crate::types::Calendar> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
@@ -69,7 +71,7 @@ impl Calendars {
         &self,
         calendar_id: &str,
         body: &crate::types::Calendar,
-    ) -> Result<crate::types::Calendar> {
+    ) -> ClientResult<crate::types::Calendar> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
@@ -96,7 +98,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn delete(&self, calendar_id: &str) -> Result<()> {
+    pub async fn delete(&self, calendar_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
@@ -127,7 +129,7 @@ impl Calendars {
         &self,
         calendar_id: &str,
         body: &crate::types::Calendar,
-    ) -> Result<crate::types::Calendar> {
+    ) -> ClientResult<crate::types::Calendar> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}",
@@ -154,7 +156,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn clear(&self, calendar_id: &str) -> Result<()> {
+    pub async fn clear(&self, calendar_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/clear",

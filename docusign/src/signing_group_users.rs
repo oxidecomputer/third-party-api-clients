@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SigningGroupUsers {
     pub client: Client,
@@ -30,7 +29,7 @@ impl SigningGroupUsers {
         &self,
         account_id: &str,
         signing_group_id: &str,
-    ) -> Result<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::types::SigningGroupUsersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",
@@ -68,7 +67,7 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
-    ) -> Result<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::types::SigningGroupUsersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",
@@ -106,7 +105,7 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
-    ) -> Result<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::types::SigningGroupUsersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",

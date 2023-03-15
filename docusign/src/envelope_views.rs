@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeViews {
     pub client: Client,
@@ -44,7 +43,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
-    ) -> Result<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::types::EnvelopeViews> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/correct",
@@ -80,7 +79,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::CorrectViewRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/correct",
@@ -133,7 +132,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> Result<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::types::EnvelopeViews> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/edit",
@@ -195,7 +194,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
-    ) -> Result<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::types::EnvelopeViews> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/recipient",
@@ -259,7 +258,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> Result<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::types::EnvelopeViews> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/sender",
@@ -300,7 +299,7 @@ impl EnvelopeViews {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::RecipientViewRequest,
-    ) -> Result<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::types::ViewUrl> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/views/shared",
@@ -339,7 +338,7 @@ impl EnvelopeViews {
         &self,
         account_id: &str,
         body: &crate::types::ConsoleViewRequest,
-    ) -> Result<crate::types::EnvelopeViews> {
+    ) -> ClientResult<crate::types::EnvelopeViews> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/views/console",

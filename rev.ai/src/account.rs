@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Account {
     pub client: Client,
@@ -19,7 +18,7 @@ impl Account {
      *
      * Get the developer's account information
      */
-    pub async fn get(&self) -> Result<crate::types::Account> {
+    pub async fn get(&self) -> ClientResult<crate::types::Account> {
         let url = self.client.url("/account", None);
         self.client
             .get(

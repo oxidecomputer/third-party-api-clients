@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ContactsApiSegments {
     pub client: Client,
@@ -23,7 +22,9 @@ impl ContactsApiSegments {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_contactdb_segments(&self) -> Result<crate::types::ListAllSegmentsResponse> {
+    pub async fn get_contactdb_segments(
+        &self,
+    ) -> ClientResult<crate::types::ListAllSegmentsResponse> {
         let url = self.client.url("/contactdb/segments", None);
         self.client
             .get(
@@ -88,7 +89,7 @@ impl ContactsApiSegments {
     pub async fn post_contactdb_segment(
         &self,
         body: &crate::types::ContactdbSegments,
-    ) -> Result<crate::types::ContactdbSegmentsWithAllOf> {
+    ) -> ClientResult<crate::types::ContactdbSegmentsWithAllOf> {
         let url = self.client.url("/contactdb/segments", None);
         self.client
             .post(
@@ -115,7 +116,7 @@ impl ContactsApiSegments {
     pub async fn get_contactdb_segments_segment(
         &self,
         segment_id: &str,
-    ) -> Result<crate::types::ContactdbSegments> {
+    ) -> ClientResult<crate::types::ContactdbSegments> {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
@@ -152,7 +153,7 @@ impl ContactsApiSegments {
         segment_id: &str,
         delete_contacts: bool,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delete_contacts {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
@@ -192,7 +193,7 @@ impl ContactsApiSegments {
         &self,
         segment_id: &str,
         body: &crate::types::PatchContactdbSegmentsSegmentRequest,
-    ) -> Result<crate::types::ContactdbSegments> {
+    ) -> ClientResult<crate::types::ContactdbSegments> {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
@@ -228,7 +229,7 @@ impl ContactsApiSegments {
         segment_id: i64,
         page: i64,
         page_size: i64,
-    ) -> Result<crate::types::ListRecipientsOnASegmentResponse> {
+    ) -> ClientResult<crate::types::ListRecipientsOnASegmentResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));

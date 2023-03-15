@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BccEmailArchive {
     pub client: Client,
@@ -30,7 +29,7 @@ impl BccEmailArchive {
         account_id: &str,
         count: &str,
         start_position: &str,
-    ) -> Result<crate::types::BccEmailArchiveList> {
+    ) -> ClientResult<crate::types::BccEmailArchiveList> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -77,7 +76,7 @@ impl BccEmailArchive {
         &self,
         account_id: &str,
         body: &crate::types::BccEmailArchiveData,
-    ) -> Result<crate::types::BccEmailArchiveData> {
+    ) -> ClientResult<crate::types::BccEmailArchiveData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/bcc_email_archives",
@@ -115,7 +114,7 @@ impl BccEmailArchive {
         bcc_email_archive_id: &str,
         count: &str,
         start_position: &str,
-    ) -> Result<crate::types::BccEmailArchiveHistoryList> {
+    ) -> ClientResult<crate::types::BccEmailArchiveHistoryList> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -158,7 +157,7 @@ impl BccEmailArchive {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `bcc_email_archive_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete(&self, account_id: &str, bcc_email_archive_id: &str) -> Result<()> {
+    pub async fn delete(&self, account_id: &str, bcc_email_archive_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/bcc_email_archives/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct DomainAliases {
     pub client: Client,
@@ -26,7 +25,7 @@ impl DomainAliases {
         &self,
         customer: &str,
         parent_domain_name: &str,
-    ) -> Result<crate::types::DomainAliases> {
+    ) -> ClientResult<crate::types::DomainAliases> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_domain_name.is_empty() {
             query_args.push((
@@ -66,7 +65,7 @@ impl DomainAliases {
         &self,
         customer: &str,
         body: &crate::types::DomainAlias,
-    ) -> Result<crate::types::DomainAlias> {
+    ) -> ClientResult<crate::types::DomainAlias> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases",
@@ -98,7 +97,7 @@ impl DomainAliases {
         &self,
         customer: &str,
         domain_alias_name: &str,
-    ) -> Result<crate::types::DomainAlias> {
+    ) -> ClientResult<crate::types::DomainAlias> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases/{}",
@@ -127,7 +126,7 @@ impl DomainAliases {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
-    pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
+    pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/domainaliases/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Alerts {
     pub client: Client,
@@ -30,7 +29,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_page(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
+    pub async fn get_page(&self) -> ClientResult<Vec<crate::types::GetAlertsResponse>> {
         let url = self.client.url("/alerts", None);
         self.client
             .get(
@@ -57,7 +56,7 @@ impl Alerts {
      *
      * For more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::GetAlertsResponse>> {
         let url = self.client.url("/alerts", None);
         self.client
             .get_all_pages(
@@ -91,7 +90,7 @@ impl Alerts {
     pub async fn post(
         &self,
         body: &crate::types::PostAlertsRequest,
-    ) -> Result<crate::types::PostAlertsResponse> {
+    ) -> ClientResult<crate::types::PostAlertsResponse> {
         let url = self.client.url("/alerts", None);
         self.client
             .post(
@@ -121,7 +120,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
+    pub async fn get(&self, alert_id: i64) -> ClientResult<crate::types::GetAlertsAlertResponse> {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",
@@ -156,7 +155,7 @@ impl Alerts {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete(&self, alert_id: i64) -> Result<crate::types::Help> {
+    pub async fn delete(&self, alert_id: i64) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",
@@ -195,7 +194,7 @@ impl Alerts {
         &self,
         alert_id: i64,
         body: &crate::types::PatchAlertsAlertRequest,
-    ) -> Result<crate::types::GetAlertsAlertResponse> {
+    ) -> ClientResult<crate::types::GetAlertsAlertResponse> {
         let url = self.client.url(
             &format!(
                 "/alerts/{}",

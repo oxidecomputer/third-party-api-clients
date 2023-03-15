@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Inventory {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Inventory {
      *
      * * `inventory_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, inventory_id: i64) -> Result<crate::types::Inventory> {
+    pub async fn get(&self, inventory_id: i64) -> ClientResult<crate::types::Inventory> {
         let url = self.client.url(
             &format!(
                 "/inventory/{}",
@@ -69,7 +68,7 @@ impl Inventory {
         ids: &[String],
         sort: &str,
         search: &str,
-    ) -> Result<Vec<crate::types::Inventory>> {
+    ) -> ClientResult<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("IDs".to_string(), ids.join(" ")));
@@ -118,7 +117,7 @@ impl Inventory {
         ids: &[String],
         sort: &str,
         search: &str,
-    ) -> Result<Vec<crate::types::Inventory>> {
+    ) -> ClientResult<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("IDs".to_string(), ids.join(" ")));
@@ -157,7 +156,7 @@ impl Inventory {
      * * `product_id: i64` -- The product id to get inventory for.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
+    pub async fn get_product(&self, product_id: i64) -> ClientResult<Vec<crate::types::Inventory>> {
         let url = self.client.url(
             &format!(
                 "/product/{}/inventory",
@@ -182,7 +181,10 @@ impl Inventory {
      *
      * As opposed to `get_product`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
+    pub async fn get_all_product(
+        &self,
+        product_id: i64,
+    ) -> ClientResult<Vec<crate::types::Inventory>> {
         let url = self.client.url(
             &format!(
                 "/product/{}/inventory",

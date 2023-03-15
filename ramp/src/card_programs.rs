@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CardPrograms {
     pub client: Client,
@@ -29,7 +28,7 @@ impl CardPrograms {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<Vec<crate::types::CardProgram>> {
+    ) -> ClientResult<Vec<crate::types::CardProgram>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -62,7 +61,7 @@ impl CardPrograms {
      *
      * Retrieve all card programs.
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::CardProgram>> {
         let url = self.client.url("/card-programs", None);
         let resp: crate::types::GetCardProgramsResponse = self
             .client
@@ -104,7 +103,7 @@ impl CardPrograms {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -127,7 +126,7 @@ impl CardPrograms {
     pub async fn post_resources(
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
-    ) -> Result<crate::types::CardProgram> {
+    ) -> ClientResult<crate::types::CardProgram> {
         let url = self.client.url("/card-programs", None);
         self.client
             .post(
@@ -150,7 +149,7 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_program(&self, id: &str) -> Result<crate::types::CardProgram> {
+    pub async fn get_program(&self, id: &str) -> ClientResult<crate::types::CardProgram> {
         let url = self.client.url(
             &format!(
                 "/card-programs/{}",

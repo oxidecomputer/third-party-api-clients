@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct UsersProfile {
     pub client: Client,
@@ -29,7 +28,7 @@ impl UsersProfile {
         &self,
         include_labels: bool,
         user: &str,
-    ) -> Result<crate::types::UsersProfileGetSchema> {
+    ) -> ClientResult<crate::types::UsersProfileGetSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_labels {
             query_args.push(("include_labels".to_string(), include_labels.to_string()));
@@ -62,7 +61,7 @@ impl UsersProfile {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:write`.
      */
-    pub async fn set(&self) -> Result<crate::types::UsersProfileSetSchema> {
+    pub async fn set(&self) -> ClientResult<crate::types::UsersProfileSetSchema> {
         let url = self.client.url("/users.profile.set", None);
         self.client
             .post(

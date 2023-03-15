@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateViews {
     pub client: Client,
@@ -29,7 +28,7 @@ impl TemplateViews {
         account_id: &str,
         template_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> Result<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::types::ViewUrl> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/views/edit",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct WebhookEndpoints {
     pub client: Client,
@@ -29,7 +28,7 @@ impl WebhookEndpoints {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::WebhookEndpoint>> {
+    ) -> ClientResult<Vec<crate::types::WebhookEndpoint>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -65,7 +64,7 @@ impl WebhookEndpoints {
      *
      * <p>Returns a list of your webhook endpoints.</p>
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::WebhookEndpoint>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::WebhookEndpoint>> {
         let url = self.client.url("/v1/webhook_endpoints", None);
         let mut resp: crate::types::GetWebhookEndpointsResponse = self
             .client
@@ -131,7 +130,7 @@ impl WebhookEndpoints {
      *
      * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::WebhookEndpoint> {
+    pub async fn post(&self) -> ClientResult<crate::types::WebhookEndpoint> {
         let url = self.client.url("/v1/webhook_endpoints", None);
         self.client
             .post(
@@ -156,7 +155,7 @@ impl WebhookEndpoints {
     pub async fn get_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> Result<crate::types::WebhookEndpoint> {
+    ) -> ClientResult<crate::types::WebhookEndpoint> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
@@ -186,7 +185,7 @@ impl WebhookEndpoints {
     pub async fn post_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> Result<crate::types::WebhookEndpoint> {
+    ) -> ClientResult<crate::types::WebhookEndpoint> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",
@@ -216,7 +215,7 @@ impl WebhookEndpoints {
     pub async fn delete_endpoint(
         &self,
         webhook_endpoint: &str,
-    ) -> Result<crate::types::DeletedWebhookEndpoint> {
+    ) -> ClientResult<crate::types::DeletedWebhookEndpoint> {
         let url = self.client.url(
             &format!(
                 "/v1/webhook_endpoints/{}",

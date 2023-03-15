@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Replies {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Replies {
         include_deleted: bool,
         page_size: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Reply>> {
+    ) -> ClientResult<Vec<crate::types::Reply>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -79,7 +78,7 @@ impl Replies {
         file_id: &str,
         comment_id: &str,
         include_deleted: bool,
-    ) -> Result<Vec<crate::types::Reply>> {
+    ) -> ClientResult<Vec<crate::types::Reply>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -161,7 +160,7 @@ impl Replies {
         file_id: &str,
         comment_id: &str,
         body: &crate::types::Reply,
-    ) -> Result<crate::types::Reply> {
+    ) -> ClientResult<crate::types::Reply> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies",
@@ -198,7 +197,7 @@ impl Replies {
         comment_id: &str,
         reply_id: &str,
         include_deleted: bool,
-    ) -> Result<crate::types::Reply> {
+    ) -> ClientResult<crate::types::Reply> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -235,7 +234,12 @@ impl Replies {
      * * `comment_id: &str` -- A link to this theme's background image.
      * * `reply_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
+    pub async fn delete(
+        &self,
+        file_id: &str,
+        comment_id: &str,
+        reply_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",
@@ -272,7 +276,7 @@ impl Replies {
         comment_id: &str,
         reply_id: &str,
         body: &crate::types::Reply,
-    ) -> Result<crate::types::Reply> {
+    ) -> ClientResult<crate::types::Reply> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",

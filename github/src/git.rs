@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Git {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateBlobRequest,
-    ) -> Result<crate::types::Tree> {
+    ) -> ClientResult<crate::types::Tree> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/blobs",
@@ -72,7 +71,7 @@ impl Git {
         owner: &str,
         repo: &str,
         file_sha: &str,
-    ) -> Result<crate::types::Blob> {
+    ) -> ClientResult<crate::types::Blob> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/blobs/{}",
@@ -140,7 +139,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateCommitRequest,
-    ) -> Result<crate::types::GitCommit> {
+    ) -> ClientResult<crate::types::GitCommit> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/commits",
@@ -208,7 +207,7 @@ impl Git {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-    ) -> Result<crate::types::GitCommit> {
+    ) -> ClientResult<crate::types::GitCommit> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/commits/{}",
@@ -258,7 +257,7 @@ impl Git {
         ref_: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GitRef>> {
+    ) -> ClientResult<Vec<crate::types::GitRef>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -309,7 +308,7 @@ impl Git {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<Vec<crate::types::GitRef>> {
+    ) -> ClientResult<Vec<crate::types::GitRef>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/matching-refs/{}",
@@ -351,7 +350,7 @@ impl Git {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<crate::types::GitRef> {
+    ) -> ClientResult<crate::types::GitRef> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/ref/{}",
@@ -390,7 +389,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateRefRequest,
-    ) -> Result<crate::types::GitRef> {
+    ) -> ClientResult<crate::types::GitRef> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs",
@@ -424,7 +423,7 @@ impl Git {
      * * `repo: &str`
      * * `ref_: &str` -- ref parameter.
      */
-    pub async fn delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
+    pub async fn delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs/{}",
@@ -465,7 +464,7 @@ impl Git {
         repo: &str,
         ref_: &str,
         body: &crate::types::GitUpdateRefRequest,
-    ) -> Result<crate::types::GitRef> {
+    ) -> ClientResult<crate::types::GitRef> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/refs/{}",
@@ -533,7 +532,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateTagRequest,
-    ) -> Result<crate::types::GitTag> {
+    ) -> ClientResult<crate::types::GitTag> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/tags",
@@ -599,7 +598,7 @@ impl Git {
         owner: &str,
         repo: &str,
         tag_sha: &str,
-    ) -> Result<crate::types::GitTag> {
+    ) -> ClientResult<crate::types::GitTag> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/tags/{}",
@@ -640,7 +639,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateTreeRequestData,
-    ) -> Result<crate::types::GitTreeData> {
+    ) -> ClientResult<crate::types::GitTreeData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/git/trees",
@@ -683,7 +682,7 @@ impl Git {
         repo: &str,
         tree_sha: &str,
         recursive: &str,
-    ) -> Result<crate::types::GitTreeData> {
+    ) -> ClientResult<crate::types::GitTreeData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !recursive.is_empty() {
             query_args.push(("recursive".to_string(), recursive.to_string()));

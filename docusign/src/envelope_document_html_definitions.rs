@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeDocumentHtmlDefinitions {
     pub client: Client,
@@ -31,7 +30,7 @@ impl EnvelopeDocumentHtmlDefinitions {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DocumentHtmlDefinitionOriginals> {
+    ) -> ClientResult<crate::types::DocumentHtmlDefinitionOriginals> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/html_definitions",

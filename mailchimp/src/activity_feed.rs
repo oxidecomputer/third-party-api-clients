@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ActivityFeed {
     pub client: Client,
@@ -28,7 +27,7 @@ impl ActivityFeed {
         &self,
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::GetActivityFeedChimpChatterResponse> {
+    ) -> ClientResult<crate::types::GetActivityFeedChimpChatterResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

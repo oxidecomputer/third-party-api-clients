@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SubuserMonitorSettings {
     pub client: Client,
@@ -20,7 +19,7 @@ impl SubuserMonitorSettings {
     pub async fn get_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
-    ) -> Result<crate::types::Monitor> {
+    ) -> ClientResult<crate::types::Monitor> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -47,7 +46,7 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
         body: &crate::types::Monitor,
-    ) -> Result<crate::types::Monitor> {
+    ) -> ClientResult<crate::types::Monitor> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -74,7 +73,7 @@ impl SubuserMonitorSettings {
         &self,
         subuser_name: &str,
         body: &crate::types::Monitor,
-    ) -> Result<crate::types::Monitor> {
+    ) -> ClientResult<crate::types::Monitor> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",
@@ -100,7 +99,7 @@ impl SubuserMonitorSettings {
     pub async fn delete_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/monitor",

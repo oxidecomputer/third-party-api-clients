@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct NotaryJournals {
     pub client: Client,
@@ -30,7 +29,7 @@ impl NotaryJournals {
         count: &str,
         search_text: &str,
         start_position: &str,
-    ) -> Result<crate::types::NotaryJournalList> {
+    ) -> ClientResult<crate::types::NotaryJournalList> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Folders {
     pub client: Client,
@@ -30,7 +29,7 @@ impl Folders {
         page_token: &str,
         parent: &str,
         show_deleted: bool,
-    ) -> Result<Vec<crate::types::Folder>> {
+    ) -> ClientResult<Vec<crate::types::Folder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -71,7 +70,7 @@ impl Folders {
         &self,
         parent: &str,
         show_deleted: bool,
-    ) -> Result<Vec<crate::types::Folder>> {
+    ) -> ClientResult<Vec<crate::types::Folder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent.is_empty() {
             query_args.push(("parent".to_string(), parent.to_string()));
@@ -146,7 +145,7 @@ impl Folders {
         &self,
         parent: &str,
         body: &crate::types::Folder,
-    ) -> Result<crate::types::Operation> {
+    ) -> ClientResult<crate::types::Operation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent.is_empty() {
             query_args.push(("parent".to_string(), parent.to_string()));
@@ -171,7 +170,7 @@ impl Folders {
     pub async fn search(
         &self,
         body: &crate::types::SearchFoldersRequest,
-    ) -> Result<Vec<crate::types::Folder>> {
+    ) -> ClientResult<Vec<crate::types::Folder>> {
         let url = self.client.url("/v2/folders:search", None);
         let resp: crate::types::SearchFoldersResponse = self
             .client
@@ -196,7 +195,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
+    pub async fn get(&self, name: &str) -> ClientResult<crate::types::Folder> {
         let url = self.client.url(
             &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
@@ -220,7 +219,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
+    pub async fn delete(&self, name: &str) -> ClientResult<crate::types::Folder> {
         let url = self.client.url(
             &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
@@ -250,7 +249,7 @@ impl Folders {
         name: &str,
         update_mask: &str,
         body: &crate::types::Folder,
-    ) -> Result<crate::types::Folder> {
+    ) -> ClientResult<crate::types::Folder> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !update_mask.is_empty() {
             query_args.push(("updateMask".to_string(), update_mask.to_string()));
@@ -287,7 +286,7 @@ impl Folders {
         &self,
         name: &str,
         body: &crate::types::MoveFolderRequest,
-    ) -> Result<crate::types::Operation> {
+    ) -> ClientResult<crate::types::Operation> {
         let url = self.client.url(
             &format!("/v2/{}/move", crate::progenitor_support::encode_path(name),),
             None,
@@ -315,7 +314,7 @@ impl Folders {
         &self,
         name: &str,
         body: &crate::types::MoveProjectMetadata,
-    ) -> Result<crate::types::Folder> {
+    ) -> ClientResult<crate::types::Folder> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/undelete",
@@ -346,7 +345,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::GetIamPolicyRequest,
-    ) -> Result<crate::types::Policy> {
+    ) -> ClientResult<crate::types::Policy> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/getIamPolicy",
@@ -377,7 +376,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::SetIamPolicyRequest,
-    ) -> Result<crate::types::Policy> {
+    ) -> ClientResult<crate::types::Policy> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/setIamPolicy",
@@ -408,7 +407,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::TestIamPermissionsRequest,
-    ) -> Result<crate::types::TestIamPermissionsResponse> {
+    ) -> ClientResult<crate::types::TestIamPermissionsResponse> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/testIamPermissions",

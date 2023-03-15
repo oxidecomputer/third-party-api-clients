@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminAppsRestricted {
     pub client: Client,
@@ -33,7 +32,7 @@ impl AdminAppsRestricted {
         cursor: &str,
         team_id: &str,
         enterprise_id: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

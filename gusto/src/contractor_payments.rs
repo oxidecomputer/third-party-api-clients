@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ContractorPayments {
     pub client: Client,
@@ -29,7 +28,7 @@ impl ContractorPayments {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> Result<crate::types::ContractorPaymentSummary> {
+    ) -> ClientResult<crate::types::ContractorPaymentSummary> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -83,7 +82,7 @@ impl ContractorPayments {
         hours: f64,
         bonus: f64,
         reimbursement: f64,
-    ) -> Result<crate::types::ContractorPayment> {
+    ) -> ClientResult<crate::types::ContractorPayment> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !bonus.to_string().is_empty() {
             query_args.push(("bonus".to_string(), bonus.to_string()));
@@ -133,7 +132,7 @@ impl ContractorPayments {
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
-    ) -> Result<crate::types::ContractorPayment> {
+    ) -> ClientResult<crate::types::ContractorPayment> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractor_payments/{}",
@@ -165,7 +164,7 @@ impl ContractorPayments {
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractor_payments/{}",

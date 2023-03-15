@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ENoteConfigurations {
     pub client: Client,
@@ -23,7 +22,7 @@ impl ENoteConfigurations {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> Result<crate::types::ENoteConfiguration> {
+    pub async fn get(&self, account_id: &str) -> ClientResult<crate::types::ENoteConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",
@@ -56,7 +55,7 @@ impl ENoteConfigurations {
         &self,
         account_id: &str,
         body: &crate::types::ENoteConfiguration,
-    ) -> Result<crate::types::ENoteConfiguration> {
+    ) -> ClientResult<crate::types::ENoteConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",
@@ -85,7 +84,7 @@ impl ENoteConfigurations {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete(&self, account_id: &str) -> Result<()> {
+    pub async fn delete(&self, account_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/enote_configuration",

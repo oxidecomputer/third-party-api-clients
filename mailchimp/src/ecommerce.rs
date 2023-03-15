@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Ecommerce {
     pub client: Client,
@@ -40,7 +39,7 @@ impl Ecommerce {
         outreach_id: &str,
         customer_id: &str,
         has_outreach: bool,
-    ) -> Result<crate::types::OrdersData> {
+    ) -> ClientResult<crate::types::OrdersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !campaign_id.is_empty() {
             query_args.push(("campaign_id".to_string(), campaign_id.to_string()));
@@ -100,7 +99,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::ECommerceStores> {
+    ) -> ClientResult<crate::types::ECommerceStores> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -138,7 +137,7 @@ impl Ecommerce {
     pub async fn post_store(
         &self,
         body: &crate::types::ECommerceStore,
-    ) -> Result<crate::types::Stores> {
+    ) -> ClientResult<crate::types::Stores> {
         let url = self.client.url("/ecommerce/stores", None);
         self.client
             .post(
@@ -168,7 +167,7 @@ impl Ecommerce {
         fields: &[String],
         exclude_fields: &[String],
         store_id: &str,
-    ) -> Result<crate::types::Stores> {
+    ) -> ClientResult<crate::types::Stores> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -206,7 +205,7 @@ impl Ecommerce {
      *
      * * `store_id: &str` -- The name of the folder.
      */
-    pub async fn delete_stores(&self, store_id: &str) -> Result<()> {
+    pub async fn delete_stores(&self, store_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}",
@@ -239,7 +238,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommerceStoreData,
-    ) -> Result<crate::types::Stores> {
+    ) -> ClientResult<crate::types::Stores> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}",
@@ -279,7 +278,7 @@ impl Ecommerce {
         count: i64,
         offset: i64,
         store_id: &str,
-    ) -> Result<crate::types::CartsData> {
+    ) -> ClientResult<crate::types::CartsData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -327,7 +326,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommerceCart,
-    ) -> Result<crate::types::Carts> {
+    ) -> ClientResult<crate::types::Carts> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts",
@@ -365,7 +364,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         store_id: &str,
         cart_id: &str,
-    ) -> Result<crate::types::Carts> {
+    ) -> ClientResult<crate::types::Carts> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -405,7 +404,7 @@ impl Ecommerce {
      * * `store_id: &str` -- The name of the folder.
      * * `cart_id: &str` -- The name of the folder.
      */
-    pub async fn delete_stores_carts(&self, store_id: &str, cart_id: &str) -> Result<()> {
+    pub async fn delete_stores_carts(&self, store_id: &str, cart_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}",
@@ -441,7 +440,7 @@ impl Ecommerce {
         store_id: &str,
         cart_id: &str,
         body: &crate::types::ECommerceCartData,
-    ) -> Result<crate::types::Carts> {
+    ) -> ClientResult<crate::types::Carts> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}",
@@ -484,7 +483,7 @@ impl Ecommerce {
         offset: i64,
         store_id: &str,
         cart_id: &str,
-    ) -> Result<crate::types::CartLines> {
+    ) -> ClientResult<crate::types::CartLines> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -535,7 +534,7 @@ impl Ecommerce {
         store_id: &str,
         cart_id: &str,
         body: &crate::types::ECommerceCartLineItemData,
-    ) -> Result<crate::types::ECommerceCartLineItem> {
+    ) -> ClientResult<crate::types::ECommerceCartLineItem> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines",
@@ -576,7 +575,7 @@ impl Ecommerce {
         store_id: &str,
         cart_id: &str,
         line_id: &str,
-    ) -> Result<crate::types::ECommerceCartLineItem> {
+    ) -> ClientResult<crate::types::ECommerceCartLineItem> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -623,7 +622,7 @@ impl Ecommerce {
         store_id: &str,
         cart_id: &str,
         line_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines/{}",
@@ -662,7 +661,7 @@ impl Ecommerce {
         cart_id: &str,
         line_id: &str,
         body: &crate::types::ECommerceCartLineItemDataType,
-    ) -> Result<crate::types::ECommerceCartLineItem> {
+    ) -> ClientResult<crate::types::ECommerceCartLineItem> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/carts/{}/lines/{}",
@@ -706,7 +705,7 @@ impl Ecommerce {
         offset: i64,
         store_id: &str,
         email_address: &str,
-    ) -> Result<crate::types::Customers> {
+    ) -> ClientResult<crate::types::Customers> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -757,7 +756,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommerceCustomerData,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers",
@@ -795,7 +794,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         store_id: &str,
         customer_id: &str,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -840,7 +839,7 @@ impl Ecommerce {
         store_id: &str,
         customer_id: &str,
         body: &crate::types::ECommerceCustomerDataType,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
@@ -871,7 +870,11 @@ impl Ecommerce {
      * * `store_id: &str` -- The name of the folder.
      * * `customer_id: &str` -- The id for the customer of a store.
      */
-    pub async fn delete_stores_customers(&self, store_id: &str, customer_id: &str) -> Result<()> {
+    pub async fn delete_stores_customers(
+        &self,
+        store_id: &str,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
@@ -907,7 +910,7 @@ impl Ecommerce {
         store_id: &str,
         customer_id: &str,
         body: &crate::types::ECommerceCartCustomer,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/customers/{}",
@@ -948,7 +951,7 @@ impl Ecommerce {
         count: i64,
         offset: i64,
         store_id: &str,
-    ) -> Result<crate::types::PromoRulesData> {
+    ) -> ClientResult<crate::types::PromoRulesData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -996,7 +999,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommercePromoRule,
-    ) -> Result<crate::types::PromoRules> {
+    ) -> ClientResult<crate::types::PromoRules> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules",
@@ -1034,7 +1037,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         store_id: &str,
         promo_rule_id: &str,
-    ) -> Result<crate::types::PromoRules> {
+    ) -> ClientResult<crate::types::PromoRules> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1078,7 +1081,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         promo_rule_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}",
@@ -1114,7 +1117,7 @@ impl Ecommerce {
         store_id: &str,
         promo_rule_id: &str,
         body: &crate::types::ECommercePromoRuleData,
-    ) -> Result<crate::types::PromoRules> {
+    ) -> ClientResult<crate::types::PromoRules> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}",
@@ -1157,7 +1160,7 @@ impl Ecommerce {
         offset: i64,
         promo_rule_id: &str,
         store_id: &str,
-    ) -> Result<crate::types::PromoCodesData> {
+    ) -> ClientResult<crate::types::PromoCodesData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1208,7 +1211,7 @@ impl Ecommerce {
         store_id: &str,
         promo_rule_id: &str,
         body: &crate::types::ECommercePromoCode,
-    ) -> Result<crate::types::PromoCodes> {
+    ) -> ClientResult<crate::types::PromoCodes> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes",
@@ -1249,7 +1252,7 @@ impl Ecommerce {
         store_id: &str,
         promo_rule_id: &str,
         promo_code_id: &str,
-    ) -> Result<crate::types::PromoCodes> {
+    ) -> ClientResult<crate::types::PromoCodes> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1296,7 +1299,7 @@ impl Ecommerce {
         store_id: &str,
         promo_rule_id: &str,
         promo_code_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
@@ -1335,7 +1338,7 @@ impl Ecommerce {
         promo_rule_id: &str,
         promo_code_id: &str,
         body: &crate::types::ECommercePromoCodeData,
-    ) -> Result<crate::types::PromoCodes> {
+    ) -> ClientResult<crate::types::PromoCodes> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
@@ -1385,7 +1388,7 @@ impl Ecommerce {
         has_outreach: bool,
         campaign_id: &str,
         outreach_id: &str,
-    ) -> Result<crate::types::OrdersDataType> {
+    ) -> ClientResult<crate::types::OrdersDataType> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !campaign_id.is_empty() {
             query_args.push(("campaign_id".to_string(), campaign_id.to_string()));
@@ -1445,7 +1448,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommerceOrder,
-    ) -> Result<crate::types::Orders> {
+    ) -> ClientResult<crate::types::Orders> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders",
@@ -1483,7 +1486,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         store_id: &str,
         order_id: &str,
-    ) -> Result<crate::types::Orders> {
+    ) -> ClientResult<crate::types::Orders> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1523,7 +1526,7 @@ impl Ecommerce {
      * * `store_id: &str` -- The name of the folder.
      * * `order_id: &str` -- The id for the order in a store.
      */
-    pub async fn delete_stores_orders(&self, store_id: &str, order_id: &str) -> Result<()> {
+    pub async fn delete_stores_orders(&self, store_id: &str, order_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}",
@@ -1559,7 +1562,7 @@ impl Ecommerce {
         store_id: &str,
         order_id: &str,
         body: &crate::types::ECommerceOrderData,
-    ) -> Result<crate::types::Orders> {
+    ) -> ClientResult<crate::types::Orders> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}",
@@ -1602,7 +1605,7 @@ impl Ecommerce {
         offset: i64,
         store_id: &str,
         order_id: &str,
-    ) -> Result<crate::types::OrderLines> {
+    ) -> ClientResult<crate::types::OrderLines> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1653,7 +1656,7 @@ impl Ecommerce {
         store_id: &str,
         order_id: &str,
         body: &crate::types::ECommerceOrderLineItem,
-    ) -> Result<crate::types::Lines> {
+    ) -> ClientResult<crate::types::Lines> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines",
@@ -1694,7 +1697,7 @@ impl Ecommerce {
         store_id: &str,
         order_id: &str,
         line_id: &str,
-    ) -> Result<crate::types::Lines> {
+    ) -> ClientResult<crate::types::Lines> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1741,7 +1744,7 @@ impl Ecommerce {
         store_id: &str,
         order_id: &str,
         line_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines/{}",
@@ -1780,7 +1783,7 @@ impl Ecommerce {
         order_id: &str,
         line_id: &str,
         body: &crate::types::ECommerceOrderLineItemData,
-    ) -> Result<crate::types::Lines> {
+    ) -> ClientResult<crate::types::Lines> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/orders/{}/lines/{}",
@@ -1822,7 +1825,7 @@ impl Ecommerce {
         count: i64,
         offset: i64,
         store_id: &str,
-    ) -> Result<crate::types::ProductsData> {
+    ) -> ClientResult<crate::types::ProductsData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1870,7 +1873,7 @@ impl Ecommerce {
         &self,
         store_id: &str,
         body: &crate::types::ECommerceProductData,
-    ) -> Result<crate::types::ECommerceProduct> {
+    ) -> ClientResult<crate::types::ECommerceProduct> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products",
@@ -1908,7 +1911,7 @@ impl Ecommerce {
         exclude_fields: &[String],
         store_id: &str,
         product_id: &str,
-    ) -> Result<crate::types::ECommerceProduct> {
+    ) -> ClientResult<crate::types::ECommerceProduct> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1948,7 +1951,11 @@ impl Ecommerce {
      * * `store_id: &str` -- The name of the folder.
      * * `product_id: &str` -- The id for the product of a store.
      */
-    pub async fn delete_stores_products(&self, store_id: &str, product_id: &str) -> Result<()> {
+    pub async fn delete_stores_products(
+        &self,
+        store_id: &str,
+        product_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}",
@@ -1984,7 +1991,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         body: &crate::types::ECommerceProductDataType,
-    ) -> Result<crate::types::ECommerceProduct> {
+    ) -> ClientResult<crate::types::ECommerceProduct> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}",
@@ -2027,7 +2034,7 @@ impl Ecommerce {
         offset: i64,
         store_id: &str,
         product_id: &str,
-    ) -> Result<crate::types::EcommerceProductVariants> {
+    ) -> ClientResult<crate::types::EcommerceProductVariants> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2078,7 +2085,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         body: &crate::types::ECommerceProductVariant,
-    ) -> Result<crate::types::Variants> {
+    ) -> ClientResult<crate::types::Variants> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants",
@@ -2119,7 +2126,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         variant_id: &str,
-    ) -> Result<crate::types::Variants> {
+    ) -> ClientResult<crate::types::Variants> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -2167,7 +2174,7 @@ impl Ecommerce {
         product_id: &str,
         variant_id: &str,
         body: &crate::types::ECommerceProductVariant,
-    ) -> Result<crate::types::Variants> {
+    ) -> ClientResult<crate::types::Variants> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
@@ -2205,7 +2212,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         variant_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
@@ -2244,7 +2251,7 @@ impl Ecommerce {
         product_id: &str,
         variant_id: &str,
         body: &crate::types::ECommerceProductVariantData,
-    ) -> Result<crate::types::Variants> {
+    ) -> ClientResult<crate::types::Variants> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/variants/{}",
@@ -2288,7 +2295,7 @@ impl Ecommerce {
         offset: i64,
         store_id: &str,
         product_id: &str,
-    ) -> Result<crate::types::EcommerceProductImages> {
+    ) -> ClientResult<crate::types::EcommerceProductImages> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2339,7 +2346,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         body: &crate::types::ECommerceProductImage,
-    ) -> Result<crate::types::Images> {
+    ) -> ClientResult<crate::types::Images> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images",
@@ -2380,7 +2387,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         image_id: &str,
-    ) -> Result<crate::types::Images> {
+    ) -> ClientResult<crate::types::Images> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -2427,7 +2434,7 @@ impl Ecommerce {
         store_id: &str,
         product_id: &str,
         image_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images/{}",
@@ -2466,7 +2473,7 @@ impl Ecommerce {
         product_id: &str,
         image_id: &str,
         body: &crate::types::ECommerceProductImageData,
-    ) -> Result<crate::types::Images> {
+    ) -> ClientResult<crate::types::Images> {
         let url = self.client.url(
             &format!(
                 "/ecommerce/stores/{}/products/{}/images/{}",

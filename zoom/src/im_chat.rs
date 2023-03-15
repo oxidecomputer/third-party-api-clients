@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ImChat {
     pub client: Client,
@@ -39,7 +38,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
+    ) -> ClientResult<crate::types::ImChatSessionsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -100,7 +99,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ImChatMessagesResponseAllOf> {
+    ) -> ClientResult<crate::types::ImChatMessagesResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -162,7 +161,7 @@ impl ImChat {
         date: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
+    ) -> ClientResult<Vec<crate::types::ListimmessagesResponseMessages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -222,7 +221,7 @@ impl ImChat {
         chat_user: &str,
         channel: &str,
         date: &str,
-    ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
+    ) -> ClientResult<Vec<crate::types::ListimmessagesResponseMessages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -312,7 +311,7 @@ impl ImChat {
         &self,
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !chat_user.is_empty() {
             query_args.push(("chat_user".to_string(), chat_user.to_string()));

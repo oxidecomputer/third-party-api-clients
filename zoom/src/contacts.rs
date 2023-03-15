@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Contacts {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Contacts {
         query_presence_status: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Contacts>> {
+    ) -> ClientResult<Vec<crate::types::Contacts>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -86,7 +85,7 @@ impl Contacts {
         &self,
         search_key: &str,
         query_presence_status: &str,
-    ) -> Result<Vec<crate::types::Contacts>> {
+    ) -> ClientResult<Vec<crate::types::Contacts>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query_presence_status.is_empty() {
             query_args.push((
@@ -178,7 +177,7 @@ impl Contacts {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetUserContactsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -225,7 +224,7 @@ impl Contacts {
     pub async fn get_all_user(
         &self,
         type_: &str,
-    ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetUserContactsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -309,7 +308,7 @@ impl Contacts {
         &self,
         contact_id: &str,
         query_presence_status: bool,
-    ) -> Result<crate::types::GetUserContactResponse> {
+    ) -> ClientResult<crate::types::GetUserContactResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if query_presence_status {
             query_args.push((

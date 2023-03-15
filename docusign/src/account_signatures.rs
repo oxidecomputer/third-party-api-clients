@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountSignatures {
     pub client: Client,
@@ -32,7 +31,7 @@ impl AccountSignatures {
         stamp_format: &str,
         stamp_name: &str,
         stamp_type: &str,
-    ) -> Result<crate::types::AccountSignaturesInformation> {
+    ) -> ClientResult<crate::types::AccountSignaturesInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !stamp_format.is_empty() {
             query_args.push(("stamp_format".to_string(), stamp_format.to_string()));
@@ -78,7 +77,7 @@ impl AccountSignatures {
         &self,
         account_id: &str,
         body: &crate::types::AccountSignaturesInformation,
-    ) -> Result<crate::types::AccountSignaturesInformation> {
+    ) -> ClientResult<crate::types::AccountSignaturesInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatures",
@@ -114,7 +113,7 @@ impl AccountSignatures {
         account_id: &str,
         decode_only: &str,
         body: &crate::types::AccountSignaturesInformation,
-    ) -> Result<crate::types::AccountSignaturesInformation> {
+    ) -> ClientResult<crate::types::AccountSignaturesInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !decode_only.is_empty() {
             query_args.push(("decode_only".to_string(), decode_only.to_string()));
@@ -154,7 +153,7 @@ impl AccountSignatures {
         &self,
         account_id: &str,
         signature_id: &str,
-    ) -> Result<crate::types::AccountSignature> {
+    ) -> ClientResult<crate::types::AccountSignature> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatures/{}",
@@ -192,7 +191,7 @@ impl AccountSignatures {
         signature_id: &str,
         close_existing_signature: &str,
         body: &crate::types::AccountSignatureDefinition,
-    ) -> Result<crate::types::AccountSignature> {
+    ) -> ClientResult<crate::types::AccountSignature> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !close_existing_signature.is_empty() {
             query_args.push((
@@ -232,7 +231,7 @@ impl AccountSignatures {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_signature(&self, account_id: &str, signature_id: &str) -> Result<()> {
+    pub async fn delete_signature(&self, account_id: &str, signature_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatures/{}",
@@ -274,7 +273,7 @@ impl AccountSignatures {
         image_type: &str,
         signature_id: &str,
         include_chrome: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
@@ -323,7 +322,7 @@ impl AccountSignatures {
         image_type: &str,
         signature_id: &str,
         transparent_png: &str,
-    ) -> Result<crate::types::AccountSignature> {
+    ) -> ClientResult<crate::types::AccountSignature> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !transparent_png.is_empty() {
             query_args.push(("transparent_png".to_string(), transparent_png.to_string()));
@@ -370,7 +369,7 @@ impl AccountSignatures {
         account_id: &str,
         image_type: &str,
         signature_id: &str,
-    ) -> Result<crate::types::AccountSignature> {
+    ) -> ClientResult<crate::types::AccountSignature> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatures/{}/{}",

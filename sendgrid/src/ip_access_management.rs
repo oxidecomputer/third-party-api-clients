@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct IpAccessManagement {
     pub client: Client,
@@ -25,7 +24,9 @@ impl IpAccessManagement {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_access_settings_whitelist(&self) -> Result<crate::types::IpAccessResponse> {
+    pub async fn get_access_settings_whitelist(
+        &self,
+    ) -> ClientResult<crate::types::IpAccessResponse> {
         let url = self.client.url("/access_settings/whitelist", None);
         self.client
             .get(
@@ -53,7 +54,7 @@ impl IpAccessManagement {
     pub async fn post_access_settings_whitelist(
         &self,
         body: &crate::types::PostAccessSettingsWhitelistRequest,
-    ) -> Result<crate::types::IpAccessResponse> {
+    ) -> ClientResult<crate::types::IpAccessResponse> {
         let url = self.client.url("/access_settings/whitelist", None);
         self.client
             .post(
@@ -83,7 +84,7 @@ impl IpAccessManagement {
     pub async fn delete_access_settings_whitelist(
         &self,
         body: &crate::types::DeleteAccessSettingsWhitelistRequest,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url("/access_settings/whitelist", None);
         self.client
             .delete(
@@ -110,7 +111,7 @@ impl IpAccessManagement {
     pub async fn get_access_settings_activity(
         &self,
         limit: i64,
-    ) -> Result<crate::types::GetAccessSettingsActivityResponse> {
+    ) -> ClientResult<crate::types::GetAccessSettingsActivityResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -145,7 +146,7 @@ impl IpAccessManagement {
     pub async fn get_access_settings_whitelist_rule(
         &self,
         rule_id: &str,
-    ) -> Result<crate::types::IpAccessResponse> {
+    ) -> ClientResult<crate::types::IpAccessResponse> {
         let url = self.client.url(
             &format!(
                 "/access_settings/whitelist/{}",
@@ -179,7 +180,7 @@ impl IpAccessManagement {
     pub async fn delete_access_settings_whitelist_rule(
         &self,
         rule_id: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/access_settings/whitelist/{}",

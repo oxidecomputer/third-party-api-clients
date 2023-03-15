@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Checkout {
     pub client: Client,
@@ -33,7 +32,7 @@ impl Checkout {
         payment_intent: &str,
         starting_after: &str,
         subscription: &str,
-    ) -> Result<Vec<crate::types::Session>> {
+    ) -> ClientResult<Vec<crate::types::Session>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -79,7 +78,7 @@ impl Checkout {
         &self,
         payment_intent: &str,
         subscription: &str,
-    ) -> Result<Vec<crate::types::Session>> {
+    ) -> ClientResult<Vec<crate::types::Session>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !payment_intent.is_empty() {
             query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
@@ -155,7 +154,7 @@ impl Checkout {
      *
      * <p>Creates a Session object.</p>
      */
-    pub async fn post_session(&self) -> Result<crate::types::Session> {
+    pub async fn post_session(&self) -> ClientResult<crate::types::Session> {
         let url = self.client.url("/v1/checkout/sessions", None);
         self.client
             .post(
@@ -177,7 +176,7 @@ impl Checkout {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `session: &str` -- The account's country.
      */
-    pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
+    pub async fn get_sessions_session(&self, session: &str) -> ClientResult<crate::types::Session> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}",
@@ -209,7 +208,7 @@ impl Checkout {
     pub async fn post_sessions_session_expire(
         &self,
         session: &str,
-    ) -> Result<crate::types::Session> {
+    ) -> ClientResult<crate::types::Session> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/expire",
@@ -246,7 +245,7 @@ impl Checkout {
         limit: i64,
         session: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    ) -> ClientResult<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -290,7 +289,7 @@ impl Checkout {
     pub async fn get_all_sessions_session_line_items(
         &self,
         session: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    ) -> ClientResult<Vec<crate::types::Item>> {
         let url = self.client.url(
             &format!(
                 "/v1/checkout/sessions/{}/line_items",

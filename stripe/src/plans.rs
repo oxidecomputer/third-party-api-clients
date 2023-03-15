@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Plans {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Plans {
         limit: i64,
         product: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::PlanData>> {
+    ) -> ClientResult<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -80,7 +79,7 @@ impl Plans {
         active: bool,
         _created: &str,
         product: &str,
-    ) -> Result<Vec<crate::types::PlanData>> {
+    ) -> ClientResult<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -154,7 +153,7 @@ impl Plans {
      *
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::PlanData> {
+    pub async fn post(&self) -> ClientResult<crate::types::PlanData> {
         let url = self.client.url("/v1/plans", None);
         self.client
             .post(
@@ -176,7 +175,7 @@ impl Plans {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `plan: &str` -- The account's country.
      */
-    pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
+    pub async fn get(&self, plan: &str) -> ClientResult<crate::types::PlanData> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,
@@ -200,7 +199,7 @@ impl Plans {
      *
      * * `plan: &str` -- The account's country.
      */
-    pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
+    pub async fn post_plans(&self, plan: &str) -> ClientResult<crate::types::PlanData> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,
@@ -224,7 +223,7 @@ impl Plans {
      *
      * * `plan: &str` -- The account's country.
      */
-    pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
+    pub async fn delete(&self, plan: &str) -> ClientResult<crate::types::DeletedPlan> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,

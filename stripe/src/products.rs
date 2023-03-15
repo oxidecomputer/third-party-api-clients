@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Products {
     pub client: Client,
@@ -39,7 +38,7 @@ impl Products {
         shippable: bool,
         starting_after: &str,
         url: &str,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -89,7 +88,7 @@ impl Products {
         _ids: &[String],
         shippable: bool,
         url: &str,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -166,7 +165,7 @@ impl Products {
      *
      * <p>Creates a new product object.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Product> {
+    pub async fn post(&self) -> ClientResult<crate::types::Product> {
         let url = self.client.url("/v1/products", None);
         self.client
             .post(
@@ -198,7 +197,7 @@ impl Products {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -237,7 +236,7 @@ impl Products {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -315,7 +314,7 @@ impl Products {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Product> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Product> {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
@@ -342,7 +341,7 @@ impl Products {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_products(&self, id: &str) -> Result<crate::types::Product> {
+    pub async fn post_products(&self, id: &str) -> ClientResult<crate::types::Product> {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",
@@ -369,7 +368,7 @@ impl Products {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedProduct> {
+    pub async fn delete(&self, id: &str) -> ClientResult<crate::types::DeletedProduct> {
         let url = self.client.url(
             &format!(
                 "/v1/products/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Folders {
     pub client: Client,
@@ -47,7 +46,7 @@ impl Folders {
         start_position: &str,
         template: &str,
         user_filter: &str,
-    ) -> Result<crate::types::FoldersResponse> {
+    ) -> ClientResult<crate::types::FoldersResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -115,7 +114,7 @@ impl Folders {
         start_position: &str,
         status: &str,
         to_date: &str,
-    ) -> Result<crate::types::FolderItemsResponse> {
+    ) -> ClientResult<crate::types::FolderItemsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -183,7 +182,7 @@ impl Folders {
         account_id: &str,
         folder_id: &str,
         body: &crate::types::FoldersRequest,
-    ) -> Result<crate::types::FoldersResponse> {
+    ) -> ClientResult<crate::types::FoldersResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/folders/{}",
@@ -240,7 +239,7 @@ impl Folders {
         order_by: &str,
         start_position: &str,
         to_date: &str,
-    ) -> Result<crate::types::FolderItemResponse> {
+    ) -> ClientResult<crate::types::FolderItemResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !all.is_empty() {
             query_args.push(("all".to_string(), all.to_string()));

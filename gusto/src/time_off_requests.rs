@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TimeOffRequests {
     pub client: Client,
@@ -46,7 +45,7 @@ impl TimeOffRequests {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> Result<Vec<crate::types::TimeOffRequest>> {
+    ) -> ClientResult<Vec<crate::types::TimeOffRequest>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -104,7 +103,7 @@ impl TimeOffRequests {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> Result<Vec<crate::types::TimeOffRequest>> {
+    ) -> ClientResult<Vec<crate::types::TimeOffRequest>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -142,7 +141,7 @@ impl TimeOffRequests {
         &self,
         company_id: &str,
         time_off_request_id: &str,
-    ) -> Result<crate::types::TimeOffRequest> {
+    ) -> ClientResult<crate::types::TimeOffRequest> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/time_off_requests/{}",

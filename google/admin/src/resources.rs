@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Resources {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Resources {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Building>> {
+    ) -> ClientResult<Vec<crate::types::Building>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -66,7 +65,10 @@ impl Resources {
      *
      * Retrieves a list of buildings for an account.
      */
-    pub async fn buildings_list_all(&self, customer: &str) -> Result<Vec<crate::types::Building>> {
+    pub async fn buildings_list_all(
+        &self,
+        customer: &str,
+    ) -> ClientResult<Vec<crate::types::Building>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings",
@@ -141,7 +143,7 @@ impl Resources {
         customer: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> Result<crate::types::Building> {
+    ) -> ClientResult<crate::types::Building> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -182,7 +184,7 @@ impl Resources {
         &self,
         customer: &str,
         building_id: &str,
-    ) -> Result<crate::types::Building> {
+    ) -> ClientResult<crate::types::Building> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
@@ -218,7 +220,7 @@ impl Resources {
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> Result<crate::types::Building> {
+    ) -> ClientResult<crate::types::Building> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -256,7 +258,7 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `building_id: &str` -- The id of the building to delete.
      */
-    pub async fn buildings_delete(&self, customer: &str, building_id: &str) -> Result<()> {
+    pub async fn buildings_delete(&self, customer: &str, building_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/buildings/{}",
@@ -292,7 +294,7 @@ impl Resources {
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
-    ) -> Result<crate::types::Building> {
+    ) -> ClientResult<crate::types::Building> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
@@ -340,7 +342,7 @@ impl Resources {
         order_by: &str,
         page_token: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::CalendarResource>> {
+    ) -> ClientResult<Vec<crate::types::CalendarResource>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -389,7 +391,7 @@ impl Resources {
         customer: &str,
         order_by: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::CalendarResource>> {
+    ) -> ClientResult<Vec<crate::types::CalendarResource>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -471,7 +473,7 @@ impl Resources {
         &self,
         customer: &str,
         body: &crate::types::CalendarResource,
-    ) -> Result<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::types::CalendarResource> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars",
@@ -503,7 +505,7 @@ impl Resources {
         &self,
         customer: &str,
         calendar_resource_id: &str,
-    ) -> Result<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::types::CalendarResource> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -537,7 +539,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
-    ) -> Result<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::types::CalendarResource> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -566,7 +568,11 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to delete.
      */
-    pub async fn calendars_delete(&self, customer: &str, calendar_resource_id: &str) -> Result<()> {
+    pub async fn calendars_delete(
+        &self,
+        customer: &str,
+        calendar_resource_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -600,7 +606,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
-    ) -> Result<crate::types::CalendarResource> {
+    ) -> ClientResult<crate::types::CalendarResource> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/calendars/{}",
@@ -635,7 +641,7 @@ impl Resources {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Feature>> {
+    ) -> ClientResult<Vec<crate::types::Feature>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -673,7 +679,10 @@ impl Resources {
      *
      * Retrieves a list of features for an account.
      */
-    pub async fn features_list_all(&self, customer: &str) -> Result<Vec<crate::types::Feature>> {
+    pub async fn features_list_all(
+        &self,
+        customer: &str,
+    ) -> ClientResult<Vec<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
@@ -746,7 +755,7 @@ impl Resources {
         &self,
         customer: &str,
         body: &crate::types::Feature,
-    ) -> Result<crate::types::Feature> {
+    ) -> ClientResult<crate::types::Feature> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features",
@@ -778,7 +787,7 @@ impl Resources {
         &self,
         customer: &str,
         feature_key: &str,
-    ) -> Result<crate::types::Feature> {
+    ) -> ClientResult<crate::types::Feature> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -812,7 +821,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
-    ) -> Result<crate::types::Feature> {
+    ) -> ClientResult<crate::types::Feature> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -841,7 +850,7 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `feature_key: &str` -- The unique ID of the feature to delete.
      */
-    pub async fn features_delete(&self, customer: &str, feature_key: &str) -> Result<()> {
+    pub async fn features_delete(&self, customer: &str, feature_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -875,7 +884,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
-    ) -> Result<crate::types::Feature> {
+    ) -> ClientResult<crate::types::Feature> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}",
@@ -909,7 +918,7 @@ impl Resources {
         customer: &str,
         old_name: &str,
         body: &crate::types::FeatureRename,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/resources/features/{}/rename",

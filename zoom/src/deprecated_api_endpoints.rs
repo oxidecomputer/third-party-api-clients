@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct DeprecatedApiEndpoints {
     pub client: Client,
@@ -34,7 +33,7 @@ impl DeprecatedApiEndpoints {
     pub async fn list_past_meeting_files(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::ListPastMeetingFilesResponse> {
+    ) -> ClientResult<crate::types::ListPastMeetingFilesResponse> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/files",
@@ -74,7 +73,7 @@ impl DeprecatedApiEndpoints {
     pub async fn list_past_webinar_files(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ListPastMeetingFilesResponse> {
+    ) -> ClientResult<crate::types::ListPastMeetingFilesResponse> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/files",

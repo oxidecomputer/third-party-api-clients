@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Migration {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Migration {
         users: &str,
         team_id: &str,
         to_old: bool,
-    ) -> Result<crate::types::MigrationExchangeSuccessSchema> {
+    ) -> ClientResult<crate::types::MigrationExchangeSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !team_id.is_empty() {
             query_args.push(("team_id".to_string(), team_id.to_string()));

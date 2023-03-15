@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct FileLinks {
     pub client: Client,
@@ -35,7 +34,7 @@ impl FileLinks {
         file: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::FileLink>> {
+    ) -> ClientResult<Vec<crate::types::FileLink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -80,7 +79,7 @@ impl FileLinks {
         _created: &str,
         expired: bool,
         file: &str,
-    ) -> Result<Vec<crate::types::FileLink>> {
+    ) -> ClientResult<Vec<crate::types::FileLink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if expired {
             query_args.push(("expired".to_string(), expired.to_string()));
@@ -154,7 +153,7 @@ impl FileLinks {
      *
      * <p>Creates a new file link object.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::FileLink> {
+    pub async fn post(&self) -> ClientResult<crate::types::FileLink> {
         let url = self.client.url("/v1/file_links", None);
         self.client
             .post(
@@ -176,7 +175,7 @@ impl FileLinks {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `link: &str` -- The account's country.
      */
-    pub async fn get_link(&self, link: &str) -> Result<crate::types::FileLink> {
+    pub async fn get_link(&self, link: &str) -> ClientResult<crate::types::FileLink> {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",
@@ -203,7 +202,7 @@ impl FileLinks {
      *
      * * `link: &str` -- The account's country.
      */
-    pub async fn post_link(&self, link: &str) -> Result<crate::types::FileLink> {
+    pub async fn post_link(&self, link: &str) -> ClientResult<crate::types::FileLink> {
         let url = self.client.url(
             &format!(
                 "/v1/file_links/{}",

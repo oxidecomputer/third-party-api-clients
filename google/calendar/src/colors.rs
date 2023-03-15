@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Colors {
     pub client: Client,
@@ -17,7 +16,7 @@ impl Colors {
      *
      * Returns the color definitions for calendars and events.
      */
-    pub async fn get(&self) -> Result<crate::types::Colors> {
+    pub async fn get(&self) -> ClientResult<crate::types::Colors> {
         let url = self.client.url("/colors", None);
         self.client
             .get(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ReverseDns {
     pub client: Client,
@@ -37,7 +36,7 @@ impl ReverseDns {
         limit: i64,
         offset: i64,
         ip: &str,
-    ) -> Result<Vec<crate::types::ReverseDns>> {
+    ) -> ClientResult<Vec<crate::types::ReverseDns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ip.is_empty() {
             query_args.push(("ip".to_string(), ip.to_string()));
@@ -81,7 +80,7 @@ impl ReverseDns {
         &self,
         offset: i64,
         ip: &str,
-    ) -> Result<Vec<crate::types::ReverseDns>> {
+    ) -> ClientResult<Vec<crate::types::ReverseDns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ip.is_empty() {
             query_args.push(("ip".to_string(), ip.to_string()));
@@ -117,7 +116,7 @@ impl ReverseDns {
     pub async fn post_whitelabel_ip(
         &self,
         body: &crate::types::PostWhitelabelIpsRequest,
-    ) -> Result<crate::types::ReverseDns> {
+    ) -> ClientResult<crate::types::ReverseDns> {
         let url = self.client.url("/whitelabel/ips", None);
         self.client
             .post(
@@ -149,7 +148,7 @@ impl ReverseDns {
     pub async fn post_whitelabel_ips_validate(
         &self,
         id: &str,
-    ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
+    ) -> ClientResult<crate::types::PostWhitelabelIpsValidateResponse> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}/validate",
@@ -180,7 +179,7 @@ impl ReverseDns {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
+    pub async fn get_whitelabel_ip(&self, id: &str) -> ClientResult<crate::types::ReverseDns> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}",
@@ -213,7 +212,7 @@ impl ReverseDns {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
+    pub async fn delete_whitelabel_ips(&self, id: &str) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/whitelabel/ips/{}",

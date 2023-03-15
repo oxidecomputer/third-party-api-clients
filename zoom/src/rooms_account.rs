@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct RoomsAccount {
     pub client: Client,
@@ -25,7 +24,9 @@ impl RoomsAccount {
      * **Scopes:** `room:read:admin`<br>
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn get_zr_account_profile(&self) -> Result<crate::types::UpdateZrAccProfileRequest> {
+    pub async fn get_zr_account_profile(
+        &self,
+    ) -> ClientResult<crate::types::UpdateZrAccProfileRequest> {
         let url = self.client.url("/rooms/account_profile", None);
         self.client
             .get(
@@ -53,7 +54,7 @@ impl RoomsAccount {
     pub async fn update_zr_acc_profile(
         &self,
         body: &crate::types::UpdateZrAccProfileRequest,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url("/rooms/account_profile", None);
         self.client
             .patch(
@@ -87,7 +88,7 @@ impl RoomsAccount {
     pub async fn get_zr_account_setting(
         &self,
         setting_type: crate::types::SettingType,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.to_string().is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -128,7 +129,7 @@ impl RoomsAccount {
     pub async fn update_zoom_room_acc_settings(
         &self,
         setting_type: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));

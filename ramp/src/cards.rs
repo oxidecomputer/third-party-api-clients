@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Cards {
     pub client: Client,
@@ -33,7 +32,7 @@ impl Cards {
         page_size: f64,
         user_id: &str,
         card_program_id: &str,
-    ) -> Result<Vec<crate::types::Card>> {
+    ) -> ClientResult<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card_program_id.is_empty() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
@@ -76,7 +75,7 @@ impl Cards {
         &self,
         user_id: &str,
         card_program_id: &str,
-    ) -> Result<Vec<crate::types::Card>> {
+    ) -> ClientResult<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card_program_id.is_empty() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
@@ -126,7 +125,7 @@ impl Cards {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -146,7 +145,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Card> {
         let url = self.client.url(
             &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -176,7 +175,7 @@ impl Cards {
         &self,
         id: &str,
         body: &crate::types::PatchResourcesCardsCardRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/cards/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -205,7 +204,7 @@ impl Cards {
     pub async fn post_resources_physical(
         &self,
         body: &crate::types::PostResourcesCardPhysicalRequest,
-    ) -> Result<crate::types::TaskResponse> {
+    ) -> ClientResult<crate::types::TaskResponse> {
         let url = self.client.url("/cards/deferred/physical", None);
         self.client
             .post(
@@ -231,7 +230,7 @@ impl Cards {
     pub async fn post_resources_virtual(
         &self,
         body: &crate::types::PostResourcesCardVirtualRequest,
-    ) -> Result<crate::types::TaskResponse> {
+    ) -> ClientResult<crate::types::TaskResponse> {
         let url = self.client.url("/cards/deferred/virtual", None);
         self.client
             .post(
@@ -254,7 +253,7 @@ impl Cards {
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
-    ) -> Result<crate::types::TaskResponse> {
+    ) -> ClientResult<crate::types::TaskResponse> {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/termination",
@@ -283,7 +282,7 @@ impl Cards {
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
-    ) -> Result<crate::types::TaskResponse> {
+    ) -> ClientResult<crate::types::TaskResponse> {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/suspension",
@@ -312,7 +311,7 @@ impl Cards {
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
-    ) -> Result<crate::types::TaskResponse> {
+    ) -> ClientResult<crate::types::TaskResponse> {
         let url = self.client.url(
             &format!(
                 "/cards/{}/deferred/unsuspension",
@@ -344,7 +343,7 @@ impl Cards {
     pub async fn get_resources_deferred(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetResourcesCardsDeferredResponse> {
+    ) -> ClientResult<crate::types::GetResourcesCardsDeferredResponse> {
         let url = self.client.url(
             &format!(
                 "/cards/deferred/status/{}",

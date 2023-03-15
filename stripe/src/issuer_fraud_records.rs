@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct IssuerFraudRecords {
     pub client: Client,
@@ -31,7 +30,7 @@ impl IssuerFraudRecords {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::IssuerFraudRecord>> {
+    ) -> ClientResult<Vec<crate::types::IssuerFraudRecord>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -70,7 +69,10 @@ impl IssuerFraudRecords {
      *
      * <p>Returns a list of issuer fraud records.</p>
      */
-    pub async fn get_all(&self, charge: &str) -> Result<Vec<crate::types::IssuerFraudRecord>> {
+    pub async fn get_all(
+        &self,
+        charge: &str,
+    ) -> ClientResult<Vec<crate::types::IssuerFraudRecord>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -153,7 +155,7 @@ impl IssuerFraudRecords {
     pub async fn get_record(
         &self,
         issuer_fraud_record: &str,
-    ) -> Result<crate::types::IssuerFraudRecord> {
+    ) -> ClientResult<crate::types::IssuerFraudRecord> {
         let url = self.client.url(
             &format!(
                 "/v1/issuer_fraud_records/{}",

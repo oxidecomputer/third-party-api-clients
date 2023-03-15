@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ChatMessages {
     pub client: Client,
@@ -51,7 +50,7 @@ impl ChatMessages {
         page_size: i64,
         next_page_token: &str,
         include_deleted_and_edited_message: &str,
-    ) -> Result<Vec<crate::types::Messages>> {
+    ) -> ClientResult<Vec<crate::types::Messages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -122,7 +121,7 @@ impl ChatMessages {
         to_channel: &str,
         date: chrono::NaiveDate,
         include_deleted_and_edited_message: &str,
-    ) -> Result<Vec<crate::types::Messages>> {
+    ) -> ClientResult<Vec<crate::types::Messages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
             query_args.push(("date".to_string(), date.to_string()));
@@ -218,7 +217,7 @@ impl ChatMessages {
         &self,
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages",
@@ -257,7 +256,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::MarkMessageRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/status",
@@ -297,7 +296,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::ReactMessageRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}/emoji_reactions",
@@ -343,7 +342,7 @@ impl ChatMessages {
         message_id: &str,
         to_contact: &str,
         to_channel: &str,
-    ) -> Result<crate::types::GetChatMessageResponse> {
+    ) -> ClientResult<crate::types::GetChatMessageResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(("to_channel".to_string(), to_channel.to_string()));
@@ -394,7 +393,7 @@ impl ChatMessages {
         user_id: &str,
         message_id: &str,
         body: &crate::types::EditMessageRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/messages/{}",
@@ -447,7 +446,7 @@ impl ChatMessages {
         message_id: &str,
         to_contact: &str,
         to_channel: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(("to_channel".to_string(), to_channel.to_string()));

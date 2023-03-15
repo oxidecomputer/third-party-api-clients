@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct FacebookAds {
     pub client: Client,
@@ -36,7 +35,7 @@ impl FacebookAds {
         offset: i64,
         sort_field: crate::types::GetAllFacebookAdsSortField,
         sort_dir: crate::types::SortDir,
-    ) -> Result<crate::types::GetAllFacebookAdsResponse> {
+    ) -> ClientResult<crate::types::GetAllFacebookAdsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -86,7 +85,7 @@ impl FacebookAds {
         fields: &[String],
         outreach_id: &str,
         exclude_fields: &[String],
-    ) -> Result<crate::types::FacebookAdsAllOf> {
+    ) -> ClientResult<crate::types::FacebookAdsAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

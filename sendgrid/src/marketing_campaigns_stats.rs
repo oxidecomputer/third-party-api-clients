@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct MarketingCampaignsStats {
     pub client: Client,
@@ -36,7 +35,7 @@ impl MarketingCampaignsStats {
         automation_ids: &[String],
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::AutomationsResponse> {
+    ) -> ClientResult<crate::types::AutomationsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !automation_ids.is_empty() {
             query_args.push(("automation_ids".to_string(), automation_ids.join(" ")));
@@ -94,7 +93,7 @@ impl MarketingCampaignsStats {
         timezone: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::AutomationsResponse> {
+    ) -> ClientResult<crate::types::AutomationsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -163,7 +162,7 @@ impl MarketingCampaignsStats {
         singlesend_ids: &[String],
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::SinglesendsResponse> {
+    ) -> ClientResult<crate::types::SinglesendsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -219,7 +218,7 @@ impl MarketingCampaignsStats {
         page_size: i64,
         page_token: &str,
         group_by: &[String],
-    ) -> Result<crate::types::SinglesendsResponse> {
+    ) -> ClientResult<crate::types::SinglesendsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -288,7 +287,7 @@ impl MarketingCampaignsStats {
         step_ids: &[String],
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::AutomationsLinkStatsResponse> {
+    ) -> ClientResult<crate::types::AutomationsLinkStatsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !group_by.is_empty() {
             query_args.push(("group_by".to_string(), group_by.join(" ")));
@@ -350,7 +349,7 @@ impl MarketingCampaignsStats {
         group_by: &[String],
         ab_variation_id: &str,
         ab_phase_id: crate::types::AbPhaseId,
-    ) -> Result<crate::types::SinglesendsLinkStatsResponse> {
+    ) -> ClientResult<crate::types::SinglesendsLinkStatsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ab_phase_id.to_string().is_empty() {
             query_args.push(("ab_phase_id".to_string(), ab_phase_id.to_string()));
@@ -406,7 +405,7 @@ impl MarketingCampaignsStats {
         &self,
         ids: &[String],
         timezone: &str,
-    ) -> Result<String> {
+    ) -> ClientResult<String> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("ids".to_string(), ids.join(" ")));
@@ -449,7 +448,7 @@ impl MarketingCampaignsStats {
         &self,
         ids: &[String],
         timezone: &str,
-    ) -> Result<String> {
+    ) -> ClientResult<String> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("ids".to_string(), ids.join(" ")));

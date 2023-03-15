@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Bots {
     pub client: Client,
@@ -24,7 +23,7 @@ impl Bots {
      * * `token: &str` -- Authentication token. Requires scope: `users:read`.
      * * `bot: &str` -- Bot user to get info on.
      */
-    pub async fn info(&self, bot: &str) -> Result<crate::types::BotsInfoSchema> {
+    pub async fn info(&self, bot: &str) -> ClientResult<crate::types::BotsInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !bot.is_empty() {
             query_args.push(("bot".to_string(), bot.to_string()));

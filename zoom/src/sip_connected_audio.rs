@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SipConnectedAudio {
     pub client: Client,
@@ -28,7 +27,7 @@ impl SipConnectedAudio {
      */
     pub async fn list_sip_trunk_numbers(
         &self,
-    ) -> Result<crate::types::ListSipTrunkNumbersResponse> {
+    ) -> ClientResult<crate::types::ListSipTrunkNumbersResponse> {
         let url = self.client.url("/sip_trunk/numbers", None);
         self.client
             .get(
@@ -59,7 +58,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipConfigRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/settings",
@@ -99,7 +98,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipTrunkNumbersRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
@@ -134,7 +133,7 @@ impl SipConnectedAudio {
      *
      * * `account_id: &str` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
      */
-    pub async fn delete_all_sip_numbers(&self, account_id: &str) -> Result<()> {
+    pub async fn delete_all_sip_numbers(&self, account_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/numbers",
@@ -169,7 +168,7 @@ impl SipConnectedAudio {
     pub async fn list_sip_trunk(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::ListSipTrunksResponseData> {
+    ) -> ClientResult<crate::types::ListSipTrunksResponseData> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
@@ -204,7 +203,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AssignSipTrunksRequestData,
-    ) -> Result<crate::types::AssignSipTrunksResponseData> {
+    ) -> ClientResult<crate::types::AssignSipTrunksResponseData> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks",
@@ -241,7 +240,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         trunk_id: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/trunks/{}",
@@ -277,7 +276,7 @@ impl SipConnectedAudio {
     pub async fn list_internal_callout_countries(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::ListInternalCalloutCountriesResponse> {
+    ) -> ClientResult<crate::types::ListInternalCalloutCountriesResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
@@ -313,7 +312,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AddCalloutCountriesRequestData,
-    ) -> Result<crate::types::AddCalloutCountriesResponse> {
+    ) -> ClientResult<crate::types::AddCalloutCountriesResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries",
@@ -351,7 +350,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         country_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/callout_countries/{}",
@@ -394,7 +393,7 @@ impl SipConnectedAudio {
         account_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::InternalNumbers>> {
+    ) -> ClientResult<Vec<crate::types::InternalNumbers>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -443,7 +442,7 @@ impl SipConnectedAudio {
     pub async fn list_all_internal_numbers(
         &self,
         account_id: &str,
-    ) -> Result<Vec<crate::types::InternalNumbers>> {
+    ) -> ClientResult<Vec<crate::types::InternalNumbers>> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
@@ -524,7 +523,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AddInternalNumbersRequest,
-    ) -> Result<crate::types::AddInternalNumbersResponseData> {
+    ) -> ClientResult<crate::types::AddInternalNumbersResponseData> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers",
@@ -560,7 +559,11 @@ impl SipConnectedAudio {
      * * `account_id: &str` -- Unique Identifier of the account. To delete an internal number from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To delete an internal number from a master account, provide `me` as the value of the `accountId` path parameter.
      * * `number_id: &str` -- Unique identifier of the phone number. This value can be retrieved by calling the List Internal Numbers API.
      */
-    pub async fn delete_internal_number(&self, account_id: &str, number_id: &str) -> Result<()> {
+    pub async fn delete_internal_number(
+        &self,
+        account_id: &str,
+        number_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/sip_trunk/internal_numbers/{}",

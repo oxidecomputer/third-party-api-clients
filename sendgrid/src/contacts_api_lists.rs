@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ContactsApiLists {
     pub client: Client,
@@ -23,7 +22,7 @@ impl ContactsApiLists {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_contactdb_lists(&self) -> Result<crate::types::ListAllListsResponse> {
+    pub async fn get_contactdb_lists(&self) -> ClientResult<crate::types::ListAllListsResponse> {
         let url = self.client.url("/contactdb/lists", None);
         self.client
             .get(
@@ -49,7 +48,7 @@ impl ContactsApiLists {
     pub async fn post_contactdb_list(
         &self,
         body: &crate::types::IpPool,
-    ) -> Result<crate::types::ContactdbList> {
+    ) -> ClientResult<crate::types::ContactdbList> {
         let url = self.client.url("/contactdb/lists", None);
         self.client
             .post(
@@ -72,7 +71,7 @@ impl ContactsApiLists {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_contactdb_lists(&self, body: &[i64]) -> Result<()> {
+    pub async fn delete_contactdb_lists(&self, body: &[i64]) -> ClientResult<()> {
         let url = self.client.url("/contactdb/lists", None);
         self.client
             .delete(
@@ -99,7 +98,7 @@ impl ContactsApiLists {
     pub async fn get_contactdb_lists_list(
         &self,
         list_id: &str,
-    ) -> Result<crate::types::ContactdbList> {
+    ) -> ClientResult<crate::types::ContactdbList> {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}",
@@ -134,7 +133,7 @@ impl ContactsApiLists {
         list_id: &str,
         delete_contacts: bool,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delete_contacts {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
@@ -174,7 +173,7 @@ impl ContactsApiLists {
         &self,
         list_id: &str,
         body: &crate::types::IpPool,
-    ) -> Result<crate::types::PatchContactdbListsListResponse> {
+    ) -> ClientResult<crate::types::PatchContactdbListsListResponse> {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}",
@@ -211,7 +210,7 @@ impl ContactsApiLists {
         list_id: i64,
         page: i64,
         page_size: i64,
-    ) -> Result<crate::types::GetContactdbRecipientsSearchResponse> {
+    ) -> ClientResult<crate::types::GetContactdbRecipientsSearchResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -255,7 +254,7 @@ impl ContactsApiLists {
         &self,
         list_id: i64,
         body: &[i64],
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients",
@@ -288,7 +287,7 @@ impl ContactsApiLists {
         &self,
         list_id: i64,
         recipient_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients/{}",
@@ -325,7 +324,7 @@ impl ContactsApiLists {
         list_id: i64,
         recipient_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/contactdb/lists/{}/recipients/{}",

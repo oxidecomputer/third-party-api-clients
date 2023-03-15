@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Webhooks {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Webhooks {
      */
     pub async fn get_user_event_settings(
         &self,
-    ) -> Result<crate::types::WebhooksEventWebhookResponse> {
+    ) -> ClientResult<crate::types::WebhooksEventWebhookResponse> {
         let url = self.client.url("/user/webhooks/event/settings", None);
         self.client
             .get(
@@ -63,7 +62,7 @@ impl Webhooks {
     pub async fn patch_user_event_settings(
         &self,
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
-    ) -> Result<crate::types::WebhooksEventWebhookResponse> {
+    ) -> ClientResult<crate::types::WebhooksEventWebhookResponse> {
         let url = self.client.url("/user/webhooks/event/settings", None);
         self.client
             .patch(
@@ -88,7 +87,7 @@ impl Webhooks {
      */
     pub async fn get_user_parse_settings(
         &self,
-    ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
+    ) -> ClientResult<crate::types::GetUserWebhooksParseSettingsResponse> {
         let url = self.client.url("/user/webhooks/parse/settings", None);
         self.client
             .get(
@@ -127,7 +126,7 @@ impl Webhooks {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> Result<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
+    ) -> ClientResult<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -177,7 +176,7 @@ impl Webhooks {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-    ) -> Result<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
+    ) -> ClientResult<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
             query_args.push(("aggregated_by".to_string(), aggregated_by.to_string()));
@@ -222,7 +221,7 @@ impl Webhooks {
      */
     pub async fn get_user_event_settings_signed(
         &self,
-    ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
+    ) -> ClientResult<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = self
             .client
             .url("/user/webhooks/event/settings/signed", None);
@@ -254,7 +253,7 @@ impl Webhooks {
     pub async fn patch_user_event_settings_signed(
         &self,
         body: &crate::types::GetTrackingSettingsOpenResponse,
-    ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
+    ) -> ClientResult<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = self
             .client
             .url("/user/webhooks/event/settings/signed", None);
@@ -290,7 +289,7 @@ impl Webhooks {
     pub async fn post_user_event_test(
         &self,
         body: &crate::types::PostUserWebhooksEventTestRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/user/webhooks/event/test", None);
         self.client
             .post(

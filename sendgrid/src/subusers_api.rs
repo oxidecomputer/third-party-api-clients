@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SubusersApi {
     pub client: Client,
@@ -32,7 +31,7 @@ impl SubusersApi {
         username: &str,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::Subuser>> {
+    ) -> ClientResult<Vec<crate::types::Subuser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -70,7 +69,7 @@ impl SubusersApi {
         &self,
         username: &str,
         offset: i64,
-    ) -> Result<Vec<crate::types::Subuser>> {
+    ) -> ClientResult<Vec<crate::types::Subuser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));
@@ -100,7 +99,7 @@ impl SubusersApi {
     pub async fn post_subuser(
         &self,
         body: &crate::types::PostSubusersRequest,
-    ) -> Result<crate::types::SubuserPost> {
+    ) -> ClientResult<crate::types::SubuserPost> {
         let url = self.client.url("/subusers", None);
         self.client
             .post(
@@ -124,7 +123,7 @@ impl SubusersApi {
     pub async fn delete_subusers_subuser_name(
         &self,
         subuser_name: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}",
@@ -153,7 +152,7 @@ impl SubusersApi {
         &self,
         subuser_name: &str,
         body: &crate::types::PatchSubusersSubuserNameRequest,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}",
@@ -187,7 +186,7 @@ impl SubusersApi {
     pub async fn get_subusers_reputations(
         &self,
         usernames: &str,
-    ) -> Result<Vec<crate::types::GetSubusersReputationsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetSubusersReputationsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !usernames.is_empty() {
             query_args.push(("usernames".to_string(), usernames.to_string()));
@@ -220,7 +219,7 @@ impl SubusersApi {
     pub async fn get_all_subusers_reputations(
         &self,
         usernames: &str,
-    ) -> Result<Vec<crate::types::GetSubusersReputationsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetSubusersReputationsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !usernames.is_empty() {
             query_args.push(("usernames".to_string(), usernames.to_string()));
@@ -257,7 +256,7 @@ impl SubusersApi {
         &self,
         subuser_name: &str,
         body: &[std::net::Ipv4Addr],
-    ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
+    ) -> ClientResult<crate::types::PutSubusersSubuserNameIpsResponse> {
         let url = self.client.url(
             &format!(
                 "/subusers/{}/ips",

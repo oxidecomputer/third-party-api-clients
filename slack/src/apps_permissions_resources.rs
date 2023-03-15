@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AppsPermissionsResources {
     pub client: Client,
@@ -29,7 +28,7 @@ impl AppsPermissionsResources {
         &self,
         cursor: &str,
         limit: i64,
-    ) -> Result<crate::types::AppsPermissionsResourcesListSuccessSchema> {
+    ) -> ClientResult<crate::types::AppsPermissionsResourcesListSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

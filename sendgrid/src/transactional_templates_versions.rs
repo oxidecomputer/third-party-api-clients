@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TransactionalTemplatesVersions {
     pub client: Client,
@@ -27,7 +26,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
-    ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions",
@@ -60,7 +59,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}/activate",
@@ -94,7 +93,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
@@ -128,7 +127,7 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",
@@ -163,7 +162,7 @@ impl TransactionalTemplatesVersions {
         template_id: &str,
         version_id: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
-    ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}/versions/{}",

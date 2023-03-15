@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ConnectedSites {
     pub client: Client,
@@ -32,7 +31,7 @@ impl ConnectedSites {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::ConnectedSites> {
+    ) -> ClientResult<crate::types::ConnectedSites> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -67,7 +66,10 @@ impl ConnectedSites {
      *
      * Create a new Mailchimp connected site.
      */
-    pub async fn post(&self, body: &crate::types::ConnectedSite) -> Result<crate::types::Sites> {
+    pub async fn post(
+        &self,
+        body: &crate::types::ConnectedSite,
+    ) -> ClientResult<crate::types::Sites> {
         let url = self.client.url("/connected-sites", None);
         self.client
             .post(
@@ -97,7 +99,7 @@ impl ConnectedSites {
         fields: &[String],
         exclude_fields: &[String],
         connected_site_id: &str,
-    ) -> Result<crate::types::Sites> {
+    ) -> ClientResult<crate::types::Sites> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -135,7 +137,7 @@ impl ConnectedSites {
      *
      * * `connected_site_id: &str` -- The unique identifier for the site.
      */
-    pub async fn delete(&self, connected_site_id: &str) -> Result<()> {
+    pub async fn delete(&self, connected_site_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/connected-sites/{}",
@@ -167,7 +169,7 @@ impl ConnectedSites {
     pub async fn post_actions_verify_script_installation(
         &self,
         connected_site_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/connected-sites/{}/actions/verify-script-installation",

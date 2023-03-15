@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Archiving {
     pub client: Client,
@@ -41,7 +40,7 @@ impl Archiving {
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
-    ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
+    ) -> ClientResult<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -95,7 +94,7 @@ impl Archiving {
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
-    ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
+    ) -> ClientResult<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -183,7 +182,7 @@ impl Archiving {
     pub async fn testget_record_archived_file(
         &self,
         meeting_uuid: &str,
-    ) -> Result<crate::types::CloudArchivedFiles> {
+    ) -> ClientResult<crate::types::CloudArchivedFiles> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/archive_files",

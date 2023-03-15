@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Spreadsheets {
     pub client: Client,
@@ -20,7 +19,7 @@ impl Spreadsheets {
     pub async fn create(
         &self,
         body: &crate::types::Spreadsheet,
-    ) -> Result<crate::types::Spreadsheet> {
+    ) -> ClientResult<crate::types::Spreadsheet> {
         let url = self.client.url("/v4/spreadsheets", None);
         self.client
             .post(
@@ -48,7 +47,7 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         include_grid_data: bool,
         ranges: &[String],
-    ) -> Result<crate::types::Spreadsheet> {
+    ) -> ClientResult<crate::types::Spreadsheet> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_grid_data {
             query_args.push(("includeGridData".to_string(), include_grid_data.to_string()));
@@ -89,7 +88,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         metadata_id: i64,
-    ) -> Result<crate::types::DeveloperMetadata> {
+    ) -> ClientResult<crate::types::DeveloperMetadata> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/developerMetadata/{}",
@@ -121,7 +120,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::SearchDeveloperMetadataRequest,
-    ) -> Result<crate::types::SearchDeveloperMetadataResponse> {
+    ) -> ClientResult<crate::types::SearchDeveloperMetadataResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/developerMetadata:search",
@@ -154,7 +153,7 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         sheet_id: i64,
         body: &crate::types::CopySheetAnotherSpreadsheetRequest,
-    ) -> Result<crate::types::SheetProperties> {
+    ) -> ClientResult<crate::types::SheetProperties> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/sheets/{}/copyTo",
@@ -193,7 +192,7 @@ impl Spreadsheets {
         date_time_render_option: crate::types::DateTimeRenderOption,
         major_dimension: crate::types::Dimension,
         value_render_option: crate::types::ValueRenderOption,
-    ) -> Result<crate::types::ValueRange> {
+    ) -> ClientResult<crate::types::ValueRange> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date_time_render_option.to_string().is_empty() {
             query_args.push((
@@ -253,7 +252,7 @@ impl Spreadsheets {
         response_value_render_option: crate::types::ValueRenderOption,
         value_input_option: crate::types::ValueInputOption,
         body: &crate::types::ValueRange,
-    ) -> Result<crate::types::UpdateValuesResponse> {
+    ) -> ClientResult<crate::types::UpdateValuesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_values_in_response {
             query_args.push((
@@ -324,7 +323,7 @@ impl Spreadsheets {
         response_value_render_option: crate::types::ValueRenderOption,
         value_input_option: crate::types::ValueInputOption,
         body: &crate::types::ValueRange,
-    ) -> Result<crate::types::AppendValuesResponse> {
+    ) -> ClientResult<crate::types::AppendValuesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_values_in_response {
             query_args.push((
@@ -391,7 +390,7 @@ impl Spreadsheets {
         spreadsheet_id: &str,
         range: &str,
         body: &crate::types::ClearValuesRequest,
-    ) -> Result<crate::types::ClearValuesResponse> {
+    ) -> ClientResult<crate::types::ClearValuesResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values/{}/clear",
@@ -423,7 +422,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchClearValuesRequest,
-    ) -> Result<crate::types::BatchClearValuesResponse> {
+    ) -> ClientResult<crate::types::BatchClearValuesResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchClear",
@@ -454,7 +453,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchClearValuesByDataFilterRequest,
-    ) -> Result<crate::types::BatchClearValuesByDataFilterResponse> {
+    ) -> ClientResult<crate::types::BatchClearValuesByDataFilterResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchClearByDataFilter",
@@ -492,7 +491,7 @@ impl Spreadsheets {
         major_dimension: crate::types::Dimension,
         ranges: &[String],
         value_render_option: crate::types::ValueRenderOption,
-    ) -> Result<crate::types::BatchGetValuesResponse> {
+    ) -> ClientResult<crate::types::BatchGetValuesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !date_time_render_option.to_string().is_empty() {
             query_args.push((
@@ -544,7 +543,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchGetValuesByDataFilterRequest,
-    ) -> Result<crate::types::BatchGetValuesByDataFilterResponse> {
+    ) -> ClientResult<crate::types::BatchGetValuesByDataFilterResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchGetByDataFilter",
@@ -575,7 +574,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateValuesRequest,
-    ) -> Result<crate::types::BatchUpdateValuesResponse> {
+    ) -> ClientResult<crate::types::BatchUpdateValuesResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchUpdate",
@@ -606,7 +605,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateValuesByDataFilterRequest,
-    ) -> Result<crate::types::BatchUpdateValuesByDataFilterResponse> {
+    ) -> ClientResult<crate::types::BatchUpdateValuesByDataFilterResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/values:batchUpdateByDataFilter",
@@ -637,7 +636,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateSpreadsheetRequest,
-    ) -> Result<crate::types::BatchUpdateSpreadsheetResponse> {
+    ) -> ClientResult<crate::types::BatchUpdateSpreadsheetResponse> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/batchUpdate",
@@ -668,7 +667,7 @@ impl Spreadsheets {
         &self,
         spreadsheet_id: &str,
         body: &crate::types::GetSpreadsheetByDataFilterRequest,
-    ) -> Result<crate::types::Spreadsheet> {
+    ) -> ClientResult<crate::types::Spreadsheet> {
         let url = self.client.url(
             &format!(
                 "/v4/spreadsheets/{}/getByDataFilter",

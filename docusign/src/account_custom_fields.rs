@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountCustomFields {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AccountCustomFields {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountCustomFields> {
+    pub async fn get(&self, account_id: &str) -> ClientResult<crate::types::AccountCustomFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/custom_fields",
@@ -58,7 +57,7 @@ impl AccountCustomFields {
         account_id: &str,
         apply_to_templates: &str,
         body: &crate::types::CustomField,
-    ) -> Result<crate::types::AccountCustomFields> {
+    ) -> ClientResult<crate::types::AccountCustomFields> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
             query_args.push((
@@ -104,7 +103,7 @@ impl AccountCustomFields {
         custom_field_id: &str,
         apply_to_templates: &str,
         body: &crate::types::CustomField,
-    ) -> Result<crate::types::AccountCustomFields> {
+    ) -> ClientResult<crate::types::AccountCustomFields> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
             query_args.push((
@@ -150,7 +149,7 @@ impl AccountCustomFields {
         account_id: &str,
         custom_field_id: &str,
         apply_to_templates: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
             query_args.push((

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Licenses {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Licenses {
         featured: bool,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::LicenseSimple>> {
+    ) -> ClientResult<Vec<crate::types::LicenseSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if featured {
             query_args.push(("featured".to_string(), featured.to_string()));
@@ -69,7 +68,7 @@ impl Licenses {
     pub async fn get_all_all_commonly_used(
         &self,
         featured: bool,
-    ) -> Result<Vec<crate::types::LicenseSimple>> {
+    ) -> ClientResult<Vec<crate::types::LicenseSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if featured {
             query_args.push(("featured".to_string(), featured.to_string()));
@@ -99,7 +98,7 @@ impl Licenses {
      *
      * * `license: &str`
      */
-    pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
+    pub async fn get(&self, license: &str) -> ClientResult<crate::types::LicenseData> {
         let url = self.client.url(
             &format!(
                 "/licenses/{}",
@@ -137,7 +136,7 @@ impl Licenses {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::LicenseContent> {
+    ) -> ClientResult<crate::types::LicenseContent> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/license",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeEmailSettings {
     pub client: Client,
@@ -28,7 +27,7 @@ impl EnvelopeEmailSettings {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::types::EmailSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -66,7 +65,7 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EmailSettings,
-    ) -> Result<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::types::EmailSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -104,7 +103,7 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EmailSettings,
-    ) -> Result<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::types::EmailSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -139,7 +138,7 @@ impl EnvelopeEmailSettings {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::types::EmailSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",

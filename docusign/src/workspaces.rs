@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Workspaces {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Workspaces {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
+    pub async fn get(&self, account_id: &str) -> ClientResult<crate::types::WorkspaceList> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces",
@@ -56,7 +55,7 @@ impl Workspaces {
         &self,
         account_id: &str,
         body: &crate::types::Workspace,
-    ) -> Result<crate::types::Workspace> {
+    ) -> ClientResult<crate::types::Workspace> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces",
@@ -90,7 +89,7 @@ impl Workspaces {
         &self,
         account_id: &str,
         workspace_id: &str,
-    ) -> Result<crate::types::Workspace> {
+    ) -> ClientResult<crate::types::Workspace> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",
@@ -126,7 +125,7 @@ impl Workspaces {
         account_id: &str,
         workspace_id: &str,
         body: &crate::types::Workspace,
-    ) -> Result<crate::types::Workspace> {
+    ) -> ClientResult<crate::types::Workspace> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",
@@ -161,7 +160,7 @@ impl Workspaces {
         &self,
         account_id: &str,
         workspace_id: &str,
-    ) -> Result<crate::types::Workspace> {
+    ) -> ClientResult<crate::types::Workspace> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}",

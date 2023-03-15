@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeWorkflowDefinition {
     pub client: Client,
@@ -24,7 +23,11 @@ impl EnvelopeWorkflowDefinition {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str, envelope_id: &str) -> Result<crate::types::Workflow> {
+    pub async fn get(
+        &self,
+        account_id: &str,
+        envelope_id: &str,
+    ) -> ClientResult<crate::types::Workflow> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/workflow",
@@ -60,7 +63,7 @@ impl EnvelopeWorkflowDefinition {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::Workflow,
-    ) -> Result<crate::types::Workflow> {
+    ) -> ClientResult<crate::types::Workflow> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/workflow",
@@ -92,7 +95,7 @@ impl EnvelopeWorkflowDefinition {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete(&self, account_id: &str, envelope_id: &str) -> Result<()> {
+    pub async fn delete(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/workflow",
@@ -127,7 +130,7 @@ impl EnvelopeWorkflowDefinition {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> Result<crate::types::Workflow> {
+    ) -> ClientResult<crate::types::Workflow> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/workflow",
@@ -163,7 +166,7 @@ impl EnvelopeWorkflowDefinition {
         account_id: &str,
         template_id: &str,
         body: &crate::types::Workflow,
-    ) -> Result<crate::types::Workflow> {
+    ) -> ClientResult<crate::types::Workflow> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/workflow",
@@ -194,7 +197,7 @@ impl EnvelopeWorkflowDefinition {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_template(&self, account_id: &str, template_id: &str) -> Result<()> {
+    pub async fn delete_template(&self, account_id: &str, template_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/workflow",

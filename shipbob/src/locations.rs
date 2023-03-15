@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Locations {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Locations {
         include_inactive: bool,
         receiving_enabled: bool,
         access_granted: bool,
-    ) -> Result<Vec<crate::types::IntegrationsLocationInternalAllOf>> {
+    ) -> ClientResult<Vec<crate::types::IntegrationsLocationInternalAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if access_granted {
             query_args.push(("AccessGranted".to_string(), access_granted.to_string()));
@@ -66,7 +65,7 @@ impl Locations {
         include_inactive: bool,
         receiving_enabled: bool,
         access_granted: bool,
-    ) -> Result<Vec<crate::types::IntegrationsLocationInternalAllOf>> {
+    ) -> ClientResult<Vec<crate::types::IntegrationsLocationInternalAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if access_granted {
             query_args.push(("AccessGranted".to_string(), access_granted.to_string()));

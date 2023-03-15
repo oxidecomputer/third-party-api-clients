@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Emojis {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Emojis {
      *
      * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
      */
-    pub async fn get(&self) -> Result<String> {
+    pub async fn get(&self) -> ClientResult<String> {
         let url = self.client.url("/emojis", None);
         self.client
             .get(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Locations {
     pub client: Client,
@@ -29,7 +28,7 @@ impl Locations {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<Vec<crate::types::Location>> {
+    ) -> ClientResult<Vec<crate::types::Location>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -62,7 +61,7 @@ impl Locations {
      *
      * Retrieves all locations for your business.
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::Location>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Location>> {
         let url = self.client.url("/locations", None);
         let resp: crate::types::GetLocationResponse = self
             .client
@@ -104,7 +103,7 @@ impl Locations {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -127,7 +126,7 @@ impl Locations {
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
-    ) -> Result<crate::types::Location> {
+    ) -> ClientResult<crate::types::Location> {
         let url = self.client.url("/locations", None);
         self.client
             .post(
@@ -150,7 +149,7 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Location> {
         let url = self.client.url(
             &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -176,7 +175,7 @@ impl Locations {
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,
-    ) -> Result<crate::types::Location> {
+    ) -> ClientResult<crate::types::Location> {
         let url = self.client.url(
             &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
             None,

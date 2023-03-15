@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateResponsiveHtmlPreview {
     pub client: Client,
@@ -39,7 +38,7 @@ impl TemplateResponsiveHtmlPreview {
         account_id: &str,
         template_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
-    ) -> Result<crate::types::DocumentHtmlDefinitions> {
+    ) -> ClientResult<crate::types::DocumentHtmlDefinitions> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/responsive_html_preview",

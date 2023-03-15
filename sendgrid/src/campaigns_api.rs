@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CampaignsApi {
     pub client: Client,
@@ -33,7 +32,7 @@ impl CampaignsApi {
         &self,
         limit: i64,
         offset: i64,
-    ) -> Result<crate::types::GetCampaignsResponse> {
+    ) -> ClientResult<crate::types::GetCampaignsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -69,7 +68,7 @@ impl CampaignsApi {
     pub async fn post_campaign(
         &self,
         body: &crate::types::CampaignsRequest,
-    ) -> Result<crate::types::CampaignResponseAllOf> {
+    ) -> ClientResult<crate::types::CampaignResponseAllOf> {
         let url = self.client.url("/campaigns", None);
         self.client
             .post(
@@ -95,7 +94,7 @@ impl CampaignsApi {
     pub async fn get_campaigns_campaign(
         &self,
         campaign_id: i64,
-    ) -> Result<crate::types::GetCampaignsCampaignResponse> {
+    ) -> ClientResult<crate::types::GetCampaignsCampaignResponse> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
@@ -124,7 +123,7 @@ impl CampaignsApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_campaigns_campaign(&self, campaign_id: i64) -> Result<()> {
+    pub async fn delete_campaigns_campaign(&self, campaign_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
@@ -159,7 +158,7 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
         body: &crate::types::UpdateACampaignRequest,
-    ) -> Result<crate::types::CampaignResponseAllOf> {
+    ) -> ClientResult<crate::types::CampaignResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
@@ -193,7 +192,7 @@ impl CampaignsApi {
     pub async fn post_campaigns_campaign_schedules_now(
         &self,
         campaign_id: i64,
-    ) -> Result<crate::types::SendACampaignResponse> {
+    ) -> ClientResult<crate::types::SendACampaignResponse> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules/now",
@@ -225,7 +224,7 @@ impl CampaignsApi {
     pub async fn get_campaigns_campaign_schedule(
         &self,
         campaign_id: i64,
-    ) -> Result<crate::types::ScheduleACampaignRequest> {
+    ) -> ClientResult<crate::types::ScheduleACampaignRequest> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
@@ -260,7 +259,7 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
         body: &crate::types::ScheduleACampaignRequest,
-    ) -> Result<crate::types::ScheduleACampaignResponse> {
+    ) -> ClientResult<crate::types::ScheduleACampaignResponse> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
@@ -292,7 +291,7 @@ impl CampaignsApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_campaigns_campaign_schedules(&self, campaign_id: i64) -> Result<()> {
+    pub async fn delete_campaigns_campaign_schedules(&self, campaign_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
@@ -325,7 +324,7 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
         body: &crate::types::ScheduleACampaignRequest,
-    ) -> Result<crate::types::UpdateAScheduledCampaignResponse> {
+    ) -> ClientResult<crate::types::UpdateAScheduledCampaignResponse> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules",
@@ -360,7 +359,7 @@ impl CampaignsApi {
         &self,
         campaign_id: i64,
         body: &crate::types::SendATestCampaignRequest,
-    ) -> Result<crate::types::SendATestCampaignRequest> {
+    ) -> ClientResult<crate::types::SendATestCampaignRequest> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/schedules/test",

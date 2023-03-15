@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Team {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Team {
         before: &str,
         count: &str,
         page: &str,
-    ) -> Result<crate::types::TeamAccessLogsSchema> {
+    ) -> ClientResult<crate::types::TeamAccessLogsSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before.is_empty() {
             query_args.push(("before".to_string(), before.to_string()));
@@ -68,7 +67,7 @@ impl Team {
      * * `token: &str` -- Authentication token. Requires scope: `admin`.
      * * `user: &str` -- A user to retrieve the billable information for. Defaults to all users.
      */
-    pub async fn billable_info(&self, user: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn billable_info(&self, user: &str) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
@@ -99,7 +98,7 @@ impl Team {
      * * `token: &str` -- Authentication token. Requires scope: `team:read`.
      * * `team: &str` -- Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels.
      */
-    pub async fn info(&self, team: &str) -> Result<crate::types::TeamInfoSchema> {
+    pub async fn info(&self, team: &str) -> ClientResult<crate::types::TeamInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !team.is_empty() {
             query_args.push(("team".to_string(), team.to_string()));
@@ -141,7 +140,7 @@ impl Team {
         page: &str,
         service_id: &str,
         user: &str,
-    ) -> Result<crate::types::TeamIntegrationLogsSchema> {
+    ) -> ClientResult<crate::types::TeamIntegrationLogsSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !app_id.is_empty() {
             query_args.push(("app_id".to_string(), app_id.to_string()));

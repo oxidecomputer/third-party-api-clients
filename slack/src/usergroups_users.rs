@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct UsergroupsUsers {
     pub client: Client,
@@ -29,7 +28,7 @@ impl UsergroupsUsers {
         &self,
         include_disabled: bool,
         usergroup: &str,
-    ) -> Result<crate::types::UsergroupsUsersListSchema> {
+    ) -> ClientResult<crate::types::UsergroupsUsersListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_disabled {
             query_args.push(("include_disabled".to_string(), include_disabled.to_string()));
@@ -62,7 +61,7 @@ impl UsergroupsUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn update(&self) -> ClientResult<crate::types::UsergroupsCreateSchema> {
         let url = self.client.url("/usergroups.users.update", None);
         self.client
             .post(

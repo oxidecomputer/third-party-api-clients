@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminTeamsAdmins {
     pub client: Client,
@@ -31,7 +30,7 @@ impl AdminTeamsAdmins {
         limit: i64,
         cursor: &str,
         team_id: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

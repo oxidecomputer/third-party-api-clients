@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminUsersSession {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AdminUsersSession {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn invalidate(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn invalidate(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.session.invalidate", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl AdminUsersSession {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn reset(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn reset(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.session.reset", None);
         self.client
             .post(

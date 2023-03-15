@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct JobApplicantsBeta {
     pub client: Client,
@@ -24,7 +23,7 @@ impl JobApplicantsBeta {
     pub async fn get_company_job_applicants(
         &self,
         company_id: &str,
-    ) -> Result<Vec<crate::types::JobApplicant>> {
+    ) -> ClientResult<Vec<crate::types::JobApplicant>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -56,7 +55,7 @@ impl JobApplicantsBeta {
     pub async fn get_all_company_job_applicants(
         &self,
         company_id: &str,
-    ) -> Result<Vec<crate::types::JobApplicant>> {
+    ) -> ClientResult<Vec<crate::types::JobApplicant>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -87,7 +86,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyJobApplicantsRequest,
-    ) -> Result<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::types::JobApplicant> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -118,7 +117,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
-    ) -> Result<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::types::JobApplicant> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
@@ -151,7 +150,7 @@ impl JobApplicantsBeta {
         company_id: &str,
         job_applicant_uuid: &str,
         body: &crate::types::PutCompanyJobApplicantRequest,
-    ) -> Result<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::types::JobApplicant> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
@@ -183,7 +182,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",

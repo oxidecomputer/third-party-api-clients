@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PaySchedules {
     pub client: Client,
@@ -19,7 +18,10 @@ impl PaySchedules {
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_company(&self, company_id: &str) -> Result<Vec<crate::types::PaySchedule>> {
+    pub async fn get_company(
+        &self,
+        company_id: &str,
+    ) -> ClientResult<Vec<crate::types::PaySchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules",
@@ -49,7 +51,7 @@ impl PaySchedules {
     pub async fn get_all_company(
         &self,
         company_id: &str,
-    ) -> Result<Vec<crate::types::PaySchedule>> {
+    ) -> ClientResult<Vec<crate::types::PaySchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules",
@@ -78,7 +80,7 @@ impl PaySchedules {
         &self,
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
-    ) -> Result<crate::types::PaySchedule> {
+    ) -> ClientResult<crate::types::PaySchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules/{}",
@@ -111,7 +113,7 @@ impl PaySchedules {
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
         body: &crate::types::PutCompanyPaySchedulesScheduleRequest,
-    ) -> Result<crate::types::PaySchedule> {
+    ) -> ClientResult<crate::types::PaySchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules/{}",

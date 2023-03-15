@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Views {
     pub client: Client,
@@ -25,7 +24,11 @@ impl Views {
      * * `trigger_id: &str` -- Exchange a trigger to post to the user.
      * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
-    pub async fn open(&self, trigger_id: &str, view: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn open(
+        &self,
+        trigger_id: &str,
+        view: &str,
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -64,7 +67,7 @@ impl Views {
         user_id: &str,
         view: &str,
         hash: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !hash.is_empty() {
             query_args.push(("hash".to_string(), hash.to_string()));
@@ -100,7 +103,11 @@ impl Views {
      * * `trigger_id: &str` -- Exchange a trigger to post to the user.
      * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
-    pub async fn push(&self, trigger_id: &str, view: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn push(
+        &self,
+        trigger_id: &str,
+        view: &str,
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -141,7 +148,7 @@ impl Views {
         external_id: &str,
         view: &str,
         hash: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !external_id.is_empty() {
             query_args.push(("external_id".to_string(), external_id.to_string()));

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SingleSignOnSettings {
     pub client: Client,
@@ -28,7 +27,7 @@ impl SingleSignOnSettings {
     pub async fn get_sso_integrations(
         &self,
         si: bool,
-    ) -> Result<Vec<crate::types::SsoIntegrationAllOf>> {
+    ) -> ClientResult<Vec<crate::types::SsoIntegrationAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if si {
             query_args.push(("si".to_string(), si.to_string()));
@@ -61,7 +60,7 @@ impl SingleSignOnSettings {
     pub async fn get_all_sso_integrations(
         &self,
         si: bool,
-    ) -> Result<Vec<crate::types::SsoIntegrationAllOf>> {
+    ) -> ClientResult<Vec<crate::types::SsoIntegrationAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if si {
             query_args.push(("si".to_string(), si.to_string()));
@@ -90,7 +89,7 @@ impl SingleSignOnSettings {
     pub async fn post_sso_integration(
         &self,
         body: &crate::types::CreateIntegrationRequest,
-    ) -> Result<crate::types::SsoIntegrationAllOf> {
+    ) -> ClientResult<crate::types::SsoIntegrationAllOf> {
         let url = self.client.url("/sso/integrations", None);
         self.client
             .post(
@@ -119,7 +118,7 @@ impl SingleSignOnSettings {
         &self,
         id: &str,
         si: bool,
-    ) -> Result<crate::types::SsoIntegrationAllOf> {
+    ) -> ClientResult<crate::types::SsoIntegrationAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if si {
             query_args.push(("si".to_string(), si.to_string()));
@@ -152,7 +151,7 @@ impl SingleSignOnSettings {
      *
      * You can retrieve the IDs for your configurations from the response provided by the "Get All SSO Integrations" endpoint.
      */
-    pub async fn delete_sso_integrations(&self, id: &str) -> Result<()> {
+    pub async fn delete_sso_integrations(&self, id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}",
@@ -188,7 +187,7 @@ impl SingleSignOnSettings {
         id: &str,
         si: bool,
         body: &crate::types::CreateIntegrationRequest,
-    ) -> Result<crate::types::SsoIntegrationAllOf> {
+    ) -> ClientResult<crate::types::SsoIntegrationAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if si {
             query_args.push(("si".to_string(), si.to_string()));

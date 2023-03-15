@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 #[derive(Debug, Default, Clone)]
 pub struct ReposUploadReleaseAssetDefaultServer {}
@@ -49,7 +48,7 @@ impl Repos {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -102,7 +101,7 @@ impl Repos {
         type_: crate::types::ReposListOrgType,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -156,7 +155,7 @@ impl Repos {
         &self,
         org: &str,
         body: &crate::types::ReposCreateInOrgRequest,
-    ) -> Result<crate::types::Repository> {
+    ) -> ClientResult<crate::types::Repository> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/repos",
@@ -190,7 +189,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn get(&self, owner: &str, repo: &str) -> Result<crate::types::FullRepository> {
+    pub async fn get(&self, owner: &str, repo: &str) -> ClientResult<crate::types::FullRepository> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}",
@@ -226,7 +225,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn delete(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn delete(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}",
@@ -264,7 +263,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposUpdateRequest,
-    ) -> Result<crate::types::FullRepository> {
+    ) -> ClientResult<crate::types::FullRepository> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}",
@@ -305,7 +304,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         page: i64,
-    ) -> Result<Vec<crate::types::Autolink>> {
+    ) -> ClientResult<Vec<crate::types::Autolink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -347,7 +346,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::Autolink>> {
+    ) -> ClientResult<Vec<crate::types::Autolink>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/autolinks",
@@ -385,7 +384,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateAutolinkRequest,
-    ) -> Result<crate::types::Autolink> {
+    ) -> ClientResult<crate::types::Autolink> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/autolinks",
@@ -426,7 +425,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         autolink_id: i64,
-    ) -> Result<crate::types::Autolink> {
+    ) -> ClientResult<crate::types::Autolink> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/autolinks/{}",
@@ -463,7 +462,12 @@ impl Repos {
      * * `repo: &str`
      * * `autolink_id: i64` -- autolink_id parameter.
      */
-    pub async fn delete_autolink(&self, owner: &str, repo: &str, autolink_id: i64) -> Result<()> {
+    pub async fn delete_autolink(
+        &self,
+        owner: &str,
+        repo: &str,
+        autolink_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/autolinks/{}",
@@ -497,7 +501,11 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn enable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn enable_automated_security_fixes(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/automated-security-fixes",
@@ -530,7 +538,11 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn disable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn disable_automated_security_fixes(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/automated-security-fixes",
@@ -573,7 +585,7 @@ impl Repos {
         protected: bool,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::ShortBranch>> {
+    ) -> ClientResult<Vec<crate::types::ShortBranch>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -620,7 +632,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         protected: bool,
-    ) -> Result<Vec<crate::types::ShortBranch>> {
+    ) -> ClientResult<Vec<crate::types::ShortBranch>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if protected {
             query_args.push(("protected".to_string(), protected.to_string()));
@@ -665,7 +677,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::BranchWithProtection> {
+    ) -> ClientResult<crate::types::BranchWithProtection> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}",
@@ -705,7 +717,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::BranchProtection> {
+    ) -> ClientResult<crate::types::BranchProtection> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection",
@@ -752,7 +764,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposUpdateBranchProtectionRequest,
-    ) -> Result<crate::types::ProtectedBranch> {
+    ) -> ClientResult<crate::types::ProtectedBranch> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection",
@@ -792,7 +804,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection",
@@ -832,7 +844,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::EnforceAdmins> {
+    ) -> ClientResult<crate::types::EnforceAdmins> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/enforce_admins",
@@ -874,7 +886,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::EnforceAdmins> {
+    ) -> ClientResult<crate::types::EnforceAdmins> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/enforce_admins",
@@ -916,7 +928,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/enforce_admins",
@@ -956,7 +968,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::ProtectedBranchPullRequestReview> {
+    ) -> ClientResult<crate::types::ProtectedBranchPullRequestReview> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
@@ -996,7 +1008,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
@@ -1041,7 +1053,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposUpdatePullRequestReviewProtection,
-    ) -> Result<crate::types::ProtectedBranchPullRequestReview> {
+    ) -> ClientResult<crate::types::ProtectedBranchPullRequestReview> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
@@ -1085,7 +1097,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::EnforceAdmins> {
+    ) -> ClientResult<crate::types::EnforceAdmins> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_signatures",
@@ -1127,7 +1139,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::EnforceAdmins> {
+    ) -> ClientResult<crate::types::EnforceAdmins> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_signatures",
@@ -1169,7 +1181,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_signatures",
@@ -1209,7 +1221,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::StatusCheckPolicy> {
+    ) -> ClientResult<crate::types::StatusCheckPolicy> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks",
@@ -1249,7 +1261,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks",
@@ -1292,7 +1304,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposUpdateStatusCheckProtectionRequest,
-    ) -> Result<crate::types::StatusCheckPolicy> {
+    ) -> ClientResult<crate::types::StatusCheckPolicy> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks",
@@ -1332,7 +1344,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<String>> {
+    ) -> ClientResult<Vec<String>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1368,7 +1380,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<String>> {
+    ) -> ClientResult<Vec<String>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1409,7 +1421,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
-    ) -> Result<Vec<String>> {
+    ) -> ClientResult<Vec<String>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1450,7 +1462,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
-    ) -> Result<Vec<String>> {
+    ) -> ClientResult<Vec<String>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1491,7 +1503,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
-    ) -> Result<Vec<String>> {
+    ) -> ClientResult<Vec<String>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1535,7 +1547,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::BranchRestrictionPolicy> {
+    ) -> ClientResult<crate::types::BranchRestrictionPolicy> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions",
@@ -1577,7 +1589,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions",
@@ -1619,7 +1631,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::GitHubApp>> {
+    ) -> ClientResult<Vec<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1657,7 +1669,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::GitHubApp>> {
+    ) -> ClientResult<Vec<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1704,7 +1716,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::GitHubApp>> {
+    ) -> ClientResult<Vec<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1751,7 +1763,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::GitHubApp>> {
+    ) -> ClientResult<Vec<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1798,7 +1810,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::GitHubApp>> {
+    ) -> ClientResult<Vec<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1840,7 +1852,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1878,7 +1890,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1925,7 +1937,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1972,7 +1984,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -2019,7 +2031,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -2061,7 +2073,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -2099,7 +2111,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -2146,7 +2158,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -2193,7 +2205,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -2240,7 +2252,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -2295,7 +2307,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposRenameBranchRequest,
-    ) -> Result<crate::types::BranchWithProtection> {
+    ) -> ClientResult<crate::types::BranchWithProtection> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/branches/{}/rename",
@@ -2344,7 +2356,7 @@ impl Repos {
         affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Collaborator>> {
+    ) -> ClientResult<Vec<crate::types::Collaborator>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -2393,7 +2405,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         affiliation: crate::types::Affiliation,
-    ) -> Result<Vec<crate::types::Collaborator>> {
+    ) -> ClientResult<Vec<crate::types::Collaborator>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -2435,7 +2447,12 @@ impl Repos {
      * * `repo: &str`
      * * `username: &str`
      */
-    pub async fn check_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
+    pub async fn check_collaborator(
+        &self,
+        owner: &str,
+        repo: &str,
+        username: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/collaborators/{}",
@@ -2486,7 +2503,7 @@ impl Repos {
         repo: &str,
         username: &str,
         body: &crate::types::ReposAddCollaboratorRequest,
-    ) -> Result<crate::types::RepositoryInvitation> {
+    ) -> ClientResult<crate::types::RepositoryInvitation> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/collaborators/{}",
@@ -2521,7 +2538,12 @@ impl Repos {
      * * `repo: &str`
      * * `username: &str`
      */
-    pub async fn remove_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
+    pub async fn remove_collaborator(
+        &self,
+        owner: &str,
+        repo: &str,
+        username: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/collaborators/{}",
@@ -2561,7 +2583,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         username: &str,
-    ) -> Result<crate::types::RepositoryCollaboratorPermission> {
+    ) -> ClientResult<crate::types::RepositoryCollaboratorPermission> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/collaborators/{}/permission",
@@ -2605,7 +2627,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::CommitComment>> {
+    ) -> ClientResult<Vec<crate::types::CommitComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2650,7 +2672,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::CommitComment>> {
+    ) -> ClientResult<Vec<crate::types::CommitComment>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments",
@@ -2689,7 +2711,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         comment_id: i64,
-    ) -> Result<crate::types::CommitComment> {
+    ) -> ClientResult<crate::types::CommitComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments/{}",
@@ -2729,7 +2751,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         comment_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments/{}",
@@ -2770,7 +2792,7 @@ impl Repos {
         repo: &str,
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::CommitComment> {
+    ) -> ClientResult<crate::types::CommitComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments/{}",
@@ -2849,7 +2871,7 @@ impl Repos {
         until: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::CommitDataType>> {
+    ) -> ClientResult<Vec<crate::types::CommitDataType>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -2939,7 +2961,7 @@ impl Repos {
         author: &str,
         since: Option<chrono::DateTime<chrono::Utc>>,
         until: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::CommitDataType>> {
+    ) -> ClientResult<Vec<crate::types::CommitDataType>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -2998,7 +3020,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-    ) -> Result<Vec<crate::types::BranchShort>> {
+    ) -> ClientResult<Vec<crate::types::BranchShort>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/branches-where-head",
@@ -3036,7 +3058,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-    ) -> Result<Vec<crate::types::BranchShort>> {
+    ) -> ClientResult<Vec<crate::types::BranchShort>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/branches-where-head",
@@ -3080,7 +3102,7 @@ impl Repos {
         commit_sha: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::CommitComment>> {
+    ) -> ClientResult<Vec<crate::types::CommitComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3125,7 +3147,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-    ) -> Result<Vec<crate::types::CommitComment>> {
+    ) -> ClientResult<Vec<crate::types::CommitComment>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/comments",
@@ -3168,7 +3190,7 @@ impl Repos {
         repo: &str,
         commit_sha: &str,
         body: &crate::types::ReposCreateCommitCommentRequest,
-    ) -> Result<crate::types::CommitComment> {
+    ) -> ClientResult<crate::types::CommitComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/comments",
@@ -3212,7 +3234,7 @@ impl Repos {
         commit_sha: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3257,7 +3279,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestSimple>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/pulls",
@@ -3336,7 +3358,7 @@ impl Repos {
         page: i64,
         per_page: i64,
         ref_: &str,
-    ) -> Result<crate::types::CommitDataType> {
+    ) -> ClientResult<crate::types::CommitDataType> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3397,7 +3419,7 @@ impl Repos {
         ref_: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::CombinedCommitStatus> {
+    ) -> ClientResult<crate::types::CombinedCommitStatus> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3452,7 +3474,7 @@ impl Repos {
         ref_: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::StatusData>> {
+    ) -> ClientResult<Vec<crate::types::StatusData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3499,7 +3521,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<Vec<crate::types::StatusData>> {
+    ) -> ClientResult<Vec<crate::types::StatusData>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/commits/{}/statuses",
@@ -3548,7 +3570,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::CommunityProfile> {
+    ) -> ClientResult<crate::types::CommunityProfile> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/community/profile",
@@ -3630,7 +3652,7 @@ impl Repos {
         page: i64,
         per_page: i64,
         basehead: &str,
-    ) -> Result<crate::types::CommitComparison> {
+    ) -> ClientResult<crate::types::CommitComparison> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3712,7 +3734,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<Vec<crate::types::Entries>> {
+    ) -> ClientResult<Vec<crate::types::Entries>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -3791,7 +3813,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<crate::types::ContentFile> {
+    ) -> ClientResult<crate::types::ContentFile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -3870,7 +3892,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<crate::types::SymlinkContent> {
+    ) -> ClientResult<crate::types::SymlinkContent> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -3949,7 +3971,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<crate::types::ContentSubmodule> {
+    ) -> ClientResult<crate::types::ContentSubmodule> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -4028,7 +4050,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<crate::types::ReposGetContentResponseOneOf> {
+    ) -> ClientResult<crate::types::ReposGetContentResponseOneOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -4075,7 +4097,7 @@ impl Repos {
         repo: &str,
         path: &str,
         body: &crate::types::ReposCreateUpdateFileContentsRequest,
-    ) -> Result<crate::types::FileCommitData> {
+    ) -> ClientResult<crate::types::FileCommitData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/contents/{}",
@@ -4122,7 +4144,7 @@ impl Repos {
         repo: &str,
         path: &str,
         body: &crate::types::ReposDeleteFileRequest,
-    ) -> Result<crate::types::FileCommitData> {
+    ) -> ClientResult<crate::types::FileCommitData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/contents/{}",
@@ -4168,7 +4190,7 @@ impl Repos {
         anon: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Contributor>> {
+    ) -> ClientResult<Vec<crate::types::Contributor>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !anon.is_empty() {
             query_args.push(("anon".to_string(), anon.to_string()));
@@ -4217,7 +4239,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         anon: &str,
-    ) -> Result<Vec<crate::types::Contributor>> {
+    ) -> ClientResult<Vec<crate::types::Contributor>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !anon.is_empty() {
             query_args.push(("anon".to_string(), anon.to_string()));
@@ -4272,7 +4294,7 @@ impl Repos {
         environment: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Deployment>> {
+    ) -> ClientResult<Vec<crate::types::Deployment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !environment.is_empty() {
             query_args.push(("environment".to_string(), environment.to_string()));
@@ -4331,7 +4353,7 @@ impl Repos {
         ref_: &str,
         task: &str,
         environment: &str,
-    ) -> Result<Vec<crate::types::Deployment>> {
+    ) -> ClientResult<Vec<crate::types::Deployment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !environment.is_empty() {
             query_args.push(("environment".to_string(), environment.to_string()));
@@ -4428,7 +4450,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateDeploymentRequest,
-    ) -> Result<crate::types::Deployment> {
+    ) -> ClientResult<crate::types::Deployment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments",
@@ -4467,7 +4489,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         deployment_id: i64,
-    ) -> Result<crate::types::Deployment> {
+    ) -> ClientResult<crate::types::Deployment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments/{}",
@@ -4514,7 +4536,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         deployment_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments/{}",
@@ -4558,7 +4580,7 @@ impl Repos {
         deployment_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::DeploymentStatus>> {
+    ) -> ClientResult<Vec<crate::types::DeploymentStatus>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -4603,7 +4625,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         deployment_id: i64,
-    ) -> Result<Vec<crate::types::DeploymentStatus>> {
+    ) -> ClientResult<Vec<crate::types::DeploymentStatus>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments/{}/statuses",
@@ -4646,7 +4668,7 @@ impl Repos {
         repo: &str,
         deployment_id: i64,
         body: &crate::types::ReposCreateDeploymentStatusRequest,
-    ) -> Result<crate::types::DeploymentStatus> {
+    ) -> ClientResult<crate::types::DeploymentStatus> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments/{}/statuses",
@@ -4688,7 +4710,7 @@ impl Repos {
         repo: &str,
         deployment_id: i64,
         status_id: i64,
-    ) -> Result<crate::types::DeploymentStatus> {
+    ) -> ClientResult<crate::types::DeploymentStatus> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/deployments/{}/statuses/{}",
@@ -4737,7 +4759,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateDispatchEventRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/dispatches",
@@ -4776,7 +4798,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::ReposGetAllEnvironmentsResponse> {
+    ) -> ClientResult<crate::types::ReposGetAllEnvironmentsResponse> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/environments",
@@ -4815,7 +4837,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         environment_name: &str,
-    ) -> Result<crate::types::EnvironmentData> {
+    ) -> ClientResult<crate::types::EnvironmentData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/environments/{}",
@@ -4862,7 +4884,7 @@ impl Repos {
         repo: &str,
         environment_name: &str,
         body: &crate::types::ReposCreateUpdateEnvironmentRequest,
-    ) -> Result<crate::types::EnvironmentData> {
+    ) -> ClientResult<crate::types::EnvironmentData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/environments/{}",
@@ -4902,7 +4924,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         environment_name: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/environments/{}",
@@ -4946,7 +4968,7 @@ impl Repos {
         sort: crate::types::ReposListForksSort,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -4993,7 +5015,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         sort: crate::types::ReposListForksSort,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !sort.to_string().is_empty() {
             query_args.push(("sort".to_string(), sort.to_string()));
@@ -5039,7 +5061,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateForkRequest,
-    ) -> Result<crate::types::FullRepository> {
+    ) -> ClientResult<crate::types::FullRepository> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/forks",
@@ -5080,7 +5102,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Hook>> {
+    ) -> ClientResult<Vec<crate::types::Hook>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -5123,7 +5145,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::Hook>> {
+    ) -> ClientResult<Vec<crate::types::Hook>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks",
@@ -5162,7 +5184,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateWebhookRequest,
-    ) -> Result<crate::types::Hook> {
+    ) -> ClientResult<crate::types::Hook> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks",
@@ -5201,7 +5223,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         hook_id: i64,
-    ) -> Result<crate::types::Hook> {
+    ) -> ClientResult<crate::types::Hook> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}",
@@ -5236,7 +5258,7 @@ impl Repos {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+    pub async fn delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}",
@@ -5277,7 +5299,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         body: &crate::types::ReposUpdateWebhookRequest,
-    ) -> Result<crate::types::Hook> {
+    ) -> ClientResult<crate::types::Hook> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}",
@@ -5319,7 +5341,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         hook_id: i64,
-    ) -> Result<crate::types::WebhookConfig> {
+    ) -> ClientResult<crate::types::WebhookConfig> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/config",
@@ -5362,7 +5384,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         body: &crate::types::AppsUpdateWebhookConfigAppRequest,
-    ) -> Result<crate::types::WebhookConfig> {
+    ) -> ClientResult<crate::types::WebhookConfig> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/config",
@@ -5406,7 +5428,7 @@ impl Repos {
         hook_id: i64,
         per_page: i64,
         cursor: &str,
-    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -5452,7 +5474,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         cursor: &str,
-    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -5500,7 +5522,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<crate::types::HookDelivery> {
+    ) -> ClientResult<crate::types::HookDelivery> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/deliveries/{}",
@@ -5543,7 +5565,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/deliveries/{}/attempts",
@@ -5579,7 +5601,7 @@ impl Repos {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+    pub async fn ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/pings",
@@ -5616,7 +5638,12 @@ impl Repos {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn test_push_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+    pub async fn test_push_webhook(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/hooks/{}/tests",
@@ -5658,7 +5685,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+    ) -> ClientResult<Vec<crate::types::RepositoryInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -5701,7 +5728,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+    ) -> ClientResult<Vec<crate::types::RepositoryInvitation>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/invitations",
@@ -5740,7 +5767,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         invitation_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/invitations/{}",
@@ -5781,7 +5808,7 @@ impl Repos {
         repo: &str,
         invitation_id: i64,
         body: &crate::types::ReposUpdateInvitationRequest,
-    ) -> Result<crate::types::RepositoryInvitation> {
+    ) -> ClientResult<crate::types::RepositoryInvitation> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/invitations/{}",
@@ -5823,7 +5850,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::DeployKey>> {
+    ) -> ClientResult<Vec<crate::types::DeployKey>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -5866,7 +5893,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::DeployKey>> {
+    ) -> ClientResult<Vec<crate::types::DeployKey>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/keys",
@@ -5904,7 +5931,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateDeployKeyRequest,
-    ) -> Result<crate::types::DeployKey> {
+    ) -> ClientResult<crate::types::DeployKey> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/keys",
@@ -5943,7 +5970,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         key_id: i64,
-    ) -> Result<crate::types::DeployKey> {
+    ) -> ClientResult<crate::types::DeployKey> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/keys/{}",
@@ -5978,7 +6005,12 @@ impl Repos {
      * * `repo: &str`
      * * `key_id: i64` -- key_id parameter.
      */
-    pub async fn delete_deploy_key(&self, owner: &str, repo: &str, key_id: i64) -> Result<()> {
+    pub async fn delete_deploy_key(
+        &self,
+        owner: &str,
+        repo: &str,
+        key_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/keys/{}",
@@ -6012,7 +6044,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn list_languages(&self, owner: &str, repo: &str) -> Result<i64> {
+    pub async fn list_languages(&self, owner: &str, repo: &str) -> ClientResult<i64> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/languages",
@@ -6050,7 +6082,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposMergeRequest,
-    ) -> Result<crate::types::CommitDataType> {
+    ) -> ClientResult<crate::types::CommitDataType> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/merges",
@@ -6083,7 +6115,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn get_pages(&self, owner: &str, repo: &str) -> Result<crate::types::Page> {
+    pub async fn get_pages(&self, owner: &str, repo: &str) -> ClientResult<crate::types::Page> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages",
@@ -6121,7 +6153,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposUpdateInformationAboutPagesSiteRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages",
@@ -6159,7 +6191,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreatePagesSiteRequest,
-    ) -> Result<crate::types::Page> {
+    ) -> ClientResult<crate::types::Page> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages",
@@ -6192,7 +6224,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn delete_pages_site(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn delete_pages_site(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages",
@@ -6233,7 +6265,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PageBuild>> {
+    ) -> ClientResult<Vec<crate::types::PageBuild>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -6276,7 +6308,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::PageBuild>> {
+    ) -> ClientResult<Vec<crate::types::PageBuild>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages/builds",
@@ -6315,7 +6347,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::PageBuildStatus> {
+    ) -> ClientResult<crate::types::PageBuildStatus> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages/builds",
@@ -6352,7 +6384,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::PageBuild> {
+    ) -> ClientResult<crate::types::PageBuild> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages/builds/latest",
@@ -6391,7 +6423,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         build_id: i64,
-    ) -> Result<crate::types::PageBuild> {
+    ) -> ClientResult<crate::types::PageBuild> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages/builds/{}",
@@ -6433,7 +6465,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::PagesHealthCheck> {
+    ) -> ClientResult<crate::types::PagesHealthCheck> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pages/health",
@@ -6474,7 +6506,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<crate::types::ContentFile> {
+    ) -> ClientResult<crate::types::ContentFile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -6523,7 +6555,7 @@ impl Repos {
         repo: &str,
         dir: &str,
         ref_: &str,
-    ) -> Result<crate::types::ContentFile> {
+    ) -> ClientResult<crate::types::ContentFile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ref_.is_empty() {
             query_args.push(("ref".to_string(), ref_.to_string()));
@@ -6573,7 +6605,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Release>> {
+    ) -> ClientResult<Vec<crate::types::Release>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -6618,7 +6650,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::Release>> {
+    ) -> ClientResult<Vec<crate::types::Release>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases",
@@ -6658,7 +6690,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposCreateReleaseRequest,
-    ) -> Result<crate::types::Release> {
+    ) -> ClientResult<crate::types::Release> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases",
@@ -6697,7 +6729,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         asset_id: i64,
-    ) -> Result<crate::types::ReleaseAsset> {
+    ) -> ClientResult<crate::types::ReleaseAsset> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/assets/{}",
@@ -6732,7 +6764,12 @@ impl Repos {
      * * `repo: &str`
      * * `asset_id: i64` -- asset_id parameter.
      */
-    pub async fn delete_release_asset(&self, owner: &str, repo: &str, asset_id: i64) -> Result<()> {
+    pub async fn delete_release_asset(
+        &self,
+        owner: &str,
+        repo: &str,
+        asset_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/assets/{}",
@@ -6773,7 +6810,7 @@ impl Repos {
         repo: &str,
         asset_id: i64,
         body: &crate::types::ReposUpdateReleaseAssetRequest,
-    ) -> Result<crate::types::ReleaseAsset> {
+    ) -> ClientResult<crate::types::ReleaseAsset> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/assets/{}",
@@ -6813,7 +6850,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::Release> {
+    ) -> ClientResult<crate::types::Release> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/latest",
@@ -6852,7 +6889,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         tag: &str,
-    ) -> Result<crate::types::Release> {
+    ) -> ClientResult<crate::types::Release> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/tags/{}",
@@ -6892,7 +6929,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         release_id: i64,
-    ) -> Result<crate::types::Release> {
+    ) -> ClientResult<crate::types::Release> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/{}",
@@ -6927,7 +6964,12 @@ impl Repos {
      * * `repo: &str`
      * * `release_id: i64` -- release_id parameter.
      */
-    pub async fn delete_release(&self, owner: &str, repo: &str, release_id: i64) -> Result<()> {
+    pub async fn delete_release(
+        &self,
+        owner: &str,
+        repo: &str,
+        release_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/{}",
@@ -6968,7 +7010,7 @@ impl Repos {
         repo: &str,
         release_id: i64,
         body: &crate::types::ReposCreateReleaseRequest,
-    ) -> Result<crate::types::Release> {
+    ) -> ClientResult<crate::types::Release> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/{}",
@@ -7012,7 +7054,7 @@ impl Repos {
         release_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::ReleaseAsset>> {
+    ) -> ClientResult<Vec<crate::types::ReleaseAsset>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -7057,7 +7099,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         release_id: i64,
-    ) -> Result<Vec<crate::types::ReleaseAsset>> {
+    ) -> ClientResult<Vec<crate::types::ReleaseAsset>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/{}/assets",
@@ -7119,7 +7161,7 @@ impl Repos {
         name: &str,
         label: &str,
         body: B,
-    ) -> Result<crate::types::ReleaseAsset> {
+    ) -> ClientResult<crate::types::ReleaseAsset> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !label.is_empty() {
             query_args.push(("label".to_string(), label.to_string()));
@@ -7162,7 +7204,11 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn get_code_frequency_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn get_code_frequency_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<Vec<Vec<i64>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/code_frequency",
@@ -7196,7 +7242,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<Vec<i64>>> {
+    ) -> ClientResult<Vec<Vec<i64>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/code_frequency",
@@ -7233,7 +7279,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::CommitActivity>> {
+    ) -> ClientResult<Vec<crate::types::CommitActivity>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/commit_activity",
@@ -7267,7 +7313,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::CommitActivity>> {
+    ) -> ClientResult<Vec<crate::types::CommitActivity>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/commit_activity",
@@ -7310,7 +7356,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ContributorActivity>> {
+    ) -> ClientResult<Vec<crate::types::ContributorActivity>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/contributors",
@@ -7350,7 +7396,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ContributorActivity>> {
+    ) -> ClientResult<Vec<crate::types::ContributorActivity>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/contributors",
@@ -7389,7 +7435,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::ParticipationStats> {
+    ) -> ClientResult<crate::types::ParticipationStats> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/participation",
@@ -7428,7 +7474,11 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn get_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn get_punch_card_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<Vec<Vec<i64>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/punch_card",
@@ -7464,7 +7514,11 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day>
      */
-    pub async fn get_all_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn get_all_punch_card_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<Vec<Vec<i64>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/stats/punch_card",
@@ -7506,7 +7560,7 @@ impl Repos {
         repo: &str,
         sha: &str,
         body: &crate::types::ReposCreateCommitStatusRequest,
-    ) -> Result<crate::types::StatusData> {
+    ) -> ClientResult<crate::types::StatusData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/statuses/{}",
@@ -7548,7 +7602,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Tag>> {
+    ) -> ClientResult<Vec<crate::types::Tag>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -7587,7 +7641,11 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
      */
-    pub async fn list_all_tags(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Tag>> {
+    pub async fn list_all_tags(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<Vec<crate::types::Tag>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/tags",
@@ -7629,7 +7687,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/tarball/{}",
@@ -7671,7 +7729,7 @@ impl Repos {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -7710,7 +7768,11 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
      */
-    pub async fn list_all_teams(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Team>> {
+    pub async fn list_all_teams(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/teams",
@@ -7751,7 +7813,7 @@ impl Repos {
         repo: &str,
         page: i64,
         per_page: i64,
-    ) -> Result<crate::types::Topic> {
+    ) -> ClientResult<crate::types::Topic> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -7798,7 +7860,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::Topic,
-    ) -> Result<crate::types::Topic> {
+    ) -> ClientResult<crate::types::Topic> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/topics",
@@ -7837,7 +7899,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         per: crate::types::Per,
-    ) -> Result<crate::types::CloneTraffic> {
+    ) -> ClientResult<crate::types::CloneTraffic> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !per.to_string().is_empty() {
             query_args.push(("per".to_string(), per.to_string()));
@@ -7880,7 +7942,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ContentTraffic>> {
+    ) -> ClientResult<Vec<crate::types::ContentTraffic>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/traffic/popular/paths",
@@ -7914,7 +7976,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ContentTraffic>> {
+    ) -> ClientResult<Vec<crate::types::ContentTraffic>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/traffic/popular/paths",
@@ -7951,7 +8013,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ReferrerTraffic>> {
+    ) -> ClientResult<Vec<crate::types::ReferrerTraffic>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/traffic/popular/referrers",
@@ -7985,7 +8047,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::ReferrerTraffic>> {
+    ) -> ClientResult<Vec<crate::types::ReferrerTraffic>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/traffic/popular/referrers",
@@ -8024,7 +8086,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         per: crate::types::Per,
-    ) -> Result<crate::types::ViewTraffic> {
+    ) -> ClientResult<crate::types::ViewTraffic> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !per.to_string().is_empty() {
             query_args.push(("per".to_string(), per.to_string()));
@@ -8068,7 +8130,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposTransferRequest,
-    ) -> Result<crate::types::MinimalRepository> {
+    ) -> ClientResult<crate::types::MinimalRepository> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/transfer",
@@ -8101,7 +8163,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn check_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn check_vulnerability_alerts(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/vulnerability-alerts",
@@ -8134,7 +8196,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/vulnerability-alerts",
@@ -8167,7 +8229,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/vulnerability-alerts",
@@ -8209,7 +8271,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/zipball/{}",
@@ -8255,7 +8317,7 @@ impl Repos {
         template_owner: &str,
         template_repo: &str,
         body: &crate::types::ReposCreateUsingTemplateRequest,
-    ) -> Result<crate::types::Repository> {
+    ) -> ClientResult<crate::types::Repository> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/generate",
@@ -8291,7 +8353,10 @@ impl Repos {
      *
      * * `since: i64` -- A repository ID. Only return repositories with an ID greater than this ID.
      */
-    pub async fn list_public(&self, since: i64) -> Result<Vec<crate::types::MinimalRepository>> {
+    pub async fn list_public(
+        &self,
+        since: i64,
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -8326,7 +8391,7 @@ impl Repos {
     pub async fn list_all_public(
         &self,
         since: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -8384,7 +8449,7 @@ impl Repos {
         page: i64,
         since: Option<chrono::DateTime<chrono::Utc>>,
         before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Repository>> {
+    ) -> ClientResult<Vec<crate::types::Repository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -8447,7 +8512,7 @@ impl Repos {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Repository>> {
+    ) -> ClientResult<Vec<crate::types::Repository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.is_empty() {
             query_args.push(("affiliation".to_string(), affiliation.to_string()));
@@ -8501,7 +8566,7 @@ impl Repos {
     pub async fn create_for_authenticated_user(
         &self,
         body: &crate::types::ReposCreateRequest,
-    ) -> Result<crate::types::Repository> {
+    ) -> ClientResult<crate::types::Repository> {
         let url = self.client.url("/user/repos", None);
         self.client
             .post(
@@ -8531,7 +8596,7 @@ impl Repos {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+    ) -> ClientResult<Vec<crate::types::RepositoryInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -8566,7 +8631,7 @@ impl Repos {
      */
     pub async fn list_all_invitations_for_authenticated_user(
         &self,
-    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+    ) -> ClientResult<Vec<crate::types::RepositoryInvitation>> {
         let url = self.client.url("/user/repository_invitations", None);
         self.client
             .get_all_pages(
@@ -8591,7 +8656,7 @@ impl Repos {
      *
      * * `invitation_id: i64` -- invitation_id parameter.
      */
-    pub async fn decline_invitation(&self, invitation_id: i64) -> Result<()> {
+    pub async fn decline_invitation(&self, invitation_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/repository_invitations/{}",
@@ -8622,7 +8687,7 @@ impl Repos {
      *
      * * `invitation_id: i64` -- invitation_id parameter.
      */
-    pub async fn accept_invitation(&self, invitation_id: i64) -> Result<()> {
+    pub async fn accept_invitation(&self, invitation_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/repository_invitations/{}",
@@ -8668,7 +8733,7 @@ impl Repos {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -8721,7 +8786,7 @@ impl Repos {
         type_: crate::types::ReposListUserType,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TeamProfile {
     pub client: Client,
@@ -24,7 +23,10 @@ impl TeamProfile {
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
      * * `visibility: &str` -- Filter by visibility.
      */
-    pub async fn get(&self, visibility: &str) -> Result<crate::types::TeamProfileGetSuccessSchema> {
+    pub async fn get(
+        &self,
+        visibility: &str,
+    ) -> ClientResult<crate::types::TeamProfileGetSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !visibility.is_empty() {
             query_args.push(("visibility".to_string(), visibility.to_string()));

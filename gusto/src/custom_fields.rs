@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CustomFields {
     pub client: Client,
@@ -22,7 +21,7 @@ impl CustomFields {
     pub async fn get_employee(
         &self,
         employee_id: &str,
-    ) -> Result<crate::types::GetEmployeeCustomFieldsResponse> {
+    ) -> ClientResult<crate::types::GetEmployeeCustomFieldsResponse> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/custom_fields",
@@ -50,7 +49,7 @@ impl CustomFields {
     pub async fn get_company(
         &self,
         company_id: &str,
-    ) -> Result<crate::types::GetCompanyCustomFieldsResponse> {
+    ) -> ClientResult<crate::types::GetCompanyCustomFieldsResponse> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/custom_fields",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Users {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
+    pub async fn get_authenticated_public_user(&self) -> ClientResult<crate::types::PublicUser> {
         let url = self.client.url("/user", None);
         self.client
             .get(
@@ -46,7 +45,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
+    pub async fn get_authenticated_private_user(&self) -> ClientResult<crate::types::PrivateUser> {
         let url = self.client.url("/user", None);
         self.client
             .get(
@@ -69,7 +68,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
+    pub async fn get_authenticated(
+        &self,
+    ) -> ClientResult<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = self.client.url("/user", None);
         self.client
             .get(
@@ -93,7 +94,7 @@ impl Users {
     pub async fn update_authenticated(
         &self,
         body: &crate::types::UsersUpdateAuthenticatedRequest,
-    ) -> Result<crate::types::PrivateUser> {
+    ) -> ClientResult<crate::types::PrivateUser> {
         let url = self.client.url("/user", None);
         self.client
             .patch(
@@ -114,7 +115,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list_blocked_by_authenticated(
+        &self,
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url("/user/blocks", None);
         self.client
             .get(
@@ -137,7 +140,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn list_all_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list_all_blocked_by_authenticated(
+        &self,
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url("/user/blocks", None);
         self.client
             .get_all_pages(
@@ -162,7 +167,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn check_blocked(&self, username: &str) -> Result<()> {
+    pub async fn check_blocked(&self, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
@@ -193,7 +198,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn block(&self, username: &str) -> Result<()> {
+    pub async fn block(&self, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
@@ -224,7 +229,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn unblock(&self, username: &str) -> Result<()> {
+    pub async fn unblock(&self, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/blocks/{}",
@@ -254,7 +259,7 @@ impl Users {
     pub async fn set_primary_email_visibility_for_authenticated(
         &self,
         body: &crate::types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
-    ) -> Result<Vec<crate::types::Email>> {
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let url = self.client.url("/user/email/visibility", None);
         self.client
             .patch(
@@ -284,7 +289,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Email>> {
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -315,7 +320,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user>
      */
-    pub async fn list_all_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+    pub async fn list_all_emails_for_authenticated(
+        &self,
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let url = self.client.url("/user/emails", None);
         self.client
             .get_all_pages(
@@ -339,7 +346,7 @@ impl Users {
     pub async fn add_email_for_authenticated(
         &self,
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
-    ) -> Result<Vec<crate::types::Email>> {
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let url = self.client.url("/user/emails", None);
         self.client
             .post(
@@ -363,7 +370,7 @@ impl Users {
     pub async fn delete_email_for_authenticated(
         &self,
         body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/user/emails", None);
         self.client
             .delete(
@@ -393,7 +400,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -428,7 +435,7 @@ impl Users {
      */
     pub async fn list_all_followers_for_authenticated_user(
         &self,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url("/user/followers", None);
         self.client
             .get_all_pages(
@@ -458,7 +465,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -493,7 +500,7 @@ impl Users {
      */
     pub async fn list_all_followed_by_authenticated(
         &self,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url("/user/following", None);
         self.client
             .get_all_pages(
@@ -518,7 +525,10 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn check_person_is_followed_by_authenticated(&self, username: &str) -> Result<()> {
+    pub async fn check_person_is_followed_by_authenticated(
+        &self,
+        username: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
@@ -551,7 +561,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn follow(&self, username: &str) -> Result<()> {
+    pub async fn follow(&self, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
@@ -582,7 +592,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn unfollow(&self, username: &str) -> Result<()> {
+    pub async fn unfollow(&self, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/following/{}",
@@ -618,7 +628,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GpgKey>> {
+    ) -> ClientResult<Vec<crate::types::GpgKey>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -649,7 +659,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user>
      */
-    pub async fn list_all_gpg_keys_for_authenticated(&self) -> Result<Vec<crate::types::GpgKey>> {
+    pub async fn list_all_gpg_keys_for_authenticated(
+        &self,
+    ) -> ClientResult<Vec<crate::types::GpgKey>> {
         let url = self.client.url("/user/gpg_keys", None);
         self.client
             .get_all_pages(
@@ -673,7 +685,7 @@ impl Users {
     pub async fn create_gpg_key_for_authenticated(
         &self,
         body: &crate::types::UsersCreateGpgKeyAuthenticatedRequest,
-    ) -> Result<crate::types::GpgKey> {
+    ) -> ClientResult<crate::types::GpgKey> {
         let url = self.client.url("/user/gpg_keys", None);
         self.client
             .post(
@@ -701,7 +713,7 @@ impl Users {
     pub async fn get_gpg_key_for_authenticated(
         &self,
         gpg_key_id: i64,
-    ) -> Result<crate::types::GpgKey> {
+    ) -> ClientResult<crate::types::GpgKey> {
         let url = self.client.url(
             &format!(
                 "/user/gpg_keys/{}",
@@ -732,7 +744,7 @@ impl Users {
      *
      * * `gpg_key_id: i64` -- gpg_key_id parameter.
      */
-    pub async fn delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
+    pub async fn delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/gpg_keys/{}",
@@ -768,7 +780,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Key>> {
+    ) -> ClientResult<Vec<crate::types::Key>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -801,7 +813,7 @@ impl Users {
      */
     pub async fn list_all_public_ssh_keys_for_authenticated(
         &self,
-    ) -> Result<Vec<crate::types::Key>> {
+    ) -> ClientResult<Vec<crate::types::Key>> {
         let url = self.client.url("/user/keys", None);
         self.client
             .get_all_pages(
@@ -825,7 +837,7 @@ impl Users {
     pub async fn create_public_ssh_key_for_authenticated(
         &self,
         body: &crate::types::UsersCreatePublicSshKeyAuthenticatedRequest,
-    ) -> Result<crate::types::Key> {
+    ) -> ClientResult<crate::types::Key> {
         let url = self.client.url("/user/keys", None);
         self.client
             .post(
@@ -853,7 +865,7 @@ impl Users {
     pub async fn get_public_ssh_key_for_authenticated(
         &self,
         key_id: i64,
-    ) -> Result<crate::types::Key> {
+    ) -> ClientResult<crate::types::Key> {
         let url = self.client.url(
             &format!(
                 "/user/keys/{}",
@@ -884,7 +896,7 @@ impl Users {
      *
      * * `key_id: i64` -- key_id parameter.
      */
-    pub async fn delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
+    pub async fn delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/keys/{}",
@@ -920,7 +932,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Email>> {
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -955,7 +967,7 @@ impl Users {
      */
     pub async fn list_all_public_emails_for_authenticated(
         &self,
-    ) -> Result<Vec<crate::types::Email>> {
+    ) -> ClientResult<Vec<crate::types::Email>> {
         let url = self.client.url("/user/public_emails", None);
         self.client
             .get_all_pages(
@@ -983,7 +995,11 @@ impl Users {
      * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
      * * `per_page: i64` -- Results per page (max 100).
      */
-    pub async fn list(&self, since: i64, per_page: i64) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list(
+        &self,
+        since: i64,
+        per_page: i64,
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if per_page > 0 {
             query_args.push(("per_page".to_string(), per_page.to_string()));
@@ -1016,7 +1032,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users>
      */
-    pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list_all(&self, since: i64) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -1055,7 +1071,7 @@ impl Users {
     pub async fn get_by_username_public_user(
         &self,
         username: &str,
-    ) -> Result<crate::types::PublicUser> {
+    ) -> ClientResult<crate::types::PublicUser> {
         let url = self.client.url(
             &format!(
                 "/users/{}",
@@ -1095,7 +1111,7 @@ impl Users {
     pub async fn get_by_username_private_user(
         &self,
         username: &str,
-    ) -> Result<crate::types::PrivateUser> {
+    ) -> ClientResult<crate::types::PrivateUser> {
         let url = self.client.url(
             &format!(
                 "/users/{}",
@@ -1135,7 +1151,7 @@ impl Users {
     pub async fn get_by_username(
         &self,
         username: &str,
-    ) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
+    ) -> ClientResult<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = self.client.url(
             &format!(
                 "/users/{}",
@@ -1173,7 +1189,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1214,7 +1230,7 @@ impl Users {
     pub async fn list_all_followers_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/followers",
@@ -1252,7 +1268,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1293,7 +1309,7 @@ impl Users {
     pub async fn list_all_following_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/following",
@@ -1325,7 +1341,11 @@ impl Users {
      * * `username: &str`
      * * `target_user: &str`
      */
-    pub async fn check_following_for_user(&self, username: &str, target_user: &str) -> Result<()> {
+    pub async fn check_following_for_user(
+        &self,
+        username: &str,
+        target_user: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/users/{}/following/{}",
@@ -1364,7 +1384,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GpgKey>> {
+    ) -> ClientResult<Vec<crate::types::GpgKey>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1405,7 +1425,7 @@ impl Users {
     pub async fn list_all_gpg_keys_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::GpgKey>> {
+    ) -> ClientResult<Vec<crate::types::GpgKey>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/gpg_keys",
@@ -1450,7 +1470,7 @@ impl Users {
         username: &str,
         subject_type: crate::types::SubjectType,
         subject_id: &str,
-    ) -> Result<crate::types::Hovercard> {
+    ) -> ClientResult<crate::types::Hovercard> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !subject_id.is_empty() {
             query_args.push(("subject_id".to_string(), subject_id.to_string()));
@@ -1497,7 +1517,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::KeySimple>> {
+    ) -> ClientResult<Vec<crate::types::KeySimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1538,7 +1558,7 @@ impl Users {
     pub async fn list_all_public_keys_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::KeySimple>> {
+    ) -> ClientResult<Vec<crate::types::KeySimple>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/keys",

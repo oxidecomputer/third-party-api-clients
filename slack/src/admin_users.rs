@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminUsers {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn assign(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.assign", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn invite(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.invite", None);
         self.client
             .post(
@@ -77,7 +76,7 @@ impl AdminUsers {
         team_id: &str,
         cursor: &str,
         limit: i64,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -113,7 +112,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.remove", None);
         self.client
             .post(
@@ -136,7 +135,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn set(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setAdmin", None);
         self.client
             .post(
@@ -159,7 +158,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_expiration(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setExpiration", None);
         self.client
             .post(
@@ -182,7 +181,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_owner(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setOwner", None);
         self.client
             .post(
@@ -205,7 +204,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_regular(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.users.setRegular", None);
         self.client
             .post(

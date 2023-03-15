@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminConversationsRestrictAccess {
     pub client: Client,
@@ -19,7 +18,7 @@ impl AdminConversationsRestrictAccess {
      *
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.addGroup>
      */
-    pub async fn add_group(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn add_group(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self
             .client
             .url("/admin.conversations.restrictAccess.addGroup", None);
@@ -50,7 +49,7 @@ impl AdminConversationsRestrictAccess {
         &self,
         channel_id: &str,
         team_id: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel_id.is_empty() {
             query_args.push(("channel_id".to_string(), channel_id.to_string()));
@@ -80,7 +79,7 @@ impl AdminConversationsRestrictAccess {
      *
      * FROM: <https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup>
      */
-    pub async fn remove_group(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove_group(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self
             .client
             .url("/admin.conversations.restrictAccess.removeGroup", None);

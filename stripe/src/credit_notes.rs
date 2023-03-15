@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CreditNotes {
     pub client: Client,
@@ -33,7 +32,7 @@ impl CreditNotes {
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::CreditNote>> {
+    ) -> ClientResult<Vec<crate::types::CreditNote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -79,7 +78,7 @@ impl CreditNotes {
         &self,
         customer: &str,
         invoice: &str,
-    ) -> Result<Vec<crate::types::CreditNote>> {
+    ) -> ClientResult<Vec<crate::types::CreditNote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -168,7 +167,7 @@ impl CreditNotes {
      * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s <code>pre_payment_credit_notes_amount</code>
      * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::CreditNote> {
+    pub async fn post(&self) -> ClientResult<crate::types::CreditNote> {
         let url = self.client.url("/v1/credit_notes", None);
         self.client
             .post(
@@ -211,7 +210,7 @@ impl CreditNotes {
         reason: crate::types::Reason,
         refund: &str,
         refund_amount: i64,
-    ) -> Result<crate::types::CreditNote> {
+    ) -> ClientResult<crate::types::CreditNote> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -291,7 +290,7 @@ impl CreditNotes {
         refund: &str,
         refund_amount: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -366,7 +365,7 @@ impl CreditNotes {
         reason: crate::types::Reason,
         refund: &str,
         refund_amount: i64,
-    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -477,7 +476,7 @@ impl CreditNotes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -521,7 +520,7 @@ impl CreditNotes {
     pub async fn get_all_note_lines(
         &self,
         credit_note: &str,
-    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+    ) -> ClientResult<Vec<crate::types::CreditNoteLineItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/lines",
@@ -598,7 +597,7 @@ impl CreditNotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
@@ -625,7 +624,7 @@ impl CreditNotes {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_credit_notes(&self, id: &str) -> Result<crate::types::CreditNote> {
+    pub async fn post_credit_notes(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}",
@@ -652,7 +651,7 @@ impl CreditNotes {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_void(&self, id: &str) -> Result<crate::types::CreditNote> {
+    pub async fn post_void(&self, id: &str) -> ClientResult<crate::types::CreditNote> {
         let url = self.client.url(
             &format!(
                 "/v1/credit_notes/{}/void",

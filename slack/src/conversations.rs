@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Conversations {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn archive(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.archive", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn close(&self) -> Result<crate::types::ConversationsCloseSuccessSchema> {
+    pub async fn close(&self) -> ClientResult<crate::types::ConversationsCloseSuccessSchema> {
         let url = self.client.url("/conversations.close", None);
         self.client
             .post(
@@ -69,7 +68,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn create(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    pub async fn create(&self) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.create", None);
         self.client
             .post(
@@ -106,7 +105,7 @@ impl Conversations {
         inclusive: bool,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::ConversationsHistorySuccessSchema> {
+    ) -> ClientResult<crate::types::ConversationsHistorySuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -159,7 +158,7 @@ impl Conversations {
         channel: &str,
         include_locale: bool,
         include_num_members: bool,
-    ) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    ) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -198,7 +197,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn invite(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    pub async fn invite(&self) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.invite", None);
         self.client
             .post(
@@ -221,7 +220,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `channels:write`.
      */
-    pub async fn join(&self) -> Result<crate::types::ConversationsJoinSuccessSchema> {
+    pub async fn join(&self) -> ClientResult<crate::types::ConversationsJoinSuccessSchema> {
         let url = self.client.url("/conversations.join", None);
         self.client
             .post(
@@ -244,7 +243,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn kick(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn kick(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.kick", None);
         self.client
             .post(
@@ -267,7 +266,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn leave(&self) -> Result<crate::types::ConversationsLeaveSuccessSchema> {
+    pub async fn leave(&self) -> ClientResult<crate::types::ConversationsLeaveSuccessSchema> {
         let url = self.client.url("/conversations.leave", None);
         self.client
             .post(
@@ -300,7 +299,7 @@ impl Conversations {
         types: &str,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::ConversationsListSuccessSchema> {
+    ) -> ClientResult<crate::types::ConversationsListSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -339,7 +338,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn mark(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn mark(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.mark", None);
         self.client
             .post(
@@ -370,7 +369,7 @@ impl Conversations {
         channel: &str,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::ConversationsMembersSuccessSchema> {
+    ) -> ClientResult<crate::types::ConversationsMembersSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -406,7 +405,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn open(&self) -> Result<crate::types::ConversationsOpenSuccessSchema> {
+    pub async fn open(&self) -> ClientResult<crate::types::ConversationsOpenSuccessSchema> {
         let url = self.client.url("/conversations.open", None);
         self.client
             .post(
@@ -429,7 +428,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn rename(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    pub async fn rename(&self) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.rename", None);
         self.client
             .post(
@@ -468,7 +467,7 @@ impl Conversations {
         inclusive: bool,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::ConversationsRepliesSuccessSchema> {
+    ) -> ClientResult<crate::types::ConversationsRepliesSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -516,7 +515,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn set_purpose(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    pub async fn set_purpose(&self) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.setPurpose", None);
         self.client
             .post(
@@ -539,7 +538,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn set_topic(&self) -> Result<crate::types::ConversationsInfoSuccessSchema> {
+    pub async fn set_topic(&self) -> ClientResult<crate::types::ConversationsInfoSuccessSchema> {
         let url = self.client.url("/conversations.setTopic", None);
         self.client
             .post(
@@ -562,7 +561,7 @@ impl Conversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `conversations:write`.
      */
-    pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn unarchive(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/conversations.unarchive", None);
         self.client
             .post(

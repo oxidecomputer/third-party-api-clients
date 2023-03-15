@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BillingPortal {
     pub client: Client,
@@ -33,7 +32,7 @@ impl BillingPortal {
         is_default: bool,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::PortalConfiguration>> {
+    ) -> ClientResult<Vec<crate::types::PortalConfiguration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -80,7 +79,7 @@ impl BillingPortal {
         &self,
         active: bool,
         is_default: bool,
-    ) -> Result<Vec<crate::types::PortalConfiguration>> {
+    ) -> ClientResult<Vec<crate::types::PortalConfiguration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -157,7 +156,7 @@ impl BillingPortal {
      *
      * <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
      */
-    pub async fn post_configuration(&self) -> Result<crate::types::PortalConfiguration> {
+    pub async fn post_configuration(&self) -> ClientResult<crate::types::PortalConfiguration> {
         let url = self.client.url("/v1/billing_portal/configurations", None);
         self.client
             .post(
@@ -182,7 +181,7 @@ impl BillingPortal {
     pub async fn get_configurations_configuration(
         &self,
         configuration: &str,
-    ) -> Result<crate::types::PortalConfiguration> {
+    ) -> ClientResult<crate::types::PortalConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
@@ -212,7 +211,7 @@ impl BillingPortal {
     pub async fn post_configurations_configuration(
         &self,
         configuration: &str,
-    ) -> Result<crate::types::PortalConfiguration> {
+    ) -> ClientResult<crate::types::PortalConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v1/billing_portal/configurations/{}",
@@ -235,7 +234,7 @@ impl BillingPortal {
      *
      * <p>Creates a session of the customer portal.</p>
      */
-    pub async fn post_session(&self) -> Result<crate::types::PortalSession> {
+    pub async fn post_session(&self) -> ClientResult<crate::types::PortalSession> {
         let url = self.client.url("/v1/billing_portal/sessions", None);
         self.client
             .post(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ExchangeRates {
     pub client: Client,
@@ -29,7 +28,7 @@ impl ExchangeRates {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::ExchangeRate>> {
+    ) -> ClientResult<Vec<crate::types::ExchangeRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -65,7 +64,7 @@ impl ExchangeRates {
      *
      * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::ExchangeRate>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::ExchangeRate>> {
         let url = self.client.url("/v1/exchange_rates", None);
         let mut resp: crate::types::GetExchangeRatesResponse = self
             .client
@@ -136,7 +135,7 @@ impl ExchangeRates {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `rate_id: &str` -- The account's country.
      */
-    pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
+    pub async fn get_rate(&self, rate_id: &str) -> ClientResult<crate::types::ExchangeRate> {
         let url = self.client.url(
             &format!(
                 "/v1/exchange_rates/{}",

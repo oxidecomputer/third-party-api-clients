@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reactions {
     pub client: Client,
@@ -42,7 +41,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -95,7 +94,7 @@ impl Reactions {
         discussion_number: i64,
         comment_number: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -147,7 +146,7 @@ impl Reactions {
         discussion_number: i64,
         comment_number: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
@@ -194,7 +193,7 @@ impl Reactions {
         discussion_number: i64,
         comment_number: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
@@ -244,7 +243,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -295,7 +294,7 @@ impl Reactions {
         team_slug: &str,
         discussion_number: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -344,7 +343,7 @@ impl Reactions {
         team_slug: &str,
         discussion_number: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/reactions",
@@ -388,7 +387,7 @@ impl Reactions {
         team_slug: &str,
         discussion_number: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/reactions/{}",
@@ -424,7 +423,7 @@ impl Reactions {
      *
      * * `reaction_id: i64`
      */
-    pub async fn delete_legacy(&self, reaction_id: i64) -> Result<()> {
+    pub async fn delete_legacy(&self, reaction_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/reactions/{}",
@@ -468,7 +467,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -517,7 +516,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -564,7 +563,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments/{}/reactions",
@@ -608,7 +607,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/comments/{}/reactions/{}",
@@ -655,7 +654,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -704,7 +703,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -751,7 +750,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}/reactions",
@@ -795,7 +794,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}/reactions/{}",
@@ -842,7 +841,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -891,7 +890,7 @@ impl Reactions {
         repo: &str,
         issue_number: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -938,7 +937,7 @@ impl Reactions {
         repo: &str,
         issue_number: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/reactions",
@@ -982,7 +981,7 @@ impl Reactions {
         repo: &str,
         issue_number: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/reactions/{}",
@@ -1029,7 +1028,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1078,7 +1077,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1125,7 +1124,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}/reactions",
@@ -1169,7 +1168,7 @@ impl Reactions {
         repo: &str,
         comment_id: i64,
         reaction_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}/reactions/{}",
@@ -1211,7 +1210,7 @@ impl Reactions {
         repo: &str,
         release_id: i64,
         body: &crate::types::ReactionsCreateReleaseRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/releases/{}/reactions",
@@ -1259,7 +1258,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1310,7 +1309,7 @@ impl Reactions {
         discussion_number: i64,
         comment_number: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1359,7 +1358,7 @@ impl Reactions {
         discussion_number: i64,
         comment_number: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}/reactions",
@@ -1405,7 +1404,7 @@ impl Reactions {
         content: crate::types::Content,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1454,7 +1453,7 @@ impl Reactions {
         team_id: i64,
         discussion_number: i64,
         content: crate::types::Content,
-    ) -> Result<Vec<crate::types::Reaction>> {
+    ) -> ClientResult<Vec<crate::types::Reaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
             query_args.push(("content".to_string(), content.to_string()));
@@ -1500,7 +1499,7 @@ impl Reactions {
         team_id: i64,
         discussion_number: i64,
         body: &crate::types::ReactionsCreateIssueRequest,
-    ) -> Result<crate::types::Reaction> {
+    ) -> ClientResult<crate::types::Reaction> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/reactions",

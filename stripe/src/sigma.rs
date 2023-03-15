@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Sigma {
     pub client: Client,
@@ -29,7 +28,7 @@ impl Sigma {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
+    ) -> ClientResult<Vec<crate::types::ScheduledQueryRun>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -67,7 +66,7 @@ impl Sigma {
      */
     pub async fn get_all_scheduled_query_runs(
         &self,
-    ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
+    ) -> ClientResult<Vec<crate::types::ScheduledQueryRun>> {
         let url = self.client.url("/v1/sigma/scheduled_query_runs", None);
         let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse = self
             .client
@@ -141,7 +140,7 @@ impl Sigma {
     pub async fn get_scheduled_query_runs_run(
         &self,
         scheduled_query_run: &str,
-    ) -> Result<crate::types::ScheduledQueryRun> {
+    ) -> ClientResult<crate::types::ScheduledQueryRun> {
         let url = self.client.url(
             &format!(
                 "/v1/sigma/scheduled_query_runs/{}",

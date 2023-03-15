@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Orders {
     pub client: Client,
@@ -41,7 +40,7 @@ impl Orders {
         status: &str,
         _status_transitions: &str,
         _upstream_ids: &[String],
-    ) -> Result<Vec<crate::types::Order>> {
+    ) -> ClientResult<Vec<crate::types::Order>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -89,7 +88,7 @@ impl Orders {
         status: &str,
         _status_transitions: &str,
         _upstream_ids: &[String],
-    ) -> Result<Vec<crate::types::Order>> {
+    ) -> ClientResult<Vec<crate::types::Order>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -163,7 +162,7 @@ impl Orders {
      *
      * <p>Creates a new order object.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Order> {
+    pub async fn post(&self) -> ClientResult<crate::types::Order> {
         let url = self.client.url("/v1/orders", None);
         self.client
             .post(
@@ -185,7 +184,7 @@ impl Orders {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Order> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Order> {
         let url = self.client.url(
             &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -209,7 +208,7 @@ impl Orders {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_orders(&self, id: &str) -> Result<crate::types::Order> {
+    pub async fn post_orders(&self, id: &str) -> ClientResult<crate::types::Order> {
         let url = self.client.url(
             &format!("/v1/orders/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -233,7 +232,7 @@ impl Orders {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_pay(&self, id: &str) -> Result<crate::types::Order> {
+    pub async fn post_pay(&self, id: &str) -> ClientResult<crate::types::Order> {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/pay",
@@ -260,7 +259,7 @@ impl Orders {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_return(&self, id: &str) -> Result<crate::types::OrderReturn> {
+    pub async fn post_return(&self, id: &str) -> ClientResult<crate::types::OrderReturn> {
         let url = self.client.url(
             &format!(
                 "/v1/orders/{}/returns",

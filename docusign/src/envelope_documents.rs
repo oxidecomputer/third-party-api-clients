@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeDocuments {
     pub client: Client,
@@ -40,7 +39,7 @@ impl EnvelopeDocuments {
         include_tabs: &str,
         recipient_id: &str,
         shared_user_id: &str,
-    ) -> Result<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !documents_by_userid.is_empty() {
             query_args.push((
@@ -112,7 +111,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> Result<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
@@ -171,7 +170,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> Result<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
@@ -230,7 +229,7 @@ impl EnvelopeDocuments {
         shared_user_id: &str,
         show_changes: &str,
         watermark: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !certificate.is_empty() {
             query_args.push(("certificate".to_string(), certificate.to_string()));
@@ -317,7 +316,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EnvelopeDocument> {
+    ) -> ClientResult<crate::types::EnvelopeDocument> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}",

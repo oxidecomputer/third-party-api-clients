@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Groups {
     pub client: Client,
@@ -27,7 +26,7 @@ impl Groups {
         &self,
         alt: crate::types::Alt,
         group_unique_id: &str,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
             query_args.push(("alt".to_string(), alt.to_string()));
@@ -67,7 +66,7 @@ impl Groups {
         alt: crate::types::Alt,
         group_unique_id: &str,
         body: &crate::types::Groups,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
             query_args.push(("alt".to_string(), alt.to_string()));
@@ -107,7 +106,7 @@ impl Groups {
         alt: crate::types::Alt,
         group_unique_id: &str,
         body: &crate::types::Groups,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
             query_args.push(("alt".to_string(), alt.to_string()));

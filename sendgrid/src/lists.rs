@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Lists {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Lists {
         &self,
         page_size: f64,
         page_token: &str,
-    ) -> Result<crate::types::GetMcListsResponse> {
+    ) -> ClientResult<crate::types::GetMcListsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -61,7 +60,7 @@ impl Lists {
      *
      * A link to the newly created object is in `_metadata`.
      */
-    pub async fn post_mc(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
+    pub async fn post_mc(&self, body: &crate::types::IpPool) -> ClientResult<crate::types::List> {
         let url = self.client.url("/marketing/lists", None);
         self.client
             .post(
@@ -83,7 +82,7 @@ impl Lists {
     pub async fn get_mc_contacts_count(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetMcListsContactsCountResponse> {
+    ) -> ClientResult<crate::types::GetMcListsContactsCountResponse> {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}/contacts/count",
@@ -120,7 +119,7 @@ impl Lists {
         &self,
         id: &str,
         contact_sample: bool,
-    ) -> Result<crate::types::GetMcListsResponseAllOf> {
+    ) -> ClientResult<crate::types::GetMcListsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if contact_sample {
             query_args.push(("contact_sample".to_string(), contact_sample.to_string()));
@@ -161,7 +160,7 @@ impl Lists {
         &self,
         id: &str,
         delete_contacts: bool,
-    ) -> Result<crate::types::DeleteListsResponse> {
+    ) -> ClientResult<crate::types::DeleteListsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delete_contacts {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
@@ -196,7 +195,7 @@ impl Lists {
         &self,
         id: &str,
         body: &crate::types::PatchMcListsRequest,
-    ) -> Result<crate::types::List> {
+    ) -> ClientResult<crate::types::List> {
         let url = self.client.url(
             &format!(
                 "/marketing/lists/{}",
@@ -231,7 +230,7 @@ impl Lists {
         &self,
         id: &str,
         contact_ids: &str,
-    ) -> Result<crate::types::DeleteMcListsContactsResponse> {
+    ) -> ClientResult<crate::types::DeleteMcListsContactsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !contact_ids.is_empty() {
             query_args.push(("contact_ids".to_string(), contact_ids.to_string()));

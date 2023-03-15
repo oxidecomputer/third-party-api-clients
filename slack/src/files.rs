@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Files {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/files.delete", None);
         self.client
             .post(
@@ -58,7 +57,7 @@ impl Files {
         page: &str,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::FilesInfoSchema> {
+    ) -> ClientResult<crate::types::FilesInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -116,7 +115,7 @@ impl Files {
         count: &str,
         page: &str,
         show_files_hidden_by_limit: bool,
-    ) -> Result<crate::types::FilesListSchema> {
+    ) -> ClientResult<crate::types::FilesListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -168,7 +167,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn revoke_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
+    pub async fn revoke_public_url(&self) -> ClientResult<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.revokePublicURL", None);
         self.client
             .post(
@@ -191,7 +190,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn shared_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
+    pub async fn shared_public_url(&self) -> ClientResult<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.sharedPublicURL", None);
         self.client
             .post(
@@ -210,7 +209,7 @@ impl Files {
      *
      * FROM: <https://api.slack.com/methods/files.upload>
      */
-    pub async fn upload(&self) -> Result<crate::types::FilesUploadSchema> {
+    pub async fn upload(&self) -> ClientResult<crate::types::FilesUploadSchema> {
         let url = self.client.url("/files.upload", None);
         self.client
             .post(

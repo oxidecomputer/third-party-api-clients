@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct RoomsLocation {
     pub client: Client,
@@ -39,7 +38,7 @@ impl RoomsLocation {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
+    ) -> ClientResult<Vec<crate::types::AddAzrLocationResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -93,7 +92,7 @@ impl RoomsLocation {
         &self,
         parent_location_id: &str,
         type_: &str,
-    ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
+    ) -> ClientResult<Vec<crate::types::AddAzrLocationResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_location_id.is_empty() {
             query_args.push((
@@ -179,7 +178,7 @@ impl RoomsLocation {
     pub async fn add_azr_location(
         &self,
         body: &crate::types::AddAzrLocationRequest,
-    ) -> Result<crate::types::AddAzrLocationResponse> {
+    ) -> ClientResult<crate::types::AddAzrLocationResponse> {
         let url = self.client.url("/rooms/locations", None);
         self.client
             .post(
@@ -212,7 +211,7 @@ impl RoomsLocation {
     pub async fn get_zr_location_profile(
         &self,
         location_id: &str,
-    ) -> Result<crate::types::GetZrLocationProfileResponse> {
+    ) -> ClientResult<crate::types::GetZrLocationProfileResponse> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
@@ -253,7 +252,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         body: &crate::types::GetZrLocationProfileResponse,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}",
@@ -294,7 +293,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -341,7 +340,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -379,7 +378,7 @@ impl RoomsLocation {
      */
     pub async fn get_zr_location_structure(
         &self,
-    ) -> Result<crate::types::GetZrLocationStructureResponse> {
+    ) -> ClientResult<crate::types::GetZrLocationStructureResponse> {
         let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .get(
@@ -406,7 +405,7 @@ impl RoomsLocation {
     pub async fn update_zoom_structure(
         &self,
         body: &crate::types::GetZrLocationStructureResponse,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/rooms/locations/structure", None);
         self.client
             .patch(
@@ -438,7 +437,7 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         body: &crate::types::ChangeParentLocationRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/rooms/locations/{}/location",

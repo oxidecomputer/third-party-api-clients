@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SegmentingContacts {
     pub client: Client,
@@ -37,7 +36,7 @@ impl SegmentingContacts {
         &self,
         parent_list_ids: &str,
         no_parent_list_id: bool,
-    ) -> Result<crate::types::GetMarketingSegmentsResponse> {
+    ) -> ClientResult<crate::types::GetMarketingSegmentsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if no_parent_list_id {
             query_args.push((
@@ -72,7 +71,7 @@ impl SegmentingContacts {
     pub async fn post_marketing_segment(
         &self,
         body: &crate::types::PostMarketingSegmentsRequestAllOf,
-    ) -> Result<crate::types::FullSegmentAllOf> {
+    ) -> ClientResult<crate::types::FullSegmentAllOf> {
         let url = self.client.url("/marketing/segments", None);
         self.client
             .post(
@@ -99,7 +98,7 @@ impl SegmentingContacts {
         &self,
         segment_id: &str,
         query_json: bool,
-    ) -> Result<crate::types::FullSegmentAllOf> {
+    ) -> ClientResult<crate::types::FullSegmentAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if query_json {
             query_args.push(("query_json".to_string(), query_json.to_string()));
@@ -135,7 +134,7 @@ impl SegmentingContacts {
     pub async fn delete_marketing_segments_segment(
         &self,
         segment_id: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/{}",
@@ -166,7 +165,7 @@ impl SegmentingContacts {
         &self,
         segment_id: &str,
         body: &crate::types::SegmentWriteV2,
-    ) -> Result<crate::types::FullSegmentAllOf> {
+    ) -> ClientResult<crate::types::FullSegmentAllOf> {
         let url = self.client.url(
             &format!(
                 "/marketing/segments/{}",
@@ -196,7 +195,7 @@ impl SegmentingContacts {
     pub async fn post_marketing_segments_delete(
         &self,
         body: &crate::types::PostMarketingSegmentsDeleteRequest,
-    ) -> Result<crate::types::PostMarketingSegmentsDeleteResponse> {
+    ) -> ClientResult<crate::types::PostMarketingSegmentsDeleteResponse> {
         let url = self.client.url("/marketing/segments/delete", None);
         self.client
             .post(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ConnectConfigurations {
     pub client: Client,
@@ -28,7 +27,7 @@ impl ConnectConfigurations {
     pub async fn connect_get_config(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::ConnectConfigResults> {
+    ) -> ClientResult<crate::types::ConnectConfigResults> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -63,7 +62,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
-    ) -> Result<crate::types::ConnectCustomConfiguration> {
+    ) -> ClientResult<crate::types::ConnectCustomConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -99,7 +98,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         body: &crate::types::ConnectCustomConfiguration,
-    ) -> Result<crate::types::ConnectCustomConfiguration> {
+    ) -> ClientResult<crate::types::ConnectCustomConfiguration> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect",
@@ -136,7 +135,7 @@ impl ConnectConfigurations {
         &self,
         account_id: &str,
         connect_id: &str,
-    ) -> Result<crate::types::ConnectConfigResults> {
+    ) -> ClientResult<crate::types::ConnectConfigResults> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
@@ -172,7 +171,11 @@ impl ConnectConfigurations {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn connect_delete_config(&self, account_id: &str, connect_id: &str) -> Result<()> {
+    pub async fn connect_delete_config(
+        &self,
+        account_id: &str,
+        connect_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/{}",
@@ -230,7 +233,7 @@ impl ConnectConfigurations {
         start_position: &str,
         status: &str,
         user_name_substring: &str,
-    ) -> Result<crate::types::IntegratedUserInfoList> {
+    ) -> ClientResult<crate::types::IntegratedUserInfoList> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));

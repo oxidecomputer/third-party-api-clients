@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Businesses {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Businesses {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_busine(&self) -> Result<crate::types::Business> {
+    pub async fn get_resources_busine(&self) -> ClientResult<crate::types::Business> {
         let url = self.client.url("/business", None);
         self.client
             .get(
@@ -48,7 +47,7 @@ impl Businesses {
      */
     pub async fn get_resources_business_current(
         &self,
-    ) -> Result<crate::types::BusinessCurrentStatus> {
+    ) -> ClientResult<crate::types::BusinessCurrentStatus> {
         let url = self.client.url("/business/balance", None);
         self.client
             .get(

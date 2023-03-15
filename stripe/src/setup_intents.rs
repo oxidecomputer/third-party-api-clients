@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SetupIntents {
     pub client: Client,
@@ -35,7 +34,7 @@ impl SetupIntents {
         limit: i64,
         payment_method: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::SetupIntent>> {
+    ) -> ClientResult<Vec<crate::types::SetupIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -82,7 +81,7 @@ impl SetupIntents {
         _created: &str,
         customer: &str,
         payment_method: &str,
-    ) -> Result<Vec<crate::types::SetupIntent>> {
+    ) -> ClientResult<Vec<crate::types::SetupIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -161,7 +160,7 @@ impl SetupIntents {
      * <p>After the SetupIntent is created, attach a payment method and <a href="/docs/api/setup_intents/confirm">confirm</a>
      * to collect any required permissions to charge the payment method later.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::SetupIntent> {
+    pub async fn post(&self) -> ClientResult<crate::types::SetupIntent> {
         let url = self.client.url("/v1/setup_intents", None);
         self.client
             .post(
@@ -192,7 +191,7 @@ impl SetupIntents {
         &self,
         client_secret: &str,
         intent: &str,
-    ) -> Result<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::types::SetupIntent> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -225,7 +224,7 @@ impl SetupIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent(&self, intent: &str) -> Result<crate::types::SetupIntent> {
+    pub async fn post_intent(&self, intent: &str) -> ClientResult<crate::types::SetupIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}",
@@ -254,7 +253,10 @@ impl SetupIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent_cancel(&self, intent: &str) -> Result<crate::types::SetupIntent> {
+    pub async fn post_intent_cancel(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::types::SetupIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/cancel",
@@ -293,7 +295,10 @@ impl SetupIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent_confirm(&self, intent: &str) -> Result<crate::types::SetupIntent> {
+    pub async fn post_intent_confirm(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::types::SetupIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/confirm",
@@ -323,7 +328,7 @@ impl SetupIntents {
     pub async fn post_intent_verify_microdeposit(
         &self,
         intent: &str,
-    ) -> Result<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::types::SetupIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/verify_microdeposits",

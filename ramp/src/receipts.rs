@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Receipts {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Receipts {
         created_before: Option<chrono::DateTime<chrono::Utc>>,
         start: &str,
         page_size: f64,
-    ) -> Result<Vec<crate::types::Receipt>> {
+    ) -> ClientResult<Vec<crate::types::Receipt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
             query_args.push(("created_after".to_string(), date.to_rfc3339()));
@@ -87,7 +86,7 @@ impl Receipts {
         to_date: Option<chrono::DateTime<chrono::Utc>>,
         created_after: Option<chrono::DateTime<chrono::Utc>>,
         created_before: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Receipt>> {
+    ) -> ClientResult<Vec<crate::types::Receipt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
             query_args.push(("created_after".to_string(), date.to_rfc3339()));
@@ -143,7 +142,7 @@ impl Receipts {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -159,7 +158,7 @@ impl Receipts {
      *
      *
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Receipt> {
         let url = self.client.url(
             &format!("/receipts/{}", crate::progenitor_support::encode_path(id),),
             None,

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Settings {
     pub client: Client,
@@ -30,7 +29,7 @@ impl Settings {
         &self,
         max_results: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Setting>> {
+    ) -> ClientResult<Vec<crate::types::Setting>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -63,7 +62,7 @@ impl Settings {
      *
      * Returns all user settings for the authenticated user.
      */
-    pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
+    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::Setting>> {
         let url = self.client.url("/users/me/settings", None);
         let mut resp: crate::types::Settings = self
             .client
@@ -136,7 +135,7 @@ impl Settings {
         max_results: i64,
         page_token: &str,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -167,7 +166,7 @@ impl Settings {
      *
      * * `setting: &str` -- The id of the user setting.
      */
-    pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
+    pub async fn get(&self, setting: &str) -> ClientResult<crate::types::Setting> {
         let url = self.client.url(
             &format!(
                 "/users/me/settings/{}",

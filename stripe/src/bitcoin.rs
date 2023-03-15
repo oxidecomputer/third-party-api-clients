@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Bitcoin {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Bitcoin {
         limit: i64,
         starting_after: &str,
         uncaptured_funds: bool,
-    ) -> Result<Vec<crate::types::BitcoinReceiver>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinReceiver>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -85,7 +84,7 @@ impl Bitcoin {
         active: bool,
         filled: bool,
         uncaptured_funds: bool,
-    ) -> Result<Vec<crate::types::BitcoinReceiver>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinReceiver>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -169,7 +168,7 @@ impl Bitcoin {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get_receiver(&self, id: &str) -> Result<crate::types::BitcoinReceiver> {
+    pub async fn get_receiver(&self, id: &str) -> ClientResult<crate::types::BitcoinReceiver> {
         let url = self.client.url(
             &format!(
                 "/v1/bitcoin/receivers/{}",
@@ -208,7 +207,7 @@ impl Bitcoin {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -256,7 +255,7 @@ impl Bitcoin {
         &self,
         customer: &str,
         receiver: &str,
-    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -350,7 +349,7 @@ impl Bitcoin {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -396,7 +395,7 @@ impl Bitcoin {
         &self,
         customer: &str,
         receiver: &str,
-    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));

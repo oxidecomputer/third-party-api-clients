@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PhoneBlockedList {
     pub client: Client,
@@ -34,7 +33,7 @@ impl PhoneBlockedList {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::BlockedList>> {
+    ) -> ClientResult<Vec<crate::types::BlockedList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -75,7 +74,7 @@ impl PhoneBlockedList {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
+    pub async fn list_all_blocked(&self) -> ClientResult<Vec<crate::types::BlockedList>> {
         let url = self.client.url("/phone/blocked_list", None);
         let mut resp: crate::types::ListBlockedResponse = self
             .client
@@ -146,7 +145,7 @@ impl PhoneBlockedList {
     pub async fn add_anumber_blocked_list(
         &self,
         body: &crate::types::UpdateBlockedListRequest,
-    ) -> Result<crate::types::Groups> {
+    ) -> ClientResult<crate::types::Groups> {
         let url = self.client.url("/phone/blocked_list", None);
         self.client
             .post(
@@ -177,7 +176,7 @@ impl PhoneBlockedList {
     pub async fn get_blocked_list(
         &self,
         blocked_list_id: &str,
-    ) -> Result<crate::types::BlockedList> {
+    ) -> ClientResult<crate::types::BlockedList> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
@@ -213,7 +212,7 @@ impl PhoneBlockedList {
      *
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
-    pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
+    pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
@@ -252,7 +251,7 @@ impl PhoneBlockedList {
         &self,
         blocked_list_id: &str,
         body: &crate::types::UpdateBlockedListRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",

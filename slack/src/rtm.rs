@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Rtm {
     pub client: Client,
@@ -29,7 +28,7 @@ impl Rtm {
         &self,
         batch_presence_aware: bool,
         presence_sub: bool,
-    ) -> Result<crate::types::RtmConnectSchema> {
+    ) -> ClientResult<crate::types::RtmConnectSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if batch_presence_aware {
             query_args.push((

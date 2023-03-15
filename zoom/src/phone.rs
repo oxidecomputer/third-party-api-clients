@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Phone {
     pub client: Client,
@@ -34,7 +33,7 @@ impl Phone {
         &self,
         account_id: &str,
         body: &crate::types::SetUpAccountRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/setup",
@@ -90,7 +89,7 @@ impl Phone {
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
             query_args.push(("extension_type".to_string(), extension_type.to_string()));
@@ -151,7 +150,7 @@ impl Phone {
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
             query_args.push(("extension_type".to_string(), extension_type.to_string()));
@@ -240,7 +239,7 @@ impl Phone {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user(&self, user_id: &str) -> Result<crate::types::PhoneUserResponse> {
+    pub async fn user(&self, user_id: &str) -> ClientResult<crate::types::PhoneUserResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
@@ -275,7 +274,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::UpdateUserProfileRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}",
@@ -306,7 +305,10 @@ impl Phone {
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
-    pub async fn setting(&self, _account_id: &str) -> Result<crate::types::PhoneSettingResponse> {
+    pub async fn setting(
+        &self,
+        _account_id: &str,
+    ) -> ClientResult<crate::types::PhoneSettingResponse> {
         let url = self.client.url("/phone/settings", None);
         self.client
             .get(
@@ -338,7 +340,7 @@ impl Phone {
         &self,
         _account_id: &str,
         body: &crate::types::UpdatePhoneSettingsRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/phone/settings", None);
         self.client
             .patch(
@@ -370,7 +372,7 @@ impl Phone {
     pub async fn user_settings(
         &self,
         user_id: &str,
-    ) -> Result<crate::types::PhoneUserSettingsResponse> {
+    ) -> ClientResult<crate::types::PhoneUserSettingsResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings",
@@ -412,7 +414,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> Result<Vec<crate::types::Templates>> {
+    ) -> ClientResult<Vec<crate::types::Templates>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -459,7 +461,7 @@ impl Phone {
     pub async fn list_all_setting_templates(
         &self,
         site_id: &str,
-    ) -> Result<Vec<crate::types::Templates>> {
+    ) -> ClientResult<Vec<crate::types::Templates>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
             query_args.push(("site_id".to_string(), site_id.to_string()));
@@ -537,7 +539,7 @@ impl Phone {
     pub async fn add_setting_template(
         &self,
         body: &crate::types::AddSettingTemplateRequest,
-    ) -> Result<crate::types::AddSettingTemplateResponse> {
+    ) -> ClientResult<crate::types::AddSettingTemplateResponse> {
         let url = self.client.url("/phone/setting_templates", None);
         self.client
             .post(
@@ -559,7 +561,7 @@ impl Phone {
     pub async fn batch_add_locations(
         &self,
         body: &crate::types::BatchAddLocationsRequest,
-    ) -> Result<Vec<crate::types::BatchAddLocationsResponse>> {
+    ) -> ClientResult<Vec<crate::types::BatchAddLocationsResponse>> {
         let url = self.client.url("/phone/batch_locations", None);
         self.client
             .post(
@@ -593,7 +595,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::ListLocationsResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListLocationsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -634,7 +636,9 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_locations(&self) -> Result<Vec<crate::types::ListLocationsResponse>> {
+    pub async fn list_all_locations(
+        &self,
+    ) -> ClientResult<Vec<crate::types::ListLocationsResponse>> {
         let url = self.client.url("/phone/locations", None);
         let mut resp: crate::types::ListLocationsResponseData = self
             .client
@@ -705,7 +709,7 @@ impl Phone {
     pub async fn add_location(
         &self,
         body: &crate::types::AddLocationRequest,
-    ) -> Result<Vec<crate::types::Site>> {
+    ) -> ClientResult<Vec<crate::types::Site>> {
         let url = self.client.url("/phone/locations", None);
         self.client
             .post(
@@ -737,7 +741,7 @@ impl Phone {
     pub async fn get_location(
         &self,
         location_id: &str,
-    ) -> Result<crate::types::GetLocationResponse> {
+    ) -> ClientResult<crate::types::GetLocationResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -772,7 +776,7 @@ impl Phone {
      *
      * * `location_id: &str` -- The emergency service location's ID.
      */
-    pub async fn delete_location(&self, location_id: &str) -> Result<()> {
+    pub async fn delete_location(&self, location_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -807,7 +811,7 @@ impl Phone {
         &self,
         location_id: &str,
         body: &crate::types::UpdateLocationRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/locations/{}",
@@ -847,7 +851,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::SipGroups>> {
+    ) -> ClientResult<Vec<crate::types::SipGroups>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -888,7 +892,7 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_sip_groups(&self) -> Result<Vec<crate::types::SipGroups>> {
+    pub async fn list_all_sip_groups(&self) -> ClientResult<Vec<crate::types::SipGroups>> {
         let url = self.client.url("/phone/sip_groups", None);
         let mut resp: crate::types::ListSipGroupsResponse = self
             .client
@@ -965,7 +969,7 @@ impl Phone {
         &self,
         template_id: &str,
         custom_query_fields: &str,
-    ) -> Result<crate::types::GetSettingTemplateResponse> {
+    ) -> ClientResult<crate::types::GetSettingTemplateResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -1013,7 +1017,7 @@ impl Phone {
         &self,
         template_id: &str,
         body: &crate::types::UpdateSettingTemplateRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/setting_templates/{}",
@@ -1065,7 +1069,7 @@ impl Phone {
         next_page_token: &str,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> Result<Vec<crate::types::CallLogs>> {
+    ) -> ClientResult<Vec<crate::types::CallLogs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1134,7 +1138,7 @@ impl Phone {
         type_: crate::types::PhoneUserCallLogsType,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> Result<Vec<crate::types::CallLogs>> {
+    ) -> ClientResult<Vec<crate::types::CallLogs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1241,7 +1245,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::Recordings>> {
+    ) -> ClientResult<Vec<crate::types::Recordings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1298,7 +1302,7 @@ impl Phone {
         user_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::Recordings>> {
+    ) -> ClientResult<Vec<crate::types::Recordings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1398,7 +1402,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::VoiceMails>> {
+    ) -> ClientResult<Vec<crate::types::VoiceMails>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1459,7 +1463,7 @@ impl Phone {
         status: crate::types::PhoneUserVoiceMailsStatus,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::VoiceMails>> {
+    ) -> ClientResult<Vec<crate::types::VoiceMails>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1558,7 +1562,7 @@ impl Phone {
         user_id: &str,
         setting_type: &str,
         body: &crate::types::AddUserSettingRequest,
-    ) -> Result<crate::types::AddUserSettingResponse> {
+    ) -> ClientResult<crate::types::AddUserSettingResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
@@ -1602,7 +1606,7 @@ impl Phone {
         user_id: &str,
         setting_type: &str,
         shared_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !shared_id.is_empty() {
             query_args.push(("shared_id".to_string(), shared_id.to_string()));
@@ -1653,7 +1657,7 @@ impl Phone {
         setting_type: &str,
         user_id: &str,
         body: &crate::types::UpdateUserSettingRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/settings/{}",
@@ -1711,7 +1715,7 @@ impl Phone {
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
-    ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
+    ) -> ClientResult<Vec<crate::types::AccountCallLogsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1779,7 +1783,7 @@ impl Phone {
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
-    ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
+    ) -> ClientResult<Vec<crate::types::AccountCallLogsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1873,7 +1877,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> Result<crate::types::AddByocNumberResponse> {
+    ) -> ClientResult<crate::types::AddByocNumberResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers",
@@ -1912,7 +1916,7 @@ impl Phone {
      * * `user_id: &str` -- Provide either userId or email address of the user.
      * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user. .
      */
-    pub async fn unassign_number(&self, user_id: &str, phone_number_id: &str) -> Result<()> {
+    pub async fn unassign_number(&self, user_id: &str, phone_number_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/phone_numbers/{}",
@@ -1948,7 +1952,7 @@ impl Phone {
         &self,
         user_id: &str,
         body: &crate::types::AssignCallingPlanRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans",
@@ -1984,7 +1988,7 @@ impl Phone {
      * * `type_: &str` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
      *   .
      */
-    pub async fn unassign_calling_plan(&self, user_id: &str, type_: &str) -> Result<()> {
+    pub async fn unassign_calling_plan(&self, user_id: &str, type_: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/calling_plans/{}",
@@ -2043,7 +2047,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetPhoneRecordingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -2111,7 +2115,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetPhoneRecordingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -2209,7 +2213,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::ByocSipTrunk>> {
+    ) -> ClientResult<Vec<crate::types::ByocSipTrunk>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2249,7 +2253,7 @@ impl Phone {
      * **Prerequisites:**
      * * A Business or Enterprise account
      */
-    pub async fn list_all_byocsip_trunk(&self) -> Result<Vec<crate::types::ByocSipTrunk>> {
+    pub async fn list_all_byocsip_trunk(&self) -> ClientResult<Vec<crate::types::ByocSipTrunk>> {
         let url = self.client.url("/phone/sip_trunk/trunks", None);
         let mut resp: crate::types::ListByocsipTrunkResponse = self
             .client
@@ -2324,7 +2328,7 @@ impl Phone {
         &self,
         account_id: &str,
         body: &crate::types::PostPhoneSipTrunkRequest,
-    ) -> Result<crate::types::PostPhoneSipTrunkRequest> {
+    ) -> ClientResult<crate::types::PostPhoneSipTrunkRequest> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks",
@@ -2364,7 +2368,7 @@ impl Phone {
         sip_trunk_id: &str,
         account_id: &str,
         body: &crate::types::UpdatePhoneSipTrunkRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/phone/sip_trunk/trunks/{}",
@@ -2405,7 +2409,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::ExternalContacts>> {
+    ) -> ClientResult<Vec<crate::types::ExternalContacts>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2446,7 +2450,9 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_external_contacts(&self) -> Result<Vec<crate::types::ExternalContacts>> {
+    pub async fn list_all_external_contacts(
+        &self,
+    ) -> ClientResult<Vec<crate::types::ExternalContacts>> {
         let url = self.client.url("/phone/external_contacts", None);
         let mut resp: crate::types::ListExternalContactsResponse = self
             .client
@@ -2517,7 +2523,7 @@ impl Phone {
     pub async fn add_external_contact(
         &self,
         body: &crate::types::AddExternalContactRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/phone/external_contacts", None);
         self.client
             .post(
@@ -2549,7 +2555,7 @@ impl Phone {
     pub async fn get_external_contact(
         &self,
         external_contact_id: &str,
-    ) -> Result<crate::types::ExternalContacts> {
+    ) -> ClientResult<crate::types::ExternalContacts> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2584,7 +2590,7 @@ impl Phone {
      *
      * * `external_contact_id: &str` -- The external contact's ID.
      */
-    pub async fn delete_external_contact(&self, external_contact_id: &str) -> Result<()> {
+    pub async fn delete_external_contact(&self, external_contact_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2623,7 +2629,7 @@ impl Phone {
         &self,
         external_contact_id: &str,
         body: &crate::types::UpdateExternalContactRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/external_contacts/{}",
@@ -2661,7 +2667,7 @@ impl Phone {
     pub async fn get_number_details(
         &self,
         number_id: &str,
-    ) -> Result<crate::types::GetPhoneNumberDetailsResponse> {
+    ) -> ClientResult<crate::types::GetPhoneNumberDetailsResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
@@ -2699,7 +2705,7 @@ impl Phone {
         &self,
         number_id: &str,
         body: &crate::types::UpdatePhoneNumberDetailsRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/numbers/{}",
@@ -2735,7 +2741,7 @@ impl Phone {
     pub async fn change_main_company_number(
         &self,
         body: &crate::types::ChangeMainCompanyNumberRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url("/phone/company_number", None);
         self.client
             .put(
@@ -2760,7 +2766,9 @@ impl Phone {
      * * A Pro or a higher account
      * * A Zoom Phone license
      */
-    pub async fn list_calling_plan(&self) -> Result<crate::types::ListCallingPlansResponseData> {
+    pub async fn list_calling_plan(
+        &self,
+    ) -> ClientResult<crate::types::ListCallingPlansResponseData> {
         let url = self.client.url("/phone/calling_plans", None);
         self.client
             .get(
@@ -2796,7 +2804,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListPhoneUsersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -2841,7 +2849,7 @@ impl Phone {
     pub async fn list_all_users(
         &self,
         site_id: &str,
-    ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListPhoneUsersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
             query_args.push(("site_id".to_string(), site_id.to_string()));
@@ -2921,7 +2929,7 @@ impl Phone {
     pub async fn get_call_log_details(
         &self,
         call_log_id: &str,
-    ) -> Result<crate::types::GetCallLogDetailsResponse> {
+    ) -> ClientResult<crate::types::GetCallLogDetailsResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/call_logs/{}",
@@ -2957,7 +2965,7 @@ impl Phone {
      * * `user_id: &str` -- The user ID or email address of the user.
      * * `call_log_id: &str` -- Unique identifier of the call log. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
      */
-    pub async fn delete_call_log(&self, user_id: &str, call_log_id: &str) -> Result<()> {
+    pub async fn delete_call_log(&self, user_id: &str, call_log_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/users/{}/call_logs/{}",
@@ -2992,7 +3000,7 @@ impl Phone {
     pub async fn add_byoc_number(
         &self,
         body: &crate::types::AddByocNumberRequest,
-    ) -> Result<crate::types::AddByocNumberResponse> {
+    ) -> ClientResult<crate::types::AddByocNumberResponse> {
         let url = self.client.url("/phone/byoc_numbers", None);
         self.client
             .post(
@@ -3020,7 +3028,7 @@ impl Phone {
      *
      * * `voicemail_id: &str` -- Unique identifier of the voicemail. Retrieve the value for this field by calling the [Get voicemails](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneuservoicemails) API.
      */
-    pub async fn delete_voicemail(&self, voicemail_id: &str) -> Result<()> {
+    pub async fn delete_voicemail(&self, voicemail_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/voice_mails/{}",

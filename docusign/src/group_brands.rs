@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct GroupBrands {
     pub client: Client,
@@ -28,7 +27,7 @@ impl GroupBrands {
         &self,
         account_id: &str,
         group_id: &str,
-    ) -> Result<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::types::GroupBrands> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",
@@ -64,7 +63,7 @@ impl GroupBrands {
         account_id: &str,
         group_id: &str,
         body: &crate::types::BrandsRequest,
-    ) -> Result<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::types::GroupBrands> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",
@@ -100,7 +99,7 @@ impl GroupBrands {
         account_id: &str,
         group_id: &str,
         body: &crate::types::BrandsRequest,
-    ) -> Result<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::types::GroupBrands> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",

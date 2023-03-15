@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct OauthV2 {
     pub client: Client,
@@ -32,7 +31,7 @@ impl OauthV2 {
         client_secret: &str,
         code: &str,
         redirect_uri: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));

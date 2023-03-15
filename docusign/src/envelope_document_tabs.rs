@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeDocumentTabs {
     pub client: Client,
@@ -32,7 +31,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         page_number: &str,
-    ) -> Result<crate::types::EnvelopeDocumentTabs> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentTabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/tabs",
@@ -79,7 +78,7 @@ impl EnvelopeDocumentTabs {
         envelope_id: &str,
         include_metadata: &str,
         page_numbers: &str,
-    ) -> Result<crate::types::EnvelopeDocumentTabs> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentTabs> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_metadata.is_empty() {
             query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
@@ -127,7 +126,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
@@ -166,7 +165,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
@@ -205,7 +204,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",

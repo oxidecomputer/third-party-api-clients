@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Migrations {
     pub client: Client,
@@ -34,7 +33,7 @@ impl Migrations {
         per_page: i64,
         page: i64,
         exclude: &[String],
-    ) -> Result<Vec<crate::types::Migration>> {
+    ) -> ClientResult<Vec<crate::types::Migration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude.is_empty() {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
@@ -79,7 +78,7 @@ impl Migrations {
         &self,
         org: &str,
         exclude: &[String],
-    ) -> Result<Vec<crate::types::Migration>> {
+    ) -> ClientResult<Vec<crate::types::Migration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude.is_empty() {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
@@ -120,7 +119,7 @@ impl Migrations {
         &self,
         org: &str,
         body: &crate::types::MigrationsStartRequest,
-    ) -> Result<crate::types::Migration> {
+    ) -> ClientResult<crate::types::Migration> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations",
@@ -165,7 +164,7 @@ impl Migrations {
         org: &str,
         migration_id: i64,
         exclude: &[String],
-    ) -> Result<crate::types::Migration> {
+    ) -> ClientResult<crate::types::Migration> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude.is_empty() {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
@@ -204,7 +203,7 @@ impl Migrations {
      * * `org: &str`
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn download_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
+    pub async fn download_archive_for_org(&self, org: &str, migration_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
@@ -237,7 +236,7 @@ impl Migrations {
      * * `org: &str`
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn delete_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
+    pub async fn delete_archive_for_org(&self, org: &str, migration_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/archive",
@@ -276,7 +275,7 @@ impl Migrations {
         org: &str,
         migration_id: i64,
         repo_name: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repos/{}/lock",
@@ -318,7 +317,7 @@ impl Migrations {
         migration_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -361,7 +360,7 @@ impl Migrations {
         &self,
         org: &str,
         migration_id: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/migrations/{}/repositories",
@@ -427,7 +426,11 @@ impl Migrations {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn get_import_status(&self, owner: &str, repo: &str) -> Result<crate::types::Import> {
+    pub async fn get_import_status(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<crate::types::Import> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
@@ -465,7 +468,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         body: &crate::types::MigrationsStartImportRequest,
-    ) -> Result<crate::types::Import> {
+    ) -> ClientResult<crate::types::Import> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
@@ -498,7 +501,7 @@ impl Migrations {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn cancel_import(&self, owner: &str, repo: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
@@ -537,7 +540,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         body: &crate::types::MigrationsUpdateImportRequest,
-    ) -> Result<crate::types::Import> {
+    ) -> ClientResult<crate::types::Import> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import",
@@ -578,7 +581,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         since: i64,
-    ) -> Result<Vec<crate::types::PorterAuthor>> {
+    ) -> ClientResult<Vec<crate::types::PorterAuthor>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -621,7 +624,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         since: i64,
-    ) -> Result<Vec<crate::types::PorterAuthor>> {
+    ) -> ClientResult<Vec<crate::types::PorterAuthor>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -667,7 +670,7 @@ impl Migrations {
         repo: &str,
         author_id: i64,
         body: &crate::types::Author,
-    ) -> Result<crate::types::PorterAuthor> {
+    ) -> ClientResult<crate::types::PorterAuthor> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/authors/{}",
@@ -705,7 +708,7 @@ impl Migrations {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::PorterLargeFile>> {
+    ) -> ClientResult<Vec<crate::types::PorterLargeFile>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
@@ -739,7 +742,7 @@ impl Migrations {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::PorterLargeFile>> {
+    ) -> ClientResult<Vec<crate::types::PorterLargeFile>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/large_files",
@@ -777,7 +780,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         body: &crate::types::MigrationsSetLfsPreferenceRequest,
-    ) -> Result<crate::types::Import> {
+    ) -> ClientResult<crate::types::Import> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/import/lfs",
@@ -814,7 +817,7 @@ impl Migrations {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Migration>> {
+    ) -> ClientResult<Vec<crate::types::Migration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -847,7 +850,9 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
      */
-    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
+    pub async fn list_all_for_authenticated_user(
+        &self,
+    ) -> ClientResult<Vec<crate::types::Migration>> {
         let url = self.client.url("/user/migrations", None);
         self.client
             .get_all_pages(
@@ -871,7 +876,7 @@ impl Migrations {
     pub async fn start_for_authenticated_user(
         &self,
         body: &crate::types::MigrationsStartRequest,
-    ) -> Result<crate::types::Migration> {
+    ) -> ClientResult<crate::types::Migration> {
         let url = self.client.url("/user/migrations", None);
         self.client
             .post(
@@ -908,7 +913,7 @@ impl Migrations {
         &self,
         migration_id: i64,
         exclude: &[String],
-    ) -> Result<crate::types::Migration> {
+    ) -> ClientResult<crate::types::Migration> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude.is_empty() {
             query_args.push(("exclude".to_string(), exclude.join(" ")));
@@ -965,7 +970,7 @@ impl Migrations {
      *
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn get_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
+    pub async fn get_archive_for_authenticated_user(&self, migration_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/archive",
@@ -996,7 +1001,10 @@ impl Migrations {
      *
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn delete_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
+    pub async fn delete_archive_for_authenticated_user(
+        &self,
+        migration_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/archive",
@@ -1032,7 +1040,7 @@ impl Migrations {
         &self,
         migration_id: i64,
         repo_name: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/repos/{}/lock",
@@ -1071,7 +1079,7 @@ impl Migrations {
         migration_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1112,7 +1120,7 @@ impl Migrations {
     pub async fn list_all_repos_for_user(
         &self,
         migration_id: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let url = self.client.url(
             &format!(
                 "/user/migrations/{}/repositories",

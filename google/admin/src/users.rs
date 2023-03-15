@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Users {
     pub client: Client,
@@ -45,7 +44,7 @@ impl Users {
         show_deleted: &str,
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> ClientResult<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -116,7 +115,7 @@ impl Users {
         show_deleted: &str,
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> ClientResult<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -206,7 +205,7 @@ impl Users {
      *
      * Creates a user.
      */
-    pub async fn insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
+    pub async fn insert(&self, body: &crate::types::User) -> ClientResult<crate::types::User> {
         let url = self.client.url("/admin/directory/v1/users", None);
         self.client
             .post(
@@ -252,7 +251,7 @@ impl Users {
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -318,7 +317,7 @@ impl Users {
         user_key: &str,
         projection: crate::types::DirectoryUsersListProjection,
         view_type: crate::types::ViewType,
-    ) -> Result<crate::types::User> {
+    ) -> ClientResult<crate::types::User> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -358,7 +357,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::User,
-    ) -> Result<crate::types::User> {
+    ) -> ClientResult<crate::types::User> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -385,7 +384,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn delete(&self, user_key: &str) -> Result<()> {
+    pub async fn delete(&self, user_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -416,7 +415,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::User,
-    ) -> Result<crate::types::User> {
+    ) -> ClientResult<crate::types::User> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}",
@@ -448,7 +447,7 @@ impl Users {
         &self,
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
-    ) -> Result<crate::types::Aliases> {
+    ) -> ClientResult<crate::types::Aliases> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
             query_args.push(("event".to_string(), event.to_string()));
@@ -485,7 +484,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::Alias,
-    ) -> Result<crate::types::Alias> {
+    ) -> ClientResult<crate::types::Alias> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases",
@@ -518,7 +517,7 @@ impl Users {
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
             query_args.push(("event".to_string(), event.to_string()));
@@ -552,7 +551,7 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> Result<()> {
+    pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/aliases/{}",
@@ -584,7 +583,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserMakeAdmin,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/makeAdmin",
@@ -611,7 +610,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn photos_get(&self, user_key: &str) -> Result<crate::types::UserPhoto> {
+    pub async fn photos_get(&self, user_key: &str) -> ClientResult<crate::types::UserPhoto> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -642,7 +641,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
-    ) -> Result<crate::types::UserPhoto> {
+    ) -> ClientResult<crate::types::UserPhoto> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -669,7 +668,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn photos_delete(&self, user_key: &str) -> Result<()> {
+    pub async fn photos_delete(&self, user_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -700,7 +699,7 @@ impl Users {
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
-    ) -> Result<crate::types::UserPhoto> {
+    ) -> ClientResult<crate::types::UserPhoto> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/photos/thumbnail",
@@ -727,7 +726,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn sign_out(&self, user_key: &str) -> Result<()> {
+    pub async fn sign_out(&self, user_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/signOut",
@@ -754,7 +753,11 @@ impl Users {
      *
      * * `user_key: &str` -- The immutable id of the user.
      */
-    pub async fn undelete(&self, user_key: &str, body: &crate::types::UserUndelete) -> Result<()> {
+    pub async fn undelete(
+        &self,
+        user_key: &str,
+        body: &crate::types::UserUndelete,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/undelete",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reviews {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Reviews {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Review>> {
+    ) -> ClientResult<Vec<crate::types::Review>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -65,7 +64,7 @@ impl Reviews {
      *
      * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
      */
-    pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Review>> {
+    pub async fn get_all(&self, _created: &str) -> ClientResult<Vec<crate::types::Review>> {
         let url = self.client.url("/v1/reviews", None);
         let mut resp: crate::types::GetReviewsResponse = self
             .client
@@ -136,7 +135,7 @@ impl Reviews {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `review: &str` -- The account's country.
      */
-    pub async fn get(&self, review: &str) -> Result<crate::types::Review> {
+    pub async fn get(&self, review: &str) -> ClientResult<crate::types::Review> {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}",
@@ -163,7 +162,7 @@ impl Reviews {
      *
      * * `review: &str` -- The account's country.
      */
-    pub async fn post_approve(&self, review: &str) -> Result<crate::types::Review> {
+    pub async fn post_approve(&self, review: &str) -> ClientResult<crate::types::Review> {
         let url = self.client.url(
             &format!(
                 "/v1/reviews/{}/approve",

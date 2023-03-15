@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Rooms {
     pub client: Client,
@@ -40,7 +39,7 @@ impl Rooms {
         page_size: i64,
         next_page_token: &str,
         location_id: &str,
-    ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListZoomRoomsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
@@ -95,7 +94,7 @@ impl Rooms {
         type_: crate::types::ListZoomRoomsType,
         unassigned_rooms: bool,
         location_id: &str,
-    ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListZoomRoomsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
@@ -178,7 +177,7 @@ impl Rooms {
     pub async fn add(
         &self,
         body: &crate::types::AddRoomRequest,
-    ) -> Result<crate::types::AddRoomResponse> {
+    ) -> ClientResult<crate::types::AddRoomResponse> {
         let url = self.client.url("/rooms", None);
         self.client
             .post(
@@ -210,7 +209,7 @@ impl Rooms {
     pub async fn get_zr_profile(
         &self,
         room_id: &str,
-    ) -> Result<crate::types::GetZrProfileResponse> {
+    ) -> ClientResult<crate::types::GetZrProfileResponse> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -240,7 +239,7 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
-    pub async fn delete_zoom(&self, room_id: &str) -> Result<crate::types::Domains> {
+    pub async fn delete_zoom(&self, room_id: &str) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -275,7 +274,7 @@ impl Rooms {
         &self,
         room_id: &str,
         body: &crate::types::UpdateRoomProfileRequest,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -313,7 +312,7 @@ impl Rooms {
         &self,
         room_id: &str,
         setting_type: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -356,7 +355,7 @@ impl Rooms {
      *   `meeting`: Meeting settings of the Zoom Room.<br>
      *   `signage`: Digital signage settings applied on the Zoom Room.
      */
-    pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> Result<()> {
+    pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -400,7 +399,7 @@ impl Rooms {
     pub async fn list_zr_devices(
         &self,
         room_id: &str,
-    ) -> Result<crate::types::ListZrDevicesResponse> {
+    ) -> ClientResult<crate::types::ListZrDevicesResponse> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/devices",
@@ -438,7 +437,7 @@ impl Rooms {
         &self,
         room_id: &str,
         body: &crate::types::ChangeZrLocationRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/location",
@@ -473,7 +472,11 @@ impl Rooms {
      *
      * * `id: &str` -- User's first name.
      */
-    pub async fn check(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
+    pub async fn check(
+        &self,
+        id: &str,
+        body: &crate::types::CheckInRoomsRequest,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/events",
@@ -520,7 +523,7 @@ impl Rooms {
         folder_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Site>> {
+    ) -> ClientResult<Vec<crate::types::Site>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(("folder_id".to_string(), folder_id.to_string()));
@@ -572,7 +575,7 @@ impl Rooms {
         &self,
         type_: &str,
         folder_id: &str,
-    ) -> Result<Vec<crate::types::Site>> {
+    ) -> ClientResult<Vec<crate::types::Site>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(("folder_id".to_string(), folder_id.to_string()));
@@ -651,7 +654,9 @@ impl Rooms {
      * * Zoom Rooms digital signage must be [enabled](https://support.zoom.us/hc/en-us/articles/360000030683-Zoom-Rooms-Digital-Signage#h_767fbb33-82a8-45a8-8392-a1bfa9687edd)
      *
      */
-    pub async fn manage_e_91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
+    pub async fn manage_e_91_1signage(
+        &self,
+    ) -> ClientResult<crate::types::ManageE911SignageResponse> {
         let url = self.client.url("/rooms/events", None);
         self.client
             .patch(

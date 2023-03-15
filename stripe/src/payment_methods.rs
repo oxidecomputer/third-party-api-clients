@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PaymentMethods {
     pub client: Client,
@@ -33,7 +32,7 @@ impl PaymentMethods {
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> Result<Vec<crate::types::PaymentMethod>> {
+    ) -> ClientResult<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -79,7 +78,7 @@ impl PaymentMethods {
         &self,
         customer: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> Result<Vec<crate::types::PaymentMethod>> {
+    ) -> ClientResult<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -157,7 +156,7 @@ impl PaymentMethods {
      *
      * <p>Instead of creating a PaymentMethod directly, we recommend using the <a href="/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a payment immediately or the <a href="/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::PaymentMethod> {
+    pub async fn post(&self) -> ClientResult<crate::types::PaymentMethod> {
         let url = self.client.url("/v1/payment_methods", None);
         self.client
             .post(
@@ -179,7 +178,10 @@ impl PaymentMethods {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `payment_method: &str` -- The account's country.
      */
-    pub async fn get_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
+    pub async fn get_method(
+        &self,
+        payment_method: &str,
+    ) -> ClientResult<crate::types::PaymentMethod> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
@@ -206,7 +208,10 @@ impl PaymentMethods {
      *
      * * `payment_method: &str` -- The account's country.
      */
-    pub async fn post_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
+    pub async fn post_method(
+        &self,
+        payment_method: &str,
+    ) -> ClientResult<crate::types::PaymentMethod> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}",
@@ -246,7 +251,7 @@ impl PaymentMethods {
     pub async fn post_method_attach(
         &self,
         payment_method: &str,
-    ) -> Result<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::types::PaymentMethod> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/attach",
@@ -276,7 +281,7 @@ impl PaymentMethods {
     pub async fn post_method_detach(
         &self,
         payment_method: &str,
-    ) -> Result<crate::types::PaymentMethod> {
+    ) -> ClientResult<crate::types::PaymentMethod> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_methods/{}/detach",

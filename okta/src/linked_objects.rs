@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct LinkedObjects {
     pub client: Client,
@@ -17,7 +16,7 @@ impl LinkedObjects {
      *
      * Success
      */
-    pub async fn list_definitions(&self) -> Result<Vec<crate::types::LinkedObject>> {
+    pub async fn list_definitions(&self) -> ClientResult<Vec<crate::types::LinkedObject>> {
         let url = self
             .client
             .url("/api/v1/meta/schemas/user/linkedObjects", None);
@@ -38,7 +37,7 @@ impl LinkedObjects {
      *
      * Success
      */
-    pub async fn list_all_definitions(&self) -> Result<Vec<crate::types::LinkedObject>> {
+    pub async fn list_all_definitions(&self) -> ClientResult<Vec<crate::types::LinkedObject>> {
         let url = self
             .client
             .url("/api/v1/meta/schemas/user/linkedObjects", None);
@@ -60,7 +59,7 @@ impl LinkedObjects {
     pub async fn add_definition(
         &self,
         body: &crate::types::LinkedObject,
-    ) -> Result<crate::types::LinkedObject> {
+    ) -> ClientResult<crate::types::LinkedObject> {
         let url = self
             .client
             .url("/api/v1/meta/schemas/user/linkedObjects", None);
@@ -86,7 +85,7 @@ impl LinkedObjects {
     pub async fn get_definition(
         &self,
         linked_object_name: &str,
-    ) -> Result<crate::types::LinkedObject> {
+    ) -> ClientResult<crate::types::LinkedObject> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/linkedObjects/{}",
@@ -113,7 +112,7 @@ impl LinkedObjects {
      *
      * * `linked_object_name: &str`
      */
-    pub async fn delete_definition(&self, linked_object_name: &str) -> Result<()> {
+    pub async fn delete_definition(&self, linked_object_name: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/linkedObjects/{}",

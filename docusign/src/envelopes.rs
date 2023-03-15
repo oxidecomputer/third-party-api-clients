@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Envelopes {
     pub client: Client,
@@ -302,7 +301,7 @@ impl Envelopes {
         user_filter: &str,
         user_id: &str,
         user_name: &str,
-    ) -> Result<crate::types::EnvelopesInformation> {
+    ) -> ClientResult<crate::types::EnvelopesInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ac_status.is_empty() {
             query_args.push(("ac_status".to_string(), ac_status.to_string()));
@@ -522,7 +521,7 @@ impl Envelopes {
         completed_documents_only: &str,
         merge_roles_on_draft: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> Result<crate::types::EnvelopeSummary> {
+    ) -> ClientResult<crate::types::EnvelopeSummary> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cdse_mode.is_empty() {
             query_args.push(("cdse_mode".to_string(), cdse_mode.to_string()));
@@ -693,7 +692,7 @@ impl Envelopes {
         transaction_ids: &str,
         user_name: &str,
         body: &crate::types::EnvelopeIdsRequest,
-    ) -> Result<crate::types::EnvelopesInformation> {
+    ) -> ClientResult<crate::types::EnvelopesInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ac_status.is_empty() {
             query_args.push(("ac_status".to_string(), ac_status.to_string()));
@@ -783,7 +782,7 @@ impl Envelopes {
         envelope_id: &str,
         advanced_update: &str,
         include: &str,
-    ) -> Result<crate::types::Envelope> {
+    ) -> ClientResult<crate::types::Envelope> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !advanced_update.is_empty() {
             query_args.push(("advanced_update".to_string(), advanced_update.to_string()));
@@ -996,7 +995,7 @@ impl Envelopes {
         advanced_update: &str,
         resend_envelope: &str,
         body: &crate::types::Envelope,
-    ) -> Result<crate::types::EnvelopeUpdateSummary> {
+    ) -> ClientResult<crate::types::EnvelopeUpdateSummary> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !advanced_update.is_empty() {
             query_args.push(("advanced_update".to_string(), advanced_update.to_string()));
@@ -1040,7 +1039,7 @@ impl Envelopes {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EnvelopeAuditEventResponse> {
+    ) -> ClientResult<crate::types::EnvelopeAuditEventResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/audit_events",
@@ -1091,7 +1090,7 @@ impl Envelopes {
         nocache: &str,
         show_changes: &str,
         start_position: &str,
-    ) -> Result<crate::types::PageImages> {
+    ) -> ClientResult<crate::types::PageImages> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1155,7 +1154,7 @@ impl Envelopes {
         document_id: &str,
         envelope_id: &str,
         page_number: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}",
@@ -1204,7 +1203,7 @@ impl Envelopes {
         max_height: &str,
         max_width: &str,
         show_changes: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !dpi.is_empty() {
             query_args.push(("dpi".to_string(), dpi.to_string()));
@@ -1261,7 +1260,7 @@ impl Envelopes {
         envelope_id: &str,
         page_number: &str,
         body: &crate::types::PageRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image",
@@ -1298,7 +1297,7 @@ impl Envelopes {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::Notification> {
+    ) -> ClientResult<crate::types::Notification> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/notification",
@@ -1336,7 +1335,7 @@ impl Envelopes {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeNotificationRequest,
-    ) -> Result<crate::types::Notification> {
+    ) -> ClientResult<crate::types::Notification> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/notification",
@@ -1383,7 +1382,7 @@ impl Envelopes {
         envelope_id: &str,
         recipient_id: &str,
         include_chrome: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
@@ -1429,7 +1428,7 @@ impl Envelopes {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image",
@@ -1467,7 +1466,7 @@ impl Envelopes {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> Result<crate::types::UserSignature> {
+    ) -> ClientResult<crate::types::UserSignature> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature",
@@ -1515,7 +1514,7 @@ impl Envelopes {
         envelope_id: &str,
         recipient_id: &str,
         include_chrome: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
@@ -1561,7 +1560,7 @@ impl Envelopes {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image",

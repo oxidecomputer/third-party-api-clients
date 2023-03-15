@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Accounts {
     pub client: Client,
@@ -41,7 +40,7 @@ impl Accounts {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -84,7 +83,7 @@ impl Accounts {
     pub async fn create(
         &self,
         body: &crate::types::AccountCreateRequest,
-    ) -> Result<crate::types::AccountCreateResponse> {
+    ) -> ClientResult<crate::types::AccountCreateResponse> {
         let url = self.client.url("/accounts", None);
         self.client
             .post(
@@ -117,7 +116,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn account(&self, account_id: &str) -> Result<crate::types::AccountResponse> {
+    pub async fn account(&self, account_id: &str) -> ClientResult<crate::types::AccountResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}",
@@ -157,7 +156,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn disassociate(&self, account_id: &str) -> Result<()> {
+    pub async fn disassociate(&self, account_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}",
@@ -200,7 +199,7 @@ impl Accounts {
         &self,
         account_id: &str,
         body: &crate::types::Options,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/options",
@@ -251,7 +250,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -314,7 +313,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::Security> {
+    ) -> ClientResult<crate::types::Security> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -377,7 +376,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::AccountSettings> {
+    ) -> ClientResult<crate::types::AccountSettings> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -440,7 +439,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::MeetingSecuritySettings> {
+    ) -> ClientResult<crate::types::MeetingSecuritySettings> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -503,7 +502,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::AccountSettingsResponseOneOf> {
+    ) -> ClientResult<crate::types::AccountSettingsResponseOneOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -555,7 +554,7 @@ impl Accounts {
         account_id: &str,
         option: crate::types::AccountSettingsUpdateOption,
         body: &crate::types::AccountSettingsUpdateRequestOneOf,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !option.to_string().is_empty() {
             query_args.push(("option".to_string(), option.to_string()));
@@ -602,7 +601,10 @@ impl Accounts {
      *
      * * `account_id: &str` -- Unique Identifier of the account. To retrieve locked settings of the master account or a regular account, provide "me" as the value of this field. <br> To retrieve locked settings of a sub account, provide the Account ID of the sub account in this field.
      */
-    pub async fn managed_domain(&self, account_id: &str) -> Result<crate::types::DomainsList> {
+    pub async fn managed_domain(
+        &self,
+        account_id: &str,
+    ) -> ClientResult<crate::types::DomainsList> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/managed_domains",
@@ -639,7 +641,7 @@ impl Accounts {
     pub async fn trusted_domain(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::AccountTrustedDomainResponse> {
+    ) -> ClientResult<crate::types::AccountTrustedDomainResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/trusted_domains",
@@ -695,7 +697,7 @@ impl Accounts {
         account_id: &str,
         option: &str,
         custom_query_fields: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push((
@@ -746,7 +748,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- Unique Identifier of the account. To retrieve locked settings of the master account or a regular account, provide "me" as the value of this field. <br> To retrieve locked settings of a sub account, provide the Account ID of the sub account in this field.
      */
-    pub async fn update_lock_settings(&self, account_id: &str) -> Result<()> {
+    pub async fn update_lock_settings(&self, account_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/lock_settings",
@@ -783,7 +785,11 @@ impl Accounts {
      *
      * * `account_id: &str` -- The account's account ID.
      */
-    pub async fn update_owner(&self, account_id: &str, body: &crate::types::Members) -> Result<()> {
+    pub async fn update_owner(
+        &self,
+        account_id: &str,
+        body: &crate::types::Members,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/owner",
@@ -824,7 +830,7 @@ impl Accounts {
         &self,
         account_id: &str,
         body: &crate::types::UploadVbRequest,
-    ) -> Result<crate::types::Files> {
+    ) -> ClientResult<crate::types::Files> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/settings/virtual_backgrounds",
@@ -860,7 +866,7 @@ impl Accounts {
      *
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
-    pub async fn del_vb(&self, account_id: &str, file_ids: &str) -> Result<()> {
+    pub async fn del_vb(&self, account_id: &str, file_ids: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));

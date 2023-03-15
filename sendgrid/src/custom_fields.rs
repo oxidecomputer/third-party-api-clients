@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CustomFields {
     pub client: Client,
@@ -21,7 +20,7 @@ impl CustomFields {
      */
     pub async fn get_mc_field_definitions(
         &self,
-    ) -> Result<crate::types::GetMcFieldDefinitionsResponse> {
+    ) -> ClientResult<crate::types::GetMcFieldDefinitionsResponse> {
         let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .get(
@@ -49,7 +48,7 @@ impl CustomFields {
     pub async fn post_mc_field_definition(
         &self,
         body: &crate::types::PostMcFieldDefinitionsRequest,
-    ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
+    ) -> ClientResult<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = self.client.url("/marketing/field_definitions", None);
         self.client
             .post(
@@ -70,7 +69,10 @@ impl CustomFields {
      *
      * You cand delete only Custom Fields; Reserved Fields cannot be deleted.
      */
-    pub async fn delete_mc_field_definitions_custom(&self, custom_field_id: &str) -> Result<()> {
+    pub async fn delete_mc_field_definitions_custom(
+        &self,
+        custom_field_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",
@@ -101,7 +103,7 @@ impl CustomFields {
         &self,
         custom_field_id: &str,
         body: &crate::types::IpPool,
-    ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
+    ) -> ClientResult<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/marketing/field_definitions/{}",

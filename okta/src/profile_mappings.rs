@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ProfileMappings {
     pub client: Client,
@@ -30,7 +29,7 @@ impl ProfileMappings {
         limit: i64,
         source_id: &str,
         target_id: &str,
-    ) -> Result<Vec<crate::types::ProfileMapping>> {
+    ) -> ClientResult<Vec<crate::types::ProfileMapping>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -69,7 +68,7 @@ impl ProfileMappings {
         &self,
         source_id: &str,
         target_id: &str,
-    ) -> Result<Vec<crate::types::ProfileMapping>> {
+    ) -> ClientResult<Vec<crate::types::ProfileMapping>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_id.is_empty() {
             query_args.push(("sourceId".to_string(), source_id.to_string()));
@@ -102,7 +101,7 @@ impl ProfileMappings {
      *
      * * `mapping_id: &str`
      */
-    pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
+    pub async fn get(&self, mapping_id: &str) -> ClientResult<crate::types::ProfileMapping> {
         let url = self.client.url(
             &format!(
                 "/api/v1/mappings/{}",
@@ -135,7 +134,7 @@ impl ProfileMappings {
         &self,
         mapping_id: &str,
         body: &crate::types::ProfileMapping,
-    ) -> Result<crate::types::ProfileMapping> {
+    ) -> ClientResult<crate::types::ProfileMapping> {
         let url = self.client.url(
             &format!(
                 "/api/v1/mappings/{}",

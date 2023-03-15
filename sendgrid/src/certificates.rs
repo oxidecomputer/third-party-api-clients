@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Certificates {
     pub client: Client,
@@ -22,7 +21,7 @@ impl Certificates {
     pub async fn post_sso(
         &self,
         body: &crate::types::PostSsoCertificatesRequest,
-    ) -> Result<crate::types::SsoCertificateBody> {
+    ) -> ClientResult<crate::types::SsoCertificateBody> {
         let url = self.client.url("/sso/certificates", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl Certificates {
     pub async fn get_sso_integrations_integration(
         &self,
         integration_id: &str,
-    ) -> Result<Vec<crate::types::SsoCertificateBody>> {
+    ) -> ClientResult<Vec<crate::types::SsoCertificateBody>> {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
@@ -78,7 +77,7 @@ impl Certificates {
     pub async fn get_all_sso_integrations_integration(
         &self,
         integration_id: &str,
-    ) -> Result<Vec<crate::types::SsoCertificateBody>> {
+    ) -> ClientResult<Vec<crate::types::SsoCertificateBody>> {
         let url = self.client.url(
             &format!(
                 "/sso/integrations/{}/certificates",
@@ -103,7 +102,10 @@ impl Certificates {
      *
      * **This endpoint allows you to retrieve an individual SSO certificate.**
      */
-    pub async fn get_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
+    pub async fn get_sso_cert(
+        &self,
+        cert_id: &str,
+    ) -> ClientResult<crate::types::SsoCertificateBody> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
@@ -130,7 +132,10 @@ impl Certificates {
      *
      * You can retrieve a certificate's ID from the response provided by the "Get All SSO Integrations" endpoint.
      */
-    pub async fn delete_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
+    pub async fn delete_sso_cert(
+        &self,
+        cert_id: &str,
+    ) -> ClientResult<crate::types::SsoCertificateBody> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",
@@ -161,7 +166,7 @@ impl Certificates {
         &self,
         cert_id: &str,
         body: &crate::types::PatchSsoCertificatesCertRequest,
-    ) -> Result<Vec<crate::types::SsoErrorResponse>> {
+    ) -> ClientResult<Vec<crate::types::SsoErrorResponse>> {
         let url = self.client.url(
             &format!(
                 "/sso/certificates/{}",

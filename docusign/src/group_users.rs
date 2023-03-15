@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct GroupUsers {
     pub client: Client,
@@ -32,7 +31,7 @@ impl GroupUsers {
         group_id: &str,
         count: &str,
         start_position: &str,
-    ) -> Result<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::types::UsersResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -77,7 +76,7 @@ impl GroupUsers {
         account_id: &str,
         group_id: &str,
         body: &crate::types::UserInfoList,
-    ) -> Result<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::types::UsersResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/users",
@@ -114,7 +113,7 @@ impl GroupUsers {
         account_id: &str,
         group_id: &str,
         body: &crate::types::UserInfoList,
-    ) -> Result<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::types::UsersResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/users",

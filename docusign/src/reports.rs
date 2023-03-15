@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reports {
     pub client: Client,
@@ -27,7 +26,7 @@ impl Reports {
     pub async fn product_get_list(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::ReportInProductList> {
+    ) -> ClientResult<crate::types::ReportInProductList> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports",
@@ -60,7 +59,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> Result<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports",
@@ -93,7 +92,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> Result<crate::types::ReportInProductRunResponse> {
+    ) -> ClientResult<crate::types::ReportInProductRunResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/report_results",
@@ -126,7 +125,7 @@ impl Reports {
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductCsvRunRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/report_results_csv",
@@ -160,7 +159,7 @@ impl Reports {
         &self,
         account_id: &str,
         id: &str,
-    ) -> Result<crate::types::ReportInProductGet> {
+    ) -> ClientResult<crate::types::ReportInProductGet> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",
@@ -196,7 +195,7 @@ impl Reports {
         account_id: &str,
         id: &str,
         body: &crate::types::ReportInProductRunRequest,
-    ) -> Result<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",
@@ -231,7 +230,7 @@ impl Reports {
         &self,
         account_id: &str,
         id: &str,
-    ) -> Result<crate::types::ReportInProductSaveResponse> {
+    ) -> ClientResult<crate::types::ReportInProductSaveResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/reports/{}",

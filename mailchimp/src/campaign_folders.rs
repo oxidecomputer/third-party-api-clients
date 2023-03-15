@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CampaignFolders {
     pub client: Client,
@@ -32,7 +31,7 @@ impl CampaignFolders {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::CampaignFolders> {
+    ) -> ClientResult<crate::types::CampaignFolders> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -70,7 +69,7 @@ impl CampaignFolders {
     pub async fn post(
         &self,
         body: &crate::types::GalleryFolder,
-    ) -> Result<crate::types::CampaignFolder> {
+    ) -> ClientResult<crate::types::CampaignFolder> {
         let url = self.client.url("/campaign-folders", None);
         self.client
             .post(
@@ -100,7 +99,7 @@ impl CampaignFolders {
         fields: &[String],
         exclude_fields: &[String],
         folder_id: &str,
-    ) -> Result<crate::types::CampaignFolder> {
+    ) -> ClientResult<crate::types::CampaignFolder> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -138,7 +137,7 @@ impl CampaignFolders {
      *
      * * `folder_id: &str` -- The unique id for the campaign folder.
      */
-    pub async fn delete(&self, folder_id: &str) -> Result<()> {
+    pub async fn delete(&self, folder_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/campaign-folders/{}",
@@ -171,7 +170,7 @@ impl CampaignFolders {
         &self,
         folder_id: &str,
         body: &crate::types::GalleryFolder,
-    ) -> Result<crate::types::CampaignFolder> {
+    ) -> ClientResult<crate::types::CampaignFolder> {
         let url = self.client.url(
             &format!(
                 "/campaign-folders/{}",

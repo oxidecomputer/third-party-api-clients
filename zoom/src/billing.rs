@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Billing {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Billing {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn account(&self, account_id: &str) -> Result<crate::types::Contact> {
+    pub async fn account(&self, account_id: &str) -> ClientResult<crate::types::Contact> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing",
@@ -73,7 +72,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::BillingContact,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing",
@@ -110,7 +109,7 @@ impl Billing {
     pub async fn account_plans(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::AccountPlansResponse> {
+    ) -> ClientResult<crate::types::AccountPlansResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans",
@@ -145,7 +144,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::AccountPlanCreateRequestAllOf,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans",
@@ -185,7 +184,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::PlanBase,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/base",
@@ -229,7 +228,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::PlanBase,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons",
@@ -268,7 +267,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::AccountPlanAddonCreateRequestOneOf,
-    ) -> Result<crate::types::AccountPlans> {
+    ) -> ClientResult<crate::types::AccountPlans> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons",
@@ -309,7 +308,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::AccountPlanBaseDeleteRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/base/status",
@@ -348,7 +347,7 @@ impl Billing {
         &self,
         account_id: &str,
         body: &crate::types::AccountPlanAddonCancelRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/addons/status",
@@ -381,7 +380,7 @@ impl Billing {
     pub async fn get_plan_usage(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::GetPlanUsageResponse> {
+    ) -> ClientResult<crate::types::GetPlanUsageResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/plans/usage",
@@ -425,7 +424,7 @@ impl Billing {
         account_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::AccountBillingInvoicesResponseData> {
+    ) -> ClientResult<crate::types::AccountBillingInvoicesResponseData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -470,7 +469,7 @@ impl Billing {
         &self,
         account_id: &str,
         invoice_id: &str,
-    ) -> Result<crate::types::GetAccountBillingInvoiceResponse> {
+    ) -> ClientResult<crate::types::GetAccountBillingInvoiceResponse> {
         let url = self.client.url(
             &format!(
                 "/accounts/{}/billing/invoices/{}",
@@ -500,7 +499,7 @@ impl Billing {
      * * You can make **one** request to this API every **30 minutes** until the daily limit is reached.
      * * This API has a daily limit of **100 requests per account**.
      */
-    pub async fn download_invoice_pdf(&self, invoice_id: &str) -> Result<()> {
+    pub async fn download_invoice_pdf(&self, invoice_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/download/billing/invoices/{}",

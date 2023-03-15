@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateBulkRecipients {
     pub client: Client,
@@ -34,7 +33,7 @@ impl TemplateBulkRecipients {
         template_id: &str,
         include_tabs: &str,
         start_position: &str,
-    ) -> Result<crate::types::BulkRecipientsResponse> {
+    ) -> ClientResult<crate::types::BulkRecipientsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_tabs.is_empty() {
             query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
@@ -84,7 +83,7 @@ impl TemplateBulkRecipients {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::BulkRecipientsRequest,
-    ) -> Result<crate::types::BulkRecipientsSummaryResponse> {
+    ) -> ClientResult<crate::types::BulkRecipientsSummaryResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
@@ -122,7 +121,7 @@ impl TemplateBulkRecipients {
         account_id: &str,
         recipient_id: &str,
         template_id: &str,
-    ) -> Result<crate::types::BulkRecipientsUpdateResponse> {
+    ) -> ClientResult<crate::types::BulkRecipientsUpdateResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",

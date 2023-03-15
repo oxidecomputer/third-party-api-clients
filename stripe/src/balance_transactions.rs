@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BalanceTransactions {
     pub client: Client,
@@ -41,7 +40,7 @@ impl BalanceTransactions {
         source: &str,
         starting_after: &str,
         type_: &str,
-    ) -> Result<Vec<crate::types::BalanceTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BalanceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -98,7 +97,7 @@ impl BalanceTransactions {
         payout: &str,
         source: &str,
         type_: &str,
-    ) -> Result<Vec<crate::types::BalanceTransaction>> {
+    ) -> ClientResult<Vec<crate::types::BalanceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -187,7 +186,7 @@ impl BalanceTransactions {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::BalanceTransaction> {
         let url = self.client.url(
             &format!(
                 "/v1/balance_transactions/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Invoices {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Invoices {
         account_id: &str,
         from_date: &str,
         to_date: &str,
-    ) -> Result<crate::types::BillingInvoicesResponse> {
+    ) -> ClientResult<crate::types::BillingInvoicesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -108,7 +107,7 @@ impl Invoices {
         &self,
         account_id: &str,
         invoice_id: &str,
-    ) -> Result<crate::types::BillingInvoice> {
+    ) -> ClientResult<crate::types::BillingInvoice> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_invoices/{}",
@@ -143,7 +142,7 @@ impl Invoices {
     pub async fn billing_get_past_due(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::BillingInvoicesSummary> {
+    ) -> ClientResult<crate::types::BillingInvoicesSummary> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_invoices_past_due",

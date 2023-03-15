@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Events {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Events {
         starting_after: &str,
         type_: &str,
         _types: &[String],
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
             query_args.push(("delivery_success".to_string(), delivery_success.to_string()));
@@ -83,7 +82,7 @@ impl Events {
         delivery_success: bool,
         type_: &str,
         _types: &[String],
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
             query_args.push(("delivery_success".to_string(), delivery_success.to_string()));
@@ -162,7 +161,7 @@ impl Events {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Event> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Event> {
         let url = self.client.url(
             &format!("/v1/events/{}", crate::progenitor_support::encode_path(id),),
             None,

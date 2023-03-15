@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateFolders {
     pub client: Client,
@@ -32,7 +31,7 @@ impl TemplateFolders {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::TemplateFolders> {
+    ) -> ClientResult<crate::types::TemplateFolders> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -67,7 +66,10 @@ impl TemplateFolders {
      *
      * Create a new template folder.
      */
-    pub async fn post(&self, body: &crate::types::GalleryFolder) -> Result<crate::types::Folders> {
+    pub async fn post(
+        &self,
+        body: &crate::types::GalleryFolder,
+    ) -> ClientResult<crate::types::Folders> {
         let url = self.client.url("/template-folders", None);
         self.client
             .post(
@@ -97,7 +99,7 @@ impl TemplateFolders {
         fields: &[String],
         exclude_fields: &[String],
         folder_id: &str,
-    ) -> Result<crate::types::Folders> {
+    ) -> ClientResult<crate::types::Folders> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -135,7 +137,7 @@ impl TemplateFolders {
      *
      * * `folder_id: &str` -- The unique id for the template folder.
      */
-    pub async fn delete(&self, folder_id: &str) -> Result<()> {
+    pub async fn delete(&self, folder_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/template-folders/{}",
@@ -168,7 +170,7 @@ impl TemplateFolders {
         &self,
         folder_id: &str,
         body: &crate::types::GalleryFolder,
-    ) -> Result<crate::types::Folders> {
+    ) -> ClientResult<crate::types::Folders> {
         let url = self.client.url(
             &format!(
                 "/template-folders/{}",

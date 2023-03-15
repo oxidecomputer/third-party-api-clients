@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Scim {
     pub client: Client,
@@ -55,7 +54,7 @@ impl Scim {
         start_index: i64,
         count: i64,
         filter: &str,
-    ) -> Result<crate::types::ScimUserList> {
+    ) -> ClientResult<crate::types::ScimUserList> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -102,7 +101,7 @@ impl Scim {
         &self,
         org: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
-    ) -> Result<crate::types::ScimUser> {
+    ) -> ClientResult<crate::types::ScimUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users",
@@ -138,7 +137,7 @@ impl Scim {
         &self,
         org: &str,
         scim_user_id: &str,
-    ) -> Result<crate::types::ScimUser> {
+    ) -> ClientResult<crate::types::ScimUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -180,7 +179,7 @@ impl Scim {
         org: &str,
         scim_user_id: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
-    ) -> Result<crate::types::ScimUser> {
+    ) -> ClientResult<crate::types::ScimUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -213,7 +212,7 @@ impl Scim {
      * * `org: &str`
      * * `scim_user_id: &str` -- scim_user_id parameter.
      */
-    pub async fn delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
+    pub async fn delete_user_from_org(&self, org: &str, scim_user_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -266,7 +265,7 @@ impl Scim {
         org: &str,
         scim_user_id: &str,
         body: &crate::types::ScimUpdateAttributeUserRequest,
-    ) -> Result<crate::types::ScimUser> {
+    ) -> ClientResult<crate::types::ScimUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BatchWebhooks {
     pub client: Client,
@@ -32,7 +31,7 @@ impl BatchWebhooks {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::BatchWebhooks> {
+    ) -> ClientResult<crate::types::BatchWebhooks> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -67,7 +66,10 @@ impl BatchWebhooks {
      *
      * Configure a webhook that will fire whenever any batch request completes processing.
      */
-    pub async fn post(&self, body: &crate::types::BatchWebhook) -> Result<crate::types::Webhooks> {
+    pub async fn post(
+        &self,
+        body: &crate::types::BatchWebhook,
+    ) -> ClientResult<crate::types::Webhooks> {
         let url = self.client.url("/batch-webhooks", None);
         self.client
             .post(
@@ -97,7 +99,7 @@ impl BatchWebhooks {
         fields: &[String],
         exclude_fields: &[String],
         batch_webhook_id: &str,
-    ) -> Result<crate::types::Webhooks> {
+    ) -> ClientResult<crate::types::Webhooks> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -135,7 +137,7 @@ impl BatchWebhooks {
      *
      * * `batch_webhook_id: &str` -- The unique id for the batch webhook.
      */
-    pub async fn delete(&self, batch_webhook_id: &str) -> Result<()> {
+    pub async fn delete(&self, batch_webhook_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/batch-webhooks/{}",
@@ -168,7 +170,7 @@ impl BatchWebhooks {
         &self,
         batch_webhook_id: &str,
         body: &crate::types::BatchWebhook,
-    ) -> Result<crate::types::Webhooks> {
+    ) -> ClientResult<crate::types::Webhooks> {
         let url = self.client.url(
             &format!(
                 "/batch-webhooks/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Metafield {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Metafield {
         &self,
         metafield_owner_id: i64,
         metafield_owner_resource: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -64,7 +63,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-01
      */
-    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-01/metafields.json", None);
         self.client
             .post(
@@ -83,7 +82,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-01
      */
-    pub async fn deprecated_202001_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202001_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/metafields/count.json", None);
@@ -113,7 +112,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -152,7 +151,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/metafields/{}/json",
@@ -181,7 +180,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/metafields/{}/json",
@@ -215,7 +214,7 @@ impl Metafield {
         &self,
         metafield_owner_id: i64,
         metafield_owner_resource: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -251,7 +250,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-04
      */
-    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-04/metafields.json", None);
         self.client
             .post(
@@ -270,7 +269,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-04
      */
-    pub async fn deprecated_202004_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202004_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/metafields/count.json", None);
@@ -300,7 +299,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -339,7 +338,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/metafields/{}/json",
@@ -368,7 +367,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/metafields/{}/json",
@@ -402,7 +401,7 @@ impl Metafield {
         &self,
         metafield_owner_id: i64,
         metafield_owner_resource: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -438,7 +437,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-07
      */
-    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-07/metafields.json", None);
         self.client
             .post(
@@ -457,7 +456,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-07
      */
-    pub async fn deprecated_202007_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202007_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/metafields/count.json", None);
@@ -487,7 +486,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -526,7 +525,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/metafields/{}/json",
@@ -555,7 +554,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/metafields/{}/json",
@@ -585,7 +584,11 @@ impl Metafield {
      * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
      * * `metafield_owner_resource: &str` -- storefront_access_token_id.
      */
-    pub async fn get(&self, metafield_owner_id: i64, metafield_owner_resource: &str) -> Result<()> {
+    pub async fn get(
+        &self,
+        metafield_owner_id: i64,
+        metafield_owner_resource: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -621,7 +624,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-10
      */
-    pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-10/metafields.json", None);
         self.client
             .post(
@@ -640,7 +643,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-10
      */
-    pub async fn get_count(&self) -> Result<()> {
+    pub async fn get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/metafields/count.json", None);
@@ -666,7 +669,7 @@ impl Metafield {
      * * `metafield_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_param(&self, metafield_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_param(&self, metafield_id: &str, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -701,7 +704,11 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn update_param(&self, metafield_id: &str, body: &serde_json::Value) -> Result<()> {
+    pub async fn update_param(
+        &self,
+        metafield_id: &str,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/metafields/{}/json",
@@ -730,7 +737,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/metafields/{}/json",
@@ -764,7 +771,7 @@ impl Metafield {
         &self,
         metafield_owner_id: i64,
         metafield_owner_resource: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -800,7 +807,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2021-01
      */
-    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2021-01/metafields.json", None);
         self.client
             .post(
@@ -819,7 +826,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2021-01
      */
-    pub async fn deprecated_202101_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202101_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/metafields/count.json", None);
@@ -849,7 +856,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -888,7 +895,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/metafields/{}/json",
@@ -917,7 +924,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/metafields/{}/json",
@@ -951,7 +958,7 @@ impl Metafield {
         &self,
         metafield_owner_id: i64,
         metafield_owner_resource: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
             query_args.push((
@@ -987,7 +994,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-unstable
      */
-    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/unstable/metafields.json", None);
         self.client
             .post(
@@ -1006,7 +1013,7 @@ impl Metafield {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-unstable
      */
-    pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
+    pub async fn deprecated_unstable_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/metafields/count.json", None);
@@ -1036,7 +1043,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1075,7 +1082,7 @@ impl Metafield {
         &self,
         metafield_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/metafields/{}/json",
@@ -1104,7 +1111,7 @@ impl Metafield {
      *
      * * `metafield_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_delete_param(&self, metafield_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_delete_param(&self, metafield_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/metafields/{}/json",

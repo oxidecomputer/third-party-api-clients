@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Users {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Users {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::User> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::User> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -45,7 +44,7 @@ impl Users {
      *
      * Suspends a user. Does not delete the user's cards. Currently this action is not reversible.
      */
-    pub async fn delete(&self, id: &str) -> Result<()> {
+    pub async fn delete(&self, id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -67,7 +66,11 @@ impl Users {
      *
      * Modify information about a user.
      */
-    pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersRequest) -> Result<()> {
+    pub async fn patch(
+        &self,
+        id: &str,
+        body: &crate::types::PatchUsersRequest,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/users/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -103,7 +106,7 @@ impl Users {
         page_size: f64,
         department_id: &str,
         location_id: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> ClientResult<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -146,7 +149,7 @@ impl Users {
         &self,
         department_id: &str,
         location_id: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> ClientResult<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -196,7 +199,7 @@ impl Users {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -215,7 +218,7 @@ impl Users {
     pub async fn post_deferred(
         &self,
         body: &crate::types::PostUsersDeferredRequest,
-    ) -> Result<crate::types::User> {
+    ) -> ClientResult<crate::types::User> {
         let url = self.client.url("/users/deferred", None);
         self.client
             .post(
@@ -237,7 +240,7 @@ impl Users {
     pub async fn get_deferred_status(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetUsersDeferredStatusResponse> {
+    ) -> ClientResult<crate::types::GetUsersDeferredStatusResponse> {
         let url = self.client.url(
             &format!(
                 "/users/deferred/status/{}",

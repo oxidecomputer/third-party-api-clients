@@ -303,7 +303,6 @@ dependencies = [
 name = "docusign"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -331,6 +330,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -341,7 +341,6 @@ dependencies = [
 name = "dolladollabills"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -369,6 +368,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -651,7 +651,6 @@ checksum = "f0a01e0497841a3b2db4f8afa483cce65f7e96a3498bd6c541734792aeac8fe7"
 name = "giphy-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -679,6 +678,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -689,7 +689,6 @@ dependencies = [
 name = "google-calendar"
 version = "0.5.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -718,6 +717,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -729,7 +729,6 @@ dependencies = [
 name = "google-cloud-resource-manager"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -758,6 +757,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -769,7 +769,6 @@ dependencies = [
 name = "google-drive"
 version = "0.6.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -798,6 +797,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -809,7 +809,6 @@ dependencies = [
 name = "google-groups-settings"
 version = "0.5.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -838,6 +837,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -849,7 +849,6 @@ dependencies = [
 name = "gsuite-api"
 version = "0.6.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -878,6 +877,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -889,7 +889,6 @@ dependencies = [
 name = "gusto-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -917,6 +916,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -1212,7 +1212,6 @@ dependencies = [
 name = "mailchimp-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -1240,6 +1239,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -1424,7 +1424,6 @@ dependencies = [
 name = "octorust"
 version = "0.3.2"
 dependencies = [
- "anyhow",
  "async-recursion",
  "base64 0.13.0",
  "chrono",
@@ -1450,6 +1449,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "wiremock",
@@ -1459,7 +1459,6 @@ dependencies = [
 name = "okta"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -1487,6 +1486,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -1726,7 +1726,6 @@ dependencies = [
 name = "ramp-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -1754,6 +1753,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -1995,7 +1995,6 @@ dependencies = [
 name = "revai"
 version = "0.5.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2023,6 +2022,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2210,7 +2210,6 @@ dependencies = [
 name = "sendgrid-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2238,6 +2237,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2335,7 +2335,6 @@ dependencies = [
 name = "sheets"
 version = "0.6.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2364,6 +2363,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2375,7 +2375,6 @@ dependencies = [
 name = "shipbob"
 version = "0.3.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2403,6 +2402,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2413,7 +2413,6 @@ dependencies = [
 name = "shopify"
 version = "0.3.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2441,6 +2440,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2488,7 +2488,6 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 name = "slack-chat-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2516,6 +2515,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -2799,7 +2799,6 @@ dependencies = [
 name = "tripactions"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -2827,6 +2826,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",
@@ -3277,7 +3277,6 @@ checksum = "c394b5bd0c6f669e7275d9c20aa90ae064cb22e75a1cad54e1b34088034b149f"
 name = "zoom-api"
 version = "0.4.0"
 dependencies = [
- "anyhow",
  "async-recursion",
  "async-trait",
  "base64 0.13.0",
@@ -3305,6 +3304,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_urlencoded",
+ "thiserror",
  "tokio",
  "url",
  "uuid",

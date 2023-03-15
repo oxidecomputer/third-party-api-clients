@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountPermissionProfiles {
     pub client: Client,
@@ -36,7 +35,7 @@ impl AccountPermissionProfiles {
         &self,
         account_id: &str,
         include: &str,
-    ) -> Result<crate::types::PermissionProfileInformation> {
+    ) -> ClientResult<crate::types::PermissionProfileInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -77,7 +76,7 @@ impl AccountPermissionProfiles {
         account_id: &str,
         include: &str,
         body: &crate::types::PermissionProfile,
-    ) -> Result<crate::types::PermissionProfile> {
+    ) -> ClientResult<crate::types::PermissionProfile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -125,7 +124,7 @@ impl AccountPermissionProfiles {
         account_id: &str,
         permission_profile_id: &str,
         include: &str,
-    ) -> Result<crate::types::PermissionProfile> {
+    ) -> ClientResult<crate::types::PermissionProfile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -175,7 +174,7 @@ impl AccountPermissionProfiles {
         permission_profile_id: &str,
         include: &str,
         body: &crate::types::PermissionProfile,
-    ) -> Result<crate::types::PermissionProfile> {
+    ) -> ClientResult<crate::types::PermissionProfile> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -226,7 +225,7 @@ impl AccountPermissionProfiles {
         account_id: &str,
         permission_profile_id: &str,
         move_users_to: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !move_users_to.is_empty() {
             query_args.push(("move_users_to".to_string(), move_users_to.to_string()));

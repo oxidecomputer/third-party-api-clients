@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Account {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Account {
      *
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self) -> Result<crate::types::Account> {
+    pub async fn get(&self) -> ClientResult<crate::types::Account> {
         let url = self.client.url("/v1/account", None);
         self.client
             .get(
@@ -40,7 +39,7 @@ impl Account {
      *
      * <p>To update your own account, use the <a href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating accounts.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Account> {
+    pub async fn post(&self) -> ClientResult<crate::types::Account> {
         let url = self.client.url("/v1/account", None);
         self.client
             .post(
@@ -61,7 +60,7 @@ impl Account {
      *
      * <p>If you want to delete your own account, use the <a href="https://dashboard.stripe.com/account">account information tab in your account settings</a> instead.</p>
      */
-    pub async fn delete(&self) -> Result<crate::types::DeletedAccount> {
+    pub async fn delete(&self) -> ClientResult<crate::types::DeletedAccount> {
         let url = self.client.url("/v1/account", None);
         self.client
             .delete(
@@ -78,7 +77,7 @@ impl Account {
      *
      * <p>Create an external account for a given account.</p>
      */
-    pub async fn post_bank(&self) -> Result<crate::types::DataAnyOf> {
+    pub async fn post_bank(&self) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url("/v1/account/bank_accounts", None);
         self.client
             .post(
@@ -100,7 +99,7 @@ impl Account {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get_bank(&self, id: &str) -> Result<crate::types::DataAnyOf> {
+    pub async fn get_bank(&self, id: &str) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
@@ -129,7 +128,7 @@ impl Account {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_bank_account(&self, id: &str) -> Result<crate::types::DataAnyOf> {
+    pub async fn post_bank_account(&self, id: &str) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
@@ -156,7 +155,10 @@ impl Account {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn delete_bank(&self, id: &str) -> Result<crate::types::DeletedExternalAccountAnyOf> {
+    pub async fn delete_bank(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::types::DeletedExternalAccountAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/bank_accounts/{}",
@@ -183,7 +185,7 @@ impl Account {
      *
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_capabilities(&self) -> Result<Vec<crate::types::Capability>> {
+    pub async fn get_capabilities(&self) -> ClientResult<Vec<crate::types::Capability>> {
         let url = self.client.url("/v1/account/capabilities", None);
         let resp: crate::types::ListAccountCapability = self
             .client
@@ -206,7 +208,7 @@ impl Account {
      *
      * <p>Returns a list of capabilities associated with the account. The capabilities are returned sorted by creation date, with the most recent capability appearing first.</p>
      */
-    pub async fn get_all_capabilities(&self) -> Result<Vec<crate::types::Capability>> {
+    pub async fn get_all_capabilities(&self) -> ClientResult<Vec<crate::types::Capability>> {
         let url = self.client.url("/v1/account/capabilities", None);
         let mut resp: crate::types::ListAccountCapability = self
             .client
@@ -280,7 +282,7 @@ impl Account {
     pub async fn get_capabilities_capability(
         &self,
         capability: &str,
-    ) -> Result<crate::types::Capability> {
+    ) -> ClientResult<crate::types::Capability> {
         let url = self.client.url(
             &format!(
                 "/v1/account/capabilities/{}",
@@ -310,7 +312,7 @@ impl Account {
     pub async fn post_capabilities_capability(
         &self,
         capability: &str,
-    ) -> Result<crate::types::Capability> {
+    ) -> ClientResult<crate::types::Capability> {
         let url = self.client.url(
             &format!(
                 "/v1/account/capabilities/{}",
@@ -345,7 +347,7 @@ impl Account {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::DataAnyOf>> {
+    ) -> ClientResult<Vec<crate::types::DataAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -381,7 +383,7 @@ impl Account {
      *
      * <p>List external accounts for an account.</p>
      */
-    pub async fn get_all_external(&self) -> Result<Vec<crate::types::DataAnyOf>> {
+    pub async fn get_all_external(&self) -> ClientResult<Vec<crate::types::DataAnyOf>> {
         let url = self.client.url("/v1/account/external_accounts", None);
         let mut resp: crate::types::ExternalAccounts = self
             .client
@@ -447,7 +449,7 @@ impl Account {
      *
      * <p>Create an external account for a given account.</p>
      */
-    pub async fn post_external(&self) -> Result<crate::types::DataAnyOf> {
+    pub async fn post_external(&self) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url("/v1/account/external_accounts", None);
         self.client
             .post(
@@ -469,7 +471,7 @@ impl Account {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get_external_account(&self, id: &str) -> Result<crate::types::DataAnyOf> {
+    pub async fn get_external_account(&self, id: &str) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
@@ -498,7 +500,7 @@ impl Account {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_external_account(&self, id: &str) -> Result<crate::types::DataAnyOf> {
+    pub async fn post_external_account(&self, id: &str) -> ClientResult<crate::types::DataAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
@@ -528,7 +530,7 @@ impl Account {
     pub async fn delete_external(
         &self,
         id: &str,
-    ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
+    ) -> ClientResult<crate::types::DeletedExternalAccountAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/account/external_accounts/{}",
@@ -553,7 +555,7 @@ impl Account {
      *
      * <p><strong>You may only create login links for <a href="/docs/connect/express-accounts">Express accounts</a> connected to your platform</strong>.</p>
      */
-    pub async fn post_login_link(&self) -> Result<crate::types::LoginLink> {
+    pub async fn post_login_link(&self) -> ClientResult<crate::types::LoginLink> {
         let url = self.client.url("/v1/account/login_links", None);
         self.client
             .post(
@@ -584,7 +586,7 @@ impl Account {
         limit: i64,
         _relationship: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Person>> {
+    ) -> ClientResult<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -620,7 +622,10 @@ impl Account {
      *
      * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
      */
-    pub async fn get_all_people(&self, _relationship: &str) -> Result<Vec<crate::types::Person>> {
+    pub async fn get_all_people(
+        &self,
+        _relationship: &str,
+    ) -> ClientResult<Vec<crate::types::Person>> {
         let url = self.client.url("/v1/account/people", None);
         let mut resp: crate::types::GetAccountPeopleResponse = self
             .client
@@ -686,7 +691,7 @@ impl Account {
      *
      * <p>Creates a new person.</p>
      */
-    pub async fn post_people(&self) -> Result<crate::types::Person> {
+    pub async fn post_people(&self) -> ClientResult<crate::types::Person> {
         let url = self.client.url("/v1/account/people", None);
         self.client
             .post(
@@ -708,7 +713,7 @@ impl Account {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `person: &str` -- The account's country.
      */
-    pub async fn get_people_person(&self, person: &str) -> Result<crate::types::Person> {
+    pub async fn get_people_person(&self, person: &str) -> ClientResult<crate::types::Person> {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
@@ -735,7 +740,7 @@ impl Account {
      *
      * * `person: &str` -- The account's country.
      */
-    pub async fn post_people_person(&self, person: &str) -> Result<crate::types::Person> {
+    pub async fn post_people_person(&self, person: &str) -> ClientResult<crate::types::Person> {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
@@ -762,7 +767,10 @@ impl Account {
      *
      * * `person: &str` -- The account's country.
      */
-    pub async fn delete_people_person(&self, person: &str) -> Result<crate::types::DeletedPerson> {
+    pub async fn delete_people_person(
+        &self,
+        person: &str,
+    ) -> ClientResult<crate::types::DeletedPerson> {
         let url = self.client.url(
             &format!(
                 "/v1/account/people/{}",
@@ -799,7 +807,7 @@ impl Account {
         limit: i64,
         _relationship: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Person>> {
+    ) -> ClientResult<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -835,7 +843,10 @@ impl Account {
      *
      * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
      */
-    pub async fn get_all_persons(&self, _relationship: &str) -> Result<Vec<crate::types::Person>> {
+    pub async fn get_all_persons(
+        &self,
+        _relationship: &str,
+    ) -> ClientResult<Vec<crate::types::Person>> {
         let url = self.client.url("/v1/account/persons", None);
         let mut resp: crate::types::GetAccountPeopleResponse = self
             .client
@@ -901,7 +912,7 @@ impl Account {
      *
      * <p>Creates a new person.</p>
      */
-    pub async fn post_person(&self) -> Result<crate::types::Person> {
+    pub async fn post_person(&self) -> ClientResult<crate::types::Person> {
         let url = self.client.url("/v1/account/persons", None);
         self.client
             .post(
@@ -923,7 +934,7 @@ impl Account {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `person: &str` -- The account's country.
      */
-    pub async fn get_persons_person(&self, person: &str) -> Result<crate::types::Person> {
+    pub async fn get_persons_person(&self, person: &str) -> ClientResult<crate::types::Person> {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",
@@ -950,7 +961,7 @@ impl Account {
      *
      * * `person: &str` -- The account's country.
      */
-    pub async fn post_persons_person(&self, person: &str) -> Result<crate::types::Person> {
+    pub async fn post_persons_person(&self, person: &str) -> ClientResult<crate::types::Person> {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",
@@ -977,7 +988,10 @@ impl Account {
      *
      * * `person: &str` -- The account's country.
      */
-    pub async fn delete_persons_person(&self, person: &str) -> Result<crate::types::DeletedPerson> {
+    pub async fn delete_persons_person(
+        &self,
+        person: &str,
+    ) -> ClientResult<crate::types::DeletedPerson> {
         let url = self.client.url(
             &format!(
                 "/v1/account/persons/{}",

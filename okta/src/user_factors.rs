@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct UserFactors {
     pub client: Client,
@@ -21,7 +20,7 @@ impl UserFactors {
      *
      * * `user_id: &str`
      */
-    pub async fn list_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
+    pub async fn list_factors(&self, user_id: &str) -> ClientResult<Vec<crate::types::UserFactor>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors",
@@ -46,7 +45,10 @@ impl UserFactors {
      *
      * Enumerates all the enrolled factors for the specified user
      */
-    pub async fn list_all_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
+    pub async fn list_all_factors(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<Vec<crate::types::UserFactor>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors",
@@ -87,7 +89,7 @@ impl UserFactors {
         token_lifetime_seconds: i64,
         activate: bool,
         body: &crate::types::UserFactor,
-    ) -> Result<crate::types::UserFactor> {
+    ) -> ClientResult<crate::types::UserFactor> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if activate {
             query_args.push(("activate".to_string(), activate.to_string()));
@@ -135,7 +137,7 @@ impl UserFactors {
     pub async fn list_supported_factors(
         &self,
         user_id: &str,
-    ) -> Result<Vec<crate::types::UserFactor>> {
+    ) -> ClientResult<Vec<crate::types::UserFactor>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/catalog",
@@ -163,7 +165,7 @@ impl UserFactors {
     pub async fn list_all_supported_factors(
         &self,
         user_id: &str,
-    ) -> Result<Vec<crate::types::UserFactor>> {
+    ) -> ClientResult<Vec<crate::types::UserFactor>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/catalog",
@@ -193,7 +195,7 @@ impl UserFactors {
     pub async fn list_supported_security_questions(
         &self,
         user_id: &str,
-    ) -> Result<Vec<crate::types::SecurityQuestion>> {
+    ) -> ClientResult<Vec<crate::types::SecurityQuestion>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/questions",
@@ -221,7 +223,7 @@ impl UserFactors {
     pub async fn list_all_supported_security_questions(
         &self,
         user_id: &str,
-    ) -> Result<Vec<crate::types::SecurityQuestion>> {
+    ) -> ClientResult<Vec<crate::types::SecurityQuestion>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/questions",
@@ -253,7 +255,7 @@ impl UserFactors {
         &self,
         user_id: &str,
         factor_id: &str,
-    ) -> Result<crate::types::UserFactor> {
+    ) -> ClientResult<crate::types::UserFactor> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}",
@@ -282,7 +284,7 @@ impl UserFactors {
      * * `user_id: &str`
      * * `factor_id: &str`
      */
-    pub async fn delete_factor(&self, user_id: &str, factor_id: &str) -> Result<()> {
+    pub async fn delete_factor(&self, user_id: &str, factor_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}",
@@ -318,7 +320,7 @@ impl UserFactors {
         user_id: &str,
         factor_id: &str,
         body: &crate::types::ActivateFactorRequest,
-    ) -> Result<crate::types::UserFactor> {
+    ) -> ClientResult<crate::types::UserFactor> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}/lifecycle/activate",
@@ -353,7 +355,7 @@ impl UserFactors {
         user_id: &str,
         factor_id: &str,
         transaction_id: &str,
-    ) -> Result<crate::types::VerifyUserFactorResponse> {
+    ) -> ClientResult<crate::types::VerifyUserFactorResponse> {
         let url = self.client.url(
             &format!(
                 "/api/v1/users/{}/factors/{}/transactions/{}",
@@ -397,7 +399,7 @@ impl UserFactors {
         template_id: &str,
         token_lifetime_seconds: i64,
         body: &crate::types::VerifyFactorRequest,
-    ) -> Result<crate::types::VerifyUserFactorResponse> {
+    ) -> ClientResult<crate::types::VerifyUserFactorResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !template_id.is_empty() {
             query_args.push(("templateId".to_string(), template_id.to_string()));

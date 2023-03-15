@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SettingsPartner {
     pub client: Client,
@@ -29,7 +28,7 @@ impl SettingsPartner {
      */
     pub async fn get_partner_settings_new_relic(
         &self,
-    ) -> Result<crate::types::PartnerSettingsNewRelic> {
+    ) -> ClientResult<crate::types::PartnerSettingsNewRelic> {
         let url = self.client.url("/partner_settings/new_relic", None);
         self.client
             .get(
@@ -59,7 +58,7 @@ impl SettingsPartner {
     pub async fn patch_partner_settings_new_relic(
         &self,
         body: &crate::types::PatchPartnerSettingsNewRelicRequest,
-    ) -> Result<crate::types::PartnerSettingsNewRelic> {
+    ) -> ClientResult<crate::types::PartnerSettingsNewRelic> {
         let url = self.client.url("/partner_settings/new_relic", None);
         self.client
             .patch(
@@ -90,7 +89,7 @@ impl SettingsPartner {
         &self,
         limit: i64,
         offset: i64,
-    ) -> Result<crate::types::GetPartnerSettingsResponse> {
+    ) -> ClientResult<crate::types::GetPartnerSettingsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));

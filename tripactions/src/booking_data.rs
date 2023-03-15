@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BookingData {
     pub client: Client,
@@ -40,7 +39,7 @@ impl BookingData {
         page: u64,
         size: i64,
         booking_type: crate::types::BookingType,
-    ) -> Result<Vec<crate::types::BookingReport>> {
+    ) -> ClientResult<Vec<crate::types::BookingReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
             query_args.push(("bookingStatus".to_string(), booking_status.to_string()));
@@ -99,7 +98,7 @@ impl BookingData {
         start_date_to: &str,
         booking_status: crate::types::BookingStatus,
         booking_type: crate::types::BookingType,
-    ) -> Result<Vec<crate::types::BookingReport>> {
+    ) -> ClientResult<Vec<crate::types::BookingReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
             query_args.push(("bookingStatus".to_string(), booking_status.to_string()));

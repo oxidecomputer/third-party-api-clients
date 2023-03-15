@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PhoneAutoReceptionists {
     pub client: Client,
@@ -34,7 +33,7 @@ impl PhoneAutoReceptionists {
         &self,
         auto_receptionist_id: &str,
         body: &crate::types::UpdateAutoReceptionistRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}",
@@ -75,7 +74,7 @@ impl PhoneAutoReceptionists {
         &self,
         auto_receptionist_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers",
@@ -111,7 +110,7 @@ impl PhoneAutoReceptionists {
     pub async fn unassign_all_phone_nums_auto_receptionist(
         &self,
         auto_receptionist_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers",
@@ -153,7 +152,7 @@ impl PhoneAutoReceptionists {
         &self,
         auto_receptionist_id: &str,
         phone_number_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/auto_receptionists/{}/phone_numbers/{}",
@@ -189,7 +188,7 @@ impl PhoneAutoReceptionists {
     pub async fn add_auto_receptionist(
         &self,
         body: &crate::types::AddAutoReceptionistRequest,
-    ) -> Result<crate::types::AddAutoReceptionistResponse> {
+    ) -> ClientResult<crate::types::AddAutoReceptionistResponse> {
         let url = self.client.url("/phone/auto_receptionists", None);
         self.client
             .post(

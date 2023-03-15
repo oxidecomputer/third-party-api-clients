@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SubscriptionSchedules {
     pub client: Client,
@@ -41,7 +40,7 @@ impl SubscriptionSchedules {
         _released_at: &str,
         scheduled: bool,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
+    ) -> ClientResult<Vec<crate::types::SubscriptionSchedule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -91,7 +90,7 @@ impl SubscriptionSchedules {
         customer: &str,
         _released_at: &str,
         scheduled: bool,
-    ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
+    ) -> ClientResult<Vec<crate::types::SubscriptionSchedule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -167,7 +166,7 @@ impl SubscriptionSchedules {
      *
      * <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::SubscriptionSchedule> {
+    pub async fn post(&self) -> ClientResult<crate::types::SubscriptionSchedule> {
         let url = self.client.url("/v1/subscription_schedules", None);
         self.client
             .post(
@@ -189,7 +188,10 @@ impl SubscriptionSchedules {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `schedule: &str` -- The account's country.
      */
-    pub async fn get_schedule(&self, schedule: &str) -> Result<crate::types::SubscriptionSchedule> {
+    pub async fn get_schedule(
+        &self,
+        schedule: &str,
+    ) -> ClientResult<crate::types::SubscriptionSchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
@@ -219,7 +221,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule(
         &self,
         schedule: &str,
-    ) -> Result<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::types::SubscriptionSchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}",
@@ -249,7 +251,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule_cancel(
         &self,
         schedule: &str,
-    ) -> Result<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::types::SubscriptionSchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/cancel",
@@ -279,7 +281,7 @@ impl SubscriptionSchedules {
     pub async fn post_schedule_release(
         &self,
         schedule: &str,
-    ) -> Result<crate::types::SubscriptionSchedule> {
+    ) -> ClientResult<crate::types::SubscriptionSchedule> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_schedules/{}/release",

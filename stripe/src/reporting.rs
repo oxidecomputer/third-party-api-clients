@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reporting {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Reporting {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::ReportingReportRun>> {
+    ) -> ClientResult<Vec<crate::types::ReportingReportRun>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -70,7 +69,7 @@ impl Reporting {
     pub async fn get_all_report_runs(
         &self,
         _created: &str,
-    ) -> Result<Vec<crate::types::ReportingReportRun>> {
+    ) -> ClientResult<Vec<crate::types::ReportingReportRun>> {
         let url = self.client.url("/v1/reporting/report_runs", None);
         let mut resp: crate::types::GetReportingReportRunsResponse = self
             .client
@@ -136,7 +135,7 @@ impl Reporting {
      *
      * <p>Creates a new object and begin running the report. (Certain report types require a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
      */
-    pub async fn post_report_run(&self) -> Result<crate::types::ReportingReportRun> {
+    pub async fn post_report_run(&self) -> ClientResult<crate::types::ReportingReportRun> {
         let url = self.client.url("/v1/reporting/report_runs", None);
         self.client
             .post(
@@ -161,7 +160,7 @@ impl Reporting {
     pub async fn get_report_runs_run(
         &self,
         report_run: &str,
-    ) -> Result<crate::types::ReportingReportRun> {
+    ) -> ClientResult<crate::types::ReportingReportRun> {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_runs/{}",
@@ -188,7 +187,7 @@ impl Reporting {
      *
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
+    pub async fn get_report_types(&self) -> ClientResult<Vec<crate::types::ReportingReportType>> {
         let url = self.client.url("/v1/reporting/report_types", None);
         let resp: crate::types::FinancialReportingFinanceReportTypeList = self
             .client
@@ -211,7 +210,9 @@ impl Reporting {
      *
      * <p>Returns a full list of Report Types.</p>
      */
-    pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
+    pub async fn get_all_report_types(
+        &self,
+    ) -> ClientResult<Vec<crate::types::ReportingReportType>> {
         let url = self.client.url("/v1/reporting/report_types", None);
         let mut resp: crate::types::FinancialReportingFinanceReportTypeList = self
             .client
@@ -285,7 +286,7 @@ impl Reporting {
     pub async fn get_report_types_type(
         &self,
         report_type: &str,
-    ) -> Result<crate::types::ReportingReportType> {
+    ) -> ClientResult<crate::types::ReportingReportType> {
         let url = self.client.url(
             &format!(
                 "/v1/reporting/report_types/{}",

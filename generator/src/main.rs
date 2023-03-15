@@ -2368,7 +2368,7 @@ fn gen(
         }
     }
 
-    let template_type = TemplateType::from_proper_name(&proper_name);
+    let template_type = TemplateType::from_proper_name(proper_name);
 
     a("");
 

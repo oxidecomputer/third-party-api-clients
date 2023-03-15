@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Dialog {
     pub client: Client,
@@ -25,7 +24,11 @@ impl Dialog {
      * * `dialog: &str` -- The dialog definition. This must be a JSON-encoded string.
      * * `trigger_id: &str` -- Exchange a trigger to post to the user.
      */
-    pub async fn open(&self, dialog: &str, trigger_id: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn open(
+        &self,
+        dialog: &str,
+        trigger_id: &str,
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !dialog.is_empty() {
             query_args.push(("dialog".to_string(), dialog.to_string()));

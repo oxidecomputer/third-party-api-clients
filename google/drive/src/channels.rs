@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Channels {
     pub client: Client,
@@ -17,7 +16,7 @@ impl Channels {
      *
      * Stop watching resources through this channel
      */
-    pub async fn stop(&self, body: &crate::types::Channel) -> Result<()> {
+    pub async fn stop(&self, body: &crate::types::Channel) -> ClientResult<()> {
         let url = self.client.url("/channels/stop", None);
         self.client
             .post(

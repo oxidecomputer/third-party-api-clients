@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CloudRecording {
     pub client: Client,
@@ -54,7 +53,7 @@ impl CloudRecording {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         trash_type: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -122,7 +121,7 @@ impl CloudRecording {
         meeting_id: &str,
         include_fields: &str,
         ttl: u64,
-    ) -> Result<crate::types::RecordingGetResponseAllOf> {
+    ) -> ClientResult<crate::types::RecordingGetResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -175,7 +174,7 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
         action: crate::types::RecordingDeleteAction,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !action.to_string().is_empty() {
             query_args.push(("action".to_string(), action.to_string()));
@@ -223,7 +222,7 @@ impl CloudRecording {
         meeting_id: &str,
         recording_id: &str,
         action: crate::types::RecordingDeleteAction,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !action.to_string().is_empty() {
             query_args.push(("action".to_string(), action.to_string()));
@@ -272,7 +271,7 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
         body: &crate::types::RecordingStatusUpdateBodyRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/status",
@@ -315,7 +314,7 @@ impl CloudRecording {
         meeting_id: &str,
         recording_id: &str,
         body: &crate::types::RecordingStatusUpdateBodyRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/{}/status",
@@ -355,7 +354,7 @@ impl CloudRecording {
     pub async fn recording_setting_update(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::RecordingSettings> {
+    ) -> ClientResult<crate::types::RecordingSettings> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/settings",
@@ -395,7 +394,7 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
         body: &crate::types::RecordingSettings,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/settings",
@@ -446,7 +445,7 @@ impl CloudRecording {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -502,7 +501,7 @@ impl CloudRecording {
     pub async fn meeting_recording_registrant_create(
         &self,
         meeting_id: i64,
-    ) -> Result<crate::types::MeetingRecordingRegistrantCreateResponse> {
+    ) -> ClientResult<crate::types::MeetingRecordingRegistrantCreateResponse> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants",
@@ -543,7 +542,7 @@ impl CloudRecording {
         &self,
         meeting_id: i64,
         body: &crate::types::RecordingRegistrantStatus,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants/status",
@@ -585,7 +584,7 @@ impl CloudRecording {
     pub async fn recording_registrants_questions_get(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::RecordingRegistrantQuestionsData> {
+    ) -> ClientResult<crate::types::RecordingRegistrantQuestionsData> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants/questions",
@@ -627,7 +626,7 @@ impl CloudRecording {
         &self,
         meeting_id: &str,
         body: &crate::types::RecordingRegistrantQuestionsData,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/meetings/{}/recordings/registrants/questions",
@@ -678,7 +677,7 @@ impl CloudRecording {
         next_page_token: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
+    ) -> ClientResult<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = from {
             query_args.push(("from".to_string(), date.to_rfc3339()));
@@ -740,7 +739,7 @@ impl CloudRecording {
         account_id: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
+    ) -> ClientResult<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = from {
             query_args.push(("from".to_string(), date.to_rfc3339()));

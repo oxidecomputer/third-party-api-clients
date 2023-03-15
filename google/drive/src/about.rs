@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct About {
     pub client: Client,
@@ -17,7 +16,7 @@ impl About {
      *
      * Gets information about the user, the user's Drive, and system capabilities.
      */
-    pub async fn get(&self) -> Result<crate::types::About> {
+    pub async fn get(&self) -> ClientResult<crate::types::About> {
         let url = self.client.url("/about", None);
         self.client
             .get(

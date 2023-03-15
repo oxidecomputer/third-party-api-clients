@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reports {
     pub client: Client,
@@ -29,7 +28,11 @@ impl Reports {
      * * `year: i64` -- Year for this report.
      * * `month: i64` -- Month for this report.
      */
-    pub async fn daily(&self, year: i64, month: i64) -> Result<crate::types::ReportDailyResponse> {
+    pub async fn daily(
+        &self,
+        year: i64,
+        month: i64,
+    ) -> ClientResult<crate::types::ReportDailyResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if month > 0 {
             query_args.push(("month".to_string(), month.to_string()));
@@ -79,7 +82,7 @@ impl Reports {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -142,7 +145,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         type_: crate::types::ReportMeetingsType,
-    ) -> Result<crate::types::ReportMeetingsResponseAllOf> {
+    ) -> ClientResult<crate::types::ReportMeetingsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -200,7 +203,7 @@ impl Reports {
     pub async fn meeting_details(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::ReportMeetingDetailsResponse> {
+    ) -> ClientResult<crate::types::ReportMeetingDetailsResponse> {
         let url = self.client.url(
             &format!(
                 "/report/meetings/{}",
@@ -247,7 +250,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::ReportMeetingParticipantsResponseAllOf> {
+    ) -> ClientResult<crate::types::ReportMeetingParticipantsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -299,7 +302,7 @@ impl Reports {
     pub async fn meeting_polls(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::ReportMeetingPollsResponse> {
+    ) -> ClientResult<crate::types::ReportMeetingPollsResponse> {
         let url = self.client.url(
             &format!(
                 "/report/meetings/{}/polls",
@@ -338,7 +341,7 @@ impl Reports {
     pub async fn webinar_details(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ReportMeetingDetailsResponse> {
+    ) -> ClientResult<crate::types::ReportMeetingDetailsResponse> {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}",
@@ -383,7 +386,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::ReportWebinarParticipantsResponseAllOf> {
+    ) -> ClientResult<crate::types::ReportWebinarParticipantsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -434,7 +437,7 @@ impl Reports {
     pub async fn webinar_polls(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ReportMeetingPollsResponse> {
+    ) -> ClientResult<crate::types::ReportMeetingPollsResponse> {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}/polls",
@@ -475,7 +478,7 @@ impl Reports {
     pub async fn webinar_qa(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ReportWebinarQaResponse> {
+    ) -> ClientResult<crate::types::ReportWebinarQaResponse> {
         let url = self.client.url(
             &format!(
                 "/report/webinars/{}/qa",
@@ -528,7 +531,7 @@ impl Reports {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -586,7 +589,7 @@ impl Reports {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::ReportCloudRecordingResponseAllOf> {
+    ) -> ClientResult<crate::types::ReportCloudRecordingResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -638,7 +641,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         category_type: crate::types::CategoryType,
-    ) -> Result<crate::types::ReportOperationLogsResponseAllOf> {
+    ) -> ClientResult<crate::types::ReportOperationLogsResponseAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category_type.to_string().is_empty() {
             query_args.push(("category_type".to_string(), category_type.to_string()));
@@ -694,7 +697,7 @@ impl Reports {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ActivityLogs>> {
+    ) -> ClientResult<Vec<crate::types::ActivityLogs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -744,7 +747,7 @@ impl Reports {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::ActivityLogs>> {
+    ) -> ClientResult<Vec<crate::types::ActivityLogs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -823,7 +826,7 @@ impl Reports {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      */
-    pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
+    pub async fn get_billing(&self) -> ClientResult<crate::types::GetBillingReportResponse> {
         let url = self.client.url("/report/billing", None);
         self.client
             .get(
@@ -859,7 +862,7 @@ impl Reports {
     pub async fn get_billing_invoices(
         &self,
         billing_id: &str,
-    ) -> Result<crate::types::GetBillingInvoicesReportsResponse> {
+    ) -> ClientResult<crate::types::GetBillingInvoicesReportsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !billing_id.is_empty() {
             query_args.push(("billing_id".to_string(), billing_id.to_string()));

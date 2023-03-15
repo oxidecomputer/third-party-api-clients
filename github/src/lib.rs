@@ -242,7 +242,41 @@ pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
-use anyhow::{anyhow, Error, Result};
+use thiserror::Error;
+type ClientResult<T> = Result<T, ClientError>;
+
+/// Errors returned by the client
+#[derive(Debug, Error)]
+pub enum ClientError {
+    // Github only
+    /// Ratelimited
+    #[error("Rate limited for the next {duration} seconds")]
+    RateLimited { duration: u64 },
+    /// JWT errors from auth.rs
+    #[error(transparent)]
+    JsonWebTokenError(#[from] jsonwebtoken::errors::Error),
+    /// URL Parsing Error
+    #[error(transparent)]
+    UrlParserError(#[from] url::ParseError),
+    /// Serde JSON parsing error
+    #[error(transparent)]
+    SerdeJsonError(#[from] serde_json::Error),
+    /// Errors returned by reqwest
+    #[error(transparent)]
+    ReqwestError(#[from] reqwest::Error),
+    /// Errors returned by reqwest::header
+    #[error(transparent)]
+    InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    /// Errors returned by reqwest middleware
+    #[error(transparent)]
+    ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
+    /// Generic HTTP Error
+    #[error("HTTP Error. Code: {status}, message: {error}")]
+    HttpError {
+        status: http::StatusCode,
+        error: String,
+    },
+}
 
 pub const FALLBACK_HOST: &str = "https://api.github.com";
 
@@ -294,7 +328,7 @@ pub struct Client {
 }
 
 impl Client {
-    pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
+    pub fn new<A, C>(agent: A, credentials: C) -> ClientResult<Self>
     where
         A: Into<String>,
         C: Into<Option<crate::auth::Credentials>>,
@@ -430,25 +464,24 @@ impl Client {
         &self,
         uri: &str,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(reqwest::Url, Option<String>)> {
-        let parsed_url = uri.parse::<reqwest::Url>();
+    ) -> ClientResult<(reqwest::Url, Option<String>)> {
+        let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
         match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
-                .map(|mut u| {
-                    u.query_pairs_mut()
-                        .append_pair("client_id", id)
-                        .append_pair("client_secret", secret);
-                    (u, None)
-                })
-                .map_err(Error::from),
+            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
+                parsed_url
+                    .query_pairs_mut()
+                    .append_pair("client_id", id)
+                    .append_pair("client_secret", secret);
+                Ok((parsed_url, None))
+            }
             Some(&crate::auth::Credentials::Token(ref token)) => {
                 let auth = format!("token {}", token);
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
             Some(&crate::auth::Credentials::JWT(ref jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
             Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
@@ -480,9 +513,9 @@ impl Client {
                     }
                 };
                 let auth = format!("token {}", token);
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                Ok((parsed_url, Some(auth)))
             }
-            None => parsed_url.map(|u| (u, None)).map_err(Error::from),
+            None => Ok((parsed_url, None)),
         }
     }
 
@@ -493,7 +526,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(Option<crate::utils::NextLink>, Out)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -576,13 +609,11 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response
-                .map(|out| (next_link, out))
-                .map_err(Error::from)
+            Ok((next_link, parsed_response))
         } else if status == http::StatusCode::NOT_MODIFIED {
             // only supported case is when client provides if-none-match
             // header when cargo builds with --cfg feature="httpcache"
@@ -610,20 +641,21 @@ impl Client {
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
                         .as_secs();
-                    anyhow!(
-                        "rate limit exceeded, will reset in {} seconds",
-                        u64::from(reset).saturating_sub(now)
-                    )
+                    ClientError::RateLimited {
+                        duration: u64::from(reset).saturating_sub(now),
+                    }
                 }
                 _ => {
                     if response_body.is_empty() {
-                        anyhow!("code: {}, empty response", status)
-                    } else {
-                        anyhow!(
-                            "code: {}, error: {:?}",
+                        ClientError::HttpError {
                             status,
-                            String::from_utf8_lossy(&response_body),
-                        )
+                            error: "empty response".into(),
+                        }
+                    } else {
+                        ClientError::HttpError {
+                            status,
+                            error: String::from_utf8_lossy(&response_body).into(),
+                        }
                     }
                 }
             };
@@ -638,7 +670,7 @@ impl Client {
         message: Message,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -648,7 +680,7 @@ impl Client {
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -661,7 +693,7 @@ impl Client {
         uri: &str,
         media: crate::utils::MediaType,
         message: Message,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -675,14 +707,17 @@ impl Client {
         .await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.unfold(uri).await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    async fn get_pages<D>(
+        &self,
+        uri: &str,
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -699,7 +734,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -713,7 +748,7 @@ impl Client {
         .await
     }
 
-    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -732,7 +767,7 @@ impl Client {
         message: Message,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -745,7 +780,7 @@ impl Client {
         uri: &str,
         message: Message,
         media: crate::utils::MediaType,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -759,7 +794,7 @@ impl Client {
         .await
     }
 
-    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -767,7 +802,7 @@ impl Client {
             .await
     }
 
-    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -780,7 +815,7 @@ impl Client {
         uri: &str,
         message: Message,
         media: crate::utils::MediaType,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -794,7 +829,7 @@ impl Client {
         .await
     }
 
-    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -809,7 +844,7 @@ impl Client {
     }
 
     /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
+    async fn unfold<D>(&self, uri: &str) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

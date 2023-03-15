@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminUsergroups {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
-    pub async fn add_channels(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn add_channels(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.addChannels", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn add_teams(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn add_teams(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.addTeams", None);
         self.client
             .post(
@@ -77,7 +76,7 @@ impl AdminUsergroups {
         usergroup_id: &str,
         team_id: &str,
         include_num_members: bool,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_num_members {
             query_args.push((
@@ -116,7 +115,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
-    pub async fn remove_channels(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove_channels(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.usergroups.removeChannels", None);
         self.client
             .post(

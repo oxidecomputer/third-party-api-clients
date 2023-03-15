@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Identity {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Identity {
         starting_after: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
-    ) -> Result<Vec<crate::types::GelatoVerificationReport>> {
+    ) -> ClientResult<Vec<crate::types::GelatoVerificationReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -86,7 +85,7 @@ impl Identity {
         _created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
-    ) -> Result<Vec<crate::types::GelatoVerificationReport>> {
+    ) -> ClientResult<Vec<crate::types::GelatoVerificationReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -174,7 +173,7 @@ impl Identity {
     pub async fn get_verification_reports_report(
         &self,
         report: &str,
-    ) -> Result<crate::types::GelatoVerificationReport> {
+    ) -> ClientResult<crate::types::GelatoVerificationReport> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_reports/{}",
@@ -213,7 +212,7 @@ impl Identity {
         limit: i64,
         starting_after: &str,
         status: crate::types::GelatoVerificationSessionStatus,
-    ) -> Result<Vec<crate::types::GelatoVerificationSession>> {
+    ) -> ClientResult<Vec<crate::types::GelatoVerificationSession>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -257,7 +256,7 @@ impl Identity {
         &self,
         _created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
-    ) -> Result<Vec<crate::types::GelatoVerificationSession>> {
+    ) -> ClientResult<Vec<crate::types::GelatoVerificationSession>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -339,7 +338,7 @@ impl Identity {
      */
     pub async fn post_verification_session(
         &self,
-    ) -> Result<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::types::GelatoVerificationSession> {
         let url = self.client.url("/v1/identity/verification_sessions", None);
         self.client
             .post(
@@ -367,7 +366,7 @@ impl Identity {
     pub async fn get_verification_sessions_session(
         &self,
         session: &str,
-    ) -> Result<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::types::GelatoVerificationSession> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
@@ -400,7 +399,7 @@ impl Identity {
     pub async fn post_verification_sessions_session(
         &self,
         session: &str,
-    ) -> Result<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::types::GelatoVerificationSession> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}",
@@ -432,7 +431,7 @@ impl Identity {
     pub async fn post_verification_sessions_session_cancel(
         &self,
         session: &str,
-    ) -> Result<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::types::GelatoVerificationSession> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/cancel",
@@ -480,7 +479,7 @@ impl Identity {
     pub async fn post_verification_sessions_session_redact(
         &self,
         session: &str,
-    ) -> Result<crate::types::GelatoVerificationSession> {
+    ) -> ClientResult<crate::types::GelatoVerificationSession> {
         let url = self.client.url(
             &format!(
                 "/v1/identity/verification_sessions/{}/redact",

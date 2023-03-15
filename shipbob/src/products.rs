@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Products {
     pub client: Client,
@@ -46,7 +45,7 @@ impl Products {
         search: &str,
         active_status: crate::types::ProductActiveStatus,
         bundle_status: crate::types::ProductBundleStatus,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -95,7 +94,7 @@ impl Products {
         search: &str,
         active_status: crate::types::ProductActiveStatus,
         bundle_status: crate::types::ProductBundleStatus,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -136,7 +135,7 @@ impl Products {
     pub async fn post(
         &self,
         body: &crate::types::ProductsCreateProductModel,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let url = self.client.url("/product", None);
         self.client
             .post(
@@ -158,7 +157,7 @@ impl Products {
      * * `product_id: i64` -- Unique identifier of the product.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, product_id: i64) -> Result<crate::types::Product> {
+    pub async fn get(&self, product_id: i64) -> ClientResult<crate::types::Product> {
         let url = self.client.url(
             &format!(
                 "/product/{}",
@@ -190,7 +189,7 @@ impl Products {
         &self,
         product_id: i64,
         body: &crate::types::ProductsUpdateProductModel,
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let url = self.client.url(
             &format!(
                 "/product/{}",
@@ -220,7 +219,7 @@ impl Products {
     pub async fn post_batch(
         &self,
         body: &[crate::types::ProductsCreateProductModel],
-    ) -> Result<Vec<crate::types::Product>> {
+    ) -> ClientResult<Vec<crate::types::Product>> {
         let url = self.client.url("/product/batch", None);
         self.client
             .post(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ThreeDSecure {
     pub client: Client,
@@ -17,7 +16,7 @@ impl ThreeDSecure {
      *
      * <p>Initiate 3D Secure authentication.</p>
      */
-    pub async fn post_3d_secure(&self) -> Result<crate::types::ThreeDSecure> {
+    pub async fn post_3d_secure(&self) -> ClientResult<crate::types::ThreeDSecure> {
         let url = self.client.url("/v1/3d_secure", None);
         self.client
             .post(
@@ -42,7 +41,7 @@ impl ThreeDSecure {
     pub async fn get_3d_secure_three_d(
         &self,
         three_d_secure: &str,
-    ) -> Result<crate::types::ThreeDSecure> {
+    ) -> ClientResult<crate::types::ThreeDSecure> {
         let url = self.client.url(
             &format!(
                 "/v1/3d_secure/{}",

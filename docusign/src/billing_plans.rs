@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct BillingPlans {
     pub client: Client,
@@ -41,7 +40,7 @@ impl BillingPlans {
         include_credit_card_information: &str,
         include_metadata: &str,
         include_successor_plans: &str,
-    ) -> Result<crate::types::AccountBillingPlanResponse> {
+    ) -> ClientResult<crate::types::AccountBillingPlanResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_credit_card_information.is_empty() {
             query_args.push((
@@ -94,7 +93,7 @@ impl BillingPlans {
         account_id: &str,
         preview_billing_plan: &str,
         body: &crate::types::BillingPlanInformation,
-    ) -> Result<crate::types::BillingPlanUpdateResponse> {
+    ) -> ClientResult<crate::types::BillingPlanUpdateResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !preview_billing_plan.is_empty() {
             query_args.push((
@@ -135,7 +134,7 @@ impl BillingPlans {
     pub async fn get_credit_card_info(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::CreditCardInformation> {
+    ) -> ClientResult<crate::types::CreditCardInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_plan/credit_card",
@@ -167,7 +166,7 @@ impl BillingPlans {
     pub async fn get_downgrade_request_info(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::DowngradRequestBillingInfoResponse> {
+    ) -> ClientResult<crate::types::DowngradRequestBillingInfoResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_plan/downgrade",
@@ -200,7 +199,7 @@ impl BillingPlans {
         &self,
         account_id: &str,
         body: &crate::types::DowngradeBillingPlanInformation,
-    ) -> Result<crate::types::DowngradePlanUpdateResponse> {
+    ) -> ClientResult<crate::types::DowngradePlanUpdateResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_plan/downgrade",
@@ -233,7 +232,7 @@ impl BillingPlans {
         &self,
         account_id: &str,
         body: &crate::types::PurchasedEnvelopesInformation,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_plan/purchased_envelopes",
@@ -258,7 +257,7 @@ impl BillingPlans {
      *
      * Retrieves a list of the billing plans associated with a distributor.
      */
-    pub async fn get_billing_plans(&self) -> Result<crate::types::BillingPlansResponse> {
+    pub async fn get_billing_plans(&self) -> ClientResult<crate::types::BillingPlansResponse> {
         let url = self.client.url("/v2.1/billing_plans", None);
         self.client
             .get(
@@ -284,7 +283,7 @@ impl BillingPlans {
     pub async fn get_plan(
         &self,
         billing_plan_id: &str,
-    ) -> Result<crate::types::BillingPlanResponse> {
+    ) -> ClientResult<crate::types::BillingPlanResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/billing_plans/{}",

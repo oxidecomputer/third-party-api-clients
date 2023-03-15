@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TestHelpers {
     pub client: Client,
@@ -24,7 +23,7 @@ impl TestHelpers {
     pub async fn post_terminal_readers_reader_present_payment_method(
         &self,
         reader: &str,
-    ) -> Result<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/terminal/readers/{}/present_payment_method",
@@ -59,7 +58,7 @@ impl TestHelpers {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::TestClock>> {
+    ) -> ClientResult<Vec<crate::types::TestClock>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -95,7 +94,7 @@ impl TestHelpers {
      *
      * <p>Returns a list of your test clocks.</p>
      */
-    pub async fn get_all_clocks(&self) -> Result<Vec<crate::types::TestClock>> {
+    pub async fn get_all_clocks(&self) -> ClientResult<Vec<crate::types::TestClock>> {
         let url = self.client.url("/v1/test_helpers/test_clocks", None);
         let mut resp: crate::types::GetTestHelpersClocksResponse = self
             .client
@@ -161,7 +160,7 @@ impl TestHelpers {
      *
      * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
      */
-    pub async fn post_clock(&self) -> Result<crate::types::TestClock> {
+    pub async fn post_clock(&self) -> ClientResult<crate::types::TestClock> {
         let url = self.client.url("/v1/test_helpers/test_clocks", None);
         self.client
             .post(
@@ -183,7 +182,10 @@ impl TestHelpers {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `test_clock: &str` -- The account's country.
      */
-    pub async fn get_clocks_clock(&self, test_clock: &str) -> Result<crate::types::TestClock> {
+    pub async fn get_clocks_clock(
+        &self,
+        test_clock: &str,
+    ) -> ClientResult<crate::types::TestClock> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
@@ -213,7 +215,7 @@ impl TestHelpers {
     pub async fn delete_clocks_clock(
         &self,
         test_clock: &str,
-    ) -> Result<crate::types::DeletedTestClock> {
+    ) -> ClientResult<crate::types::DeletedTestClock> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
@@ -243,7 +245,7 @@ impl TestHelpers {
     pub async fn post_clocks_clock_advance(
         &self,
         test_clock: &str,
-    ) -> Result<crate::types::TestClock> {
+    ) -> ClientResult<crate::types::TestClock> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}/advance",

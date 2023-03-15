@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateLocks {
     pub client: Client,
@@ -41,7 +40,7 @@ impl TemplateLocks {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> Result<crate::types::LockInformation> {
+    ) -> ClientResult<crate::types::LockInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -99,7 +98,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> Result<crate::types::LockInformation> {
+    ) -> ClientResult<crate::types::LockInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -191,7 +190,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> Result<crate::types::LockInformation> {
+    ) -> ClientResult<crate::types::LockInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",
@@ -244,7 +243,7 @@ impl TemplateLocks {
         account_id: &str,
         template_id: &str,
         body: &crate::types::LockRequest,
-    ) -> Result<crate::types::LockInformation> {
+    ) -> ClientResult<crate::types::LockInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/lock",

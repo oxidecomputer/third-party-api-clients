@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Radar {
     pub client: Client,
@@ -33,7 +32,7 @@ impl Radar {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::RadarEarlyFraudWarning>> {
+    ) -> ClientResult<Vec<crate::types::RadarEarlyFraudWarning>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -79,7 +78,7 @@ impl Radar {
         &self,
         charge: &str,
         payment_intent: &str,
-    ) -> Result<Vec<crate::types::RadarEarlyFraudWarning>> {
+    ) -> ClientResult<Vec<crate::types::RadarEarlyFraudWarning>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -165,7 +164,7 @@ impl Radar {
     pub async fn get_early_fraud_warnings_warning(
         &self,
         early_fraud_warning: &str,
-    ) -> Result<crate::types::RadarEarlyFraudWarning> {
+    ) -> ClientResult<crate::types::RadarEarlyFraudWarning> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/early_fraud_warnings/{}",
@@ -206,7 +205,7 @@ impl Radar {
         starting_after: &str,
         value: &str,
         value_list: &str,
-    ) -> Result<Vec<crate::types::RadarListItem>> {
+    ) -> ClientResult<Vec<crate::types::RadarListItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -253,7 +252,7 @@ impl Radar {
         _created: &str,
         value: &str,
         value_list: &str,
-    ) -> Result<Vec<crate::types::RadarListItem>> {
+    ) -> ClientResult<Vec<crate::types::RadarListItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !value.is_empty() {
             query_args.push(("value".to_string(), value.to_string()));
@@ -329,7 +328,7 @@ impl Radar {
      *
      * <p>Creates a new <code>ValueListItem</code> object, which is added to the specified parent value list.</p>
      */
-    pub async fn post_value_list_item(&self) -> Result<crate::types::RadarListItem> {
+    pub async fn post_value_list_item(&self) -> ClientResult<crate::types::RadarListItem> {
         let url = self.client.url("/v1/radar/value_list_items", None);
         self.client
             .post(
@@ -354,7 +353,7 @@ impl Radar {
     pub async fn get_value_list_items_item(
         &self,
         item: &str,
-    ) -> Result<crate::types::RadarListItem> {
+    ) -> ClientResult<crate::types::RadarListItem> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
@@ -384,7 +383,7 @@ impl Radar {
     pub async fn delete_value_list_items_item(
         &self,
         item: &str,
-    ) -> Result<crate::types::RadarListDeletedItem> {
+    ) -> ClientResult<crate::types::RadarListDeletedItem> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
@@ -425,7 +424,7 @@ impl Radar {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::RadarList>> {
+    ) -> ClientResult<Vec<crate::types::RadarList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
             query_args.push(("alias".to_string(), alias.to_string()));
@@ -472,7 +471,7 @@ impl Radar {
         alias: &str,
         contains: &str,
         _created: &str,
-    ) -> Result<Vec<crate::types::RadarList>> {
+    ) -> ClientResult<Vec<crate::types::RadarList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
             query_args.push(("alias".to_string(), alias.to_string()));
@@ -548,7 +547,7 @@ impl Radar {
      *
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
-    pub async fn post_value_list(&self) -> Result<crate::types::RadarList> {
+    pub async fn post_value_list(&self) -> ClientResult<crate::types::RadarList> {
         let url = self.client.url("/v1/radar/value_lists", None);
         self.client
             .post(
@@ -570,7 +569,10 @@ impl Radar {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `value_list: &str` -- The account's country.
      */
-    pub async fn get_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
+    pub async fn get_value_lists_list(
+        &self,
+        value_list: &str,
+    ) -> ClientResult<crate::types::RadarList> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
@@ -597,7 +599,10 @@ impl Radar {
      *
      * * `value_list: &str` -- The account's country.
      */
-    pub async fn post_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
+    pub async fn post_value_lists_list(
+        &self,
+        value_list: &str,
+    ) -> ClientResult<crate::types::RadarList> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
@@ -627,7 +632,7 @@ impl Radar {
     pub async fn delete_value_lists_list(
         &self,
         value_list: &str,
-    ) -> Result<crate::types::RadarListDeleted> {
+    ) -> ClientResult<crate::types::RadarListDeleted> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",

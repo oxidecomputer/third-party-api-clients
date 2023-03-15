@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct OrderReturns {
     pub client: Client,
@@ -33,7 +32,7 @@ impl OrderReturns {
         limit: i64,
         order: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::OrderReturn>> {
+    ) -> ClientResult<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -76,7 +75,7 @@ impl OrderReturns {
         &self,
         _created: &str,
         order: &str,
-    ) -> Result<Vec<crate::types::OrderReturn>> {
+    ) -> ClientResult<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -154,7 +153,7 @@ impl OrderReturns {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::OrderReturn> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::OrderReturn> {
         let url = self.client.url(
             &format!(
                 "/v1/order_returns/{}",

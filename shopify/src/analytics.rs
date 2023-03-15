@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Analytics {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -88,7 +87,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -126,7 +125,7 @@ impl Analytics {
         &self,
         report_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -165,7 +164,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/reports/{}/json",
@@ -197,7 +196,7 @@ impl Analytics {
     pub async fn deprecated_202001_delete_reports_param_report(
         &self,
         report_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/reports/{}/json",
@@ -240,7 +239,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -291,7 +290,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -329,7 +328,7 @@ impl Analytics {
         &self,
         report_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -368,7 +367,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/reports/{}/json",
@@ -400,7 +399,7 @@ impl Analytics {
     pub async fn deprecated_202004_delete_reports_param_report(
         &self,
         report_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/reports/{}/json",
@@ -443,7 +442,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -494,7 +493,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -532,7 +531,7 @@ impl Analytics {
         &self,
         report_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -571,7 +570,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/reports/{}/json",
@@ -603,7 +602,7 @@ impl Analytics {
     pub async fn deprecated_202007_delete_reports_param_report(
         &self,
         report_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/reports/{}/json",
@@ -646,7 +645,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -697,7 +696,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -731,7 +730,11 @@ impl Analytics {
      * * `report_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn get_reports_param_report(&self, report_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_reports_param_report(
+        &self,
+        report_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -770,7 +773,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/reports/{}/json",
@@ -799,7 +802,7 @@ impl Analytics {
      *
      * * `report_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_reports_param_report(&self, report_id: &str) -> Result<()> {
+    pub async fn delete_reports_param_report(&self, report_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/reports/{}/json",
@@ -842,7 +845,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -893,7 +896,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -931,7 +934,7 @@ impl Analytics {
         &self,
         report_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -970,7 +973,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/reports/{}/json",
@@ -1002,7 +1005,7 @@ impl Analytics {
     pub async fn deprecated_202101_delete_reports_param_report(
         &self,
         report_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/reports/{}/json",
@@ -1045,7 +1048,7 @@ impl Analytics {
         updated_at_min: &str,
         updated_at_max: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1097,7 +1100,7 @@ impl Analytics {
         name: &str,
         shopify_ql: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -1136,7 +1139,7 @@ impl Analytics {
         &self,
         report_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1175,7 +1178,7 @@ impl Analytics {
         &self,
         report_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/reports/{}/json",
@@ -1207,7 +1210,7 @@ impl Analytics {
     pub async fn deprecated_unstable_delete_reports_param_report(
         &self,
         report_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/reports/{}/json",

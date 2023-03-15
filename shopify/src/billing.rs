@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Billing {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -61,7 +60,7 @@ impl Billing {
     pub async fn deprecated_202001_create_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/application_charges.json", None);
@@ -91,7 +90,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -135,7 +134,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/application_charges/{}/activate.json",
@@ -169,7 +168,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -202,7 +201,7 @@ impl Billing {
     pub async fn deprecated_202004_create_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/application_charges.json", None);
@@ -232,7 +231,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -276,7 +275,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/application_charges/{}/activate.json",
@@ -310,7 +309,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -343,7 +342,7 @@ impl Billing {
     pub async fn deprecated_202007_create_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/application_charges.json", None);
@@ -373,7 +372,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -417,7 +416,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/application_charges/{}/activate.json",
@@ -447,7 +446,7 @@ impl Billing {
      * * `since_id: &str` -- Restrict results to after the specified ID.
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn get_application_charge(&self, since_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_application_charge(&self, since_id: &str, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -477,7 +476,7 @@ impl Billing {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-10
      */
-    pub async fn create_application_charges(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_application_charges(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/application_charges.json", None);
@@ -507,7 +506,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -551,7 +550,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/application_charges/{}/activate.json",
@@ -585,7 +584,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -618,7 +617,7 @@ impl Billing {
     pub async fn deprecated_202101_create_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/application_charges.json", None);
@@ -648,7 +647,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -688,7 +687,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -721,7 +720,7 @@ impl Billing {
     pub async fn deprecated_unstable_create_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/application_charges.json", None);
@@ -751,7 +750,7 @@ impl Billing {
         &self,
         application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -786,7 +785,7 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202001_get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_application_credit(&self, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -816,7 +815,7 @@ impl Billing {
     pub async fn deprecated_202001_create_application_credits(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/application_credits.json", None);
@@ -846,7 +845,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -881,7 +880,7 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202004_get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_application_credit(&self, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -911,7 +910,7 @@ impl Billing {
     pub async fn deprecated_202004_create_application_credits(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/application_credits.json", None);
@@ -941,7 +940,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -976,7 +975,7 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202007_get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_application_credit(&self, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1006,7 +1005,7 @@ impl Billing {
     pub async fn deprecated_202007_create_application_credits(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/application_credits.json", None);
@@ -1036,7 +1035,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1071,7 +1070,7 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn get_application_credit(&self, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1098,7 +1097,7 @@ impl Billing {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-10
      */
-    pub async fn create_application_credits(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_application_credits(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/application_credits.json", None);
@@ -1128,7 +1127,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1163,7 +1162,7 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_202101_get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_application_credit(&self, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1193,7 +1192,7 @@ impl Billing {
     pub async fn deprecated_202101_create_application_credits(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/application_credits.json", None);
@@ -1223,7 +1222,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1258,7 +1257,10 @@ impl Billing {
      *
      * * `fields: &str` -- A comma-separated list of fields to include in the response.
      */
-    pub async fn deprecated_unstable_get_application_credit(&self, fields: &str) -> Result<()> {
+    pub async fn deprecated_unstable_get_application_credit(
+        &self,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1288,7 +1290,7 @@ impl Billing {
     pub async fn deprecated_unstable_create_application_credits(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/application_credits.json", None);
@@ -1318,7 +1320,7 @@ impl Billing {
         &self,
         application_credit_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1358,7 +1360,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1394,7 +1396,7 @@ impl Billing {
     pub async fn deprecated_202001_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/2020-01/recurring_application_charges.json",
             None,
@@ -1425,7 +1427,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1463,7 +1465,7 @@ impl Billing {
     pub async fn deprecated_202001_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/json",
@@ -1501,7 +1503,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/activate.json",
@@ -1535,7 +1537,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -1578,7 +1580,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1614,7 +1616,7 @@ impl Billing {
     pub async fn deprecated_202004_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/2020-04/recurring_application_charges.json",
             None,
@@ -1645,7 +1647,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1683,7 +1685,7 @@ impl Billing {
     pub async fn deprecated_202004_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/json",
@@ -1721,7 +1723,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/activate.json",
@@ -1755,7 +1757,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -1798,7 +1800,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1834,7 +1836,7 @@ impl Billing {
     pub async fn deprecated_202007_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/2020-07/recurring_application_charges.json",
             None,
@@ -1865,7 +1867,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1903,7 +1905,7 @@ impl Billing {
     pub async fn deprecated_202007_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/json",
@@ -1941,7 +1943,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/activate.json",
@@ -1975,7 +1977,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -2018,7 +2020,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2054,7 +2056,7 @@ impl Billing {
     pub async fn create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/2020-10/recurring_application_charges.json",
             None,
@@ -2085,7 +2087,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2123,7 +2125,7 @@ impl Billing {
     pub async fn delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/json",
@@ -2161,7 +2163,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/activate.json",
@@ -2195,7 +2197,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -2238,7 +2240,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2274,7 +2276,7 @@ impl Billing {
     pub async fn deprecated_202101_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/2021-01/recurring_application_charges.json",
             None,
@@ -2305,7 +2307,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2343,7 +2345,7 @@ impl Billing {
     pub async fn deprecated_202101_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/json",
@@ -2377,7 +2379,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -2420,7 +2422,7 @@ impl Billing {
         &self,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2456,7 +2458,7 @@ impl Billing {
     pub async fn deprecated_unstable_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             "/admin/api/unstable/recurring_application_charges.json",
             None,
@@ -2487,7 +2489,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2525,7 +2527,7 @@ impl Billing {
     pub async fn deprecated_unstable_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/json",
@@ -2559,7 +2561,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         recurring_application_charge_capped_amount: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if recurring_application_charge_capped_amount > 0 {
             query_args.push((
@@ -2602,7 +2604,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2641,7 +2643,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/recurring_application_charges/{}/usage_charges.json",
@@ -2677,7 +2679,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2718,7 +2720,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2757,7 +2759,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/recurring_application_charges/{}/usage_charges.json",
@@ -2793,7 +2795,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2834,7 +2836,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2873,7 +2875,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/recurring_application_charges/{}/usage_charges.json",
@@ -2909,7 +2911,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2950,7 +2952,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2989,7 +2991,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/recurring_application_charges/{}/usage_charges.json",
@@ -3025,7 +3027,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3066,7 +3068,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3105,7 +3107,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/recurring_application_charges/{}/usage_charges.json",
@@ -3141,7 +3143,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3182,7 +3184,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3221,7 +3223,7 @@ impl Billing {
         &self,
         recurring_application_charge_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/recurring_application_charges/{}/usage_charges.json",
@@ -3257,7 +3259,7 @@ impl Billing {
         recurring_application_charge_id: &str,
         usage_charge_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));

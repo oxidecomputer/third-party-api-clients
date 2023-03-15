@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountBrands {
     pub client: Client,
@@ -32,7 +31,7 @@ impl AccountBrands {
         account_id: &str,
         exclude_distributor_brand: &str,
         include_logos: &str,
-    ) -> Result<crate::types::AccountBrands> {
+    ) -> ClientResult<crate::types::AccountBrands> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_distributor_brand.is_empty() {
             query_args.push((
@@ -83,7 +82,7 @@ impl AccountBrands {
         &self,
         account_id: &str,
         body: &crate::types::Brand,
-    ) -> Result<crate::types::AccountBrands> {
+    ) -> ClientResult<crate::types::AccountBrands> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands",
@@ -118,7 +117,7 @@ impl AccountBrands {
         &self,
         account_id: &str,
         body: &crate::types::BrandsRequest,
-    ) -> Result<crate::types::AccountBrands> {
+    ) -> ClientResult<crate::types::AccountBrands> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands",
@@ -158,7 +157,7 @@ impl AccountBrands {
         brand_id: &str,
         include_external_references: &str,
         include_logos: &str,
-    ) -> Result<crate::types::Brand> {
+    ) -> ClientResult<crate::types::Brand> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_external_references.is_empty() {
             query_args.push((
@@ -208,7 +207,7 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
         body: &crate::types::Brand,
-    ) -> Result<crate::types::Brand> {
+    ) -> ClientResult<crate::types::Brand> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}",
@@ -241,7 +240,7 @@ impl AccountBrands {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn brand_delete(&self, account_id: &str, brand_id: &str) -> Result<()> {
+    pub async fn brand_delete(&self, account_id: &str, brand_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}",
@@ -274,7 +273,11 @@ impl AccountBrands {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn brand_export_get_file(&self, account_id: &str, brand_id: &str) -> Result<()> {
+    pub async fn brand_export_get_file(
+        &self,
+        account_id: &str,
+        brand_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/file",
@@ -313,7 +316,7 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
         logo_type: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
@@ -358,7 +361,7 @@ impl AccountBrands {
         brand_id: &str,
         logo_type: &str,
         body: bytes::Bytes,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
@@ -398,7 +401,7 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
         logo_type: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/logos/{}",
@@ -436,7 +439,7 @@ impl AccountBrands {
         &self,
         account_id: &str,
         brand_id: &str,
-    ) -> Result<crate::types::BrandResourcesList> {
+    ) -> ClientResult<crate::types::BrandResourcesList> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/resources",
@@ -488,7 +491,7 @@ impl AccountBrands {
         resource_content_type: &str,
         langcode: &str,
         return_master: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !langcode.is_empty() {
             query_args.push(("langcode".to_string(), langcode.to_string()));
@@ -550,7 +553,7 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
         resource_content_type: &str,
-    ) -> Result<crate::types::BrandResources> {
+    ) -> ClientResult<crate::types::BrandResources> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/brands/{}/resources/{}",

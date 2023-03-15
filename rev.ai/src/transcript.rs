@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Transcript {
     pub client: Client,
@@ -26,7 +25,11 @@ impl Transcript {
      *
      * * `accept: crate::types::AcceptTranscript` -- MIME type specifying the transcription output format.
      */
-    pub async fn get(&self, id: &str, accept: crate::types::AcceptTranscript) -> Result<String> {
+    pub async fn get(
+        &self,
+        id: &str,
+        accept: crate::types::AcceptTranscript,
+    ) -> ClientResult<String> {
         let url = self.client.url(
             &format!(
                 "/jobs/{}/transcript",

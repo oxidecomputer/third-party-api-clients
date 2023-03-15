@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ConnectSecret {
     pub client: Client,
@@ -24,7 +23,11 @@ impl ConnectSecret {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `key_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn connect_hmac_delete_secret(&self, account_id: &str, key_id: &str) -> Result<()> {
+    pub async fn connect_hmac_delete_secret(
+        &self,
+        account_id: &str,
+        key_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/secret/{}",

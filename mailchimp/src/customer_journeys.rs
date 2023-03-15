@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CustomerJourneys {
     pub client: Client,
@@ -29,7 +28,7 @@ impl CustomerJourneys {
         journey_id: i64,
         step_id: i64,
         body: &crate::types::SubscriberInAutomationQueue,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/customer-journeys/journeys/{}/steps/{}/actions/trigger",

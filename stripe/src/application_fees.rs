@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ApplicationFees {
     pub client: Client,
@@ -33,7 +32,7 @@ impl ApplicationFees {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::PlatformFee>> {
+    ) -> ClientResult<Vec<crate::types::PlatformFee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -76,7 +75,7 @@ impl ApplicationFees {
         &self,
         charge: &str,
         _created: &str,
-    ) -> Result<Vec<crate::types::PlatformFee>> {
+    ) -> ClientResult<Vec<crate::types::PlatformFee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -155,7 +154,11 @@ impl ApplicationFees {
      * * `fee: &str` -- The account's country.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get_fee_refund(&self, fee: &str, id: &str) -> Result<crate::types::FeeRefund> {
+    pub async fn get_fee_refund(
+        &self,
+        fee: &str,
+        id: &str,
+    ) -> ClientResult<crate::types::FeeRefund> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds/{}",
@@ -186,7 +189,11 @@ impl ApplicationFees {
      * * `fee: &str` -- The account's country.
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_fee_refund(&self, fee: &str, id: &str) -> Result<crate::types::FeeRefund> {
+    pub async fn post_fee_refund(
+        &self,
+        fee: &str,
+        id: &str,
+    ) -> ClientResult<crate::types::FeeRefund> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds/{}",
@@ -215,7 +222,7 @@ impl ApplicationFees {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::PlatformFee> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::PlatformFee> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}",
@@ -242,7 +249,7 @@ impl ApplicationFees {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_refund(&self, id: &str) -> Result<crate::types::PlatformFee> {
+    pub async fn post_refund(&self, id: &str) -> ClientResult<crate::types::PlatformFee> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refund",
@@ -279,7 +286,7 @@ impl ApplicationFees {
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::FeeRefund>> {
+    ) -> ClientResult<Vec<crate::types::FeeRefund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -320,7 +327,7 @@ impl ApplicationFees {
      *
      * <p>You can see a list of the refunds belonging to a specific application fee. Note that the 10 most recent refunds are always available by default on the application fee object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
      */
-    pub async fn get_all_refunds(&self, id: &str) -> Result<Vec<crate::types::FeeRefund>> {
+    pub async fn get_all_refunds(&self, id: &str) -> ClientResult<Vec<crate::types::FeeRefund>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds",
@@ -404,7 +411,10 @@ impl ApplicationFees {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_refund_application_fees(&self, id: &str) -> Result<crate::types::FeeRefund> {
+    pub async fn post_refund_application_fees(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::types::FeeRefund> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds",

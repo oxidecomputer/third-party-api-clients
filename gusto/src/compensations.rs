@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Compensations {
     pub client: Client,
@@ -22,7 +21,7 @@ impl Compensations {
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
      *
      */
-    pub async fn get(&self, compensation_id: &str) -> Result<crate::types::Compensation> {
+    pub async fn get(&self, compensation_id: &str) -> ClientResult<crate::types::Compensation> {
         let url = self.client.url(
             &format!(
                 "/v1/compensations/{}",
@@ -53,7 +52,7 @@ impl Compensations {
         &self,
         compensation_id: &str,
         body: &crate::types::PutCompensationRequest,
-    ) -> Result<crate::types::Compensation> {
+    ) -> ClientResult<crate::types::Compensation> {
         let url = self.client.url(
             &format!(
                 "/v1/compensations/{}",
@@ -82,7 +81,7 @@ impl Compensations {
      *
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
-    pub async fn get_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
+    pub async fn get_job(&self, job_id: &str) -> ClientResult<Vec<crate::types::Compensation>> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",
@@ -113,7 +112,7 @@ impl Compensations {
      *
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
-    pub async fn get_all_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
+    pub async fn get_all_job(&self, job_id: &str) -> ClientResult<Vec<crate::types::Compensation>> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",

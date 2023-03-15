@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Quotes {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Quotes {
         starting_after: &str,
         status: crate::types::QuoteStatus,
         test_clock: &str,
-    ) -> Result<Vec<crate::types::Quote>> {
+    ) -> ClientResult<Vec<crate::types::Quote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -83,7 +82,7 @@ impl Quotes {
         customer: &str,
         status: crate::types::QuoteStatus,
         test_clock: &str,
-    ) -> Result<Vec<crate::types::Quote>> {
+    ) -> ClientResult<Vec<crate::types::Quote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -160,7 +159,7 @@ impl Quotes {
      *
      * <p>A quote models prices and services for a customer. Default options for <code>header</code>, <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Quote> {
+    pub async fn post(&self) -> ClientResult<crate::types::Quote> {
         let url = self.client.url("/v1/quotes", None);
         self.client
             .post(
@@ -182,7 +181,7 @@ impl Quotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `quote: &str` -- The account's country.
      */
-    pub async fn get(&self, quote: &str) -> Result<crate::types::Quote> {
+    pub async fn get(&self, quote: &str) -> ClientResult<crate::types::Quote> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
@@ -209,7 +208,7 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_quotes(&self, quote: &str) -> Result<crate::types::Quote> {
+    pub async fn post_quotes(&self, quote: &str) -> ClientResult<crate::types::Quote> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
@@ -236,7 +235,7 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_accept(&self, quote: &str) -> Result<crate::types::Quote> {
+    pub async fn post_accept(&self, quote: &str) -> ClientResult<crate::types::Quote> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/accept",
@@ -263,7 +262,7 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, quote: &str) -> Result<crate::types::Quote> {
+    pub async fn post_cancel(&self, quote: &str) -> ClientResult<crate::types::Quote> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/cancel",
@@ -300,7 +299,7 @@ impl Quotes {
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    ) -> ClientResult<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -344,7 +343,7 @@ impl Quotes {
     pub async fn get_all_computed_upfront_line_items(
         &self,
         quote: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    ) -> ClientResult<Vec<crate::types::Item>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/computed_upfront_line_items",
@@ -420,7 +419,7 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_finalize(&self, quote: &str) -> Result<crate::types::Quote> {
+    pub async fn post_finalize(&self, quote: &str) -> ClientResult<crate::types::Quote> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/finalize",
@@ -457,7 +456,7 @@ impl Quotes {
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    ) -> ClientResult<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -498,7 +497,7 @@ impl Quotes {
      *
      * <p>When retrieving a quote, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
-    pub async fn get_all_line_items(&self, quote: &str) -> Result<Vec<crate::types::Item>> {
+    pub async fn get_all_line_items(&self, quote: &str) -> ClientResult<Vec<crate::types::Item>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/line_items",
@@ -575,7 +574,7 @@ impl Quotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `quote: &str` -- The account's country.
      */
-    pub async fn get_pdf(&self, quote: &str) -> Result<()> {
+    pub async fn get_pdf(&self, quote: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/pdf",

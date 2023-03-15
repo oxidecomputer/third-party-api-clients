@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Departments {
     pub client: Client,
@@ -29,7 +28,7 @@ impl Departments {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<Vec<crate::types::Department>> {
+    ) -> ClientResult<Vec<crate::types::Department>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -62,7 +61,7 @@ impl Departments {
      *
      * Retrieve all departments.
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Department>> {
         let url = self.client.url("/departments", None);
         let resp: crate::types::GetDepartmentsResponse = self
             .client
@@ -104,7 +103,7 @@ impl Departments {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -123,7 +122,7 @@ impl Departments {
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
-    ) -> Result<crate::types::Department> {
+    ) -> ClientResult<crate::types::Department> {
         let url = self.client.url("/departments", None);
         self.client
             .post(
@@ -146,7 +145,7 @@ impl Departments {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Department> {
         let url = self.client.url(
             &format!(
                 "/departments/{}",
@@ -175,7 +174,7 @@ impl Departments {
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,
-    ) -> Result<crate::types::Department> {
+    ) -> ClientResult<crate::types::Department> {
         let url = self.client.url(
             &format!(
                 "/departments/{}",

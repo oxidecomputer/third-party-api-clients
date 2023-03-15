@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CountrySpecs {
     pub client: Client,
@@ -29,7 +28,7 @@ impl CountrySpecs {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::CountrySpec>> {
+    ) -> ClientResult<Vec<crate::types::CountrySpec>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -65,7 +64,7 @@ impl CountrySpecs {
      *
      * <p>Lists all Country Spec objects available in the API.</p>
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::CountrySpec>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::CountrySpec>> {
         let url = self.client.url("/v1/country_specs", None);
         let mut resp: crate::types::GetCountrySpecsResponse = self
             .client
@@ -136,7 +135,7 @@ impl CountrySpecs {
      * * `country: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
+    pub async fn get(&self, country: &str) -> ClientResult<crate::types::CountrySpec> {
         let url = self.client.url(
             &format!(
                 "/v1/country_specs/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminsBeta {
     pub client: Client,
@@ -21,7 +20,10 @@ impl AdminsBeta {
      *
      * Returns a list of all the admins at a company
      */
-    pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
+    pub async fn get_company_admins(
+        &self,
+        company_id: &str,
+    ) -> ClientResult<Vec<crate::types::Admin>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
@@ -53,7 +55,7 @@ impl AdminsBeta {
     pub async fn get_all_company_admins(
         &self,
         company_id: &str,
-    ) -> Result<Vec<crate::types::Admin>> {
+    ) -> ClientResult<Vec<crate::types::Admin>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",
@@ -84,7 +86,7 @@ impl AdminsBeta {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyAdminsRequest,
-    ) -> Result<crate::types::Admin> {
+    ) -> ClientResult<crate::types::Admin> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/admins",

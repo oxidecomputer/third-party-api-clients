@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Transactions {
     pub client: Client,
@@ -57,7 +56,7 @@ impl Transactions {
         start: &str,
         page_size: f64,
         requires_memo: bool,
-    ) -> Result<Vec<crate::types::Data>> {
+    ) -> ClientResult<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -160,7 +159,7 @@ impl Transactions {
         min_amount: f64,
         max_amount: f64,
         requires_memo: bool,
-    ) -> Result<Vec<crate::types::Data>> {
+    ) -> ClientResult<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -258,7 +257,7 @@ impl Transactions {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -278,7 +277,7 @@ impl Transactions {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resource(&self, id: &str) -> Result<crate::types::Data> {
+    pub async fn get_resource(&self, id: &str) -> ClientResult<crate::types::Data> {
         let url = self.client.url(
             &format!(
                 "/transactions/{}",

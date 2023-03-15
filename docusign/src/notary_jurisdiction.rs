@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct NotaryJurisdiction {
     pub client: Client,
@@ -20,7 +19,7 @@ impl NotaryJurisdiction {
      * Returns a list of jurisdictions that the notary is registered in.
      * The current user must be a notary.
      */
-    pub async fn s_get(&self) -> Result<crate::types::NotaryJurisdictionList> {
+    pub async fn s_get(&self) -> ClientResult<crate::types::NotaryJurisdictionList> {
         let url = self
             .client
             .url("/v2.1/current_user/notary/jurisdictions", None);
@@ -44,7 +43,7 @@ impl NotaryJurisdiction {
     pub async fn s_post(
         &self,
         body: &crate::types::NotaryJurisdictionData,
-    ) -> Result<crate::types::NotaryJurisdictionData> {
+    ) -> ClientResult<crate::types::NotaryJurisdictionData> {
         let url = self
             .client
             .url("/v2.1/current_user/notary/jurisdictions", None);
@@ -104,7 +103,7 @@ impl NotaryJurisdiction {
     pub async fn s_get_jurisdiction(
         &self,
         jurisdiction_id: &str,
-    ) -> Result<crate::types::NotaryJurisdictionData> {
+    ) -> ClientResult<crate::types::NotaryJurisdictionData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",
@@ -223,7 +222,7 @@ impl NotaryJurisdiction {
         &self,
         jurisdiction_id: &str,
         body: &crate::types::NotaryJurisdictionData,
-    ) -> Result<crate::types::NotaryJurisdictionData> {
+    ) -> ClientResult<crate::types::NotaryJurisdictionData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",
@@ -280,7 +279,7 @@ impl NotaryJurisdiction {
      *   -  `62 - Florida Commissioner of Deeds`
      *   .
      */
-    pub async fn s_delete_jurisdiction(&self, jurisdiction_id: &str) -> Result<()> {
+    pub async fn s_delete_jurisdiction(&self, jurisdiction_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/current_user/notary/jurisdictions/{}",

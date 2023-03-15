@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Issuing {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Issuing {
         limit: i64,
         starting_after: &str,
         status: crate::types::IssuingAuthorizationStatus,
-    ) -> Result<Vec<crate::types::IssuingAuthorization>> {
+    ) -> ClientResult<Vec<crate::types::IssuingAuthorization>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -88,7 +87,7 @@ impl Issuing {
         cardholder: &str,
         _created: &str,
         status: crate::types::IssuingAuthorizationStatus,
-    ) -> Result<Vec<crate::types::IssuingAuthorization>> {
+    ) -> ClientResult<Vec<crate::types::IssuingAuthorization>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -175,7 +174,7 @@ impl Issuing {
     pub async fn get_authorizations_authorization(
         &self,
         authorization: &str,
-    ) -> Result<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::types::IssuingAuthorization> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}",
@@ -205,7 +204,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization(
         &self,
         authorization: &str,
-    ) -> Result<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::types::IssuingAuthorization> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}",
@@ -235,7 +234,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization_approve(
         &self,
         authorization: &str,
-    ) -> Result<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::types::IssuingAuthorization> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}/approve",
@@ -265,7 +264,7 @@ impl Issuing {
     pub async fn post_authorizations_authorization_decline(
         &self,
         authorization: &str,
-    ) -> Result<crate::types::IssuingAuthorization> {
+    ) -> ClientResult<crate::types::IssuingAuthorization> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/authorizations/{}/decline",
@@ -310,7 +309,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
-    ) -> Result<Vec<crate::types::IssuingCardholder>> {
+    ) -> ClientResult<Vec<crate::types::IssuingCardholder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -365,7 +364,7 @@ impl Issuing {
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
-    ) -> Result<Vec<crate::types::IssuingCardholder>> {
+    ) -> ClientResult<Vec<crate::types::IssuingCardholder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -447,7 +446,7 @@ impl Issuing {
      *
      * <p>Creates a new Issuing <code>Cardholder</code> object that can be issued cards.</p>
      */
-    pub async fn post_cardholder(&self) -> Result<crate::types::IssuingCardholder> {
+    pub async fn post_cardholder(&self) -> ClientResult<crate::types::IssuingCardholder> {
         let url = self.client.url("/v1/issuing/cardholders", None);
         self.client
             .post(
@@ -472,7 +471,7 @@ impl Issuing {
     pub async fn get_cardholders_cardholder(
         &self,
         cardholder: &str,
-    ) -> Result<crate::types::IssuingCardholder> {
+    ) -> ClientResult<crate::types::IssuingCardholder> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cardholders/{}",
@@ -502,7 +501,7 @@ impl Issuing {
     pub async fn post_cardholders_cardholder(
         &self,
         cardholder: &str,
-    ) -> Result<crate::types::IssuingCardholder> {
+    ) -> ClientResult<crate::types::IssuingCardholder> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cardholders/{}",
@@ -551,7 +550,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
-    ) -> Result<Vec<crate::types::IssuingCard>> {
+    ) -> ClientResult<Vec<crate::types::IssuingCard>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cardholder.is_empty() {
             query_args.push(("cardholder".to_string(), cardholder.to_string()));
@@ -614,7 +613,7 @@ impl Issuing {
         last_4: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
-    ) -> Result<Vec<crate::types::IssuingCard>> {
+    ) -> ClientResult<Vec<crate::types::IssuingCard>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cardholder.is_empty() {
             query_args.push(("cardholder".to_string(), cardholder.to_string()));
@@ -702,7 +701,7 @@ impl Issuing {
      *
      * <p>Creates an Issuing <code>Card</code> object.</p>
      */
-    pub async fn post_card(&self) -> Result<crate::types::IssuingCard> {
+    pub async fn post_card(&self) -> ClientResult<crate::types::IssuingCard> {
         let url = self.client.url("/v1/issuing/cards", None);
         self.client
             .post(
@@ -724,7 +723,7 @@ impl Issuing {
      * * `card: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
+    pub async fn get_cards_card(&self, card: &str) -> ClientResult<crate::types::IssuingCard> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cards/{}",
@@ -751,7 +750,7 @@ impl Issuing {
      *
      * * `card: &str` -- The account's country.
      */
-    pub async fn post_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
+    pub async fn post_cards_card(&self, card: &str) -> ClientResult<crate::types::IssuingCard> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/cards/{}",
@@ -792,7 +791,7 @@ impl Issuing {
         starting_after: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
-    ) -> Result<Vec<crate::types::IssuingDispute>> {
+    ) -> ClientResult<Vec<crate::types::IssuingDispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -839,7 +838,7 @@ impl Issuing {
         _created: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
-    ) -> Result<Vec<crate::types::IssuingDispute>> {
+    ) -> ClientResult<Vec<crate::types::IssuingDispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -915,7 +914,7 @@ impl Issuing {
      *
      * <p>Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>evidence</code> object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to <a href="/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute reasons and evidence</a> for more details about evidence requirements.</p>
      */
-    pub async fn post_dispute(&self) -> Result<crate::types::IssuingDispute> {
+    pub async fn post_dispute(&self) -> ClientResult<crate::types::IssuingDispute> {
         let url = self.client.url("/v1/issuing/disputes", None);
         self.client
             .post(
@@ -940,7 +939,7 @@ impl Issuing {
     pub async fn get_disputes_dispute(
         &self,
         dispute: &str,
-    ) -> Result<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::types::IssuingDispute> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}",
@@ -970,7 +969,7 @@ impl Issuing {
     pub async fn post_disputes_dispute(
         &self,
         dispute: &str,
-    ) -> Result<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::types::IssuingDispute> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}",
@@ -1000,7 +999,7 @@ impl Issuing {
     pub async fn post_disputes_dispute_submit(
         &self,
         dispute: &str,
-    ) -> Result<crate::types::IssuingDispute> {
+    ) -> ClientResult<crate::types::IssuingDispute> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/disputes/{}/submit",
@@ -1037,7 +1036,7 @@ impl Issuing {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::IssuingSettlement>> {
+    ) -> ClientResult<Vec<crate::types::IssuingSettlement>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -1076,7 +1075,7 @@ impl Issuing {
     pub async fn get_all_settlements(
         &self,
         _created: &str,
-    ) -> Result<Vec<crate::types::IssuingSettlement>> {
+    ) -> ClientResult<Vec<crate::types::IssuingSettlement>> {
         let url = self.client.url("/v1/issuing/settlements", None);
         let mut resp: crate::types::GetIssuingSettlementsResponse = self
             .client
@@ -1150,7 +1149,7 @@ impl Issuing {
     pub async fn get_settlements_settlement(
         &self,
         settlement: &str,
-    ) -> Result<crate::types::IssuingSettlement> {
+    ) -> ClientResult<crate::types::IssuingSettlement> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/settlements/{}",
@@ -1180,7 +1179,7 @@ impl Issuing {
     pub async fn post_settlements_settlement(
         &self,
         settlement: &str,
-    ) -> Result<crate::types::IssuingSettlement> {
+    ) -> ClientResult<crate::types::IssuingSettlement> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/settlements/{}",
@@ -1223,7 +1222,7 @@ impl Issuing {
         limit: i64,
         starting_after: &str,
         type_: crate::types::IssuingTransactionType,
-    ) -> Result<Vec<crate::types::IssuingTransaction>> {
+    ) -> ClientResult<Vec<crate::types::IssuingTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -1274,7 +1273,7 @@ impl Issuing {
         cardholder: &str,
         _created: &str,
         type_: crate::types::IssuingTransactionType,
-    ) -> Result<Vec<crate::types::IssuingTransaction>> {
+    ) -> ClientResult<Vec<crate::types::IssuingTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -1361,7 +1360,7 @@ impl Issuing {
     pub async fn get_transactions_transaction(
         &self,
         transaction: &str,
-    ) -> Result<crate::types::IssuingTransaction> {
+    ) -> ClientResult<crate::types::IssuingTransaction> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/transactions/{}",
@@ -1391,7 +1390,7 @@ impl Issuing {
     pub async fn post_transactions_transaction(
         &self,
         transaction: &str,
-    ) -> Result<crate::types::IssuingTransaction> {
+    ) -> ClientResult<crate::types::IssuingTransaction> {
         let url = self.client.url(
             &format!(
                 "/v1/issuing/transactions/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct UserProfiles {
     pub client: Client,
@@ -27,7 +26,11 @@ impl UserProfiles {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn get(&self, account_id: &str, user_id: &str) -> Result<crate::types::UserProfile> {
+    pub async fn get(
+        &self,
+        account_id: &str,
+        user_id: &str,
+    ) -> ClientResult<crate::types::UserProfile> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile",
@@ -66,7 +69,7 @@ impl UserProfiles {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserProfile,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile",

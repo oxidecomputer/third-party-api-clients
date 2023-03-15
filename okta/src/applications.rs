@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Applications {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Applications {
         filter: &str,
         expand: &str,
         include_non_deleted: bool,
-    ) -> Result<Vec<crate::types::Application>> {
+    ) -> ClientResult<Vec<crate::types::Application>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -86,7 +85,7 @@ impl Applications {
         filter: &str,
         expand: &str,
         include_non_deleted: bool,
-    ) -> Result<Vec<crate::types::Application>> {
+    ) -> ClientResult<Vec<crate::types::Application>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -131,7 +130,7 @@ impl Applications {
         &self,
         activate: bool,
         body: &crate::types::Application,
-    ) -> Result<crate::types::Application> {
+    ) -> ClientResult<crate::types::Application> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if activate {
             query_args.push(("activate".to_string(), activate.to_string()));
@@ -160,7 +159,7 @@ impl Applications {
      * * `app_id: &str`
      * * `expand: &str`
      */
-    pub async fn get(&self, app_id: &str, expand: &str) -> Result<crate::types::Application> {
+    pub async fn get(&self, app_id: &str, expand: &str) -> ClientResult<crate::types::Application> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -199,7 +198,7 @@ impl Applications {
         &self,
         app_id: &str,
         body: &crate::types::Application,
-    ) -> Result<crate::types::Application> {
+    ) -> ClientResult<crate::types::Application> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}",
@@ -228,7 +227,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn delete(&self, app_id: &str) -> Result<()> {
+    pub async fn delete(&self, app_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}",
@@ -257,7 +256,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn list_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_csrs_fors(&self, app_id: &str) -> ClientResult<Vec<crate::types::Csr>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
@@ -284,7 +283,7 @@ impl Applications {
      *
      * Enumerates Certificate Signing Requests for an application
      */
-    pub async fn list_all_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_all_csrs_fors(&self, app_id: &str) -> ClientResult<Vec<crate::types::Csr>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
@@ -317,7 +316,7 @@ impl Applications {
         &self,
         app_id: &str,
         body: &crate::types::CsrMetadata,
-    ) -> Result<crate::types::Csr> {
+    ) -> ClientResult<crate::types::Csr> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs",
@@ -343,7 +342,7 @@ impl Applications {
      * * `app_id: &str`
      * * `csr_id: &str`
      */
-    pub async fn get_csr_for(&self, app_id: &str, csr_id: &str) -> Result<crate::types::Csr> {
+    pub async fn get_csr_for(&self, app_id: &str, csr_id: &str) -> ClientResult<crate::types::Csr> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}",
@@ -370,7 +369,7 @@ impl Applications {
      * * `app_id: &str`
      * * `csr_id: &str`
      */
-    pub async fn revoke_csr_from(&self, app_id: &str, csr_id: &str) -> Result<()> {
+    pub async fn revoke_csr_from(&self, app_id: &str, csr_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}",
@@ -401,7 +400,7 @@ impl Applications {
         &self,
         app_id: &str,
         csr_id: &str,
-    ) -> Result<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::types::JsonWebKey> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/csrs/{}/lifecycle/publish",
@@ -431,7 +430,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn list_keys(&self, app_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
+    pub async fn list_keys(&self, app_id: &str) -> ClientResult<Vec<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys",
@@ -458,7 +457,7 @@ impl Applications {
      *
      * Enumerates key credentials for an application
      */
-    pub async fn list_all_keys(&self, app_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
+    pub async fn list_all_keys(&self, app_id: &str) -> ClientResult<Vec<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys",
@@ -490,7 +489,7 @@ impl Applications {
         &self,
         app_id: &str,
         validity_years: i64,
-    ) -> Result<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::types::JsonWebKey> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if validity_years > 0 {
             query_args.push(("validityYears".to_string(), validity_years.to_string()));
@@ -526,7 +525,11 @@ impl Applications {
      * * `app_id: &str`
      * * `key_id: &str`
      */
-    pub async fn get_key(&self, app_id: &str, key_id: &str) -> Result<crate::types::JsonWebKey> {
+    pub async fn get_key(
+        &self,
+        app_id: &str,
+        key_id: &str,
+    ) -> ClientResult<crate::types::JsonWebKey> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/credentials/keys/{}",
@@ -563,7 +566,7 @@ impl Applications {
         app_id: &str,
         key_id: &str,
         target_aid: &str,
-    ) -> Result<crate::types::JsonWebKey> {
+    ) -> ClientResult<crate::types::JsonWebKey> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !target_aid.is_empty() {
             query_args.push(("targetAid".to_string(), target_aid.to_string()));
@@ -602,7 +605,7 @@ impl Applications {
         &self,
         app_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::OAuth2ScopeConsentGrant>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2ScopeConsentGrant>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -637,7 +640,7 @@ impl Applications {
         &self,
         app_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::OAuth2ScopeConsentGrant>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2ScopeConsentGrant>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -674,7 +677,7 @@ impl Applications {
         &self,
         app_id: &str,
         body: &crate::types::OAuth2ScopeConsentGrant,
-    ) -> Result<crate::types::OAuth2ScopeConsentGrant> {
+    ) -> ClientResult<crate::types::OAuth2ScopeConsentGrant> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants",
@@ -708,7 +711,7 @@ impl Applications {
         app_id: &str,
         grant_id: &str,
         expand: &str,
-    ) -> Result<crate::types::OAuth2ScopeConsentGrant> {
+    ) -> ClientResult<crate::types::OAuth2ScopeConsentGrant> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -743,7 +746,11 @@ impl Applications {
      * * `app_id: &str`
      * * `grant_id: &str`
      */
-    pub async fn revoke_scope_consent_grant(&self, app_id: &str, grant_id: &str) -> Result<()> {
+    pub async fn revoke_scope_consent_grant(
+        &self,
+        app_id: &str,
+        grant_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/grants/{}",
@@ -784,7 +791,7 @@ impl Applications {
         after: &str,
         limit: i64,
         expand: &str,
-    ) -> Result<Vec<crate::types::ApplicationGroupAssignment>> {
+    ) -> ClientResult<Vec<crate::types::ApplicationGroupAssignment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -831,7 +838,7 @@ impl Applications {
         app_id: &str,
         q: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::ApplicationGroupAssignment>> {
+    ) -> ClientResult<Vec<crate::types::ApplicationGroupAssignment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -876,7 +883,7 @@ impl Applications {
         app_id: &str,
         group_id: &str,
         expand: &str,
-    ) -> Result<crate::types::ApplicationGroupAssignment> {
+    ) -> ClientResult<crate::types::ApplicationGroupAssignment> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -918,7 +925,7 @@ impl Applications {
         app_id: &str,
         group_id: &str,
         body: &crate::types::ApplicationGroupAssignment,
-    ) -> Result<crate::types::ApplicationGroupAssignment> {
+    ) -> ClientResult<crate::types::ApplicationGroupAssignment> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups/{}",
@@ -949,7 +956,7 @@ impl Applications {
      * * `app_id: &str`
      * * `group_id: &str`
      */
-    pub async fn delete_group_assignment(&self, app_id: &str, group_id: &str) -> Result<()> {
+    pub async fn delete_group_assignment(&self, app_id: &str, group_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/groups/{}",
@@ -979,7 +986,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn activate(&self, app_id: &str) -> Result<()> {
+    pub async fn activate(&self, app_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/lifecycle/activate",
@@ -1008,7 +1015,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn deactivate(&self, app_id: &str) -> Result<()> {
+    pub async fn deactivate(&self, app_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/lifecycle/deactivate",
@@ -1044,7 +1051,7 @@ impl Applications {
         expand: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::OAuth2Token>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Token>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1085,7 +1092,7 @@ impl Applications {
         &self,
         app_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::OAuth2Token>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Token>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -1118,7 +1125,7 @@ impl Applications {
      *
      * * `app_id: &str`
      */
-    pub async fn revoke_o_auth_2_tokens_for(&self, app_id: &str) -> Result<()> {
+    pub async fn revoke_o_auth_2_tokens_for(&self, app_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens",
@@ -1152,7 +1159,7 @@ impl Applications {
         app_id: &str,
         token_id: &str,
         expand: &str,
-    ) -> Result<crate::types::OAuth2Token> {
+    ) -> ClientResult<crate::types::OAuth2Token> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -1187,7 +1194,11 @@ impl Applications {
      * * `app_id: &str`
      * * `token_id: &str`
      */
-    pub async fn revoke_o_auth_2_token_for(&self, app_id: &str, token_id: &str) -> Result<()> {
+    pub async fn revoke_o_auth_2_token_for(
+        &self,
+        app_id: &str,
+        token_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/tokens/{}",
@@ -1232,7 +1243,7 @@ impl Applications {
         limit: i64,
         filter: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::AppUser>> {
+    ) -> ClientResult<Vec<crate::types::AppUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1287,7 +1298,7 @@ impl Applications {
         query_scope: &str,
         filter: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::AppUser>> {
+    ) -> ClientResult<Vec<crate::types::AppUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -1335,7 +1346,7 @@ impl Applications {
         &self,
         app_id: &str,
         body: &crate::types::AppUser,
-    ) -> Result<crate::types::AppUser> {
+    ) -> ClientResult<crate::types::AppUser> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users",
@@ -1371,7 +1382,7 @@ impl Applications {
         app_id: &str,
         user_id: &str,
         expand: &str,
-    ) -> Result<crate::types::AppUser> {
+    ) -> ClientResult<crate::types::AppUser> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -1413,7 +1424,7 @@ impl Applications {
         app_id: &str,
         user_id: &str,
         body: &crate::types::AppUser,
-    ) -> Result<crate::types::AppUser> {
+    ) -> ClientResult<crate::types::AppUser> {
         let url = self.client.url(
             &format!(
                 "/api/v1/apps/{}/users/{}",
@@ -1445,7 +1456,12 @@ impl Applications {
      * * `user_id: &str`
      * * `send_email: bool`
      */
-    pub async fn delete_user(&self, app_id: &str, user_id: &str, send_email: bool) -> Result<()> {
+    pub async fn delete_user(
+        &self,
+        app_id: &str,
+        user_id: &str,
+        send_email: bool,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_email {
             query_args.push(("sendEmail".to_string(), send_email.to_string()));

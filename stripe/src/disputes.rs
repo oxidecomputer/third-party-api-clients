@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Disputes {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Disputes {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Dispute>> {
+    ) -> ClientResult<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -80,7 +79,7 @@ impl Disputes {
         charge: &str,
         _created: &str,
         payment_intent: &str,
-    ) -> Result<Vec<crate::types::Dispute>> {
+    ) -> ClientResult<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -159,7 +158,7 @@ impl Disputes {
      * * `dispute: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self, dispute: &str) -> Result<crate::types::Dispute> {
+    pub async fn get(&self, dispute: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
@@ -188,7 +187,7 @@ impl Disputes {
      *
      * * `dispute: &str` -- The account's country.
      */
-    pub async fn post(&self, dispute: &str) -> Result<crate::types::Dispute> {
+    pub async fn post(&self, dispute: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}",
@@ -217,7 +216,7 @@ impl Disputes {
      *
      * * `dispute: &str` -- The account's country.
      */
-    pub async fn post_close(&self, dispute: &str) -> Result<crate::types::Dispute> {
+    pub async fn post_close(&self, dispute: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/disputes/{}/close",

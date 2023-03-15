@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SetupAttempts {
     pub client: Client,
@@ -36,7 +35,7 @@ impl SetupAttempts {
         limit: i64,
         setup_intent: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::SetupAttempt>> {
+    ) -> ClientResult<Vec<crate::types::SetupAttempt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -79,7 +78,7 @@ impl SetupAttempts {
         &self,
         _created: &str,
         setup_intent: &str,
-    ) -> Result<Vec<crate::types::SetupAttempt>> {
+    ) -> ClientResult<Vec<crate::types::SetupAttempt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setup_intent.is_empty() {
             query_args.push(("setup_intent".to_string(), setup_intent.to_string()));

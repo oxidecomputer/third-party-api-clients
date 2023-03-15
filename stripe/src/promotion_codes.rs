@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PromotionCodes {
     pub client: Client,
@@ -39,7 +38,7 @@ impl PromotionCodes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::PromotionCode>> {
+    ) -> ClientResult<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -94,7 +93,7 @@ impl PromotionCodes {
         coupon: &str,
         _created: &str,
         customer: &str,
-    ) -> Result<Vec<crate::types::PromotionCode>> {
+    ) -> ClientResult<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -176,7 +175,7 @@ impl PromotionCodes {
      *
      * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::PromotionCode> {
+    pub async fn post(&self) -> ClientResult<crate::types::PromotionCode> {
         let url = self.client.url("/v1/promotion_codes", None);
         self.client
             .post(
@@ -198,7 +197,10 @@ impl PromotionCodes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `promotion_code: &str` -- The account's country.
      */
-    pub async fn get_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
+    pub async fn get_code(
+        &self,
+        promotion_code: &str,
+    ) -> ClientResult<crate::types::PromotionCode> {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
@@ -225,7 +227,10 @@ impl PromotionCodes {
      *
      * * `promotion_code: &str` -- The account's country.
      */
-    pub async fn post_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
+    pub async fn post_code(
+        &self,
+        promotion_code: &str,
+    ) -> ClientResult<crate::types::PromotionCode> {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",

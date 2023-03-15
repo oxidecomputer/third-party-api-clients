@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Payouts {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Payouts {
         limit: i64,
         starting_after: &str,
         status: &str,
-    ) -> Result<Vec<crate::types::Payout>> {
+    ) -> ClientResult<Vec<crate::types::Payout>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -83,7 +82,7 @@ impl Payouts {
         _created: &str,
         destination: &str,
         status: &str,
-    ) -> Result<Vec<crate::types::Payout>> {
+    ) -> ClientResult<Vec<crate::types::Payout>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -161,7 +160,7 @@ impl Payouts {
      *
      * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source types, you’ll need to specify the source type balance that the payout should draw from. The <a href="#balance_object">balance object</a> details available and pending amounts by source type.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Payout> {
+    pub async fn post(&self) -> ClientResult<crate::types::Payout> {
         let url = self.client.url("/v1/payouts", None);
         self.client
             .post(
@@ -183,7 +182,7 @@ impl Payouts {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `payout: &str` -- The account's country.
      */
-    pub async fn get(&self, payout: &str) -> Result<crate::types::Payout> {
+    pub async fn get(&self, payout: &str) -> ClientResult<crate::types::Payout> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
@@ -210,7 +209,7 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_payouts(&self, payout: &str) -> Result<crate::types::Payout> {
+    pub async fn post_payouts(&self, payout: &str) -> ClientResult<crate::types::Payout> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}",
@@ -237,7 +236,7 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, payout: &str) -> Result<crate::types::Payout> {
+    pub async fn post_cancel(&self, payout: &str) -> ClientResult<crate::types::Payout> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/cancel",
@@ -266,7 +265,7 @@ impl Payouts {
      *
      * * `payout: &str` -- The account's country.
      */
-    pub async fn post_reverse(&self, payout: &str) -> Result<crate::types::Payout> {
+    pub async fn post_reverse(&self, payout: &str) -> ClientResult<crate::types::Payout> {
         let url = self.client.url(
             &format!(
                 "/v1/payouts/{}/reverse",

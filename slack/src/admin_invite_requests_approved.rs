@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminInviteRequestsApproved {
     pub client: Client,
@@ -31,7 +30,7 @@ impl AdminInviteRequestsApproved {
         team_id: &str,
         cursor: &str,
         limit: i64,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

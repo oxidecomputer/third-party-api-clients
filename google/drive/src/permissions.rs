@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Permissions {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> Result<Vec<crate::types::Permission>> {
+    ) -> ClientResult<Vec<crate::types::Permission>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
             query_args.push((
@@ -105,7 +104,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> Result<Vec<crate::types::Permission>> {
+    ) -> ClientResult<Vec<crate::types::Permission>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
             query_args.push((
@@ -220,7 +219,7 @@ impl Permissions {
         transfer_ownership: bool,
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
-    ) -> Result<crate::types::Permission> {
+    ) -> ClientResult<crate::types::Permission> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email_message.is_empty() {
             query_args.push(("emailMessage".to_string(), email_message.to_string()));
@@ -298,7 +297,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> Result<crate::types::Permission> {
+    ) -> ClientResult<crate::types::Permission> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -358,7 +357,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -423,7 +422,7 @@ impl Permissions {
         transfer_ownership: bool,
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
-    ) -> Result<crate::types::Permission> {
+    ) -> ClientResult<crate::types::Permission> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if remove_expiration {
             query_args.push((

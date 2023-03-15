@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeCustomFields {
     pub client: Client,
@@ -30,7 +29,7 @@ impl EnvelopeCustomFields {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::CustomFieldsEnvelope> {
+    ) -> ClientResult<crate::types::CustomFieldsEnvelope> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
@@ -69,7 +68,7 @@ impl EnvelopeCustomFields {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeCustomFields,
-    ) -> Result<crate::types::EnvelopeCustomFields> {
+    ) -> ClientResult<crate::types::EnvelopeCustomFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
@@ -108,7 +107,7 @@ impl EnvelopeCustomFields {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeCustomFields,
-    ) -> Result<crate::types::EnvelopeCustomFields> {
+    ) -> ClientResult<crate::types::EnvelopeCustomFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",
@@ -144,7 +143,7 @@ impl EnvelopeCustomFields {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeCustomFields,
-    ) -> Result<crate::types::EnvelopeCustomFields> {
+    ) -> ClientResult<crate::types::EnvelopeCustomFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/custom_fields",

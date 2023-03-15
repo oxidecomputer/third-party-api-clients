@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Groups {
     pub client: Client,
@@ -38,7 +37,7 @@ impl Groups {
         query: &str,
         sort_order: crate::types::SortOrder,
         user_key: &str,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -97,7 +96,7 @@ impl Groups {
         query: &str,
         sort_order: crate::types::SortOrder,
         user_key: &str,
-    ) -> Result<Vec<crate::types::Group>> {
+    ) -> ClientResult<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -178,7 +177,7 @@ impl Groups {
      *
      * Creates a group.
      */
-    pub async fn insert(&self, body: &crate::types::Group) -> Result<crate::types::Group> {
+    pub async fn insert(&self, body: &crate::types::Group) -> ClientResult<crate::types::Group> {
         let url = self.client.url("/admin/directory/v1/groups", None);
         self.client
             .post(
@@ -199,7 +198,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn get(&self, group_key: &str) -> Result<crate::types::Group> {
+    pub async fn get(&self, group_key: &str) -> ClientResult<crate::types::Group> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -230,7 +229,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Group,
-    ) -> Result<crate::types::Group> {
+    ) -> ClientResult<crate::types::Group> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -257,7 +256,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn delete(&self, group_key: &str) -> Result<()> {
+    pub async fn delete(&self, group_key: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -288,7 +287,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Group,
-    ) -> Result<crate::types::Group> {
+    ) -> ClientResult<crate::types::Group> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -315,7 +314,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
+    pub async fn aliases_list(&self, group_key: &str) -> ClientResult<crate::types::Aliases> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
@@ -346,7 +345,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Alias,
-    ) -> Result<crate::types::Alias> {
+    ) -> ClientResult<crate::types::Alias> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
@@ -374,7 +373,7 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
+    pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases/{}",

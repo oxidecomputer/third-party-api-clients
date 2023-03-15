@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CommonAreaPhones {
     pub client: Client,
@@ -38,7 +37,7 @@ impl CommonAreaPhones {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::CommonAreaPhones>> {
+    ) -> ClientResult<Vec<crate::types::CommonAreaPhones>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -83,7 +82,7 @@ impl CommonAreaPhones {
      * * Account owner or admin permissions.
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      */
-    pub async fn list_all(&self) -> Result<Vec<crate::types::CommonAreaPhones>> {
+    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::CommonAreaPhones>> {
         let url = self.client.url("/phone/common_area_phones", None);
         let mut resp: crate::types::ListCommonAreaPhonesResponse = self
             .client
@@ -158,7 +157,7 @@ impl CommonAreaPhones {
     pub async fn add(
         &self,
         body: &crate::types::AddCommonAreaPhoneRequest,
-    ) -> Result<crate::types::AddCommonAreaPhoneResponse> {
+    ) -> ClientResult<crate::types::AddCommonAreaPhoneResponse> {
         let url = self.client.url("/phone/common_area_phones", None);
         self.client
             .post(
@@ -193,7 +192,7 @@ impl CommonAreaPhones {
     pub async fn get(
         &self,
         common_area_phone_id: &str,
-    ) -> Result<crate::types::GetCommonAreaPhoneResponse> {
+    ) -> ClientResult<crate::types::GetCommonAreaPhoneResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -229,7 +228,7 @@ impl CommonAreaPhones {
      *
      * * `common_area_phone_id: &str` -- Unique Identifier of the common area phone.
      */
-    pub async fn delete(&self, common_area_phone_id: &str) -> Result<()> {
+    pub async fn delete(&self, common_area_phone_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -268,7 +267,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::UpdateCommonAreaPhoneRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}",
@@ -304,7 +303,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignPhoneNumbersCommonAreaRequest,
-    ) -> Result<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
+    ) -> ClientResult<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/phone_numbers",
@@ -344,7 +343,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         phone_number_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/phone_numbers/{}",
@@ -381,7 +380,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignCallingPlansCommonAreaPhoneRequestData,
-    ) -> Result<crate::types::AssignCallingPlansCommonAreaPhoneResponseData> {
+    ) -> ClientResult<crate::types::AssignCallingPlansCommonAreaPhoneResponseData> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/calling_plans",
@@ -421,7 +420,7 @@ impl CommonAreaPhones {
         &self,
         common_area_phone_id: &str,
         type_: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/common_area_phones/{}/calling_plans/{}",

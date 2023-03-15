@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reactions {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Reactions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
-    pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/reactions.add", None);
         self.client
             .post(
@@ -58,7 +57,7 @@ impl Reactions {
         file_comment: &str,
         full: bool,
         timestamp: &str,
-    ) -> Result<crate::types::Fields> {
+    ) -> ClientResult<crate::types::Fields> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -112,7 +111,7 @@ impl Reactions {
         page: i64,
         cursor: &str,
         limit: i64,
-    ) -> Result<crate::types::ReactionsListSchema> {
+    ) -> ClientResult<crate::types::ReactionsListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -157,7 +156,7 @@ impl Reactions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
-    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/reactions.remove", None);
         self.client
             .post(

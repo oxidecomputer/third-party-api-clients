@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct RequestLogs {
     pub client: Client,
@@ -27,7 +26,10 @@ impl RequestLogs {
      *
      * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn api_get_log(&self, encoding: &str) -> Result<crate::types::ApiRequestLogsResult> {
+    pub async fn api_get_log(
+        &self,
+        encoding: &str,
+    ) -> ClientResult<crate::types::ApiRequestLogsResult> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encoding.is_empty() {
             query_args.push(("encoding".to_string(), encoding.to_string()));
@@ -53,7 +55,7 @@ impl RequestLogs {
      *
      * Deletes the request log files.
      */
-    pub async fn api_delete_logs(&self) -> Result<()> {
+    pub async fn api_delete_logs(&self) -> ClientResult<()> {
         let url = self.client.url("/v2.1/diagnostics/request_logs", None);
         self.client
             .delete(
@@ -82,7 +84,7 @@ impl RequestLogs {
      *
      * * `request_log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn api_get(&self, request_log_id: &str) -> Result<bytes::Bytes> {
+    pub async fn api_get(&self, request_log_id: &str) -> ClientResult<bytes::Bytes> {
         let url = self.client.url(
             &format!(
                 "/v2.1/diagnostics/request_logs/{}",
@@ -110,7 +112,9 @@ impl RequestLogs {
      * **Response**
      * The response includes the current API request logging setting for the user, along with the maximum log entries and remaining log entries.
      */
-    pub async fn api_get_setting(&self) -> Result<crate::types::DiagnosticsSettingsInformation> {
+    pub async fn api_get_setting(
+        &self,
+    ) -> ClientResult<crate::types::DiagnosticsSettingsInformation> {
         let url = self.client.url("/v2.1/diagnostics/settings", None);
         self.client
             .get(
@@ -143,7 +147,7 @@ impl RequestLogs {
     pub async fn api_put_settings(
         &self,
         body: &crate::types::DiagnosticsSettingsInformation,
-    ) -> Result<crate::types::DiagnosticsSettingsInformation> {
+    ) -> ClientResult<crate::types::DiagnosticsSettingsInformation> {
         let url = self.client.url("/v2.1/diagnostics/settings", None);
         self.client
             .put(

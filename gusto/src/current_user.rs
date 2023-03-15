@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CurrentUser {
     pub client: Client,
@@ -19,7 +18,7 @@ impl CurrentUser {
      *
      * Returns information pertaining to the user associated with the provided access token.
      */
-    pub async fn get_me(&self) -> Result<crate::types::CurrentUser> {
+    pub async fn get_me(&self) -> ClientResult<crate::types::CurrentUser> {
         let url = self.client.url("/v1/me", None);
         self.client
             .get(

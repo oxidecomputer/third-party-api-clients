@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Skus {
     pub client: Client,
@@ -39,7 +38,7 @@ impl Skus {
         limit: i64,
         product: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Sku>> {
+    ) -> ClientResult<Vec<crate::types::Sku>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -89,7 +88,7 @@ impl Skus {
         _ids: &[String],
         in_stock: bool,
         product: &str,
-    ) -> Result<Vec<crate::types::Sku>> {
+    ) -> ClientResult<Vec<crate::types::Sku>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -166,7 +165,7 @@ impl Skus {
      *
      * <p>Creates a new SKU associated with a product.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Sku> {
+    pub async fn post(&self) -> ClientResult<crate::types::Sku> {
         let url = self.client.url("/v1/skus", None);
         self.client
             .post(
@@ -188,7 +187,7 @@ impl Skus {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::GetSkusResponseAnyOf> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::GetSkusResponseAnyOf> {
         let url = self.client.url(
             &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -214,7 +213,7 @@ impl Skus {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_skus(&self, id: &str) -> Result<crate::types::Sku> {
+    pub async fn post_skus(&self, id: &str) -> ClientResult<crate::types::Sku> {
         let url = self.client.url(
             &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -238,7 +237,7 @@ impl Skus {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedSku> {
+    pub async fn delete(&self, id: &str) -> ClientResult<crate::types::DeletedSku> {
         let url = self.client.url(
             &format!("/v1/skus/{}", crate::progenitor_support::encode_path(id),),
             None,

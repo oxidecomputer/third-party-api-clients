@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PhoneCallQueues {
     pub client: Client,
@@ -37,7 +36,7 @@ impl PhoneCallQueues {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::CallQueues>> {
+    ) -> ClientResult<Vec<crate::types::CallQueues>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -81,7 +80,7 @@ impl PhoneCallQueues {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      */
-    pub async fn list_all_call_queues(&self) -> Result<Vec<crate::types::CallQueues>> {
+    pub async fn list_all_call_queues(&self) -> ClientResult<Vec<crate::types::CallQueues>> {
         let url = self.client.url("/phone/call_queues", None);
         let mut resp: crate::types::ListCallQueuesResponse = self
             .client
@@ -155,7 +154,7 @@ impl PhoneCallQueues {
     pub async fn create_call_queue(
         &self,
         body: &crate::types::CreateCallQueueRequest,
-    ) -> Result<crate::types::CreateCallQueueResponse> {
+    ) -> ClientResult<crate::types::CreateCallQueueResponse> {
         let url = self.client.url("/phone/call_queues", None);
         self.client
             .post(
@@ -189,7 +188,7 @@ impl PhoneCallQueues {
     pub async fn get_call_queue(
         &self,
         call_queue_id: &str,
-    ) -> Result<crate::types::GetCallQueueResponse> {
+    ) -> ClientResult<crate::types::GetCallQueueResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -228,7 +227,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the call queue.
      */
-    pub async fn delete_call_queue(&self, call_queue_id: &str) -> Result<()> {
+    pub async fn delete_call_queue(&self, call_queue_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -269,7 +268,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::UpdateCallQueueRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}",
@@ -310,7 +309,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers",
@@ -349,7 +348,7 @@ impl PhoneCallQueues {
     pub async fn unassign_phone_num_call_queue(
         &self,
         call_queue_id: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers",
@@ -390,7 +389,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         phone_number_id: &str,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/phone_numbers/{}",
@@ -431,7 +430,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::AddMembersCallQueueRequestData,
-    ) -> Result<crate::types::Domains> {
+    ) -> ClientResult<crate::types::Domains> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members",
@@ -467,7 +466,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- User's first name.
      */
-    pub async fn unassign_all_members(&self, call_queue_id: &str) -> Result<()> {
+    pub async fn unassign_all_members(&self, call_queue_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members",
@@ -508,7 +507,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         member_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/members/{}",
@@ -551,7 +550,7 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         body: &crate::types::ChangeCallQueueManagerRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/call_queues/{}/manager",
@@ -598,7 +597,7 @@ impl PhoneCallQueues {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetCallQueueRecordingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -656,7 +655,7 @@ impl PhoneCallQueues {
         call_queue_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetCallQueueRecordingsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));

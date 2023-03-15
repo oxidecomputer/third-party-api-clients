@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CloudStorageProviders {
     pub client: Client,
@@ -35,7 +34,7 @@ impl CloudStorageProviders {
         account_id: &str,
         user_id: &str,
         redirect_url: &str,
-    ) -> Result<crate::types::CloudStorageProvidersData> {
+    ) -> ClientResult<crate::types::CloudStorageProvidersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
             query_args.push(("redirectUrl".to_string(), redirect_url.to_string()));
@@ -78,7 +77,7 @@ impl CloudStorageProviders {
         account_id: &str,
         user_id: &str,
         body: &crate::types::CloudStorageProvidersData,
-    ) -> Result<crate::types::CloudStorageProvidersData> {
+    ) -> ClientResult<crate::types::CloudStorageProvidersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/cloud_storage",
@@ -115,7 +114,7 @@ impl CloudStorageProviders {
         account_id: &str,
         user_id: &str,
         body: &crate::types::CloudStorageProvidersData,
-    ) -> Result<crate::types::CloudStorageProvidersData> {
+    ) -> ClientResult<crate::types::CloudStorageProvidersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/cloud_storage",
@@ -160,7 +159,7 @@ impl CloudStorageProviders {
         service_id: &str,
         user_id: &str,
         redirect_url: &str,
-    ) -> Result<crate::types::CloudStorageProvidersData> {
+    ) -> ClientResult<crate::types::CloudStorageProvidersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
             query_args.push(("redirectUrl".to_string(), redirect_url.to_string()));
@@ -207,7 +206,7 @@ impl CloudStorageProviders {
         account_id: &str,
         service_id: &str,
         user_id: &str,
-    ) -> Result<crate::types::CloudStorageProvidersData> {
+    ) -> ClientResult<crate::types::CloudStorageProvidersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/cloud_storage/{}",

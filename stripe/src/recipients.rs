@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Recipients {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Recipients {
         starting_after: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
-    ) -> Result<Vec<crate::types::Recipient>> {
+    ) -> ClientResult<Vec<crate::types::Recipient>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -80,7 +79,7 @@ impl Recipients {
         _created: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
-    ) -> Result<Vec<crate::types::Recipient>> {
+    ) -> ClientResult<Vec<crate::types::Recipient>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -155,7 +154,7 @@ impl Recipients {
      * <p>Creates a new <code>Recipient</code> object and verifies the recipient’s identity.
      * Also verifies the recipient’s bank account information or debit card, if either is provided.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Recipient> {
+    pub async fn post(&self) -> ClientResult<crate::types::Recipient> {
         let url = self.client.url("/v1/recipients", None);
         self.client
             .post(
@@ -177,7 +176,7 @@ impl Recipients {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::GetRecipientsResponseAnyOf> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::GetRecipientsResponseAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
@@ -208,7 +207,7 @@ impl Recipients {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_recipients(&self, id: &str) -> Result<crate::types::Recipient> {
+    pub async fn post_recipients(&self, id: &str) -> ClientResult<crate::types::Recipient> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",
@@ -235,7 +234,7 @@ impl Recipients {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedRecipient> {
+    pub async fn delete(&self, id: &str) -> ClientResult<crate::types::DeletedRecipient> {
         let url = self.client.url(
             &format!(
                 "/v1/recipients/{}",

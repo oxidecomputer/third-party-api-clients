@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Contacts {
     pub client: Client,
@@ -25,7 +24,7 @@ impl Contacts {
      *
      * Please note that pagination of the contacts has been deprecated.
      */
-    pub async fn get_mc_contats(&self) -> Result<crate::types::GetMcContatsResponse> {
+    pub async fn get_mc_contats(&self) -> ClientResult<crate::types::GetMcContatsResponse> {
         let url = self.client.url("/marketing/contacts", None);
         self.client
             .get(
@@ -57,7 +56,7 @@ impl Contacts {
     pub async fn put_mc(
         &self,
         body: &crate::types::PutMcContactsRequest,
-    ) -> Result<crate::types::PutMcContactsResponse> {
+    ) -> ClientResult<crate::types::PutMcContactsResponse> {
         let url = self.client.url("/marketing/contacts", None);
         self.client
             .put(
@@ -93,7 +92,7 @@ impl Contacts {
         &self,
         delete_all_contacts: &str,
         ids: &str,
-    ) -> Result<crate::types::DeleteMcContactsResponse> {
+    ) -> ClientResult<crate::types::DeleteMcContactsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !delete_all_contacts.is_empty() {
             query_args.push((
@@ -125,7 +124,7 @@ impl Contacts {
      *
      * **This endpoint returns the total number of contacts you have stored.**
      */
-    pub async fn get_mc_count(&self) -> Result<crate::types::GetMcContactsCountResponse> {
+    pub async fn get_mc_count(&self) -> ClientResult<crate::types::GetMcContactsCountResponse> {
         let url = self.client.url("/marketing/contacts/count", None);
         self.client
             .get(
@@ -152,7 +151,7 @@ impl Contacts {
      */
     pub async fn get_marketing_exports(
         &self,
-    ) -> Result<crate::types::GetMarketingContactsExportsResponse> {
+    ) -> ClientResult<crate::types::GetMarketingContactsExportsResponse> {
         let url = self.client.url("/marketing/contacts/exports", None);
         self.client
             .get(
@@ -184,7 +183,7 @@ impl Contacts {
     pub async fn post_mc_export(
         &self,
         body: &crate::types::PostMcContactsExportsRequest,
-    ) -> Result<crate::types::PostMcContactsExportsResponse> {
+    ) -> ClientResult<crate::types::PostMcContactsExportsResponse> {
         let url = self.client.url("/marketing/contacts/exports", None);
         self.client
             .post(
@@ -205,7 +204,7 @@ impl Contacts {
      *
      * The "Get Contacts by Emails" endpoint can be used to get the ID of a contact.
      */
-    pub async fn get_mc(&self, id: &str) -> Result<crate::types::ContactDetails3> {
+    pub async fn get_mc(&self, id: &str) -> ClientResult<crate::types::ContactDetails3> {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/{}",
@@ -243,7 +242,7 @@ impl Contacts {
     pub async fn post_mc_search(
         &self,
         body: &crate::types::PostMcContactsSearchRequest,
-    ) -> Result<crate::types::PostMcContactsSearchResponse> {
+    ) -> ClientResult<crate::types::PostMcContactsSearchResponse> {
         let url = self.client.url("/marketing/contacts/search", None);
         self.client
             .post(
@@ -281,7 +280,7 @@ impl Contacts {
     pub async fn put_mc_imports(
         &self,
         body: &crate::types::PutMcContactsImportsRequest,
-    ) -> Result<crate::types::PutMcContactsImportsResponse> {
+    ) -> ClientResult<crate::types::PutMcContactsImportsResponse> {
         let url = self.client.url("/marketing/contacts/imports", None);
         self.client
             .put(
@@ -310,7 +309,10 @@ impl Contacts {
      *
      * The `results` object will have fields depending on the job type.
      */
-    pub async fn get_marketing_import(&self, id: &str) -> Result<crate::types::ContactImport> {
+    pub async fn get_marketing_import(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::types::ContactImport> {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/imports/{}",
@@ -339,7 +341,7 @@ impl Contacts {
      *
      * If you would like to download a list, take the `id` that is returned from the "Export Contacts" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).
      */
-    pub async fn get_mc_export(&self, id: &str) -> Result<crate::types::ContactExport> {
+    pub async fn get_mc_export(&self, id: &str) -> ClientResult<crate::types::ContactExport> {
         let url = self.client.url(
             &format!(
                 "/marketing/contacts/exports/{}",
@@ -371,7 +373,7 @@ impl Contacts {
     pub async fn post_marketing_batch(
         &self,
         body: &crate::types::PostMarketingContactsBatchRequest,
-    ) -> Result<crate::types::PostMarketingContactsBatchResponse> {
+    ) -> ClientResult<crate::types::PostMarketingContactsBatchResponse> {
         let url = self.client.url("/marketing/contacts/batch", None);
         self.client
             .post(
@@ -407,7 +409,7 @@ impl Contacts {
     pub async fn post_marketing_search_email(
         &self,
         body: &crate::types::PostMarketingContactsSearchEmailsRequest,
-    ) -> Result<crate::types::PostMarketingContactsSearchEmailsResponse> {
+    ) -> ClientResult<crate::types::PostMarketingContactsSearchEmailsResponse> {
         let url = self.client.url("/marketing/contacts/search/emails", None);
         self.client
             .post(

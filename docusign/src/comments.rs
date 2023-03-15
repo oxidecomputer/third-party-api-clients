@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Comments {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Comments {
         account_id: &str,
         envelope_id: &str,
         encoding: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encoding.is_empty() {
             query_args.push(("encoding".to_string(), encoding.to_string()));

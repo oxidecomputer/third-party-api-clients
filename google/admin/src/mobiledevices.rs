@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Mobiledevices {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Mobiledevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<Vec<crate::types::MobileDevice>> {
+    ) -> ClientResult<Vec<crate::types::MobileDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -93,7 +92,7 @@ impl Mobiledevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<Vec<crate::types::MobileDevice>> {
+    ) -> ClientResult<Vec<crate::types::MobileDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -184,7 +183,7 @@ impl Mobiledevices {
         customer_id: &str,
         resource_id: &str,
         projection: crate::types::Projection,
-    ) -> Result<crate::types::MobileDevice> {
+    ) -> ClientResult<crate::types::MobileDevice> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -219,7 +218,7 @@ impl Mobiledevices {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      */
-    pub async fn delete(&self, customer_id: &str, resource_id: &str) -> Result<()> {
+    pub async fn delete(&self, customer_id: &str, resource_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}",
@@ -253,7 +252,7 @@ impl Mobiledevices {
         customer_id: &str,
         resource_id: &str,
         body: &crate::types::MobileDeviceAction,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}/action",

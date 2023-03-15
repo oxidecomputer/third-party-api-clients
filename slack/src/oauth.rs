@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Oauth {
     pub client: Client,
@@ -34,7 +33,7 @@ impl Oauth {
         code: &str,
         redirect_uri: &str,
         single_channel: bool,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -85,7 +84,7 @@ impl Oauth {
         code: &str,
         redirect_uri: &str,
         single_channel: bool,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AdminApps {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AdminApps {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.apps:write`.
      */
-    pub async fn approve(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn approve(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.apps.approve", None);
         self.client
             .post(
@@ -46,7 +45,7 @@ impl AdminApps {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.apps:write`.
      */
-    pub async fn restrict(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn restrict(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/admin.apps.restrict", None);
         self.client
             .post(

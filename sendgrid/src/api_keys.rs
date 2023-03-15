@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ApiKeys {
     pub client: Client,
@@ -30,7 +29,7 @@ impl ApiKeys {
      * * `limit: i64`
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get(&self, limit: i64) -> Result<crate::types::GetApiKeysResponse> {
+    pub async fn get(&self, limit: i64) -> ClientResult<crate::types::GetApiKeysResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -73,7 +72,7 @@ impl ApiKeys {
     pub async fn create(
         &self,
         body: &crate::types::CreateApiKeysRequest,
-    ) -> Result<crate::types::CreateApiKeysResponse> {
+    ) -> ClientResult<crate::types::CreateApiKeysResponse> {
         let url = self.client.url("/api_keys", None);
         self.client
             .post(
@@ -100,7 +99,10 @@ impl ApiKeys {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
+    pub async fn get_key(
+        &self,
+        api_key_id: &str,
+    ) -> ClientResult<crate::types::GetApiKeysKeyResponse> {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
@@ -139,7 +141,7 @@ impl ApiKeys {
         &self,
         api_key_id: &str,
         body: &crate::types::PutApiKeysKeyRequest,
-    ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
+    ) -> ClientResult<crate::types::ApiKeyNameScopesAllOf> {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
@@ -170,7 +172,7 @@ impl ApiKeys {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
+    pub async fn delete_key(&self, api_key_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",
@@ -205,7 +207,7 @@ impl ApiKeys {
         &self,
         api_key_id: &str,
         body: &crate::types::IpPool,
-    ) -> Result<crate::types::ApiKeyNameId> {
+    ) -> ClientResult<crate::types::ApiKeyNameId> {
         let url = self.client.url(
             &format!(
                 "/api_keys/{}",

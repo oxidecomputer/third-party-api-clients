@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Pins {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Pins {
      *
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
-    pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/pins.add", None);
         self.client
             .post(
@@ -47,7 +46,10 @@ impl Pins {
      * * `token: &str` -- Authentication token. Requires scope: `pins:read`.
      * * `channel: &str` -- Channel to get pinned items for.
      */
-    pub async fn list(&self, channel: &str) -> Result<Vec<crate::types::PinsListResponseAnyOf>> {
+    pub async fn list(
+        &self,
+        channel: &str,
+    ) -> ClientResult<Vec<crate::types::PinsListResponseAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -76,7 +78,7 @@ impl Pins {
     pub async fn list_all(
         &self,
         channel: &str,
-    ) -> Result<Vec<crate::types::PinsListResponseAnyOf>> {
+    ) -> ClientResult<Vec<crate::types::PinsListResponseAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -104,7 +106,7 @@ impl Pins {
      *
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
-    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/pins.remove", None);
         self.client
             .post(

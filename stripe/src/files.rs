@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 #[derive(Debug, Default, Clone)]
 pub struct PostFilesDefaultServer {}
@@ -42,7 +41,7 @@ impl Files {
         limit: i64,
         purpose: crate::types::Purpose,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::File>> {
+    ) -> ClientResult<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -83,7 +82,7 @@ impl Files {
         &self,
         _created: &str,
         purpose: crate::types::Purpose,
-    ) -> Result<Vec<crate::types::File>> {
+    ) -> ClientResult<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !purpose.to_string().is_empty() {
             query_args.push(("purpose".to_string(), purpose.to_string()));
@@ -156,7 +155,7 @@ impl Files {
      *
      * <p>All of Stripe’s officially supported Client libraries should have support for sending <code>multipart/form-data</code>.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::File> {
+    pub async fn post(&self) -> ClientResult<crate::types::File> {
         let url = self.client.url(
             "/v1/files",
             Some(PostFilesDefaultServer::default().default_url()),
@@ -181,7 +180,7 @@ impl Files {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `file: &str` -- The account's country.
      */
-    pub async fn get(&self, file: &str) -> Result<crate::types::File> {
+    pub async fn get(&self, file: &str) -> ClientResult<crate::types::File> {
         let url = self.client.url(
             &format!("/v1/files/{}", crate::progenitor_support::encode_path(file),),
             None,

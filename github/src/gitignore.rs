@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Gitignore {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Gitignore {
      *
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
-    pub async fn get_all_templates(&self) -> Result<Vec<String>> {
+    pub async fn get_all_templates(&self) -> ClientResult<Vec<String>> {
         let url = self.client.url("/gitignore/templates", None);
         self.client
             .get(
@@ -44,7 +43,7 @@ impl Gitignore {
      *
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
-    pub async fn get_all_all_templates(&self) -> Result<Vec<String>> {
+    pub async fn get_all_all_templates(&self) -> ClientResult<Vec<String>> {
         let url = self.client.url("/gitignore/templates", None);
         self.client
             .get_all_pages(
@@ -70,7 +69,7 @@ impl Gitignore {
      *
      * * `name: &str`
      */
-    pub async fn get_template(&self, name: &str) -> Result<crate::types::GitignoreTemplate> {
+    pub async fn get_template(&self, name: &str) -> ClientResult<crate::types::GitignoreTemplate> {
         let url = self.client.url(
             &format!(
                 "/gitignore/templates/{}",

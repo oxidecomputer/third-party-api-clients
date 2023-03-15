@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Terminations {
     pub client: Client,
@@ -21,7 +20,10 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Termination>> {
+    pub async fn get_employee(
+        &self,
+        employee_id: &str,
+    ) -> ClientResult<Vec<crate::types::Termination>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
@@ -53,7 +55,7 @@ impl Terminations {
     pub async fn get_all_employee(
         &self,
         employee_id: &str,
-    ) -> Result<Vec<crate::types::Termination>> {
+    ) -> ClientResult<Vec<crate::types::Termination>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",
@@ -84,7 +86,7 @@ impl Terminations {
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeTerminationsRequest,
-    ) -> Result<crate::types::Termination> {
+    ) -> ClientResult<crate::types::Termination> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/terminations",

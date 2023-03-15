@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Markdown {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Markdown {
      *
      * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document>
      */
-    pub async fn render(&self, body: &crate::types::MarkdownRenderRequest) -> Result<String> {
+    pub async fn render(&self, body: &crate::types::MarkdownRenderRequest) -> ClientResult<String> {
         let url = self.client.url("/markdown", None);
         self.client
             .post(
@@ -42,7 +41,7 @@ impl Markdown {
      *
      * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document-in-raw-mode>
      */
-    pub async fn render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
+    pub async fn render_raw<T: Into<reqwest::Body>>(&self, body: T) -> ClientResult<String> {
         let url = self.client.url("/markdown/raw", None);
         self.client
             .post(

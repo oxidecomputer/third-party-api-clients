@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Transfers {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Transfers {
         limit: i64,
         starting_after: &str,
         transfer_group: &str,
-    ) -> Result<Vec<crate::types::Transfer>> {
+    ) -> ClientResult<Vec<crate::types::Transfer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -80,7 +79,7 @@ impl Transfers {
         _created: &str,
         destination: &str,
         transfer_group: &str,
-    ) -> Result<Vec<crate::types::Transfer>> {
+    ) -> ClientResult<Vec<crate::types::Transfer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -154,7 +153,7 @@ impl Transfers {
      *
      * <p>To send funds from your Stripe account to a connected account, you create a new transfer object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount, or you’ll receive an “Insufficient Funds” error.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Transfer> {
+    pub async fn post(&self) -> ClientResult<crate::types::Transfer> {
         let url = self.client.url("/v1/transfers", None);
         self.client
             .post(
@@ -185,7 +184,7 @@ impl Transfers {
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::TransferReversal>> {
+    ) -> ClientResult<Vec<crate::types::TransferReversal>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -226,7 +225,10 @@ impl Transfers {
      *
      * <p>You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional reversals.</p>
      */
-    pub async fn get_all_reversals(&self, id: &str) -> Result<Vec<crate::types::TransferReversal>> {
+    pub async fn get_all_reversals(
+        &self,
+        id: &str,
+    ) -> ClientResult<Vec<crate::types::TransferReversal>> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
@@ -306,7 +308,7 @@ impl Transfers {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_reversal(&self, id: &str) -> Result<crate::types::TransferReversal> {
+    pub async fn post_reversal(&self, id: &str) -> ClientResult<crate::types::TransferReversal> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals",
@@ -334,7 +336,7 @@ impl Transfers {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `transfer: &str` -- The account's country.
      */
-    pub async fn get(&self, transfer: &str) -> Result<crate::types::Transfer> {
+    pub async fn get(&self, transfer: &str) -> ClientResult<crate::types::Transfer> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
@@ -363,7 +365,7 @@ impl Transfers {
      *
      * * `transfer: &str` -- The account's country.
      */
-    pub async fn post_transfers(&self, transfer: &str) -> Result<crate::types::Transfer> {
+    pub async fn post_transfers(&self, transfer: &str) -> ClientResult<crate::types::Transfer> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}",
@@ -396,7 +398,7 @@ impl Transfers {
         &self,
         id: &str,
         transfer: &str,
-    ) -> Result<crate::types::TransferReversal> {
+    ) -> ClientResult<crate::types::TransferReversal> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",
@@ -431,7 +433,7 @@ impl Transfers {
         &self,
         id: &str,
         transfer: &str,
-    ) -> Result<crate::types::TransferReversal> {
+    ) -> ClientResult<crate::types::TransferReversal> {
         let url = self.client.url(
             &format!(
                 "/v1/transfers/{}/reversals/{}",

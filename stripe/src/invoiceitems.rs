@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Invoiceitems {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Invoiceitems {
         limit: i64,
         pending: bool,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::InvoiceItem>> {
+    ) -> ClientResult<Vec<crate::types::InvoiceItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -88,7 +87,7 @@ impl Invoiceitems {
         customer: &str,
         invoice: &str,
         pending: bool,
-    ) -> Result<Vec<crate::types::InvoiceItem>> {
+    ) -> ClientResult<Vec<crate::types::InvoiceItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -167,7 +166,7 @@ impl Invoiceitems {
      *
      * <p>Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::InvoiceItem> {
+    pub async fn post(&self) -> ClientResult<crate::types::InvoiceItem> {
         let url = self.client.url("/v1/invoiceitems", None);
         self.client
             .post(
@@ -189,7 +188,7 @@ impl Invoiceitems {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `invoiceitem: &str` -- The account's country.
      */
-    pub async fn get(&self, invoiceitem: &str) -> Result<crate::types::InvoiceItem> {
+    pub async fn get(&self, invoiceitem: &str) -> ClientResult<crate::types::InvoiceItem> {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",
@@ -216,7 +215,10 @@ impl Invoiceitems {
      *
      * * `invoiceitem: &str` -- The account's country.
      */
-    pub async fn post_invoiceitems(&self, invoiceitem: &str) -> Result<crate::types::InvoiceItem> {
+    pub async fn post_invoiceitems(
+        &self,
+        invoiceitem: &str,
+    ) -> ClientResult<crate::types::InvoiceItem> {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",
@@ -243,7 +245,10 @@ impl Invoiceitems {
      *
      * * `invoiceitem: &str` -- The account's country.
      */
-    pub async fn delete(&self, invoiceitem: &str) -> Result<crate::types::DeletedInvoiceItem> {
+    pub async fn delete(
+        &self,
+        invoiceitem: &str,
+    ) -> ClientResult<crate::types::DeletedInvoiceItem> {
         let url = self.client.url(
             &format!(
                 "/v1/invoiceitems/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct UserTypes {
     pub client: Client,
@@ -17,7 +16,7 @@ impl UserTypes {
      *
      * Fetches all User Types in your org
      */
-    pub async fn list(&self) -> Result<Vec<crate::types::UserType>> {
+    pub async fn list(&self) -> ClientResult<Vec<crate::types::UserType>> {
         let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .get(
@@ -36,7 +35,7 @@ impl UserTypes {
      *
      * Fetches all User Types in your org
      */
-    pub async fn list_all(&self) -> Result<Vec<crate::types::UserType>> {
+    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::UserType>> {
         let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .get_all_pages(
@@ -53,7 +52,10 @@ impl UserTypes {
      *
      * Creates a new User Type. A default User Type is automatically created along with your org, and you may add another 9 User Types for a maximum of 10.
      */
-    pub async fn create(&self, body: &crate::types::UserType) -> Result<crate::types::UserType> {
+    pub async fn create(
+        &self,
+        body: &crate::types::UserType,
+    ) -> ClientResult<crate::types::UserType> {
         let url = self.client.url("/api/v1/meta/types/user", None);
         self.client
             .post(
@@ -74,7 +76,7 @@ impl UserTypes {
      *
      * * `type_id: &str`
      */
-    pub async fn get(&self, type_id: &str) -> Result<crate::types::UserType> {
+    pub async fn get(&self, type_id: &str) -> ClientResult<crate::types::UserType> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/types/user/{}",
@@ -105,7 +107,7 @@ impl UserTypes {
         &self,
         type_id: &str,
         body: &crate::types::UserType,
-    ) -> Result<crate::types::UserType> {
+    ) -> ClientResult<crate::types::UserType> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/types/user/{}",
@@ -136,7 +138,7 @@ impl UserTypes {
         &self,
         type_id: &str,
         body: &crate::types::UserType,
-    ) -> Result<crate::types::UserType> {
+    ) -> ClientResult<crate::types::UserType> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/types/user/{}",
@@ -163,7 +165,7 @@ impl UserTypes {
      *
      * * `type_id: &str`
      */
-    pub async fn delete(&self, type_id: &str) -> Result<()> {
+    pub async fn delete(&self, type_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/types/user/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Tokens {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Tokens {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn list(&self, user_key: &str) -> Result<crate::types::Tokens> {
+    pub async fn list(&self, user_key: &str) -> ClientResult<crate::types::Tokens> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens",
@@ -49,7 +48,7 @@ impl Tokens {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `client_id: &str` -- The Client ID of the application the token is issued to.
      */
-    pub async fn get(&self, user_key: &str, client_id: &str) -> Result<crate::types::Token> {
+    pub async fn get(&self, user_key: &str, client_id: &str) -> ClientResult<crate::types::Token> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens/{}",
@@ -78,7 +77,7 @@ impl Tokens {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `client_id: &str` -- The Client ID of the application the token is issued to.
      */
-    pub async fn delete(&self, user_key: &str, client_id: &str) -> Result<()> {
+    pub async fn delete(&self, user_key: &str, client_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/users/{}/tokens/{}",

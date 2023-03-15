@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Events {
     pub client: Client,
@@ -69,7 +68,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -171,7 +170,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -307,7 +306,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -369,7 +368,7 @@ impl Events {
         conference_data_version: u64,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -422,7 +421,7 @@ impl Events {
         text: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -513,7 +512,7 @@ impl Events {
         time_zone: &str,
         updated_min: &str,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
             query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
@@ -607,7 +606,7 @@ impl Events {
         event_id: &str,
         max_attendees: i64,
         time_zone: &str,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -663,7 +662,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -729,7 +728,7 @@ impl Events {
         event_id: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -788,7 +787,7 @@ impl Events {
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
         body: &crate::types::Event,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
@@ -865,7 +864,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -932,7 +931,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::Event>> {
+    ) -> ClientResult<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
             query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
@@ -1036,7 +1035,7 @@ impl Events {
         destination: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> Result<crate::types::Event> {
+    ) -> ClientResult<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));

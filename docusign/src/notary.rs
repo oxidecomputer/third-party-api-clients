@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Notary {
     pub client: Client,
@@ -24,7 +23,10 @@ impl Notary {
      *
      * * `include_jurisdictions: &str` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
      */
-    pub async fn get(&self, include_jurisdictions: &str) -> Result<crate::types::NotaryResult> {
+    pub async fn get(
+        &self,
+        include_jurisdictions: &str,
+    ) -> ClientResult<crate::types::NotaryResult> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_jurisdictions.is_empty() {
             query_args.push((
@@ -53,7 +55,10 @@ impl Notary {
      *
      * Updates notary information for the current user.
      */
-    pub async fn put(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
+    pub async fn put(
+        &self,
+        body: &crate::types::NotaryData,
+    ) -> ClientResult<crate::types::NotaryData> {
         let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .put(
@@ -72,7 +77,10 @@ impl Notary {
      *
      * Registers the current user as a notary.
      */
-    pub async fn post(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
+    pub async fn post(
+        &self,
+        body: &crate::types::NotaryData,
+    ) -> ClientResult<crate::types::NotaryData> {
         let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .post(

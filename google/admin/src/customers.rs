@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Customers {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be retrieved.
      */
-    pub async fn get(&self, customer_key: &str) -> Result<crate::types::Customer> {
+    pub async fn get(&self, customer_key: &str) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -52,7 +51,7 @@ impl Customers {
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -83,7 +82,7 @@ impl Customers {
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
-    ) -> Result<crate::types::Customer> {
+    ) -> ClientResult<crate::types::Customer> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customers/{}",
@@ -110,7 +109,10 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn admin_chrome_printers_get(&self, name: &str) -> Result<crate::types::Printer> {
+    pub async fn admin_chrome_printers_get(
+        &self,
+        name: &str,
+    ) -> ClientResult<crate::types::Printer> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
@@ -137,7 +139,10 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn admin_chrome_printers_delete(&self, name: &str) -> Result<crate::types::Empty> {
+    pub async fn admin_chrome_printers_delete(
+        &self,
+        name: &str,
+    ) -> ClientResult<crate::types::Empty> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}",
@@ -172,7 +177,7 @@ impl Customers {
         clear_mask: &str,
         update_mask: &str,
         body: &crate::types::Printer,
-    ) -> Result<crate::types::Printer> {
+    ) -> ClientResult<crate::types::Printer> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !clear_mask.is_empty() {
             query_args.push(("clearMask".to_string(), clear_mask.to_string()));
@@ -219,7 +224,7 @@ impl Customers {
         org_unit_id: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Printer>> {
+    ) -> ClientResult<Vec<crate::types::Printer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -268,7 +273,7 @@ impl Customers {
         parent: &str,
         filter: &str,
         org_unit_id: &str,
-    ) -> Result<Vec<crate::types::Printer>> {
+    ) -> ClientResult<Vec<crate::types::Printer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -350,7 +355,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::Printer,
-    ) -> Result<crate::types::Printer> {
+    ) -> ClientResult<crate::types::Printer> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers",
@@ -381,7 +386,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::BatchCreatePrintersRequest,
-    ) -> Result<crate::types::BatchCreatePrintersResponse> {
+    ) -> ClientResult<crate::types::BatchCreatePrintersResponse> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
@@ -412,7 +417,7 @@ impl Customers {
         &self,
         parent: &str,
         body: &crate::types::BatchDeletePrintersRequest,
-    ) -> Result<crate::types::BatchDeletePrintersResponse> {
+    ) -> ClientResult<crate::types::BatchDeletePrintersResponse> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
@@ -448,7 +453,7 @@ impl Customers {
         filter: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::PrinterModel>> {
+    ) -> ClientResult<Vec<crate::types::PrinterModel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -493,7 +498,7 @@ impl Customers {
         &self,
         parent: &str,
         filter: &str,
-    ) -> Result<Vec<crate::types::PrinterModel>> {
+    ) -> ClientResult<Vec<crate::types::PrinterModel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));

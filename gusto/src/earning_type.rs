@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EarningType {
     pub client: Client,
@@ -28,7 +27,7 @@ impl EarningType {
     pub async fn get_company(
         &self,
         company_id: &str,
-    ) -> Result<crate::types::EarningTypeListResponse> {
+    ) -> ClientResult<crate::types::EarningTypeListResponse> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
@@ -59,7 +58,7 @@ impl EarningType {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyEarningTypesRequest,
-    ) -> Result<crate::types::EarningType> {
+    ) -> ClientResult<crate::types::EarningType> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types",
@@ -89,7 +88,7 @@ impl EarningType {
         company_id: &str,
         earning_type_uuid: &str,
         body: &crate::types::PutCompanyEarningTypeRequest,
-    ) -> Result<crate::types::EarningType> {
+    ) -> ClientResult<crate::types::EarningType> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",
@@ -119,7 +118,7 @@ impl EarningType {
         &self,
         company_id: &str,
         earning_type_uuid: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/earning_types/{}",

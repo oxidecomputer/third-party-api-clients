@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Sources {
     pub client: Client,
@@ -17,7 +16,7 @@ impl Sources {
      *
      * <p>Creates a new source object.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::SourceData> {
+    pub async fn post(&self) -> ClientResult<crate::types::SourceData> {
         let url = self.client.url("/v1/sources", None);
         self.client
             .post(
@@ -40,7 +39,11 @@ impl Sources {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `source: &str` -- The account's country.
      */
-    pub async fn get(&self, client_secret: &str, source: &str) -> Result<crate::types::SourceData> {
+    pub async fn get(
+        &self,
+        client_secret: &str,
+        source: &str,
+    ) -> ClientResult<crate::types::SourceData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -75,7 +78,7 @@ impl Sources {
      *
      * * `source: &str` -- The account's country.
      */
-    pub async fn post_sources(&self, source: &str) -> Result<crate::types::SourceData> {
+    pub async fn post_sources(&self, source: &str) -> ClientResult<crate::types::SourceData> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}",
@@ -108,7 +111,7 @@ impl Sources {
         &self,
         mandate_notification: &str,
         source: &str,
-    ) -> Result<crate::types::SourceMandateNotification> {
+    ) -> ClientResult<crate::types::SourceMandateNotification> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/mandate_notifications/{}",
@@ -146,7 +149,7 @@ impl Sources {
         limit: i64,
         source: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::SourceTransaction>> {
+    ) -> ClientResult<Vec<crate::types::SourceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -190,7 +193,7 @@ impl Sources {
     pub async fn get_all_transactions(
         &self,
         source: &str,
-    ) -> Result<Vec<crate::types::SourceTransaction>> {
+    ) -> ClientResult<Vec<crate::types::SourceTransaction>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions",
@@ -272,7 +275,7 @@ impl Sources {
         &self,
         source: &str,
         source_transaction: &str,
-    ) -> Result<crate::types::SourceTransaction> {
+    ) -> ClientResult<crate::types::SourceTransaction> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions/{}",
@@ -300,7 +303,7 @@ impl Sources {
      *
      * * `source: &str` -- The account's country.
      */
-    pub async fn post_verify(&self, source: &str) -> Result<crate::types::SourceData> {
+    pub async fn post_verify(&self, source: &str) -> ClientResult<crate::types::SourceData> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/verify",

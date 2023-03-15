@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PowerForms {
     pub client: Client,
@@ -49,7 +48,7 @@ impl PowerForms {
         order: &str,
         order_by: &str,
         to_date: &str,
-    ) -> Result<crate::types::PowerFormsResponse> {
+    ) -> ClientResult<crate::types::PowerFormsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -136,7 +135,7 @@ impl PowerForms {
         &self,
         account_id: &str,
         body: &crate::types::PowerForm,
-    ) -> Result<crate::types::PowerForm> {
+    ) -> ClientResult<crate::types::PowerForm> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/powerforms",
@@ -169,7 +168,7 @@ impl PowerForms {
         &self,
         account_id: &str,
         body: &crate::types::PowerFormsRequest,
-    ) -> Result<crate::types::PowerFormsResponse> {
+    ) -> ClientResult<crate::types::PowerFormsResponse> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/powerforms",
@@ -203,7 +202,7 @@ impl PowerForms {
         &self,
         account_id: &str,
         start_position: &str,
-    ) -> Result<crate::types::PowerFormSendersResponse> {
+    ) -> ClientResult<crate::types::PowerFormSendersResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !start_position.is_empty() {
             query_args.push(("start_position".to_string(), start_position.to_string()));
@@ -243,7 +242,7 @@ impl PowerForms {
         &self,
         account_id: &str,
         power_form_id: &str,
-    ) -> Result<crate::types::PowerForm> {
+    ) -> ClientResult<crate::types::PowerForm> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/powerforms/{}",
@@ -279,7 +278,7 @@ impl PowerForms {
         account_id: &str,
         power_form_id: &str,
         body: &crate::types::PowerForm,
-    ) -> Result<crate::types::PowerForm> {
+    ) -> ClientResult<crate::types::PowerForm> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/powerforms/{}",
@@ -310,7 +309,7 @@ impl PowerForms {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `power_form_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_form(&self, account_id: &str, power_form_id: &str) -> Result<()> {
+    pub async fn delete_form(&self, account_id: &str, power_form_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/powerforms/{}",

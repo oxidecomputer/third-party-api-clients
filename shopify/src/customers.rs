@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Customers {
     pub client: Client,
@@ -41,7 +40,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -89,7 +88,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-01
      */
-    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-01/customers.json", None);
         self.client
             .post(
@@ -123,7 +122,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -164,7 +163,11 @@ impl Customers {
      * * `customer_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202001_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_param(
+        &self,
+        customer_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -203,7 +206,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/json",
@@ -232,7 +235,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/json",
@@ -266,7 +269,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/account_activation_url.json",
@@ -299,7 +302,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/send_invite.json",
@@ -324,7 +327,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-01
      */
-    pub async fn deprecated_202001_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202001_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/customers/count.json", None);
@@ -349,7 +352,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/orders.json",
@@ -396,7 +399,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -444,7 +447,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-04
      */
-    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-04/customers.json", None);
         self.client
             .post(
@@ -478,7 +481,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -519,7 +522,11 @@ impl Customers {
      * * `customer_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202004_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_param(
+        &self,
+        customer_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -558,7 +565,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/json",
@@ -587,7 +594,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/json",
@@ -621,7 +628,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/account_activation_url.json",
@@ -654,7 +661,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/send_invite.json",
@@ -679,7 +686,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-04
      */
-    pub async fn deprecated_202004_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202004_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/customers/count.json", None);
@@ -704,7 +711,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/orders.json",
@@ -751,7 +758,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -799,7 +806,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-07
      */
-    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-07/customers.json", None);
         self.client
             .post(
@@ -833,7 +840,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -874,7 +881,11 @@ impl Customers {
      * * `customer_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202007_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_param(
+        &self,
+        customer_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -913,7 +924,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/json",
@@ -942,7 +953,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/json",
@@ -976,7 +987,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/account_activation_url.json",
@@ -1009,7 +1020,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/send_invite.json",
@@ -1034,7 +1045,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-07
      */
-    pub async fn deprecated_202007_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202007_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/customers/count.json", None);
@@ -1059,7 +1070,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/orders.json",
@@ -1106,7 +1117,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1154,7 +1165,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2020-10
      */
-    pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2020-10/customers.json", None);
         self.client
             .post(
@@ -1188,7 +1199,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1229,7 +1240,7 @@ impl Customers {
      * * `customer_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_param(&self, customer_id: &str, fields: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1264,7 +1275,11 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn update_param(&self, customer_id: &str, body: &serde_json::Value) -> Result<()> {
+    pub async fn update_param(
+        &self,
+        customer_id: &str,
+        body: &serde_json::Value,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/json",
@@ -1293,7 +1308,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/json",
@@ -1327,7 +1342,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/account_activation_url.json",
@@ -1360,7 +1375,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/send_invite.json",
@@ -1385,7 +1400,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2020-10
      */
-    pub async fn get_count(&self) -> Result<()> {
+    pub async fn get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/customers/count.json", None);
@@ -1410,7 +1425,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/orders.json",
@@ -1457,7 +1472,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1505,7 +1520,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-2021-01
      */
-    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/2021-01/customers.json", None);
         self.client
             .post(
@@ -1539,7 +1554,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1580,7 +1595,11 @@ impl Customers {
      * * `customer_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202101_get_param(&self, customer_id: &str, fields: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_param(
+        &self,
+        customer_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1619,7 +1638,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/json",
@@ -1648,7 +1667,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/json",
@@ -1682,7 +1701,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/account_activation_url.json",
@@ -1715,7 +1734,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/send_invite.json",
@@ -1740,7 +1759,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-2021-01
      */
-    pub async fn deprecated_202101_get_count(&self) -> Result<()> {
+    pub async fn deprecated_202101_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/customers/count.json", None);
@@ -1765,7 +1784,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/orders.json",
@@ -1812,7 +1831,7 @@ impl Customers {
         updated_at_max: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1860,7 +1879,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#create-unstable
      */
-    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self.client.url("/admin/api/unstable/customers.json", None);
         self.client
             .post(
@@ -1894,7 +1913,7 @@ impl Customers {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1939,7 +1958,7 @@ impl Customers {
         &self,
         customer_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1978,7 +1997,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/json",
@@ -2007,7 +2026,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_delete_param(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_delete_param(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/json",
@@ -2041,7 +2060,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/account_activation_url.json",
@@ -2074,7 +2093,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/send_invite.json",
@@ -2099,7 +2118,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#count-unstable
      */
-    pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
+    pub async fn deprecated_unstable_get_count(&self) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/customers/count.json", None);
@@ -2124,7 +2143,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_get_param_order(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_get_param_order(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/orders.json",
@@ -2153,7 +2172,10 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_param_addresse(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses.json",
@@ -2186,7 +2208,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses.json",
@@ -2220,7 +2242,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses/{}/json",
@@ -2256,7 +2278,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses/{}/json",
@@ -2291,7 +2313,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses/{}/json",
@@ -2328,7 +2350,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -2371,7 +2393,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customers/{}/addresses/{}/default.json",
@@ -2401,7 +2423,10 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_param_addresse(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses.json",
@@ -2434,7 +2459,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses.json",
@@ -2468,7 +2493,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses/{}/json",
@@ -2504,7 +2529,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses/{}/json",
@@ -2539,7 +2564,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses/{}/json",
@@ -2576,7 +2601,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -2619,7 +2644,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customers/{}/addresses/{}/default.json",
@@ -2649,7 +2674,10 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_param_addresse(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses.json",
@@ -2682,7 +2710,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses.json",
@@ -2716,7 +2744,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses/{}/json",
@@ -2752,7 +2780,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses/{}/json",
@@ -2787,7 +2815,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses/{}/json",
@@ -2824,7 +2852,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -2867,7 +2895,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customers/{}/addresses/{}/default.json",
@@ -2897,7 +2925,7 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn get_param_addresse(&self, customer_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses.json",
@@ -2930,7 +2958,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses.json",
@@ -2964,7 +2992,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses/{}/json",
@@ -3000,7 +3028,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses/{}/json",
@@ -3035,7 +3063,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses/{}/json",
@@ -3072,7 +3100,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -3115,7 +3143,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customers/{}/addresses/{}/default.json",
@@ -3145,7 +3173,10 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_param_addresse(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses.json",
@@ -3178,7 +3209,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses.json",
@@ -3212,7 +3243,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses/{}/json",
@@ -3248,7 +3279,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses/{}/json",
@@ -3283,7 +3314,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses/{}/json",
@@ -3320,7 +3351,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -3363,7 +3394,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customers/{}/addresses/{}/default.json",
@@ -3393,7 +3424,10 @@ impl Customers {
      *
      * * `customer_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_get_param_addresse(&self, customer_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_get_param_addresse(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses.json",
@@ -3426,7 +3460,7 @@ impl Customers {
         &self,
         customer_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses.json",
@@ -3460,7 +3494,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses/{}/json",
@@ -3496,7 +3530,7 @@ impl Customers {
         customer_id: &str,
         address_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses/{}/json",
@@ -3531,7 +3565,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses/{}/json",
@@ -3568,7 +3602,7 @@ impl Customers {
         customer_id: &str,
         address_ids: i64,
         operation: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if address_ids > 0 {
             query_args.push(("address_ids[]".to_string(), address_ids.to_string()));
@@ -3611,7 +3645,7 @@ impl Customers {
         &self,
         customer_id: &str,
         address_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customers/{}/addresses/{}/default.json",
@@ -3649,7 +3683,7 @@ impl Customers {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3685,7 +3719,7 @@ impl Customers {
     pub async fn deprecated_202001_create_saved_searches(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-01/customer_saved_searches.json", None);
@@ -3710,7 +3744,10 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn deprecated_202001_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn deprecated_202001_get_saved_searches_count(
+        &self,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -3749,7 +3786,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3788,7 +3825,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customer_saved_searches/{}/json",
@@ -3820,7 +3857,7 @@ impl Customers {
     pub async fn deprecated_202001_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/customer_saved_searches/{}/json",
@@ -3860,7 +3897,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3909,7 +3946,7 @@ impl Customers {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3945,7 +3982,7 @@ impl Customers {
     pub async fn deprecated_202004_create_saved_searches(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-04/customer_saved_searches.json", None);
@@ -3970,7 +4007,10 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn deprecated_202004_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn deprecated_202004_get_saved_searches_count(
+        &self,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -4009,7 +4049,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4048,7 +4088,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customer_saved_searches/{}/json",
@@ -4080,7 +4120,7 @@ impl Customers {
     pub async fn deprecated_202004_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/customer_saved_searches/{}/json",
@@ -4120,7 +4160,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4169,7 +4209,7 @@ impl Customers {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4205,7 +4245,7 @@ impl Customers {
     pub async fn deprecated_202007_create_saved_searches(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-07/customer_saved_searches.json", None);
@@ -4230,7 +4270,10 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn deprecated_202007_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn deprecated_202007_get_saved_searches_count(
+        &self,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -4269,7 +4312,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4308,7 +4351,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customer_saved_searches/{}/json",
@@ -4340,7 +4383,7 @@ impl Customers {
     pub async fn deprecated_202007_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/customer_saved_searches/{}/json",
@@ -4380,7 +4423,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4424,7 +4467,12 @@ impl Customers {
      * * `since_id: &str` -- Restrict results to after the specified ID.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_saved_searche(&self, limit: &str, since_id: &str, fields: &str) -> Result<()> {
+    pub async fn get_saved_searche(
+        &self,
+        limit: &str,
+        since_id: &str,
+        fields: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4457,7 +4505,7 @@ impl Customers {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/customers/customersavedsearch#create-2020-10
      */
-    pub async fn create_saved_searches(&self, body: &serde_json::Value) -> Result<()> {
+    pub async fn create_saved_searches(&self, body: &serde_json::Value) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2020-10/customer_saved_searches.json", None);
@@ -4482,7 +4530,7 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn get_saved_searches_count(&self, since_id: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -4521,7 +4569,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4560,7 +4608,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customer_saved_searches/{}/json",
@@ -4592,7 +4640,7 @@ impl Customers {
     pub async fn delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/customer_saved_searches/{}/json",
@@ -4632,7 +4680,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4681,7 +4729,7 @@ impl Customers {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4717,7 +4765,7 @@ impl Customers {
     pub async fn deprecated_202101_create_saved_searches(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/2021-01/customer_saved_searches.json", None);
@@ -4742,7 +4790,10 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn deprecated_202101_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn deprecated_202101_get_saved_searches_count(
+        &self,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -4781,7 +4832,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4820,7 +4871,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customer_saved_searches/{}/json",
@@ -4852,7 +4903,7 @@ impl Customers {
     pub async fn deprecated_202101_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/customer_saved_searches/{}/json",
@@ -4892,7 +4943,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4941,7 +4992,7 @@ impl Customers {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4980,7 +5031,7 @@ impl Customers {
     pub async fn deprecated_unstable_create_saved_searches(
         &self,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self
             .client
             .url("/admin/api/unstable/customer_saved_searches.json", None);
@@ -5005,7 +5056,10 @@ impl Customers {
      *
      * * `since_id: &str` -- Restrict results to after the specified ID.
      */
-    pub async fn deprecated_unstable_get_saved_searches_count(&self, since_id: &str) -> Result<()> {
+    pub async fn deprecated_unstable_get_saved_searches_count(
+        &self,
+        since_id: &str,
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !since_id.is_empty() {
             query_args.push(("since_id".to_string(), since_id.to_string()));
@@ -5044,7 +5098,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5083,7 +5137,7 @@ impl Customers {
         &self,
         customer_saved_search_id: &str,
         body: &serde_json::Value,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customer_saved_searches/{}/json",
@@ -5115,7 +5169,7 @@ impl Customers {
     pub async fn deprecated_unstable_delete_saved_searches_param_search(
         &self,
         customer_saved_search_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/customer_saved_searches/{}/json",
@@ -5155,7 +5209,7 @@ impl Customers {
         order: &str,
         limit: &str,
         fields: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));

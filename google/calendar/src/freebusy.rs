@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Freebusy {
     pub client: Client,
@@ -20,7 +19,7 @@ impl Freebusy {
     pub async fn query(
         &self,
         body: &crate::types::FreeBusyRequest,
-    ) -> Result<crate::types::FreeBusyResponse> {
+    ) -> ClientResult<crate::types::FreeBusyResponse> {
         let url = self.client.url("/freeBusy", None);
         self.client
             .post(

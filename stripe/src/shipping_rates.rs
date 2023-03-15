@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ShippingRates {
     pub client: Client,
@@ -35,7 +34,7 @@ impl ShippingRates {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::ShippingRate>> {
+    ) -> ClientResult<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -82,7 +81,7 @@ impl ShippingRates {
         active: bool,
         _created: &str,
         currency: &str,
-    ) -> Result<Vec<crate::types::ShippingRate>> {
+    ) -> ClientResult<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -158,7 +157,7 @@ impl ShippingRates {
      *
      * <p>Creates a new shipping rate object.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::ShippingRate> {
+    pub async fn post(&self) -> ClientResult<crate::types::ShippingRate> {
         let url = self.client.url("/v1/shipping_rates", None);
         self.client
             .post(
@@ -183,7 +182,7 @@ impl ShippingRates {
     pub async fn get_rate_token(
         &self,
         shipping_rate_token: &str,
-    ) -> Result<crate::types::ShippingRate> {
+    ) -> ClientResult<crate::types::ShippingRate> {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
@@ -213,7 +212,7 @@ impl ShippingRates {
     pub async fn post_rate_token(
         &self,
         shipping_rate_token: &str,
-    ) -> Result<crate::types::ShippingRate> {
+    ) -> ClientResult<crate::types::ShippingRate> {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",

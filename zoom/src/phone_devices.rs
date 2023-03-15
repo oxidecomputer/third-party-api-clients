@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PhoneDevices {
     pub client: Client,
@@ -36,7 +35,7 @@ impl PhoneDevices {
         type_: crate::types::ListPhoneDevicesType,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListPhoneDevicesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -81,7 +80,7 @@ impl PhoneDevices {
     pub async fn list_all(
         &self,
         type_: crate::types::ListPhoneDevicesType,
-    ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListPhoneDevicesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -157,7 +156,7 @@ impl PhoneDevices {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
+    pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> ClientResult<()> {
         let url = self.client.url("/phone/devices", None);
         self.client
             .post(
@@ -186,7 +185,10 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn get_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
+    pub async fn get_device(
+        &self,
+        device_id: &str,
+    ) -> ClientResult<crate::types::GetDeviceResponse> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
@@ -223,7 +225,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn delete_device(&self, device_id: &str) -> Result<()> {
+    pub async fn delete_device(&self, device_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",
@@ -263,7 +265,7 @@ impl PhoneDevices {
         &self,
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/phone/devices/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountSealProviders {
     pub client: Client,
@@ -26,7 +25,7 @@ impl AccountSealProviders {
     pub async fn account_signature_providers_get_seal(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::AccountSealProviders> {
+    ) -> ClientResult<crate::types::AccountSealProviders> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/seals",

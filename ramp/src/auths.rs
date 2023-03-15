@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Auths {
     pub client: Client,
@@ -52,7 +51,7 @@ impl Auths {
      *
      * * `authorization: &str` -- Basic \<base64-encoded client_id:client_secret\>.
      */
-    pub async fn post_token(&self) -> Result<crate::types::OAuth2Token> {
+    pub async fn post_token(&self) -> ClientResult<crate::types::OAuth2Token> {
         let url = self.client.url("/token", None);
         self.client
             .post(

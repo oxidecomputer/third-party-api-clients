@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EmailAddressValidation {
     pub client: Client,
@@ -22,7 +21,7 @@ impl EmailAddressValidation {
     pub async fn post_validations_email(
         &self,
         body: &crate::types::PostValidationsEmailRequest,
-    ) -> Result<crate::types::PostValidationsEmailResponse> {
+    ) -> ClientResult<crate::types::PostValidationsEmailResponse> {
         let url = self.client.url("/validations/email", None);
         self.client
             .post(

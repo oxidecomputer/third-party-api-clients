@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Chromeosdevices {
     pub client: Client,
@@ -38,7 +37,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<Vec<crate::types::ChromeOsDevice>> {
+    ) -> ClientResult<Vec<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -99,7 +98,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<Vec<crate::types::ChromeOsDevice>> {
+    ) -> ClientResult<Vec<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -192,7 +191,7 @@ impl Chromeosdevices {
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::ChromeOsMoveDevicesOu,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
             query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
@@ -232,7 +231,7 @@ impl Chromeosdevices {
         customer_id: &str,
         device_id: &str,
         projection: crate::types::Projection,
-    ) -> Result<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::types::ChromeOsDevice> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -274,7 +273,7 @@ impl Chromeosdevices {
         device_id: &str,
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
-    ) -> Result<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::types::ChromeOsDevice> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -316,7 +315,7 @@ impl Chromeosdevices {
         device_id: &str,
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
-    ) -> Result<crate::types::ChromeOsDevice> {
+    ) -> ClientResult<crate::types::ChromeOsDevice> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -356,7 +355,7 @@ impl Chromeosdevices {
         customer_id: &str,
         resource_id: &str,
         body: &crate::types::ChromeOsDeviceAction,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}/action",

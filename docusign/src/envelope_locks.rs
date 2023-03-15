@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeLocks {
     pub client: Client,
@@ -40,7 +39,7 @@ impl EnvelopeLocks {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::types::EnvelopeLocks> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -98,7 +97,7 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::LockRequest,
-    ) -> Result<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::types::EnvelopeLocks> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -190,7 +189,7 @@ impl EnvelopeLocks {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::LockRequest,
-    ) -> Result<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::types::EnvelopeLocks> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",
@@ -241,7 +240,7 @@ impl EnvelopeLocks {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EnvelopeLocks> {
+    ) -> ClientResult<crate::types::EnvelopeLocks> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/lock",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeDocumentFields {
     pub client: Client,
@@ -30,7 +29,7 @@ impl EnvelopeDocumentFields {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -69,7 +68,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> Result<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -108,7 +107,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> Result<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",
@@ -147,7 +146,7 @@ impl EnvelopeDocumentFields {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDocumentFields,
-    ) -> Result<crate::types::EnvelopeDocumentFields> {
+    ) -> ClientResult<crate::types::EnvelopeDocumentFields> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/fields",

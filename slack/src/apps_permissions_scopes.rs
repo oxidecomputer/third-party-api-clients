@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AppsPermissionsScopes {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AppsPermissionsScopes {
      *
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
-    pub async fn list(&self) -> Result<crate::types::ApiPermissionsScopesListSuccessSchema> {
+    pub async fn list(&self) -> ClientResult<crate::types::ApiPermissionsScopesListSuccessSchema> {
         let url = self.client.url("/apps.permissions.scopes.list", None);
         self.client
             .get(

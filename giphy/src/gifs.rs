@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Gifs {
     pub client: Client,
@@ -24,7 +23,7 @@ impl Gifs {
      *
      * * `ids: &str` -- Filters results by specified GIF IDs, separated by commas.
      */
-    pub async fn get(&self, ids: &str) -> Result<crate::types::GetGifsByResponse> {
+    pub async fn get(&self, ids: &str) -> ClientResult<crate::types::GetGifsByResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("ids".to_string(), ids.to_string()));
@@ -54,7 +53,11 @@ impl Gifs {
      * * `tag: &str` -- The unique bit.ly URL for this GIF.
      * * `rating: &str` -- The unique bit.ly URL for this GIF.
      */
-    pub async fn random(&self, tag: &str, rating: &str) -> Result<crate::types::RandomGifResponse> {
+    pub async fn random(
+        &self,
+        tag: &str,
+        rating: &str,
+    ) -> ClientResult<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !rating.is_empty() {
             query_args.push(("rating".to_string(), rating.to_string()));
@@ -97,7 +100,7 @@ impl Gifs {
         offset: i64,
         rating: &str,
         lang: &str,
-    ) -> Result<crate::types::GetGifsByResponse> {
+    ) -> ClientResult<crate::types::GetGifsByResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !lang.is_empty() {
             query_args.push(("lang".to_string(), lang.to_string()));
@@ -138,7 +141,7 @@ impl Gifs {
      *
      * * `s: &str` -- The unique bit.ly URL for this GIF.
      */
-    pub async fn translate(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
+    pub async fn translate(&self, s: &str) -> ClientResult<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !s.is_empty() {
             query_args.push(("s".to_string(), s.to_string()));
@@ -176,7 +179,7 @@ impl Gifs {
         limit: i64,
         offset: i64,
         rating: &str,
-    ) -> Result<crate::types::GetGifsByResponse> {
+    ) -> ClientResult<crate::types::GetGifsByResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -211,7 +214,7 @@ impl Gifs {
      *
      * * `gif_id: i64` -- Filters results by specified GIF ID.
      */
-    pub async fn get_gifs(&self, gif_id: i64) -> Result<crate::types::RandomGifResponse> {
+    pub async fn get_gifs(&self, gif_id: i64) -> ClientResult<crate::types::RandomGifResponse> {
         let url = self.client.url(
             &format!(
                 "/gifs/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PaymentIntents {
     pub client: Client,
@@ -33,7 +32,7 @@ impl PaymentIntents {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::PaymentIntent>> {
+    ) -> ClientResult<Vec<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -76,7 +75,7 @@ impl PaymentIntents {
         &self,
         _created: &str,
         customer: &str,
-    ) -> Result<Vec<crate::types::PaymentIntent>> {
+    ) -> ClientResult<Vec<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -158,7 +157,7 @@ impl PaymentIntents {
      * available in the <a href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code>
      * is supplied.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::PaymentIntent> {
+    pub async fn post(&self) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url("/v1/payment_intents", None);
         self.client
             .post(
@@ -190,7 +189,7 @@ impl PaymentIntents {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -229,7 +228,7 @@ impl PaymentIntents {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -316,7 +315,7 @@ impl PaymentIntents {
         &self,
         client_secret: &str,
         intent: &str,
-    ) -> Result<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::types::PaymentIntent> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -355,7 +354,7 @@ impl PaymentIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
+    pub async fn post_intent(&self, intent: &str) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}",
@@ -386,7 +385,10 @@ impl PaymentIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent_cancel(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
+    pub async fn post_intent_cancel(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/cancel",
@@ -417,7 +419,10 @@ impl PaymentIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent_capture(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
+    pub async fn post_intent_capture(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/capture",
@@ -468,7 +473,10 @@ impl PaymentIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent_confirm(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
+    pub async fn post_intent_confirm(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/confirm",
@@ -498,7 +506,7 @@ impl PaymentIntents {
     pub async fn post_intent_verify_microdeposit(
         &self,
         intent: &str,
-    ) -> Result<crate::types::PaymentIntent> {
+    ) -> ClientResult<crate::types::PaymentIntent> {
         let url = self.client.url(
             &format!(
                 "/v1/payment_intents/{}/verify_microdeposits",

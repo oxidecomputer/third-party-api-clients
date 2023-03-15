@@ -127,7 +127,37 @@ pub mod users_api;
 pub mod utils;
 pub mod webhooks;
 
-use anyhow::{anyhow, Error, Result};
+use thiserror::Error;
+type ClientResult<T> = Result<T, ClientError>;
+
+/// Errors returned by the client
+#[derive(Debug, Error)]
+pub enum ClientError {
+    /// utf8 convertion error
+    #[error(transparent)]
+    FromUtf8Error(#[from] std::string::FromUtf8Error),
+    /// URL Parsing Error
+    #[error(transparent)]
+    UrlParserError(#[from] url::ParseError),
+    /// Serde JSON parsing error
+    #[error(transparent)]
+    SerdeJsonError(#[from] serde_json::Error),
+    /// Errors returned by reqwest
+    #[error(transparent)]
+    ReqwestError(#[from] reqwest::Error),
+    /// Errors returned by reqwest::header
+    #[error(transparent)]
+    InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    /// Errors returned by reqwest middleware
+    #[error(transparent)]
+    ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
+    /// Generic HTTP Error
+    #[error("HTTP Error. Code: {status}, message: {error}")]
+    HttpError {
+        status: http::StatusCode,
+        error: String,
+    },
+}
 
 pub const FALLBACK_HOST: &str = "https://api.sendgrid.com/v3";
 
@@ -256,10 +286,10 @@ impl Client {
         Client::new(token)
     }
 
-    async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
-        let parsed_url = uri.parse::<reqwest::Url>();
+    async fn url_and_auth(&self, uri: &str) -> ClientResult<(reqwest::Url, Option<String>)> {
+        let parsed_url = uri.parse::<reqwest::Url>()?;
         let auth = format!("Bearer {}", self.token);
-        parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+        Ok((parsed_url, Some(auth)))
     }
 
     async fn request_raw(
@@ -267,7 +297,7 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         message: Message,
-    ) -> Result<reqwest::Response> {
+    ) -> ClientResult<reqwest::Response> {
         let (url, auth) = self.url_and_auth(uri).await?;
         let instance = <&Client>::clone(&self);
         let mut req = instance.client.request(method.clone(), url);
@@ -303,7 +333,7 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         message: Message,
-    ) -> Result<Out>
+    ) -> ClientResult<Out>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -318,20 +348,22 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map_err(Error::from)
+            Ok(parsed_response)
         } else {
             let error = if response_body.is_empty() {
-                anyhow!("code: {}, empty response", status)
-            } else {
-                anyhow!(
-                    "code: {}, error: {:?}",
+                ClientError::HttpError {
                     status,
-                    String::from_utf8_lossy(&response_body),
-                )
+                    error: "empty response".into(),
+                }
+            } else {
+                ClientError::HttpError {
+                    status,
+                    error: String::from_utf8_lossy(&response_body).into(),
+                }
             };
 
             Err(error)
@@ -343,7 +375,7 @@ impl Client {
         method: http::Method,
         uri: &str,
         message: Message,
-    ) -> Result<(Option<crate::utils::NextLink>, Out)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -366,20 +398,22 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map(|out| (link, out)).map_err(Error::from)
+            Ok((link, parsed_response))
         } else {
             let error = if response_body.is_empty() {
-                anyhow!("code: {}, empty response", status)
-            } else {
-                anyhow!(
-                    "code: {}, error: {:?}",
+                ClientError::HttpError {
                     status,
-                    String::from_utf8_lossy(&response_body),
-                )
+                    error: "empty response".into(),
+                }
+            } else {
+                ClientError::HttpError {
+                    status,
+                    error: String::from_utf8_lossy(&response_body).into(),
+                }
             };
             Err(error)
         }
@@ -387,7 +421,7 @@ impl Client {
 
     /* TODO: make this more DRY */
     #[allow(dead_code)]
-    async fn post_form<Out>(&self, uri: &str, form: reqwest::multipart::Form) -> Result<Out>
+    async fn post_form<Out>(&self, uri: &str, form: reqwest::multipart::Form) -> ClientResult<Out>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -420,25 +454,26 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {
                 // Parse the output as a string.
-                serde_json::from_value(serde_json::json!(&String::from_utf8(
-                    response_body.to_vec()
-                )?))
+                let s = String::from_utf8(response_body.to_vec())?;
+                serde_json::from_value(serde_json::json!(&s))?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map_err(Error::from)
+            Ok(parsed_response)
         } else {
             let error = if response_body.is_empty() {
-                anyhow!("code: {}, empty response", status)
-            } else {
-                anyhow!(
-                    "code: {}, error: {:?}",
+                ClientError::HttpError {
                     status,
-                    String::from_utf8_lossy(&response_body),
-                )
+                    error: "empty response".into(),
+                }
+            } else {
+                ClientError::HttpError {
+                    status,
+                    error: String::from_utf8_lossy(&response_body).into(),
+                }
             };
 
             Err(error)
@@ -452,7 +487,7 @@ impl Client {
         method: reqwest::Method,
         uri: &str,
         accept_mime_type: &str,
-    ) -> Result<Out>
+    ) -> ClientResult<Out>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -483,25 +518,26 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {
                 // Parse the output as a string.
-                serde_json::from_value(serde_json::json!(&String::from_utf8(
-                    response_body.to_vec()
-                )?))
+                let s = String::from_utf8(response_body.to_vec())?;
+                serde_json::from_value(serde_json::json!(&s))?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map_err(Error::from)
+            Ok(parsed_response)
         } else {
             let error = if response_body.is_empty() {
-                anyhow!("code: {}, empty response", status)
-            } else {
-                anyhow!(
-                    "code: {}, error: {:?}",
+                ClientError::HttpError {
                     status,
-                    String::from_utf8_lossy(&response_body),
-                )
+                    error: "empty response".into(),
+                }
+            } else {
+                ClientError::HttpError {
+                    status,
+                    error: String::from_utf8_lossy(&response_body).into(),
+                }
             };
 
             Err(error)
@@ -516,7 +552,7 @@ impl Client {
         uri: &str,
         content: &[u8],
         mime_type: &str,
-    ) -> Result<Out>
+    ) -> ClientResult<Out>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -567,20 +603,22 @@ impl Client {
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
-                serde_json::from_str("null")
+                serde_json::from_str("null")?
             } else {
-                serde_json::from_slice::<Out>(&response_body)
+                serde_json::from_slice::<Out>(&response_body)?
             };
-            parsed_response.map_err(Error::from)
+            Ok(parsed_response)
         } else {
             let error = if response_body.is_empty() {
-                anyhow!("code: {}, empty response", status)
-            } else {
-                anyhow!(
-                    "code: {}, error: {:?}",
+                ClientError::HttpError {
                     status,
-                    String::from_utf8_lossy(&response_body),
-                )
+                    error: "empty response".into(),
+                }
+            } else {
+                ClientError::HttpError {
+                    status,
+                    error: String::from_utf8_lossy(&response_body).into(),
+                }
             };
 
             Err(error)
@@ -592,7 +630,7 @@ impl Client {
         method: http::Method,
         uri: &str,
         message: Message,
-    ) -> Result<D>
+    ) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -601,7 +639,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -609,7 +647,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Message) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -619,7 +657,7 @@ impl Client {
 
     /// "unfold" paginated results of a vector of items
     #[allow(dead_code)]
-    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
+    async fn unfold<D>(&self, uri: &str) -> ClientResult<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -641,7 +679,10 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    async fn get_pages<D>(
+        &self,
+        uri: &str,
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -653,7 +694,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<crate::utils::NextLink>, Vec<D>)>
+    ) -> ClientResult<(Option<crate::utils::NextLink>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -662,7 +703,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn post<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -670,7 +711,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn patch<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn patch<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -678,7 +719,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn put<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn put<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -686,7 +727,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn delete<D>(&self, uri: &str, message: Message) -> Result<D>
+    async fn delete<D>(&self, uri: &str, message: Message) -> ClientResult<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

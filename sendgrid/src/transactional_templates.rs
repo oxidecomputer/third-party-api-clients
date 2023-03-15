@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TransactionalTemplates {
     pub client: Client,
@@ -31,7 +30,7 @@ impl TransactionalTemplates {
         generations: crate::types::Generations,
         page_size: f64,
         page_token: &str,
-    ) -> Result<crate::types::GetTemplatesResponse> {
+    ) -> ClientResult<crate::types::GetTemplatesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !generations.to_string().is_empty() {
             query_args.push(("generations".to_string(), generations.to_string()));
@@ -68,7 +67,7 @@ impl TransactionalTemplates {
     pub async fn post_template(
         &self,
         body: &crate::types::PostTemplatesRequest,
-    ) -> Result<crate::types::TransactionalTemplateAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateAllOf> {
         let url = self.client.url("/templates", None);
         self.client
             .post(
@@ -94,7 +93,7 @@ impl TransactionalTemplates {
     pub async fn get_templates_template(
         &self,
         template_id: &str,
-    ) -> Result<crate::types::TransactionalTemplateAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
@@ -127,7 +126,7 @@ impl TransactionalTemplates {
         &self,
         template_id: &str,
         body: &crate::types::PostTemplatesTemplateRequest,
-    ) -> Result<crate::types::TransactionalTemplateAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
@@ -156,7 +155,10 @@ impl TransactionalTemplates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
+    pub async fn delete_templates_template(
+        &self,
+        template_id: &str,
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
@@ -191,7 +193,7 @@ impl TransactionalTemplates {
         &self,
         template_id: &str,
         body: &crate::types::PatchTemplatesTemplateRequest,
-    ) -> Result<crate::types::TransactionalTemplateAllOf> {
+    ) -> ClientResult<crate::types::TransactionalTemplateAllOf> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Search {
     pub client: Client,
@@ -53,7 +52,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchCodeResponse> {
+    ) -> ClientResult<crate::types::SearchCodeResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -113,7 +112,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchCommitsResponse> {
+    ) -> ClientResult<crate::types::SearchCommitsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -179,7 +178,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchIssuesPullRequestsResponse> {
+    ) -> ClientResult<crate::types::SearchIssuesPullRequestsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -242,7 +241,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchLabelsResponse> {
+    ) -> ClientResult<crate::types::SearchLabelsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -310,7 +309,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchReposResponse> {
+    ) -> ClientResult<crate::types::SearchReposResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));
@@ -369,7 +368,7 @@ impl Search {
         q: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchTopicsResponse> {
+    ) -> ClientResult<crate::types::SearchTopicsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -424,7 +423,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::SearchUsersResponse> {
+    ) -> ClientResult<crate::types::SearchUsersResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
             query_args.push(("order".to_string(), order.to_string()));

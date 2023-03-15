@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Automations {
     pub client: Client,
@@ -42,7 +41,7 @@ impl Automations {
         before_start_time: Option<chrono::DateTime<chrono::Utc>>,
         since_start_time: Option<chrono::DateTime<chrono::Utc>>,
         status: crate::types::Status,
-    ) -> Result<crate::types::GetAutomationsResponse> {
+    ) -> ClientResult<crate::types::GetAutomationsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = before_create_time {
             query_args.push(("before_create_time".to_string(), date.to_rfc3339()));
@@ -93,7 +92,7 @@ impl Automations {
     pub async fn post(
         &self,
         body: &crate::types::AutomationWorkflow,
-    ) -> Result<crate::types::Automations> {
+    ) -> ClientResult<crate::types::Automations> {
         let url = self.client.url("/automations", None);
         self.client
             .post(
@@ -123,7 +122,7 @@ impl Automations {
         fields: &[String],
         exclude_fields: &[String],
         workflow_id: &str,
-    ) -> Result<crate::types::Automations> {
+    ) -> ClientResult<crate::types::Automations> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -161,7 +160,7 @@ impl Automations {
      *
      * * `workflow_id: &str` -- The unique id for the Automation workflow.
      */
-    pub async fn post_actions_pause_all_email(&self, workflow_id: &str) -> Result<()> {
+    pub async fn post_actions_pause_all_email(&self, workflow_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/pause-all-emails",
@@ -190,7 +189,7 @@ impl Automations {
      *
      * * `workflow_id: &str` -- The unique id for the Automation workflow.
      */
-    pub async fn post_actions_start_all_email(&self, workflow_id: &str) -> Result<()> {
+    pub async fn post_actions_start_all_email(&self, workflow_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/start-all-emails",
@@ -219,7 +218,7 @@ impl Automations {
      *
      * * `workflow_id: &str` -- The unique id for the Automation workflow.
      */
-    pub async fn archive(&self, workflow_id: &str) -> Result<()> {
+    pub async fn archive(&self, workflow_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/actions/archive",
@@ -248,7 +247,10 @@ impl Automations {
      *
      * * `workflow_id: &str` -- The unique id for the Automation workflow.
      */
-    pub async fn get_email(&self, workflow_id: &str) -> Result<crate::types::AutomationEmails> {
+    pub async fn get_email(
+        &self,
+        workflow_id: &str,
+    ) -> ClientResult<crate::types::AutomationEmails> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails",
@@ -282,7 +284,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         workflow_email_id: &str,
-    ) -> Result<crate::types::Emails> {
+    ) -> ClientResult<crate::types::Emails> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
@@ -313,7 +315,11 @@ impl Automations {
      * * `workflow_id: &str` -- The unique id for the Automation workflow.
      * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
      */
-    pub async fn delete_emails(&self, workflow_id: &str, workflow_email_id: &str) -> Result<()> {
+    pub async fn delete_emails(
+        &self,
+        workflow_id: &str,
+        workflow_email_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
@@ -349,7 +355,7 @@ impl Automations {
         workflow_id: &str,
         workflow_email_id: &str,
         body: &crate::types::UpdateInformationAboutASpecificWorkflowEmail,
-    ) -> Result<crate::types::Emails> {
+    ) -> ClientResult<crate::types::Emails> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}",
@@ -384,7 +390,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         workflow_email_id: &str,
-    ) -> Result<crate::types::GetAutomationsEmailsQueueResponse> {
+    ) -> ClientResult<crate::types::GetAutomationsEmailsQueueResponse> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue",
@@ -420,7 +426,7 @@ impl Automations {
         workflow_id: &str,
         workflow_email_id: &str,
         body: &crate::types::SubscriberInAutomationQueue,
-    ) -> Result<crate::types::SubscriberInAutomationQueueData> {
+    ) -> ClientResult<crate::types::SubscriberInAutomationQueueData> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue",
@@ -457,7 +463,7 @@ impl Automations {
         workflow_id: &str,
         workflow_email_id: &str,
         subscriber_hash: &str,
-    ) -> Result<crate::types::SubscriberInAutomationQueueData> {
+    ) -> ClientResult<crate::types::SubscriberInAutomationQueueData> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/queue/{}",
@@ -493,7 +499,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         workflow_email_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/actions/pause",
@@ -528,7 +534,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         workflow_email_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/emails/{}/actions/start",
@@ -561,7 +567,7 @@ impl Automations {
     pub async fn get_removed_subscriber(
         &self,
         workflow_id: &str,
-    ) -> Result<crate::types::RemovedSubscribers> {
+    ) -> ClientResult<crate::types::RemovedSubscribers> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers",
@@ -594,7 +600,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         body: &crate::types::SubscriberInAutomationQueue,
-    ) -> Result<crate::types::Subscribers> {
+    ) -> ClientResult<crate::types::Subscribers> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers",
@@ -628,7 +634,7 @@ impl Automations {
         &self,
         workflow_id: &str,
         subscriber_hash: &str,
-    ) -> Result<crate::types::Subscribers> {
+    ) -> ClientResult<crate::types::Subscribers> {
         let url = self.client.url(
             &format!(
                 "/automations/{}/removed-subscribers/{}",

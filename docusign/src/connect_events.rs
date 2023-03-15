@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ConnectEvents {
     pub client: Client,
@@ -28,7 +27,7 @@ impl ConnectEvents {
         &self,
         account_id: &str,
         body: &crate::types::ConnectFailureFilter,
-    ) -> Result<crate::types::ConnectFailureResults> {
+    ) -> ClientResult<crate::types::ConnectFailureResults> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/envelopes/retry_queue",
@@ -62,7 +61,7 @@ impl ConnectEvents {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::ConnectFailureResults> {
+    ) -> ClientResult<crate::types::ConnectFailureResults> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/envelopes/{}/retry_queue",
@@ -103,7 +102,7 @@ impl ConnectEvents {
         account_id: &str,
         from_date: &str,
         to_date: &str,
-    ) -> Result<crate::types::ConnectLogs> {
+    ) -> ClientResult<crate::types::ConnectLogs> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -146,7 +145,7 @@ impl ConnectEvents {
         &self,
         account_id: &str,
         failure_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/failures/{}",
@@ -189,7 +188,7 @@ impl ConnectEvents {
         account_id: &str,
         from_date: &str,
         to_date: &str,
-    ) -> Result<crate::types::ConnectLogs> {
+    ) -> ClientResult<crate::types::ConnectLogs> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -227,7 +226,7 @@ impl ConnectEvents {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn connect_log_delete_logs(&self, account_id: &str) -> Result<()> {
+    pub async fn connect_log_delete_logs(&self, account_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs",
@@ -265,7 +264,7 @@ impl ConnectEvents {
         account_id: &str,
         log_id: &str,
         additional_info: &str,
-    ) -> Result<crate::types::ConnectLog> {
+    ) -> ClientResult<crate::types::ConnectLog> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !additional_info.is_empty() {
             query_args.push(("additional_info".to_string(), additional_info.to_string()));
@@ -303,7 +302,7 @@ impl ConnectEvents {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn connect_log_delete(&self, account_id: &str, log_id: &str) -> Result<()> {
+    pub async fn connect_log_delete(&self, account_id: &str, log_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/logs/{}",

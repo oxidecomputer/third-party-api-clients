@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TaxRates {
     pub client: Client,
@@ -35,7 +34,7 @@ impl TaxRates {
         inclusive: bool,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::TaxRate>> {
+    ) -> ClientResult<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -80,7 +79,7 @@ impl TaxRates {
         active: bool,
         _created: &str,
         inclusive: bool,
-    ) -> Result<Vec<crate::types::TaxRate>> {
+    ) -> ClientResult<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -154,7 +153,7 @@ impl TaxRates {
      *
      * <p>Creates a new tax rate.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::TaxRate> {
+    pub async fn post(&self) -> ClientResult<crate::types::TaxRate> {
         let url = self.client.url("/v1/tax_rates", None);
         self.client
             .post(
@@ -176,7 +175,7 @@ impl TaxRates {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `tax_rate: &str` -- The account's country.
      */
-    pub async fn get_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
+    pub async fn get_rate(&self, tax_rate: &str) -> ClientResult<crate::types::TaxRate> {
         let url = self.client.url(
             &format!(
                 "/v1/tax_rates/{}",
@@ -203,7 +202,7 @@ impl TaxRates {
      *
      * * `tax_rate: &str` -- The account's country.
      */
-    pub async fn post_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
+    pub async fn post_rate(&self, tax_rate: &str) -> ClientResult<crate::types::TaxRate> {
         let url = self.client.url(
             &format!(
                 "/v1/tax_rates/{}",

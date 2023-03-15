@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Tendertransaction {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -97,7 +96,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -157,7 +156,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -217,7 +216,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -277,7 +276,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -337,7 +336,7 @@ impl Tendertransaction {
         processed_at_max: &str,
         processed_at: &str,
         order: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));

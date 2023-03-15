@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SuppressionsGlobal {
     pub client: Client,
@@ -26,7 +25,7 @@ impl SuppressionsGlobal {
     pub async fn post_asm(
         &self,
         body: &crate::types::SuppressionsRequestBody,
-    ) -> Result<crate::types::SuppressionsRequestBody> {
+    ) -> ClientResult<crate::types::SuppressionsRequestBody> {
         let url = self.client.url("/asm/suppressions/global", None);
         self.client
             .post(
@@ -59,7 +58,7 @@ impl SuppressionsGlobal {
         end_time: i64,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -101,7 +100,7 @@ impl SuppressionsGlobal {
         start_time: i64,
         end_time: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -142,7 +141,7 @@ impl SuppressionsGlobal {
     pub async fn get_asm_email(
         &self,
         email: &str,
-    ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
+    ) -> ClientResult<crate::types::RetrieveAGlobalSuppressionResponse> {
         let url = self.client.url(
             &format!(
                 "/asm/suppressions/global/{}",
@@ -173,7 +172,7 @@ impl SuppressionsGlobal {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
+    pub async fn delete_asm_email(&self, email: &str) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/asm/suppressions/global/{}",

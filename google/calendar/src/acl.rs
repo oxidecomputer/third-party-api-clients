@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Acl {
     pub client: Client,
@@ -34,7 +33,7 @@ impl Acl {
         max_results: i64,
         page_token: &str,
         show_deleted: bool,
-    ) -> Result<Vec<crate::types::AclRule>> {
+    ) -> ClientResult<Vec<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -79,7 +78,7 @@ impl Acl {
         &self,
         calendar_id: &str,
         show_deleted: bool,
-    ) -> Result<Vec<crate::types::AclRule>> {
+    ) -> ClientResult<Vec<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if show_deleted {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
@@ -160,7 +159,7 @@ impl Acl {
         calendar_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> Result<crate::types::AclRule> {
+    ) -> ClientResult<crate::types::AclRule> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -210,7 +209,7 @@ impl Acl {
         page_token: &str,
         show_deleted: bool,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -250,7 +249,11 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `rule_id: &str` -- ETag of the collection.
      */
-    pub async fn get(&self, calendar_id: &str, rule_id: &str) -> Result<crate::types::AclRule> {
+    pub async fn get(
+        &self,
+        calendar_id: &str,
+        rule_id: &str,
+    ) -> ClientResult<crate::types::AclRule> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
@@ -286,7 +289,7 @@ impl Acl {
         rule_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> Result<crate::types::AclRule> {
+    ) -> ClientResult<crate::types::AclRule> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -324,7 +327,7 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `rule_id: &str` -- ETag of the collection.
      */
-    pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
@@ -360,7 +363,7 @@ impl Acl {
         rule_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> Result<crate::types::AclRule> {
+    ) -> ClientResult<crate::types::AclRule> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((

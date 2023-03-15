@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SingleSends {
     pub client: Client,
@@ -30,7 +29,7 @@ impl SingleSends {
         &self,
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::GetMarketingSinglesendsResponse> {
+    ) -> ClientResult<crate::types::GetMarketingSinglesendsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -64,7 +63,7 @@ impl SingleSends {
     pub async fn post_marketing_singlesend(
         &self,
         body: &crate::types::SinglesendRequest,
-    ) -> Result<crate::types::SinglesendResponseAllOf> {
+    ) -> ClientResult<crate::types::SinglesendResponseAllOf> {
         let url = self.client.url("/marketing/singlesends", None);
         self.client
             .post(
@@ -91,7 +90,7 @@ impl SingleSends {
      *
      * * `ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
      */
-    pub async fn delete_marketing_singlesends(&self, ids: &[String]) -> Result<()> {
+    pub async fn delete_marketing_singlesends(&self, ids: &[String]) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ids.is_empty() {
             query_args.push(("ids".to_string(), ids.join(" ")));
@@ -122,7 +121,7 @@ impl SingleSends {
     pub async fn get_marketing_singlesend(
         &self,
         id: &str,
-    ) -> Result<crate::types::SinglesendResponseAllOf> {
+    ) -> ClientResult<crate::types::SinglesendResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
@@ -155,7 +154,7 @@ impl SingleSends {
         &self,
         id: &str,
         body: &crate::types::PostMarketingSinglesendsRequest,
-    ) -> Result<crate::types::SinglesendResponseAllOf> {
+    ) -> ClientResult<crate::types::SinglesendResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
@@ -184,7 +183,7 @@ impl SingleSends {
      *
      * Please note that a `DELETE` request is permanent, and your Single Send will not be recoverable after deletion.
      */
-    pub async fn delete_marketing_singlesends_single_sends(&self, id: &str) -> Result<()> {
+    pub async fn delete_marketing_singlesends_single_sends(&self, id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
@@ -215,7 +214,7 @@ impl SingleSends {
         &self,
         id: &str,
         body: &crate::types::SinglesendRequest,
-    ) -> Result<crate::types::SinglesendResponseAllOf> {
+    ) -> ClientResult<crate::types::SinglesendResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}",
@@ -266,7 +265,7 @@ impl SingleSends {
         page_size: i64,
         page_token: &str,
         body: &crate::types::SinglesendSearch,
-    ) -> Result<crate::types::GetMarketingSinglesendsResponse> {
+    ) -> ClientResult<crate::types::GetMarketingSinglesendsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -301,7 +300,7 @@ impl SingleSends {
         &self,
         id: &str,
         body: &crate::types::PutMarketingSinglesendsScheduleRequest,
-    ) -> Result<crate::types::PutMarketingSinglesendsScheduleResponse> {
+    ) -> ClientResult<crate::types::PutMarketingSinglesendsScheduleResponse> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}/schedule",
@@ -331,7 +330,7 @@ impl SingleSends {
     pub async fn delete_marketing_singlesends_schedule(
         &self,
         id: &str,
-    ) -> Result<crate::types::SinglesendSchedule> {
+    ) -> ClientResult<crate::types::SinglesendSchedule> {
         let url = self.client.url(
             &format!(
                 "/marketing/singlesends/{}/schedule",
@@ -360,7 +359,7 @@ impl SingleSends {
      */
     pub async fn get_marketing_singlesends_categories(
         &self,
-    ) -> Result<crate::types::GetMarketingSinglesendsCategoriesResponse> {
+    ) -> ClientResult<crate::types::GetMarketingSinglesendsCategoriesResponse> {
         let url = self.client.url("/marketing/singlesends/categories", None);
         self.client
             .get(

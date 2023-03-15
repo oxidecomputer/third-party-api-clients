@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountConsumerDisclosures {
     pub client: Client,
@@ -78,7 +77,7 @@ impl AccountConsumerDisclosures {
         &self,
         account_id: &str,
         lang_code: &str,
-    ) -> Result<crate::types::AccountConsumerDisclosures> {
+    ) -> ClientResult<crate::types::AccountConsumerDisclosures> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !lang_code.is_empty() {
             query_args.push(("langCode".to_string(), lang_code.to_string()));
@@ -168,7 +167,7 @@ impl AccountConsumerDisclosures {
         &self,
         account_id: &str,
         lang_code: &str,
-    ) -> Result<crate::types::AccountConsumerDisclosures> {
+    ) -> ClientResult<crate::types::AccountConsumerDisclosures> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/consumer_disclosure/{}",
@@ -301,7 +300,7 @@ impl AccountConsumerDisclosures {
         lang_code: &str,
         include_metadata: &str,
         body: &crate::types::ConsumerDisclosure,
-    ) -> Result<crate::types::ConsumerDisclosure> {
+    ) -> ClientResult<crate::types::ConsumerDisclosure> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_metadata.is_empty() {
             query_args.push(("include_metadata".to_string(), include_metadata.to_string()));

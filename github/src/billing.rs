@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Billing {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Billing {
     pub async fn get_github_actions_billing_ghe(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::ActionsBillingUsage> {
+    ) -> ClientResult<crate::types::ActionsBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/actions",
@@ -70,7 +69,7 @@ impl Billing {
     pub async fn get_github_packages_billing_ghe(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::PackagesBillingUsage> {
+    ) -> ClientResult<crate::types::PackagesBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/packages",
@@ -108,7 +107,7 @@ impl Billing {
     pub async fn get_shared_storage_billing_ghe(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::CombinedBillingUsage> {
+    ) -> ClientResult<crate::types::CombinedBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/settings/billing/shared-storage",
@@ -146,7 +145,7 @@ impl Billing {
     pub async fn get_github_actions_billing_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::ActionsBillingUsage> {
+    ) -> ClientResult<crate::types::ActionsBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/actions",
@@ -184,7 +183,7 @@ impl Billing {
     pub async fn get_github_packages_billing_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::PackagesBillingUsage> {
+    ) -> ClientResult<crate::types::PackagesBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/packages",
@@ -222,7 +221,7 @@ impl Billing {
     pub async fn get_shared_storage_billing_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::CombinedBillingUsage> {
+    ) -> ClientResult<crate::types::CombinedBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/settings/billing/shared-storage",
@@ -260,7 +259,7 @@ impl Billing {
     pub async fn get_github_actions_billing_user(
         &self,
         username: &str,
-    ) -> Result<crate::types::ActionsBillingUsage> {
+    ) -> ClientResult<crate::types::ActionsBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/actions",
@@ -298,7 +297,7 @@ impl Billing {
     pub async fn get_github_packages_billing_user(
         &self,
         username: &str,
-    ) -> Result<crate::types::PackagesBillingUsage> {
+    ) -> ClientResult<crate::types::PackagesBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/packages",
@@ -336,7 +335,7 @@ impl Billing {
     pub async fn get_shared_storage_billing_user(
         &self,
         username: &str,
-    ) -> Result<crate::types::CombinedBillingUsage> {
+    ) -> ClientResult<crate::types::CombinedBillingUsage> {
         let url = self.client.url(
             &format!(
                 "/users/{}/settings/billing/shared-storage",

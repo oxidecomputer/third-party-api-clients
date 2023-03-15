@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Pac {
     pub client: Client,
@@ -31,7 +30,7 @@ impl Pac {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_pa_cs(&self, user_id: &str) -> Result<crate::types::UserPaCsResponse> {
+    pub async fn user_pa_cs(&self, user_id: &str) -> ClientResult<crate::types::UserPaCsResponse> {
         let url = self.client.url(
             &format!(
                 "/users/{}/pac",

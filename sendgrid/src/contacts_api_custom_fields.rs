@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ContactsApiCustomFields {
     pub client: Client,
@@ -25,7 +24,7 @@ impl ContactsApiCustomFields {
      */
     pub async fn get_contactdb_custom_fields(
         &self,
-    ) -> Result<crate::types::ListAllCustomFieldsResponse> {
+    ) -> ClientResult<crate::types::ListAllCustomFieldsResponse> {
         let url = self.client.url("/contactdb/custom_fields", None);
         self.client
             .get(
@@ -53,7 +52,7 @@ impl ContactsApiCustomFields {
     pub async fn post_contactdb_custom_field(
         &self,
         body: &crate::types::PostContactdbCustomFieldsRequest,
-    ) -> Result<crate::types::ContactdbCustomFieldWithAllOf> {
+    ) -> ClientResult<crate::types::ContactdbCustomFieldWithAllOf> {
         let url = self.client.url("/contactdb/custom_fields", None);
         self.client
             .post(
@@ -79,7 +78,7 @@ impl ContactsApiCustomFields {
     pub async fn get_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
-    ) -> Result<crate::types::ContactdbCustomFieldWithAllOf> {
+    ) -> ClientResult<crate::types::ContactdbCustomFieldWithAllOf> {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
@@ -111,7 +110,7 @@ impl ContactsApiCustomFields {
     pub async fn delete_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
-    ) -> Result<crate::types::GlobalErrorResponseSchema> {
+    ) -> ClientResult<crate::types::GlobalErrorResponseSchema> {
         let url = self.client.url(
             &format!(
                 "/contactdb/custom_fields/{}",
@@ -142,7 +141,7 @@ impl ContactsApiCustomFields {
      */
     pub async fn get_contactdb_reserved_fields(
         &self,
-    ) -> Result<crate::types::GetContactdbReservedFieldsResponse> {
+    ) -> ClientResult<crate::types::GetContactdbReservedFieldsResponse> {
         let url = self.client.url("/contactdb/reserved_fields", None);
         self.client
             .get(

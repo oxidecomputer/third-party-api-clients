@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct FavoriteTemplates {
     pub client: Client,
@@ -23,7 +22,7 @@ impl FavoriteTemplates {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> Result<crate::types::FavoriteTemplatesInfo> {
+    pub async fn get(&self, account_id: &str) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",
@@ -57,7 +56,7 @@ impl FavoriteTemplates {
         &self,
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
-    ) -> Result<crate::types::FavoriteTemplatesInfo> {
+    ) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",
@@ -90,7 +89,7 @@ impl FavoriteTemplates {
         &self,
         account_id: &str,
         body: &crate::types::FavoriteTemplatesInfo,
-    ) -> Result<crate::types::FavoriteTemplatesInfo> {
+    ) -> ClientResult<crate::types::FavoriteTemplatesInfo> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/favorite_templates",

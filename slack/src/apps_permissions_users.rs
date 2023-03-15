@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AppsPermissionsUsers {
     pub client: Client,
@@ -25,7 +24,7 @@ impl AppsPermissionsUsers {
      * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
      * * `limit: i64` -- The maximum number of items to return.
      */
-    pub async fn list(&self, cursor: &str, limit: i64) -> Result<crate::types::DndEndSchema> {
+    pub async fn list(&self, cursor: &str, limit: i64) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -66,7 +65,7 @@ impl AppsPermissionsUsers {
         scopes: &str,
         trigger_id: &str,
         user: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scopes.is_empty() {
             query_args.push(("scopes".to_string(), scopes.to_string()));

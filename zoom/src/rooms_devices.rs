@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct RoomsDevices {
     pub client: Client,
@@ -33,7 +32,7 @@ impl RoomsDevices {
         room_id: &str,
         device_id: &str,
         body: &crate::types::ChangeZoomRoomsAppVersionRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/devices/{}/app_version",

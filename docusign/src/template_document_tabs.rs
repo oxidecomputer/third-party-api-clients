@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateDocumentTabs {
     pub client: Client,
@@ -32,7 +31,7 @@ impl TemplateDocumentTabs {
         document_id: &str,
         page_number: &str,
         template_id: &str,
-    ) -> Result<crate::types::TemplateDocumentTabs> {
+    ) -> ClientResult<crate::types::TemplateDocumentTabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/tabs",
@@ -75,7 +74,7 @@ impl TemplateDocumentTabs {
         document_id: &str,
         template_id: &str,
         page_numbers: &str,
-    ) -> Result<crate::types::TemplateDocumentTabs> {
+    ) -> ClientResult<crate::types::TemplateDocumentTabs> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_numbers.is_empty() {
             query_args.push(("page_numbers".to_string(), page_numbers.to_string()));
@@ -120,7 +119,7 @@ impl TemplateDocumentTabs {
         document_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
@@ -159,7 +158,7 @@ impl TemplateDocumentTabs {
         document_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
@@ -198,7 +197,7 @@ impl TemplateDocumentTabs {
         document_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",

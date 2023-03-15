@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateRecipientTabs {
     pub client: Client,
@@ -34,7 +33,7 @@ impl TemplateRecipientTabs {
         template_id: &str,
         include_anchor_tab_locations: &str,
         include_metadata: &str,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
             query_args.push((
@@ -85,7 +84,7 @@ impl TemplateRecipientTabs {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/tabs",
@@ -124,7 +123,7 @@ impl TemplateRecipientTabs {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/tabs",
@@ -163,7 +162,7 @@ impl TemplateRecipientTabs {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::TemplateTabs,
-    ) -> Result<crate::types::Tabs> {
+    ) -> ClientResult<crate::types::Tabs> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/tabs",

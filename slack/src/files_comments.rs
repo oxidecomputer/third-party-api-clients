@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct FilesComments {
     pub client: Client,
@@ -23,7 +22,7 @@ impl FilesComments {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/files.comments.delete", None);
         self.client
             .post(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Topups {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Topups {
         limit: i64,
         starting_after: &str,
         status: crate::types::GetTopupsStatus,
-    ) -> Result<Vec<crate::types::Topup>> {
+    ) -> ClientResult<Vec<crate::types::Topup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -77,7 +76,7 @@ impl Topups {
         _amount: &str,
         _created: &str,
         status: crate::types::GetTopupsStatus,
-    ) -> Result<Vec<crate::types::Topup>> {
+    ) -> ClientResult<Vec<crate::types::Topup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.to_string().is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -148,7 +147,7 @@ impl Topups {
      *
      * <p>Top up the balance of an account</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Topup> {
+    pub async fn post(&self) -> ClientResult<crate::types::Topup> {
         let url = self.client.url("/v1/topups", None);
         self.client
             .post(
@@ -170,7 +169,7 @@ impl Topups {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `topup: &str` -- The account's country.
      */
-    pub async fn get(&self, topup: &str) -> Result<crate::types::Topup> {
+    pub async fn get(&self, topup: &str) -> ClientResult<crate::types::Topup> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
@@ -197,7 +196,7 @@ impl Topups {
      *
      * * `topup: &str` -- The account's country.
      */
-    pub async fn post_topups(&self, topup: &str) -> Result<crate::types::Topup> {
+    pub async fn post_topups(&self, topup: &str) -> ClientResult<crate::types::Topup> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}",
@@ -224,7 +223,7 @@ impl Topups {
      *
      * * `topup: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, topup: &str) -> Result<crate::types::Topup> {
+    pub async fn post_cancel(&self, topup: &str) -> ClientResult<crate::types::Topup> {
         let url = self.client.url(
             &format!(
                 "/v1/topups/{}/cancel",

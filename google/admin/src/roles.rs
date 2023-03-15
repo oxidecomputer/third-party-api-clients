@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Roles {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Roles {
         customer: &str,
         max_results: i64,
         page_token: &str,
-    ) -> Result<Vec<crate::types::Role>> {
+    ) -> ClientResult<Vec<crate::types::Role>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -66,7 +65,7 @@ impl Roles {
      *
      * Retrieves a paginated list of all the roles in a domain.
      */
-    pub async fn list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
+    pub async fn list_all(&self, customer: &str) -> ClientResult<Vec<crate::types::Role>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
@@ -139,7 +138,7 @@ impl Roles {
         &self,
         customer: &str,
         body: &crate::types::Role,
-    ) -> Result<crate::types::Role> {
+    ) -> ClientResult<crate::types::Role> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles",
@@ -167,7 +166,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn get(&self, customer: &str, role_id: &str) -> Result<crate::types::Role> {
+    pub async fn get(&self, customer: &str, role_id: &str) -> ClientResult<crate::types::Role> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -201,7 +200,7 @@ impl Roles {
         customer: &str,
         role_id: &str,
         body: &crate::types::Role,
-    ) -> Result<crate::types::Role> {
+    ) -> ClientResult<crate::types::Role> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -230,7 +229,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn delete(&self, customer: &str, role_id: &str) -> Result<()> {
+    pub async fn delete(&self, customer: &str, role_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",
@@ -264,7 +263,7 @@ impl Roles {
         customer: &str,
         role_id: &str,
         body: &crate::types::Role,
-    ) -> Result<crate::types::Role> {
+    ) -> ClientResult<crate::types::Role> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roles/{}",

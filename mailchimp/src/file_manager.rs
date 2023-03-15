@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct FileManager {
     pub client: Client,
@@ -44,7 +43,7 @@ impl FileManager {
         since_created_at: &str,
         sort_field: crate::types::GetFileManagerFilesSortField,
         sort_dir: crate::types::SortDir,
-    ) -> Result<crate::types::FileManager> {
+    ) -> ClientResult<crate::types::FileManager> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_created_at.is_empty() {
             query_args.push((
@@ -100,7 +99,10 @@ impl FileManager {
      *
      * Upload a new image or file to the File Manager.
      */
-    pub async fn post(&self, body: &crate::types::GalleryFile) -> Result<crate::types::Files> {
+    pub async fn post(
+        &self,
+        body: &crate::types::GalleryFile,
+    ) -> ClientResult<crate::types::Files> {
         let url = self.client.url("/file-manager/files", None);
         self.client
             .post(
@@ -130,7 +132,7 @@ impl FileManager {
         fields: &[String],
         exclude_fields: &[String],
         file_id: &str,
-    ) -> Result<crate::types::Files> {
+    ) -> ClientResult<crate::types::Files> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -168,7 +170,7 @@ impl FileManager {
      *
      * * `file_id: &str` -- The unique id for the File Manager file.
      */
-    pub async fn delete_files(&self, file_id: &str) -> Result<()> {
+    pub async fn delete_files(&self, file_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/file-manager/files/{}",
@@ -201,7 +203,7 @@ impl FileManager {
         &self,
         file_id: &str,
         body: &crate::types::GalleryFileData,
-    ) -> Result<crate::types::Files> {
+    ) -> ClientResult<crate::types::Files> {
         let url = self.client.url(
             &format!(
                 "/file-manager/files/{}",
@@ -245,7 +247,7 @@ impl FileManager {
         created_by: &str,
         before_created_at: &str,
         since_created_at: &str,
-    ) -> Result<crate::types::FileManagerFolders> {
+    ) -> ClientResult<crate::types::FileManagerFolders> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_created_at.is_empty() {
             query_args.push((
@@ -295,7 +297,7 @@ impl FileManager {
     pub async fn post_folder(
         &self,
         body: &crate::types::GalleryFolder,
-    ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
+    ) -> ClientResult<crate::types::FileManagerFoldersGalleryFolder> {
         let url = self.client.url("/file-manager/folders", None);
         self.client
             .post(
@@ -325,7 +327,7 @@ impl FileManager {
         fields: &[String],
         exclude_fields: &[String],
         folder_id: &str,
-    ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
+    ) -> ClientResult<crate::types::FileManagerFoldersGalleryFolder> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -363,7 +365,7 @@ impl FileManager {
      *
      * * `folder_id: &str` -- The unique id for the File Manager folder.
      */
-    pub async fn delete_folders(&self, folder_id: &str) -> Result<()> {
+    pub async fn delete_folders(&self, folder_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/file-manager/folders/{}",
@@ -396,7 +398,7 @@ impl FileManager {
         &self,
         folder_id: &str,
         body: &crate::types::GalleryFolder,
-    ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
+    ) -> ClientResult<crate::types::FileManagerFoldersGalleryFolder> {
         let url = self.client.url(
             &format!(
                 "/file-manager/folders/{}",

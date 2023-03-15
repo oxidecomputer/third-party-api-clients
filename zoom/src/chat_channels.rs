@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ChatChannels {
     pub client: Client,
@@ -36,7 +35,7 @@ impl ChatChannels {
         user_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Channels>> {
+    ) -> ClientResult<Vec<crate::types::Channels>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -82,7 +81,10 @@ impl ChatChannels {
      *
      * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> This API supports both user-managed apps and account-level apps. However, in an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, to list channels of another user in the same Zoom account, the user calling this API must have a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit.">role</a> that has the <b>View</b> or <b>Edit</b> permission for the <b>Chat channels</b> feature.</p>
      */
-    pub async fn get_all_channels(&self, user_id: &str) -> Result<Vec<crate::types::Channels>> {
+    pub async fn get_all_channels(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<Vec<crate::types::Channels>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels",
@@ -164,7 +166,7 @@ impl ChatChannels {
         &self,
         user_id: &str,
         body: &crate::types::CreateChannelRequest,
-    ) -> Result<crate::types::CreateChannelResponse> {
+    ) -> ClientResult<crate::types::CreateChannelResponse> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels",
@@ -201,7 +203,10 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn get_user_level_channel(&self, channel_id: &str) -> Result<crate::types::Channel> {
+    pub async fn get_user_level_channel(
+        &self,
+        channel_id: &str,
+    ) -> ClientResult<crate::types::Channel> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}",
@@ -238,7 +243,7 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn delete_user_level_channel(&self, channel_id: &str) -> Result<()> {
+    pub async fn delete_user_level_channel(&self, channel_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}",
@@ -278,7 +283,7 @@ impl ChatChannels {
         &self,
         channel_id: &str,
         body: &crate::types::Attendees,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}",
@@ -319,7 +324,7 @@ impl ChatChannels {
         &self,
         channel_id: &str,
         member_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}/members/{}",
@@ -357,7 +362,7 @@ impl ChatChannels {
     pub async fn join_channel(
         &self,
         channel_id: &str,
-    ) -> Result<crate::types::JoinChannelResponse> {
+    ) -> ClientResult<crate::types::JoinChannelResponse> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}/members/me",
@@ -391,7 +396,7 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn leave_channel(&self, channel_id: &str) -> Result<()> {
+    pub async fn leave_channel(&self, channel_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/channels/{}/members/me",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct IpAddresses {
     pub client: Client,
@@ -40,7 +39,7 @@ impl IpAddresses {
         offset: i64,
         subuser: &str,
         sort_by_direction: crate::types::SortByDirection,
-    ) -> Result<Vec<crate::types::GetIpsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetIpsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if exclude_whitelabels {
             query_args.push((
@@ -98,7 +97,7 @@ impl IpAddresses {
         offset: i64,
         subuser: &str,
         sort_by_direction: crate::types::SortByDirection,
-    ) -> Result<Vec<crate::types::GetIpsResponse>> {
+    ) -> ClientResult<Vec<crate::types::GetIpsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if exclude_whitelabels {
             query_args.push((
@@ -143,7 +142,7 @@ impl IpAddresses {
     pub async fn post_ip(
         &self,
         body: &crate::types::PostIpsRequest,
-    ) -> Result<crate::types::PostIpsResponseData> {
+    ) -> ClientResult<crate::types::PostIpsResponseData> {
         let url = self.client.url("/ips", None);
         self.client
             .post(
@@ -162,7 +161,7 @@ impl IpAddresses {
      *
      * **This endpoint gets amount of IP Addresses that can still be created during a given period and the price of those IPs.**
      */
-    pub async fn get_ips_remaining(&self) -> Result<crate::types::GetIpsRemainingResponse> {
+    pub async fn get_ips_remaining(&self) -> ClientResult<crate::types::GetIpsRemainingResponse> {
         let url = self.client.url("/ips/remaining", None);
         self.client
             .get(
@@ -183,7 +182,9 @@ impl IpAddresses {
      *
      * A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
      */
-    pub async fn get_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
+    pub async fn get_ips_assigned(
+        &self,
+    ) -> ClientResult<Vec<crate::types::GetIpsAssignedResponse>> {
         let url = self.client.url("/ips/assigned", None);
         self.client
             .get(
@@ -206,7 +207,9 @@ impl IpAddresses {
      *
      * A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
      */
-    pub async fn get_all_ips_assigned(&self) -> Result<Vec<crate::types::GetIpsAssignedResponse>> {
+    pub async fn get_all_ips_assigned(
+        &self,
+    ) -> ClientResult<Vec<crate::types::GetIpsAssignedResponse>> {
         let url = self.client.url("/ips/assigned", None);
         self.client
             .get_all_pages(
@@ -232,7 +235,7 @@ impl IpAddresses {
     pub async fn get_ips_ip_address(
         &self,
         ip_address: &str,
-    ) -> Result<crate::types::GetIpsIpAddressResponse> {
+    ) -> ClientResult<crate::types::GetIpsIpAddressResponse> {
         let url = self.client.url(
             &format!(
                 "/ips/{}",

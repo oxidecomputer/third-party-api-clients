@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SenderIdentitiesApi {
     pub client: Client,
@@ -23,7 +22,7 @@ impl SenderIdentitiesApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_senders(&self) -> Result<crate::types::GetSendersResponse> {
+    pub async fn get_senders(&self) -> ClientResult<crate::types::GetSendersResponse> {
         let url = self.client.url("/senders", None);
         self.client
             .get(
@@ -51,7 +50,7 @@ impl SenderIdentitiesApi {
     pub async fn post_sender(
         &self,
         body: &crate::types::PostSendersRequestAllOf,
-    ) -> Result<crate::types::SenderAllOf> {
+    ) -> ClientResult<crate::types::SenderAllOf> {
         let url = self.client.url("/senders", None);
         self.client
             .post(
@@ -74,7 +73,10 @@ impl SenderIdentitiesApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_senders_sender(&self, sender_id: i64) -> Result<crate::types::SenderAllOf> {
+    pub async fn get_senders_sender(
+        &self,
+        sender_id: i64,
+    ) -> ClientResult<crate::types::SenderAllOf> {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
@@ -103,7 +105,7 @@ impl SenderIdentitiesApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_senders_sender(&self, sender_id: i64) -> Result<crate::types::Help> {
+    pub async fn delete_senders_sender(&self, sender_id: i64) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
@@ -140,7 +142,7 @@ impl SenderIdentitiesApi {
         &self,
         sender_id: i64,
         body: &crate::types::SenderRequest,
-    ) -> Result<crate::types::SenderAllOf> {
+    ) -> ClientResult<crate::types::SenderAllOf> {
         let url = self.client.url(
             &format!(
                 "/senders/{}",
@@ -172,7 +174,7 @@ impl SenderIdentitiesApi {
     pub async fn post_senders_sender_resend_verification(
         &self,
         sender_id: i64,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/senders/{}/resend_verification",

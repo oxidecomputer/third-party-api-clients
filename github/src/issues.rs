@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Issues {
     pub client: Client,
@@ -65,7 +64,7 @@ impl Issues {
         pulls: bool,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collab {
             query_args.push(("collab".to_string(), collab.to_string()));
@@ -146,7 +145,7 @@ impl Issues {
         orgs: bool,
         owned: bool,
         pulls: bool,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if collab {
             query_args.push(("collab".to_string(), collab.to_string()));
@@ -234,7 +233,7 @@ impl Issues {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -304,7 +303,7 @@ impl Issues {
         sort: crate::types::IssuesListSort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -365,7 +364,7 @@ impl Issues {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -408,7 +407,7 @@ impl Issues {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/assignees",
@@ -451,7 +450,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         assignee: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/assignees/{}",
@@ -518,7 +517,7 @@ impl Issues {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueSimple>> {
+    ) -> ClientResult<Vec<crate::types::IssueSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignee.is_empty() {
             query_args.push(("assignee".to_string(), assignee.to_string()));
@@ -602,7 +601,7 @@ impl Issues {
         sort: crate::types::IssuesListSort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::IssueSimple>> {
+    ) -> ClientResult<Vec<crate::types::IssueSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !assignee.is_empty() {
             query_args.push(("assignee".to_string(), assignee.to_string()));
@@ -672,7 +671,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         body: &crate::types::IssuesCreateRequest,
-    ) -> Result<crate::types::Issue> {
+    ) -> ClientResult<crate::types::Issue> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues",
@@ -721,7 +720,7 @@ impl Issues {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueComment>> {
+    ) -> ClientResult<Vec<crate::types::IssueComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -776,7 +775,7 @@ impl Issues {
         sort: crate::types::Sort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::IssueComment>> {
+    ) -> ClientResult<Vec<crate::types::IssueComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -827,7 +826,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         comment_id: i64,
-    ) -> Result<crate::types::IssueComment> {
+    ) -> ClientResult<crate::types::IssueComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
@@ -862,7 +861,12 @@ impl Issues {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn delete_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
+    pub async fn delete_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
@@ -903,7 +907,7 @@ impl Issues {
         repo: &str,
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::IssueComment> {
+    ) -> ClientResult<crate::types::IssueComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/comments/{}",
@@ -945,7 +949,7 @@ impl Issues {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueEvent>> {
+    ) -> ClientResult<Vec<crate::types::IssueEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -988,7 +992,7 @@ impl Issues {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::IssueEvent>> {
+    ) -> ClientResult<Vec<crate::types::IssueEvent>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/events",
@@ -1027,7 +1031,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         event_id: i64,
-    ) -> Result<crate::types::IssueEvent> {
+    ) -> ClientResult<crate::types::IssueEvent> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/events/{}",
@@ -1077,7 +1081,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<crate::types::Issue> {
+    ) -> ClientResult<crate::types::Issue> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}",
@@ -1118,7 +1122,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesUpdateRequest,
-    ) -> Result<crate::types::Issue> {
+    ) -> ClientResult<crate::types::Issue> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}",
@@ -1159,7 +1163,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesAddAssigneesRequest,
-    ) -> Result<crate::types::IssueSimple> {
+    ) -> ClientResult<crate::types::IssueSimple> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/assignees",
@@ -1200,7 +1204,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesAddAssigneesRequest,
-    ) -> Result<crate::types::IssueSimple> {
+    ) -> ClientResult<crate::types::IssueSimple> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/assignees",
@@ -1246,7 +1250,7 @@ impl Issues {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueComment>> {
+    ) -> ClientResult<Vec<crate::types::IssueComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1295,7 +1299,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::IssueComment>> {
+    ) -> ClientResult<Vec<crate::types::IssueComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
             query_args.push(("since".to_string(), date.to_rfc3339()));
@@ -1342,7 +1346,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::IssueComment> {
+    ) -> ClientResult<crate::types::IssueComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/comments",
@@ -1386,7 +1390,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
+    ) -> ClientResult<Vec<crate::types::IssueEventAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1431,7 +1435,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
+    ) -> ClientResult<Vec<crate::types::IssueEventAnyOf>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/events",
@@ -1475,7 +1479,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1520,7 +1524,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
@@ -1561,7 +1565,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesSetLabelsRequestAnyOf,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
@@ -1602,7 +1606,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesAddLabelsRequestOneOf,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
@@ -1642,7 +1646,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels",
@@ -1684,7 +1688,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         name: &str,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/labels/{}",
@@ -1728,7 +1732,7 @@ impl Issues {
         repo: &str,
         issue_number: i64,
         body: &crate::types::IssuesLockRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/lock",
@@ -1763,7 +1767,7 @@ impl Issues {
      * * `repo: &str`
      * * `issue_number: i64` -- issue_number parameter.
      */
-    pub async fn unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
+    pub async fn unlock(&self, owner: &str, repo: &str, issue_number: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/lock",
@@ -1807,7 +1811,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Data>> {
+    ) -> ClientResult<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1852,7 +1856,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::Data>> {
+    ) -> ClientResult<Vec<crate::types::Data>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/issues/{}/timeline",
@@ -1894,7 +1898,7 @@ impl Issues {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1937,7 +1941,7 @@ impl Issues {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels",
@@ -1975,7 +1979,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         body: &crate::types::IssuesCreateLabelRequest,
-    ) -> Result<crate::types::Label> {
+    ) -> ClientResult<crate::types::Label> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels",
@@ -2014,7 +2018,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         name: &str,
-    ) -> Result<crate::types::Label> {
+    ) -> ClientResult<crate::types::Label> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
@@ -2049,7 +2053,7 @@ impl Issues {
      * * `repo: &str`
      * * `name: &str`
      */
-    pub async fn delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
+    pub async fn delete_label(&self, owner: &str, repo: &str, name: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
@@ -2090,7 +2094,7 @@ impl Issues {
         repo: &str,
         name: &str,
         body: &crate::types::IssuesUpdateLabelRequest,
-    ) -> Result<crate::types::Label> {
+    ) -> ClientResult<crate::types::Label> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/labels/{}",
@@ -2140,7 +2144,7 @@ impl Issues {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Milestone>> {
+    ) -> ClientResult<Vec<crate::types::Milestone>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2195,7 +2199,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         sort: crate::types::IssuesListMilestonesSort,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::Milestone>> {
+    ) -> ClientResult<Vec<crate::types::Milestone>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2245,7 +2249,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         body: &crate::types::IssuesCreateMilestoneRequest,
-    ) -> Result<crate::types::Milestone> {
+    ) -> ClientResult<crate::types::Milestone> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones",
@@ -2284,7 +2288,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         milestone_number: i64,
-    ) -> Result<crate::types::Milestone> {
+    ) -> ClientResult<crate::types::Milestone> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
@@ -2324,7 +2328,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         milestone_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
@@ -2365,7 +2369,7 @@ impl Issues {
         repo: &str,
         milestone_number: i64,
         body: &crate::types::IssuesCreateMilestoneRequest,
-    ) -> Result<crate::types::Milestone> {
+    ) -> ClientResult<crate::types::Milestone> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}",
@@ -2409,7 +2413,7 @@ impl Issues {
         milestone_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2454,7 +2458,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         milestone_number: i64,
-    ) -> Result<Vec<crate::types::Label>> {
+    ) -> ClientResult<Vec<crate::types::Label>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/milestones/{}/labels",
@@ -2516,7 +2520,7 @@ impl Issues {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2578,7 +2582,7 @@ impl Issues {
         sort: crate::types::IssuesListSort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Issue>> {
+    ) -> ClientResult<Vec<crate::types::Issue>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));

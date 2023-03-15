@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ChatScheduledMessages {
     pub client: Client,
@@ -35,7 +34,7 @@ impl ChatScheduledMessages {
         oldest: f64,
         limit: i64,
         cursor: &str,
-    ) -> Result<crate::types::ChatScheduledMessagesListSchema> {
+    ) -> ClientResult<crate::types::ChatScheduledMessagesListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));

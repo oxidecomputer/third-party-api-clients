@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountSignatureProviders {
     pub client: Client,
@@ -26,7 +25,7 @@ impl AccountSignatureProviders {
     pub async fn get(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::AccountSignatureProvidersData> {
+    ) -> ClientResult<crate::types::AccountSignatureProvidersData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatureProviders",

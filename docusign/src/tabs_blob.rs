@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TabsBlob {
     pub client: Client,
@@ -24,7 +23,7 @@ impl TabsBlob {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str, envelope_id: &str) -> Result<()> {
+    pub async fn get(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/tabs_blob",
@@ -55,7 +54,7 @@ impl TabsBlob {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put(&self, account_id: &str, envelope_id: &str) -> Result<()> {
+    pub async fn put(&self, account_id: &str, envelope_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/tabs_blob",

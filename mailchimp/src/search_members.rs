@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SearchMembers {
     pub client: Client,
@@ -32,7 +31,7 @@ impl SearchMembers {
         exclude_fields: &[String],
         query: &str,
         list_id: &str,
-    ) -> Result<crate::types::MembersData> {
+    ) -> ClientResult<crate::types::MembersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

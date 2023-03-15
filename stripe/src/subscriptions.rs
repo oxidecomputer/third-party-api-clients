@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Subscriptions {
     pub client: Client,
@@ -45,7 +44,7 @@ impl Subscriptions {
         starting_after: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
-    ) -> Result<Vec<crate::types::Subscription>> {
+    ) -> ClientResult<Vec<crate::types::Subscription>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -109,7 +108,7 @@ impl Subscriptions {
         price: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
-    ) -> Result<Vec<crate::types::Subscription>> {
+    ) -> ClientResult<Vec<crate::types::Subscription>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -203,7 +202,7 @@ impl Subscriptions {
      * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status, use <a href="/docs/billing/subscriptions/subscription-schedules#managing">subscription schedules</a> instead.
      * Schedules provide the flexibility to model more complex billing configurations that change over time.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Subscription> {
+    pub async fn post(&self) -> ClientResult<crate::types::Subscription> {
         let url = self.client.url("/v1/subscriptions", None);
         self.client
             .post(
@@ -235,7 +234,7 @@ impl Subscriptions {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -274,7 +273,7 @@ impl Subscriptions {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -355,7 +354,7 @@ impl Subscriptions {
     pub async fn get_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> Result<crate::types::Subscription> {
+    ) -> ClientResult<crate::types::Subscription> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -385,7 +384,7 @@ impl Subscriptions {
     pub async fn post_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> Result<crate::types::Subscription> {
+    ) -> ClientResult<crate::types::Subscription> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -419,7 +418,7 @@ impl Subscriptions {
     pub async fn delete_exposed(
         &self,
         subscription_exposed_id: &str,
-    ) -> Result<crate::types::Subscription> {
+    ) -> ClientResult<crate::types::Subscription> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}",
@@ -449,7 +448,7 @@ impl Subscriptions {
     pub async fn delete_exposed_discount(
         &self,
         subscription_exposed_id: &str,
-    ) -> Result<crate::types::DeletedDiscount> {
+    ) -> ClientResult<crate::types::DeletedDiscount> {
         let url = self.client.url(
             &format!(
                 "/v1/subscriptions/{}/discount",

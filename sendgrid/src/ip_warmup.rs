@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct IpWarmup {
     pub client: Client,
@@ -19,7 +18,7 @@ impl IpWarmup {
      *
      * **This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**
      */
-    pub async fn get_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
+    pub async fn get_ips_warmup(&self) -> ClientResult<Vec<crate::types::IpWarmupResponse>> {
         let url = self.client.url("/ips/warmup", None);
         self.client
             .get(
@@ -40,7 +39,7 @@ impl IpWarmup {
      *
      * **This endpoint allows you to retrieve all of your IP addresses that are currently warming up.**
      */
-    pub async fn get_all_ips_warmup(&self) -> Result<Vec<crate::types::IpWarmupResponse>> {
+    pub async fn get_all_ips_warmup(&self) -> ClientResult<Vec<crate::types::IpWarmupResponse>> {
         let url = self.client.url("/ips/warmup", None);
         self.client
             .get_all_pages(
@@ -62,7 +61,7 @@ impl IpWarmup {
     pub async fn post_ips_warmup(
         &self,
         body: &crate::types::PostIpsWarmupRequest,
-    ) -> Result<Vec<crate::types::IpWarmupResponse>> {
+    ) -> ClientResult<Vec<crate::types::IpWarmupResponse>> {
         let url = self.client.url("/ips/warmup", None);
         self.client
             .post(
@@ -86,7 +85,7 @@ impl IpWarmup {
     pub async fn get_ips_warmup_ip_address(
         &self,
         ip_address: &str,
-    ) -> Result<Vec<crate::types::IpWarmupResponse>> {
+    ) -> ClientResult<Vec<crate::types::IpWarmupResponse>> {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",
@@ -118,7 +117,7 @@ impl IpWarmup {
     pub async fn get_all_ips_warmup_ip_address(
         &self,
         ip_address: &str,
-    ) -> Result<Vec<crate::types::IpWarmupResponse>> {
+    ) -> ClientResult<Vec<crate::types::IpWarmupResponse>> {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",
@@ -148,7 +147,7 @@ impl IpWarmup {
     pub async fn delete_ips_warmup_ip_address(
         &self,
         ip_address: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/ips/warmup/{}",

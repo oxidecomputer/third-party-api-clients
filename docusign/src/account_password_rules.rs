@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountPasswordRules {
     pub client: Client,
@@ -23,7 +22,10 @@ impl AccountPasswordRules {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountPasswordRulesData> {
+    pub async fn get(
+        &self,
+        account_id: &str,
+    ) -> ClientResult<crate::types::AccountPasswordRulesData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/password_rules",
@@ -58,7 +60,7 @@ impl AccountPasswordRules {
         &self,
         account_id: &str,
         body: &crate::types::AccountPasswordRulesData,
-    ) -> Result<crate::types::AccountPasswordRulesData> {
+    ) -> ClientResult<crate::types::AccountPasswordRulesData> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/password_rules",
@@ -83,7 +85,7 @@ impl AccountPasswordRules {
      *
      *
      */
-    pub async fn password_rules_get(&self) -> Result<crate::types::UserPasswordRules> {
+    pub async fn password_rules_get(&self) -> ClientResult<crate::types::UserPasswordRules> {
         let url = self.client.url("/v2.1/current_user/password_rules", None);
         self.client
             .get(

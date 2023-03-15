@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct PowerFormData {
     pub client: Client,
@@ -50,7 +49,7 @@ impl PowerFormData {
         data_layout: &str,
         from_date: &str,
         to_date: &str,
-    ) -> Result<crate::types::PowerFormsFormDataResponse> {
+    ) -> ClientResult<crate::types::PowerFormsFormDataResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !data_layout.is_empty() {
             query_args.push(("data_layout".to_string(), data_layout.to_string()));

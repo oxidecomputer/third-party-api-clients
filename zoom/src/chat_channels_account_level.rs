@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ChatChannelsAccountLevel {
     pub client: Client,
@@ -34,7 +33,7 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -70,7 +69,7 @@ impl ChatChannelsAccountLevel {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> Result<()> {
+    pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -112,7 +111,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         body: &crate::types::Attendees,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}",
@@ -155,7 +154,7 @@ impl ChatChannelsAccountLevel {
         channel_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListChannelMembersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -204,7 +203,7 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-    ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
+    ) -> ClientResult<Vec<crate::types::ListChannelMembersResponse>> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
@@ -287,7 +286,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         body: &crate::types::InviteChannelMembersRequest,
-    ) -> Result<crate::types::InviteChannelMembersResponse> {
+    ) -> ClientResult<crate::types::InviteChannelMembersResponse> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members",
@@ -330,7 +329,7 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         member_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/chat/users/{}/channels/{}/members/{}",

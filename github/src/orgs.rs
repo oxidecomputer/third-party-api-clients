@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Orgs {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Orgs {
         &self,
         since: i64,
         per_page: i64,
-    ) -> Result<Vec<crate::types::OrganizationSimple>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if per_page > 0 {
             query_args.push(("per_page".to_string(), per_page.to_string()));
@@ -65,7 +64,10 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations>
      */
-    pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::OrganizationSimple>> {
+    pub async fn list_all(
+        &self,
+        since: i64,
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if since > 0 {
             query_args.push(("since".to_string(), since.to_string()));
@@ -97,7 +99,7 @@ impl Orgs {
      *
      * * `org: &str`
      */
-    pub async fn get(&self, org: &str) -> Result<crate::types::OrganizationFull> {
+    pub async fn get(&self, org: &str) -> ClientResult<crate::types::OrganizationFull> {
         let url = self.client.url(
             &format!("/orgs/{}", crate::progenitor_support::encode_path(org),),
             None,
@@ -131,7 +133,7 @@ impl Orgs {
         &self,
         org: &str,
         body: &crate::types::OrgsUpdateRequest,
-    ) -> Result<crate::types::OrganizationFull> {
+    ) -> ClientResult<crate::types::OrganizationFull> {
         let url = self.client.url(
             &format!("/orgs/{}", crate::progenitor_support::encode_path(org),),
             None,
@@ -186,7 +188,7 @@ impl Orgs {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::AuditLogEvent>> {
+    ) -> ClientResult<Vec<crate::types::AuditLogEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -249,7 +251,7 @@ impl Orgs {
         after: &str,
         before: &str,
         order: crate::types::Order,
-    ) -> Result<Vec<crate::types::AuditLogEvent>> {
+    ) -> ClientResult<Vec<crate::types::AuditLogEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -298,7 +300,10 @@ impl Orgs {
      *
      * * `org: &str`
      */
-    pub async fn list_blocked_users(&self, org: &str) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list_blocked_users(
+        &self,
+        org: &str,
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks",
@@ -327,7 +332,10 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization>
      */
-    pub async fn list_all_blocked_users(&self, org: &str) -> Result<Vec<crate::types::SimpleUser>> {
+    pub async fn list_all_blocked_users(
+        &self,
+        org: &str,
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks",
@@ -359,7 +367,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn check_blocked_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn check_blocked_user(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
@@ -392,7 +400,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn block_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn block_user(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
@@ -425,7 +433,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn unblock_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn unblock_user(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/blocks/{}",
@@ -462,7 +470,7 @@ impl Orgs {
     pub async fn list_saml_sso_authorizations(
         &self,
         org: &str,
-    ) -> Result<Vec<crate::types::CredentialAuthorization>> {
+    ) -> ClientResult<Vec<crate::types::CredentialAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations",
@@ -496,7 +504,7 @@ impl Orgs {
     pub async fn list_all_saml_sso_authorizations(
         &self,
         org: &str,
-    ) -> Result<Vec<crate::types::CredentialAuthorization>> {
+    ) -> ClientResult<Vec<crate::types::CredentialAuthorization>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations",
@@ -530,7 +538,11 @@ impl Orgs {
      * * `org: &str`
      * * `credential_id: i64`
      */
-    pub async fn remove_saml_sso_authorization(&self, org: &str, credential_id: i64) -> Result<()> {
+    pub async fn remove_saml_sso_authorization(
+        &self,
+        org: &str,
+        credential_id: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/credential-authorizations/{}",
@@ -569,7 +581,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -610,7 +622,7 @@ impl Orgs {
     pub async fn list_all_failed_invitations(
         &self,
         org: &str,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/failed_invitations",
@@ -648,7 +660,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrgHook>> {
+    ) -> ClientResult<Vec<crate::types::OrgHook>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -686,7 +698,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-webhooks>
      */
-    pub async fn list_all_webhooks(&self, org: &str) -> Result<Vec<crate::types::OrgHook>> {
+    pub async fn list_all_webhooks(&self, org: &str) -> ClientResult<Vec<crate::types::OrgHook>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks",
@@ -721,7 +733,7 @@ impl Orgs {
         &self,
         org: &str,
         body: &crate::types::OrgsCreateWebhookRequest,
-    ) -> Result<crate::types::OrgHook> {
+    ) -> ClientResult<crate::types::OrgHook> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks",
@@ -753,7 +765,11 @@ impl Orgs {
      * * `org: &str`
      * * `hook_id: i64`
      */
-    pub async fn get_webhook(&self, org: &str, hook_id: i64) -> Result<crate::types::OrgHook> {
+    pub async fn get_webhook(
+        &self,
+        org: &str,
+        hook_id: i64,
+    ) -> ClientResult<crate::types::OrgHook> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
@@ -786,7 +802,7 @@ impl Orgs {
      * * `org: &str`
      * * `hook_id: i64`
      */
-    pub async fn delete_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
+    pub async fn delete_webhook(&self, org: &str, hook_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
@@ -824,7 +840,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         body: &crate::types::OrgsUpdateWebhookRequest,
-    ) -> Result<crate::types::OrgHook> {
+    ) -> ClientResult<crate::types::OrgHook> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}",
@@ -863,7 +879,7 @@ impl Orgs {
         &self,
         org: &str,
         hook_id: i64,
-    ) -> Result<crate::types::WebhookConfig> {
+    ) -> ClientResult<crate::types::WebhookConfig> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/config",
@@ -903,7 +919,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         body: &crate::types::AppsUpdateWebhookConfigAppRequest,
-    ) -> Result<crate::types::WebhookConfig> {
+    ) -> ClientResult<crate::types::WebhookConfig> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/config",
@@ -944,7 +960,7 @@ impl Orgs {
         hook_id: i64,
         per_page: i64,
         cursor: &str,
-    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -988,7 +1004,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         cursor: &str,
-    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -1033,7 +1049,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<crate::types::HookDelivery> {
+    ) -> ClientResult<crate::types::HookDelivery> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}",
@@ -1073,7 +1089,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/deliveries/{}/attempts",
@@ -1107,7 +1123,7 @@ impl Orgs {
      * * `org: &str`
      * * `hook_id: i64`
      */
-    pub async fn ping_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
+    pub async fn ping_webhook(&self, org: &str, hook_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/hooks/{}/pings",
@@ -1146,7 +1162,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::AppsListInstallationsResponse> {
+    ) -> ClientResult<crate::types::AppsListInstallationsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1193,7 +1209,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1234,7 +1250,7 @@ impl Orgs {
     pub async fn list_all_pending_invitations(
         &self,
         org: &str,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations",
@@ -1271,7 +1287,7 @@ impl Orgs {
         &self,
         org: &str,
         body: &crate::types::OrgsCreateInvitationRequest,
-    ) -> Result<crate::types::OrganizationInvitation> {
+    ) -> ClientResult<crate::types::OrganizationInvitation> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations",
@@ -1305,7 +1321,7 @@ impl Orgs {
      * * `org: &str`
      * * `invitation_id: i64` -- invitation_id parameter.
      */
-    pub async fn cancel_invitation(&self, org: &str, invitation_id: i64) -> Result<()> {
+    pub async fn cancel_invitation(&self, org: &str, invitation_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations/{}",
@@ -1346,7 +1362,7 @@ impl Orgs {
         invitation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1389,7 +1405,7 @@ impl Orgs {
         &self,
         org: &str,
         invitation_id: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/invitations/{}/teams",
@@ -1437,7 +1453,7 @@ impl Orgs {
         role: crate::types::OrgsListMembersRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.to_string().is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -1486,7 +1502,7 @@ impl Orgs {
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
         role: crate::types::OrgsListMembersRole,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.to_string().is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -1527,7 +1543,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn check_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn check_membership_for_user(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members/{}",
@@ -1560,7 +1576,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn remove_member(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn remove_member(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/members/{}",
@@ -1597,7 +1613,7 @@ impl Orgs {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<crate::types::OrgMembership> {
+    ) -> ClientResult<crate::types::OrgMembership> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
@@ -1643,7 +1659,7 @@ impl Orgs {
         org: &str,
         username: &str,
         body: &crate::types::OrgsSetMembershipUserRequest,
-    ) -> Result<crate::types::OrgMembership> {
+    ) -> ClientResult<crate::types::OrgMembership> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
@@ -1678,7 +1694,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn remove_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn remove_membership_for_user(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/memberships/{}",
@@ -1721,7 +1737,7 @@ impl Orgs {
         filter: crate::types::OrgsListMembersFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.to_string().is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -1766,7 +1782,7 @@ impl Orgs {
         &self,
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.to_string().is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -1808,7 +1824,7 @@ impl Orgs {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators/{}",
@@ -1841,7 +1857,7 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn remove_outside_collaborator(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn remove_outside_collaborator(&self, org: &str, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/outside_collaborators/{}",
@@ -1880,7 +1896,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1921,7 +1937,7 @@ impl Orgs {
     pub async fn list_all_public_members(
         &self,
         org: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members",
@@ -1953,7 +1969,11 @@ impl Orgs {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn check_public_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn check_public_membership_for_user(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
@@ -1992,7 +2012,7 @@ impl Orgs {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
@@ -2029,7 +2049,7 @@ impl Orgs {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/public_members/{}",
@@ -2068,7 +2088,7 @@ impl Orgs {
         state: crate::types::OrgMembershipState,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrgMembership>> {
+    ) -> ClientResult<Vec<crate::types::OrgMembership>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2107,7 +2127,7 @@ impl Orgs {
     pub async fn list_all_memberships_for_authenticated_user(
         &self,
         state: crate::types::OrgMembershipState,
-    ) -> Result<Vec<crate::types::OrgMembership>> {
+    ) -> ClientResult<Vec<crate::types::OrgMembership>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -2142,7 +2162,7 @@ impl Orgs {
     pub async fn get_membership_for_authenticated_user(
         &self,
         org: &str,
-    ) -> Result<crate::types::OrgMembership> {
+    ) -> ClientResult<crate::types::OrgMembership> {
         let url = self.client.url(
             &format!(
                 "/user/memberships/orgs/{}",
@@ -2177,7 +2197,7 @@ impl Orgs {
         &self,
         org: &str,
         body: &crate::types::OrgsUpdateMembershipRequest,
-    ) -> Result<crate::types::OrgMembership> {
+    ) -> ClientResult<crate::types::OrgMembership> {
         let url = self.client.url(
             &format!(
                 "/user/memberships/orgs/{}",
@@ -2217,7 +2237,7 @@ impl Orgs {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationSimple>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2254,7 +2274,7 @@ impl Orgs {
      */
     pub async fn list_all_for_authenticated_user(
         &self,
-    ) -> Result<Vec<crate::types::OrganizationSimple>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let url = self.client.url("/user/orgs", None);
         self.client
             .get_all_pages(
@@ -2288,7 +2308,7 @@ impl Orgs {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationSimple>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2331,7 +2351,7 @@ impl Orgs {
     pub async fn list_all_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::OrganizationSimple>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationSimple>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/orgs",

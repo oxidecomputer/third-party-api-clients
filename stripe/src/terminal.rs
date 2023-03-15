@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Terminal {
     pub client: Client,
@@ -17,7 +16,9 @@ impl Terminal {
      *
      * <p>To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token from Stripe, proxied through your server. On your backend, add an endpoint that creates and returns a connection token.</p>
      */
-    pub async fn post_connection_token(&self) -> Result<crate::types::TerminalConnectionToken> {
+    pub async fn post_connection_token(
+        &self,
+    ) -> ClientResult<crate::types::TerminalConnectionToken> {
         let url = self.client.url("/v1/terminal/connection_tokens", None);
         self.client
             .post(
@@ -46,7 +47,7 @@ impl Terminal {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::TerminalLocation>> {
+    ) -> ClientResult<Vec<crate::types::TerminalLocation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -82,7 +83,7 @@ impl Terminal {
      *
      * <p>Returns a list of <code>Location</code> objects.</p>
      */
-    pub async fn get_all_locations(&self) -> Result<Vec<crate::types::TerminalLocation>> {
+    pub async fn get_all_locations(&self) -> ClientResult<Vec<crate::types::TerminalLocation>> {
         let url = self.client.url("/v1/terminal/locations", None);
         let mut resp: crate::types::TerminalLocationList = self
             .client
@@ -149,7 +150,7 @@ impl Terminal {
      * <p>Creates a new <code>Location</code> object.
      * For further details, including which address fields are required in each country, see the <a href="/docs/terminal/fleet/locations">Manage locations</a> guide.</p>
      */
-    pub async fn post_location(&self) -> Result<crate::types::TerminalLocation> {
+    pub async fn post_location(&self) -> ClientResult<crate::types::TerminalLocation> {
         let url = self.client.url("/v1/terminal/locations", None);
         self.client
             .post(
@@ -174,7 +175,7 @@ impl Terminal {
     pub async fn get_locations_location(
         &self,
         location: &str,
-    ) -> Result<crate::types::GetTerminalLocationResponseAnyOf> {
+    ) -> ClientResult<crate::types::GetTerminalLocationResponseAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
@@ -204,7 +205,7 @@ impl Terminal {
     pub async fn post_locations_location(
         &self,
         location: &str,
-    ) -> Result<crate::types::GetTerminalLocationResponseAnyOf> {
+    ) -> ClientResult<crate::types::GetTerminalLocationResponseAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
@@ -234,7 +235,7 @@ impl Terminal {
     pub async fn delete_locations_location(
         &self,
         location: &str,
-    ) -> Result<crate::types::DeletedTerminalLocation> {
+    ) -> ClientResult<crate::types::DeletedTerminalLocation> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/locations/{}",
@@ -275,7 +276,7 @@ impl Terminal {
         location: &str,
         starting_after: &str,
         status: crate::types::CustomerAcceptanceType,
-    ) -> Result<Vec<crate::types::TerminalReader>> {
+    ) -> ClientResult<Vec<crate::types::TerminalReader>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !device_type.to_string().is_empty() {
             query_args.push(("device_type".to_string(), device_type.to_string()));
@@ -325,7 +326,7 @@ impl Terminal {
         device_type: crate::types::DeviceType,
         location: &str,
         status: crate::types::CustomerAcceptanceType,
-    ) -> Result<Vec<crate::types::TerminalReader>> {
+    ) -> ClientResult<Vec<crate::types::TerminalReader>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !device_type.to_string().is_empty() {
             query_args.push(("device_type".to_string(), device_type.to_string()));
@@ -404,7 +405,7 @@ impl Terminal {
      *
      * <p>Creates a new <code>Reader</code> object.</p>
      */
-    pub async fn post_reader(&self) -> Result<crate::types::TerminalReader> {
+    pub async fn post_reader(&self) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url("/v1/terminal/readers", None);
         self.client
             .post(
@@ -429,7 +430,7 @@ impl Terminal {
     pub async fn get_readers_reader(
         &self,
         reader: &str,
-    ) -> Result<crate::types::GetTerminalReadersReaderResponseAnyOf> {
+    ) -> ClientResult<crate::types::GetTerminalReadersReaderResponseAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
@@ -459,7 +460,7 @@ impl Terminal {
     pub async fn post_readers_reader(
         &self,
         reader: &str,
-    ) -> Result<crate::types::GetTerminalReadersReaderResponseAnyOf> {
+    ) -> ClientResult<crate::types::GetTerminalReadersReaderResponseAnyOf> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
@@ -489,7 +490,7 @@ impl Terminal {
     pub async fn delete_readers_reader(
         &self,
         reader: &str,
-    ) -> Result<crate::types::DeletedTerminalReader> {
+    ) -> ClientResult<crate::types::DeletedTerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}",
@@ -519,7 +520,7 @@ impl Terminal {
     pub async fn post_readers_reader_cancel_action(
         &self,
         reader: &str,
-    ) -> Result<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/cancel_action",
@@ -549,7 +550,7 @@ impl Terminal {
     pub async fn post_readers_reader_process_payment_intent(
         &self,
         reader: &str,
-    ) -> Result<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/process_payment_intent",
@@ -579,7 +580,7 @@ impl Terminal {
     pub async fn post_readers_reader_process_setup_intent(
         &self,
         reader: &str,
-    ) -> Result<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/process_setup_intent",
@@ -609,7 +610,7 @@ impl Terminal {
     pub async fn post_readers_reader_set_display(
         &self,
         reader: &str,
-    ) -> Result<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::types::TerminalReader> {
         let url = self.client.url(
             &format!(
                 "/v1/terminal/readers/{}/set_reader_display",

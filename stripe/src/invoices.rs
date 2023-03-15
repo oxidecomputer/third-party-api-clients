@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Invoices {
     pub client: Client,
@@ -41,7 +40,7 @@ impl Invoices {
         starting_after: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
-    ) -> Result<Vec<crate::types::Invoice>> {
+    ) -> ClientResult<Vec<crate::types::Invoice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -98,7 +97,7 @@ impl Invoices {
         _due_date: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
-    ) -> Result<Vec<crate::types::Invoice>> {
+    ) -> ClientResult<Vec<crate::types::Invoice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -181,7 +180,7 @@ impl Invoices {
      *
      * <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you <a href="#finalize_invoice">finalize</a> the invoice, which allows you to <a href="#pay_invoice">pay</a> or <a href="#send_invoice">send</a> the invoice to your customers.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Invoice> {
+    pub async fn post(&self) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url("/v1/invoices", None);
         self.client
             .post(
@@ -213,7 +212,7 @@ impl Invoices {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -252,7 +251,7 @@ impl Invoices {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -377,7 +376,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> Result<crate::types::Invoice> {
+    ) -> ClientResult<crate::types::Invoice> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -500,7 +499,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> Result<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -605,7 +604,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> Result<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -728,7 +727,7 @@ impl Invoices {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn get(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn get(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -760,7 +759,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_invoices(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_invoices(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -787,7 +786,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn delete(&self, invoice: &str) -> Result<crate::types::DeletedInvoice> {
+    pub async fn delete(&self, invoice: &str) -> ClientResult<crate::types::DeletedInvoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -814,7 +813,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_finalize(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_finalize(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/finalize",
@@ -851,7 +850,7 @@ impl Invoices {
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -892,7 +891,7 @@ impl Invoices {
      *
      * <p>When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
-    pub async fn get_all_lines(&self, invoice: &str) -> Result<Vec<crate::types::LineItem>> {
+    pub async fn get_all_lines(&self, invoice: &str) -> ClientResult<Vec<crate::types::LineItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/lines",
@@ -968,7 +967,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_mark_uncollectible(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_mark_uncollectible(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/mark_uncollectible",
@@ -995,7 +997,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_pay(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_pay(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/pay",
@@ -1024,7 +1026,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_send(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_send(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/send",
@@ -1051,7 +1053,7 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_void(&self, invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn post_void(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/void",

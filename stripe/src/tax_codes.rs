@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TaxCodes {
     pub client: Client,
@@ -29,7 +28,7 @@ impl TaxCodes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::TaxCode>> {
+    ) -> ClientResult<Vec<crate::types::TaxCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -63,7 +62,7 @@ impl TaxCodes {
      *
      * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::TaxCode>> {
         let url = self.client.url("/v1/tax_codes", None);
         let mut resp: crate::types::TaxProductResourceCodeList = self
             .client
@@ -134,7 +133,7 @@ impl TaxCodes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::TaxCode> {
         let url = self.client.url(
             &format!(
                 "/v1/tax_codes/{}",

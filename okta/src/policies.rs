@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Policies {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Policies {
         type_: &str,
         status: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::Policy>> {
+    ) -> ClientResult<Vec<crate::types::Policy>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -65,7 +64,7 @@ impl Policies {
         type_: &str,
         status: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::Policy>> {
+    ) -> ClientResult<Vec<crate::types::Policy>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -103,7 +102,7 @@ impl Policies {
         &self,
         activate: bool,
         body: &crate::types::Policy,
-    ) -> Result<crate::types::Policy> {
+    ) -> ClientResult<crate::types::Policy> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if activate {
             query_args.push(("activate".to_string(), activate.to_string()));
@@ -132,7 +131,11 @@ impl Policies {
      * * `policy_id: &str`
      * * `expand: &str`
      */
-    pub async fn get_policy(&self, policy_id: &str, expand: &str) -> Result<crate::types::Policy> {
+    pub async fn get_policy(
+        &self,
+        policy_id: &str,
+        expand: &str,
+    ) -> ClientResult<crate::types::Policy> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -169,7 +172,7 @@ impl Policies {
         &self,
         policy_id: &str,
         body: &crate::types::Policy,
-    ) -> Result<crate::types::Policy> {
+    ) -> ClientResult<crate::types::Policy> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
@@ -196,7 +199,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn delete_policy(&self, policy_id: &str) -> Result<()> {
+    pub async fn delete_policy(&self, policy_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}",
@@ -223,7 +226,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn activate_policy(&self, policy_id: &str) -> Result<()> {
+    pub async fn activate_policy(&self, policy_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/activate",
@@ -250,7 +253,7 @@ impl Policies {
      *
      * * `policy_id: &str`
      */
-    pub async fn deactivate_policy(&self, policy_id: &str) -> Result<()> {
+    pub async fn deactivate_policy(&self, policy_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/lifecycle/deactivate",
@@ -280,7 +283,7 @@ impl Policies {
     pub async fn list_policy_rules(
         &self,
         policy_id: &str,
-    ) -> Result<Vec<crate::types::PolicyRule>> {
+    ) -> ClientResult<Vec<crate::types::PolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -308,7 +311,7 @@ impl Policies {
     pub async fn list_all_policy_rules(
         &self,
         policy_id: &str,
-    ) -> Result<Vec<crate::types::PolicyRule>> {
+    ) -> ClientResult<Vec<crate::types::PolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -339,7 +342,7 @@ impl Policies {
         &self,
         policy_id: &str,
         body: &crate::types::PolicyRule,
-    ) -> Result<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::types::PolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules",
@@ -371,7 +374,7 @@ impl Policies {
         &self,
         policy_id: &str,
         rule_id: &str,
-    ) -> Result<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::types::PolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -405,7 +408,7 @@ impl Policies {
         policy_id: &str,
         rule_id: &str,
         body: &crate::types::PolicyRule,
-    ) -> Result<crate::types::PolicyRule> {
+    ) -> ClientResult<crate::types::PolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -434,7 +437,7 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}",
@@ -463,7 +466,7 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/activate",
@@ -492,7 +495,7 @@ impl Policies {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",

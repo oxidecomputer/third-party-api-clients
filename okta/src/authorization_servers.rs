@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AuthorizationServers {
     pub client: Client,
@@ -28,7 +27,7 @@ impl AuthorizationServers {
         q: &str,
         limit: &str,
         after: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServer>> {
+    ) -> ClientResult<Vec<crate::types::AuthorizationServer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -60,7 +59,7 @@ impl AuthorizationServers {
      *
      * Success
      */
-    pub async fn list_all(&self, q: &str) -> Result<Vec<crate::types::AuthorizationServer>> {
+    pub async fn list_all(&self, q: &str) -> ClientResult<Vec<crate::types::AuthorizationServer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -87,7 +86,7 @@ impl AuthorizationServers {
     pub async fn create(
         &self,
         body: &crate::types::AuthorizationServer,
-    ) -> Result<crate::types::AuthorizationServer> {
+    ) -> ClientResult<crate::types::AuthorizationServer> {
         let url = self.client.url("/api/v1/authorizationServers", None);
         self.client
             .post(
@@ -108,7 +107,10 @@ impl AuthorizationServers {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn get(&self, auth_server_id: &str) -> Result<crate::types::AuthorizationServer> {
+    pub async fn get(
+        &self,
+        auth_server_id: &str,
+    ) -> ClientResult<crate::types::AuthorizationServer> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
@@ -139,7 +141,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         body: &crate::types::AuthorizationServer,
-    ) -> Result<crate::types::AuthorizationServer> {
+    ) -> ClientResult<crate::types::AuthorizationServer> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
@@ -166,7 +168,7 @@ impl AuthorizationServers {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn delete(&self, auth_server_id: &str) -> Result<()> {
+    pub async fn delete(&self, auth_server_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}",
@@ -196,7 +198,7 @@ impl AuthorizationServers {
     pub async fn list_o_auth_2_claims(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::OAuth2Claim>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Claim>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
@@ -224,7 +226,7 @@ impl AuthorizationServers {
     pub async fn list_all_o_auth_2_claims(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::OAuth2Claim>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Claim>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
@@ -255,7 +257,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         body: &crate::types::OAuth2Claim,
-    ) -> Result<crate::types::OAuth2Claim> {
+    ) -> ClientResult<crate::types::OAuth2Claim> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims",
@@ -287,7 +289,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         claim_id: &str,
-    ) -> Result<crate::types::OAuth2Claim> {
+    ) -> ClientResult<crate::types::OAuth2Claim> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
@@ -321,7 +323,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         claim_id: &str,
         body: &crate::types::OAuth2Claim,
-    ) -> Result<crate::types::OAuth2Claim> {
+    ) -> ClientResult<crate::types::OAuth2Claim> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
@@ -350,7 +352,11 @@ impl AuthorizationServers {
      * * `auth_server_id: &str`
      * * `claim_id: &str`
      */
-    pub async fn delete_o_auth_2_claim(&self, auth_server_id: &str, claim_id: &str) -> Result<()> {
+    pub async fn delete_o_auth_2_claim(
+        &self,
+        auth_server_id: &str,
+        claim_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/claims/{}",
@@ -381,7 +387,7 @@ impl AuthorizationServers {
     pub async fn list_o_auth_2_clients_fors(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::OAuth2Client>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Client>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients",
@@ -409,7 +415,7 @@ impl AuthorizationServers {
     pub async fn list_all_o_auth_2_clients_fors(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::OAuth2Client>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Client>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients",
@@ -447,7 +453,7 @@ impl AuthorizationServers {
         expand: &str,
         after: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::OAuth2RefreshToken>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2RefreshToken>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -490,7 +496,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         client_id: &str,
         expand: &str,
-    ) -> Result<Vec<crate::types::OAuth2RefreshToken>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2RefreshToken>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -529,7 +535,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         client_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens",
@@ -566,7 +572,7 @@ impl AuthorizationServers {
         client_id: &str,
         token_id: &str,
         expand: &str,
-    ) -> Result<crate::types::OAuth2RefreshToken> {
+    ) -> ClientResult<crate::types::OAuth2RefreshToken> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -608,7 +614,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         client_id: &str,
         token_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/clients/{}/tokens/{}",
@@ -637,7 +643,10 @@ impl AuthorizationServers {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn list_keys(&self, auth_server_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
+    pub async fn list_keys(
+        &self,
+        auth_server_id: &str,
+    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/keys",
@@ -665,7 +674,7 @@ impl AuthorizationServers {
     pub async fn list_all_keys(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::JsonWebKey>> {
+    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/keys",
@@ -696,7 +705,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         body: &crate::types::JwkUse,
-    ) -> Result<Vec<crate::types::JsonWebKey>> {
+    ) -> ClientResult<Vec<crate::types::JsonWebKey>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/credentials/lifecycle/keyRotate",
@@ -723,7 +732,7 @@ impl AuthorizationServers {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn activate(&self, auth_server_id: &str) -> Result<()> {
+    pub async fn activate(&self, auth_server_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/lifecycle/activate",
@@ -750,7 +759,7 @@ impl AuthorizationServers {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn deactivate(&self, auth_server_id: &str) -> Result<()> {
+    pub async fn deactivate(&self, auth_server_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/lifecycle/deactivate",
@@ -780,7 +789,7 @@ impl AuthorizationServers {
     pub async fn list_policies(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServerPolicy>> {
+    ) -> ClientResult<Vec<crate::types::AuthorizationServerPolicy>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
@@ -808,7 +817,7 @@ impl AuthorizationServers {
     pub async fn list_all_policies(
         &self,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServerPolicy>> {
+    ) -> ClientResult<Vec<crate::types::AuthorizationServerPolicy>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
@@ -839,7 +848,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         body: &crate::types::AuthorizationServerPolicy,
-    ) -> Result<crate::types::AuthorizationServerPolicy> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicy> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies",
@@ -871,7 +880,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         policy_id: &str,
-    ) -> Result<crate::types::AuthorizationServerPolicy> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicy> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
@@ -905,7 +914,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         policy_id: &str,
         body: &crate::types::AuthorizationServerPolicy,
-    ) -> Result<crate::types::AuthorizationServerPolicy> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicy> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
@@ -934,7 +943,7 @@ impl AuthorizationServers {
      * * `auth_server_id: &str`
      * * `policy_id: &str`
      */
-    pub async fn delete_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
+    pub async fn delete_policy(&self, auth_server_id: &str, policy_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}",
@@ -963,7 +972,7 @@ impl AuthorizationServers {
      * * `auth_server_id: &str`
      * * `policy_id: &str`
      */
-    pub async fn activate_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
+    pub async fn activate_policy(&self, auth_server_id: &str, policy_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/lifecycle/activate",
@@ -992,7 +1001,11 @@ impl AuthorizationServers {
      * * `auth_server_id: &str`
      * * `policy_id: &str`
      */
-    pub async fn deactivate_policy(&self, auth_server_id: &str, policy_id: &str) -> Result<()> {
+    pub async fn deactivate_policy(
+        &self,
+        auth_server_id: &str,
+        policy_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/lifecycle/deactivate",
@@ -1025,7 +1038,7 @@ impl AuthorizationServers {
         &self,
         policy_id: &str,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServerPolicyRule>> {
+    ) -> ClientResult<Vec<crate::types::AuthorizationServerPolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
@@ -1055,7 +1068,7 @@ impl AuthorizationServers {
         &self,
         policy_id: &str,
         auth_server_id: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServerPolicyRule>> {
+    ) -> ClientResult<Vec<crate::types::AuthorizationServerPolicyRule>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
@@ -1089,7 +1102,7 @@ impl AuthorizationServers {
         policy_id: &str,
         auth_server_id: &str,
         body: &crate::types::AuthorizationServerPolicyRule,
-    ) -> Result<crate::types::AuthorizationServerPolicyRule> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules",
@@ -1124,7 +1137,7 @@ impl AuthorizationServers {
         policy_id: &str,
         auth_server_id: &str,
         rule_id: &str,
-    ) -> Result<crate::types::AuthorizationServerPolicyRule> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
@@ -1161,7 +1174,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         rule_id: &str,
         body: &crate::types::AuthorizationServerPolicyRule,
-    ) -> Result<crate::types::AuthorizationServerPolicyRule> {
+    ) -> ClientResult<crate::types::AuthorizationServerPolicyRule> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
@@ -1197,7 +1210,7 @@ impl AuthorizationServers {
         policy_id: &str,
         auth_server_id: &str,
         rule_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}",
@@ -1233,7 +1246,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         policy_id: &str,
         rule_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/activate",
@@ -1269,7 +1282,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         policy_id: &str,
         rule_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/policies/{}/rules/{}/lifecycle/deactivate",
@@ -1309,7 +1322,7 @@ impl AuthorizationServers {
         filter: &str,
         cursor: &str,
         limit: i64,
-    ) -> Result<Vec<crate::types::OAuth2Scope>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Scope>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -1355,7 +1368,7 @@ impl AuthorizationServers {
         q: &str,
         filter: &str,
         cursor: &str,
-    ) -> Result<Vec<crate::types::OAuth2Scope>> {
+    ) -> ClientResult<Vec<crate::types::OAuth2Scope>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -1398,7 +1411,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         body: &crate::types::OAuth2Scope,
-    ) -> Result<crate::types::OAuth2Scope> {
+    ) -> ClientResult<crate::types::OAuth2Scope> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes",
@@ -1430,7 +1443,7 @@ impl AuthorizationServers {
         &self,
         auth_server_id: &str,
         scope_id: &str,
-    ) -> Result<crate::types::OAuth2Scope> {
+    ) -> ClientResult<crate::types::OAuth2Scope> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",
@@ -1464,7 +1477,7 @@ impl AuthorizationServers {
         auth_server_id: &str,
         scope_id: &str,
         body: &crate::types::OAuth2Scope,
-    ) -> Result<crate::types::OAuth2Scope> {
+    ) -> ClientResult<crate::types::OAuth2Scope> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",
@@ -1493,7 +1506,11 @@ impl AuthorizationServers {
      * * `auth_server_id: &str`
      * * `scope_id: &str`
      */
-    pub async fn delete_o_auth_2_scope(&self, auth_server_id: &str, scope_id: &str) -> Result<()> {
+    pub async fn delete_o_auth_2_scope(
+        &self,
+        auth_server_id: &str,
+        scope_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/api/v1/authorizationServers/{}/scopes/{}",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct RoleAssignments {
     pub client: Client,
@@ -32,7 +31,7 @@ impl RoleAssignments {
         page_token: &str,
         role_id: &str,
         user_key: &str,
-    ) -> Result<Vec<crate::types::RoleAssignment>> {
+    ) -> ClientResult<Vec<crate::types::RoleAssignment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -81,7 +80,7 @@ impl RoleAssignments {
         customer: &str,
         role_id: &str,
         user_key: &str,
-    ) -> Result<Vec<crate::types::RoleAssignment>> {
+    ) -> ClientResult<Vec<crate::types::RoleAssignment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !role_id.is_empty() {
             query_args.push(("roleId".to_string(), role_id.to_string()));
@@ -163,7 +162,7 @@ impl RoleAssignments {
         &self,
         customer: &str,
         body: &crate::types::RoleAssignment,
-    ) -> Result<crate::types::RoleAssignment> {
+    ) -> ClientResult<crate::types::RoleAssignment> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments",
@@ -195,7 +194,7 @@ impl RoleAssignments {
         &self,
         customer: &str,
         role_assignment_id: &str,
-    ) -> Result<crate::types::RoleAssignment> {
+    ) -> ClientResult<crate::types::RoleAssignment> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments/{}",
@@ -224,7 +223,7 @@ impl RoleAssignments {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
      */
-    pub async fn delete(&self, customer: &str, role_assignment_id: &str) -> Result<()> {
+    pub async fn delete(&self, customer: &str, role_assignment_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/roleassignments/{}",

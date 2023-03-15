@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Emoji {
     pub client: Client,
@@ -23,7 +22,7 @@ impl Emoji {
      *
      * * `token: &str` -- Authentication token. Requires scope: `emoji:read`.
      */
-    pub async fn list(&self) -> Result<crate::types::DndEndSchema> {
+    pub async fn list(&self) -> ClientResult<crate::types::DndEndSchema> {
         let url = self.client.url("/emoji.list", None);
         self.client
             .get(

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AccountTabSettings {
     pub client: Client,
@@ -26,7 +25,7 @@ impl AccountTabSettings {
     pub async fn tab_settings_get(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::TabAccountSettings> {
+    ) -> ClientResult<crate::types::TabAccountSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/tabs",
@@ -59,7 +58,7 @@ impl AccountTabSettings {
         &self,
         account_id: &str,
         body: &crate::types::TabAccountSettings,
-    ) -> Result<crate::types::TabAccountSettings> {
+    ) -> ClientResult<crate::types::TabAccountSettings> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/tabs",

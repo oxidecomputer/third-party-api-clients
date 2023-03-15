@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeTransferRules {
     pub client: Client,
@@ -32,7 +31,7 @@ impl EnvelopeTransferRules {
         account_id: &str,
         count: &str,
         start_position: &str,
-    ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -76,7 +75,7 @@ impl EnvelopeTransferRules {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopeTransferRuleInformation,
-    ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules",
@@ -120,7 +119,7 @@ impl EnvelopeTransferRules {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopeTransferRuleRequest,
-    ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
+    ) -> ClientResult<crate::types::EnvelopeTransferRuleInformation> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules",
@@ -159,7 +158,7 @@ impl EnvelopeTransferRules {
         account_id: &str,
         envelope_transfer_rule_id: &str,
         body: &crate::types::EnvelopeTransferRule,
-    ) -> Result<crate::types::EnvelopeTransferRule> {
+    ) -> ClientResult<crate::types::EnvelopeTransferRule> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
@@ -192,7 +191,11 @@ impl EnvelopeTransferRules {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
      */
-    pub async fn delete(&self, account_id: &str, envelope_transfer_rule_id: &str) -> Result<()> {
+    pub async fn delete(
+        &self,
+        account_id: &str,
+        envelope_transfer_rule_id: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/transfer_rules/{}",

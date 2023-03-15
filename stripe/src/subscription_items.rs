@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SubscriptionItems {
     pub client: Client,
@@ -31,7 +30,7 @@ impl SubscriptionItems {
         limit: i64,
         starting_after: &str,
         subscription: &str,
-    ) -> Result<Vec<crate::types::SubscriptionItem>> {
+    ) -> ClientResult<Vec<crate::types::SubscriptionItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -70,7 +69,10 @@ impl SubscriptionItems {
      *
      * <p>Returns a list of your subscription items for a given subscription.</p>
      */
-    pub async fn get_all(&self, subscription: &str) -> Result<Vec<crate::types::SubscriptionItem>> {
+    pub async fn get_all(
+        &self,
+        subscription: &str,
+    ) -> ClientResult<Vec<crate::types::SubscriptionItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !subscription.is_empty() {
             query_args.push(("subscription".to_string(), subscription.to_string()));
@@ -143,7 +145,7 @@ impl SubscriptionItems {
      *
      * <p>Adds a new item to an existing subscription. No existing items will be changed or replaced.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::SubscriptionItem> {
+    pub async fn post(&self) -> ClientResult<crate::types::SubscriptionItem> {
         let url = self.client.url("/v1/subscription_items", None);
         self.client
             .post(
@@ -165,7 +167,7 @@ impl SubscriptionItems {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `item: &str` -- The account's country.
      */
-    pub async fn get_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
+    pub async fn get_item(&self, item: &str) -> ClientResult<crate::types::SubscriptionItem> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -192,7 +194,7 @@ impl SubscriptionItems {
      *
      * * `item: &str` -- The account's country.
      */
-    pub async fn post_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
+    pub async fn post_item(&self, item: &str) -> ClientResult<crate::types::SubscriptionItem> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -219,7 +221,10 @@ impl SubscriptionItems {
      *
      * * `item: &str` -- The account's country.
      */
-    pub async fn delete_item(&self, item: &str) -> Result<crate::types::DeletedSubscriptionItem> {
+    pub async fn delete_item(
+        &self,
+        item: &str,
+    ) -> ClientResult<crate::types::DeletedSubscriptionItem> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -258,7 +263,7 @@ impl SubscriptionItems {
         limit: i64,
         starting_after: &str,
         subscription_item: &str,
-    ) -> Result<Vec<crate::types::UsageRecordSummary>> {
+    ) -> ClientResult<Vec<crate::types::UsageRecordSummary>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -304,7 +309,7 @@ impl SubscriptionItems {
     pub async fn get_all_item_usage_record_summaries(
         &self,
         subscription_item: &str,
-    ) -> Result<Vec<crate::types::UsageRecordSummary>> {
+    ) -> ClientResult<Vec<crate::types::UsageRecordSummary>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_record_summaries",
@@ -389,7 +394,7 @@ impl SubscriptionItems {
     pub async fn post_item_usage_record(
         &self,
         subscription_item: &str,
-    ) -> Result<crate::types::UsageRecord> {
+    ) -> ClientResult<crate::types::UsageRecord> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_records",

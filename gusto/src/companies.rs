@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Companies {
     pub client: Client,
@@ -19,7 +18,7 @@ impl Companies {
      *
      * Get a company.
      */
-    pub async fn get(&self, company_id_or_uuid: &str) -> Result<crate::types::Company> {
+    pub async fn get(&self, company_id_or_uuid: &str) -> ClientResult<crate::types::Company> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}",
@@ -71,7 +70,7 @@ impl Companies {
     pub async fn post_partner_managed(
         &self,
         body: &crate::types::PostPartnerManagedCompaniesRequest,
-    ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
+    ) -> ClientResult<crate::types::PostPartnerManagedCompaniesResponse> {
         let url = self.client.url("/v1/partner_managed_companies", None);
         self.client
             .post(
@@ -111,7 +110,7 @@ impl Companies {
     pub async fn post_provision(
         &self,
         body: &crate::types::PostProvisionRequest,
-    ) -> Result<crate::types::PostProvisionResponse> {
+    ) -> ClientResult<crate::types::PostProvisionResponse> {
         let url = self.client.url("/v1/provision", None);
         self.client
             .post(

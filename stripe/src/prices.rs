@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Prices {
     pub client: Client,
@@ -43,7 +42,7 @@ impl Prices {
         _recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
-    ) -> Result<Vec<crate::types::PriceData>> {
+    ) -> ClientResult<Vec<crate::types::PriceData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -98,7 +97,7 @@ impl Prices {
         product: &str,
         _recurring: &str,
         type_: crate::types::PriceType,
-    ) -> Result<Vec<crate::types::PriceData>> {
+    ) -> ClientResult<Vec<crate::types::PriceData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -178,7 +177,7 @@ impl Prices {
      *
      * <p>Creates a new price for an existing product. The price can be recurring or one-time.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::PriceData> {
+    pub async fn post(&self) -> ClientResult<crate::types::PriceData> {
         let url = self.client.url("/v1/prices", None);
         self.client
             .post(
@@ -210,7 +209,7 @@ impl Prices {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -249,7 +248,7 @@ impl Prices {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -327,7 +326,7 @@ impl Prices {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `price: &str` -- The account's country.
      */
-    pub async fn get(&self, price: &str) -> Result<crate::types::PriceData> {
+    pub async fn get(&self, price: &str) -> ClientResult<crate::types::PriceData> {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",
@@ -354,7 +353,7 @@ impl Prices {
      *
      * * `price: &str` -- The account's country.
      */
-    pub async fn post_prices(&self, price: &str) -> Result<crate::types::PriceData> {
+    pub async fn post_prices(&self, price: &str) -> ClientResult<crate::types::PriceData> {
         let url = self.client.url(
             &format!(
                 "/v1/prices/{}",

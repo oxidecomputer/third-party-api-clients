@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct AppsPermissions {
     pub client: Client,
@@ -23,7 +22,7 @@ impl AppsPermissions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
-    pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
+    pub async fn info(&self) -> ClientResult<crate::types::AppsPermissionsInfoSchema> {
         let url = self.client.url("/apps.permissions.info", None);
         self.client
             .get(
@@ -52,7 +51,7 @@ impl AppsPermissions {
         &self,
         scopes: &str,
         trigger_id: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scopes.is_empty() {
             query_args.push(("scopes".to_string(), scopes.to_string()));

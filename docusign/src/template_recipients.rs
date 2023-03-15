@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateRecipients {
     pub client: Client,
@@ -34,7 +33,7 @@ impl TemplateRecipients {
         include_anchor_tab_locations: &str,
         include_extended: &str,
         include_tabs: &str,
-    ) -> Result<crate::types::Recipients> {
+    ) -> ClientResult<crate::types::Recipients> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
             query_args.push((
@@ -91,7 +90,7 @@ impl TemplateRecipients {
         template_id: &str,
         resend_envelope: &str,
         body: &crate::types::TemplateRecipientsData,
-    ) -> Result<crate::types::RecipientsUpdateSummary> {
+    ) -> ClientResult<crate::types::RecipientsUpdateSummary> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
@@ -137,7 +136,7 @@ impl TemplateRecipients {
         template_id: &str,
         resend_envelope: &str,
         body: &crate::types::TemplateRecipientsData,
-    ) -> Result<crate::types::Recipients> {
+    ) -> ClientResult<crate::types::Recipients> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
             query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
@@ -179,7 +178,7 @@ impl TemplateRecipients {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateRecipientsData,
-    ) -> Result<crate::types::Recipients> {
+    ) -> ClientResult<crate::types::Recipients> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients",
@@ -217,7 +216,7 @@ impl TemplateRecipients {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::TemplateRecipientsData,
-    ) -> Result<crate::types::Recipients> {
+    ) -> ClientResult<crate::types::Recipients> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}",
@@ -256,7 +255,7 @@ impl TemplateRecipients {
         account_id: &str,
         template_id: &str,
         body: &crate::types::RecipientPreviewRequest,
-    ) -> Result<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::types::ViewUrl> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/views/recipient_preview",

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct InvalidEmailsApi {
     pub client: Client,
@@ -33,7 +32,7 @@ impl InvalidEmailsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::InvalidEmail>> {
+    ) -> ClientResult<Vec<crate::types::InvalidEmail>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -75,7 +74,7 @@ impl InvalidEmailsApi {
         start_time: i64,
         end_time: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::InvalidEmail>> {
+    ) -> ClientResult<Vec<crate::types::InvalidEmail>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
@@ -119,7 +118,7 @@ impl InvalidEmailsApi {
     pub async fn delete_suppression_invalid_emails(
         &self,
         body: &crate::types::DeleteSuppressionBlocksRequest,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url("/suppression/invalid_emails", None);
         self.client
             .delete(
@@ -145,7 +144,7 @@ impl InvalidEmailsApi {
     pub async fn get_suppression_invalid_emails_email(
         &self,
         email: &str,
-    ) -> Result<Vec<crate::types::InvalidEmail>> {
+    ) -> ClientResult<Vec<crate::types::InvalidEmail>> {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",
@@ -175,7 +174,7 @@ impl InvalidEmailsApi {
     pub async fn get_all_suppression_invalid_emails_email(
         &self,
         email: &str,
-    ) -> Result<Vec<crate::types::InvalidEmail>> {
+    ) -> ClientResult<Vec<crate::types::InvalidEmail>> {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",
@@ -207,7 +206,7 @@ impl InvalidEmailsApi {
     pub async fn delete_suppression_invalid_emails_email(
         &self,
         email: &str,
-    ) -> Result<crate::types::Help> {
+    ) -> ClientResult<crate::types::Help> {
         let url = self.client.url(
             &format!(
                 "/suppression/invalid_emails/{}",

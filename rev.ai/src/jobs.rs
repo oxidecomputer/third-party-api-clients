@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Jobs {
     pub client: Client,
@@ -28,7 +27,7 @@ impl Jobs {
         &self,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::JobAllOf>> {
+    ) -> ClientResult<Vec<crate::types::JobAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -60,7 +59,7 @@ impl Jobs {
     pub async fn get_all_list_all_of(
         &self,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::JobAllOf>> {
+    ) -> ClientResult<Vec<crate::types::JobAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !starting_after.is_empty() {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
@@ -87,7 +86,7 @@ impl Jobs {
     pub async fn submit_transcription(
         &self,
         body: &crate::types::SubmitJobMediaUrlOptionsAllOf,
-    ) -> Result<crate::types::JobAllOf> {
+    ) -> ClientResult<crate::types::JobAllOf> {
         let url = self.client.url("/jobs", None);
         self.client
             .post(
@@ -106,7 +105,7 @@ impl Jobs {
      *
      * Returns information about a transcription job
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::JobAllOf> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::JobAllOf> {
         let url = self.client.url(
             &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -128,7 +127,7 @@ impl Jobs {
      *
      * Deletes a transcription job. All data related to the job, such as input media and transcript, will be permanently deleted. A job can only be deleted once it's completed (either with success or failure).
      */
-    pub async fn delete(&self, id: &str) -> Result<()> {
+    pub async fn delete(&self, id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/jobs/{}", crate::progenitor_support::encode_path(id),),
             None,

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct MailSend {
     pub client: Client,
@@ -64,7 +63,7 @@ impl MailSend {
      *    a. `--data-binary '@data.json.gz'
      * `
      */
-    pub async fn post(&self, body: &crate::types::PostMailSendRequest) -> Result<()> {
+    pub async fn post(&self, body: &crate::types::PostMailSendRequest) -> ClientResult<()> {
         let url = self.client.url("/mail/send", None);
         self.client
             .post(

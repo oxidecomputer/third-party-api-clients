@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Lists {
     pub client: Client,
@@ -50,7 +49,7 @@ impl Lists {
         sort_dir: crate::types::SortDir,
         has_ecommerce_store: bool,
         include_total_contacts: bool,
-    ) -> Result<crate::types::SubscriberLists> {
+    ) -> ClientResult<crate::types::SubscriberLists> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_campaign_last_sent.is_empty() {
             query_args.push((
@@ -128,7 +127,10 @@ impl Lists {
      *
      * Create a new list in your Mailchimp account.
      */
-    pub async fn post(&self, body: &crate::types::SubscriberList) -> Result<crate::types::Lists> {
+    pub async fn post(
+        &self,
+        body: &crate::types::SubscriberList,
+    ) -> ClientResult<crate::types::Lists> {
         let url = self.client.url("/lists", None);
         self.client
             .post(
@@ -160,7 +162,7 @@ impl Lists {
         exclude_fields: &[String],
         list_id: &str,
         include_total_contacts: bool,
-    ) -> Result<crate::types::Lists> {
+    ) -> ClientResult<crate::types::Lists> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -212,7 +214,7 @@ impl Lists {
         skip_merge_validation: bool,
         skip_duplicate_check: bool,
         body: &crate::types::MembersSubscribeUnsubscribeFromAListInBatch,
-    ) -> Result<crate::types::BatchUpdateListMembers> {
+    ) -> ClientResult<crate::types::BatchUpdateListMembers> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if skip_duplicate_check {
             query_args.push((
@@ -256,7 +258,7 @@ impl Lists {
      *
      * * `list_id: &str` -- The unique ID for the list.
      */
-    pub async fn delete(&self, list_id: &str) -> Result<()> {
+    pub async fn delete(&self, list_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
             None,
@@ -286,7 +288,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::SubscriberListData,
-    ) -> Result<crate::types::Lists> {
+    ) -> ClientResult<crate::types::Lists> {
         let url = self.client.url(
             &format!("/lists/{}", crate::progenitor_support::encode_path(list_id),),
             None,
@@ -323,7 +325,7 @@ impl Lists {
         count: i64,
         offset: i64,
         list_id: &str,
-    ) -> Result<crate::types::AbuseComplaints> {
+    ) -> ClientResult<crate::types::AbuseComplaints> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -380,7 +382,7 @@ impl Lists {
         offset: i64,
         list_id: &str,
         report_id: &str,
-    ) -> Result<crate::types::AbuseReports> {
+    ) -> ClientResult<crate::types::AbuseReports> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -432,7 +434,7 @@ impl Lists {
         fields: &[String],
         exclude_fields: &[String],
         list_id: &str,
-    ) -> Result<crate::types::ListActivity> {
+    ) -> ClientResult<crate::types::ListActivity> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -477,7 +479,7 @@ impl Lists {
         fields: &[String],
         exclude_fields: &[String],
         list_id: &str,
-    ) -> Result<crate::types::EmailClients> {
+    ) -> ClientResult<crate::types::EmailClients> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -530,7 +532,7 @@ impl Lists {
         list_id: &str,
         sort_field: crate::types::GetListsGrowthHistorySortField,
         sort_dir: crate::types::SortDir,
-    ) -> Result<crate::types::GrowthHistory> {
+    ) -> ClientResult<crate::types::GrowthHistory> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -589,7 +591,7 @@ impl Lists {
         exclude_fields: &[String],
         list_id: &str,
         month: &str,
-    ) -> Result<crate::types::History> {
+    ) -> ClientResult<crate::types::History> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -641,7 +643,7 @@ impl Lists {
         count: i64,
         offset: i64,
         type_: &str,
-    ) -> Result<crate::types::InterestGroupings> {
+    ) -> ClientResult<crate::types::InterestGroupings> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -692,7 +694,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::InterestCategory,
-    ) -> Result<crate::types::Categories> {
+    ) -> ClientResult<crate::types::Categories> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories",
@@ -730,7 +732,7 @@ impl Lists {
         interest_category_id: &str,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::Categories> {
+    ) -> ClientResult<crate::types::Categories> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -774,7 +776,7 @@ impl Lists {
         &self,
         list_id: &str,
         interest_category_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}",
@@ -810,7 +812,7 @@ impl Lists {
         list_id: &str,
         interest_category_id: &str,
         body: &crate::types::InterestCategory,
-    ) -> Result<crate::types::Categories> {
+    ) -> ClientResult<crate::types::Categories> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}",
@@ -853,7 +855,7 @@ impl Lists {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::InterestsData> {
+    ) -> ClientResult<crate::types::InterestsData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -904,7 +906,7 @@ impl Lists {
         list_id: &str,
         interest_category_id: &str,
         body: &crate::types::Interest,
-    ) -> Result<crate::types::InterestsInterest> {
+    ) -> ClientResult<crate::types::InterestsInterest> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests",
@@ -945,7 +947,7 @@ impl Lists {
         interest_id: &str,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::InterestsInterest> {
+    ) -> ClientResult<crate::types::InterestsInterest> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -992,7 +994,7 @@ impl Lists {
         list_id: &str,
         interest_category_id: &str,
         interest_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests/{}",
@@ -1031,7 +1033,7 @@ impl Lists {
         interest_category_id: &str,
         interest_id: &str,
         body: &crate::types::Interest,
-    ) -> Result<crate::types::InterestsInterest> {
+    ) -> ClientResult<crate::types::InterestsInterest> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/interest-categories/{}/interests/{}",
@@ -1089,7 +1091,7 @@ impl Lists {
         include_unsubscribed: bool,
         since_updated_at: &str,
         before_updated_at: &str,
-    ) -> Result<crate::types::CollectionOfSegments> {
+    ) -> ClientResult<crate::types::CollectionOfSegments> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_created_at.is_empty() {
             query_args.push((
@@ -1173,7 +1175,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::ListData,
-    ) -> Result<crate::types::Segments> {
+    ) -> ClientResult<crate::types::Segments> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments",
@@ -1217,7 +1219,7 @@ impl Lists {
         include_cleaned: bool,
         include_transactional: bool,
         include_unsubscribed: bool,
-    ) -> Result<crate::types::Segments> {
+    ) -> ClientResult<crate::types::Segments> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1277,7 +1279,7 @@ impl Lists {
         list_id: &str,
         segment_id: &str,
         body: &crate::types::MembersAddRemoveFromAStaticSegment,
-    ) -> Result<crate::types::BatchAddRemoveListMembersFromStaticSegment> {
+    ) -> ClientResult<crate::types::BatchAddRemoveListMembersFromStaticSegment> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
@@ -1308,7 +1310,7 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      * * `segment_id: &str` -- The unique id for the segment.
      */
-    pub async fn delete_segments(&self, list_id: &str, segment_id: &str) -> Result<()> {
+    pub async fn delete_segments(&self, list_id: &str, segment_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
@@ -1344,7 +1346,7 @@ impl Lists {
         list_id: &str,
         segment_id: &str,
         body: &crate::types::ListDataType,
-    ) -> Result<crate::types::Segments> {
+    ) -> ClientResult<crate::types::Segments> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}",
@@ -1393,7 +1395,7 @@ impl Lists {
         include_cleaned: bool,
         include_transactional: bool,
         include_unsubscribed: bool,
-    ) -> Result<crate::types::SegmentMembers> {
+    ) -> ClientResult<crate::types::SegmentMembers> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1459,7 +1461,7 @@ impl Lists {
         list_id: &str,
         segment_id: &str,
         body: &crate::types::SubscriberInAutomationQueue,
-    ) -> Result<crate::types::ListMembers> {
+    ) -> ClientResult<crate::types::ListMembers> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}/members",
@@ -1496,7 +1498,7 @@ impl Lists {
         list_id: &str,
         segment_id: &str,
         subscriber_hash: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/segments/{}/members/{}",
@@ -1532,7 +1534,7 @@ impl Lists {
         &self,
         list_id: &str,
         name: &str,
-    ) -> Result<crate::types::TagSearchResults> {
+    ) -> ClientResult<crate::types::TagSearchResults> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !name.is_empty() {
             query_args.push(("name".to_string(), name.to_string()));
@@ -1608,7 +1610,7 @@ impl Lists {
         sort_dir: crate::types::SortDir,
         since_last_campaign: bool,
         unsubscribed_since: &str,
-    ) -> Result<crate::types::ListMembersDataType> {
+    ) -> ClientResult<crate::types::ListMembersDataType> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_last_changed.is_empty() {
             query_args.push((
@@ -1724,7 +1726,7 @@ impl Lists {
         list_id: &str,
         skip_merge_validation: bool,
         body: &crate::types::AddListMembers,
-    ) -> Result<crate::types::ListMembersData> {
+    ) -> ClientResult<crate::types::ListMembersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if skip_merge_validation {
             query_args.push((
@@ -1771,7 +1773,7 @@ impl Lists {
         exclude_fields: &[String],
         list_id: &str,
         subscriber_hash: &str,
-    ) -> Result<crate::types::ListMembersData> {
+    ) -> ClientResult<crate::types::ListMembersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -1818,7 +1820,7 @@ impl Lists {
         subscriber_hash: &str,
         skip_merge_validation: bool,
         body: &crate::types::AddListMembersData,
-    ) -> Result<crate::types::ListMembersData> {
+    ) -> ClientResult<crate::types::ListMembersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if skip_merge_validation {
             query_args.push((
@@ -1858,7 +1860,7 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
      */
-    pub async fn delete_members(&self, list_id: &str, subscriber_hash: &str) -> Result<()> {
+    pub async fn delete_members(&self, list_id: &str, subscriber_hash: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}",
@@ -1896,7 +1898,7 @@ impl Lists {
         subscriber_hash: &str,
         skip_merge_validation: bool,
         body: &crate::types::AddListMembersDataType,
-    ) -> Result<crate::types::ListMembersData> {
+    ) -> ClientResult<crate::types::ListMembersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if skip_merge_validation {
             query_args.push((
@@ -1946,7 +1948,7 @@ impl Lists {
         fields: &[String],
         exclude_fields: &[String],
         action: &[String],
-    ) -> Result<crate::types::MemberActivityEvents> {
+    ) -> ClientResult<crate::types::MemberActivityEvents> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !action.is_empty() {
             query_args.push(("action".to_string(), action.join(" ")));
@@ -2003,7 +2005,7 @@ impl Lists {
         count: i64,
         offset: i64,
         activity_filters: &[String],
-    ) -> Result<crate::types::MemberActivityEventsData> {
+    ) -> ClientResult<crate::types::MemberActivityEventsData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !activity_filters.is_empty() {
             query_args.push(("activity_filters".to_string(), activity_filters.join(" ")));
@@ -2064,7 +2066,7 @@ impl Lists {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::CollectionOfTags> {
+    ) -> ClientResult<crate::types::CollectionOfTags> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2115,7 +2117,7 @@ impl Lists {
         list_id: &str,
         subscriber_hash: &str,
         body: &crate::types::MemberTags,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/tags",
@@ -2158,7 +2160,7 @@ impl Lists {
         offset: i64,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::CollectionOfEvents> {
+    ) -> ClientResult<crate::types::CollectionOfEvents> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2209,7 +2211,7 @@ impl Lists {
         list_id: &str,
         subscriber_hash: &str,
         body: &crate::types::EventsData,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/events",
@@ -2248,7 +2250,7 @@ impl Lists {
         subscriber_hash: &str,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::CollectionOfMemberActivityEvents> {
+    ) -> ClientResult<crate::types::CollectionOfMemberActivityEvents> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -2304,7 +2306,7 @@ impl Lists {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> Result<crate::types::CollectionOfNotes> {
+    ) -> ClientResult<crate::types::CollectionOfNotes> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2361,7 +2363,7 @@ impl Lists {
         list_id: &str,
         subscriber_hash: &str,
         body: &crate::types::MemberNotes,
-    ) -> Result<crate::types::CollectionOfNotesMember> {
+    ) -> ClientResult<crate::types::CollectionOfNotesMember> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes",
@@ -2402,7 +2404,7 @@ impl Lists {
         note_id: &str,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> Result<crate::types::CollectionOfNotesMember> {
+    ) -> ClientResult<crate::types::CollectionOfNotesMember> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -2449,7 +2451,7 @@ impl Lists {
         list_id: &str,
         subscriber_hash: &str,
         note_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes/{}",
@@ -2488,7 +2490,7 @@ impl Lists {
         subscriber_hash: &str,
         note_id: &str,
         body: &crate::types::MemberNotes,
-    ) -> Result<crate::types::CollectionOfNotesMember> {
+    ) -> ClientResult<crate::types::CollectionOfNotesMember> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/notes/{}",
@@ -2524,7 +2526,7 @@ impl Lists {
         &self,
         list_id: &str,
         subscriber_hash: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/members/{}/actions/delete-permanent",
@@ -2569,7 +2571,7 @@ impl Lists {
         offset: i64,
         type_: &str,
         required: bool,
-    ) -> Result<crate::types::CollectionOfMergeFields> {
+    ) -> ClientResult<crate::types::CollectionOfMergeFields> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -2623,7 +2625,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::MergeFieldData,
-    ) -> Result<crate::types::MergeField> {
+    ) -> ClientResult<crate::types::MergeField> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields",
@@ -2661,7 +2663,7 @@ impl Lists {
         merge_id: &str,
         exclude_fields: &[String],
         fields: &[String],
-    ) -> Result<crate::types::MergeField> {
+    ) -> ClientResult<crate::types::MergeField> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -2701,7 +2703,7 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      * * `merge_id: &str` -- The id for the merge field.
      */
-    pub async fn delete_merge_fields(&self, list_id: &str, merge_id: &str) -> Result<()> {
+    pub async fn delete_merge_fields(&self, list_id: &str, merge_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields/{}",
@@ -2737,7 +2739,7 @@ impl Lists {
         list_id: &str,
         merge_id: &str,
         body: &crate::types::MergeFieldDataType,
-    ) -> Result<crate::types::MergeField> {
+    ) -> ClientResult<crate::types::MergeField> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/merge-fields/{}",
@@ -2767,7 +2769,7 @@ impl Lists {
      *
      * * `list_id: &str` -- The unique ID for the list.
      */
-    pub async fn get_webhook(&self, list_id: &str) -> Result<crate::types::ListWebhooksData> {
+    pub async fn get_webhook(&self, list_id: &str) -> ClientResult<crate::types::ListWebhooksData> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks",
@@ -2800,7 +2802,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::AddWebhook,
-    ) -> Result<crate::types::ListWebhooks> {
+    ) -> ClientResult<crate::types::ListWebhooks> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks",
@@ -2834,7 +2836,7 @@ impl Lists {
         &self,
         list_id: &str,
         webhook_id: &str,
-    ) -> Result<crate::types::ListWebhooks> {
+    ) -> ClientResult<crate::types::ListWebhooks> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
@@ -2865,7 +2867,7 @@ impl Lists {
      * * `list_id: &str` -- The unique ID for the list.
      * * `webhook_id: &str` -- The name of the folder.
      */
-    pub async fn delete_webhooks(&self, list_id: &str, webhook_id: &str) -> Result<()> {
+    pub async fn delete_webhooks(&self, list_id: &str, webhook_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
@@ -2901,7 +2903,7 @@ impl Lists {
         list_id: &str,
         webhook_id: &str,
         body: &crate::types::AddWebhook,
-    ) -> Result<crate::types::ListWebhooks> {
+    ) -> ClientResult<crate::types::ListWebhooks> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/webhooks/{}",
@@ -2931,7 +2933,10 @@ impl Lists {
      *
      * * `list_id: &str` -- The unique ID for the list.
      */
-    pub async fn get_signup_form(&self, list_id: &str) -> Result<crate::types::ListSignupForms> {
+    pub async fn get_signup_form(
+        &self,
+        list_id: &str,
+    ) -> ClientResult<crate::types::ListSignupForms> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/signup-forms",
@@ -2964,7 +2969,7 @@ impl Lists {
         &self,
         list_id: &str,
         body: &crate::types::SignupFormData,
-    ) -> Result<crate::types::SignupForm> {
+    ) -> ClientResult<crate::types::SignupForm> {
         let url = self.client.url(
             &format!(
                 "/lists/{}/signup-forms",
@@ -3000,7 +3005,7 @@ impl Lists {
         fields: &[String],
         exclude_fields: &[String],
         list_id: &str,
-    ) -> Result<crate::types::ListLocations> {
+    ) -> ClientResult<crate::types::ListLocations> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

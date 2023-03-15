@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Files {
     pub client: Client,
@@ -49,7 +48,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<Vec<crate::types::File>> {
+    ) -> ClientResult<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
             query_args.push(("corpora".to_string(), corpora.to_string()));
@@ -141,7 +140,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<Vec<crate::types::File>> {
+    ) -> ClientResult<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
             query_args.push(("corpora".to_string(), corpora.to_string()));
@@ -271,7 +270,7 @@ impl Files {
         supports_team_drives: bool,
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
-    ) -> Result<crate::types::File> {
+    ) -> ClientResult<crate::types::File> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
@@ -340,7 +339,7 @@ impl Files {
         count: i64,
         space: &str,
         type_: &str,
-    ) -> Result<crate::types::GeneratedIds> {
+    ) -> ClientResult<crate::types::GeneratedIds> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -374,7 +373,7 @@ impl Files {
      *
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
-    pub async fn empty_trash(&self) -> Result<()> {
+    pub async fn empty_trash(&self) -> ClientResult<()> {
         let url = self.client.url("/files/trash", None);
         self.client
             .delete(
@@ -406,7 +405,7 @@ impl Files {
         include_permissions_for_view: &str,
         supports_all_drives: bool,
         supports_team_drives: bool,
-    ) -> Result<crate::types::File> {
+    ) -> ClientResult<crate::types::File> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
@@ -468,7 +467,7 @@ impl Files {
         file_id: &str,
         supports_all_drives: bool,
         supports_team_drives: bool,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -531,7 +530,7 @@ impl Files {
         supports_team_drives: bool,
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
-    ) -> Result<crate::types::File> {
+    ) -> ClientResult<crate::types::File> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !add_parents.is_empty() {
             query_args.push(("addParents".to_string(), add_parents.to_string()));
@@ -617,7 +616,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         body: &crate::types::File,
-    ) -> Result<crate::types::File> {
+    ) -> ClientResult<crate::types::File> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
@@ -681,7 +680,7 @@ impl Files {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `mime_type: &str` -- The MIME type of the format requested for this export.
      */
-    pub async fn export(&self, file_id: &str, mime_type: &str) -> Result<()> {
+    pub async fn export(&self, file_id: &str, mime_type: &str) -> ClientResult<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !mime_type.is_empty() {
             query_args.push(("mimeType".to_string(), mime_type.to_string()));
@@ -726,7 +725,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         body: &crate::types::Channel,
-    ) -> Result<crate::types::Channel> {
+    ) -> ClientResult<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((

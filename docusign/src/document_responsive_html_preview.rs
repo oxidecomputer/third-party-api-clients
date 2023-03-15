@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct DocumentResponsiveHtmlPreview {
     pub client: Client,
@@ -37,7 +36,7 @@ impl DocumentResponsiveHtmlPreview {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
-    ) -> Result<crate::types::DocumentHtmlDefinitions> {
+    ) -> ClientResult<crate::types::DocumentHtmlDefinitions> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/responsive_html_preview",

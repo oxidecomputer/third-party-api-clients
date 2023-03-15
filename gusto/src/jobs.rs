@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Jobs {
     pub client: Client,
@@ -19,7 +18,7 @@ impl Jobs {
      *
      * Get a job.
      */
-    pub async fn get(&self, job_id: &str) -> Result<crate::types::Job> {
+    pub async fn get(&self, job_id: &str) -> ClientResult<crate::types::Job> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
@@ -48,7 +47,7 @@ impl Jobs {
         &self,
         job_id: &str,
         body: &crate::types::PutJobRequest,
-    ) -> Result<crate::types::Job> {
+    ) -> ClientResult<crate::types::Job> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
@@ -73,7 +72,7 @@ impl Jobs {
      *
      * Deletes a specific job that an employee holds.
      */
-    pub async fn delete(&self, job_id: &str) -> Result<()> {
+    pub async fn delete(&self, job_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}",
@@ -98,7 +97,7 @@ impl Jobs {
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_employee(&self, employee_id: &str) -> ClientResult<Vec<crate::types::Job>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
@@ -125,7 +124,10 @@ impl Jobs {
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_all_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_all_employee(
+        &self,
+        employee_id: &str,
+    ) -> ClientResult<Vec<crate::types::Job>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
@@ -154,7 +156,7 @@ impl Jobs {
         &self,
         employee_id: &str,
         body: &crate::types::PostJobRequest,
-    ) -> Result<crate::types::Job> {
+    ) -> ClientResult<crate::types::Job> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/jobs",
@@ -185,7 +187,7 @@ impl Jobs {
         &self,
         job_id: &str,
         body: &crate::types::PostJobCompensationsRequest,
-    ) -> Result<crate::types::Compensation> {
+    ) -> ClientResult<crate::types::Compensation> {
         let url = self.client.url(
             &format!(
                 "/v1/jobs/{}/compensations",

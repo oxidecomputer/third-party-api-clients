@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnterpriseAdmin {
     pub client: Client,
@@ -30,7 +29,7 @@ impl EnterpriseAdmin {
     pub async fn get_github_actions_permissions_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::ActionsEnterprisePermissions> {
+    ) -> ClientResult<crate::types::ActionsEnterprisePermissions> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions",
@@ -67,7 +66,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::EnterpriseAdminSetGithubActionsPermissionsRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions",
@@ -107,7 +106,8 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
+    ) -> ClientResult<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -153,7 +153,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions/organizations",
@@ -191,7 +191,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         org_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions/organizations/{}",
@@ -230,7 +230,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         org_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions/organizations/{}",
@@ -267,7 +267,7 @@ impl EnterpriseAdmin {
     pub async fn get_allowed_actions_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::SelectedActions> {
+    ) -> ClientResult<crate::types::SelectedActions> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions/selected-actions",
@@ -304,7 +304,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::SelectedActions,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/permissions/selected-actions",
@@ -344,7 +344,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnerGroupsResponse> {
+    ) -> ClientResult<crate::types::EnterpriseAdminListSelfHostedRunnerGroupsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -390,7 +390,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::EnterpriseAdminCreateSelfHostedRunnerGroupRequest,
-    ) -> Result<crate::types::RunnerGroupsEnterprise> {
+    ) -> ClientResult<crate::types::RunnerGroupsEnterprise> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups",
@@ -428,7 +428,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-    ) -> Result<crate::types::RunnerGroupsEnterprise> {
+    ) -> ClientResult<crate::types::RunnerGroupsEnterprise> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
@@ -467,7 +467,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
@@ -507,7 +507,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         body: &crate::types::EnterpriseAdminUpdateSelfHostedRunnerGroupRequest,
-    ) -> Result<crate::types::RunnerGroupsEnterprise> {
+    ) -> ClientResult<crate::types::RunnerGroupsEnterprise> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}",
@@ -550,7 +550,8 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
+    ) -> ClientResult<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -599,7 +600,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         body: &crate::types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations",
@@ -640,7 +641,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         org_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
@@ -682,7 +683,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         org_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/organizations/{}",
@@ -726,7 +727,7 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
+    ) -> ClientResult<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -775,7 +776,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         body: &crate::types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners",
@@ -817,7 +818,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         runner_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners/{}",
@@ -859,7 +860,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         runner_group_id: i64,
         runner_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runner-groups/{}/runners/{}",
@@ -901,7 +902,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnersResponse> {
+    ) -> ClientResult<crate::types::EnterpriseAdminListSelfHostedRunnersResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -946,7 +947,7 @@ impl EnterpriseAdmin {
     pub async fn list_runner_applications_for_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/downloads",
@@ -980,7 +981,7 @@ impl EnterpriseAdmin {
     pub async fn list_all_runner_applications_for_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/downloads",
@@ -1024,7 +1025,7 @@ impl EnterpriseAdmin {
     pub async fn create_registration_token_for_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::types::AuthenticationToken> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/registration-token",
@@ -1069,7 +1070,7 @@ impl EnterpriseAdmin {
     pub async fn create_remove_token_for_enterprise(
         &self,
         enterprise: &str,
-    ) -> Result<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::types::AuthenticationToken> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/remove-token",
@@ -1107,7 +1108,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         runner_id: i64,
-    ) -> Result<crate::types::Runner> {
+    ) -> ClientResult<crate::types::Runner> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/{}",
@@ -1146,7 +1147,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         runner_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/enterprises/{}/actions/runners/{}",
@@ -1203,7 +1204,7 @@ impl EnterpriseAdmin {
         order: crate::types::Order,
         page: i64,
         per_page: i64,
-    ) -> Result<Vec<crate::types::AuditLogEvent>> {
+    ) -> ClientResult<Vec<crate::types::AuditLogEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1264,7 +1265,7 @@ impl EnterpriseAdmin {
         after: &str,
         before: &str,
         order: crate::types::Order,
-    ) -> Result<Vec<crate::types::AuditLogEvent>> {
+    ) -> ClientResult<Vec<crate::types::AuditLogEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -1324,7 +1325,7 @@ impl EnterpriseAdmin {
         count: i64,
         filter: &str,
         excluded_attributes: &str,
-    ) -> Result<crate::types::ScimGroupListEnterprise> {
+    ) -> ClientResult<crate::types::ScimGroupListEnterprise> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1379,7 +1380,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteGroupRequest,
-    ) -> Result<crate::types::ScimEnterpriseGroup> {
+    ) -> ClientResult<crate::types::ScimEnterpriseGroup> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Groups",
@@ -1417,7 +1418,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_group_id: &str,
         excluded_attributes: &str,
-    ) -> Result<crate::types::ScimEnterpriseGroup> {
+    ) -> ClientResult<crate::types::ScimEnterpriseGroup> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !excluded_attributes.is_empty() {
             query_args.push((
@@ -1466,7 +1467,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_group_id: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteGroupRequest,
-    ) -> Result<crate::types::ScimEnterpriseGroup> {
+    ) -> ClientResult<crate::types::ScimEnterpriseGroup> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Groups/{}",
@@ -1503,7 +1504,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         scim_group_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Groups/{}",
@@ -1543,7 +1544,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_group_id: &str,
         body: &crate::types::EnterpriseAdminUpdateAttributeGroupRequest,
-    ) -> Result<crate::types::ScimEnterpriseGroup> {
+    ) -> ClientResult<crate::types::ScimEnterpriseGroup> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Groups/{}",
@@ -1601,7 +1602,7 @@ impl EnterpriseAdmin {
         start_index: i64,
         count: i64,
         filter: &str,
-    ) -> Result<crate::types::ScimUserListEnterprise> {
+    ) -> ClientResult<crate::types::ScimUserListEnterprise> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -1652,7 +1653,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteUserRequest,
-    ) -> Result<crate::types::ScimEnterpriseUser> {
+    ) -> ClientResult<crate::types::ScimEnterpriseUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Users",
@@ -1688,7 +1689,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         scim_user_id: &str,
-    ) -> Result<crate::types::ScimEnterpriseUser> {
+    ) -> ClientResult<crate::types::ScimEnterpriseUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Users/{}",
@@ -1732,7 +1733,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_user_id: &str,
         body: &crate::types::EnterpriseAdminProvisionInviteUserRequest,
-    ) -> Result<crate::types::ScimEnterpriseUser> {
+    ) -> ClientResult<crate::types::ScimEnterpriseUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Users/{}",
@@ -1769,7 +1770,7 @@ impl EnterpriseAdmin {
         &self,
         enterprise: &str,
         scim_user_id: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Users/{}",
@@ -1824,7 +1825,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         scim_user_id: &str,
         body: &crate::types::EnterpriseAdminUpdateAttributeUserRequest,
-    ) -> Result<crate::types::ScimEnterpriseUser> {
+    ) -> ClientResult<crate::types::ScimEnterpriseUser> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/enterprises/{}/Users/{}",

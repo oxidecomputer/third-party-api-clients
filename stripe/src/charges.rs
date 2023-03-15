@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Charges {
     pub client: Client,
@@ -37,7 +36,7 @@ impl Charges {
         payment_intent: &str,
         starting_after: &str,
         transfer_group: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -86,7 +85,7 @@ impl Charges {
         customer: &str,
         payment_intent: &str,
         transfer_group: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -163,7 +162,7 @@ impl Charges {
      *
      * <p>To charge a credit card or other payment source, you create a <code>Charge</code> object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Charge> {
+    pub async fn post(&self) -> ClientResult<crate::types::Charge> {
         let url = self.client.url("/v1/charges", None);
         self.client
             .post(
@@ -195,7 +194,7 @@ impl Charges {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    ) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -234,7 +233,7 @@ impl Charges {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -312,7 +311,7 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self, charge: &str) -> Result<crate::types::Charge> {
+    pub async fn get(&self, charge: &str) -> ClientResult<crate::types::Charge> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}",
@@ -339,7 +338,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_charges(&self, charge: &str) -> Result<crate::types::Charge> {
+    pub async fn post_charges(&self, charge: &str) -> ClientResult<crate::types::Charge> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}",
@@ -368,7 +367,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_capture(&self, charge: &str) -> Result<crate::types::Charge> {
+    pub async fn post_capture(&self, charge: &str) -> ClientResult<crate::types::Charge> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/capture",
@@ -396,7 +395,7 @@ impl Charges {
      * * `charge: &str` -- The account's country.
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
+    pub async fn get_dispute(&self, charge: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute",
@@ -423,7 +422,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
+    pub async fn post_dispute(&self, charge: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute",
@@ -450,7 +449,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_dispute_close(&self, charge: &str) -> Result<crate::types::Dispute> {
+    pub async fn post_dispute_close(&self, charge: &str) -> ClientResult<crate::types::Dispute> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/dispute/close",
@@ -487,7 +486,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_refund(&self, charge: &str) -> Result<crate::types::Charge> {
+    pub async fn post_refund(&self, charge: &str) -> ClientResult<crate::types::Charge> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refund",
@@ -524,7 +523,7 @@ impl Charges {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Refund>> {
+    ) -> ClientResult<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -565,7 +564,7 @@ impl Charges {
      *
      * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
      */
-    pub async fn get_all_refunds(&self, charge: &str) -> Result<Vec<crate::types::Refund>> {
+    pub async fn get_all_refunds(&self, charge: &str) -> ClientResult<Vec<crate::types::Refund>> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds",
@@ -641,7 +640,7 @@ impl Charges {
      *
      * * `charge: &str` -- The account's country.
      */
-    pub async fn post_refund_charges(&self, charge: &str) -> Result<crate::types::Refund> {
+    pub async fn post_refund_charges(&self, charge: &str) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds",
@@ -674,7 +673,7 @@ impl Charges {
         &self,
         charge: &str,
         refund: &str,
-    ) -> Result<crate::types::Refund> {
+    ) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds/{}",
@@ -707,7 +706,7 @@ impl Charges {
         &self,
         charge: &str,
         refund: &str,
-    ) -> Result<crate::types::Refund> {
+    ) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/charges/{}/refunds/{}",

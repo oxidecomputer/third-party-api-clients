@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct SingleSignOnTeammates {
     pub client: Client,
@@ -24,7 +23,7 @@ impl SingleSignOnTeammates {
     pub async fn post_sso_teammate(
         &self,
         body: &crate::types::SsoTeammateRequestAllOf,
-    ) -> Result<crate::types::SsoTeammateResponseAllOf> {
+    ) -> ClientResult<crate::types::SsoTeammateResponseAllOf> {
         let url = self.client.url("/sso/teammates", None);
         self.client
             .post(
@@ -51,7 +50,7 @@ impl SingleSignOnTeammates {
         &self,
         username: &str,
         body: &crate::types::PatchSsoTeammatesUsernameRequest,
-    ) -> Result<crate::types::SsoTeammatesPatchResponseAllOf> {
+    ) -> ClientResult<crate::types::SsoTeammatesPatchResponseAllOf> {
         let url = self.client.url(
             &format!(
                 "/sso/teammates/{}",

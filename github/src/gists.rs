@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Gists {
     pub client: Client,
@@ -32,7 +31,7 @@ impl Gists {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -69,7 +68,7 @@ impl Gists {
     pub async fn list_all(
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
             query_args.push(("since".to_string(), date.to_rfc3339()));
@@ -100,7 +99,7 @@ impl Gists {
     pub async fn create(
         &self,
         body: &crate::types::GistsCreateRequest,
-    ) -> Result<crate::types::GistSimple> {
+    ) -> ClientResult<crate::types::GistSimple> {
         let url = self.client.url("/gists", None);
         self.client
             .post(
@@ -134,7 +133,7 @@ impl Gists {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -173,7 +172,7 @@ impl Gists {
     pub async fn list_all_public(
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
             query_args.push(("since".to_string(), date.to_rfc3339()));
@@ -210,7 +209,7 @@ impl Gists {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -247,7 +246,7 @@ impl Gists {
     pub async fn list_all_starred(
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
             query_args.push(("since".to_string(), date.to_rfc3339()));
@@ -277,7 +276,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn get(&self, gist_id: &str) -> Result<crate::types::GistSimple> {
+    pub async fn get(&self, gist_id: &str) -> ClientResult<crate::types::GistSimple> {
         let url = self.client.url(
             &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
@@ -305,7 +304,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn delete(&self, gist_id: &str) -> Result<()> {
+    pub async fn delete(&self, gist_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
@@ -337,7 +336,7 @@ impl Gists {
         &self,
         gist_id: &str,
         body: &crate::types::GistsUpdateRequest,
-    ) -> Result<crate::types::GistSimple> {
+    ) -> ClientResult<crate::types::GistSimple> {
         let url = self.client.url(
             &format!("/gists/{}", crate::progenitor_support::encode_path(gist_id),),
             None,
@@ -372,7 +371,7 @@ impl Gists {
         gist_id: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GistComment>> {
+    ) -> ClientResult<Vec<crate::types::GistComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -410,7 +409,10 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
      */
-    pub async fn list_all_comments(&self, gist_id: &str) -> Result<Vec<crate::types::GistComment>> {
+    pub async fn list_all_comments(
+        &self,
+        gist_id: &str,
+    ) -> ClientResult<Vec<crate::types::GistComment>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
@@ -445,7 +447,7 @@ impl Gists {
         &self,
         gist_id: &str,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::GistComment> {
+    ) -> ClientResult<crate::types::GistComment> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments",
@@ -481,7 +483,7 @@ impl Gists {
         &self,
         gist_id: &str,
         comment_id: i64,
-    ) -> Result<crate::types::GistComment> {
+    ) -> ClientResult<crate::types::GistComment> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
@@ -514,7 +516,7 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
+    pub async fn delete_comment(&self, gist_id: &str, comment_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
@@ -552,7 +554,7 @@ impl Gists {
         gist_id: &str,
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::GistComment> {
+    ) -> ClientResult<crate::types::GistComment> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/comments/{}",
@@ -591,7 +593,7 @@ impl Gists {
         gist_id: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GistCommit>> {
+    ) -> ClientResult<Vec<crate::types::GistCommit>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -629,7 +631,10 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
      */
-    pub async fn list_all_commits(&self, gist_id: &str) -> Result<Vec<crate::types::GistCommit>> {
+    pub async fn list_all_commits(
+        &self,
+        gist_id: &str,
+    ) -> ClientResult<Vec<crate::types::GistCommit>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/commits",
@@ -667,7 +672,7 @@ impl Gists {
         gist_id: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::GistSimple>> {
+    ) -> ClientResult<Vec<crate::types::GistSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -705,7 +710,10 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
      */
-    pub async fn list_all_forks(&self, gist_id: &str) -> Result<Vec<crate::types::GistSimple>> {
+    pub async fn list_all_forks(
+        &self,
+        gist_id: &str,
+    ) -> ClientResult<Vec<crate::types::GistSimple>> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
@@ -736,7 +744,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn fork(&self, gist_id: &str) -> Result<crate::types::BaseGist> {
+    pub async fn fork(&self, gist_id: &str) -> ClientResult<crate::types::BaseGist> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/forks",
@@ -767,7 +775,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn check_is_starred(&self, gist_id: &str) -> Result<()> {
+    pub async fn check_is_starred(&self, gist_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
@@ -798,7 +806,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn star(&self, gist_id: &str) -> Result<()> {
+    pub async fn star(&self, gist_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
@@ -829,7 +837,7 @@ impl Gists {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn unstar(&self, gist_id: &str) -> Result<()> {
+    pub async fn unstar(&self, gist_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/star",
@@ -861,7 +869,11 @@ impl Gists {
      * * `gist_id: &str` -- gist_id parameter.
      * * `sha: &str`
      */
-    pub async fn get_revision(&self, gist_id: &str, sha: &str) -> Result<crate::types::GistSimple> {
+    pub async fn get_revision(
+        &self,
+        gist_id: &str,
+        sha: &str,
+    ) -> ClientResult<crate::types::GistSimple> {
         let url = self.client.url(
             &format!(
                 "/gists/{}/{}",
@@ -902,7 +914,7 @@ impl Gists {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -947,7 +959,7 @@ impl Gists {
         &self,
         username: &str,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::BaseGist>> {
+    ) -> ClientResult<Vec<crate::types::BaseGist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
             query_args.push(("since".to_string(), date.to_rfc3339()));

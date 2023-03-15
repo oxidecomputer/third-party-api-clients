@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct TemplateHtmlDefinitions {
     pub client: Client,
@@ -28,7 +27,7 @@ impl TemplateHtmlDefinitions {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> Result<crate::types::DocumentHtmlDefinitionOriginals> {
+    ) -> ClientResult<crate::types::DocumentHtmlDefinitionOriginals> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/html_definitions",

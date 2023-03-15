@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Refunds {
     pub client: Client,
@@ -35,7 +34,7 @@ impl Refunds {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<Vec<crate::types::Refund>> {
+    ) -> ClientResult<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -80,7 +79,7 @@ impl Refunds {
         charge: &str,
         _created: &str,
         payment_intent: &str,
-    ) -> Result<Vec<crate::types::Refund>> {
+    ) -> ClientResult<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -154,7 +153,7 @@ impl Refunds {
      *
      * <p>Create a refund.</p>
      */
-    pub async fn post(&self) -> Result<crate::types::Refund> {
+    pub async fn post(&self) -> ClientResult<crate::types::Refund> {
         let url = self.client.url("/v1/refunds", None);
         self.client
             .post(
@@ -176,7 +175,7 @@ impl Refunds {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `refund: &str` -- The account's country.
      */
-    pub async fn get(&self, refund: &str) -> Result<crate::types::Refund> {
+    pub async fn get(&self, refund: &str) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
@@ -205,7 +204,7 @@ impl Refunds {
      *
      * * `refund: &str` -- The account's country.
      */
-    pub async fn post_refunds(&self, refund: &str) -> Result<crate::types::Refund> {
+    pub async fn post_refunds(&self, refund: &str) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}",
@@ -234,7 +233,7 @@ impl Refunds {
      *
      * * `refund: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, refund: &str) -> Result<crate::types::Refund> {
+    pub async fn post_cancel(&self, refund: &str) -> ClientResult<crate::types::Refund> {
         let url = self.client.url(
             &format!(
                 "/v1/refunds/{}/cancel",

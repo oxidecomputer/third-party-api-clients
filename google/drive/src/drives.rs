@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Drives {
     pub client: Client,
@@ -30,7 +29,7 @@ impl Drives {
         page_token: &str,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> Result<Vec<crate::types::Drive>> {
+    ) -> ClientResult<Vec<crate::types::Drive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -74,7 +73,7 @@ impl Drives {
         &self,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> Result<Vec<crate::types::Drive>> {
+    ) -> ClientResult<Vec<crate::types::Drive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -152,7 +151,7 @@ impl Drives {
         &self,
         request_id: &str,
         body: &crate::types::Drive,
-    ) -> Result<crate::types::Drive> {
+    ) -> ClientResult<crate::types::Drive> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !request_id.is_empty() {
             query_args.push(("requestId".to_string(), request_id.to_string()));
@@ -183,7 +182,7 @@ impl Drives {
         &self,
         drive_id: &str,
         use_domain_admin_access: bool,
-    ) -> Result<crate::types::Drive> {
+    ) -> ClientResult<crate::types::Drive> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
@@ -219,7 +218,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, drive_id: &str) -> Result<()> {
+    pub async fn delete(&self, drive_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/drives/{}",
@@ -252,7 +251,7 @@ impl Drives {
         drive_id: &str,
         use_domain_admin_access: bool,
         body: &crate::types::Drive,
-    ) -> Result<crate::types::Drive> {
+    ) -> ClientResult<crate::types::Drive> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
@@ -288,7 +287,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
+    pub async fn hide(&self, drive_id: &str) -> ClientResult<crate::types::Drive> {
         let url = self.client.url(
             &format!(
                 "/drives/{}/hide",
@@ -315,7 +314,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
+    pub async fn unhide(&self, drive_id: &str) -> ClientResult<crate::types::Drive> {
         let url = self.client.url(
             &format!(
                 "/drives/{}/unhide",

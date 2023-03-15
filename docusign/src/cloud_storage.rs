@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CloudStorage {
     pub client: Client,
@@ -58,7 +57,7 @@ impl CloudStorage {
         order_by: &str,
         search_text: &str,
         start_position: &str,
-    ) -> Result<crate::types::ExternalFolder> {
+    ) -> ClientResult<crate::types::ExternalFolder> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cloud_storage_folder_path.is_empty() {
             query_args.push((
@@ -154,7 +153,7 @@ impl CloudStorage {
         order_by: &str,
         search_text: &str,
         start_position: &str,
-    ) -> Result<crate::types::ExternalFolder> {
+    ) -> ClientResult<crate::types::ExternalFolder> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cloud_storage_folder_path.is_empty() {
             query_args.push((

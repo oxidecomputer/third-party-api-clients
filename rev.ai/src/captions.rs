@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Captions {
     pub client: Client,
@@ -33,7 +32,7 @@ impl Captions {
         id: &str,
         accept: crate::types::Accept,
         speaker_channel: i64,
-    ) -> Result<String> {
+    ) -> ClientResult<String> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if speaker_channel > 0 {
             query_args.push(("speaker_channel".to_string(), speaker_channel.to_string()));

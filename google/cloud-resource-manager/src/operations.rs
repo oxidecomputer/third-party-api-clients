@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Operations {
     pub client: Client,
@@ -21,7 +20,7 @@ impl Operations {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn get(&self, name: &str) -> Result<crate::types::Operation> {
+    pub async fn get(&self, name: &str) -> ClientResult<crate::types::Operation> {
         let url = self.client.url(
             &format!("/v1/{}", crate::progenitor_support::encode_path(name),),
             None,

@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct CancelScheduledSends {
     pub client: Client,
@@ -27,7 +26,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_mail_batch(&self) -> Result<crate::types::MailBatchId> {
+    pub async fn post_mail_batch(&self) -> ClientResult<crate::types::MailBatchId> {
         let url = self.client.url("/mail/batch", None);
         self.client
             .post(
@@ -54,7 +53,7 @@ impl CancelScheduledSends {
      */
     pub async fn get_user_scheduled_sends(
         &self,
-    ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
+    ) -> ClientResult<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .get(
@@ -79,7 +78,7 @@ impl CancelScheduledSends {
      */
     pub async fn get_all_user_scheduled_sends(
         &self,
-    ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
+    ) -> ClientResult<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .get_all_pages(
@@ -111,7 +110,7 @@ impl CancelScheduledSends {
     pub async fn post_user_scheduled_send(
         &self,
         body: &crate::types::CancelPauseAScheduledSendRequest,
-    ) -> Result<crate::types::UserScheduledSendStatusAllOf> {
+    ) -> ClientResult<crate::types::UserScheduledSendStatusAllOf> {
         let url = self.client.url("/user/scheduled_sends", None);
         self.client
             .post(
@@ -140,7 +139,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_mail_batch(&self, batch_id: &str) -> Result<crate::types::MailBatchId> {
+    pub async fn get_mail_batch(&self, batch_id: &str) -> ClientResult<crate::types::MailBatchId> {
         let url = self.client.url(
             &format!(
                 "/mail/batch/{}",
@@ -172,7 +171,7 @@ impl CancelScheduledSends {
     pub async fn get_user_scheduled_sends_batch(
         &self,
         batch_id: &str,
-    ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
+    ) -> ClientResult<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
@@ -202,7 +201,7 @@ impl CancelScheduledSends {
     pub async fn get_all_user_scheduled_sends_batch(
         &self,
         batch_id: &str,
-    ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
+    ) -> ClientResult<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
@@ -233,7 +232,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_user_scheduled_sends_batch(&self, batch_id: &str) -> Result<()> {
+    pub async fn delete_user_scheduled_sends_batch(&self, batch_id: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",
@@ -268,7 +267,7 @@ impl CancelScheduledSends {
         &self,
         batch_id: &str,
         body: &crate::types::UserScheduledSendStatus,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/user/scheduled_sends/{}",

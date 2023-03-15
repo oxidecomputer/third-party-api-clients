@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Teams {
     pub client: Client,
@@ -36,7 +35,7 @@ impl Teams {
         org: &str,
         per_page: i64,
         page: &str,
-    ) -> Result<crate::types::GroupMapping> {
+    ) -> ClientResult<crate::types::GroupMapping> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page.is_empty() {
             query_args.push(("page".to_string(), page.to_string()));
@@ -83,7 +82,7 @@ impl Teams {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -121,7 +120,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams>
      */
-    pub async fn list_all(&self, org: &str) -> Result<Vec<crate::types::Team>> {
+    pub async fn list_all(&self, org: &str) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams",
@@ -158,7 +157,7 @@ impl Teams {
         &self,
         org: &str,
         body: &crate::types::TeamsCreateRequest,
-    ) -> Result<crate::types::FullTeam> {
+    ) -> ClientResult<crate::types::FullTeam> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams",
@@ -192,7 +191,11 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      */
-    pub async fn get_by_name(&self, org: &str, team_slug: &str) -> Result<crate::types::FullTeam> {
+    pub async fn get_by_name(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> ClientResult<crate::types::FullTeam> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
@@ -229,7 +232,7 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      */
-    pub async fn delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
+    pub async fn delete_in_org(&self, org: &str, team_slug: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
@@ -269,7 +272,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         body: &crate::types::TeamsUpdateInOrgRequest,
-    ) -> Result<crate::types::FullTeam> {
+    ) -> ClientResult<crate::types::FullTeam> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}",
@@ -318,7 +321,7 @@ impl Teams {
         per_page: i64,
         page: i64,
         pinned: &str,
-    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussion>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -371,7 +374,7 @@ impl Teams {
         team_slug: &str,
         direction: crate::types::Order,
         pinned: &str,
-    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussion>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -422,7 +425,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         body: &crate::types::TeamsCreateDiscussionInOrgRequest,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions",
@@ -463,7 +466,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
@@ -505,7 +508,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
@@ -548,7 +551,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}",
@@ -598,7 +601,7 @@ impl Teams {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -649,7 +652,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -700,7 +703,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments",
@@ -744,7 +747,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -789,7 +792,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -835,7 +838,7 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -880,7 +883,7 @@ impl Teams {
         team_slug: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -925,7 +928,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/invitations",
@@ -973,7 +976,7 @@ impl Teams {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1022,7 +1025,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         role: crate::types::TeamsListMembersInOrgRole,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !role.to_string().is_empty() {
             query_args.push(("role".to_string(), role.to_string()));
@@ -1076,7 +1079,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         username: &str,
-    ) -> Result<crate::types::TeamMembership> {
+    ) -> ClientResult<crate::types::TeamMembership> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
@@ -1127,7 +1130,7 @@ impl Teams {
         team_slug: &str,
         username: &str,
         body: &crate::types::TeamsAddUpdateMembershipUserInOrgRequest,
-    ) -> Result<crate::types::TeamMembership> {
+    ) -> ClientResult<crate::types::TeamMembership> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
@@ -1173,7 +1176,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         username: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/memberships/{}",
@@ -1217,7 +1220,7 @@ impl Teams {
         team_slug: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamProject>> {
+    ) -> ClientResult<Vec<crate::types::TeamProject>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1262,7 +1265,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-    ) -> Result<Vec<crate::types::TeamProject>> {
+    ) -> ClientResult<Vec<crate::types::TeamProject>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects",
@@ -1303,7 +1306,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         project_id: i64,
-    ) -> Result<crate::types::TeamProject> {
+    ) -> ClientResult<crate::types::TeamProject> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
@@ -1346,7 +1349,7 @@ impl Teams {
         team_slug: &str,
         project_id: i64,
         body: &crate::types::ProjectsAddCollaboratorRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
@@ -1388,7 +1391,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         project_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/projects/{}",
@@ -1432,7 +1435,7 @@ impl Teams {
         team_slug: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1477,7 +1480,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos",
@@ -1524,7 +1527,7 @@ impl Teams {
         team_slug: &str,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::TeamRepository> {
+    ) -> ClientResult<crate::types::TeamRepository> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
@@ -1572,7 +1575,7 @@ impl Teams {
         owner: &str,
         repo: &str,
         body: &crate::types::TeamsAddUpdateRepoPermissionsInOrgRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
@@ -1617,7 +1620,7 @@ impl Teams {
         team_slug: &str,
         owner: &str,
         repo: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/repos/{}/{}",
@@ -1660,7 +1663,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-    ) -> Result<crate::types::GroupMapping> {
+    ) -> ClientResult<crate::types::GroupMapping> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/team-sync/group-mappings",
@@ -1702,7 +1705,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         body: &crate::types::TeamsCreateUpdateIdpGroupConnectionsInOrgRequest,
-    ) -> Result<crate::types::GroupMapping> {
+    ) -> ClientResult<crate::types::GroupMapping> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/team-sync/group-mappings",
@@ -1745,7 +1748,7 @@ impl Teams {
         team_slug: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1790,7 +1793,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/teams/{}/teams",
@@ -1822,7 +1825,7 @@ impl Teams {
      *
      * * `team_id: i64`
      */
-    pub async fn get_legacy(&self, team_id: i64) -> Result<crate::types::FullTeam> {
+    pub async fn get_legacy(&self, team_id: i64) -> ClientResult<crate::types::FullTeam> {
         let url = self.client.url(
             &format!(
                 "/teams/{}",
@@ -1857,7 +1860,7 @@ impl Teams {
      *
      * * `team_id: i64`
      */
-    pub async fn delete_legacy(&self, team_id: i64) -> Result<()> {
+    pub async fn delete_legacy(&self, team_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}",
@@ -1896,7 +1899,7 @@ impl Teams {
         &self,
         team_id: i64,
         body: &crate::types::TeamsUpdateInOrgRequest,
-    ) -> Result<crate::types::FullTeam> {
+    ) -> ClientResult<crate::types::FullTeam> {
         let url = self.client.url(
             &format!(
                 "/teams/{}",
@@ -1940,7 +1943,7 @@ impl Teams {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussion>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1987,7 +1990,7 @@ impl Teams {
         &self,
         team_id: i64,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussion>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2032,7 +2035,7 @@ impl Teams {
         &self,
         team_id: i64,
         body: &crate::types::TeamsCreateDiscussionInOrgRequest,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions",
@@ -2070,7 +2073,7 @@ impl Teams {
         &self,
         team_id: i64,
         discussion_number: i64,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}",
@@ -2109,7 +2112,7 @@ impl Teams {
         &self,
         team_id: i64,
         discussion_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}",
@@ -2149,7 +2152,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
-    ) -> Result<crate::types::TeamDiscussion> {
+    ) -> ClientResult<crate::types::TeamDiscussion> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}",
@@ -2196,7 +2199,7 @@ impl Teams {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2245,7 +2248,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+    ) -> ClientResult<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -2293,7 +2296,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments",
@@ -2334,7 +2337,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}",
@@ -2376,7 +2379,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}",
@@ -2419,7 +2422,7 @@ impl Teams {
         discussion_number: i64,
         comment_number: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::TeamDiscussionComment> {
+    ) -> ClientResult<crate::types::TeamDiscussionComment> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/discussions/{}/comments/{}",
@@ -2461,7 +2464,7 @@ impl Teams {
         team_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2504,7 +2507,7 @@ impl Teams {
     pub async fn list_all_pending_invitations_legacy(
         &self,
         team_id: i64,
-    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+    ) -> ClientResult<Vec<crate::types::OrganizationInvitation>> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/invitations",
@@ -2549,7 +2552,7 @@ impl Teams {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2596,7 +2599,7 @@ impl Teams {
         &self,
         team_id: i64,
         role: crate::types::TeamsListMembersInOrgRole,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> ClientResult<Vec<crate::types::SimpleUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !role.to_string().is_empty() {
             query_args.push(("role".to_string(), role.to_string()));
@@ -2638,7 +2641,7 @@ impl Teams {
      * * `team_id: i64`
      * * `username: &str`
      */
-    pub async fn get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+    pub async fn get_member_legacy(&self, team_id: i64, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/members/{}",
@@ -2681,7 +2684,7 @@ impl Teams {
      * * `team_id: i64`
      * * `username: &str`
      */
-    pub async fn add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+    pub async fn add_member_legacy(&self, team_id: i64, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/members/{}",
@@ -2722,7 +2725,7 @@ impl Teams {
      * * `team_id: i64`
      * * `username: &str`
      */
-    pub async fn remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+    pub async fn remove_member_legacy(&self, team_id: i64, username: &str) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/members/{}",
@@ -2768,7 +2771,7 @@ impl Teams {
         &self,
         team_id: i64,
         username: &str,
-    ) -> Result<crate::types::TeamMembership> {
+    ) -> ClientResult<crate::types::TeamMembership> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/memberships/{}",
@@ -2816,7 +2819,7 @@ impl Teams {
         team_id: i64,
         username: &str,
         body: &crate::types::TeamsAddUpdateMembershipUserInOrgRequest,
-    ) -> Result<crate::types::TeamMembership> {
+    ) -> ClientResult<crate::types::TeamMembership> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/memberships/{}",
@@ -2859,7 +2862,7 @@ impl Teams {
         &self,
         team_id: i64,
         username: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/memberships/{}",
@@ -2900,7 +2903,7 @@ impl Teams {
         team_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamProject>> {
+    ) -> ClientResult<Vec<crate::types::TeamProject>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2943,7 +2946,7 @@ impl Teams {
     pub async fn list_all_projects_legacy(
         &self,
         team_id: i64,
-    ) -> Result<Vec<crate::types::TeamProject>> {
+    ) -> ClientResult<Vec<crate::types::TeamProject>> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/projects",
@@ -2981,7 +2984,7 @@ impl Teams {
         &self,
         team_id: i64,
         project_id: i64,
-    ) -> Result<crate::types::TeamProject> {
+    ) -> ClientResult<crate::types::TeamProject> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/projects/{}",
@@ -3021,7 +3024,7 @@ impl Teams {
         team_id: i64,
         project_id: i64,
         body: &crate::types::TeamsAddUpdateProjectPermissionsLegacyRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/projects/{}",
@@ -3056,7 +3059,7 @@ impl Teams {
      * * `team_id: i64`
      * * `project_id: i64`
      */
-    pub async fn remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
+    pub async fn remove_project_legacy(&self, team_id: i64, project_id: i64) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/projects/{}",
@@ -3095,7 +3098,7 @@ impl Teams {
         team_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3136,7 +3139,7 @@ impl Teams {
     pub async fn list_all_repos_legacy(
         &self,
         team_id: i64,
-    ) -> Result<Vec<crate::types::MinimalRepository>> {
+    ) -> ClientResult<Vec<crate::types::MinimalRepository>> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/repos",
@@ -3178,7 +3181,7 @@ impl Teams {
         team_id: i64,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::TeamRepository> {
+    ) -> ClientResult<crate::types::TeamRepository> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/repos/{}/{}",
@@ -3223,7 +3226,7 @@ impl Teams {
         owner: &str,
         repo: &str,
         body: &crate::types::TeamsAddUpdateRepoPermissionsLegacyRequest,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/repos/{}/{}",
@@ -3260,7 +3263,12 @@ impl Teams {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn remove_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<()> {
+    pub async fn remove_repo_legacy(
+        &self,
+        team_id: i64,
+        owner: &str,
+        repo: &str,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/repos/{}/{}",
@@ -3300,7 +3308,7 @@ impl Teams {
     pub async fn list_idp_groups_for_legacy(
         &self,
         team_id: i64,
-    ) -> Result<crate::types::GroupMapping> {
+    ) -> ClientResult<crate::types::GroupMapping> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/team-sync/group-mappings",
@@ -3339,7 +3347,7 @@ impl Teams {
         &self,
         team_id: i64,
         body: &crate::types::TeamsCreateUpdateIdpGroupConnectionsLegacyRequest,
-    ) -> Result<crate::types::GroupMapping> {
+    ) -> ClientResult<crate::types::GroupMapping> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/team-sync/group-mappings",
@@ -3377,7 +3385,7 @@ impl Teams {
         team_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Team>> {
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3415,7 +3423,10 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams/#list-child-teams-legacy>
      */
-    pub async fn list_all_child_legacy(&self, team_id: i64) -> Result<Vec<crate::types::Team>> {
+    pub async fn list_all_child_legacy(
+        &self,
+        team_id: i64,
+    ) -> ClientResult<Vec<crate::types::Team>> {
         let url = self.client.url(
             &format!(
                 "/teams/{}/teams",
@@ -3451,7 +3462,7 @@ impl Teams {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::FullTeam>> {
+    ) -> ClientResult<Vec<crate::types::FullTeam>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3482,7 +3493,9 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
      */
-    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::FullTeam>> {
+    pub async fn list_all_for_authenticated_user(
+        &self,
+    ) -> ClientResult<Vec<crate::types::FullTeam>> {
         let url = self.client.url("/user/teams", None);
         self.client
             .get_all_pages(

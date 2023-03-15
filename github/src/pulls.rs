@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Pulls {
     pub client: Client,
@@ -46,7 +45,7 @@ impl Pulls {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !base.is_empty() {
             query_args.push(("base".to_string(), base.to_string()));
@@ -109,7 +108,7 @@ impl Pulls {
         base: &str,
         sort: crate::types::PullsListSort,
         direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestSimple>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !base.is_empty() {
             query_args.push(("base".to_string(), base.to_string()));
@@ -171,7 +170,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         body: &crate::types::PullsCreateRequest,
-    ) -> Result<crate::types::PullRequestData> {
+    ) -> ClientResult<crate::types::PullRequestData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls",
@@ -220,7 +219,7 @@ impl Pulls {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -275,7 +274,7 @@ impl Pulls {
         sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -326,7 +325,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         comment_id: i64,
-    ) -> Result<crate::types::PullRequestReviewComment> {
+    ) -> ClientResult<crate::types::PullRequestReviewComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
@@ -366,7 +365,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         comment_id: i64,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
@@ -407,7 +406,7 @@ impl Pulls {
         repo: &str,
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewComment> {
+    ) -> ClientResult<crate::types::PullRequestReviewComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/comments/{}",
@@ -461,7 +460,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<crate::types::PullRequestData> {
+    ) -> ClientResult<crate::types::PullRequestData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}",
@@ -504,7 +503,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsUpdateRequest,
-    ) -> Result<crate::types::PullRequestData> {
+    ) -> ClientResult<crate::types::PullRequestData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}",
@@ -556,7 +555,7 @@ impl Pulls {
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -613,7 +612,7 @@ impl Pulls {
         sort: crate::types::Sort,
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -673,7 +672,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsCreateReviewCommentRequest,
-    ) -> Result<crate::types::PullRequestReviewComment> {
+    ) -> ClientResult<crate::types::PullRequestReviewComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments",
@@ -718,7 +717,7 @@ impl Pulls {
         pull_number: i64,
         comment_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewComment> {
+    ) -> ClientResult<crate::types::PullRequestReviewComment> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/comments/{}/replies",
@@ -763,7 +762,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::CommitDataType>> {
+    ) -> ClientResult<Vec<crate::types::CommitDataType>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -808,7 +807,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<Vec<crate::types::CommitDataType>> {
+    ) -> ClientResult<Vec<crate::types::CommitDataType>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/commits",
@@ -852,7 +851,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::DiffEntry>> {
+    ) -> ClientResult<Vec<crate::types::DiffEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -897,7 +896,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<Vec<crate::types::DiffEntry>> {
+    ) -> ClientResult<Vec<crate::types::DiffEntry>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/files",
@@ -932,7 +931,12 @@ impl Pulls {
      * * `repo: &str`
      * * `pull_number: i64`
      */
-    pub async fn check_if_merged(&self, owner: &str, repo: &str, pull_number: i64) -> Result<()> {
+    pub async fn check_if_merged(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> ClientResult<()> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/merge",
@@ -973,7 +977,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsMergeRequest,
-    ) -> Result<crate::types::PullRequestMergeResult> {
+    ) -> ClientResult<crate::types::PullRequestMergeResult> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/merge",
@@ -1017,7 +1021,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> ClientResult<crate::types::PullRequestReview> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1067,7 +1071,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsRequestReviewers,
-    ) -> Result<crate::types::PullRequestSimple> {
+    ) -> ClientResult<crate::types::PullRequestSimple> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -1108,7 +1112,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsRemoveRequestedReviewersRequest,
-    ) -> Result<crate::types::PullRequestSimple> {
+    ) -> ClientResult<crate::types::PullRequestSimple> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -1152,7 +1156,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestReviewData>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1197,7 +1201,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<Vec<crate::types::PullRequestReviewData>> {
+    ) -> ClientResult<Vec<crate::types::PullRequestReviewData>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews",
@@ -1244,7 +1248,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsCreateReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews",
@@ -1286,7 +1290,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
@@ -1330,7 +1334,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
@@ -1373,7 +1377,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}",
@@ -1420,7 +1424,7 @@ impl Pulls {
         review_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::ReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::ReviewComment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1467,7 +1471,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-    ) -> Result<Vec<crate::types::ReviewComment>> {
+    ) -> ClientResult<Vec<crate::types::ReviewComment>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/comments",
@@ -1511,7 +1515,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsDismissReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
@@ -1555,7 +1559,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsSubmitReviewRequest,
-    ) -> Result<crate::types::PullRequestReviewData> {
+    ) -> ClientResult<crate::types::PullRequestReviewData> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/reviews/{}/events",
@@ -1597,7 +1601,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsUpdateBranchRequest,
-    ) -> Result<crate::types::PullsUpdateBranchResponse> {
+    ) -> ClientResult<crate::types::PullsUpdateBranchResponse> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/pulls/{}/update-branch",

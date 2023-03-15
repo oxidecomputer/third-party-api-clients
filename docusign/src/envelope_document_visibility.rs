@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct EnvelopeDocumentVisibility {
     pub client: Client,
@@ -30,7 +29,7 @@ impl EnvelopeDocumentVisibility {
         account_id: &str,
         envelope_id: &str,
         recipient_id: &str,
-    ) -> Result<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::types::DocumentVisibilityList> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",
@@ -71,7 +70,7 @@ impl EnvelopeDocumentVisibility {
         envelope_id: &str,
         recipient_id: &str,
         body: &crate::types::DocumentVisibilityList,
-    ) -> Result<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::types::DocumentVisibilityList> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/document_visibility",

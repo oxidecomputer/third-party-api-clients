@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct ApiKeyPermissions {
     pub client: Client,
@@ -31,7 +30,7 @@ impl ApiKeyPermissions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_scopes(&self) -> Result<crate::types::GetScopesResponse> {
+    pub async fn get_scopes(&self) -> ClientResult<crate::types::GetScopesResponse> {
         let url = self.client.url("/scopes", None);
         self.client
             .get(

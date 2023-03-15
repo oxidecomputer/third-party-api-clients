@@ -1,6 +1,5 @@
-use anyhow::Result;
-
 use crate::Client;
+use crate::ClientResult;
 
 pub struct Reimbursements {
     pub client: Client,
@@ -26,7 +25,7 @@ impl Reimbursements {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<Vec<crate::types::Reimbursement>> {
+    ) -> ClientResult<Vec<crate::types::Reimbursement>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -59,7 +58,7 @@ impl Reimbursements {
      *
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
+    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Reimbursement>> {
         let url = self.client.url("/reimbursements", None);
         let resp: crate::types::GetReimbursementsResponse = self
             .client
@@ -101,7 +100,7 @@ impl Reimbursements {
                     if e.to_string().contains("404 Not Found") {
                         page = "".to_string();
                     } else {
-                        anyhow::bail!(e);
+                        return Err(e);
                     }
                 }
             }
@@ -115,7 +114,7 @@ impl Reimbursements {
      *
      * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
      */
-    pub async fn get(&self, id: &str) -> Result<crate::types::Reimbursement> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Reimbursement> {
         let url = self.client.url(
             &format!(
                 "/reimbursements/{}",
