@@ -1,11 +1,11 @@
-use anyhow::Result;
+use crate::ClientResult;
 
 #[async_trait::async_trait]
 pub trait SpreadsheetOps {
     /// Get single cell value.
     /// The `cell_name` is something like `A1` and what is returned is a string representation of
     /// the cell's value.
-    async fn cell_get(&self, sheet_id: &str, cell_name: &str) -> Result<String>;
+    async fn cell_get(&self, sheet_id: &str, cell_name: &str) -> ClientResult<String>;
 }
 
 #[async_trait::async_trait]
@@ -13,7 +13,7 @@ impl SpreadsheetOps for crate::spreadsheets::Spreadsheets {
     /// Get single cell value.
     /// The `cell_name` is something like `A1` and what is returned is a string representation of
     /// the cell's value.
-    async fn cell_get(&self, sheet_id: &str, cell_name: &str) -> Result<String> {
+    async fn cell_get(&self, sheet_id: &str, cell_name: &str) -> ClientResult<String> {
         let values = self
             .values_get(
                 sheet_id,

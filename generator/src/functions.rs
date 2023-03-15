@@ -126,7 +126,7 @@ pub fn generate_files(
                     content.push_str(&format!("body: {}", bp));
                 }
 
-                content.push_str(&format!(") -> Result<{}> {{", response_type));
+                content.push_str(&format!(") -> ClientResult<{}> {{", response_type));
 
                 content.push_str(template);
 
@@ -972,7 +972,7 @@ fn get_fn_inner(
                         if e.to_string().contains("404 Not Found") {{
                             page = "".to_string();
                         }} else {{
-                            anyhow::bail!(e);
+                            return Err(e);
                         }}
                     }}
                 }}

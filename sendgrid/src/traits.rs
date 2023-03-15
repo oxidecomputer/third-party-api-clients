@@ -1,5 +1,6 @@
 #![allow(clippy::field_reassign_with_default)]
-use anyhow::{anyhow, Result};
+use crate::ClientError;
+use crate::ClientResult;
 
 #[async_trait::async_trait]
 pub trait MailOps {
@@ -14,7 +15,7 @@ pub trait MailOps {
         cc: &[String],
         bcc: &[String],
         from: &str,
-    ) -> Result<()>;
+    ) -> ClientResult<()>;
 }
 
 #[async_trait::async_trait]
@@ -30,7 +31,7 @@ impl MailOps for crate::mail_send::MailSend {
         ccs: &[String],
         bccs: &[String],
         from: &str,
-    ) -> Result<()> {
+    ) -> ClientResult<()> {
         let mut mail: crate::types::PostMailSendRequest = Default::default();
         mail.subject = subject.to_string();
         mail.from = crate::types::FromEmailObject {
@@ -77,7 +78,10 @@ impl MailOps for crate::mail_send::MailSend {
 
         match resp.status() {
             http::StatusCode::ACCEPTED => Ok(()),
-            s => Err(anyhow!("received response status: {:?}", s)),
+            s => Err(ClientError::HttpError {
+                status: s,
+                error: "Posting to /mail/send".to_string(),
+            }),
         }
     }
 }

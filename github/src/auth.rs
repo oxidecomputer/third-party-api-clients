@@ -5,7 +5,7 @@ use std::{
     time,
 };
 
-use anyhow::Result;
+use crate::ClientResult;
 use jsonwebtoken as jwt;
 use serde::Serialize;
 use tokio::sync::RwLock;
@@ -91,7 +91,7 @@ pub struct JWTCredentials {
 }
 
 impl JWTCredentials {
-    pub fn new(app_id: i64, private_key: Vec<u8>) -> Result<JWTCredentials> {
+    pub fn new(app_id: i64, private_key: Vec<u8>) -> ClientResult<JWTCredentials> {
         let creds = ExpiringJWTCredential::calculate(app_id, &private_key)?;
 
         Ok(JWTCredentials {
@@ -133,7 +133,7 @@ struct JWTCredentialClaim {
 }
 
 impl ExpiringJWTCredential {
-    fn calculate(app_id: i64, private_key: &[u8]) -> Result<ExpiringJWTCredential> {
+    fn calculate(app_id: i64, private_key: &[u8]) -> ClientResult<ExpiringJWTCredential> {
         // SystemTime can go backwards, Instant can't, so always use
         // Instant for ensuring regular cycling.
         let created_at = tokio::time::Instant::now();

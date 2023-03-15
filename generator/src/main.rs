@@ -21,6 +21,26 @@ use serde::Deserialize;
 
 use client::GeneratedServers;
 
+enum TemplateType {
+    Github,
+    GenericApiKey,
+    GenericClientCredentials,
+    GenericToken,
+}
+
+impl TemplateType {
+    fn from_proper_name(proper_name: &str) -> TemplateType {
+        match proper_name {
+            "GitHub" => TemplateType::Github,
+            "SendGrid" | "Giphy" | "Rev.ai" | "Okta" | "ShipBob" | "Stripe" => {
+                TemplateType::GenericApiKey
+            }
+            "TripActions" => TemplateType::GenericClientCredentials,
+            _ => TemplateType::GenericToken,
+        }
+    }
+}
+
 fn save<P>(p: P, data: &str) -> Result<()>
 where
     P: AsRef<Path>,
@@ -2348,9 +2368,81 @@ fn gen(
         }
     }
 
+    let template_type = TemplateType::from_proper_name(&proper_name);
+
     a("");
 
-    a("use anyhow::{anyhow, Error, Result};");
+    a("use thiserror::Error;");
+    a("type ClientResult<T> = Result<T, ClientError>;");
+    a("");
+    a(r#"
+/// Errors returned by the client
+#[derive(Debug, Error)]
+pub enum ClientError {"#);
+
+    match template_type {
+        TemplateType::Github => {
+            a(r#"// Github only
+            /// Ratelimited
+            #[error("Rate limited for the next {duration} seconds")]
+            RateLimited{
+                duration: u64,
+            },
+            /// JWT errors from auth.rs
+            #[error(transparent)]
+            JsonWebTokenError(#[from] jsonwebtoken::errors::Error),"#);
+        }
+        TemplateType::GenericApiKey | TemplateType::GenericClientCredentials => {
+            a(r#"/// utf8 convertion error
+            #[error(transparent)]
+            FromUtf8Error(#[from] std::string::FromUtf8Error),"#);
+        }
+        TemplateType::GenericToken => {
+            a(r#"// Generic Token Client
+            /// Empty refresh auth token
+            #[error("Refresh AuthToken is empty")]
+            EmptyRefreshToken,
+            /// utf8 convertion error
+            #[error(transparent)]
+            FromUtf8Error(#[from] std::string::FromUtf8Error),"#);
+        }
+    }
+
+    // Google Drive only due to traits.rs
+    if proper_name == "Google Drive" {
+        a(r#"
+        /// Google Drive not found
+        #[error("{name:?}: Drive not found")]
+        DriveNotFound{name: String},
+        /// str convertion error
+        #[error(transparent)]
+        ToStrError(#[from] reqwest::header::ToStrError),"#);
+    }
+
+    a(r#"/// URL Parsing Error
+    #[error(transparent)]
+    UrlParserError(#[from] url::ParseError),
+    /// Serde JSON parsing error
+    #[error(transparent)]
+    SerdeJsonError(#[from] serde_json::Error),
+    /// Errors returned by reqwest
+    #[error(transparent)]
+    ReqwestError(#[from] reqwest::Error),
+    /// Errors returned by reqwest::header
+    #[error(transparent)]
+    InvalidHeaderValue(#[from] reqwest::header::InvalidHeaderValue),
+    /// Errors returned by reqwest middleware
+    #[error(transparent)]
+    ReqwestMiddleWareError(#[from] reqwest_middleware::Error),
+    /// Generic HTTP Error
+    #[error("HTTP Error. Code: {status}, message: {error}")]
+    HttpError {
+        status: http::StatusCode,
+        error: String,
+    },
+}
+"#);
+
     a("");
 
     a(&format!(
@@ -2403,41 +2495,40 @@ pub(crate) struct Message {
     a("");
 
     // Print the client template.
-    if proper_name == "GitHub" {
-        let server_block = if servers.count > 0 {
-            servers.output.as_deref().unwrap()
-        } else {
-            ""
-        };
-        a(server_block);
-        a(crate::client::GITHUB_TEMPLATE);
-    } else if proper_name == "SendGrid"
-        || proper_name == "Giphy"
-        || proper_name == "Rev.ai"
-        || proper_name == "Okta"
-        || proper_name == "ShipBob"
-        || proper_name == "Stripe"
-    {
-        a(&crate::client::generate_client_generic_api_key(
-            proper_name,
-            add_post_header,
-            servers,
-        ));
-    } else if proper_name == "TripActions" {
-        a(&crate::client::generate_client_generic_client_credentials(
-            proper_name,
-            token_endpoint,
-            add_post_header,
-            servers,
-        ));
-    } else {
-        a(&crate::client::generate_client_generic_token(
-            proper_name,
-            token_endpoint,
-            user_consent_endpoint,
-            add_post_header,
-            servers,
-        ));
+    match template_type {
+        TemplateType::Github => {
+            let server_block = if servers.count > 0 {
+                servers.output.as_deref().unwrap()
+            } else {
+                ""
+            };
+            a(server_block);
+            a(crate::client::GITHUB_TEMPLATE);
+        }
+        TemplateType::GenericApiKey => {
+            a(&crate::client::generate_client_generic_api_key(
+                proper_name,
+                add_post_header,
+                servers,
+            ));
+        }
+        TemplateType::GenericClientCredentials => {
+            a(&crate::client::generate_client_generic_client_credentials(
+                proper_name,
+                token_endpoint,
+                add_post_header,
+                servers,
+            ));
+        }
+        TemplateType::GenericToken => {
+            a(&crate::client::generate_client_generic_token(
+                proper_name,
+                token_endpoint,
+                user_consent_endpoint,
+                add_post_header,
+                servers,
+            ));
+        }
     }
 
     a("");
@@ -3259,7 +3350,6 @@ native-tls = ["reqwest/default-tls", "openssl"]
 rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 
 [dependencies]
-anyhow = "1"
 async-recursion = "^1.0"
 chrono = {{ version = "0.4", default-features = false, features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
@@ -3282,6 +3372,7 @@ serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
+thiserror = "1"
 tokio = {{ version = "1.25.0", features = ["full"] }}
 
 [dev-dependencies]
@@ -3304,47 +3395,41 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Generate our documentation for the library.
              */
-            let docs = if proper_name == "GitHub" {
-                template::generate_docs_github(
+            let docs = match TemplateType::from_proper_name(&proper_name) {
+                TemplateType::Github => template::generate_docs_github(
                     &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
                     host.trim_start_matches("https://"),
                     &spec_link,
-                )
-            } else if proper_name == "SendGrid"
-                || proper_name == "Giphy"
-                || proper_name == "Rev.ai"
-                || proper_name == "Okta"
-                || proper_name == "ShipBob"
-                || proper_name == "Stripe"
-            {
-                template::generate_docs_generic_api_key(
+                ),
+                TemplateType::GenericApiKey => template::generate_docs_generic_api_key(
                     &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
                     &spec_link,
-                )
-            } else if proper_name == "TripActions" {
-                template::generate_docs_generic_client_credentials(
-                    &api,
-                    &to_snake_case(&name),
-                    &version,
-                    &proper_name,
-                    &spec_link,
-                )
-            } else {
-                template::generate_docs_generic_token(
+                ),
+                TemplateType::GenericClientCredentials => {
+                    template::generate_docs_generic_client_credentials(
+                        &api,
+                        &to_snake_case(&name),
+                        &version,
+                        &proper_name,
+                        &spec_link,
+                    )
+                }
+                TemplateType::GenericToken => template::generate_docs_generic_token(
                     &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
                     &spec_link,
                     &add_post_header,
-                )
+                ),
             };
+
             let mut readme = root.clone();
             readme.push("README.md");
             save(
@@ -3403,8 +3488,8 @@ rustdoc-args = ["--cfg", "docsrs"]
                         tagrs.push(format!("{}.rs", to_snake_case(&clean_name(&f))));
 
                         let output = format!(
-                            r#"use anyhow::Result;
-
+                            r#"
+use crate::ClientResult;
 use crate::Client;
 
 {}
