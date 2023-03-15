@@ -9,8 +9,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::ClientResult;
 use crate::ClientError;
+use crate::ClientResult;
 use http::Uri;
 
 /// A type for an HTTP cache.
@@ -192,7 +192,10 @@ fn read_to_string<P: AsRef<Path>>(path: P) -> ClientResult<String> {
 }
 
 fn no_read<T, E: Into<Box<dyn std::error::Error + Send + Sync>>>(error: E) -> ClientResult<T> {
-    Err(ClientError::IoError(io::Error::new(io::ErrorKind::NotFound, error)))
+    Err(ClientError::IoError(io::Error::new(
+        io::ErrorKind::NotFound,
+        error,
+    )))
 }
 
 // Separate to provide a blanket implementation for `T: HttpCache + Clone`

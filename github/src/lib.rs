@@ -255,6 +255,11 @@ pub enum ClientError {
     /// JWT errors from auth.rs
     #[error(transparent)]
     JsonWebTokenError(#[from] jsonwebtoken::errors::Error),
+    /// IO Errors
+    #[cfg(feature = "httpcache")]
+    #[error(transparent)]
+    #[cfg(feature = "httpcache")]
+    IoError(#[from] std::io::Error),
     /// URL Parsing Error
     #[error(transparent)]
     UrlParserError(#[from] url::ParseError),
