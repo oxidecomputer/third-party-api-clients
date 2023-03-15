@@ -2390,7 +2390,12 @@ pub enum ClientError {"#);
             },
             /// JWT errors from auth.rs
             #[error(transparent)]
-            JsonWebTokenError(#[from] jsonwebtoken::errors::Error),"#);
+            JsonWebTokenError(#[from] jsonwebtoken::errors::Error),
+            /// IO Errors
+            #[cfg(feature = "httpcache")]
+            #[error(transparent)]
+            #[cfg(feature = "httpcache")]
+            IoError(#[from] std::io::Error),"#);
         }
         TemplateType::GenericApiKey | TemplateType::GenericClientCredentials => {
             a(r#"/// utf8 convertion error
