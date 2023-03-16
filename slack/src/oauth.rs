@@ -33,7 +33,7 @@ impl Oauth {
         code: &str,
         redirect_uri: &str,
         single_channel: bool,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));
@@ -84,7 +84,7 @@ impl Oauth {
         code: &str,
         redirect_uri: &str,
         single_channel: bool,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));

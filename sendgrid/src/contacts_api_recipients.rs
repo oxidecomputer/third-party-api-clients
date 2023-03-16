@@ -31,7 +31,7 @@ impl ContactsApiRecipients {
         &self,
         page: i64,
         page_size: i64,
-    ) -> ClientResult<crate::types::ListRecipientsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListRecipientsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -71,7 +71,7 @@ impl ContactsApiRecipients {
     pub async fn post_contactdb_recipient(
         &self,
         body: &[crate::types::PostContactdbRecipientsRequest],
-    ) -> ClientResult<crate::types::ContactDbRecipientResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactDbRecipientResponse>> {
         let url = self.client.url("/contactdb/recipients", None);
         self.client
             .post(
@@ -99,7 +99,7 @@ impl ContactsApiRecipients {
     pub async fn delete_contactdb_recipients(
         &self,
         body: &[String],
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url("/contactdb/recipients", None);
         self.client
             .delete(
@@ -129,7 +129,7 @@ impl ContactsApiRecipients {
     pub async fn patch_contactdb_recipients(
         &self,
         body: &[crate::types::PatchContactdbRecipientsRequest],
-    ) -> ClientResult<crate::types::ContactDbRecipientResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactDbRecipientResponse>> {
         let url = self.client.url("/contactdb/recipients", None);
         self.client
             .patch(
@@ -154,7 +154,7 @@ impl ContactsApiRecipients {
      */
     pub async fn get_contactdb_statu(
         &self,
-    ) -> ClientResult<crate::types::GetContactdbStatusResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::GetContactdbStatusResponseData>> {
         let url = self.client.url("/contactdb/status", None);
         self.client
             .get(
@@ -180,7 +180,7 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_recipient(
         &self,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::ContactdbRecipient> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbRecipient>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}",
@@ -214,7 +214,7 @@ impl ContactsApiRecipients {
     pub async fn delete_contactdb_recipients_recipient(
         &self,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::Help> {
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}",
@@ -248,7 +248,8 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_recipient_lists(
         &self,
         recipient_id: &str,
-    ) -> ClientResult<crate::types::GetContactdbRecipientsRecipientListsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetContactdbRecipientsRecipientListsResponse>>
+    {
         let url = self.client.url(
             &format!(
                 "/contactdb/recipients/{}/lists",
@@ -281,7 +282,7 @@ impl ContactsApiRecipients {
      */
     pub async fn get_contactdb_recipients_billable_count(
         &self,
-    ) -> ClientResult<crate::types::ContactdbRecipientCount> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbRecipientCount>> {
         let url = self
             .client
             .url("/contactdb/recipients/billable_count", None);
@@ -308,7 +309,7 @@ impl ContactsApiRecipients {
      */
     pub async fn get_contactdb_recipients_count(
         &self,
-    ) -> ClientResult<crate::types::ContactdbRecipientCount> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbRecipientCount>> {
         let url = self.client.url("/contactdb/recipients/count", None);
         self.client
             .get(
@@ -344,7 +345,7 @@ impl ContactsApiRecipients {
     pub async fn get_contactdb_recipients_search(
         &self,
         field_name: &str,
-    ) -> ClientResult<crate::types::GetContactdbRecipientsSearchResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetContactdbRecipientsSearchResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !field_name.is_empty() {
             query_args.push(("{field_name}".to_string(), field_name.to_string()));
@@ -415,7 +416,8 @@ impl ContactsApiRecipients {
     pub async fn post_contactdb_recipients_search(
         &self,
         body: &crate::types::PostContactdbRecipientsSearchRequest,
-    ) -> ClientResult<crate::types::PostContactdbRecipientsSearchResponseData> {
+    ) -> ClientResult<crate::Response<crate::types::PostContactdbRecipientsSearchResponseData>>
+    {
         let url = self.client.url("/contactdb/recipients/search", None);
         self.client
             .post(

@@ -28,7 +28,7 @@ impl Dialog {
         &self,
         dialog: &str,
         trigger_id: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !dialog.is_empty() {
             query_args.push(("dialog".to_string(), dialog.to_string()));

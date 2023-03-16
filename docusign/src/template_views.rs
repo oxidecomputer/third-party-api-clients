@@ -28,7 +28,7 @@ impl TemplateViews {
         account_id: &str,
         template_id: &str,
         body: &crate::types::ReturnUrlRequest,
-    ) -> ClientResult<crate::types::ViewUrl> {
+    ) -> ClientResult<crate::Response<crate::types::ViewUrl>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/views/edit",

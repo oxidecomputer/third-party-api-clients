@@ -54,7 +54,7 @@ impl Scim {
         start_index: i64,
         count: i64,
         filter: &str,
-    ) -> ClientResult<crate::types::ScimUserList> {
+    ) -> ClientResult<crate::Response<crate::types::ScimUserList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -101,7 +101,7 @@ impl Scim {
         &self,
         org: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
-    ) -> ClientResult<crate::types::ScimUser> {
+    ) -> ClientResult<crate::Response<crate::types::ScimUser>> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users",
@@ -137,7 +137,7 @@ impl Scim {
         &self,
         org: &str,
         scim_user_id: &str,
-    ) -> ClientResult<crate::types::ScimUser> {
+    ) -> ClientResult<crate::Response<crate::types::ScimUser>> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -179,7 +179,7 @@ impl Scim {
         org: &str,
         scim_user_id: &str,
         body: &crate::types::ScimProvisionInviteUserRequest,
-    ) -> ClientResult<crate::types::ScimUser> {
+    ) -> ClientResult<crate::Response<crate::types::ScimUser>> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -212,7 +212,11 @@ impl Scim {
      * * `org: &str`
      * * `scim_user_id: &str` -- scim_user_id parameter.
      */
-    pub async fn delete_user_from_org(&self, org: &str, scim_user_id: &str) -> ClientResult<()> {
+    pub async fn delete_user_from_org(
+        &self,
+        org: &str,
+        scim_user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",
@@ -265,7 +269,7 @@ impl Scim {
         org: &str,
         scim_user_id: &str,
         body: &crate::types::ScimUpdateAttributeUserRequest,
-    ) -> ClientResult<crate::types::ScimUser> {
+    ) -> ClientResult<crate::Response<crate::types::ScimUser>> {
         let url = self.client.url(
             &format!(
                 "/scim/v2/organizations/{}/Users/{}",

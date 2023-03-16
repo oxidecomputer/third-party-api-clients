@@ -22,7 +22,7 @@ impl Calls {
      *
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
-    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.add", None);
         self.client
             .post(
@@ -45,7 +45,7 @@ impl Calls {
      *
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
-    pub async fn end(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.end", None);
         self.client
             .post(
@@ -69,7 +69,10 @@ impl Calls {
      * * `token: &str` -- Authentication token. Requires scope: `calls:read`.
      * * `id: &str` -- `id` of the Call returned by the [`calls.add`](/methods/calls.add) method.
      */
-    pub async fn info(&self, id: &str) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn info(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !id.is_empty() {
             query_args.push(("id".to_string(), id.to_string()));
@@ -97,7 +100,7 @@ impl Calls {
      *
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
-    pub async fn update(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn update(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.update", None);
         self.client
             .post(

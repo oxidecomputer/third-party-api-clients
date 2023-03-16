@@ -62,7 +62,7 @@ impl Users {
         start_position: &str,
         status: &str,
         user_name_substring: &str,
-    ) -> ClientResult<crate::types::UserInformationList> {
+    ) -> ClientResult<crate::Response<crate::types::UserInformationList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !additional_info.is_empty() {
             query_args.push(("additional_info".to_string(), additional_info.to_string()));
@@ -137,7 +137,7 @@ impl Users {
         &self,
         account_id: &str,
         body: &crate::types::UserInformationList,
-    ) -> ClientResult<crate::types::UserInformationList> {
+    ) -> ClientResult<crate::Response<crate::types::UserInformationList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users",
@@ -228,7 +228,7 @@ impl Users {
         &self,
         account_id: &str,
         body: &crate::types::NewUsersDefinition,
-    ) -> ClientResult<crate::types::NewUsersSummary> {
+    ) -> ClientResult<crate::Response<crate::types::NewUsersSummary>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users",
@@ -265,7 +265,7 @@ impl Users {
         account_id: &str,
         delete: &str,
         body: &crate::types::UserInfoList,
-    ) -> ClientResult<crate::types::UsersResponse> {
+    ) -> ClientResult<crate::Response<crate::types::UsersResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !delete.is_empty() {
             query_args.push(("delete".to_string(), delete.to_string()));
@@ -312,7 +312,7 @@ impl Users {
         user_id: &str,
         additional_info: &str,
         email: &str,
-    ) -> ClientResult<crate::types::UserInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !additional_info.is_empty() {
             query_args.push(("additional_info".to_string(), additional_info.to_string()));
@@ -358,7 +358,7 @@ impl Users {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserInformation,
-    ) -> ClientResult<crate::types::UserInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}",
@@ -400,7 +400,7 @@ impl Users {
         account_id: &str,
         user_id: &str,
         encoding: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encoding.is_empty() {
             query_args.push(("encoding".to_string(), encoding.to_string()));
@@ -440,7 +440,11 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn profile_image_put(&self, account_id: &str, user_id: &str) -> ClientResult<()> {
+    pub async fn profile_image_put(
+        &self,
+        account_id: &str,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile/image",
@@ -474,7 +478,11 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn profile_image_delete(&self, account_id: &str, user_id: &str) -> ClientResult<()> {
+    pub async fn profile_image_delete(
+        &self,
+        account_id: &str,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile/image",
@@ -520,7 +528,7 @@ impl Users {
         &self,
         account_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::UserSettingsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserSettingsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/settings",
@@ -557,7 +565,7 @@ impl Users {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserSettingsInformation,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/settings",

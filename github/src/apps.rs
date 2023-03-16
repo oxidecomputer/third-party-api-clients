@@ -22,7 +22,9 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#get-the-authenticated-app>
      */
-    pub async fn get_authenticated(&self) -> ClientResult<crate::types::GitHubApp> {
+    pub async fn get_authenticated(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GitHubApp>> {
         let url = self.client.url("/app", None);
         self.client
             .get(
@@ -50,7 +52,7 @@ impl Apps {
     pub async fn create_from_manifest(
         &self,
         code: &str,
-    ) -> ClientResult<crate::types::AppsCreateFromManifestResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::AppsCreateFromManifestResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/app-manifests/{}/conversions",
@@ -79,7 +81,9 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#get-a-webhook-configuration-for-an-app>
      */
-    pub async fn get_webhook_config_for_app(&self) -> ClientResult<crate::types::WebhookConfig> {
+    pub async fn get_webhook_config_for_app(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::WebhookConfig>> {
         let url = self.client.url("/app/hook/config", None);
         self.client
             .get(
@@ -105,7 +109,7 @@ impl Apps {
     pub async fn update_webhook_config_for_app(
         &self,
         body: &crate::types::AppsUpdateWebhookConfigAppRequest,
-    ) -> ClientResult<crate::types::WebhookConfig> {
+    ) -> ClientResult<crate::Response<crate::types::WebhookConfig>> {
         let url = self.client.url("/app/hook/config", None);
         self.client
             .patch(
@@ -137,7 +141,7 @@ impl Apps {
         &self,
         per_page: i64,
         cursor: &str,
-    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::HookDeliveryItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -175,7 +179,7 @@ impl Apps {
     pub async fn list_all_webhook_deliveries(
         &self,
         cursor: &str,
-    ) -> ClientResult<Vec<crate::types::HookDeliveryItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::HookDeliveryItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -212,7 +216,7 @@ impl Apps {
     pub async fn get_webhook_delivery(
         &self,
         delivery_id: i64,
-    ) -> ClientResult<crate::types::HookDelivery> {
+    ) -> ClientResult<crate::Response<crate::types::HookDelivery>> {
         let url = self.client.url(
             &format!(
                 "/app/hook/deliveries/{}",
@@ -245,7 +249,10 @@ impl Apps {
      *
      * * `delivery_id: i64`
      */
-    pub async fn redeliver_webhook_delivery(&self, delivery_id: i64) -> ClientResult<()> {
+    pub async fn redeliver_webhook_delivery(
+        &self,
+        delivery_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/app/hook/deliveries/{}/attempts",
@@ -287,7 +294,7 @@ impl Apps {
         page: i64,
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
-    ) -> ClientResult<Vec<crate::types::Installation>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Installation>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !outdated.is_empty() {
             query_args.push(("outdated".to_string(), outdated.to_string()));
@@ -332,7 +339,7 @@ impl Apps {
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
-    ) -> ClientResult<Vec<crate::types::Installation>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Installation>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !outdated.is_empty() {
             query_args.push(("outdated".to_string(), outdated.to_string()));
@@ -372,7 +379,7 @@ impl Apps {
     pub async fn get_installation(
         &self,
         installation_id: i64,
-    ) -> ClientResult<crate::types::Installation> {
+    ) -> ClientResult<crate::Response<crate::types::Installation>> {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}",
@@ -405,7 +412,10 @@ impl Apps {
      *
      * * `installation_id: i64` -- installation_id parameter.
      */
-    pub async fn delete_installation(&self, installation_id: i64) -> ClientResult<()> {
+    pub async fn delete_installation(
+        &self,
+        installation_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}",
@@ -443,7 +453,7 @@ impl Apps {
         &self,
         installation_id: i64,
         body: &crate::types::AppsCreateInstallationAccessTokenRequest,
-    ) -> ClientResult<crate::types::InstallationToken> {
+    ) -> ClientResult<crate::Response<crate::types::InstallationToken>> {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/access_tokens",
@@ -478,7 +488,10 @@ impl Apps {
      *
      * * `installation_id: i64` -- installation_id parameter.
      */
-    pub async fn suspend_installation(&self, installation_id: i64) -> ClientResult<()> {
+    pub async fn suspend_installation(
+        &self,
+        installation_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/suspended",
@@ -511,7 +524,10 @@ impl Apps {
      *
      * * `installation_id: i64` -- installation_id parameter.
      */
-    pub async fn unsuspend_installation(&self, installation_id: i64) -> ClientResult<()> {
+    pub async fn unsuspend_installation(
+        &self,
+        installation_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/app/installations/{}/suspended",
@@ -547,7 +563,7 @@ impl Apps {
         &self,
         client_id: &str,
         body: &crate::types::AppsCheckTokenRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/grant",
@@ -587,7 +603,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/grants/{}",
@@ -623,7 +639,7 @@ impl Apps {
         &self,
         client_id: &str,
         body: &crate::types::AppsCheckTokenRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
@@ -658,7 +674,7 @@ impl Apps {
         &self,
         client_id: &str,
         body: &crate::types::AppsCheckTokenRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
@@ -693,7 +709,7 @@ impl Apps {
         &self,
         client_id: &str,
         body: &crate::types::AppsCheckTokenRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token",
@@ -728,7 +744,7 @@ impl Apps {
         &self,
         client_id: &str,
         body: &crate::types::AppsScopeTokenRequest,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/token/scoped",
@@ -766,7 +782,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
@@ -805,7 +821,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> ClientResult<crate::types::Authorization> {
+    ) -> ClientResult<crate::Response<crate::types::Authorization>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
@@ -844,7 +860,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/applications/{}/tokens/{}",
@@ -878,7 +894,10 @@ impl Apps {
      *
      * * `app_slug: &str`
      */
-    pub async fn get_by_slug(&self, app_slug: &str) -> ClientResult<crate::types::GitHubApp> {
+    pub async fn get_by_slug(
+        &self,
+        app_slug: &str,
+    ) -> ClientResult<crate::Response<crate::types::GitHubApp>> {
         let url = self.client.url(
             &format!("/apps/{}", crate::progenitor_support::encode_path(app_slug),),
             None,
@@ -913,7 +932,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::AppsListInstallationReposResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AppsListInstallationReposResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -948,7 +967,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#revoke-an-installation-access-token>
      */
-    pub async fn revoke_installation_access_token(&self) -> ClientResult<()> {
+    pub async fn revoke_installation_access_token(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/installation/token", None);
         self.client
             .delete(
@@ -978,7 +997,7 @@ impl Apps {
     pub async fn get_subscription_plan_for_account(
         &self,
         account_id: i64,
-    ) -> ClientResult<crate::types::MarketplacePurchaseData> {
+    ) -> ClientResult<crate::Response<crate::types::MarketplacePurchaseData>> {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/accounts/{}",
@@ -1016,7 +1035,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MarketplaceListingPlan>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1051,7 +1070,9 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-plans>
      */
-    pub async fn list_all_plans(&self) -> ClientResult<Vec<crate::types::MarketplaceListingPlan>> {
+    pub async fn list_all_plans(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
         let url = self.client.url("/marketplace_listing/plans", None);
         self.client
             .get_all_pages(
@@ -1091,7 +1112,7 @@ impl Apps {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MarketplacePurchaseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplacePurchaseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1142,7 +1163,7 @@ impl Apps {
         plan_id: i64,
         sort: crate::types::Sort,
         direction: crate::types::Order,
-    ) -> ClientResult<Vec<crate::types::MarketplacePurchaseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplacePurchaseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1187,7 +1208,7 @@ impl Apps {
     pub async fn get_subscription_plan_for_account_stubbed(
         &self,
         account_id: i64,
-    ) -> ClientResult<crate::types::MarketplacePurchaseData> {
+    ) -> ClientResult<crate::Response<crate::types::MarketplacePurchaseData>> {
         let url = self.client.url(
             &format!(
                 "/marketplace_listing/stubbed/accounts/{}",
@@ -1225,7 +1246,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MarketplaceListingPlan>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1263,7 +1284,7 @@ impl Apps {
      */
     pub async fn list_all_plans_stubbed(
         &self,
-    ) -> ClientResult<Vec<crate::types::MarketplaceListingPlan>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplaceListingPlan>>> {
         let url = self.client.url("/marketplace_listing/stubbed/plans", None);
         self.client
             .get_all_pages(
@@ -1303,7 +1324,7 @@ impl Apps {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::MarketplacePurchaseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplacePurchaseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1354,7 +1375,7 @@ impl Apps {
         plan_id: i64,
         sort: crate::types::Sort,
         direction: crate::types::Order,
-    ) -> ClientResult<Vec<crate::types::MarketplacePurchaseData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MarketplacePurchaseData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
             query_args.push(("direction".to_string(), direction.to_string()));
@@ -1399,7 +1420,7 @@ impl Apps {
     pub async fn get_org_installation(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::Installation> {
+    ) -> ClientResult<crate::Response<crate::types::Installation>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/installation",
@@ -1442,7 +1463,7 @@ impl Apps {
         repo: &str,
         content_reference_id: i64,
         body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
-    ) -> ClientResult<crate::types::ContentReferenceAttachment> {
+    ) -> ClientResult<crate::Response<crate::types::ContentReferenceAttachment>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/content_references/{}/attachments",
@@ -1482,7 +1503,7 @@ impl Apps {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::Installation> {
+    ) -> ClientResult<crate::Response<crate::types::Installation>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/installation",
@@ -1525,7 +1546,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::AppsListInstallationsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AppsListInstallationsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1573,7 +1594,7 @@ impl Apps {
         installation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::AppsListInstallationReposResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AppsListInstallationReposResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1620,7 +1641,7 @@ impl Apps {
         &self,
         installation_id: i64,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/installations/{}/repositories/{}",
@@ -1659,7 +1680,7 @@ impl Apps {
         &self,
         installation_id: i64,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/installations/{}/repositories/{}",
@@ -1696,7 +1717,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::UserMarketplacePurchase>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1731,7 +1752,7 @@ impl Apps {
      */
     pub async fn list_all_subscriptions_for_authenticated_user(
         &self,
-    ) -> ClientResult<Vec<crate::types::UserMarketplacePurchase>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
         let url = self.client.url("/user/marketplace_purchases", None);
         self.client
             .get_all_pages(
@@ -1761,7 +1782,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<Vec<crate::types::UserMarketplacePurchase>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1797,7 +1818,7 @@ impl Apps {
      */
     pub async fn list_all_subscriptions_for_authenticated_user_stubbed(
         &self,
-    ) -> ClientResult<Vec<crate::types::UserMarketplacePurchase>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UserMarketplacePurchase>>> {
         let url = self.client.url("/user/marketplace_purchases/stubbed", None);
         self.client
             .get_all_pages(
@@ -1827,7 +1848,7 @@ impl Apps {
     pub async fn get_user_installation(
         &self,
         username: &str,
-    ) -> ClientResult<crate::types::Installation> {
+    ) -> ClientResult<crate::Response<crate::types::Installation>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/installation",

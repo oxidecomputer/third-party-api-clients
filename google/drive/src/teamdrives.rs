@@ -29,7 +29,7 @@ impl Teamdrives {
         page_token: &str,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::TeamDrive>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TeamDrive>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -48,7 +48,7 @@ impl Teamdrives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/teamdrives?{}", query_), None);
-        let resp: crate::types::TeamDriveList = self
+        let resp: crate::Response<crate::types::TeamDriveList> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl Teamdrives {
             .await?;
 
         // Return our response data.
-        Ok(resp.team_drives.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.team_drives.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/teamdrives` endpoint.
@@ -73,7 +77,7 @@ impl Teamdrives {
         &self,
         q: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::TeamDrive>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TeamDrive>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -86,7 +90,11 @@ impl Teamdrives {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/teamdrives?{}", query_), None);
-        let mut resp: crate::types::TeamDriveList = self
+        let crate::Response::<crate::types::TeamDriveList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -97,13 +105,17 @@ impl Teamdrives {
             )
             .await?;
 
-        let mut team_drives = resp.team_drives;
-        let mut page = resp.next_page_token;
+        let mut team_drives = body.team_drives;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::TeamDriveList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -114,7 +126,11 @@ impl Teamdrives {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::TeamDriveList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -126,17 +142,17 @@ impl Teamdrives {
                     .await?;
             }
 
-            team_drives.append(&mut resp.team_drives);
+            team_drives.append(&mut body.team_drives);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(team_drives)
+        Ok(crate::Response::new(status, headers, team_drives))
     }
     /**
      * This function performs a `POST` to the `/teamdrives` endpoint.
@@ -151,7 +167,7 @@ impl Teamdrives {
         &self,
         request_id: &str,
         body: &crate::types::TeamDrive,
-    ) -> ClientResult<crate::types::TeamDrive> {
+    ) -> ClientResult<crate::Response<crate::types::TeamDrive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !request_id.is_empty() {
             query_args.push(("requestId".to_string(), request_id.to_string()));
@@ -182,7 +198,7 @@ impl Teamdrives {
         &self,
         team_drive_id: &str,
         use_domain_admin_access: bool,
-    ) -> ClientResult<crate::types::TeamDrive> {
+    ) -> ClientResult<crate::Response<crate::types::TeamDrive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
@@ -218,7 +234,7 @@ impl Teamdrives {
      *
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, team_drive_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, team_drive_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/teamdrives/{}",
@@ -251,7 +267,7 @@ impl Teamdrives {
         team_drive_id: &str,
         use_domain_admin_access: bool,
         body: &crate::types::TeamDrive,
-    ) -> ClientResult<crate::types::TeamDrive> {
+    ) -> ClientResult<crate::Response<crate::types::TeamDrive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((

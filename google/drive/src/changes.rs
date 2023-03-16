@@ -47,7 +47,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> ClientResult<Vec<crate::types::Change>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Change>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -111,7 +111,7 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/changes?{}", query_), None);
-        let resp: crate::types::ChangeList = self
+        let resp: crate::Response<crate::types::ChangeList> = self
             .client
             .get(
                 &url,
@@ -123,7 +123,11 @@ impl Changes {
             .await?;
 
         // Return our response data.
-        Ok(resp.changes.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.changes.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/changes` endpoint.
@@ -145,7 +149,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> ClientResult<Vec<crate::types::Change>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Change>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -203,7 +207,11 @@ impl Changes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/changes?{}", query_), None);
-        let mut resp: crate::types::ChangeList = self
+        let crate::Response::<crate::types::ChangeList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -214,13 +222,17 @@ impl Changes {
             )
             .await?;
 
-        let mut changes = resp.changes;
-        let mut page = resp.next_page_token;
+        let mut changes = body.changes;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ChangeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -231,7 +243,11 @@ impl Changes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ChangeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -243,17 +259,17 @@ impl Changes {
                     .await?;
             }
 
-            changes.append(&mut resp.changes);
+            changes.append(&mut body.changes);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(changes)
+        Ok(crate::Response::new(status, headers, changes))
     }
     /**
      * This function performs a `GET` to the `/changes/startPageToken` endpoint.
@@ -273,7 +289,7 @@ impl Changes {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> ClientResult<crate::types::StartPageToken> {
+    ) -> ClientResult<crate::Response<crate::types::StartPageToken>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));
@@ -344,7 +360,7 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
             query_args.push(("driveId".to_string(), drive_id.to_string()));

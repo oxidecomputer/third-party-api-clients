@@ -25,7 +25,7 @@ impl UserSchemas {
     pub async fn get_application(
         &self,
         app_instance_id: &str,
-    ) -> ClientResult<crate::types::UserSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UserSchema>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/apps/{}/default",
@@ -58,7 +58,7 @@ impl UserSchemas {
         &self,
         app_instance_id: &str,
         body: &crate::types::UserSchema,
-    ) -> ClientResult<crate::types::UserSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UserSchema>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/apps/{}/default",
@@ -87,7 +87,10 @@ impl UserSchemas {
      *
      * * `schema_id: &str`
      */
-    pub async fn get(&self, schema_id: &str) -> ClientResult<crate::types::UserSchema> {
+    pub async fn get(
+        &self,
+        schema_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserSchema>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/{}",
@@ -118,7 +121,7 @@ impl UserSchemas {
         &self,
         schema_id: &str,
         body: &crate::types::UserSchema,
-    ) -> ClientResult<crate::types::UserSchema> {
+    ) -> ClientResult<crate::Response<crate::types::UserSchema>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/meta/schemas/user/{}",

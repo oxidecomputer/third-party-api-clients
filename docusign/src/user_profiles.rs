@@ -30,7 +30,7 @@ impl UserProfiles {
         &self,
         account_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::UserProfile> {
+    ) -> ClientResult<crate::Response<crate::types::UserProfile>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile",
@@ -69,7 +69,7 @@ impl UserProfiles {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserProfile,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/profile",

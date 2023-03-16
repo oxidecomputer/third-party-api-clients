@@ -28,7 +28,7 @@ impl Locations {
         &self,
         start: &str,
         page_size: f64,
-    ) -> ClientResult<Vec<crate::types::Location>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Location>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -38,7 +38,7 @@ impl Locations {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/locations?{}", query_), None);
-        let resp: crate::types::GetLocationResponse = self
+        let resp: crate::Response<crate::types::GetLocationResponse> = self
             .client
             .get(
                 &url,
@@ -50,7 +50,11 @@ impl Locations {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List locations.
@@ -61,9 +65,13 @@ impl Locations {
      *
      * Retrieves all locations for your business.
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Location>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Location>>> {
         let url = self.client.url("/locations", None);
-        let resp: crate::types::GetLocationResponse = self
+        let crate::Response::<crate::types::GetLocationResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -74,8 +82,8 @@ impl Locations {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -91,10 +99,12 @@ impl Locations {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -110,7 +120,7 @@ impl Locations {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * Create new location.
@@ -126,7 +136,7 @@ impl Locations {
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url("/locations", None);
         self.client
             .post(
@@ -149,7 +159,7 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Location> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -175,7 +185,7 @@ impl Locations {
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!("/locations/{}", crate::progenitor_support::encode_path(id),),
             None,

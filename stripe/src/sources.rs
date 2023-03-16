@@ -16,7 +16,7 @@ impl Sources {
      *
      * <p>Creates a new source object.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::SourceData> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SourceData>> {
         let url = self.client.url("/v1/sources", None);
         self.client
             .post(
@@ -43,7 +43,7 @@ impl Sources {
         &self,
         client_secret: &str,
         source: &str,
-    ) -> ClientResult<crate::types::SourceData> {
+    ) -> ClientResult<crate::Response<crate::types::SourceData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -78,7 +78,10 @@ impl Sources {
      *
      * * `source: &str` -- The account's country.
      */
-    pub async fn post_sources(&self, source: &str) -> ClientResult<crate::types::SourceData> {
+    pub async fn post_sources(
+        &self,
+        source: &str,
+    ) -> ClientResult<crate::Response<crate::types::SourceData>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}",
@@ -111,7 +114,7 @@ impl Sources {
         &self,
         mandate_notification: &str,
         source: &str,
-    ) -> ClientResult<crate::types::SourceMandateNotification> {
+    ) -> ClientResult<crate::Response<crate::types::SourceMandateNotification>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/mandate_notifications/{}",
@@ -149,7 +152,7 @@ impl Sources {
         limit: i64,
         source: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::SourceTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SourceTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -169,7 +172,7 @@ impl Sources {
             ),
             None,
         );
-        let resp: crate::types::ApmsSourcesSourceTransactionList = self
+        let resp: crate::Response<crate::types::ApmsSourcesSourceTransactionList> = self
             .client
             .get(
                 &url,
@@ -181,7 +184,11 @@ impl Sources {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
@@ -193,7 +200,7 @@ impl Sources {
     pub async fn get_all_transactions(
         &self,
         source: &str,
-    ) -> ClientResult<Vec<crate::types::SourceTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SourceTransaction>>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions",
@@ -201,7 +208,11 @@ impl Sources {
             ),
             None,
         );
-        let mut resp: crate::types::ApmsSourcesSourceTransactionList = self
+        let crate::Response::<crate::types::ApmsSourcesSourceTransactionList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -212,8 +223,8 @@ impl Sources {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -229,7 +240,11 @@ impl Sources {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ApmsSourcesSourceTransactionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -240,7 +255,11 @@ impl Sources {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ApmsSourcesSourceTransactionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -252,13 +271,13 @@ impl Sources {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/sources/{source}/source_transactions/{source_transaction}` endpoint.
@@ -275,7 +294,7 @@ impl Sources {
         &self,
         source: &str,
         source_transaction: &str,
-    ) -> ClientResult<crate::types::SourceTransaction> {
+    ) -> ClientResult<crate::Response<crate::types::SourceTransaction>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/source_transactions/{}",
@@ -303,7 +322,10 @@ impl Sources {
      *
      * * `source: &str` -- The account's country.
      */
-    pub async fn post_verify(&self, source: &str) -> ClientResult<crate::types::SourceData> {
+    pub async fn post_verify(
+        &self,
+        source: &str,
+    ) -> ClientResult<crate::Response<crate::types::SourceData>> {
         let url = self.client.url(
             &format!(
                 "/v1/sources/{}/verify",

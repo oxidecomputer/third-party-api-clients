@@ -38,7 +38,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -91,7 +91,7 @@ impl Events {
         &self,
         event_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -131,7 +131,7 @@ impl Events {
         &self,
         created_at_min: &str,
         created_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -181,7 +181,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -234,7 +234,7 @@ impl Events {
         &self,
         event_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -274,7 +274,7 @@ impl Events {
         &self,
         created_at_min: &str,
         created_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -324,7 +324,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -377,7 +377,7 @@ impl Events {
         &self,
         event_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -417,7 +417,7 @@ impl Events {
         &self,
         created_at_min: &str,
         created_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -467,7 +467,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -516,7 +516,11 @@ impl Events {
      * * `event_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_param(&self, event_id: &str, fields: &str) -> ClientResult<()> {
+    pub async fn get_param(
+        &self,
+        event_id: &str,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -552,7 +556,11 @@ impl Events {
      * * `created_at_min: &str` -- Count only events created at or after this date and time. (format: 2014-04-25T16:15:47-04:00).
      * * `created_at_max: &str` -- Count only events created at or before this date and time. (format: 2014-04-25T16:15:47-04:00).
      */
-    pub async fn get_count(&self, created_at_min: &str, created_at_max: &str) -> ClientResult<()> {
+    pub async fn get_count(
+        &self,
+        created_at_min: &str,
+        created_at_max: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -602,7 +610,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -655,7 +663,7 @@ impl Events {
         &self,
         event_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -695,7 +703,7 @@ impl Events {
         &self,
         created_at_min: &str,
         created_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -745,7 +753,7 @@ impl Events {
         filter: &str,
         verb: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -798,7 +806,7 @@ impl Events {
         &self,
         event_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -838,7 +846,7 @@ impl Events {
         &self,
         created_at_min: &str,
         created_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -893,7 +901,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -953,7 +961,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -990,7 +998,7 @@ impl Events {
         &self,
         address: &str,
         topic: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1029,7 +1037,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1068,7 +1076,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/webhooks/{}/json",
@@ -1100,7 +1108,7 @@ impl Events {
     pub async fn deprecated_202001_delete_webhooks_param_webhook(
         &self,
         webhook_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/webhooks/{}/json",
@@ -1150,7 +1158,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1210,7 +1218,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -1247,7 +1255,7 @@ impl Events {
         &self,
         address: &str,
         topic: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1286,7 +1294,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1325,7 +1333,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/webhooks/{}/json",
@@ -1357,7 +1365,7 @@ impl Events {
     pub async fn deprecated_202004_delete_webhooks_param_webhook(
         &self,
         webhook_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/webhooks/{}/json",
@@ -1407,7 +1415,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1467,7 +1475,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -1504,7 +1512,7 @@ impl Events {
         &self,
         address: &str,
         topic: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1543,7 +1551,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1582,7 +1590,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/webhooks/{}/json",
@@ -1614,7 +1622,7 @@ impl Events {
     pub async fn deprecated_202007_delete_webhooks_param_webhook(
         &self,
         webhook_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/webhooks/{}/json",
@@ -1664,7 +1672,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1724,7 +1732,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -1757,7 +1765,11 @@ impl Events {
      * * `topic: &str` -- Show webhook subscriptions with a given topic.
      *   For a list of valid values, refer to the topic property.>.
      */
-    pub async fn get_webhooks_count(&self, address: &str, topic: &str) -> ClientResult<()> {
+    pub async fn get_webhooks_count(
+        &self,
+        address: &str,
+        topic: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1796,7 +1808,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1835,7 +1847,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/webhooks/{}/json",
@@ -1864,7 +1876,10 @@ impl Events {
      *
      * * `webhook_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_webhooks_param_webhook(&self, webhook_id: &str) -> ClientResult<()> {
+    pub async fn delete_webhooks_param_webhook(
+        &self,
+        webhook_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/webhooks/{}/json",
@@ -1914,7 +1929,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -1974,7 +1989,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -2011,7 +2026,7 @@ impl Events {
         &self,
         address: &str,
         topic: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -2050,7 +2065,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2089,7 +2104,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/webhooks/{}/json",
@@ -2121,7 +2136,7 @@ impl Events {
     pub async fn deprecated_202101_delete_webhooks_param_webhook(
         &self,
         webhook_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/webhooks/{}/json",
@@ -2171,7 +2186,7 @@ impl Events {
         topic: &str,
         updated_at_min: &str,
         updated_at_max: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -2231,7 +2246,7 @@ impl Events {
         &self,
         format: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !format.is_empty() {
             query_args.push(("format".to_string(), format.to_string()));
@@ -2268,7 +2283,7 @@ impl Events {
         &self,
         address: &str,
         topic: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !address.is_empty() {
             query_args.push(("address".to_string(), address.to_string()));
@@ -2307,7 +2322,7 @@ impl Events {
         &self,
         webhook_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2346,7 +2361,7 @@ impl Events {
         &self,
         webhook_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/webhooks/{}/json",
@@ -2378,7 +2393,7 @@ impl Events {
     pub async fn deprecated_unstable_delete_webhooks_param_webhook(
         &self,
         webhook_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/webhooks/{}/json",

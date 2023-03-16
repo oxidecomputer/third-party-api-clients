@@ -29,7 +29,7 @@ impl Actions {
     pub async fn get_github_actions_permissions_organization(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::ActionsOrganizationPermissions> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsOrganizationPermissions>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions",
@@ -68,7 +68,7 @@ impl Actions {
         &self,
         org: &str,
         body: &crate::types::ActionsSetGithubPermissionsOrganizationRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions",
@@ -108,8 +108,11 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse>
-    {
+    ) -> ClientResult<
+        crate::Response<
+            crate::types::ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse,
+        >,
+    > {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -155,7 +158,7 @@ impl Actions {
         &self,
         org: &str,
         body: &crate::types::ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions/repositories",
@@ -193,7 +196,7 @@ impl Actions {
         &self,
         org: &str,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions/repositories/{}",
@@ -232,7 +235,7 @@ impl Actions {
         &self,
         org: &str,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions/repositories/{}",
@@ -269,7 +272,7 @@ impl Actions {
     pub async fn get_allowed_actions_organization(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::SelectedActions> {
+    ) -> ClientResult<crate::Response<crate::types::SelectedActions>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions/selected-actions",
@@ -310,7 +313,7 @@ impl Actions {
         &self,
         org: &str,
         body: &crate::types::SelectedActions,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/permissions/selected-actions",
@@ -352,7 +355,8 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelfHostedRunnerGroupsOrgResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListSelfHostedRunnerGroupsOrgResponse>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -400,7 +404,7 @@ impl Actions {
         &self,
         org: &str,
         body: &crate::types::ActionsCreateSelfHostedRunnerGroupOrgRequest,
-    ) -> ClientResult<crate::types::RunnerGroupsOrg> {
+    ) -> ClientResult<crate::Response<crate::types::RunnerGroupsOrg>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups",
@@ -440,7 +444,7 @@ impl Actions {
         &self,
         org: &str,
         runner_group_id: i64,
-    ) -> ClientResult<crate::types::RunnerGroupsOrg> {
+    ) -> ClientResult<crate::Response<crate::types::RunnerGroupsOrg>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
@@ -481,7 +485,7 @@ impl Actions {
         &self,
         org: &str,
         runner_group_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
@@ -523,7 +527,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         body: &crate::types::ActionsUpdateSelfHostedRunnerGroupOrgRequest,
-    ) -> ClientResult<crate::types::RunnerGroupsOrg> {
+    ) -> ClientResult<crate::Response<crate::types::RunnerGroupsOrg>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}",
@@ -568,7 +572,9 @@ impl Actions {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> ClientResult<crate::types::ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse> {
+    ) -> ClientResult<
+        crate::Response<crate::types::ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse>,
+    > {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -619,7 +625,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         body: &crate::types::ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories",
@@ -664,7 +670,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories/{}",
@@ -709,7 +715,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/repositories/{}",
@@ -755,7 +761,8 @@ impl Actions {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -806,7 +813,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         body: &crate::types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners",
@@ -851,7 +858,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         runner_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners/{}",
@@ -896,7 +903,7 @@ impl Actions {
         org: &str,
         runner_group_id: i64,
         runner_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runner-groups/{}/runners/{}",
@@ -938,7 +945,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListSelfHostedRunnersOrgResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -983,7 +990,7 @@ impl Actions {
     pub async fn list_runner_applications_for_org(
         &self,
         org: &str,
-    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RunnerApplication>>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/downloads",
@@ -1017,7 +1024,7 @@ impl Actions {
     pub async fn list_all_runner_applications_for_org(
         &self,
         org: &str,
-    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RunnerApplication>>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/downloads",
@@ -1061,7 +1068,7 @@ impl Actions {
     pub async fn create_registration_token_for_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::Response<crate::types::AuthenticationToken>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/registration-token",
@@ -1106,7 +1113,7 @@ impl Actions {
     pub async fn create_remove_token_for_org(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::Response<crate::types::AuthenticationToken>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/remove-token",
@@ -1144,7 +1151,7 @@ impl Actions {
         &self,
         org: &str,
         runner_id: i64,
-    ) -> ClientResult<crate::types::Runner> {
+    ) -> ClientResult<crate::Response<crate::types::Runner>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/{}",
@@ -1183,7 +1190,7 @@ impl Actions {
         &self,
         org: &str,
         runner_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/runners/{}",
@@ -1222,7 +1229,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListOrgSecretsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListOrgSecretsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1265,7 +1272,7 @@ impl Actions {
     pub async fn get_org_public_key(
         &self,
         org: &str,
-    ) -> ClientResult<crate::types::ActionsPublicKey> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsPublicKey>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/public-key",
@@ -1301,7 +1308,7 @@ impl Actions {
         &self,
         org: &str,
         secret_name: &str,
-    ) -> ClientResult<crate::types::OrganizationActionsSecret> {
+    ) -> ClientResult<crate::Response<crate::types::OrganizationActionsSecret>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}",
@@ -1413,7 +1420,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateOrgSecretRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}",
@@ -1446,7 +1453,11 @@ impl Actions {
      * * `org: &str`
      * * `secret_name: &str` -- secret_name parameter.
      */
-    pub async fn delete_org_secret(&self, org: &str, secret_name: &str) -> ClientResult<()> {
+    pub async fn delete_org_secret(
+        &self,
+        org: &str,
+        secret_name: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}",
@@ -1487,7 +1498,8 @@ impl Actions {
         secret_name: &str,
         page: i64,
         per_page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelectedReposOrgSecretResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListSelectedReposOrgSecretResponse>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1534,7 +1546,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         body: &crate::types::ActionsSetSelectedReposOrgSecretRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}/repositories",
@@ -1573,7 +1585,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}/repositories/{}",
@@ -1613,7 +1625,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         repository_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/actions/secrets/{}/repositories/{}",
@@ -1655,7 +1667,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListArtifactsRepoResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListArtifactsRepoResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -1703,7 +1715,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         artifact_id: i64,
-    ) -> ClientResult<crate::types::Artifact> {
+    ) -> ClientResult<crate::Response<crate::types::Artifact>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/artifacts/{}",
@@ -1743,7 +1755,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         artifact_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/artifacts/{}",
@@ -1788,7 +1800,7 @@ impl Actions {
         repo: &str,
         artifact_id: i64,
         archive_format: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/artifacts/{}/{}",
@@ -1829,7 +1841,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         job_id: i64,
-    ) -> ClientResult<crate::types::Job> {
+    ) -> ClientResult<crate::Response<crate::types::Job>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/jobs/{}",
@@ -1872,7 +1884,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         job_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/jobs/{}/logs",
@@ -1913,7 +1925,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::ActionsRepositoryPermissions> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsRepositoryPermissions>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/permissions",
@@ -1955,7 +1967,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         body: &crate::types::ActionsSetGithubPermissionsRepositoryRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/permissions",
@@ -1994,7 +2006,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::SelectedActions> {
+    ) -> ClientResult<crate::Response<crate::types::SelectedActions>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/permissions/selected-actions",
@@ -2038,7 +2050,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         body: &crate::types::SelectedActions,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/permissions/selected-actions",
@@ -2079,7 +2091,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListSelfHostedRunnersOrgResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2127,7 +2139,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RunnerApplication>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/downloads",
@@ -2163,7 +2175,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<Vec<crate::types::RunnerApplication>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RunnerApplication>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/downloads",
@@ -2209,7 +2221,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::Response<crate::types::AuthenticationToken>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/registration-token",
@@ -2255,7 +2267,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::AuthenticationToken> {
+    ) -> ClientResult<crate::Response<crate::types::AuthenticationToken>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/remove-token",
@@ -2297,7 +2309,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         runner_id: i64,
-    ) -> ClientResult<crate::types::Runner> {
+    ) -> ClientResult<crate::Response<crate::types::Runner>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/{}",
@@ -2340,7 +2352,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         runner_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runners/{}",
@@ -2394,7 +2406,7 @@ impl Actions {
         per_page: i64,
         page: i64,
         created: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<crate::types::ActionsListWorkflowRunsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListWorkflowRunsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !actor.is_empty() {
             query_args.push(("actor".to_string(), actor.to_string()));
@@ -2457,7 +2469,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<crate::types::WorkflowRun> {
+    ) -> ClientResult<crate::Response<crate::types::WorkflowRun>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}",
@@ -2499,7 +2511,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}",
@@ -2539,7 +2551,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<Vec<crate::types::EnvironmentApproval>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::EnvironmentApproval>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/approvals",
@@ -2575,7 +2587,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<Vec<crate::types::EnvironmentApproval>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::EnvironmentApproval>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/approvals",
@@ -2617,7 +2629,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/approve",
@@ -2661,7 +2673,7 @@ impl Actions {
         run_id: i64,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListArtifactsRepoResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListArtifactsRepoResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -2710,7 +2722,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/cancel",
@@ -2758,7 +2770,7 @@ impl Actions {
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListJobsWorkflowRunResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListJobsWorkflowRunResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.to_string().is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
@@ -2813,7 +2825,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/logs",
@@ -2853,7 +2865,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/logs",
@@ -2895,7 +2907,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<Vec<crate::types::PendingDeployment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PendingDeployment>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
@@ -2933,7 +2945,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<Vec<crate::types::PendingDeployment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PendingDeployment>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
@@ -2976,7 +2988,7 @@ impl Actions {
         repo: &str,
         run_id: i64,
         body: &crate::types::ActionsReviewPendingDeploymentsRunRequest,
-    ) -> ClientResult<Vec<crate::types::Deployment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Deployment>>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/pending_deployments",
@@ -3011,7 +3023,12 @@ impl Actions {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> ClientResult<()> {
+    pub async fn re_run_workflow(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/rerun",
@@ -3051,7 +3068,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/rerun-failed-jobs",
@@ -3093,7 +3110,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> ClientResult<crate::types::WorkflowRunUsage> {
+    ) -> ClientResult<crate::Response<crate::types::WorkflowRunUsage>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/runs/{}/timing",
@@ -3135,7 +3152,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListRepoSecretsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListRepoSecretsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3181,7 +3198,7 @@ impl Actions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> ClientResult<crate::types::ActionsPublicKey> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsPublicKey>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/secrets/public-key",
@@ -3220,7 +3237,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         secret_name: &str,
-    ) -> ClientResult<crate::types::ActionsSecret> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsSecret>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/secrets/{}",
@@ -3335,7 +3352,7 @@ impl Actions {
         repo: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/secrets/{}",
@@ -3375,7 +3392,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         secret_name: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/secrets/{}",
@@ -3417,7 +3434,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListRepoWorkflowsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListRepoWorkflowsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3465,7 +3482,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-    ) -> ClientResult<crate::types::Workflow> {
+    ) -> ClientResult<crate::Response<crate::types::Workflow>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/workflows/{}",
@@ -3507,7 +3524,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/workflows/{}/disable",
@@ -3552,7 +3569,7 @@ impl Actions {
         repo: &str,
         workflow_id: &str,
         body: &crate::types::ActionsCreateWorkflowDispatchRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/workflows/{}/dispatches",
@@ -3594,7 +3611,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/workflows/{}/enable",
@@ -3650,7 +3667,7 @@ impl Actions {
         per_page: i64,
         page: i64,
         created: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> ClientResult<crate::types::ActionsListWorkflowRunsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListWorkflowRunsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !actor.is_empty() {
             query_args.push(("actor".to_string(), actor.to_string()));
@@ -3716,7 +3733,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-    ) -> ClientResult<crate::types::WorkflowUsage> {
+    ) -> ClientResult<crate::Response<crate::types::WorkflowUsage>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/actions/workflows/{}/timing",
@@ -3758,7 +3775,7 @@ impl Actions {
         environment_name: &str,
         per_page: i64,
         page: i64,
-    ) -> ClientResult<crate::types::ActionsListRepoSecretsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsListRepoSecretsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -3804,7 +3821,7 @@ impl Actions {
         &self,
         repository_id: i64,
         environment_name: &str,
-    ) -> ClientResult<crate::types::ActionsPublicKey> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsPublicKey>> {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/public-key",
@@ -3843,7 +3860,7 @@ impl Actions {
         repository_id: i64,
         environment_name: &str,
         secret_name: &str,
-    ) -> ClientResult<crate::types::ActionsSecret> {
+    ) -> ClientResult<crate::Response<crate::types::ActionsSecret>> {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",
@@ -3958,7 +3975,7 @@ impl Actions {
         environment_name: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",
@@ -3998,7 +4015,7 @@ impl Actions {
         repository_id: i64,
         environment_name: &str,
         secret_name: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/repositories/{}/environments/{}/secrets/{}",

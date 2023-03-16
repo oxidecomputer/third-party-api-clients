@@ -27,7 +27,7 @@ impl EnvelopeHtmlDefinitions {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::DocumentHtmlDefinitionOriginals> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentHtmlDefinitionOriginals>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/html_definitions",

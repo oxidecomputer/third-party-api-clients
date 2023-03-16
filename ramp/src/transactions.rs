@@ -56,7 +56,7 @@ impl Transactions {
         start: &str,
         page_size: f64,
         requires_memo: bool,
-    ) -> ClientResult<Vec<crate::types::Data>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Data>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -120,7 +120,7 @@ impl Transactions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/transactions?{}", query_), None);
-        let resp: crate::types::GetTransactionResponse = self
+        let resp: crate::Response<crate::types::GetTransactionResponse> = self
             .client
             .get(
                 &url,
@@ -132,7 +132,11 @@ impl Transactions {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List transactions.
@@ -159,7 +163,7 @@ impl Transactions {
         min_amount: f64,
         max_amount: f64,
         requires_memo: bool,
-    ) -> ClientResult<Vec<crate::types::Data>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Data>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
@@ -217,7 +221,11 @@ impl Transactions {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/transactions?{}", query_), None);
-        let resp: crate::types::GetTransactionResponse = self
+        let crate::Response::<crate::types::GetTransactionResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -228,8 +236,8 @@ impl Transactions {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -245,10 +253,12 @@ impl Transactions {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -264,7 +274,7 @@ impl Transactions {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * GET a transaction.
@@ -277,7 +287,10 @@ impl Transactions {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resource(&self, id: &str) -> ClientResult<crate::types::Data> {
+    pub async fn get_resource(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Data>> {
         let url = self.client.url(
             &format!(
                 "/transactions/{}",

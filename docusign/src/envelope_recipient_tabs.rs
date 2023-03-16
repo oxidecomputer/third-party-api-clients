@@ -39,7 +39,7 @@ impl EnvelopeRecipientTabs {
         recipient_id: &str,
         include_anchor_tab_locations: &str,
         include_metadata: &str,
-    ) -> ClientResult<crate::types::EnvelopeRecipientTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipientTabs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
             query_args.push((
@@ -93,7 +93,7 @@ impl EnvelopeRecipientTabs {
         envelope_id: &str,
         recipient_id: &str,
         body: &crate::types::EnvelopeRecipientTabs,
-    ) -> ClientResult<crate::types::EnvelopeRecipientTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipientTabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",
@@ -132,7 +132,7 @@ impl EnvelopeRecipientTabs {
         envelope_id: &str,
         recipient_id: &str,
         body: &crate::types::EnvelopeRecipientTabs,
-    ) -> ClientResult<crate::types::EnvelopeRecipientTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipientTabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",
@@ -171,7 +171,7 @@ impl EnvelopeRecipientTabs {
         envelope_id: &str,
         recipient_id: &str,
         body: &crate::types::EnvelopeRecipientTabs,
-    ) -> ClientResult<crate::types::EnvelopeRecipientTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeRecipientTabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",

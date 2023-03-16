@@ -27,7 +27,7 @@ impl Revisions {
         file_id: &str,
         page_size: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Revision>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Revision>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -44,7 +44,7 @@ impl Revisions {
             ),
             None,
         );
-        let resp: crate::types::RevisionList = self
+        let resp: crate::Response<crate::types::RevisionList> = self
             .client
             .get(
                 &url,
@@ -56,7 +56,11 @@ impl Revisions {
             .await?;
 
         // Return our response data.
-        Ok(resp.revisions.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.revisions.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
@@ -65,7 +69,10 @@ impl Revisions {
      *
      * Lists a file's revisions.
      */
-    pub async fn list_all(&self, file_id: &str) -> ClientResult<Vec<crate::types::Revision>> {
+    pub async fn list_all(
+        &self,
+        file_id: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Revision>>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions",
@@ -73,7 +80,11 @@ impl Revisions {
             ),
             None,
         );
-        let mut resp: crate::types::RevisionList = self
+        let crate::Response::<crate::types::RevisionList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -84,13 +95,17 @@ impl Revisions {
             )
             .await?;
 
-        let mut revisions = resp.revisions;
-        let mut page = resp.next_page_token;
+        let mut revisions = body.revisions;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::RevisionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -101,7 +116,11 @@ impl Revisions {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::RevisionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -113,17 +132,17 @@ impl Revisions {
                     .await?;
             }
 
-            revisions.append(&mut resp.revisions);
+            revisions.append(&mut body.revisions);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(revisions)
+        Ok(crate::Response::new(status, headers, revisions))
     }
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
@@ -141,7 +160,7 @@ impl Revisions {
         file_id: &str,
         revision_id: &str,
         acknowledge_abuse: bool,
-    ) -> ClientResult<crate::types::Revision> {
+    ) -> ClientResult<crate::Response<crate::types::Revision>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
@@ -179,7 +198,11 @@ impl Revisions {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `revision_id: &str` -- A link to this theme's background image.
      */
-    pub async fn delete(&self, file_id: &str, revision_id: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        file_id: &str,
+        revision_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",
@@ -213,7 +236,7 @@ impl Revisions {
         file_id: &str,
         revision_id: &str,
         body: &crate::types::Revision,
-    ) -> ClientResult<crate::types::Revision> {
+    ) -> ClientResult<crate::Response<crate::types::Revision>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/revisions/{}",

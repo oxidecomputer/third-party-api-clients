@@ -37,7 +37,7 @@ impl Logs {
         limit: i64,
         sort_order: &str,
         after: &str,
-    ) -> ClientResult<Vec<crate::types::LogEvent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LogEvent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
             query_args.push(("after".to_string(), after.to_string()));
@@ -88,7 +88,7 @@ impl Logs {
         filter: &str,
         q: &str,
         sort_order: &str,
-    ) -> ClientResult<Vec<crate::types::LogEvent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LogEvent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));

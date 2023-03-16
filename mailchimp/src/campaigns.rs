@@ -53,7 +53,7 @@ impl Campaigns {
         member_id: &str,
         sort_field: crate::types::SortField,
         sort_dir: crate::types::SortDir,
-    ) -> ClientResult<crate::types::GetCampaignsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCampaignsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = before_create_time {
             query_args.push(("before_create_time".to_string(), date.to_rfc3339()));
@@ -122,7 +122,7 @@ impl Campaigns {
     pub async fn post(
         &self,
         body: &crate::types::CreatedCampaign,
-    ) -> ClientResult<crate::types::Campaign> {
+    ) -> ClientResult<crate::Response<crate::types::Campaign>> {
         let url = self.client.url("/campaigns", None);
         self.client
             .post(
@@ -152,7 +152,7 @@ impl Campaigns {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::Campaign> {
+    ) -> ClientResult<crate::Response<crate::types::Campaign>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -190,7 +190,7 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn delete(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
@@ -223,7 +223,7 @@ impl Campaigns {
         &self,
         campaign_id: &str,
         body: &crate::types::CampaignData,
-    ) -> ClientResult<crate::types::Campaign> {
+    ) -> ClientResult<crate::Response<crate::types::Campaign>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}",
@@ -252,7 +252,10 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn post_actions_cancel_send(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_cancel_send(
+        &self,
+        campaign_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/cancel-send",
@@ -284,7 +287,7 @@ impl Campaigns {
     pub async fn post_actions_replicate(
         &self,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignDataType> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignDataType>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/replicate",
@@ -313,7 +316,7 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn post_actions_send(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_send(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/send",
@@ -346,7 +349,7 @@ impl Campaigns {
         &self,
         campaign_id: &str,
         body: &crate::types::PostCampaignsActionsScheduleRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/schedule",
@@ -375,7 +378,10 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn post_actions_unschedule(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_unschedule(
+        &self,
+        campaign_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/unschedule",
@@ -408,7 +414,7 @@ impl Campaigns {
         &self,
         campaign_id: &str,
         body: &crate::types::PostCampaignsActionsTestRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/test",
@@ -437,7 +443,7 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn post_actions_pause(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_pause(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/pause",
@@ -466,7 +472,10 @@ impl Campaigns {
      *
      * * `campaign_id: &str` -- The unique id for the campaign.
      */
-    pub async fn post_actions_resume(&self, campaign_id: &str) -> ClientResult<()> {
+    pub async fn post_actions_resume(
+        &self,
+        campaign_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/resume",
@@ -498,7 +507,7 @@ impl Campaigns {
     pub async fn post_actions_create_resend(
         &self,
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignDataType> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignDataType>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/actions/create-resend",
@@ -534,7 +543,7 @@ impl Campaigns {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignContent> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignContent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -576,7 +585,7 @@ impl Campaigns {
         &self,
         campaign_id: &str,
         body: &crate::types::CampaignContentData,
-    ) -> ClientResult<crate::types::CampaignContent> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignContent>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/content",
@@ -612,7 +621,7 @@ impl Campaigns {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::CampaignReports> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignReports>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -654,7 +663,7 @@ impl Campaigns {
         &self,
         campaign_id: &str,
         body: &crate::types::CampaignFeedback,
-    ) -> ClientResult<crate::types::CampaignFeedbackData> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignFeedbackData>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback",
@@ -692,7 +701,7 @@ impl Campaigns {
         exclude_fields: &[String],
         campaign_id: &str,
         feedback_id: &str,
-    ) -> ClientResult<crate::types::CampaignFeedbackData> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignFeedbackData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -732,7 +741,11 @@ impl Campaigns {
      * * `campaign_id: &str` -- The unique id for the campaign.
      * * `feedback_id: &str` -- The unique id for the feedback message.
      */
-    pub async fn delete_feedback(&self, campaign_id: &str, feedback_id: &str) -> ClientResult<()> {
+    pub async fn delete_feedback(
+        &self,
+        campaign_id: &str,
+        feedback_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback/{}",
@@ -768,7 +781,7 @@ impl Campaigns {
         campaign_id: &str,
         feedback_id: &str,
         body: &crate::types::CampaignFeedbackDataType,
-    ) -> ClientResult<crate::types::CampaignFeedbackData> {
+    ) -> ClientResult<crate::Response<crate::types::CampaignFeedbackData>> {
         let url = self.client.url(
             &format!(
                 "/campaigns/{}/feedback/{}",
@@ -805,7 +818,7 @@ impl Campaigns {
         fields: &[String],
         exclude_fields: &[String],
         campaign_id: &str,
-    ) -> ClientResult<crate::types::SendChecklist> {
+    ) -> ClientResult<crate::Response<crate::types::SendChecklist>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

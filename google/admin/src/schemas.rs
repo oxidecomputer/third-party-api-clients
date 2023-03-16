@@ -20,7 +20,10 @@ impl Schemas {
      *
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn list(&self, customer_id: &str) -> ClientResult<crate::types::Schemas> {
+    pub async fn list(
+        &self,
+        customer_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Schemas>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas",
@@ -51,7 +54,7 @@ impl Schemas {
         &self,
         customer_id: &str,
         body: &crate::types::Schema,
-    ) -> ClientResult<crate::types::Schema> {
+    ) -> ClientResult<crate::Response<crate::types::Schema>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas",
@@ -83,7 +86,7 @@ impl Schemas {
         &self,
         customer_id: &str,
         schema_key: &str,
-    ) -> ClientResult<crate::types::Schema> {
+    ) -> ClientResult<crate::Response<crate::types::Schema>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
@@ -117,7 +120,7 @@ impl Schemas {
         customer_id: &str,
         schema_key: &str,
         body: &crate::types::Schema,
-    ) -> ClientResult<crate::types::Schema> {
+    ) -> ClientResult<crate::Response<crate::types::Schema>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
@@ -146,7 +149,11 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
-    pub async fn delete(&self, customer_id: &str, schema_key: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        customer_id: &str,
+        schema_key: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",
@@ -180,7 +187,7 @@ impl Schemas {
         customer_id: &str,
         schema_key: &str,
         body: &crate::types::Schema,
-    ) -> ClientResult<crate::types::Schema> {
+    ) -> ClientResult<crate::Response<crate::types::Schema>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/schemas/{}",

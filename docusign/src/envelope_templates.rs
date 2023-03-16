@@ -36,7 +36,7 @@ impl EnvelopeTemplates {
         document_id: &str,
         envelope_id: &str,
         include: &str,
-    ) -> ClientResult<crate::types::TemplateInformation> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -83,7 +83,7 @@ impl EnvelopeTemplates {
         envelope_id: &str,
         preserve_template_recipient: &str,
         body: &crate::types::DocumentTemplateList,
-    ) -> ClientResult<crate::types::DocumentTemplateList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentTemplateList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !preserve_template_recipient.is_empty() {
             query_args.push((
@@ -132,7 +132,7 @@ impl EnvelopeTemplates {
         document_id: &str,
         envelope_id: &str,
         template_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates/{}",
@@ -172,7 +172,7 @@ impl EnvelopeTemplates {
         account_id: &str,
         envelope_id: &str,
         include: &str,
-    ) -> ClientResult<crate::types::TemplateInformation> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -216,7 +216,7 @@ impl EnvelopeTemplates {
         envelope_id: &str,
         preserve_template_recipient: &str,
         body: &crate::types::DocumentTemplateList,
-    ) -> ClientResult<crate::types::DocumentTemplateList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentTemplateList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !preserve_template_recipient.is_empty() {
             query_args.push((

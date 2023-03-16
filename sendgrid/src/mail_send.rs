@@ -63,7 +63,10 @@ impl MailSend {
      *    a. `--data-binary '@data.json.gz'
      * `
      */
-    pub async fn post(&self, body: &crate::types::PostMailSendRequest) -> ClientResult<()> {
+    pub async fn post(
+        &self,
+        body: &crate::types::PostMailSendRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/mail/send", None);
         self.client
             .post(

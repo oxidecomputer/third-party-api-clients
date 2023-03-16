@@ -28,7 +28,7 @@ impl Workflows {
         &self,
         workflow_step_execute_id: &str,
         outputs: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !outputs.is_empty() {
             query_args.push(("outputs".to_string(), outputs.to_string()));
@@ -70,7 +70,7 @@ impl Workflows {
         &self,
         workflow_step_execute_id: &str,
         error: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !error.is_empty() {
             query_args.push(("error".to_string(), error.to_string()));
@@ -118,7 +118,7 @@ impl Workflows {
         outputs: &str,
         step_name: &str,
         step_image_url: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !inputs.is_empty() {
             query_args.push(("inputs".to_string(), inputs.to_string()));

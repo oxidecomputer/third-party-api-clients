@@ -30,7 +30,7 @@ impl ApplePay {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::ApplePayDomain>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ApplePayDomain>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain_name.is_empty() {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
@@ -48,7 +48,7 @@ impl ApplePay {
         let url = self
             .client
             .url(&format!("/v1/apple_pay/domains?{}", query_), None);
-        let resp: crate::types::ApplePayDomainList = self
+        let resp: crate::Response<crate::types::ApplePayDomainList> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl ApplePay {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/apple_pay/domains` endpoint.
@@ -72,7 +76,7 @@ impl ApplePay {
     pub async fn get_all_domains(
         &self,
         domain_name: &str,
-    ) -> ClientResult<Vec<crate::types::ApplePayDomain>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ApplePayDomain>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain_name.is_empty() {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
@@ -81,7 +85,11 @@ impl ApplePay {
         let url = self
             .client
             .url(&format!("/v1/apple_pay/domains?{}", query_), None);
-        let mut resp: crate::types::ApplePayDomainList = self
+        let crate::Response::<crate::types::ApplePayDomainList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -92,8 +100,8 @@ impl ApplePay {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -109,7 +117,11 @@ impl ApplePay {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ApplePayDomainList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -120,7 +132,11 @@ impl ApplePay {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ApplePayDomainList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -132,20 +148,20 @@ impl ApplePay {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/apple_pay/domains` endpoint.
      *
      * <p>Create an apple pay domain.</p>
      */
-    pub async fn post_domain(&self) -> ClientResult<crate::types::ApplePayDomain> {
+    pub async fn post_domain(&self) -> ClientResult<crate::Response<crate::types::ApplePayDomain>> {
         let url = self.client.url("/v1/apple_pay/domains", None);
         self.client
             .post(
@@ -170,7 +186,7 @@ impl ApplePay {
     pub async fn get_domains_domain(
         &self,
         domain: &str,
-    ) -> ClientResult<crate::types::ApplePayDomain> {
+    ) -> ClientResult<crate::Response<crate::types::ApplePayDomain>> {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",
@@ -200,7 +216,7 @@ impl ApplePay {
     pub async fn delete_domains_domain(
         &self,
         domain: &str,
-    ) -> ClientResult<crate::types::DeletedApplePayDomain> {
+    ) -> ClientResult<crate::Response<crate::types::DeletedApplePayDomain>> {
         let url = self.client.url(
             &format!(
                 "/v1/apple_pay/domains/{}",

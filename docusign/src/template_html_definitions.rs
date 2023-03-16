@@ -27,7 +27,7 @@ impl TemplateHtmlDefinitions {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::DocumentHtmlDefinitionOriginals> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentHtmlDefinitionOriginals>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/html_definitions",

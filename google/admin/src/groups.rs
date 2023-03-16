@@ -37,7 +37,7 @@ impl Groups {
         query: &str,
         sort_order: crate::types::SortOrder,
         user_key: &str,
-    ) -> ClientResult<Vec<crate::types::Group>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Group>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -67,7 +67,7 @@ impl Groups {
         let url = self
             .client
             .url(&format!("/admin/directory/v1/groups?{}", query_), None);
-        let resp: crate::types::Groups = self
+        let resp: crate::Response<crate::types::Groups> = self
             .client
             .get(
                 &url,
@@ -79,7 +79,11 @@ impl Groups {
             .await?;
 
         // Return our response data.
-        Ok(resp.groups.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.groups.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups` endpoint.
@@ -96,7 +100,7 @@ impl Groups {
         query: &str,
         sort_order: crate::types::SortOrder,
         user_key: &str,
-    ) -> ClientResult<Vec<crate::types::Group>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Group>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -120,7 +124,11 @@ impl Groups {
         let url = self
             .client
             .url(&format!("/admin/directory/v1/groups?{}", query_), None);
-        let mut resp: crate::types::Groups = self
+        let crate::Response::<crate::types::Groups> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -131,13 +139,17 @@ impl Groups {
             )
             .await?;
 
-        let mut groups = resp.groups;
-        let mut page = resp.next_page_token;
+        let mut groups = body.groups;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Groups> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -148,7 +160,11 @@ impl Groups {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Groups> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -160,24 +176,27 @@ impl Groups {
                     .await?;
             }
 
-            groups.append(&mut resp.groups);
+            groups.append(&mut body.groups);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(groups)
+        Ok(crate::Response::new(status, headers, groups))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/groups` endpoint.
      *
      * Creates a group.
      */
-    pub async fn insert(&self, body: &crate::types::Group) -> ClientResult<crate::types::Group> {
+    pub async fn insert(
+        &self,
+        body: &crate::types::Group,
+    ) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url("/admin/directory/v1/groups", None);
         self.client
             .post(
@@ -198,7 +217,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn get(&self, group_key: &str) -> ClientResult<crate::types::Group> {
+    pub async fn get(&self, group_key: &str) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -229,7 +248,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Group,
-    ) -> ClientResult<crate::types::Group> {
+    ) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -256,7 +275,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn delete(&self, group_key: &str) -> ClientResult<()> {
+    pub async fn delete(&self, group_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -287,7 +306,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Group,
-    ) -> ClientResult<crate::types::Group> {
+    ) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}",
@@ -314,7 +333,10 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn aliases_list(&self, group_key: &str) -> ClientResult<crate::types::Aliases> {
+    pub async fn aliases_list(
+        &self,
+        group_key: &str,
+    ) -> ClientResult<crate::Response<crate::types::Aliases>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
@@ -345,7 +367,7 @@ impl Groups {
         &self,
         group_key: &str,
         body: &crate::types::Alias,
-    ) -> ClientResult<crate::types::Alias> {
+    ) -> ClientResult<crate::Response<crate::types::Alias>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases",
@@ -373,7 +395,11 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> ClientResult<()> {
+    pub async fn aliases_delete(
+        &self,
+        group_key: &str,
+        alias: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/aliases/{}",

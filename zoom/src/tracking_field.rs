@@ -23,7 +23,7 @@ impl TrackingField {
      * **Prerequisites:**
      * * Business, Education, API or higher plan
      */
-    pub async fn trackingfield_list(&self) -> ClientResult<crate::types::Domains> {
+    pub async fn trackingfield_list(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url("/tracking_fields", None);
         self.client
             .get(
@@ -50,7 +50,7 @@ impl TrackingField {
     pub async fn trackingfield_create(
         &self,
         body: &crate::types::TrackingField,
-    ) -> ClientResult<crate::types::TrackingfieldGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TrackingfieldGetResponseAllOf>> {
         let url = self.client.url("/tracking_fields", None);
         self.client
             .post(
@@ -82,7 +82,7 @@ impl TrackingField {
     pub async fn trackingfield_get(
         &self,
         field_id: &str,
-    ) -> ClientResult<crate::types::TrackingfieldGetResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::TrackingfieldGetResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",
@@ -116,7 +116,7 @@ impl TrackingField {
      *
      * * `field_id: &str` -- The Tracking Field ID.
      */
-    pub async fn trackingfield_delete(&self, field_id: &str) -> ClientResult<()> {
+    pub async fn trackingfield_delete(&self, field_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",
@@ -154,7 +154,7 @@ impl TrackingField {
         &self,
         field_id: &str,
         body: &crate::types::TrackingField,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/tracking_fields/{}",

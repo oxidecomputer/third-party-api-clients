@@ -30,7 +30,7 @@ impl SubscriptionItems {
         limit: i64,
         starting_after: &str,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::SubscriptionItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -48,7 +48,7 @@ impl SubscriptionItems {
         let url = self
             .client
             .url(&format!("/v1/subscription_items?{}", query_), None);
-        let resp: crate::types::Items = self
+        let resp: crate::Response<crate::types::Items> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl SubscriptionItems {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/subscription_items` endpoint.
@@ -72,7 +76,7 @@ impl SubscriptionItems {
     pub async fn get_all(
         &self,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::SubscriptionItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SubscriptionItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !subscription.is_empty() {
             query_args.push(("subscription".to_string(), subscription.to_string()));
@@ -81,7 +85,11 @@ impl SubscriptionItems {
         let url = self
             .client
             .url(&format!("/v1/subscription_items?{}", query_), None);
-        let mut resp: crate::types::Items = self
+        let crate::Response::<crate::types::Items> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -92,8 +100,8 @@ impl SubscriptionItems {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -109,7 +117,11 @@ impl SubscriptionItems {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Items> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -120,7 +132,11 @@ impl SubscriptionItems {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Items> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -132,20 +148,20 @@ impl SubscriptionItems {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/subscription_items` endpoint.
      *
      * <p>Adds a new item to an existing subscription. No existing items will be changed or replaced.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::SubscriptionItem> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SubscriptionItem>> {
         let url = self.client.url("/v1/subscription_items", None);
         self.client
             .post(
@@ -167,7 +183,10 @@ impl SubscriptionItems {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `item: &str` -- The account's country.
      */
-    pub async fn get_item(&self, item: &str) -> ClientResult<crate::types::SubscriptionItem> {
+    pub async fn get_item(
+        &self,
+        item: &str,
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -194,7 +213,10 @@ impl SubscriptionItems {
      *
      * * `item: &str` -- The account's country.
      */
-    pub async fn post_item(&self, item: &str) -> ClientResult<crate::types::SubscriptionItem> {
+    pub async fn post_item(
+        &self,
+        item: &str,
+    ) -> ClientResult<crate::Response<crate::types::SubscriptionItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -224,7 +246,7 @@ impl SubscriptionItems {
     pub async fn delete_item(
         &self,
         item: &str,
-    ) -> ClientResult<crate::types::DeletedSubscriptionItem> {
+    ) -> ClientResult<crate::Response<crate::types::DeletedSubscriptionItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}",
@@ -263,7 +285,7 @@ impl SubscriptionItems {
         limit: i64,
         starting_after: &str,
         subscription_item: &str,
-    ) -> ClientResult<Vec<crate::types::UsageRecordSummary>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsageRecordSummary>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -283,7 +305,9 @@ impl SubscriptionItems {
             ),
             None,
         );
-        let resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse = self
+        let resp: crate::Response<
+            crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse,
+        > = self
             .client
             .get(
                 &url,
@@ -295,7 +319,11 @@ impl SubscriptionItems {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/subscription_items/{subscription_item}/usage_record_summaries` endpoint.
@@ -309,7 +337,7 @@ impl SubscriptionItems {
     pub async fn get_all_item_usage_record_summaries(
         &self,
         subscription_item: &str,
-    ) -> ClientResult<Vec<crate::types::UsageRecordSummary>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::UsageRecordSummary>>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_record_summaries",
@@ -317,7 +345,11 @@ impl SubscriptionItems {
             ),
             None,
         );
-        let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse = self
+        let crate::Response::<crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -328,8 +360,8 @@ impl SubscriptionItems {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -345,7 +377,13 @@ impl SubscriptionItems {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<
+                    crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse,
+                > {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -356,7 +394,13 @@ impl SubscriptionItems {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<
+                    crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse,
+                > {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -368,13 +412,13 @@ impl SubscriptionItems {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/subscription_items/{subscription_item}/usage_records` endpoint.
@@ -394,7 +438,7 @@ impl SubscriptionItems {
     pub async fn post_item_usage_record(
         &self,
         subscription_item: &str,
-    ) -> ClientResult<crate::types::UsageRecord> {
+    ) -> ClientResult<crate::Response<crate::types::UsageRecord>> {
         let url = self.client.url(
             &format!(
                 "/v1/subscription_items/{}/usage_records",

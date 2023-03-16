@@ -27,7 +27,7 @@ impl ConnectSecret {
         &self,
         account_id: &str,
         key_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/connect/secret/{}",

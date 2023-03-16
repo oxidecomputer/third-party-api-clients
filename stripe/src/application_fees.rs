@@ -32,7 +32,7 @@ impl ApplicationFees {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PlatformFee>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PlatformFee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -50,7 +50,7 @@ impl ApplicationFees {
         let url = self
             .client
             .url(&format!("/v1/application_fees?{}", query_), None);
-        let resp: crate::types::GetApplicationFeesResponse = self
+        let resp: crate::Response<crate::types::GetApplicationFeesResponse> = self
             .client
             .get(
                 &url,
@@ -62,7 +62,11 @@ impl ApplicationFees {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/application_fees` endpoint.
@@ -75,7 +79,7 @@ impl ApplicationFees {
         &self,
         charge: &str,
         _created: &str,
-    ) -> ClientResult<Vec<crate::types::PlatformFee>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PlatformFee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -84,7 +88,11 @@ impl ApplicationFees {
         let url = self
             .client
             .url(&format!("/v1/application_fees?{}", query_), None);
-        let mut resp: crate::types::GetApplicationFeesResponse = self
+        let crate::Response::<crate::types::GetApplicationFeesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -95,8 +103,8 @@ impl ApplicationFees {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -112,7 +120,11 @@ impl ApplicationFees {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetApplicationFeesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -123,7 +135,11 @@ impl ApplicationFees {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetApplicationFeesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -135,13 +151,13 @@ impl ApplicationFees {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/application_fees/{fee}/refunds/{id}` endpoint.
@@ -158,7 +174,7 @@ impl ApplicationFees {
         &self,
         fee: &str,
         id: &str,
-    ) -> ClientResult<crate::types::FeeRefund> {
+    ) -> ClientResult<crate::Response<crate::types::FeeRefund>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds/{}",
@@ -193,7 +209,7 @@ impl ApplicationFees {
         &self,
         fee: &str,
         id: &str,
-    ) -> ClientResult<crate::types::FeeRefund> {
+    ) -> ClientResult<crate::Response<crate::types::FeeRefund>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds/{}",
@@ -222,7 +238,7 @@ impl ApplicationFees {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::PlatformFee> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::PlatformFee>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}",
@@ -249,7 +265,10 @@ impl ApplicationFees {
      *
      * * `id: &str` -- The account's country.
      */
-    pub async fn post_refund(&self, id: &str) -> ClientResult<crate::types::PlatformFee> {
+    pub async fn post_refund(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::PlatformFee>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refund",
@@ -286,7 +305,7 @@ impl ApplicationFees {
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::FeeRefund>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::FeeRefund>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -306,7 +325,7 @@ impl ApplicationFees {
             ),
             None,
         );
-        let resp: crate::types::Refunds = self
+        let resp: crate::Response<crate::types::Refunds> = self
             .client
             .get(
                 &url,
@@ -318,7 +337,11 @@ impl ApplicationFees {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/application_fees/{id}/refunds` endpoint.
@@ -327,7 +350,10 @@ impl ApplicationFees {
      *
      * <p>You can see a list of the refunds belonging to a specific application fee. Note that the 10 most recent refunds are always available by default on the application fee object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
      */
-    pub async fn get_all_refunds(&self, id: &str) -> ClientResult<Vec<crate::types::FeeRefund>> {
+    pub async fn get_all_refunds(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::FeeRefund>>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds",
@@ -335,7 +361,11 @@ impl ApplicationFees {
             ),
             None,
         );
-        let mut resp: crate::types::Refunds = self
+        let crate::Response::<crate::types::Refunds> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -346,8 +376,8 @@ impl ApplicationFees {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -363,7 +393,11 @@ impl ApplicationFees {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Refunds> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -374,7 +408,11 @@ impl ApplicationFees {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Refunds> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -386,13 +424,13 @@ impl ApplicationFees {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/application_fees/{id}/refunds` endpoint.
@@ -414,7 +452,7 @@ impl ApplicationFees {
     pub async fn post_refund_application_fees(
         &self,
         id: &str,
-    ) -> ClientResult<crate::types::FeeRefund> {
+    ) -> ClientResult<crate::Response<crate::types::FeeRefund>> {
         let url = self.client.url(
             &format!(
                 "/v1/application_fees/{}/refunds",

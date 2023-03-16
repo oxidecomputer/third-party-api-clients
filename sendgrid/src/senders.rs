@@ -29,7 +29,7 @@ impl Senders {
     pub async fn post_marketing(
         &self,
         body: &crate::types::PostMarketingSendersRequest,
-    ) -> ClientResult<crate::types::SenderAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::SenderAllOf>> {
         let url = self.client.url("/marketing/senders", None);
         self.client
             .post(

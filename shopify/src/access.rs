@@ -18,7 +18,7 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/accessscope#index-2020-10
      */
-    pub async fn get_admin_oauth_scope(&self) -> ClientResult<()> {
+    pub async fn get_admin_oauth_scope(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/oauth/access_scopes.json", None);
         self.client
             .get(
@@ -37,7 +37,9 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-01
      */
-    pub async fn deprecated_202001_get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_storefront_token(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/storefront_access_tokens.json", None);
@@ -61,7 +63,7 @@ impl Access {
     pub async fn deprecated_202001_create_storefront_tokens(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/storefront_access_tokens.json", None);
@@ -89,7 +91,7 @@ impl Access {
     pub async fn deprecated_202001_delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/storefront_access_tokens/{}/json",
@@ -114,7 +116,9 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-04
      */
-    pub async fn deprecated_202004_get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_storefront_token(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/storefront_access_tokens.json", None);
@@ -138,7 +142,7 @@ impl Access {
     pub async fn deprecated_202004_create_storefront_tokens(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/storefront_access_tokens.json", None);
@@ -166,7 +170,7 @@ impl Access {
     pub async fn deprecated_202004_delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/storefront_access_tokens/{}/json",
@@ -191,7 +195,9 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-07
      */
-    pub async fn deprecated_202007_get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_storefront_token(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/storefront_access_tokens.json", None);
@@ -215,7 +221,7 @@ impl Access {
     pub async fn deprecated_202007_create_storefront_tokens(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/storefront_access_tokens.json", None);
@@ -243,7 +249,7 @@ impl Access {
     pub async fn deprecated_202007_delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/storefront_access_tokens/{}/json",
@@ -268,7 +274,7 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2020-10
      */
-    pub async fn get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn get_storefront_token(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/storefront_access_tokens.json", None);
@@ -289,7 +295,10 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#create-2020-10
      */
-    pub async fn create_storefront_tokens(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_storefront_tokens(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/storefront_access_tokens.json", None);
@@ -317,7 +326,7 @@ impl Access {
     pub async fn delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/storefront_access_tokens/{}/json",
@@ -342,7 +351,9 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-2021-01
      */
-    pub async fn deprecated_202101_get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_storefront_token(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/storefront_access_tokens.json", None);
@@ -366,7 +377,7 @@ impl Access {
     pub async fn deprecated_202101_create_storefront_tokens(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/storefront_access_tokens.json", None);
@@ -394,7 +405,7 @@ impl Access {
     pub async fn deprecated_202101_delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/storefront_access_tokens/{}/json",
@@ -419,7 +430,9 @@ impl Access {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/access/storefrontaccesstoken#index-unstable
      */
-    pub async fn deprecated_unstable_get_storefront_token(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_storefront_token(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/storefront_access_tokens.json", None);
@@ -443,7 +456,7 @@ impl Access {
     pub async fn deprecated_unstable_create_storefront_tokens(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/storefront_access_tokens.json", None);
@@ -471,7 +484,7 @@ impl Access {
     pub async fn deprecated_unstable_delete_storefront_tokens_param_token(
         &self,
         storefront_access_token_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/storefront_access_tokens/{}/json",

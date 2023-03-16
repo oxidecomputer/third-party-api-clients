@@ -21,7 +21,7 @@ impl EmailAddressValidation {
     pub async fn post_validations_email(
         &self,
         body: &crate::types::PostValidationsEmailRequest,
-    ) -> ClientResult<crate::types::PostValidationsEmailResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostValidationsEmailResponse>> {
         let url = self.client.url("/validations/email", None);
         self.client
             .post(

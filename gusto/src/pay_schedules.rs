@@ -21,7 +21,7 @@ impl PaySchedules {
     pub async fn get_company(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::PaySchedule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaySchedule>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules",
@@ -51,7 +51,7 @@ impl PaySchedules {
     pub async fn get_all_company(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::PaySchedule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PaySchedule>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules",
@@ -80,7 +80,7 @@ impl PaySchedules {
         &self,
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
-    ) -> ClientResult<crate::types::PaySchedule> {
+    ) -> ClientResult<crate::Response<crate::types::PaySchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules/{}",
@@ -113,7 +113,7 @@ impl PaySchedules {
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
         body: &crate::types::PutCompanyPaySchedulesScheduleRequest,
-    ) -> ClientResult<crate::types::PaySchedule> {
+    ) -> ClientResult<crate::Response<crate::types::PaySchedule>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/pay_schedules/{}",

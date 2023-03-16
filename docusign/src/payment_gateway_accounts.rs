@@ -25,7 +25,7 @@ impl PaymentGatewayAccounts {
     pub async fn get_all(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::PaymentGatewayAccountsInfo> {
+    ) -> ClientResult<crate::Response<crate::types::PaymentGatewayAccountsInfo>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/payment_gateway_accounts",

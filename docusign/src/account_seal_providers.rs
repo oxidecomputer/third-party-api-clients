@@ -25,7 +25,7 @@ impl AccountSealProviders {
     pub async fn account_signature_providers_get_seal(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::AccountSealProviders> {
+    ) -> ClientResult<crate::Response<crate::types::AccountSealProviders>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/seals",

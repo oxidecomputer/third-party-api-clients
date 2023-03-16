@@ -33,7 +33,7 @@ impl Acl {
         max_results: i64,
         page_token: &str,
         show_deleted: bool,
-    ) -> ClientResult<Vec<crate::types::AclRule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AclRule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -53,7 +53,7 @@ impl Acl {
             ),
             None,
         );
-        let resp: crate::types::Acl = self
+        let resp: crate::Response<crate::types::Acl> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Acl {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/acl` endpoint.
@@ -78,7 +82,7 @@ impl Acl {
         &self,
         calendar_id: &str,
         show_deleted: bool,
-    ) -> ClientResult<Vec<crate::types::AclRule>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::AclRule>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if show_deleted {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
@@ -92,7 +96,11 @@ impl Acl {
             ),
             None,
         );
-        let mut resp: crate::types::Acl = self
+        let crate::Response::<crate::types::Acl> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -103,13 +111,17 @@ impl Acl {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Acl> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -120,7 +132,11 @@ impl Acl {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Acl> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -132,17 +148,17 @@ impl Acl {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/calendars/{calendarId}/acl` endpoint.
@@ -159,7 +175,7 @@ impl Acl {
         calendar_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> ClientResult<crate::types::AclRule> {
+    ) -> ClientResult<crate::Response<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -209,7 +225,7 @@ impl Acl {
         page_token: &str,
         show_deleted: bool,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -253,7 +269,7 @@ impl Acl {
         &self,
         calendar_id: &str,
         rule_id: &str,
-    ) -> ClientResult<crate::types::AclRule> {
+    ) -> ClientResult<crate::Response<crate::types::AclRule>> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
@@ -289,7 +305,7 @@ impl Acl {
         rule_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> ClientResult<crate::types::AclRule> {
+    ) -> ClientResult<crate::Response<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
@@ -327,7 +343,11 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `rule_id: &str` -- ETag of the collection.
      */
-    pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        calendar_id: &str,
+        rule_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/calendars/{}/acl/{}",
@@ -363,7 +383,7 @@ impl Acl {
         rule_id: &str,
         send_notifications: bool,
         body: &crate::types::AclRule,
-    ) -> ClientResult<crate::types::AclRule> {
+    ) -> ClientResult<crate::Response<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((

@@ -39,7 +39,7 @@ impl EnvelopeDocuments {
         include_tabs: &str,
         recipient_id: &str,
         shared_user_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentsResult>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !documents_by_userid.is_empty() {
             query_args.push((
@@ -111,7 +111,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
@@ -170,7 +170,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> ClientResult<crate::types::EnvelopeDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents",
@@ -229,7 +229,7 @@ impl EnvelopeDocuments {
         shared_user_id: &str,
         show_changes: &str,
         watermark: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !certificate.is_empty() {
             query_args.push(("certificate".to_string(), certificate.to_string()));
@@ -316,7 +316,7 @@ impl EnvelopeDocuments {
         account_id: &str,
         document_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeDocument> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocument>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}",

@@ -32,7 +32,7 @@ impl Radar {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::RadarEarlyFraudWarning>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarEarlyFraudWarning>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -53,7 +53,7 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
-        let resp: crate::types::RadarEarlyFraudWarningList = self
+        let resp: crate::Response<crate::types::RadarEarlyFraudWarningList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Radar {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings` endpoint.
@@ -78,7 +82,7 @@ impl Radar {
         &self,
         charge: &str,
         payment_intent: &str,
-    ) -> ClientResult<Vec<crate::types::RadarEarlyFraudWarning>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarEarlyFraudWarning>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -90,7 +94,11 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
-        let mut resp: crate::types::RadarEarlyFraudWarningList = self
+        let crate::Response::<crate::types::RadarEarlyFraudWarningList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -101,8 +109,8 @@ impl Radar {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -118,7 +126,11 @@ impl Radar {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::RadarEarlyFraudWarningList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -129,7 +141,11 @@ impl Radar {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::RadarEarlyFraudWarningList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -141,13 +157,13 @@ impl Radar {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/radar/early_fraud_warnings/{early_fraud_warning}` endpoint.
@@ -164,7 +180,7 @@ impl Radar {
     pub async fn get_early_fraud_warnings_warning(
         &self,
         early_fraud_warning: &str,
-    ) -> ClientResult<crate::types::RadarEarlyFraudWarning> {
+    ) -> ClientResult<crate::Response<crate::types::RadarEarlyFraudWarning>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/early_fraud_warnings/{}",
@@ -205,7 +221,7 @@ impl Radar {
         starting_after: &str,
         value: &str,
         value_list: &str,
-    ) -> ClientResult<Vec<crate::types::RadarListItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -226,7 +242,7 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/value_list_items?{}", query_), None);
-        let resp: crate::types::ListItems = self
+        let resp: crate::Response<crate::types::ListItems> = self
             .client
             .get(
                 &url,
@@ -238,7 +254,11 @@ impl Radar {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
@@ -252,7 +272,7 @@ impl Radar {
         _created: &str,
         value: &str,
         value_list: &str,
-    ) -> ClientResult<Vec<crate::types::RadarListItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !value.is_empty() {
             query_args.push(("value".to_string(), value.to_string()));
@@ -264,7 +284,11 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/value_list_items?{}", query_), None);
-        let mut resp: crate::types::ListItems = self
+        let crate::Response::<crate::types::ListItems> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -275,8 +299,8 @@ impl Radar {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -292,7 +316,11 @@ impl Radar {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -303,7 +331,11 @@ impl Radar {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -315,20 +347,22 @@ impl Radar {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/radar/value_list_items` endpoint.
      *
      * <p>Creates a new <code>ValueListItem</code> object, which is added to the specified parent value list.</p>
      */
-    pub async fn post_value_list_item(&self) -> ClientResult<crate::types::RadarListItem> {
+    pub async fn post_value_list_item(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
         let url = self.client.url("/v1/radar/value_list_items", None);
         self.client
             .post(
@@ -353,7 +387,7 @@ impl Radar {
     pub async fn get_value_list_items_item(
         &self,
         item: &str,
-    ) -> ClientResult<crate::types::RadarListItem> {
+    ) -> ClientResult<crate::Response<crate::types::RadarListItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
@@ -383,7 +417,7 @@ impl Radar {
     pub async fn delete_value_list_items_item(
         &self,
         item: &str,
-    ) -> ClientResult<crate::types::RadarListDeletedItem> {
+    ) -> ClientResult<crate::Response<crate::types::RadarListDeletedItem>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_list_items/{}",
@@ -424,7 +458,7 @@ impl Radar {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::RadarList>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
             query_args.push(("alias".to_string(), alias.to_string()));
@@ -445,7 +479,7 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/value_lists?{}", query_), None);
-        let resp: crate::types::GetRadarValueListsResponse = self
+        let resp: crate::Response<crate::types::GetRadarValueListsResponse> = self
             .client
             .get(
                 &url,
@@ -457,7 +491,11 @@ impl Radar {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
@@ -471,7 +509,7 @@ impl Radar {
         alias: &str,
         contains: &str,
         _created: &str,
-    ) -> ClientResult<Vec<crate::types::RadarList>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
             query_args.push(("alias".to_string(), alias.to_string()));
@@ -483,7 +521,11 @@ impl Radar {
         let url = self
             .client
             .url(&format!("/v1/radar/value_lists?{}", query_), None);
-        let mut resp: crate::types::GetRadarValueListsResponse = self
+        let crate::Response::<crate::types::GetRadarValueListsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -494,8 +536,8 @@ impl Radar {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -511,7 +553,11 @@ impl Radar {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetRadarValueListsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -522,7 +568,11 @@ impl Radar {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetRadarValueListsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -534,20 +584,20 @@ impl Radar {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/radar/value_lists` endpoint.
      *
      * <p>Creates a new <code>ValueList</code> object, which can then be referenced in rules.</p>
      */
-    pub async fn post_value_list(&self) -> ClientResult<crate::types::RadarList> {
+    pub async fn post_value_list(&self) -> ClientResult<crate::Response<crate::types::RadarList>> {
         let url = self.client.url("/v1/radar/value_lists", None);
         self.client
             .post(
@@ -572,7 +622,7 @@ impl Radar {
     pub async fn get_value_lists_list(
         &self,
         value_list: &str,
-    ) -> ClientResult<crate::types::RadarList> {
+    ) -> ClientResult<crate::Response<crate::types::RadarList>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
@@ -602,7 +652,7 @@ impl Radar {
     pub async fn post_value_lists_list(
         &self,
         value_list: &str,
-    ) -> ClientResult<crate::types::RadarList> {
+    ) -> ClientResult<crate::Response<crate::types::RadarList>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",
@@ -632,7 +682,7 @@ impl Radar {
     pub async fn delete_value_lists_list(
         &self,
         value_list: &str,
-    ) -> ClientResult<crate::types::RadarListDeleted> {
+    ) -> ClientResult<crate::Response<crate::types::RadarListDeleted>> {
         let url = self.client.url(
             &format!(
                 "/v1/radar/value_lists/{}",

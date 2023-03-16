@@ -36,7 +36,7 @@ impl Search {
         query: &str,
         sort: &str,
         sort_dir: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

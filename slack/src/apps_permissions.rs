@@ -22,7 +22,9 @@ impl AppsPermissions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
-    pub async fn info(&self) -> ClientResult<crate::types::AppsPermissionsInfoSchema> {
+    pub async fn info(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::AppsPermissionsInfoSchema>> {
         let url = self.client.url("/apps.permissions.info", None);
         self.client
             .get(
@@ -51,7 +53,7 @@ impl AppsPermissions {
         &self,
         scopes: &str,
         trigger_id: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scopes.is_empty() {
             query_args.push(("scopes".to_string(), scopes.to_string()));

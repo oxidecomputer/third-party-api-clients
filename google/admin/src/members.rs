@@ -25,7 +25,7 @@ impl Members {
         &self,
         group_key: &str,
         member_key: &str,
-    ) -> ClientResult<crate::types::MembersHasMember> {
+    ) -> ClientResult<crate::Response<crate::types::MembersHasMember>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/hasMember/{}",
@@ -64,7 +64,7 @@ impl Members {
         max_results: i64,
         page_token: &str,
         roles: &str,
-    ) -> ClientResult<Vec<crate::types::Member>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Member>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
@@ -90,7 +90,7 @@ impl Members {
             ),
             None,
         );
-        let resp: crate::types::Members = self
+        let resp: crate::Response<crate::types::Members> = self
             .client
             .get(
                 &url,
@@ -102,7 +102,11 @@ impl Members {
             .await?;
 
         // Return our response data.
-        Ok(resp.members.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.members.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
@@ -116,7 +120,7 @@ impl Members {
         group_key: &str,
         include_derived_membership: bool,
         roles: &str,
-    ) -> ClientResult<Vec<crate::types::Member>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Member>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
@@ -136,7 +140,11 @@ impl Members {
             ),
             None,
         );
-        let mut resp: crate::types::Members = self
+        let crate::Response::<crate::types::Members> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -147,13 +155,17 @@ impl Members {
             )
             .await?;
 
-        let mut members = resp.members;
-        let mut page = resp.next_page_token;
+        let mut members = body.members;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Members> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -164,7 +176,11 @@ impl Members {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Members> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -176,17 +192,17 @@ impl Members {
                     .await?;
             }
 
-            members.append(&mut resp.members);
+            members.append(&mut body.members);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(members)
+        Ok(crate::Response::new(status, headers, members))
     }
     /**
      * This function performs a `POST` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
@@ -201,7 +217,7 @@ impl Members {
         &self,
         group_key: &str,
         body: &crate::types::Member,
-    ) -> ClientResult<crate::types::Member> {
+    ) -> ClientResult<crate::Response<crate::types::Member>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members",
@@ -233,7 +249,7 @@ impl Members {
         &self,
         group_key: &str,
         member_key: &str,
-    ) -> ClientResult<crate::types::Member> {
+    ) -> ClientResult<crate::Response<crate::types::Member>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -267,7 +283,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
-    ) -> ClientResult<crate::types::Member> {
+    ) -> ClientResult<crate::Response<crate::types::Member>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -296,7 +312,11 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn delete(&self, group_key: &str, member_key: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        group_key: &str,
+        member_key: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",
@@ -330,7 +350,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
-    ) -> ClientResult<crate::types::Member> {
+    ) -> ClientResult<crate::Response<crate::types::Member>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/groups/{}/members/{}",

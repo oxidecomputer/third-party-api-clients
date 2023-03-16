@@ -18,7 +18,7 @@ impl Domains {
      *
      * List all verified custom Domains for the org.
      */
-    pub async fn list(&self) -> ClientResult<crate::types::DomainListResponse> {
+    pub async fn list(&self) -> ClientResult<crate::Response<crate::types::DomainListResponse>> {
         let url = self.client.url("/api/v1/domains", None);
         self.client
             .get(
@@ -37,7 +37,10 @@ impl Domains {
      *
      * Creates your domain.
      */
-    pub async fn create(&self, body: &crate::types::Domain) -> ClientResult<crate::types::Domain> {
+    pub async fn create(
+        &self,
+        body: &crate::types::Domain,
+    ) -> ClientResult<crate::Response<crate::types::Domain>> {
         let url = self.client.url("/api/v1/domains", None);
         self.client
             .post(
@@ -60,7 +63,10 @@ impl Domains {
      *
      * * `domain_id: &str`
      */
-    pub async fn get(&self, domain_id: &str) -> ClientResult<crate::types::Domain> {
+    pub async fn get(
+        &self,
+        domain_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Domain>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}",
@@ -89,7 +95,7 @@ impl Domains {
      *
      * * `domain_id: &str`
      */
-    pub async fn delete(&self, domain_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, domain_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}",
@@ -122,7 +128,7 @@ impl Domains {
         &self,
         domain_id: &str,
         body: &crate::types::DomainCertificate,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}/certificate",
@@ -151,7 +157,10 @@ impl Domains {
      *
      * * `domain_id: &str`
      */
-    pub async fn verify(&self, domain_id: &str) -> ClientResult<crate::types::Domain> {
+    pub async fn verify(
+        &self,
+        domain_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Domain>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/domains/{}/verify",

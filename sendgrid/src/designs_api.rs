@@ -22,7 +22,10 @@ impl DesignsApi {
      *
      * This endpoint is valuable when retrieving information stored in a field that you wish to update using a PATCH request.
      */
-    pub async fn get_design(&self, id: &str) -> ClientResult<crate::types::DesignOutputAllOf> {
+    pub async fn get_design(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
             &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -55,7 +58,7 @@ impl DesignsApi {
         &self,
         id: &str,
         body: &crate::types::DesignDuplicateInput,
-    ) -> ClientResult<crate::types::DesignOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
             &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -79,7 +82,10 @@ impl DesignsApi {
      *
      * Be sure to check the ID of the design you intend to delete before making this request; deleting a design is a permanent action.
      */
-    pub async fn delete_design(&self, id: &str) -> ClientResult<crate::types::Help> {
+    pub async fn delete_design(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Help>> {
         let url = self.client.url(
             &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -115,7 +121,7 @@ impl DesignsApi {
         &self,
         id: &str,
         body: &crate::types::PutDesignRequest,
-    ) -> ClientResult<crate::types::DesignOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
             &format!("/designs/{}", crate::progenitor_support::encode_path(id),),
             None,
@@ -152,7 +158,7 @@ impl DesignsApi {
         page_size: u64,
         page_token: &str,
         summary: bool,
-    ) -> ClientResult<crate::types::ListDesignsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListDesignsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -191,7 +197,7 @@ impl DesignsApi {
     pub async fn post_design(
         &self,
         body: &crate::types::DesignInputAllOf,
-    ) -> ClientResult<crate::types::DesignOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url("/designs", None);
         self.client
             .post(
@@ -217,7 +223,7 @@ impl DesignsApi {
     pub async fn get_sendgrid_pre_built_design(
         &self,
         id: &str,
-    ) -> ClientResult<crate::types::DesignOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/designs/pre-builts/{}",
@@ -251,7 +257,7 @@ impl DesignsApi {
         &self,
         id: &str,
         body: &crate::types::DesignDuplicateInput,
-    ) -> ClientResult<crate::types::DesignOutputAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DesignOutputAllOf>> {
         let url = self.client.url(
             &format!(
                 "/designs/pre-builts/{}",
@@ -293,7 +299,7 @@ impl DesignsApi {
         page_size: u64,
         page_token: &str,
         summary: bool,
-    ) -> ClientResult<crate::types::ListDesignsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListDesignsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));

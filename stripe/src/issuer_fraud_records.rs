@@ -30,7 +30,7 @@ impl IssuerFraudRecords {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::IssuerFraudRecord>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuerFraudRecord>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -48,7 +48,7 @@ impl IssuerFraudRecords {
         let url = self
             .client
             .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
-        let resp: crate::types::RadarIssuerFraudRecordList = self
+        let resp: crate::Response<crate::types::RadarIssuerFraudRecordList> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl IssuerFraudRecords {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/issuer_fraud_records` endpoint.
@@ -72,7 +76,7 @@ impl IssuerFraudRecords {
     pub async fn get_all(
         &self,
         charge: &str,
-    ) -> ClientResult<Vec<crate::types::IssuerFraudRecord>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::IssuerFraudRecord>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -81,7 +85,11 @@ impl IssuerFraudRecords {
         let url = self
             .client
             .url(&format!("/v1/issuer_fraud_records?{}", query_), None);
-        let mut resp: crate::types::RadarIssuerFraudRecordList = self
+        let crate::Response::<crate::types::RadarIssuerFraudRecordList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -92,8 +100,8 @@ impl IssuerFraudRecords {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -109,7 +117,11 @@ impl IssuerFraudRecords {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::RadarIssuerFraudRecordList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -120,7 +132,11 @@ impl IssuerFraudRecords {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::RadarIssuerFraudRecordList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -132,13 +148,13 @@ impl IssuerFraudRecords {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/issuer_fraud_records/{issuer_fraud_record}` endpoint.
@@ -155,7 +171,7 @@ impl IssuerFraudRecords {
     pub async fn get_record(
         &self,
         issuer_fraud_record: &str,
-    ) -> ClientResult<crate::types::IssuerFraudRecord> {
+    ) -> ClientResult<crate::Response<crate::types::IssuerFraudRecord>> {
         let url = self.client.url(
             &format!(
                 "/v1/issuer_fraud_records/{}",

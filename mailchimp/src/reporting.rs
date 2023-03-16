@@ -35,7 +35,7 @@ impl Reporting {
         offset: i64,
         sort_field: crate::types::GetAllFacebookAdsSortField,
         sort_dir: crate::types::SortDir,
-    ) -> ClientResult<crate::types::GetReportingFacebookAdsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetReportingFacebookAdsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -87,7 +87,7 @@ impl Reporting {
         fields: &[String],
         outreach_id: &str,
         exclude_fields: &[String],
-    ) -> ClientResult<crate::types::GetReportingFacebookAdsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::GetReportingFacebookAdsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -138,7 +138,8 @@ impl Reporting {
         offset: i64,
         outreach_id: &str,
         sort_field: crate::types::GetReportsEcommerceProductActivitySortField,
-    ) -> ClientResult<crate::types::GetReportsEcommerceProductActivityResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetReportsEcommerceProductActivityResponse>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));
@@ -192,7 +193,7 @@ impl Reporting {
         fields: &[String],
         outreach_id: &str,
         exclude_fields: &[String],
-    ) -> ClientResult<crate::types::LandingPages> {
+    ) -> ClientResult<crate::Response<crate::types::LandingPages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -239,7 +240,7 @@ impl Reporting {
         exclude_fields: &[String],
         count: i64,
         offset: i64,
-    ) -> ClientResult<crate::types::GetReportingLandingPagesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetReportingLandingPagesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
             query_args.push(("count".to_string(), count.to_string()));

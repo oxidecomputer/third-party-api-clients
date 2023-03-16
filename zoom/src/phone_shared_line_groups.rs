@@ -36,7 +36,7 @@ impl PhoneSharedLineGroups {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::SharedLineGroups>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SharedLineGroups>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -48,7 +48,7 @@ impl PhoneSharedLineGroups {
         let url = self
             .client
             .url(&format!("/phone/shared_line_groups?{}", query_), None);
-        let resp: crate::types::ListSharedLineGroupsResponse = self
+        let resp: crate::Response<crate::types::ListSharedLineGroupsResponse> = self
             .client
             .get(
                 &url,
@@ -60,7 +60,11 @@ impl PhoneSharedLineGroups {
             .await?;
 
         // Return our response data.
-        Ok(resp.shared_line_groups.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.shared_line_groups.to_vec(),
+        ))
     }
     /**
      * List shared line groups.
@@ -82,9 +86,13 @@ impl PhoneSharedLineGroups {
      */
     pub async fn list_all_shared_line_groups(
         &self,
-    ) -> ClientResult<Vec<crate::types::SharedLineGroups>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SharedLineGroups>>> {
         let url = self.client.url("/phone/shared_line_groups", None);
-        let mut resp: crate::types::ListSharedLineGroupsResponse = self
+        let crate::Response::<crate::types::ListSharedLineGroupsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -95,14 +103,18 @@ impl PhoneSharedLineGroups {
             )
             .await?;
 
-        let mut shared_line_groups = resp.shared_line_groups;
-        let mut page = resp.next_page_token;
+        let mut shared_line_groups = body.shared_line_groups;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListSharedLineGroupsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -113,7 +125,11 @@ impl PhoneSharedLineGroups {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListSharedLineGroupsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -125,17 +141,17 @@ impl PhoneSharedLineGroups {
                     .await?;
             }
 
-            shared_line_groups.append(&mut resp.shared_line_groups);
+            shared_line_groups.append(&mut body.shared_line_groups);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(shared_line_groups)
+        Ok(crate::Response::new(status, headers, shared_line_groups))
     }
     /**
      * Create a shared line group.
@@ -155,7 +171,7 @@ impl PhoneSharedLineGroups {
     pub async fn create_shared_line_group(
         &self,
         body: &crate::types::CreateSharedLineGroupRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/shared_line_groups", None);
         self.client
             .post(
@@ -190,7 +206,7 @@ impl PhoneSharedLineGroups {
     pub async fn get_shared_line_group(
         &self,
         shared_line_group_id: &str,
-    ) -> ClientResult<crate::types::GetSharedLineGroupResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetSharedLineGroupResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
@@ -227,7 +243,10 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group that you would like to delete.
      */
-    pub async fn delete_shared_line_group(&self, shared_line_group_id: &str) -> ClientResult<()> {
+    pub async fn delete_shared_line_group(
+        &self,
+        shared_line_group_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
@@ -267,7 +286,7 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         body: &crate::types::UpdateSharedLineGroupRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}",
@@ -310,7 +329,7 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         body: &crate::types::AddMembersSharedLineGroupRequestData,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
@@ -348,7 +367,10 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique identifier of the Shared Line Group that you would like to delete.
      */
-    pub async fn delete_members_of_slg(&self, shared_line_group_id: &str) -> ClientResult<()> {
+    pub async fn delete_members_of_slg(
+        &self,
+        shared_line_group_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members",
@@ -391,7 +413,7 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         member_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/members/{}",
@@ -432,7 +454,7 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         body: &crate::types::AddByocNumberResponse,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
@@ -468,7 +490,10 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
      */
-    pub async fn delete_phone_numbers_slg(&self, shared_line_group_id: &str) -> ClientResult<()> {
+    pub async fn delete_phone_numbers_slg(
+        &self,
+        shared_line_group_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers",
@@ -509,7 +534,7 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         phone_number_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/shared_line_groups/{}/phone_numbers/{}",

@@ -22,7 +22,10 @@ impl VerifiedDomains {
      *
      * * `domain_name: &str` -- The name of the folder.
      */
-    pub async fn get(&self, domain_name: &str) -> ClientResult<crate::types::VerifiedDomains> {
+    pub async fn get(
+        &self,
+        domain_name: &str,
+    ) -> ClientResult<crate::Response<crate::types::VerifiedDomains>> {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}",
@@ -51,7 +54,7 @@ impl VerifiedDomains {
      *
      * * `domain_name: &str` -- The name of the folder.
      */
-    pub async fn delete(&self, domain_name: &str) -> ClientResult<()> {
+    pub async fn delete(&self, domain_name: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}",
@@ -84,7 +87,7 @@ impl VerifiedDomains {
         &self,
         domain_name: &str,
         body: &crate::types::VerifyADomainSending,
-    ) -> ClientResult<crate::types::VerifiedDomains> {
+    ) -> ClientResult<crate::Response<crate::types::VerifiedDomains>> {
         let url = self.client.url(
             &format!(
                 "/verified-domains/{}/actions/verify",
@@ -109,7 +112,9 @@ impl VerifiedDomains {
      *
      * Get all of the sending domains on the account.
      */
-    pub async fn get_verified_domains(&self) -> ClientResult<crate::types::VerifiedDomainsData> {
+    pub async fn get_verified_domains(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::VerifiedDomainsData>> {
         let url = self.client.url("/verified-domains", None);
         self.client
             .get(
@@ -131,7 +136,7 @@ impl VerifiedDomains {
     pub async fn create(
         &self,
         body: &crate::types::VerifiedDomainsDataType,
-    ) -> ClientResult<crate::types::VerifiedDomains> {
+    ) -> ClientResult<crate::Response<crate::types::VerifiedDomains>> {
         let url = self.client.url("/verified-domains", None);
         self.client
             .post(

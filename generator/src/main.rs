@@ -2314,7 +2314,8 @@ fn gen(
         a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
         a("pub mod http_cache;");
     }
-    if proper_name == "Google Drive"
+    if proper_name == "GitHub"
+        || proper_name == "Google Drive"
         || proper_name == "Google Sheets"
         || proper_name == "SendGrid"
         || proper_name == "Rev.ai"
@@ -2372,8 +2373,29 @@ fn gen(
 
     a("");
 
-    a("use thiserror::Error;");
+    a(r#"
+#[derive(Debug)]
+pub struct Response<T> {
+    pub status: reqwest::StatusCode,
+    pub headers: reqwest::header::HeaderMap,
+    pub body: T
+}
+
+impl<T> Response<T> {
+    pub fn new(status: reqwest::StatusCode, headers: reqwest::header::HeaderMap, body: T) -> Self {
+        Self {
+            status,
+            headers,
+            body,
+        }
+    }
+}"#);
+    a("");
+
     a("type ClientResult<T> = Result<T, ClientError>;");
+    a("");
+
+    a("use thiserror::Error;");
     a("");
     a(r#"
 /// Errors returned by the client
@@ -3317,15 +3339,13 @@ fn main() -> Result<()> {
             /*
              * Write the Cargo.toml file:
              */
-            let mut uuid_lib = "".to_string();
             let mut yup_oauth2_lib = "".to_string();
-            if proper_name != "GitHub" {
-                uuid_lib = r#"
+
+            let uuid_lib = r#"
 bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
 uuid = { version = "1.1", features = ["serde", "v4"] }"#
-                    .to_string();
-            }
+                .to_string();
 
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"

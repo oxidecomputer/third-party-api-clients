@@ -34,7 +34,7 @@ impl Plans {
         limit: i64,
         product: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PlanData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PlanData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -53,7 +53,7 @@ impl Plans {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/plans?{}", query_), None);
-        let resp: crate::types::PlanList = self
+        let resp: crate::Response<crate::types::PlanList> = self
             .client
             .get(
                 &url,
@@ -65,7 +65,11 @@ impl Plans {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/plans` endpoint.
@@ -79,7 +83,7 @@ impl Plans {
         active: bool,
         _created: &str,
         product: &str,
-    ) -> ClientResult<Vec<crate::types::PlanData>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PlanData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -89,7 +93,11 @@ impl Plans {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/plans?{}", query_), None);
-        let mut resp: crate::types::PlanList = self
+        let crate::Response::<crate::types::PlanList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -100,8 +108,8 @@ impl Plans {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -117,7 +125,11 @@ impl Plans {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PlanList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -128,7 +140,11 @@ impl Plans {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PlanList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -140,20 +156,20 @@ impl Plans {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/plans` endpoint.
      *
      * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PlanData> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url("/v1/plans", None);
         self.client
             .post(
@@ -175,7 +191,7 @@ impl Plans {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `plan: &str` -- The account's country.
      */
-    pub async fn get(&self, plan: &str) -> ClientResult<crate::types::PlanData> {
+    pub async fn get(&self, plan: &str) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,
@@ -199,7 +215,10 @@ impl Plans {
      *
      * * `plan: &str` -- The account's country.
      */
-    pub async fn post_plans(&self, plan: &str) -> ClientResult<crate::types::PlanData> {
+    pub async fn post_plans(
+        &self,
+        plan: &str,
+    ) -> ClientResult<crate::Response<crate::types::PlanData>> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,
@@ -223,7 +242,10 @@ impl Plans {
      *
      * * `plan: &str` -- The account's country.
      */
-    pub async fn delete(&self, plan: &str) -> ClientResult<crate::types::DeletedPlan> {
+    pub async fn delete(
+        &self,
+        plan: &str,
+    ) -> ClientResult<crate::Response<crate::types::DeletedPlan>> {
         let url = self.client.url(
             &format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),),
             None,

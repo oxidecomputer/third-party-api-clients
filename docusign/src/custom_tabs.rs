@@ -27,7 +27,7 @@ impl CustomTabs {
         &self,
         account_id: &str,
         custom_tab_only: &str,
-    ) -> ClientResult<crate::types::TabMetadataList> {
+    ) -> ClientResult<crate::Response<crate::types::TabMetadataList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_tab_only.is_empty() {
             query_args.push(("custom_tab_only".to_string(), custom_tab_only.to_string()));
@@ -68,7 +68,7 @@ impl CustomTabs {
         &self,
         account_id: &str,
         body: &crate::types::TabMetadata,
-    ) -> ClientResult<crate::types::TabMetadata> {
+    ) -> ClientResult<crate::Response<crate::types::TabMetadata>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/tab_definitions",
@@ -102,7 +102,7 @@ impl CustomTabs {
         &self,
         account_id: &str,
         custom_tab_id: &str,
-    ) -> ClientResult<crate::types::TabMetadata> {
+    ) -> ClientResult<crate::Response<crate::types::TabMetadata>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/tab_definitions/{}",
@@ -140,7 +140,7 @@ impl CustomTabs {
         account_id: &str,
         custom_tab_id: &str,
         body: &crate::types::TabMetadata,
-    ) -> ClientResult<crate::types::TabMetadata> {
+    ) -> ClientResult<crate::Response<crate::types::TabMetadata>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/tab_definitions/{}",
@@ -175,7 +175,7 @@ impl CustomTabs {
         &self,
         account_id: &str,
         custom_tab_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/tab_definitions/{}",

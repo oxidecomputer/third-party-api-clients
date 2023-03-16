@@ -28,7 +28,7 @@ impl CustomerJourneys {
         journey_id: i64,
         step_id: i64,
         body: &crate::types::SubscriberInAutomationQueue,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/customer-journeys/journeys/{}/steps/{}/actions/trigger",

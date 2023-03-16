@@ -47,7 +47,7 @@ impl Templates {
         folder_id: &str,
         sort_field: crate::types::GetTemplatesSortField,
         sort_dir: crate::types::SortDir,
-    ) -> ClientResult<crate::types::TemplatesData> {
+    ) -> ClientResult<crate::Response<crate::types::TemplatesData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !before_date_created.is_empty() {
             query_args.push((
@@ -113,7 +113,7 @@ impl Templates {
     pub async fn post(
         &self,
         body: &crate::types::TemplateInstance,
-    ) -> ClientResult<crate::types::Templates> {
+    ) -> ClientResult<crate::Response<crate::types::Templates>> {
         let url = self.client.url("/templates", None);
         self.client
             .post(
@@ -143,7 +143,7 @@ impl Templates {
         fields: &[String],
         exclude_fields: &[String],
         template_id: &str,
-    ) -> ClientResult<crate::types::Templates> {
+    ) -> ClientResult<crate::Response<crate::types::Templates>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
@@ -181,7 +181,7 @@ impl Templates {
      *
      * * `template_id: &str` -- The unique id for the template.
      */
-    pub async fn delete(&self, template_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, template_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
@@ -214,7 +214,7 @@ impl Templates {
         &self,
         template_id: &str,
         body: &crate::types::TemplateInstance,
-    ) -> ClientResult<crate::types::Templates> {
+    ) -> ClientResult<crate::Response<crate::types::Templates>> {
         let url = self.client.url(
             &format!(
                 "/templates/{}",
@@ -250,7 +250,7 @@ impl Templates {
         fields: &[String],
         exclude_fields: &[String],
         template_id: &str,
-    ) -> ClientResult<crate::types::TemplateDefaultContent> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDefaultContent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

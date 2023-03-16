@@ -24,7 +24,7 @@ impl ContactsApiSegments {
      */
     pub async fn get_contactdb_segments(
         &self,
-    ) -> ClientResult<crate::types::ListAllSegmentsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListAllSegmentsResponse>> {
         let url = self.client.url("/contactdb/segments", None);
         self.client
             .get(
@@ -89,7 +89,7 @@ impl ContactsApiSegments {
     pub async fn post_contactdb_segment(
         &self,
         body: &crate::types::ContactdbSegments,
-    ) -> ClientResult<crate::types::ContactdbSegmentsWithAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbSegmentsWithAllOf>> {
         let url = self.client.url("/contactdb/segments", None);
         self.client
             .post(
@@ -116,7 +116,7 @@ impl ContactsApiSegments {
     pub async fn get_contactdb_segments_segment(
         &self,
         segment_id: &str,
-    ) -> ClientResult<crate::types::ContactdbSegments> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbSegments>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
@@ -153,7 +153,7 @@ impl ContactsApiSegments {
         segment_id: &str,
         delete_contacts: bool,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delete_contacts {
             query_args.push(("delete_contacts".to_string(), delete_contacts.to_string()));
@@ -193,7 +193,7 @@ impl ContactsApiSegments {
         &self,
         segment_id: &str,
         body: &crate::types::PatchContactdbSegmentsSegmentRequest,
-    ) -> ClientResult<crate::types::ContactdbSegments> {
+    ) -> ClientResult<crate::Response<crate::types::ContactdbSegments>> {
         let url = self.client.url(
             &format!(
                 "/contactdb/segments/{}",
@@ -229,7 +229,7 @@ impl ContactsApiSegments {
         segment_id: i64,
         page: i64,
         page_size: i64,
-    ) -> ClientResult<crate::types::ListRecipientsOnASegmentResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListRecipientsOnASegmentResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));

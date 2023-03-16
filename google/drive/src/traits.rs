@@ -1,6 +1,5 @@
 #![allow(clippy::field_reassign_with_default)]
-use crate::ClientError;
-use crate::ClientResult;
+use crate::{ClientError, ClientResult, Response};
 
 #[async_trait::async_trait]
 pub trait PermissionOps {
@@ -62,7 +61,7 @@ impl PermissionOps for crate::permissions::Permissions {
     ) -> ClientResult<crate::types::Permission> {
         // First let's check if the permission already exists.
         // List all the permissions for a file.
-        let perms = self
+        let resp = self
             .list_all(
                 file_id,
                 "",   // include_permissions_for_view
@@ -73,7 +72,7 @@ impl PermissionOps for crate::permissions::Permissions {
             .await?;
 
         // Iterate over our permissions and see if we have ours.
-        for perm in perms {
+        for perm in resp.body {
             if perm.email_address == email_address && perm.role == role && perm.type_ == type_ {
                 // We found the permission, return it.
                 return Ok(perm);
@@ -111,6 +110,7 @@ impl PermissionOps for crate::permissions::Permissions {
             &perm,
         )
         .await
+        .map(|resp| resp.body)
     }
 }
 
@@ -122,7 +122,7 @@ pub trait FileOps {
         drive_id: &str,
         parent_id: &str,
         name: &str,
-    ) -> ClientResult<Vec<crate::types::File>>;
+    ) -> ClientResult<Response<Vec<crate::types::File>>>;
 
     /// Create or update a file in a drive.
     /// If the file already exists, it will update it.
@@ -134,10 +134,10 @@ pub trait FileOps {
         name: &str,
         mime_type: &str,
         contents: &[u8],
-    ) -> ClientResult<crate::types::File>;
+    ) -> ClientResult<Response<crate::types::File>>;
 
     /// Download a file by it's ID.
-    async fn download_by_id(&self, id: &str) -> ClientResult<bytes::Bytes>;
+    async fn download_by_id(&self, id: &str) -> ClientResult<Response<bytes::Bytes>>;
 
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
     async fn create_folder(
@@ -148,7 +148,7 @@ pub trait FileOps {
     ) -> ClientResult<String>;
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
-    async fn get_contents_by_id(&self, id: &str) -> ClientResult<String>;
+    async fn get_contents_by_id(&self, id: &str) -> ClientResult<Response<String>>;
 
     /// Delete a file by its name.
     async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str)
@@ -163,7 +163,7 @@ impl FileOps for crate::files::Files {
         drive_id: &str,
         parent_id: &str,
         name: &str,
-    ) -> ClientResult<Vec<crate::types::File>> {
+    ) -> ClientResult<Response<Vec<crate::types::File>>> {
         let mut query = format!("name = '{}'", name);
         if !parent_id.is_empty() {
             query = format!("{} and '{}' in parents", query, parent_id);
@@ -195,7 +195,7 @@ impl FileOps for crate::files::Files {
         name: &str,
         mime_type: &str,
         contents: &[u8],
-    ) -> ClientResult<crate::types::File> {
+    ) -> ClientResult<Response<crate::types::File>> {
         // Create the file.
         let mut f: crate::types::File = Default::default();
         let mut method = reqwest::Method::POST;
@@ -205,6 +205,7 @@ impl FileOps for crate::files::Files {
         let files = self
             .get_by_name(drive_id, parent_id, name)
             .await
+            .map(|resp| resp.body)
             .unwrap_or_default();
         if files.is_empty() {
             // Set the name,
@@ -276,7 +277,7 @@ impl FileOps for crate::files::Files {
     }
 
     /// Download a file by it's ID.
-    async fn download_by_id(&self, id: &str) -> ClientResult<bytes::Bytes> {
+    async fn download_by_id(&self, id: &str) -> ClientResult<Response<bytes::Bytes>> {
         let resp = self
             .client
             .request_raw(
@@ -286,7 +287,11 @@ impl FileOps for crate::files::Files {
             )
             .await?;
 
-        Ok(resp.bytes().await?)
+        Ok(Response::new(
+            resp.status(),
+            resp.headers().clone(),
+            resp.bytes().await?,
+        ))
     }
 
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
@@ -316,7 +321,7 @@ impl FileOps for crate::files::Files {
         }
 
         // Check if the folder exists.
-        let folders = self
+        let resp = self
             .list_all(
                 "drive",  // corpora
                 drive_id, // drive id
@@ -330,15 +335,15 @@ impl FileOps for crate::files::Files {
                 false,    // supports_team_drives
                 "",       // team_drive_id
             )
-            .await
-            .unwrap_or_default();
-        if !folders.is_empty() {
-            let f = folders.get(0).unwrap().clone();
+            .await?;
+
+        if !resp.body.is_empty() {
+            let f = resp.body.get(0).unwrap().clone();
             return Ok(f.id);
         }
 
         // Make the request and return the ID.
-        let folder: crate::types::File = self
+        let resp: Response<crate::types::File> = self
             .client
             .post(
                 "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
@@ -349,12 +354,12 @@ impl FileOps for crate::files::Files {
             )
             .await?;
 
-        Ok(folder.id)
+        Ok(resp.body.id)
     }
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
     // TODO: make binary content work in the actual library.
-    async fn get_contents_by_id(&self, id: &str) -> ClientResult<String> {
+    async fn get_contents_by_id(&self, id: &str) -> ClientResult<Response<String>> {
         let mut query_ = String::new();
         let query_args = vec!["mime_type=text/plain".to_string()];
         for (i, n) in query_args.iter().enumerate() {
@@ -373,7 +378,11 @@ impl FileOps for crate::files::Files {
             .request_raw(reqwest::Method::GET, &url, crate::Message::default())
             .await?;
 
-        Ok(resp.text().await?)
+        Ok(Response::new(
+            resp.status(),
+            resp.headers().clone(),
+            resp.text().await?,
+        ))
     }
 
     /// Delete a file by its name.
@@ -384,22 +393,21 @@ impl FileOps for crate::files::Files {
         name: &str,
     ) -> ClientResult<()> {
         // Check if the file exists.
-        let files = self
-            .get_by_name(drive_id, parent_id, name)
-            .await
-            .unwrap_or_default();
-        if files.is_empty() {
+        let resp = self.get_by_name(drive_id, parent_id, name).await?;
+
+        if resp.body.is_empty() {
             // The file does not exist.
             return Ok(());
         }
 
         // Delete the file.
         self.delete(
-            &files.get(0).unwrap().id,
+            &resp.body.get(0).unwrap().id,
             true, // supports all drives
             true, // supports team drives
         )
         .await
+        .map(|resp| resp.body)
     }
 }
 
@@ -413,14 +421,14 @@ pub trait DriveOps {
 impl DriveOps for crate::drives::Drives {
     /// Get a drive by it's name.
     async fn get_by_name(&self, name: &str) -> ClientResult<crate::types::Drive> {
-        let drives = self
+        let resp = self
             .list_all(
                 //&format!("name = '{}'", name), // query
                 "", true, // use domain admin access
             )
             .await?;
 
-        for drive in drives {
+        for drive in resp.body {
             if drive.name == name {
                 return Ok(drive);
             }

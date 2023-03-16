@@ -24,7 +24,7 @@ impl Tsp {
      * **Prerequisites:**<br>
      * * A Pro or a higher plan.
      */
-    pub async fn get(&self) -> ClientResult<crate::types::TspResponse> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::TspResponse>> {
         let url = self.client.url("/tsp", None);
         self.client
             .get(
@@ -49,7 +49,10 @@ impl Tsp {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      */
-    pub async fn update(&self, body: &crate::types::TspUpdateRequest) -> ClientResult<()> {
+    pub async fn update(
+        &self,
+        body: &crate::types::TspUpdateRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/tsp", None);
         self.client
             .patch(
@@ -75,7 +78,10 @@ impl Tsp {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_ts_ps(&self, user_id: &str) -> ClientResult<crate::types::UserTsPsResponse> {
+    pub async fn user_ts_ps(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::UserTsPsResponse>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp",
@@ -112,7 +118,7 @@ impl Tsp {
         &self,
         user_id: &str,
         body: &crate::types::TspAccountsList,
-    ) -> ClientResult<crate::types::TspAccountsList> {
+    ) -> ClientResult<crate::Response<crate::types::TspAccountsList>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp",
@@ -151,7 +157,7 @@ impl Tsp {
         &self,
         user_id: &str,
         tsp_id: &str,
-    ) -> ClientResult<crate::types::TspAccount> {
+    ) -> ClientResult<crate::Response<crate::types::TspAccount>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
@@ -187,7 +193,11 @@ impl Tsp {
      * * `tsp_id: &str` -- Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
      *  `3` - SIP Connected Audio.
      */
-    pub async fn user_delete(&self, user_id: &str, tsp_id: &str) -> ClientResult<()> {
+    pub async fn user_delete(
+        &self,
+        user_id: &str,
+        tsp_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
@@ -228,7 +238,7 @@ impl Tsp {
         user_id: &str,
         tsp_id: &str,
         body: &crate::types::TspAccountData,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/{}",
@@ -266,7 +276,7 @@ impl Tsp {
         &self,
         user_id: &str,
         body: &crate::types::TspGlobalDialIn,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/tsp/settings",

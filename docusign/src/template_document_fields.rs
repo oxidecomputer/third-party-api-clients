@@ -29,7 +29,7 @@ impl TemplateDocumentFields {
         account_id: &str,
         document_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::DocumentFieldsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentFieldsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
@@ -68,7 +68,7 @@ impl TemplateDocumentFields {
         document_id: &str,
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
-    ) -> ClientResult<crate::types::DocumentFieldsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentFieldsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
@@ -107,7 +107,7 @@ impl TemplateDocumentFields {
         document_id: &str,
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
-    ) -> ClientResult<crate::types::DocumentFieldsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentFieldsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
@@ -146,7 +146,7 @@ impl TemplateDocumentFields {
         document_id: &str,
         template_id: &str,
         body: &crate::types::DocumentFieldsInformation,
-    ) -> ClientResult<crate::types::DocumentFieldsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentFieldsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/fields",

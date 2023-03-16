@@ -22,7 +22,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn add(&self) -> ClientResult<crate::types::RemindersAddSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::RemindersAddSchema>> {
         let url = self.client.url("/reminders.add", None);
         self.client
             .post(
@@ -45,7 +45,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn complete(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn complete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/reminders.complete", None);
         self.client
             .post(
@@ -68,7 +68,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn delete(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/reminders.delete", None);
         self.client
             .post(
@@ -92,7 +92,10 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      * * `reminder: &str` -- The ID of the reminder.
      */
-    pub async fn info(&self, reminder: &str) -> ClientResult<crate::types::RemindersAddSchema> {
+    pub async fn info(
+        &self,
+        reminder: &str,
+    ) -> ClientResult<crate::Response<crate::types::RemindersAddSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !reminder.is_empty() {
             query_args.push(("reminder".to_string(), reminder.to_string()));
@@ -122,7 +125,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      */
-    pub async fn list(&self) -> ClientResult<crate::types::RemindersListSchema> {
+    pub async fn list(&self) -> ClientResult<crate::Response<crate::types::RemindersListSchema>> {
         let url = self.client.url("/reminders.list", None);
         self.client
             .get(

@@ -40,7 +40,7 @@ impl UserSignatures {
         account_id: &str,
         user_id: &str,
         stamp_type: &str,
-    ) -> ClientResult<crate::types::UserSignaturesInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignaturesInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !stamp_type.is_empty() {
             query_args.push(("stamp_type".to_string(), stamp_type.to_string()));
@@ -83,7 +83,7 @@ impl UserSignatures {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserSignaturesInformation,
-    ) -> ClientResult<crate::types::UserSignaturesInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignaturesInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures",
@@ -138,7 +138,7 @@ impl UserSignatures {
         account_id: &str,
         user_id: &str,
         body: &crate::types::UserSignaturesInformation,
-    ) -> ClientResult<crate::types::UserSignaturesInformation> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignaturesInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures",
@@ -182,7 +182,7 @@ impl UserSignatures {
         account_id: &str,
         signature_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::UserSignature> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignature>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}",
@@ -232,7 +232,7 @@ impl UserSignatures {
         user_id: &str,
         close_existing_signature: &str,
         body: &crate::types::UserSignatureDefinition,
-    ) -> ClientResult<crate::types::UserSignature> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignature>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !close_existing_signature.is_empty() {
             query_args.push((
@@ -286,7 +286,7 @@ impl UserSignatures {
         account_id: &str,
         signature_id: &str,
         user_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}",
@@ -340,7 +340,7 @@ impl UserSignatures {
         signature_id: &str,
         user_id: &str,
         include_chrome: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
@@ -400,7 +400,7 @@ impl UserSignatures {
         signature_id: &str,
         user_id: &str,
         transparent_png: &str,
-    ) -> ClientResult<crate::types::UserSignature> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignature>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !transparent_png.is_empty() {
             query_args.push(("transparent_png".to_string(), transparent_png.to_string()));
@@ -459,7 +459,7 @@ impl UserSignatures {
         image_type: &str,
         signature_id: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::UserSignature> {
+    ) -> ClientResult<crate::Response<crate::types::UserSignature>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/users/{}/signatures/{}/{}",

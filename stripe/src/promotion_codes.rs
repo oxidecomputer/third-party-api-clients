@@ -38,7 +38,7 @@ impl PromotionCodes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::PromotionCode>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PromotionCode>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -65,7 +65,7 @@ impl PromotionCodes {
         let url = self
             .client
             .url(&format!("/v1/promotion_codes?{}", query_), None);
-        let resp: crate::types::GetPromotionCodesResponse = self
+        let resp: crate::Response<crate::types::GetPromotionCodesResponse> = self
             .client
             .get(
                 &url,
@@ -77,7 +77,11 @@ impl PromotionCodes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/promotion_codes` endpoint.
@@ -93,7 +97,7 @@ impl PromotionCodes {
         coupon: &str,
         _created: &str,
         customer: &str,
-    ) -> ClientResult<Vec<crate::types::PromotionCode>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PromotionCode>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -111,7 +115,11 @@ impl PromotionCodes {
         let url = self
             .client
             .url(&format!("/v1/promotion_codes?{}", query_), None);
-        let mut resp: crate::types::GetPromotionCodesResponse = self
+        let crate::Response::<crate::types::GetPromotionCodesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -122,8 +130,8 @@ impl PromotionCodes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -139,7 +147,11 @@ impl PromotionCodes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetPromotionCodesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -150,7 +162,11 @@ impl PromotionCodes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetPromotionCodesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -162,20 +178,20 @@ impl PromotionCodes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/promotion_codes` endpoint.
      *
      * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::PromotionCode> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::PromotionCode>> {
         let url = self.client.url("/v1/promotion_codes", None);
         self.client
             .post(
@@ -200,7 +216,7 @@ impl PromotionCodes {
     pub async fn get_code(
         &self,
         promotion_code: &str,
-    ) -> ClientResult<crate::types::PromotionCode> {
+    ) -> ClientResult<crate::Response<crate::types::PromotionCode>> {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",
@@ -230,7 +246,7 @@ impl PromotionCodes {
     pub async fn post_code(
         &self,
         promotion_code: &str,
-    ) -> ClientResult<crate::types::PromotionCode> {
+    ) -> ClientResult<crate::Response<crate::types::PromotionCode>> {
         let url = self.client.url(
             &format!(
                 "/v1/promotion_codes/{}",

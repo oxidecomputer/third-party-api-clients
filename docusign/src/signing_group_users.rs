@@ -29,7 +29,7 @@ impl SigningGroupUsers {
         &self,
         account_id: &str,
         signing_group_id: &str,
-    ) -> ClientResult<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupUsersData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",
@@ -67,7 +67,7 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
-    ) -> ClientResult<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupUsersData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",
@@ -105,7 +105,7 @@ impl SigningGroupUsers {
         account_id: &str,
         signing_group_id: &str,
         body: &crate::types::SigningGroupUsersData,
-    ) -> ClientResult<crate::types::SigningGroupUsersData> {
+    ) -> ClientResult<crate::Response<crate::types::SigningGroupUsersData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signing_groups/{}/users",

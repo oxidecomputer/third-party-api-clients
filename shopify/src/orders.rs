@@ -39,7 +39,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -102,7 +102,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -165,7 +165,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -228,7 +228,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -291,7 +291,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -354,7 +354,7 @@ impl Orders {
         updated_at_min: &str,
         updated_at_max: &str,
         status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -454,7 +454,7 @@ impl Orders {
         financial_status: &str,
         fulfillment_status: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !attribution_app_id.is_empty() {
             query_args.push((
@@ -548,7 +548,10 @@ impl Orders {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-01
     */
-    pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn deprecated_202001_create(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/orders.json", None);
         self.client
             .post(
@@ -576,7 +579,7 @@ impl Orders {
         &self,
         order_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -615,7 +618,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/json",
@@ -644,7 +647,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_delete_param(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_delete_param(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/json",
@@ -708,7 +714,7 @@ impl Orders {
         status: &str,
         financial_status: &str,
         fulfillment_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -764,7 +770,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/close.json",
@@ -797,7 +803,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/open.json",
@@ -848,7 +854,7 @@ impl Orders {
         email: &str,
         refund: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount.is_empty() {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -957,7 +963,7 @@ impl Orders {
         financial_status: &str,
         fulfillment_status: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !attribution_app_id.is_empty() {
             query_args.push((
@@ -1051,7 +1057,10 @@ impl Orders {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#create-2020-04
     */
-    pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn deprecated_202004_create(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/orders.json", None);
         self.client
             .post(
@@ -1079,7 +1088,7 @@ impl Orders {
         &self,
         order_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1118,7 +1127,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/json",
@@ -1147,7 +1156,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_delete_param(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_delete_param(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/json",
@@ -1211,7 +1223,7 @@ impl Orders {
         status: &str,
         financial_status: &str,
         fulfillment_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1267,7 +1279,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/close.json",
@@ -1300,7 +1312,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/open.json",
@@ -1351,7 +1363,7 @@ impl Orders {
         email: &str,
         refund: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount.is_empty() {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -1460,7 +1472,7 @@ impl Orders {
         financial_status: &str,
         fulfillment_status: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !attribution_app_id.is_empty() {
             query_args.push((
@@ -1535,7 +1547,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_param_risk(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/risks.json",
@@ -1568,7 +1583,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/risks.json",
@@ -1602,7 +1617,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/risks/{}/json",
@@ -1642,7 +1657,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/risks/{}/json",
@@ -1681,7 +1696,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/orders/{}/risks/{}/json",
@@ -1711,7 +1726,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_param_risk(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/risks.json",
@@ -1744,7 +1762,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/risks.json",
@@ -1778,7 +1796,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/risks/{}/json",
@@ -1818,7 +1836,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/risks/{}/json",
@@ -1857,7 +1875,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/orders/{}/risks/{}/json",
@@ -1887,7 +1905,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_param_risk(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/risks.json",
@@ -1920,7 +1941,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/risks.json",
@@ -1954,7 +1975,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/risks/{}/json",
@@ -1994,7 +2015,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/risks/{}/json",
@@ -2033,7 +2054,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/orders/{}/risks/{}/json",
@@ -2063,7 +2084,7 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn get_param_risk(&self, order_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/risks.json",
@@ -2096,7 +2117,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/risks.json",
@@ -2126,7 +2147,11 @@ impl Orders {
      * * `order_id: &str` -- storefront_access_token_id.
      * * `risk_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_param_risks_risk(&self, order_id: &str, risk_id: &str) -> ClientResult<()> {
+    pub async fn get_param_risks_risk(
+        &self,
+        order_id: &str,
+        risk_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/risks/{}/json",
@@ -2166,7 +2191,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/risks/{}/json",
@@ -2201,7 +2226,11 @@ impl Orders {
     * * `order_id: &str` -- storefront_access_token_id.
     * * `risk_id: &str` -- storefront_access_token_id.
     */
-    pub async fn delete_param_risks_risk(&self, order_id: &str, risk_id: &str) -> ClientResult<()> {
+    pub async fn delete_param_risks_risk(
+        &self,
+        order_id: &str,
+        risk_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/orders/{}/risks/{}/json",
@@ -2231,7 +2260,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_param_risk(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/risks.json",
@@ -2264,7 +2296,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/risks.json",
@@ -2298,7 +2330,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/risks/{}/json",
@@ -2338,7 +2370,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/risks/{}/json",
@@ -2377,7 +2409,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/orders/{}/risks/{}/json",
@@ -2407,7 +2439,10 @@ impl Orders {
      *
      * * `order_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_unstable_get_param_risk(&self, order_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_param_risk(
+        &self,
+        order_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/risks.json",
@@ -2440,7 +2475,7 @@ impl Orders {
         &self,
         order_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/risks.json",
@@ -2474,7 +2509,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/risks/{}/json",
@@ -2514,7 +2549,7 @@ impl Orders {
         order_id: &str,
         risk_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/risks/{}/json",
@@ -2553,7 +2588,7 @@ impl Orders {
         &self,
         order_id: &str,
         risk_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/orders/{}/risks/{}/json",
@@ -2594,7 +2629,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2686,7 +2721,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -2763,7 +2798,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2846,7 +2881,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -2901,7 +2936,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2993,7 +3028,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3070,7 +3105,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3153,7 +3188,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3208,7 +3243,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3300,7 +3335,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3377,7 +3412,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3460,7 +3495,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3515,7 +3550,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3607,7 +3642,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3684,7 +3719,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3767,7 +3802,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3822,7 +3857,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3914,7 +3949,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -3991,7 +4026,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4074,7 +4109,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -4129,7 +4164,7 @@ impl Orders {
         limit: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4221,7 +4256,7 @@ impl Orders {
         transactions: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -4298,7 +4333,7 @@ impl Orders {
         refund_id: &str,
         fields: &str,
         in_shop_currency: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4381,7 +4416,7 @@ impl Orders {
         refund_line_items: &str,
         currency: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));

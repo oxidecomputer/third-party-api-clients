@@ -35,7 +35,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -74,7 +74,7 @@ impl Plus {
     pub async fn deprecated_202001_create_gift_cards(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/gift_cards.json", None);
         self.client
             .post(
@@ -100,7 +100,7 @@ impl Plus {
     pub async fn deprecated_202001_get_gift_cards_param_card(
         &self,
         gift_card_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/json",
@@ -134,7 +134,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/json",
@@ -166,7 +166,10 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn deprecated_202001_get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_gift_cards_count(
+        &self,
+        status: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -201,7 +204,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/gift_cards/{}/disable.json",
@@ -252,7 +255,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -305,7 +308,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -344,7 +347,7 @@ impl Plus {
     pub async fn deprecated_202004_create_gift_cards(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/gift_cards.json", None);
         self.client
             .post(
@@ -370,7 +373,7 @@ impl Plus {
     pub async fn deprecated_202004_get_gift_cards_param_card(
         &self,
         gift_card_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/json",
@@ -404,7 +407,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/json",
@@ -436,7 +439,10 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn deprecated_202004_get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_gift_cards_count(
+        &self,
+        status: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -471,7 +477,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/gift_cards/{}/disable.json",
@@ -522,7 +528,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -575,7 +581,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -614,7 +620,7 @@ impl Plus {
     pub async fn deprecated_202007_create_gift_cards(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/gift_cards.json", None);
         self.client
             .post(
@@ -640,7 +646,7 @@ impl Plus {
     pub async fn deprecated_202007_get_gift_cards_param_card(
         &self,
         gift_card_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/json",
@@ -674,7 +680,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/json",
@@ -706,7 +712,10 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn deprecated_202007_get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_gift_cards_count(
+        &self,
+        status: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -741,7 +750,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/gift_cards/{}/disable.json",
@@ -792,7 +801,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -845,7 +854,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -881,7 +890,10 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/giftcard#create-2020-10
      */
-    pub async fn create_gift_cards(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_gift_cards(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/gift_cards.json", None);
         self.client
             .post(
@@ -904,7 +916,10 @@ impl Plus {
      *
      * * `gift_card_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_gift_cards_param_card(&self, gift_card_id: &str) -> ClientResult<()> {
+    pub async fn get_gift_cards_param_card(
+        &self,
+        gift_card_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/json",
@@ -938,7 +953,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/json",
@@ -970,7 +985,7 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn get_gift_cards_count(&self, status: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -1005,7 +1020,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/gift_cards/{}/disable.json",
@@ -1056,7 +1071,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1109,7 +1124,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1148,7 +1163,7 @@ impl Plus {
     pub async fn deprecated_202101_create_gift_cards(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/gift_cards.json", None);
         self.client
             .post(
@@ -1174,7 +1189,7 @@ impl Plus {
     pub async fn deprecated_202101_get_gift_cards_param_card(
         &self,
         gift_card_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/json",
@@ -1208,7 +1223,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/json",
@@ -1240,7 +1255,10 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn deprecated_202101_get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_gift_cards_count(
+        &self,
+        status: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -1275,7 +1293,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/gift_cards/{}/disable.json",
@@ -1326,7 +1344,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1379,7 +1397,7 @@ impl Plus {
         limit: &str,
         since_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1418,7 +1436,7 @@ impl Plus {
     pub async fn deprecated_unstable_create_gift_cards(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/gift_cards.json", None);
         self.client
             .post(
@@ -1444,7 +1462,7 @@ impl Plus {
     pub async fn deprecated_unstable_get_gift_cards_param_card(
         &self,
         gift_card_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/json",
@@ -1478,7 +1496,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/json",
@@ -1510,7 +1528,10 @@ impl Plus {
      *                           enabled: Count only enabled gift cards
      *                           disabled: Count only disabled gift cards.
      */
-    pub async fn deprecated_unstable_get_gift_cards_count(&self, status: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_gift_cards_count(
+        &self,
+        status: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !status.is_empty() {
             query_args.push(("status".to_string(), status.to_string()));
@@ -1545,7 +1566,7 @@ impl Plus {
         &self,
         gift_card_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/gift_cards/{}/disable.json",
@@ -1596,7 +1617,7 @@ impl Plus {
         query: &str,
         limit: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1642,7 +1663,7 @@ impl Plus {
         &self,
         limit: &str,
         page_info: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1675,7 +1696,10 @@ impl Plus {
      *
      * * `user_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202001_get_users_param_user(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_users_param_user(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/users/{}/json",
@@ -1700,7 +1724,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-01
      */
-    pub async fn deprecated_202001_get_users_current(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/users/current.json", None);
@@ -1731,7 +1755,7 @@ impl Plus {
         &self,
         limit: &str,
         page_info: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1764,7 +1788,10 @@ impl Plus {
      *
      * * `user_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202004_get_users_param_user(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_users_param_user(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/users/{}/json",
@@ -1789,7 +1816,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-04
      */
-    pub async fn deprecated_202004_get_users_current(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/users/current.json", None);
@@ -1820,7 +1847,7 @@ impl Plus {
         &self,
         limit: &str,
         page_info: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1853,7 +1880,10 @@ impl Plus {
      *
      * * `user_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202007_get_users_param_user(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_users_param_user(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/users/{}/json",
@@ -1878,7 +1908,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-07
      */
-    pub async fn deprecated_202007_get_users_current(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/users/current.json", None);
@@ -1905,7 +1935,11 @@ impl Plus {
      *                     (default: 50, maximum: 250).
      * * `page_info: &str` -- A unique ID used to access a certain page of results.
      */
-    pub async fn get_user(&self, limit: &str, page_info: &str) -> ClientResult<()> {
+    pub async fn get_user(
+        &self,
+        limit: &str,
+        page_info: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1938,7 +1972,7 @@ impl Plus {
      *
      * * `user_id: &str` -- storefront_access_token_id.
      */
-    pub async fn get_users_param_user(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn get_users_param_user(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/users/{}/json",
@@ -1963,7 +1997,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2020-10
      */
-    pub async fn get_users_current(&self) -> ClientResult<()> {
+    pub async fn get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/users/current.json", None);
@@ -1994,7 +2028,7 @@ impl Plus {
         &self,
         limit: &str,
         page_info: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -2027,7 +2061,10 @@ impl Plus {
      *
      * * `user_id: &str` -- storefront_access_token_id.
      */
-    pub async fn deprecated_202101_get_users_param_user(&self, user_id: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_users_param_user(
+        &self,
+        user_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/users/{}/json",
@@ -2052,7 +2089,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-2021-01
      */
-    pub async fn deprecated_202101_get_users_current(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/users/current.json", None);
@@ -2083,7 +2120,7 @@ impl Plus {
         &self,
         limit: &str,
         page_info: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -2119,7 +2156,7 @@ impl Plus {
     pub async fn deprecated_unstable_get_users_param_user(
         &self,
         user_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/users/{}/json",
@@ -2144,7 +2181,7 @@ impl Plus {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/plus/user#current-unstable
      */
-    pub async fn deprecated_unstable_get_users_current(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_users_current(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/users/current.json", None);

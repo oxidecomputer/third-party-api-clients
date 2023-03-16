@@ -30,7 +30,9 @@ impl ApiKeyPermissions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_scopes(&self) -> ClientResult<crate::types::GetScopesResponse> {
+    pub async fn get_scopes(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::GetScopesResponse>> {
         let url = self.client.url("/scopes", None);
         self.client
             .get(

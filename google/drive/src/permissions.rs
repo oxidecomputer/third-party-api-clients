@@ -35,7 +35,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::Permission>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Permission>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
             query_args.push((
@@ -76,7 +76,7 @@ impl Permissions {
             ),
             None,
         );
-        let resp: crate::types::PermissionList = self
+        let resp: crate::Response<crate::types::PermissionList> = self
             .client
             .get(
                 &url,
@@ -88,7 +88,11 @@ impl Permissions {
             .await?;
 
         // Return our response data.
-        Ok(resp.permissions.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.permissions.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions` endpoint.
@@ -104,7 +108,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> ClientResult<Vec<crate::types::Permission>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Permission>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
             query_args.push((
@@ -139,7 +143,11 @@ impl Permissions {
             ),
             None,
         );
-        let mut resp: crate::types::PermissionList = self
+        let crate::Response::<crate::types::PermissionList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -150,13 +158,17 @@ impl Permissions {
             )
             .await?;
 
-        let mut permissions = resp.permissions;
-        let mut page = resp.next_page_token;
+        let mut permissions = body.permissions;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PermissionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -167,7 +179,11 @@ impl Permissions {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PermissionList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -179,17 +195,17 @@ impl Permissions {
                     .await?;
             }
 
-            permissions.append(&mut resp.permissions);
+            permissions.append(&mut body.permissions);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(permissions)
+        Ok(crate::Response::new(status, headers, permissions))
     }
     /**
      * This function performs a `POST` to the `/files/{fileId}/permissions` endpoint.
@@ -219,7 +235,7 @@ impl Permissions {
         transfer_ownership: bool,
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
-    ) -> ClientResult<crate::types::Permission> {
+    ) -> ClientResult<crate::Response<crate::types::Permission>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email_message.is_empty() {
             query_args.push(("emailMessage".to_string(), email_message.to_string()));
@@ -297,7 +313,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> ClientResult<crate::types::Permission> {
+    ) -> ClientResult<crate::Response<crate::types::Permission>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -357,7 +373,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
@@ -422,7 +438,7 @@ impl Permissions {
         transfer_ownership: bool,
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
-    ) -> ClientResult<crate::types::Permission> {
+    ) -> ClientResult<crate::Response<crate::types::Permission>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if remove_expiration {
             query_args.push((

@@ -31,7 +31,7 @@ impl Payments {
         account_id: &str,
         from_date: &str,
         to_date: &str,
-    ) -> ClientResult<crate::types::BillingPaymentsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BillingPaymentsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -80,7 +80,7 @@ impl Payments {
         &self,
         account_id: &str,
         body: &crate::types::BillingPaymentRequest,
-    ) -> ClientResult<crate::types::BillingPaymentResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BillingPaymentResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_payments",
@@ -116,7 +116,7 @@ impl Payments {
         &self,
         account_id: &str,
         payment_id: &str,
-    ) -> ClientResult<crate::types::BillingPaymentItem> {
+    ) -> ClientResult<crate::Response<crate::types::BillingPaymentItem>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/billing_payments/{}",

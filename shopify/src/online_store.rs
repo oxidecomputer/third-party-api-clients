@@ -57,7 +57,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -132,7 +132,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles.json",
@@ -183,7 +183,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -243,7 +243,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -285,7 +285,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/{}/json",
@@ -320,7 +320,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/articles/{}/json",
@@ -346,7 +346,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-01
      */
-    pub async fn deprecated_202001_get_articles_author(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/articles/authors.json", None);
@@ -376,7 +376,7 @@ impl OnlineStore {
         &self,
         limit: &str,
         popular: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -445,7 +445,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -520,7 +520,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles.json",
@@ -571,7 +571,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -631,7 +631,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -673,7 +673,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/{}/json",
@@ -708,7 +708,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/blogs/{}/articles/{}/json",
@@ -734,7 +734,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-04
      */
-    pub async fn deprecated_202004_get_articles_author(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/articles/authors.json", None);
@@ -764,7 +764,7 @@ impl OnlineStore {
         &self,
         limit: &str,
         popular: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -833,7 +833,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -908,7 +908,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles.json",
@@ -959,7 +959,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1019,7 +1019,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1061,7 +1061,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/{}/json",
@@ -1096,7 +1096,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/blogs/{}/articles/{}/json",
@@ -1122,7 +1122,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-07
      */
-    pub async fn deprecated_202007_get_articles_author(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/articles/authors.json", None);
@@ -1152,7 +1152,7 @@ impl OnlineStore {
         &self,
         limit: &str,
         popular: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1221,7 +1221,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -1296,7 +1296,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles.json",
@@ -1347,7 +1347,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1407,7 +1407,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1449,7 +1449,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/{}/json",
@@ -1484,7 +1484,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/blogs/{}/articles/{}/json",
@@ -1510,7 +1510,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2020-10
      */
-    pub async fn get_articles_author(&self) -> ClientResult<()> {
+    pub async fn get_articles_author(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-10/articles/authors.json", None);
@@ -1536,7 +1536,11 @@ impl OnlineStore {
      * * `limit: &str` -- The maximum number of tags to retrieve.
      * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
-    pub async fn get_articles_tag(&self, limit: &str, popular: &str) -> ClientResult<()> {
+    pub async fn get_articles_tag(
+        &self,
+        limit: &str,
+        popular: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1605,7 +1609,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -1680,7 +1684,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles.json",
@@ -1731,7 +1735,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -1791,7 +1795,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -1833,7 +1837,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/{}/json",
@@ -1868,7 +1872,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/blogs/{}/articles/{}/json",
@@ -1894,7 +1898,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-2021-01
      */
-    pub async fn deprecated_202101_get_articles_author(&self) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_articles_author(&self) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2021-01/articles/authors.json", None);
@@ -1924,7 +1928,7 @@ impl OnlineStore {
         &self,
         limit: &str,
         popular: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1993,7 +1997,7 @@ impl OnlineStore {
         tag: &str,
         author: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !author.is_empty() {
             query_args.push(("author".to_string(), author.to_string()));
@@ -2068,7 +2072,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles.json",
@@ -2119,7 +2123,7 @@ impl OnlineStore {
         published_at_min: &str,
         published_at_max: &str,
         published_status: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -2179,7 +2183,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -2221,7 +2225,7 @@ impl OnlineStore {
         blog_id: &str,
         article_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/{}/json",
@@ -2256,7 +2260,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         article_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/blogs/{}/articles/{}/json",
@@ -2282,7 +2286,9 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/article#authors-unstable
      */
-    pub async fn deprecated_unstable_get_articles_author(&self) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_articles_author(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/articles/authors.json", None);
@@ -2312,7 +2318,7 @@ impl OnlineStore {
         &self,
         limit: &str,
         popular: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -2355,7 +2361,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2402,7 +2408,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -2445,7 +2451,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2489,7 +2495,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2536,7 +2542,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -2579,7 +2585,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2623,7 +2629,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2670,7 +2676,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -2713,7 +2719,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2757,7 +2763,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2804,7 +2810,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -2847,7 +2853,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2891,7 +2897,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -2938,7 +2944,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -2981,7 +2987,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -3025,7 +3031,7 @@ impl OnlineStore {
         theme_id: &str,
         fields: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -3072,7 +3078,7 @@ impl OnlineStore {
         src: &str,
         source_key: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !source_key.is_empty() {
             query_args.push(("source_key".to_string(), source_key.to_string()));
@@ -3115,7 +3121,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         asset_key: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !asset_key.is_empty() {
             query_args.push(("asset[key]".to_string(), asset_key.to_string()));
@@ -3160,7 +3166,7 @@ impl OnlineStore {
         since_id: &str,
         handle: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3198,7 +3204,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_create_blogs(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/blogs.json", None);
         self.client
             .post(
@@ -3217,7 +3223,7 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/blog#count-2020-01
      */
-    pub async fn deprecated_202001_get_blogs_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_blogs_count(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/blogs/count.json", None);
         self.client
             .get(
@@ -3245,7 +3251,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3284,7 +3290,7 @@ impl OnlineStore {
         &self,
         blog_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/json",
@@ -3316,7 +3322,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_blogs_param_blog(
         &self,
         blog_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/blogs/{}/json",
@@ -3382,7 +3388,7 @@ impl OnlineStore {
         status: &str,
         article_id: i64,
         blog_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if article_id > 0 {
             query_args.push(("article_id".to_string(), article_id.to_string()));
@@ -3448,7 +3454,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_create_comments(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/comments.json", None);
         self.client
             .post(
@@ -3501,7 +3507,7 @@ impl OnlineStore {
         status: &str,
         article_id: i64,
         blog_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if article_id > 0 {
             query_args.push(("article_id".to_string(), article_id.to_string()));
@@ -3564,7 +3570,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3603,7 +3609,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/json",
@@ -3636,7 +3642,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/spam.json",
@@ -3669,7 +3675,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/not_spam.json",
@@ -3702,7 +3708,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/approve.json",
@@ -3735,7 +3741,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/remove.json",
@@ -3768,7 +3774,7 @@ impl OnlineStore {
         &self,
         comment_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/comments/{}/restore.json",
@@ -3809,7 +3815,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3852,7 +3858,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_create_redirects(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/redirects.json", None);
         self.client
             .post(
@@ -3880,7 +3886,7 @@ impl OnlineStore {
         &self,
         path: &str,
         target: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -3919,7 +3925,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -3958,7 +3964,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/redirects/{}/json",
@@ -3990,7 +3996,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_redirects_param_redirect(
         &self,
         redirect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/redirects/{}/json",
@@ -4031,7 +4037,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4074,7 +4080,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_create_redirects(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/redirects.json", None);
         self.client
             .post(
@@ -4102,7 +4108,7 @@ impl OnlineStore {
         &self,
         path: &str,
         target: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -4141,7 +4147,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4180,7 +4186,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/redirects/{}/json",
@@ -4212,7 +4218,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_delete_redirects_param_redirect(
         &self,
         redirect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/redirects/{}/json",
@@ -4253,7 +4259,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4296,7 +4302,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_create_redirects(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/redirects.json", None);
         self.client
             .post(
@@ -4324,7 +4330,7 @@ impl OnlineStore {
         &self,
         path: &str,
         target: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -4363,7 +4369,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4402,7 +4408,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/redirects/{}/json",
@@ -4434,7 +4440,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_delete_redirects_param_redirect(
         &self,
         redirect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/redirects/{}/json",
@@ -4475,7 +4481,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4515,7 +4521,10 @@ impl OnlineStore {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-10
     */
-    pub async fn create_redirects(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_redirects(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/redirects.json", None);
         self.client
             .post(
@@ -4539,7 +4548,11 @@ impl OnlineStore {
      * * `path: &str` -- Count redirects with given path.
      * * `target: &str` -- Count redirects with given target.
      */
-    pub async fn get_redirects_count(&self, path: &str, target: &str) -> ClientResult<()> {
+    pub async fn get_redirects_count(
+        &self,
+        path: &str,
+        target: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -4578,7 +4591,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4617,7 +4630,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/redirects/{}/json",
@@ -4646,7 +4659,10 @@ impl OnlineStore {
      *
      * * `redirect_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_redirects_param_redirect(&self, redirect_id: &str) -> ClientResult<()> {
+    pub async fn delete_redirects_param_redirect(
+        &self,
+        redirect_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/redirects/{}/json",
@@ -4687,7 +4703,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4730,7 +4746,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_create_redirects(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/redirects.json", None);
         self.client
             .post(
@@ -4758,7 +4774,7 @@ impl OnlineStore {
         &self,
         path: &str,
         target: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -4797,7 +4813,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4836,7 +4852,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/redirects/{}/json",
@@ -4868,7 +4884,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_delete_redirects_param_redirect(
         &self,
         redirect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/redirects/{}/json",
@@ -4909,7 +4925,7 @@ impl OnlineStore {
         path: &str,
         target: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -4952,7 +4968,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_create_redirects(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/redirects.json", None);
         self.client
             .post(
@@ -4980,7 +4996,7 @@ impl OnlineStore {
         &self,
         path: &str,
         target: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !path.is_empty() {
             query_args.push(("path".to_string(), path.to_string()));
@@ -5019,7 +5035,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5058,7 +5074,7 @@ impl OnlineStore {
         &self,
         redirect_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/redirects/{}/json",
@@ -5090,7 +5106,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_delete_redirects_param_redirect(
         &self,
         redirect_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/redirects/{}/json",
@@ -5137,7 +5153,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -5188,7 +5204,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_create_script_tags(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/script_tags.json", None);
         self.client
             .post(
@@ -5211,7 +5227,10 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn deprecated_202001_get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_script_tags_count(
+        &self,
+        src: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -5247,7 +5266,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5286,7 +5305,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/script_tags/{}/json",
@@ -5318,7 +5337,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_script_tags_param_tag(
         &self,
         script_tag_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/script_tags/{}/json",
@@ -5365,7 +5384,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -5416,7 +5435,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_create_script_tags(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/script_tags.json", None);
         self.client
             .post(
@@ -5439,7 +5458,10 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn deprecated_202004_get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_script_tags_count(
+        &self,
+        src: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -5475,7 +5497,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5514,7 +5536,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/script_tags/{}/json",
@@ -5546,7 +5568,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_delete_script_tags_param_tag(
         &self,
         script_tag_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/script_tags/{}/json",
@@ -5593,7 +5615,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -5644,7 +5666,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_create_script_tags(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/script_tags.json", None);
         self.client
             .post(
@@ -5667,7 +5689,10 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn deprecated_202007_get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_script_tags_count(
+        &self,
+        src: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -5703,7 +5728,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5742,7 +5767,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/script_tags/{}/json",
@@ -5774,7 +5799,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_delete_script_tags_param_tag(
         &self,
         script_tag_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/script_tags/{}/json",
@@ -5821,7 +5846,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -5869,7 +5894,10 @@ impl OnlineStore {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/online-store/scripttag#create-2020-10
      */
-    pub async fn create_script_tags(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_script_tags(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/script_tags.json", None);
         self.client
             .post(
@@ -5892,7 +5920,7 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn get_script_tags_count(&self, src: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -5928,7 +5956,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -5967,7 +5995,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/script_tags/{}/json",
@@ -5996,7 +6024,10 @@ impl OnlineStore {
      *
      * * `script_tag_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_script_tags_param_tag(&self, script_tag_id: &str) -> ClientResult<()> {
+    pub async fn delete_script_tags_param_tag(
+        &self,
+        script_tag_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/script_tags/{}/json",
@@ -6043,7 +6074,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -6094,7 +6125,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_create_script_tags(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/script_tags.json", None);
         self.client
             .post(
@@ -6117,7 +6148,10 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn deprecated_202101_get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_script_tags_count(
+        &self,
+        src: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -6153,7 +6187,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6192,7 +6226,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/script_tags/{}/json",
@@ -6224,7 +6258,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_delete_script_tags_param_tag(
         &self,
         script_tag_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/script_tags/{}/json",
@@ -6271,7 +6305,7 @@ impl OnlineStore {
         updated_at_max: &str,
         src: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !created_at_max.is_empty() {
             query_args.push(("created_at_max".to_string(), created_at_max.to_string()));
@@ -6322,7 +6356,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_create_script_tags(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/unstable/script_tags.json", None);
@@ -6347,7 +6381,10 @@ impl OnlineStore {
      *
      * * `src: &str` -- Count only script tags with a given URL.
      */
-    pub async fn deprecated_unstable_get_script_tags_count(&self, src: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_script_tags_count(
+        &self,
+        src: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !src.is_empty() {
             query_args.push(("src".to_string(), src.to_string()));
@@ -6383,7 +6420,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6422,7 +6459,7 @@ impl OnlineStore {
         &self,
         script_tag_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/script_tags/{}/json",
@@ -6454,7 +6491,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_delete_script_tags_param_tag(
         &self,
         script_tag_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/script_tags/{}/json",
@@ -6483,7 +6520,10 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202001_get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_theme(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6515,7 +6555,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_create_themes(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/themes.json", None);
         self.client
             .post(
@@ -6543,7 +6583,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6582,7 +6622,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/json",
@@ -6614,7 +6654,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_themes_param_theme(
         &self,
         theme_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/themes/{}/json",
@@ -6643,7 +6683,10 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202004_get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_theme(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6675,7 +6718,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_create_themes(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/themes.json", None);
         self.client
             .post(
@@ -6703,7 +6746,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6742,7 +6785,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/json",
@@ -6774,7 +6817,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_delete_themes_param_theme(
         &self,
         theme_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/themes/{}/json",
@@ -6803,7 +6846,10 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202007_get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_theme(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6835,7 +6881,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_create_themes(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/themes.json", None);
         self.client
             .post(
@@ -6863,7 +6909,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6902,7 +6948,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/json",
@@ -6934,7 +6980,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_delete_themes_param_theme(
         &self,
         theme_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/themes/{}/json",
@@ -6963,7 +7009,7 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn get_theme(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -6992,7 +7038,10 @@ impl OnlineStore {
     *
     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-10
     */
-    pub async fn create_themes(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_themes(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/themes.json", None);
         self.client
             .post(
@@ -7016,7 +7065,11 @@ impl OnlineStore {
      * * `theme_id: &str` -- storefront_access_token_id.
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn get_themes_param_theme(&self, theme_id: &str, fields: &str) -> ClientResult<()> {
+    pub async fn get_themes_param_theme(
+        &self,
+        theme_id: &str,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7055,7 +7108,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/json",
@@ -7084,7 +7137,10 @@ impl OnlineStore {
      *
      * * `theme_id: &str` -- storefront_access_token_id.
      */
-    pub async fn delete_themes_param_theme(&self, theme_id: &str) -> ClientResult<()> {
+    pub async fn delete_themes_param_theme(
+        &self,
+        theme_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/themes/{}/json",
@@ -7113,7 +7169,10 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_202101_get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_theme(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7145,7 +7204,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_create_themes(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/themes.json", None);
         self.client
             .post(
@@ -7173,7 +7232,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7212,7 +7271,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/json",
@@ -7244,7 +7303,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_delete_themes_param_theme(
         &self,
         theme_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/themes/{}/json",
@@ -7273,7 +7332,10 @@ impl OnlineStore {
      *
      * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
      */
-    pub async fn deprecated_unstable_get_theme(&self, fields: &str) -> ClientResult<()> {
+    pub async fn deprecated_unstable_get_theme(
+        &self,
+        fields: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7305,7 +7367,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_create_themes(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/themes.json", None);
         self.client
             .post(
@@ -7333,7 +7395,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         fields: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
             query_args.push(("fields".to_string(), fields.to_string()));
@@ -7372,7 +7434,7 @@ impl OnlineStore {
         &self,
         theme_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/json",
@@ -7404,7 +7466,7 @@ impl OnlineStore {
     pub async fn deprecated_unstable_delete_themes_param_theme(
         &self,
         theme_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/themes/{}/json",

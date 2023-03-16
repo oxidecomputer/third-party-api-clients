@@ -31,7 +31,7 @@ impl OauthV2 {
         client_secret: &str,
         code: &str,
         redirect_uri: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));

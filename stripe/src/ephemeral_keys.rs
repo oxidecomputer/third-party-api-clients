@@ -16,7 +16,7 @@ impl EphemeralKeys {
      *
      * <p>Creates a short-lived API key for a given resource.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::EphemeralKey> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::EphemeralKey>> {
         let url = self.client.url("/v1/ephemeral_keys", None);
         self.client
             .post(
@@ -37,7 +37,10 @@ impl EphemeralKeys {
      *
      * * `key: &str` -- The account's country.
      */
-    pub async fn delete_key(&self, key: &str) -> ClientResult<crate::types::EphemeralKey> {
+    pub async fn delete_key(
+        &self,
+        key: &str,
+    ) -> ClientResult<crate::Response<crate::types::EphemeralKey>> {
         let url = self.client.url(
             &format!(
                 "/v1/ephemeral_keys/{}",

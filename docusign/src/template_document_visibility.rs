@@ -31,7 +31,7 @@ impl TemplateDocumentVisibility {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
-    ) -> ClientResult<crate::types::TemplateDocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
@@ -68,7 +68,7 @@ impl TemplateDocumentVisibility {
         account_id: &str,
         recipient_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::DocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
@@ -109,7 +109,7 @@ impl TemplateDocumentVisibility {
         recipient_id: &str,
         template_id: &str,
         body: &crate::types::TemplateDocumentVisibilityList,
-    ) -> ClientResult<crate::types::TemplateDocumentVisibilityList> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDocumentVisibilityList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",

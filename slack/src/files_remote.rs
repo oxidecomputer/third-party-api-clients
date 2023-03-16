@@ -18,7 +18,7 @@ impl FilesRemote {
      *
      * FROM: <https://api.slack.com/methods/files.remote.add>
      */
-    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/files.remote.add", None);
         self.client
             .post(
@@ -47,7 +47,7 @@ impl FilesRemote {
         &self,
         file: &str,
         external_id: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !external_id.is_empty() {
             query_args.push(("external_id".to_string(), external_id.to_string()));
@@ -92,7 +92,7 @@ impl FilesRemote {
         ts_to: f64,
         limit: i64,
         cursor: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -130,7 +130,7 @@ impl FilesRemote {
      *
      * FROM: <https://api.slack.com/methods/files.remote.remove>
      */
-    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/files.remote.remove", None);
         self.client
             .post(
@@ -161,7 +161,7 @@ impl FilesRemote {
         file: &str,
         external_id: &str,
         channels: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channels.is_empty() {
             query_args.push(("channels".to_string(), channels.to_string()));
@@ -193,7 +193,7 @@ impl FilesRemote {
      *
      * FROM: <https://api.slack.com/methods/files.remote.update>
      */
-    pub async fn update(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn update(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/files.remote.update", None);
         self.client
             .post(

@@ -23,7 +23,7 @@ impl JobApplicantsBeta {
     pub async fn get_company_job_applicants(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::JobApplicant>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::JobApplicant>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -55,7 +55,7 @@ impl JobApplicantsBeta {
     pub async fn get_all_company_job_applicants(
         &self,
         company_id: &str,
-    ) -> ClientResult<Vec<crate::types::JobApplicant>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::JobApplicant>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -86,7 +86,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyJobApplicantsRequest,
-    ) -> ClientResult<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::Response<crate::types::JobApplicant>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants",
@@ -117,7 +117,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
-    ) -> ClientResult<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::Response<crate::types::JobApplicant>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
@@ -150,7 +150,7 @@ impl JobApplicantsBeta {
         company_id: &str,
         job_applicant_uuid: &str,
         body: &crate::types::PutCompanyJobApplicantRequest,
-    ) -> ClientResult<crate::types::JobApplicant> {
+    ) -> ClientResult<crate::Response<crate::types::JobApplicant>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",
@@ -182,7 +182,7 @@ impl JobApplicantsBeta {
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/job_applicants/{}",

@@ -40,7 +40,7 @@ impl PhoneReports {
         category_type: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::ReportOperationLogsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ReportOperationLogsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category_type.is_empty() {
             query_args.push(("category_type".to_string(), category_type.to_string()));

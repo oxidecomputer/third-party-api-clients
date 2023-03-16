@@ -26,7 +26,7 @@ impl Employees {
         &self,
         employee_id_or_uuid: &str,
         include: &[String],
-    ) -> ClientResult<crate::types::Employee> {
+    ) -> ClientResult<crate::Response<crate::types::Employee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.join(" ")));
@@ -61,7 +61,7 @@ impl Employees {
         &self,
         employee_id_or_uuid: &str,
         body: &crate::types::PutEmployeesRequest,
-    ) -> ClientResult<crate::types::Employee> {
+    ) -> ClientResult<crate::Response<crate::types::Employee>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}",
@@ -100,7 +100,7 @@ impl Employees {
         page: f64,
         per: f64,
         include: &[String],
-    ) -> ClientResult<Vec<crate::types::Employee>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Employee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.join(" ")));
@@ -147,7 +147,7 @@ impl Employees {
         company_id_or_uuid: &str,
         terminated: bool,
         include: &[String],
-    ) -> ClientResult<Vec<crate::types::Employee>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Employee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.join(" ")));
@@ -185,7 +185,7 @@ impl Employees {
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostEmployeesRequest,
-    ) -> ClientResult<crate::types::Employee> {
+    ) -> ClientResult<crate::Response<crate::types::Employee>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/employees",
@@ -213,7 +213,7 @@ impl Employees {
     pub async fn get_home_address(
         &self,
         employee_id: &str,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/home_address",
@@ -242,7 +242,7 @@ impl Employees {
         &self,
         employee_id: &str,
         body: &crate::types::PutEmployeeHomeAddressRequest,
-    ) -> ClientResult<crate::types::Location> {
+    ) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
             &format!(
                 "/v1/employees/{}/home_address",

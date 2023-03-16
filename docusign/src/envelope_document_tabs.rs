@@ -31,7 +31,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         page_number: &str,
-    ) -> ClientResult<crate::types::EnvelopeDocumentTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentTabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/tabs",
@@ -78,7 +78,7 @@ impl EnvelopeDocumentTabs {
         envelope_id: &str,
         include_metadata: &str,
         page_numbers: &str,
-    ) -> ClientResult<crate::types::EnvelopeDocumentTabs> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocumentTabs>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_metadata.is_empty() {
             query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
@@ -126,7 +126,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> ClientResult<crate::types::Tabs> {
+    ) -> ClientResult<crate::Response<crate::types::Tabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
@@ -165,7 +165,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> ClientResult<crate::types::Tabs> {
+    ) -> ClientResult<crate::Response<crate::types::Tabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",
@@ -204,7 +204,7 @@ impl EnvelopeDocumentTabs {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::Tabs,
-    ) -> ClientResult<crate::types::Tabs> {
+    ) -> ClientResult<crate::Response<crate::types::Tabs>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs",

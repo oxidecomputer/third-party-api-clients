@@ -34,7 +34,7 @@ impl SetupIntents {
         limit: i64,
         payment_method: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::SetupIntent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SetupIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -55,7 +55,7 @@ impl SetupIntents {
         let url = self
             .client
             .url(&format!("/v1/setup_intents?{}", query_), None);
-        let resp: crate::types::PaymentFlowsSetupIntentList = self
+        let resp: crate::Response<crate::types::PaymentFlowsSetupIntentList> = self
             .client
             .get(
                 &url,
@@ -67,7 +67,11 @@ impl SetupIntents {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/setup_intents` endpoint.
@@ -81,7 +85,7 @@ impl SetupIntents {
         _created: &str,
         customer: &str,
         payment_method: &str,
-    ) -> ClientResult<Vec<crate::types::SetupIntent>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SetupIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -93,7 +97,11 @@ impl SetupIntents {
         let url = self
             .client
             .url(&format!("/v1/setup_intents?{}", query_), None);
-        let mut resp: crate::types::PaymentFlowsSetupIntentList = self
+        let crate::Response::<crate::types::PaymentFlowsSetupIntentList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -104,8 +112,8 @@ impl SetupIntents {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -121,7 +129,11 @@ impl SetupIntents {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsSetupIntentList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -132,7 +144,11 @@ impl SetupIntents {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::PaymentFlowsSetupIntentList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -144,13 +160,13 @@ impl SetupIntents {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/setup_intents` endpoint.
@@ -160,7 +176,7 @@ impl SetupIntents {
      * <p>After the SetupIntent is created, attach a payment method and <a href="/docs/api/setup_intents/confirm">confirm</a>
      * to collect any required permissions to charge the payment method later.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::SetupIntent> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let url = self.client.url("/v1/setup_intents", None);
         self.client
             .post(
@@ -191,7 +207,7 @@ impl SetupIntents {
         &self,
         client_secret: &str,
         intent: &str,
-    ) -> ClientResult<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -224,7 +240,10 @@ impl SetupIntents {
      *
      * * `intent: &str` -- The account's country.
      */
-    pub async fn post_intent(&self, intent: &str) -> ClientResult<crate::types::SetupIntent> {
+    pub async fn post_intent(
+        &self,
+        intent: &str,
+    ) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}",
@@ -256,7 +275,7 @@ impl SetupIntents {
     pub async fn post_intent_cancel(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/cancel",
@@ -298,7 +317,7 @@ impl SetupIntents {
     pub async fn post_intent_confirm(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/confirm",
@@ -328,7 +347,7 @@ impl SetupIntents {
     pub async fn post_intent_verify_microdeposit(
         &self,
         intent: &str,
-    ) -> ClientResult<crate::types::SetupIntent> {
+    ) -> ClientResult<crate::Response<crate::types::SetupIntent>> {
         let url = self.client.url(
             &format!(
                 "/v1/setup_intents/{}/verify_microdeposits",

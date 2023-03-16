@@ -25,7 +25,7 @@ impl AccountTabSettings {
     pub async fn tab_settings_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::TabAccountSettings> {
+    ) -> ClientResult<crate::Response<crate::types::TabAccountSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/tabs",
@@ -58,7 +58,7 @@ impl AccountTabSettings {
         &self,
         account_id: &str,
         body: &crate::types::TabAccountSettings,
-    ) -> ClientResult<crate::types::TabAccountSettings> {
+    ) -> ClientResult<crate::Response<crate::types::TabAccountSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/tabs",

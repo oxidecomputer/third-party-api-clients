@@ -31,7 +31,7 @@ impl SearchMembers {
         exclude_fields: &[String],
         query: &str,
         list_id: &str,
-    ) -> ClientResult<crate::types::MembersData> {
+    ) -> ClientResult<crate::Response<crate::types::MembersData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));

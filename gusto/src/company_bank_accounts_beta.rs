@@ -23,7 +23,7 @@ impl CompanyBankAccountsBeta {
     pub async fn get_company_bank_accounts(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::CompanyBankAccount>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CompanyBankAccount>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/bank_accounts",
@@ -55,7 +55,7 @@ impl CompanyBankAccountsBeta {
     pub async fn get_all_company_bank_accounts(
         &self,
         company_id_or_uuid: &str,
-    ) -> ClientResult<Vec<crate::types::CompanyBankAccount>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::CompanyBankAccount>>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/bank_accounts",
@@ -86,7 +86,7 @@ impl CompanyBankAccountsBeta {
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyBankAccountsRequest,
-    ) -> ClientResult<crate::types::CompanyBankAccount> {
+    ) -> ClientResult<crate::Response<crate::types::CompanyBankAccount>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/bank_accounts",
@@ -118,7 +118,7 @@ impl CompanyBankAccountsBeta {
         company_id_or_uuid: &str,
         bank_account_uuid: &str,
         body: &crate::types::PutCompanyBankAccountsVerifyRequest,
-    ) -> ClientResult<crate::types::CompanyBankAccount> {
+    ) -> ClientResult<crate::Response<crate::types::CompanyBankAccount>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/bank_accounts/{}/verify",

@@ -21,7 +21,7 @@ impl Balance {
      *
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      */
-    pub async fn get(&self) -> ClientResult<crate::types::Balance> {
+    pub async fn get(&self) -> ClientResult<crate::Response<crate::types::Balance>> {
         let url = self.client.url("/v1/balance", None);
         self.client
             .get(
@@ -62,7 +62,7 @@ impl Balance {
         source: &str,
         starting_after: &str,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::BalanceTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BalanceTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -89,7 +89,7 @@ impl Balance {
         let url = self
             .client
             .url(&format!("/v1/balance/history?{}", query_), None);
-        let resp: crate::types::BalanceTransactionsList = self
+        let resp: crate::Response<crate::types::BalanceTransactionsList> = self
             .client
             .get(
                 &url,
@@ -101,7 +101,11 @@ impl Balance {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/balance/history` endpoint.
@@ -119,7 +123,7 @@ impl Balance {
         payout: &str,
         source: &str,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::BalanceTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BalanceTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -137,7 +141,11 @@ impl Balance {
         let url = self
             .client
             .url(&format!("/v1/balance/history?{}", query_), None);
-        let mut resp: crate::types::BalanceTransactionsList = self
+        let crate::Response::<crate::types::BalanceTransactionsList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -148,8 +156,8 @@ impl Balance {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -165,7 +173,11 @@ impl Balance {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::BalanceTransactionsList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -176,7 +188,11 @@ impl Balance {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::BalanceTransactionsList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -188,13 +204,13 @@ impl Balance {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/balance/history/{id}` endpoint.
@@ -211,7 +227,7 @@ impl Balance {
     pub async fn get_history_balance(
         &self,
         id: &str,
-    ) -> ClientResult<crate::types::BalanceTransaction> {
+    ) -> ClientResult<crate::Response<crate::types::BalanceTransaction>> {
         let url = self.client.url(
             &format!(
                 "/v1/balance/history/{}",

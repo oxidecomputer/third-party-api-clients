@@ -29,7 +29,7 @@ impl TemplateDocuments {
         account_id: &str,
         template_id: &str,
         include_tabs: &str,
-    ) -> ClientResult<crate::types::TemplateDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDocumentsResult>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_tabs.is_empty() {
             query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
@@ -71,7 +71,7 @@ impl TemplateDocuments {
         account_id: &str,
         template_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> ClientResult<crate::types::TemplateDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDocumentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents",
@@ -121,7 +121,7 @@ impl TemplateDocuments {
         account_id: &str,
         template_id: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> ClientResult<crate::types::TemplateDocumentsResult> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateDocumentsResult>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents",
@@ -164,7 +164,7 @@ impl TemplateDocuments {
         template_id: &str,
         encrypt: &str,
         show_changes: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encrypt.is_empty() {
             query_args.push(("encrypt".to_string(), encrypt.to_string()));
@@ -214,7 +214,7 @@ impl TemplateDocuments {
         template_id: &str,
         is_envelope_definition: &str,
         body: &crate::types::EnvelopeDefinition,
-    ) -> ClientResult<crate::types::EnvelopeDocument> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeDocument>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !is_envelope_definition.is_empty() {
             query_args.push((

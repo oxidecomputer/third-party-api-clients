@@ -26,7 +26,7 @@ impl Contacts {
         &self,
         account_id: &str,
         body: &crate::types::ContactModRequest,
-    ) -> ClientResult<crate::types::ContactUpdateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactUpdateResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/contacts",
@@ -61,7 +61,7 @@ impl Contacts {
         &self,
         account_id: &str,
         body: &crate::types::ContactModRequest,
-    ) -> ClientResult<crate::types::ContactUpdateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactUpdateResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/contacts",
@@ -94,7 +94,7 @@ impl Contacts {
         &self,
         account_id: &str,
         body: &crate::types::ContactModRequest,
-    ) -> ClientResult<crate::types::ContactUpdateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactUpdateResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/contacts",
@@ -144,7 +144,7 @@ impl Contacts {
         account_id: &str,
         contact_id: &str,
         cloud_provider: &str,
-    ) -> ClientResult<crate::types::ContactGetResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactGetResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cloud_provider.is_empty() {
             query_args.push(("cloud_provider".to_string(), cloud_provider.to_string()));
@@ -185,7 +185,7 @@ impl Contacts {
         &self,
         account_id: &str,
         contact_id: &str,
-    ) -> ClientResult<crate::types::ContactUpdateResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ContactUpdateResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/contacts/{}",

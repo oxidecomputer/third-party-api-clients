@@ -22,7 +22,9 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn delete(&self) -> ClientResult<crate::types::ChatDeleteSuccessSchema> {
+    pub async fn delete(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ChatDeleteSuccessSchema>> {
         let url = self.client.url("/chat.delete", None);
         self.client
             .post(
@@ -45,7 +47,9 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn delete_scheduled_message(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn delete_scheduled_message(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/chat.deleteScheduledMessage", None);
         self.client
             .post(
@@ -74,7 +78,7 @@ impl Chat {
         &self,
         channel: &str,
         message_ts: &str,
-    ) -> ClientResult<crate::types::ChatGetPermalinkSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::ChatGetPermalinkSuccessSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -107,7 +111,9 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn me_message(&self) -> ClientResult<crate::types::ChatMeMessageSchema> {
+    pub async fn me_message(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ChatMeMessageSchema>> {
         let url = self.client.url("/chat.meMessage", None);
         self.client
             .post(
@@ -132,7 +138,7 @@ impl Chat {
      */
     pub async fn post_ephemeral(
         &self,
-    ) -> ClientResult<crate::types::ChatPostEphemeralSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::ChatPostEphemeralSuccessSchema>> {
         let url = self.client.url("/chat.postEphemeral", None);
         self.client
             .post(
@@ -155,7 +161,9 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn post_message(&self) -> ClientResult<crate::types::ChatPostMessageSuccessSchema> {
+    pub async fn post_message(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ChatPostMessageSuccessSchema>> {
         let url = self.client.url("/chat.postMessage", None);
         self.client
             .post(
@@ -180,7 +188,7 @@ impl Chat {
      */
     pub async fn schedule_message(
         &self,
-    ) -> ClientResult<crate::types::ChatScheduleMessageSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::ChatScheduleMessageSuccessSchema>> {
         let url = self.client.url("/chat.scheduleMessage", None);
         self.client
             .post(
@@ -203,7 +211,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `links:write`.
      */
-    pub async fn unfurl(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn unfurl(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/chat.unfurl", None);
         self.client
             .post(
@@ -226,7 +234,9 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn update(&self) -> ClientResult<crate::types::ChatUpdateSuccessSchema> {
+    pub async fn update(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ChatUpdateSuccessSchema>> {
         let url = self.client.url("/chat.update", None);
         self.client
             .post(

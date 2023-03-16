@@ -27,7 +27,7 @@ impl EnvelopeEmailSettings {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::Response<crate::types::EmailSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -65,7 +65,7 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EmailSettings,
-    ) -> ClientResult<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::Response<crate::types::EmailSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -103,7 +103,7 @@ impl EnvelopeEmailSettings {
         account_id: &str,
         envelope_id: &str,
         body: &crate::types::EmailSettings,
-    ) -> ClientResult<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::Response<crate::types::EmailSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",
@@ -138,7 +138,7 @@ impl EnvelopeEmailSettings {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> ClientResult<crate::types::EmailSettings> {
+    ) -> ClientResult<crate::Response<crate::types::EmailSettings>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/email_settings",

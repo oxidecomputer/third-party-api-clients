@@ -28,7 +28,7 @@ impl Apps {
         &self,
         client_id: &str,
         client_secret: &str,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
             query_args.push(("client_id".to_string(), client_id.to_string()));

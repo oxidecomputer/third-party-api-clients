@@ -29,7 +29,7 @@ impl Settings {
         &self,
         max_results: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Setting>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Setting>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -41,7 +41,7 @@ impl Settings {
         let url = self
             .client
             .url(&format!("/users/me/settings?{}", query_), None);
-        let resp: crate::types::Settings = self
+        let resp: crate::Response<crate::types::Settings> = self
             .client
             .get(
                 &url,
@@ -53,7 +53,11 @@ impl Settings {
             .await?;
 
         // Return our response data.
-        Ok(resp.items.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.items.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/users/me/settings` endpoint.
@@ -62,9 +66,13 @@ impl Settings {
      *
      * Returns all user settings for the authenticated user.
      */
-    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::Setting>> {
+    pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Setting>>> {
         let url = self.client.url("/users/me/settings", None);
-        let mut resp: crate::types::Settings = self
+        let crate::Response::<crate::types::Settings> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -75,13 +83,17 @@ impl Settings {
             )
             .await?;
 
-        let mut items = resp.items;
-        let mut page = resp.next_page_token;
+        let mut items = body.items;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Settings> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -92,7 +104,11 @@ impl Settings {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Settings> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -104,17 +120,17 @@ impl Settings {
                     .await?;
             }
 
-            items.append(&mut resp.items);
+            items.append(&mut body.items);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(items)
+        Ok(crate::Response::new(status, headers, items))
     }
     /**
      * This function performs a `POST` to the `/users/me/settings/watch` endpoint.
@@ -135,7 +151,7 @@ impl Settings {
         max_results: i64,
         page_token: &str,
         body: &crate::types::Channel,
-    ) -> ClientResult<crate::types::Channel> {
+    ) -> ClientResult<crate::Response<crate::types::Channel>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -166,7 +182,7 @@ impl Settings {
      *
      * * `setting: &str` -- The id of the user setting.
      */
-    pub async fn get(&self, setting: &str) -> ClientResult<crate::types::Setting> {
+    pub async fn get(&self, setting: &str) -> ClientResult<crate::Response<crate::types::Setting>> {
         let url = self.client.url(
             &format!(
                 "/users/me/settings/{}",

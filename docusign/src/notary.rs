@@ -26,7 +26,7 @@ impl Notary {
     pub async fn get(
         &self,
         include_jurisdictions: &str,
-    ) -> ClientResult<crate::types::NotaryResult> {
+    ) -> ClientResult<crate::Response<crate::types::NotaryResult>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_jurisdictions.is_empty() {
             query_args.push((
@@ -58,7 +58,7 @@ impl Notary {
     pub async fn put(
         &self,
         body: &crate::types::NotaryData,
-    ) -> ClientResult<crate::types::NotaryData> {
+    ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
         let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .put(
@@ -80,7 +80,7 @@ impl Notary {
     pub async fn post(
         &self,
         body: &crate::types::NotaryData,
-    ) -> ClientResult<crate::types::NotaryData> {
+    ) -> ClientResult<crate::Response<crate::types::NotaryData>> {
         let url = self.client.url("/v2.1/current_user/notary", None);
         self.client
             .post(

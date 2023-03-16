@@ -40,7 +40,7 @@ impl Invoices {
         starting_after: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::Invoice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Invoice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -68,7 +68,7 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/invoices?{}", query_), None);
-        let resp: crate::types::InvoicesList = self
+        let resp: crate::Response<crate::types::InvoicesList> = self
             .client
             .get(
                 &url,
@@ -80,7 +80,11 @@ impl Invoices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices` endpoint.
@@ -97,7 +101,7 @@ impl Invoices {
         _due_date: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
-    ) -> ClientResult<Vec<crate::types::Invoice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Invoice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -116,7 +120,11 @@ impl Invoices {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/invoices?{}", query_), None);
-        let mut resp: crate::types::InvoicesList = self
+        let crate::Response::<crate::types::InvoicesList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -127,8 +135,8 @@ impl Invoices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -144,7 +152,11 @@ impl Invoices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::InvoicesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -155,7 +167,11 @@ impl Invoices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::InvoicesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -167,20 +183,20 @@ impl Invoices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/invoices` endpoint.
      *
      * <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you <a href="#finalize_invoice">finalize</a> the invoice, which allows you to <a href="#pay_invoice">pay</a> or <a href="#send_invoice">send</a> the invoice to your customers.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Invoice> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url("/v1/invoices", None);
         self.client
             .post(
@@ -212,7 +228,7 @@ impl Invoices {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> ClientResult<Vec<crate::types::Charge>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -227,7 +243,7 @@ impl Invoices {
         let url = self
             .client
             .url(&format!("/v1/invoices/search?{}", query_), None);
-        let resp: crate::types::SearchResult = self
+        let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
                 &url,
@@ -239,7 +255,11 @@ impl Invoices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices/search` endpoint.
@@ -251,7 +271,10 @@ impl Invoices {
      * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
      * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
      */
-    pub async fn get_all_search(&self, query: &str) -> ClientResult<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(
+        &self,
+        query: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Charge>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -260,7 +283,11 @@ impl Invoices {
         let url = self
             .client
             .url(&format!("/v1/invoices/search?{}", query_), None);
-        let mut resp: crate::types::SearchResult = self
+        let crate::Response::<crate::types::SearchResult> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -271,8 +298,8 @@ impl Invoices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -288,7 +315,11 @@ impl Invoices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -299,7 +330,11 @@ impl Invoices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::SearchResult> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -311,13 +346,13 @@ impl Invoices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices/upcoming` endpoint.
@@ -376,7 +411,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> ClientResult<crate::types::Invoice> {
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -499,7 +534,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> ClientResult<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -562,7 +597,7 @@ impl Invoices {
         let url = self
             .client
             .url(&format!("/v1/invoices/upcoming/lines?{}", query_), None);
-        let resp: crate::types::InvoiceLinesList = self
+        let resp: crate::Response<crate::types::InvoiceLinesList> = self
             .client
             .get(
                 &url,
@@ -574,7 +609,11 @@ impl Invoices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices/upcoming/lines` endpoint.
@@ -604,7 +643,7 @@ impl Invoices {
         subscription_start_date: i64,
         _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> ClientResult<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -658,7 +697,11 @@ impl Invoices {
         let url = self
             .client
             .url(&format!("/v1/invoices/upcoming/lines?{}", query_), None);
-        let mut resp: crate::types::InvoiceLinesList = self
+        let crate::Response::<crate::types::InvoiceLinesList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -669,8 +712,8 @@ impl Invoices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -686,7 +729,11 @@ impl Invoices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::InvoiceLinesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -697,7 +744,11 @@ impl Invoices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::InvoiceLinesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -709,13 +760,13 @@ impl Invoices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices/{invoice}` endpoint.
@@ -727,7 +778,7 @@ impl Invoices {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn get(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn get(&self, invoice: &str) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -759,7 +810,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_invoices(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn post_invoices(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -786,7 +840,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn delete(&self, invoice: &str) -> ClientResult<crate::types::DeletedInvoice> {
+    pub async fn delete(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::DeletedInvoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}",
@@ -813,7 +870,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_finalize(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn post_finalize(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/finalize",
@@ -850,7 +910,7 @@ impl Invoices {
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::LineItem>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::LineItem>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -870,7 +930,7 @@ impl Invoices {
             ),
             None,
         );
-        let resp: crate::types::InvoiceLinesList = self
+        let resp: crate::Response<crate::types::InvoiceLinesList> = self
             .client
             .get(
                 &url,
@@ -882,7 +942,11 @@ impl Invoices {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/invoices/{invoice}/lines` endpoint.
@@ -891,7 +955,10 @@ impl Invoices {
      *
      * <p>When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
-    pub async fn get_all_lines(&self, invoice: &str) -> ClientResult<Vec<crate::types::LineItem>> {
+    pub async fn get_all_lines(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::LineItem>>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/lines",
@@ -899,7 +966,11 @@ impl Invoices {
             ),
             None,
         );
-        let mut resp: crate::types::InvoiceLinesList = self
+        let crate::Response::<crate::types::InvoiceLinesList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -910,8 +981,8 @@ impl Invoices {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -927,7 +998,11 @@ impl Invoices {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::InvoiceLinesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -938,7 +1013,11 @@ impl Invoices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::InvoiceLinesList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -950,13 +1029,13 @@ impl Invoices {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/invoices/{invoice}/mark_uncollectible` endpoint.
@@ -970,7 +1049,7 @@ impl Invoices {
     pub async fn post_mark_uncollectible(
         &self,
         invoice: &str,
-    ) -> ClientResult<crate::types::Invoice> {
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/mark_uncollectible",
@@ -997,7 +1076,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_pay(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn post_pay(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/pay",
@@ -1026,7 +1108,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_send(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn post_send(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/send",
@@ -1053,7 +1138,10 @@ impl Invoices {
      *
      * * `invoice: &str` -- The account's country.
      */
-    pub async fn post_void(&self, invoice: &str) -> ClientResult<crate::types::Invoice> {
+    pub async fn post_void(
+        &self,
+        invoice: &str,
+    ) -> ClientResult<crate::Response<crate::types::Invoice>> {
         let url = self.client.url(
             &format!(
                 "/v1/invoices/{}/void",

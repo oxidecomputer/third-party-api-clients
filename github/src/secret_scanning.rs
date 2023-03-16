@@ -39,7 +39,7 @@ impl SecretScanning {
         secret_type: &str,
         page: i64,
         per_page: i64,
-    ) -> ClientResult<Vec<crate::types::SecretScanningAlert>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SecretScanningAlert>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -92,7 +92,7 @@ impl SecretScanning {
         repo: &str,
         state: crate::types::SecretScanningAlertState,
         secret_type: &str,
-    ) -> ClientResult<Vec<crate::types::SecretScanningAlert>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SecretScanningAlert>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !secret_type.is_empty() {
             query_args.push(("secret_type".to_string(), secret_type.to_string()));
@@ -142,7 +142,7 @@ impl SecretScanning {
         owner: &str,
         repo: &str,
         alert_number: i64,
-    ) -> ClientResult<crate::types::SecretScanningAlert> {
+    ) -> ClientResult<crate::Response<crate::types::SecretScanningAlert>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts/{}",
@@ -185,7 +185,7 @@ impl SecretScanning {
         repo: &str,
         alert_number: i64,
         body: &crate::types::SecretScanningUpdateAlertRequest,
-    ) -> ClientResult<crate::types::SecretScanningAlert> {
+    ) -> ClientResult<crate::Response<crate::types::SecretScanningAlert>> {
         let url = self.client.url(
             &format!(
                 "/repos/{}/{}/secret-scanning/alerts/{}",

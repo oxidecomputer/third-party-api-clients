@@ -25,7 +25,7 @@ impl Reimbursements {
         &self,
         start: &str,
         page_size: f64,
-    ) -> ClientResult<Vec<crate::types::Reimbursement>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Reimbursement>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -37,7 +37,7 @@ impl Reimbursements {
         let url = self
             .client
             .url(&format!("/reimbursements?{}", query_), None);
-        let resp: crate::types::GetReimbursementsResponse = self
+        let resp: crate::Response<crate::types::GetReimbursementsResponse> = self
             .client
             .get(
                 &url,
@@ -49,7 +49,11 @@ impl Reimbursements {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List Reimbursements.
@@ -58,9 +62,13 @@ impl Reimbursements {
      *
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Reimbursement>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Reimbursement>>> {
         let url = self.client.url("/reimbursements", None);
-        let resp: crate::types::GetReimbursementsResponse = self
+        let crate::Response::<crate::types::GetReimbursementsResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -71,8 +79,8 @@ impl Reimbursements {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -88,10 +96,12 @@ impl Reimbursements {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -107,14 +117,17 @@ impl Reimbursements {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * Get details for one reimbursement.
      *
      * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Reimbursement> {
+    pub async fn get(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Reimbursement>> {
         let url = self.client.url(
             &format!(
                 "/reimbursements/{}",

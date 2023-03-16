@@ -42,7 +42,7 @@ impl BulkSend {
         count: &str,
         start_position: &str,
         status: &str,
-    ) -> ClientResult<crate::types::BulkSendBatchSummaries> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendBatchSummaries>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !batch_ids.is_empty() {
             query_args.push(("batch_ids".to_string(), batch_ids.to_string()));
@@ -97,7 +97,7 @@ impl BulkSend {
         &self,
         account_id: &str,
         bulk_send_batch_id: &str,
-    ) -> ClientResult<crate::types::BulkSendBatchStatus> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendBatchStatus>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_batch/{}",
@@ -133,7 +133,7 @@ impl BulkSend {
         account_id: &str,
         bulk_send_batch_id: &str,
         body: &crate::types::BulkSendBatchRequest,
-    ) -> ClientResult<crate::types::BulkSendBatchStatus> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendBatchStatus>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_batch/{}",
@@ -166,7 +166,7 @@ impl BulkSend {
     pub async fn v_2crud_get_list(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::BulkSendingListSummaries> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendingListSummaries>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists",
@@ -225,7 +225,7 @@ impl BulkSend {
         &self,
         account_id: &str,
         body: &crate::types::BulkSendingList,
-    ) -> ClientResult<crate::types::BulkSendingList> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendingList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists",
@@ -259,7 +259,7 @@ impl BulkSend {
         &self,
         account_id: &str,
         bulk_send_list_id: &str,
-    ) -> ClientResult<crate::types::BulkSendingList> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendingList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
@@ -295,7 +295,7 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendingList,
-    ) -> ClientResult<crate::types::BulkSendingList> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendingList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
@@ -330,7 +330,7 @@ impl BulkSend {
         &self,
         account_id: &str,
         bulk_send_list_id: &str,
-    ) -> ClientResult<crate::types::BulkSendingListSummaries> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendingListSummaries>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}",
@@ -403,7 +403,7 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
-    ) -> ClientResult<crate::types::BulkSendResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}/send",
@@ -476,7 +476,7 @@ impl BulkSend {
         account_id: &str,
         bulk_send_list_id: &str,
         body: &crate::types::BulkSendRequest,
-    ) -> ClientResult<crate::types::BulkSendTestResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BulkSendTestResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/bulk_send_lists/{}/test",

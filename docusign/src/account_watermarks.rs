@@ -22,7 +22,10 @@ impl AccountWatermarks {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn watermark_get(&self, account_id: &str) -> ClientResult<crate::types::Watermark> {
+    pub async fn watermark_get(
+        &self,
+        account_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Watermark>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/watermark",
@@ -55,7 +58,7 @@ impl AccountWatermarks {
         &self,
         account_id: &str,
         body: &crate::types::Watermark,
-    ) -> ClientResult<crate::types::Watermark> {
+    ) -> ClientResult<crate::Response<crate::types::Watermark>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/watermark",
@@ -88,7 +91,7 @@ impl AccountWatermarks {
         &self,
         account_id: &str,
         body: &crate::types::Watermark,
-    ) -> ClientResult<crate::types::Watermark> {
+    ) -> ClientResult<crate::Response<crate::types::Watermark>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/watermark/preview",

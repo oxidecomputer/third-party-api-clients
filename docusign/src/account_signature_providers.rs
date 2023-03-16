@@ -25,7 +25,7 @@ impl AccountSignatureProviders {
     pub async fn get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::AccountSignatureProvidersData> {
+    ) -> ClientResult<crate::Response<crate::types::AccountSignatureProvidersData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/signatureProviders",

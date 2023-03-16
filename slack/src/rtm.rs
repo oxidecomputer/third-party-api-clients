@@ -28,7 +28,7 @@ impl Rtm {
         &self,
         batch_presence_aware: bool,
         presence_sub: bool,
-    ) -> ClientResult<crate::types::RtmConnectSchema> {
+    ) -> ClientResult<crate::Response<crate::types::RtmConnectSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if batch_presence_aware {
             query_args.push((

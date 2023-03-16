@@ -28,7 +28,7 @@ impl Orders {
     pub async fn post_estimate(
         &self,
         body: &crate::types::OrdersEstimateFulfillmentRequestModel,
-    ) -> ClientResult<crate::types::OrdersEstimate> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersEstimate>> {
         let url = self.client.url("/order/estimate", None);
         self.client
             .post(
@@ -50,7 +50,7 @@ impl Orders {
      * * `order_id: i64` -- Unique id of the channel.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, order_id: i64) -> ClientResult<crate::types::Order> {
+    pub async fn get(&self, order_id: i64) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
             &format!(
                 "/order/{}",
@@ -103,7 +103,7 @@ impl Orders {
         last_update_start_date: Option<chrono::DateTime<chrono::Utc>>,
         last_update_end_date: Option<chrono::DateTime<chrono::Utc>>,
         is_tracking_uploaded: bool,
-    ) -> ClientResult<Vec<crate::types::Order>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -173,7 +173,7 @@ impl Orders {
         last_update_start_date: Option<chrono::DateTime<chrono::Utc>>,
         last_update_end_date: Option<chrono::DateTime<chrono::Utc>>,
         is_tracking_uploaded: bool,
-    ) -> ClientResult<Vec<crate::types::Order>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Order>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -229,7 +229,7 @@ impl Orders {
     pub async fn post(
         &self,
         body: &crate::types::OrdersCreateOrderModel,
-    ) -> ClientResult<crate::types::Order> {
+    ) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url("/order", None);
         self.client
             .post(
@@ -254,7 +254,7 @@ impl Orders {
     pub async fn post_cancel(
         &self,
         order_id: i64,
-    ) -> ClientResult<crate::types::OrdersCanceledOrder> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersCanceledOrder>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/cancel",
@@ -281,7 +281,7 @@ impl Orders {
      *
      * * `order_id: i64` -- The order ID to Get the JSON Stored.
      */
-    pub async fn get_store_json(&self, order_id: i64) -> ClientResult<String> {
+    pub async fn get_store_json(&self, order_id: i64) -> ClientResult<crate::Response<String>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/storeOrderJson",
@@ -312,7 +312,7 @@ impl Orders {
         &self,
         order_id: i64,
         body: &crate::types::OrdersAddStoreOrderJsonModel,
-    ) -> ClientResult<String> {
+    ) -> ClientResult<crate::Response<String>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/storeOrderJson",
@@ -345,7 +345,7 @@ impl Orders {
         &self,
         order_id: i64,
         shipment_id: i64,
-    ) -> ClientResult<crate::types::OrdersShipment> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersShipment>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}",
@@ -379,7 +379,7 @@ impl Orders {
         &self,
         shipment_id: i64,
         order_id: &str,
-    ) -> ClientResult<crate::types::OrdersShipment> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersShipment>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/cancel",
@@ -413,7 +413,7 @@ impl Orders {
         &self,
         order_id: i64,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/timeline",
@@ -443,7 +443,7 @@ impl Orders {
         &self,
         order_id: i64,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/timeline",
@@ -475,7 +475,7 @@ impl Orders {
     pub async fn get_shipments(
         &self,
         order_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipment>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment",
@@ -503,7 +503,7 @@ impl Orders {
     pub async fn get_all_shipments(
         &self,
         order_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipment>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipment>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment",
@@ -536,7 +536,7 @@ impl Orders {
         &self,
         order_id: i64,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/logs",
@@ -566,7 +566,7 @@ impl Orders {
         &self,
         order_id: i64,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/order/{}/shipment/{}/logs",
@@ -598,7 +598,7 @@ impl Orders {
     pub async fn get_shipment_orders(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<crate::types::OrdersShipment> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersShipment>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}",
@@ -629,7 +629,7 @@ impl Orders {
     pub async fn post_shipment_cancel_orders(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<crate::types::OrdersShipment> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersShipment>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/cancel",
@@ -659,7 +659,7 @@ impl Orders {
     pub async fn post_shipment_cancel_bulk(
         &self,
         body: &crate::types::OrdersCancelShipmentsModel,
-    ) -> ClientResult<crate::types::OrdersCanceledShipments> {
+    ) -> ClientResult<crate::Response<crate::types::OrdersCanceledShipments>> {
         let url = self.client.url("/shipment/cancelbulk", None);
         self.client
             .post(
@@ -684,7 +684,7 @@ impl Orders {
     pub async fn get_shipment_timeline_orders(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/timeline",
@@ -712,7 +712,7 @@ impl Orders {
     pub async fn get_all_shipment_timeline_all(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/timeline",
@@ -743,7 +743,7 @@ impl Orders {
     pub async fn get_shipment_logs_orders(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/logs",
@@ -771,7 +771,7 @@ impl Orders {
     pub async fn get_all_shipment_logs_all(
         &self,
         shipment_id: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipmentLog>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipmentLog>>> {
         let url = self.client.url(
             &format!(
                 "/shipment/{}/logs",
@@ -805,7 +805,7 @@ impl Orders {
         &self,
         page: i64,
         limit: i64,
-    ) -> ClientResult<Vec<crate::types::OrdersShipMethodDetail>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipMethodDetail>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("Limit".to_string(), limit.to_string()));
@@ -838,7 +838,7 @@ impl Orders {
      */
     pub async fn get_all_shipping_method(
         &self,
-    ) -> ClientResult<Vec<crate::types::OrdersShipMethodDetail>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::OrdersShipMethodDetail>>> {
         let url = self.client.url("/shippingmethod", None);
         self.client
             .get_all_pages(

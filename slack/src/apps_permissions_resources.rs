@@ -28,7 +28,8 @@ impl AppsPermissionsResources {
         &self,
         cursor: &str,
         limit: i64,
-    ) -> ClientResult<crate::types::AppsPermissionsResourcesListSuccessSchema> {
+    ) -> ClientResult<crate::Response<crate::types::AppsPermissionsResourcesListSuccessSchema>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

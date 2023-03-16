@@ -16,7 +16,9 @@ impl ThreeDSecure {
      *
      * <p>Initiate 3D Secure authentication.</p>
      */
-    pub async fn post_3d_secure(&self) -> ClientResult<crate::types::ThreeDSecure> {
+    pub async fn post_3d_secure(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ThreeDSecure>> {
         let url = self.client.url("/v1/3d_secure", None);
         self.client
             .post(
@@ -41,7 +43,7 @@ impl ThreeDSecure {
     pub async fn get_3d_secure_three_d(
         &self,
         three_d_secure: &str,
-    ) -> ClientResult<crate::types::ThreeDSecure> {
+    ) -> ClientResult<crate::Response<crate::types::ThreeDSecure>> {
         let url = self.client.url(
             &format!(
                 "/v1/3d_secure/{}",

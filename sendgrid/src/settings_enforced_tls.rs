@@ -26,7 +26,9 @@ impl SettingsEnforcedTls {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user(&self) -> ClientResult<crate::types::EnforcedTlsRequestResponse> {
+    pub async fn get_user(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
         let url = self.client.url("/user/settings/enforced_tls", None);
         self.client
             .get(
@@ -56,7 +58,7 @@ impl SettingsEnforcedTls {
     pub async fn patch_user(
         &self,
         body: &crate::types::EnforcedTlsRequestResponse,
-    ) -> ClientResult<crate::types::EnforcedTlsRequestResponse> {
+    ) -> ClientResult<crate::Response<crate::types::EnforcedTlsRequestResponse>> {
         let url = self.client.url("/user/settings/enforced_tls", None);
         self.client
             .patch(

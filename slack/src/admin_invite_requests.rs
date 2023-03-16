@@ -25,7 +25,7 @@ impl AdminInviteRequests {
     pub async fn approve(
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.inviteRequests.approve", None);
         self.client
             .post(
@@ -51,7 +51,7 @@ impl AdminInviteRequests {
     pub async fn deny(
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.inviteRequests.deny", None);
         self.client
             .post(
@@ -82,7 +82,7 @@ impl AdminInviteRequests {
         team_id: &str,
         cursor: &str,
         limit: i64,
-    ) -> ClientResult<crate::types::DndEndSchema> {
+    ) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

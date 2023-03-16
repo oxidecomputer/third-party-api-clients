@@ -35,7 +35,7 @@ impl Contacts {
         query_presence_status: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Contacts>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Contacts>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -54,7 +54,7 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/contacts?{}", query_), None);
-        let resp: crate::types::SearchCompanyContactsResponse = self
+        let resp: crate::Response<crate::types::SearchCompanyContactsResponse> = self
             .client
             .get(
                 &url,
@@ -66,7 +66,11 @@ impl Contacts {
             .await?;
 
         // Return our response data.
-        Ok(resp.contacts.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.contacts.to_vec(),
+        ))
     }
     /**
      * Search company contacts.
@@ -85,7 +89,7 @@ impl Contacts {
         &self,
         search_key: &str,
         query_presence_status: &str,
-    ) -> ClientResult<Vec<crate::types::Contacts>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Contacts>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query_presence_status.is_empty() {
             query_args.push((
@@ -98,7 +102,11 @@ impl Contacts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/contacts?{}", query_), None);
-        let mut resp: crate::types::SearchCompanyContactsResponse = self
+        let crate::Response::<crate::types::SearchCompanyContactsResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -109,14 +117,18 @@ impl Contacts {
             )
             .await?;
 
-        let mut contacts = resp.contacts;
-        let mut page = resp.next_page_token;
+        let mut contacts = body.contacts;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::SearchCompanyContactsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -127,7 +139,11 @@ impl Contacts {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::SearchCompanyContactsResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -139,17 +155,17 @@ impl Contacts {
                     .await?;
             }
 
-            contacts.append(&mut resp.contacts);
+            contacts.append(&mut body.contacts);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(contacts)
+        Ok(crate::Response::new(status, headers, contacts))
     }
     /**
      * List user's contacts.
@@ -177,7 +193,7 @@ impl Contacts {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::GetUserContactsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetUserContactsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -192,7 +208,7 @@ impl Contacts {
         let url = self
             .client
             .url(&format!("/chat/users/me/contacts?{}", query_), None);
-        let resp: crate::types::GetUserContactsResponseData = self
+        let resp: crate::Response<crate::types::GetUserContactsResponseData> = self
             .client
             .get(
                 &url,
@@ -204,7 +220,11 @@ impl Contacts {
             .await?;
 
         // Return our response data.
-        Ok(resp.contacts.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.contacts.to_vec(),
+        ))
     }
     /**
      * List user's contacts.
@@ -224,7 +244,7 @@ impl Contacts {
     pub async fn get_all_user(
         &self,
         type_: &str,
-    ) -> ClientResult<Vec<crate::types::GetUserContactsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::GetUserContactsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -233,7 +253,11 @@ impl Contacts {
         let url = self
             .client
             .url(&format!("/chat/users/me/contacts?{}", query_), None);
-        let mut resp: crate::types::GetUserContactsResponseData = self
+        let crate::Response::<crate::types::GetUserContactsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -244,14 +268,18 @@ impl Contacts {
             )
             .await?;
 
-        let mut contacts = resp.contacts;
-        let mut page = resp.next_page_token;
+        let mut contacts = body.contacts;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetUserContactsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -262,7 +290,11 @@ impl Contacts {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetUserContactsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -274,17 +306,17 @@ impl Contacts {
                     .await?;
             }
 
-            contacts.append(&mut resp.contacts);
+            contacts.append(&mut body.contacts);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(contacts)
+        Ok(crate::Response::new(status, headers, contacts))
     }
     /**
      * Get user's contact details.
@@ -308,7 +340,7 @@ impl Contacts {
         &self,
         contact_id: &str,
         query_presence_status: bool,
-    ) -> ClientResult<crate::types::GetUserContactResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetUserContactResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if query_presence_status {
             query_args.push((

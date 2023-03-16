@@ -34,7 +34,7 @@ impl Quotes {
         starting_after: &str,
         status: crate::types::QuoteStatus,
         test_clock: &str,
-    ) -> ClientResult<Vec<crate::types::Quote>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Quote>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -56,7 +56,7 @@ impl Quotes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
-        let resp: crate::types::GetQuotesResponse = self
+        let resp: crate::Response<crate::types::GetQuotesResponse> = self
             .client
             .get(
                 &url,
@@ -68,7 +68,11 @@ impl Quotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/quotes` endpoint.
@@ -82,7 +86,7 @@ impl Quotes {
         customer: &str,
         status: crate::types::QuoteStatus,
         test_clock: &str,
-    ) -> ClientResult<Vec<crate::types::Quote>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Quote>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -95,7 +99,11 @@ impl Quotes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
-        let mut resp: crate::types::GetQuotesResponse = self
+        let crate::Response::<crate::types::GetQuotesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -106,8 +114,8 @@ impl Quotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -123,7 +131,11 @@ impl Quotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetQuotesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -134,7 +146,11 @@ impl Quotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetQuotesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -146,20 +162,20 @@ impl Quotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/quotes` endpoint.
      *
      * <p>A quote models prices and services for a customer. Default options for <code>header</code>, <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::Quote> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url("/v1/quotes", None);
         self.client
             .post(
@@ -181,7 +197,7 @@ impl Quotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `quote: &str` -- The account's country.
      */
-    pub async fn get(&self, quote: &str) -> ClientResult<crate::types::Quote> {
+    pub async fn get(&self, quote: &str) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
@@ -208,7 +224,10 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_quotes(&self, quote: &str) -> ClientResult<crate::types::Quote> {
+    pub async fn post_quotes(
+        &self,
+        quote: &str,
+    ) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}",
@@ -235,7 +254,10 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_accept(&self, quote: &str) -> ClientResult<crate::types::Quote> {
+    pub async fn post_accept(
+        &self,
+        quote: &str,
+    ) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/accept",
@@ -262,7 +284,10 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_cancel(&self, quote: &str) -> ClientResult<crate::types::Quote> {
+    pub async fn post_cancel(
+        &self,
+        quote: &str,
+    ) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/cancel",
@@ -299,7 +324,7 @@ impl Quotes {
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -319,7 +344,7 @@ impl Quotes {
             ),
             None,
         );
-        let resp: crate::types::LineItems = self
+        let resp: crate::Response<crate::types::LineItems> = self
             .client
             .get(
                 &url,
@@ -331,7 +356,11 @@ impl Quotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/computed_upfront_line_items` endpoint.
@@ -343,7 +372,7 @@ impl Quotes {
     pub async fn get_all_computed_upfront_line_items(
         &self,
         quote: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/computed_upfront_line_items",
@@ -351,7 +380,11 @@ impl Quotes {
             ),
             None,
         );
-        let mut resp: crate::types::LineItems = self
+        let crate::Response::<crate::types::LineItems> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -362,8 +395,8 @@ impl Quotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -379,7 +412,11 @@ impl Quotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -390,7 +427,11 @@ impl Quotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -402,13 +443,13 @@ impl Quotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/quotes/{quote}/finalize` endpoint.
@@ -419,7 +460,10 @@ impl Quotes {
      *
      * * `quote: &str` -- The account's country.
      */
-    pub async fn post_finalize(&self, quote: &str) -> ClientResult<crate::types::Quote> {
+    pub async fn post_finalize(
+        &self,
+        quote: &str,
+    ) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/finalize",
@@ -456,7 +500,7 @@ impl Quotes {
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::Item>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -476,7 +520,7 @@ impl Quotes {
             ),
             None,
         );
-        let resp: crate::types::LineItems = self
+        let resp: crate::Response<crate::types::LineItems> = self
             .client
             .get(
                 &url,
@@ -488,7 +532,11 @@ impl Quotes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/line_items` endpoint.
@@ -497,7 +545,10 @@ impl Quotes {
      *
      * <p>When retrieving a quote, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
      */
-    pub async fn get_all_line_items(&self, quote: &str) -> ClientResult<Vec<crate::types::Item>> {
+    pub async fn get_all_line_items(
+        &self,
+        quote: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Item>>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/line_items",
@@ -505,7 +556,11 @@ impl Quotes {
             ),
             None,
         );
-        let mut resp: crate::types::LineItems = self
+        let crate::Response::<crate::types::LineItems> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -516,8 +571,8 @@ impl Quotes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -533,7 +588,11 @@ impl Quotes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -544,7 +603,11 @@ impl Quotes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::LineItems> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -556,13 +619,13 @@ impl Quotes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/quotes/{quote}/pdf` endpoint.
@@ -574,7 +637,7 @@ impl Quotes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `quote: &str` -- The account's country.
      */
-    pub async fn get_pdf(&self, quote: &str) -> ClientResult<()> {
+    pub async fn get_pdf(&self, quote: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/quotes/{}/pdf",

@@ -23,7 +23,7 @@ impl SingleSignOnTeammates {
     pub async fn post_sso_teammate(
         &self,
         body: &crate::types::SsoTeammateRequestAllOf,
-    ) -> ClientResult<crate::types::SsoTeammateResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::SsoTeammateResponseAllOf>> {
         let url = self.client.url("/sso/teammates", None);
         self.client
             .post(
@@ -50,7 +50,7 @@ impl SingleSignOnTeammates {
         &self,
         username: &str,
         body: &crate::types::PatchSsoTeammatesUsernameRequest,
-    ) -> ClientResult<crate::types::SsoTeammatesPatchResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::SsoTeammatesPatchResponseAllOf>> {
         let url = self.client.url(
             &format!(
                 "/sso/teammates/{}",

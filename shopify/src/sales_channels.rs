@@ -21,7 +21,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_create_checkouts(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-01/checkouts.json", None);
         self.client
             .post(
@@ -43,7 +43,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_create_checkouts(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-04/checkouts.json", None);
         self.client
             .post(
@@ -65,7 +65,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_create_checkouts(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-07/checkouts.json", None);
         self.client
             .post(
@@ -84,7 +84,10 @@ impl SalesChannels {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-10
      */
-    pub async fn create_checkouts(&self, body: &serde_json::Value) -> ClientResult<()> {
+    pub async fn create_checkouts(
+        &self,
+        body: &serde_json::Value,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/checkouts.json", None);
         self.client
             .post(
@@ -106,7 +109,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_create_checkouts(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2021-01/checkouts.json", None);
         self.client
             .post(
@@ -128,7 +131,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_create_checkouts(
         &self,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/unstable/checkouts.json", None);
         self.client
             .post(
@@ -155,7 +158,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/complete.json",
@@ -187,7 +190,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_checkouts_param_token(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/json",
@@ -220,7 +223,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/json",
@@ -254,7 +257,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/shipping_rates.json",
@@ -287,7 +290,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/complete.json",
@@ -319,7 +322,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_checkouts_param_token(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/json",
@@ -352,7 +355,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/json",
@@ -386,7 +389,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/shipping_rates.json",
@@ -419,7 +422,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/complete.json",
@@ -451,7 +454,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_checkouts_param_token(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/json",
@@ -484,7 +487,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/json",
@@ -518,7 +521,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/shipping_rates.json",
@@ -551,7 +554,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/complete.json",
@@ -580,7 +583,10 @@ impl SalesChannels {
      *
      * * `token: &str` -- storefront_access_token_id.
      */
-    pub async fn get_checkouts_param_token(&self, token: &str) -> ClientResult<()> {
+    pub async fn get_checkouts_param_token(
+        &self,
+        token: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/json",
@@ -613,7 +619,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/json",
@@ -644,7 +650,10 @@ impl SalesChannels {
     *
     * * `token: &str` -- storefront_access_token_id.
     */
-    pub async fn get_checkouts_param_token_shipping_rate(&self, token: &str) -> ClientResult<()> {
+    pub async fn get_checkouts_param_token_shipping_rate(
+        &self,
+        token: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/shipping_rates.json",
@@ -677,7 +686,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/complete.json",
@@ -709,7 +718,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_checkouts_param_token(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/json",
@@ -742,7 +751,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/json",
@@ -776,7 +785,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/shipping_rates.json",
@@ -809,7 +818,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/complete.json",
@@ -841,7 +850,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_checkouts_param_token(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/json",
@@ -874,7 +883,7 @@ impl SalesChannels {
         &self,
         token: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/json",
@@ -908,7 +917,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/shipping_rates.json",
@@ -938,7 +947,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202001_get_collection_listing(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_collection_listing(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -975,7 +987,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1013,7 +1025,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
@@ -1046,7 +1058,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
@@ -1078,7 +1090,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/collection_listings/{}/json",
@@ -1108,7 +1120,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202004_get_collection_listing(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_collection_listing(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1145,7 +1160,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1183,7 +1198,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
@@ -1216,7 +1231,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
@@ -1248,7 +1263,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/collection_listings/{}/json",
@@ -1278,7 +1293,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202007_get_collection_listing(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_collection_listing(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1315,7 +1333,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1353,7 +1371,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
@@ -1386,7 +1404,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
@@ -1418,7 +1436,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/collection_listings/{}/json",
@@ -1448,7 +1466,7 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn get_collection_listing(&self, limit: &str) -> ClientResult<()> {
+    pub async fn get_collection_listing(&self, limit: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1485,7 +1503,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1523,7 +1541,7 @@ impl SalesChannels {
     pub async fn get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
@@ -1556,7 +1574,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
@@ -1588,7 +1606,7 @@ impl SalesChannels {
     pub async fn delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/collection_listings/{}/json",
@@ -1618,7 +1636,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202101_get_collection_listing(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202101_get_collection_listing(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1655,7 +1676,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1693,7 +1714,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
@@ -1726,7 +1747,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
@@ -1758,7 +1779,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/collection_listings/{}/json",
@@ -1791,7 +1812,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_collection_listing(
         &self,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1828,7 +1849,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         limit: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -1866,7 +1887,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
@@ -1899,7 +1920,7 @@ impl SalesChannels {
         &self,
         collection_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
@@ -1931,7 +1952,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/collection_listings/{}/json",
@@ -1963,7 +1984,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_checkouts_param_token_payment(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments.json",
@@ -2009,7 +2030,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2078,7 +2099,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments/{}/json",
@@ -2111,7 +2132,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/checkouts/{}/payments/count.json",
@@ -2143,7 +2164,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_checkouts_param_token_payment(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments.json",
@@ -2189,7 +2210,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2258,7 +2279,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments/{}/json",
@@ -2291,7 +2312,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/checkouts/{}/payments/count.json",
@@ -2323,7 +2344,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_checkouts_param_token_payment(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments.json",
@@ -2369,7 +2390,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2438,7 +2459,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments/{}/json",
@@ -2471,7 +2492,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/checkouts/{}/payments/count.json",
@@ -2500,7 +2521,10 @@ impl SalesChannels {
      *
      * * `token: &str` -- storefront_access_token_id.
      */
-    pub async fn get_checkouts_param_token_payment(&self, token: &str) -> ClientResult<()> {
+    pub async fn get_checkouts_param_token_payment(
+        &self,
+        token: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments.json",
@@ -2546,7 +2570,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2615,7 +2639,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments/{}/json",
@@ -2645,7 +2669,10 @@ impl SalesChannels {
      *
      * * `token: &str` -- storefront_access_token_id.
      */
-    pub async fn get_checkouts_param_token_payments_count(&self, token: &str) -> ClientResult<()> {
+    pub async fn get_checkouts_param_token_payments_count(
+        &self,
+        token: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-10/checkouts/{}/payments/count.json",
@@ -2677,7 +2704,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_checkouts_param_token_payment(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments.json",
@@ -2723,7 +2750,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2792,7 +2819,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments/{}/json",
@@ -2825,7 +2852,7 @@ impl SalesChannels {
     pub async fn deprecated_202101_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2021-01/checkouts/{}/payments/count.json",
@@ -2857,7 +2884,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_checkouts_param_token_payment(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments.json",
@@ -2903,7 +2930,7 @@ impl SalesChannels {
         session_id_required: &str,
         unique_token_required: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !amount_required.is_empty() {
             query_args.push((
@@ -2972,7 +2999,7 @@ impl SalesChannels {
         &self,
         token: &str,
         payment_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments/{}/json",
@@ -3005,7 +3032,7 @@ impl SalesChannels {
     pub async fn deprecated_unstable_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/unstable/checkouts/{}/payments/count.json",
@@ -3046,7 +3073,7 @@ impl SalesChannels {
         collection_id: &str,
         updated_at_min: &str,
         handle: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3090,7 +3117,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202001_get_product_listings_id(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_product_listings_id(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -3120,7 +3150,9 @@ impl SalesChannels {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-01
      */
-    pub async fn deprecated_202001_get_product_listings_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202001_get_product_listings_count(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-01/product_listings/count.json", None);
@@ -3148,7 +3180,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
@@ -3181,7 +3213,7 @@ impl SalesChannels {
         &self,
         product_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
@@ -3213,7 +3245,7 @@ impl SalesChannels {
     pub async fn deprecated_202001_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-01/product_listings/{}/json",
@@ -3254,7 +3286,7 @@ impl SalesChannels {
         collection_id: &str,
         updated_at_min: &str,
         handle: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3298,7 +3330,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202004_get_product_listings_id(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_product_listings_id(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -3328,7 +3363,9 @@ impl SalesChannels {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-04
      */
-    pub async fn deprecated_202004_get_product_listings_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202004_get_product_listings_count(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-04/product_listings/count.json", None);
@@ -3356,7 +3393,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
@@ -3389,7 +3426,7 @@ impl SalesChannels {
         &self,
         product_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
@@ -3421,7 +3458,7 @@ impl SalesChannels {
     pub async fn deprecated_202004_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-04/product_listings/{}/json",
@@ -3462,7 +3499,7 @@ impl SalesChannels {
         collection_id: &str,
         updated_at_min: &str,
         handle: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_id.is_empty() {
             query_args.push(("collection_id".to_string(), collection_id.to_string()));
@@ -3506,7 +3543,10 @@ impl SalesChannels {
      * * `limit: &str` -- Amount of results
      *                     (default: 50, maximum: 1000).
      */
-    pub async fn deprecated_202007_get_product_listings_id(&self, limit: &str) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_product_listings_id(
+        &self,
+        limit: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -3536,7 +3576,9 @@ impl SalesChannels {
      *
      * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-07
      */
-    pub async fn deprecated_202007_get_product_listings_count(&self) -> ClientResult<()> {
+    pub async fn deprecated_202007_get_product_listings_count(
+        &self,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self
             .client
             .url("/admin/api/2020-07/product_listings/count.json", None);
@@ -3564,7 +3606,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",
@@ -3597,7 +3639,7 @@ impl SalesChannels {
         &self,
         product_listing_id: &str,
         body: &serde_json::Value,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",
@@ -3629,7 +3671,7 @@ impl SalesChannels {
     pub async fn deprecated_202007_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/api/2020-07/product_listings/{}/json",

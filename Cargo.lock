@@ -1425,7 +1425,9 @@ name = "octorust"
 version = "0.3.2"
 dependencies = [
  "async-recursion",
+ "async-trait",
  "base64 0.13.0",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -1452,6 +1454,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "url",
+ "uuid",
  "wiremock",
 ]
 

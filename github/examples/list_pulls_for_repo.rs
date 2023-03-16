@@ -76,7 +76,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         )
         .await
         .unwrap();
-    println!("length: {}", repos.len());
+    println!("length: {}", repos.body.len());
 
     Ok(())
 }

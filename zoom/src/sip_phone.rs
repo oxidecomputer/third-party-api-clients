@@ -39,7 +39,7 @@ impl SipPhone {
         search_key: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Phones>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Phones>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -55,7 +55,7 @@ impl SipPhone {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/sip_phones?{}", query_), None);
-        let resp: crate::types::ListSipPhonesResponse = self
+        let resp: crate::Response<crate::types::ListSipPhonesResponse> = self
             .client
             .get(
                 &url,
@@ -67,7 +67,11 @@ impl SipPhone {
             .await?;
 
         // Return our response data.
-        Ok(resp.phones.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.phones.to_vec(),
+        ))
     }
     /**
      * List SIP phones.
@@ -83,14 +87,21 @@ impl SipPhone {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
      */
-    pub async fn list_all(&self, search_key: &str) -> ClientResult<Vec<crate::types::Phones>> {
+    pub async fn list_all(
+        &self,
+        search_key: &str,
+    ) -> ClientResult<crate::Response<Vec<crate::types::Phones>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !search_key.is_empty() {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/sip_phones?{}", query_), None);
-        let mut resp: crate::types::ListSipPhonesResponse = self
+        let crate::Response::<crate::types::ListSipPhonesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -101,14 +112,18 @@ impl SipPhone {
             )
             .await?;
 
-        let mut phones = resp.phones;
-        let mut page = resp.next_page_token;
+        let mut phones = body.phones;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListSipPhonesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -119,7 +134,11 @@ impl SipPhone {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListSipPhonesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -131,17 +150,17 @@ impl SipPhone {
                     .await?;
             }
 
-            phones.append(&mut resp.phones);
+            phones.append(&mut body.phones);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(phones)
+        Ok(crate::Response::new(status, headers, phones))
     }
     /**
      * Enable SIP phone.
@@ -157,7 +176,10 @@ impl SipPhone {
      *
      *
      */
-    pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> ClientResult<()> {
+    pub async fn create(
+        &self,
+        body: &crate::types::CreateSipPhoneRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/sip_phones", None);
         self.client
             .post(
@@ -185,7 +207,7 @@ impl SipPhone {
      *
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. It can be retrieved from the List SIP Phones API.
      */
-    pub async fn delete(&self, phone_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, phone_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",
@@ -223,7 +245,7 @@ impl SipPhone {
         &self,
         phone_id: &str,
         body: &crate::types::UpdateSipPhoneRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/sip_phones/{}",

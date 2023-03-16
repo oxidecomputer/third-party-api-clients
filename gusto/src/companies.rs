@@ -18,7 +18,10 @@ impl Companies {
      *
      * Get a company.
      */
-    pub async fn get(&self, company_id_or_uuid: &str) -> ClientResult<crate::types::Company> {
+    pub async fn get(
+        &self,
+        company_id_or_uuid: &str,
+    ) -> ClientResult<crate::Response<crate::types::Company>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}",
@@ -70,7 +73,7 @@ impl Companies {
     pub async fn post_partner_managed(
         &self,
         body: &crate::types::PostPartnerManagedCompaniesRequest,
-    ) -> ClientResult<crate::types::PostPartnerManagedCompaniesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostPartnerManagedCompaniesResponse>> {
         let url = self.client.url("/v1/partner_managed_companies", None);
         self.client
             .post(
@@ -110,7 +113,7 @@ impl Companies {
     pub async fn post_provision(
         &self,
         body: &crate::types::PostProvisionRequest,
-    ) -> ClientResult<crate::types::PostProvisionResponse> {
+    ) -> ClientResult<crate::Response<crate::types::PostProvisionResponse>> {
         let url = self.client.url("/v1/provision", None);
         self.client
             .post(

@@ -34,7 +34,7 @@ impl ShippingRates {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::ShippingRate>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ShippingRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -55,7 +55,7 @@ impl ShippingRates {
         let url = self
             .client
             .url(&format!("/v1/shipping_rates?{}", query_), None);
-        let resp: crate::types::ShippingResourcesRateList = self
+        let resp: crate::Response<crate::types::ShippingResourcesRateList> = self
             .client
             .get(
                 &url,
@@ -67,7 +67,11 @@ impl ShippingRates {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
@@ -81,7 +85,7 @@ impl ShippingRates {
         active: bool,
         _created: &str,
         currency: &str,
-    ) -> ClientResult<Vec<crate::types::ShippingRate>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ShippingRate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -93,7 +97,11 @@ impl ShippingRates {
         let url = self
             .client
             .url(&format!("/v1/shipping_rates?{}", query_), None);
-        let mut resp: crate::types::ShippingResourcesRateList = self
+        let crate::Response::<crate::types::ShippingResourcesRateList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -104,8 +112,8 @@ impl ShippingRates {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -121,7 +129,11 @@ impl ShippingRates {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ShippingResourcesRateList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -132,7 +144,11 @@ impl ShippingRates {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ShippingResourcesRateList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -144,20 +160,20 @@ impl ShippingRates {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/shipping_rates` endpoint.
      *
      * <p>Creates a new shipping rate object.</p>
      */
-    pub async fn post(&self) -> ClientResult<crate::types::ShippingRate> {
+    pub async fn post(&self) -> ClientResult<crate::Response<crate::types::ShippingRate>> {
         let url = self.client.url("/v1/shipping_rates", None);
         self.client
             .post(
@@ -182,7 +198,7 @@ impl ShippingRates {
     pub async fn get_rate_token(
         &self,
         shipping_rate_token: &str,
-    ) -> ClientResult<crate::types::ShippingRate> {
+    ) -> ClientResult<crate::Response<crate::types::ShippingRate>> {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",
@@ -212,7 +228,7 @@ impl ShippingRates {
     pub async fn post_rate_token(
         &self,
         shipping_rate_token: &str,
-    ) -> ClientResult<crate::types::ShippingRate> {
+    ) -> ClientResult<crate::Response<crate::types::ShippingRate>> {
         let url = self.client.url(
             &format!(
                 "/v1/shipping_rates/{}",

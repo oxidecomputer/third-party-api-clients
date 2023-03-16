@@ -24,7 +24,10 @@ impl ChatbotMessages {
      * You will need to send your ClientID and Secret as a Basic base64 encoded AUthorization header. Ex. `Basic base64Encode({client_id}:{client_sceret})`<br><br> Next, use the token recieved (access_token) as a bearer token while making the POST /im/chat/messages request to send chatbot messages.<br><br>
      * Learn more about how to authorize chatbots in the [Chatbot Authorization](https://marketplace.zoom.us/docs/guides/chatbots/authorization) guide.
      */
-    pub async fn sendchatbot(&self, body: &crate::types::SendchatbotRequest) -> ClientResult<()> {
+    pub async fn sendchatbot(
+        &self,
+        body: &crate::types::SendchatbotRequest,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/im/chat/messages", None);
         self.client
             .post(
@@ -58,7 +61,7 @@ impl ChatbotMessages {
         &self,
         message_id: &str,
         body: &crate::types::EditChatbotMessageRequest,
-    ) -> ClientResult<crate::types::EditChatbotMessageResponse> {
+    ) -> ClientResult<crate::Response<crate::types::EditChatbotMessageResponse>> {
         let url = self.client.url(
             &format!(
                 "/im/chat/messages/{}",
@@ -89,7 +92,7 @@ impl ChatbotMessages {
         &self,
         message_id: &str,
         body: &crate::types::DeleteChatbotMessageRequest,
-    ) -> ClientResult<crate::types::DeleteChatbotMessageResponse> {
+    ) -> ClientResult<crate::Response<crate::types::DeleteChatbotMessageResponse>> {
         let url = self.client.url(
             &format!(
                 "/im/chat/messages/{}",

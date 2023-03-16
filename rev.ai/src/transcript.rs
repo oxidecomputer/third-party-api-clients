@@ -29,7 +29,7 @@ impl Transcript {
         &self,
         id: &str,
         accept: crate::types::AcceptTranscript,
-    ) -> ClientResult<String> {
+    ) -> ClientResult<crate::Response<String>> {
         let url = self.client.url(
             &format!(
                 "/jobs/{}/transcript",

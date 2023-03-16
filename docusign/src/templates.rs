@@ -116,7 +116,7 @@ impl Templates {
         used_to_date: &str,
         user_filter: &str,
         user_id: &str,
-    ) -> ClientResult<crate::types::EnvelopeTemplateResults> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTemplateResults>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -280,7 +280,7 @@ impl Templates {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopeTemplate,
-    ) -> ClientResult<crate::types::TemplateSummary> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateSummary>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates",
@@ -324,7 +324,7 @@ impl Templates {
         account_id: &str,
         template_id: &str,
         include: &str,
-    ) -> ClientResult<crate::types::EnvelopeTemplate> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopeTemplate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
             query_args.push(("include".to_string(), include.to_string()));
@@ -366,7 +366,7 @@ impl Templates {
         account_id: &str,
         template_id: &str,
         body: &crate::types::EnvelopeTemplate,
-    ) -> ClientResult<crate::types::TemplateUpdateSummary> {
+    ) -> ClientResult<crate::Response<crate::types::TemplateUpdateSummary>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}",
@@ -417,7 +417,7 @@ impl Templates {
         nocache: &str,
         show_changes: &str,
         start_position: &str,
-    ) -> ClientResult<crate::types::PageImages> {
+    ) -> ClientResult<crate::Response<crate::types::PageImages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -482,7 +482,7 @@ impl Templates {
         page_number: &str,
         template_id: &str,
         body: &crate::types::PageRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}",
@@ -531,7 +531,7 @@ impl Templates {
         max_height: &str,
         max_width: &str,
         show_changes: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !dpi.is_empty() {
             query_args.push(("dpi".to_string(), dpi.to_string()));
@@ -588,7 +588,7 @@ impl Templates {
         page_number: &str,
         template_id: &str,
         body: &crate::types::PageRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/page_image",
@@ -625,7 +625,7 @@ impl Templates {
         &self,
         account_id: &str,
         template_id: &str,
-    ) -> ClientResult<crate::types::Notification> {
+    ) -> ClientResult<crate::Response<crate::types::Notification>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/notification",
@@ -661,7 +661,7 @@ impl Templates {
         account_id: &str,
         template_id: &str,
         body: &crate::types::TemplateNotificationRequest,
-    ) -> ClientResult<crate::types::Notification> {
+    ) -> ClientResult<crate::Response<crate::types::Notification>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/notification",
@@ -701,7 +701,7 @@ impl Templates {
         template_id: &str,
         template_part: &str,
         body: &crate::types::GroupInformation,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/{}",
@@ -740,7 +740,7 @@ impl Templates {
         template_id: &str,
         template_part: &str,
         body: &crate::types::GroupInformation,
-    ) -> ClientResult<crate::types::GroupInformation> {
+    ) -> ClientResult<crate::Response<crate::types::GroupInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/templates/{}/{}",

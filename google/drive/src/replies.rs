@@ -31,7 +31,7 @@ impl Replies {
         include_deleted: bool,
         page_size: i64,
         page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Reply>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Reply>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -52,7 +52,7 @@ impl Replies {
             ),
             None,
         );
-        let resp: crate::types::ReplyList = self
+        let resp: crate::Response<crate::types::ReplyList> = self
             .client
             .get(
                 &url,
@@ -64,7 +64,11 @@ impl Replies {
             .await?;
 
         // Return our response data.
-        Ok(resp.replies.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.replies.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
@@ -78,7 +82,7 @@ impl Replies {
         file_id: &str,
         comment_id: &str,
         include_deleted: bool,
-    ) -> ClientResult<Vec<crate::types::Reply>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Reply>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -93,7 +97,11 @@ impl Replies {
             ),
             None,
         );
-        let mut resp: crate::types::ReplyList = self
+        let crate::Response::<crate::types::ReplyList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -104,13 +112,17 @@ impl Replies {
             )
             .await?;
 
-        let mut replies = resp.replies;
-        let mut page = resp.next_page_token;
+        let mut replies = body.replies;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ReplyList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -121,7 +133,11 @@ impl Replies {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ReplyList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -133,17 +149,17 @@ impl Replies {
                     .await?;
             }
 
-            replies.append(&mut resp.replies);
+            replies.append(&mut body.replies);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(replies)
+        Ok(crate::Response::new(status, headers, replies))
     }
     /**
      * This function performs a `POST` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
@@ -160,7 +176,7 @@ impl Replies {
         file_id: &str,
         comment_id: &str,
         body: &crate::types::Reply,
-    ) -> ClientResult<crate::types::Reply> {
+    ) -> ClientResult<crate::Response<crate::types::Reply>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies",
@@ -197,7 +213,7 @@ impl Replies {
         comment_id: &str,
         reply_id: &str,
         include_deleted: bool,
-    ) -> ClientResult<crate::types::Reply> {
+    ) -> ClientResult<crate::Response<crate::types::Reply>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
             query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
@@ -239,7 +255,7 @@ impl Replies {
         file_id: &str,
         comment_id: &str,
         reply_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",
@@ -276,7 +292,7 @@ impl Replies {
         comment_id: &str,
         reply_id: &str,
         body: &crate::types::Reply,
-    ) -> ClientResult<crate::types::Reply> {
+    ) -> ClientResult<crate::Response<crate::types::Reply>> {
         let url = self.client.url(
             &format!(
                 "/files/{}/comments/{}/replies/{}",

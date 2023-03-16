@@ -39,7 +39,7 @@ impl Rooms {
         page_size: i64,
         next_page_token: &str,
         location_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListZoomRoomsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListZoomRoomsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
@@ -61,7 +61,7 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/rooms?{}", query_), None);
-        let resp: crate::types::ListZoomRoomsResponseData = self
+        let resp: crate::Response<crate::types::ListZoomRoomsResponseData> = self
             .client
             .get(
                 &url,
@@ -73,7 +73,11 @@ impl Rooms {
             .await?;
 
         // Return our response data.
-        Ok(resp.rooms.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.rooms.to_vec(),
+        ))
     }
     /**
      * List Zoom Rooms.
@@ -94,7 +98,7 @@ impl Rooms {
         type_: crate::types::ListZoomRoomsType,
         unassigned_rooms: bool,
         location_id: &str,
-    ) -> ClientResult<Vec<crate::types::ListZoomRoomsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListZoomRoomsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
@@ -110,7 +114,11 @@ impl Rooms {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/rooms?{}", query_), None);
-        let mut resp: crate::types::ListZoomRoomsResponseData = self
+        let crate::Response::<crate::types::ListZoomRoomsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -121,14 +129,18 @@ impl Rooms {
             )
             .await?;
 
-        let mut rooms = resp.rooms;
-        let mut page = resp.next_page_token;
+        let mut rooms = body.rooms;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListZoomRoomsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -139,7 +151,11 @@ impl Rooms {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListZoomRoomsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -151,17 +167,17 @@ impl Rooms {
                     .await?;
             }
 
-            rooms.append(&mut resp.rooms);
+            rooms.append(&mut body.rooms);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(rooms)
+        Ok(crate::Response::new(status, headers, rooms))
     }
     /**
      * Add a Zoom Room.
@@ -177,7 +193,7 @@ impl Rooms {
     pub async fn add(
         &self,
         body: &crate::types::AddRoomRequest,
-    ) -> ClientResult<crate::types::AddRoomResponse> {
+    ) -> ClientResult<crate::Response<crate::types::AddRoomResponse>> {
         let url = self.client.url("/rooms", None);
         self.client
             .post(
@@ -209,7 +225,7 @@ impl Rooms {
     pub async fn get_zr_profile(
         &self,
         room_id: &str,
-    ) -> ClientResult<crate::types::GetZrProfileResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetZrProfileResponse>> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -239,7 +255,10 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
-    pub async fn delete_zoom(&self, room_id: &str) -> ClientResult<crate::types::Domains> {
+    pub async fn delete_zoom(
+        &self,
+        room_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -274,7 +293,7 @@ impl Rooms {
         &self,
         room_id: &str,
         body: &crate::types::UpdateRoomProfileRequest,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let url = self.client.url(
             &format!("/rooms/{}", crate::progenitor_support::encode_path(room_id),),
             None,
@@ -312,7 +331,7 @@ impl Rooms {
         &self,
         room_id: &str,
         setting_type: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -355,7 +374,11 @@ impl Rooms {
      *   `meeting`: Meeting settings of the Zoom Room.<br>
      *   `signage`: Digital signage settings applied on the Zoom Room.
      */
-    pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> ClientResult<()> {
+    pub async fn update_zr_settings(
+        &self,
+        room_id: &str,
+        setting_type: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(("setting_type".to_string(), setting_type.to_string()));
@@ -399,7 +422,7 @@ impl Rooms {
     pub async fn list_zr_devices(
         &self,
         room_id: &str,
-    ) -> ClientResult<crate::types::ListZrDevicesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListZrDevicesResponse>> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/devices",
@@ -437,7 +460,7 @@ impl Rooms {
         &self,
         room_id: &str,
         body: &crate::types::ChangeZrLocationRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/location",
@@ -476,7 +499,7 @@ impl Rooms {
         &self,
         id: &str,
         body: &crate::types::CheckInRoomsRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/rooms/{}/events",
@@ -523,7 +546,7 @@ impl Rooms {
         folder_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::Site>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Site>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(("folder_id".to_string(), folder_id.to_string()));
@@ -541,7 +564,7 @@ impl Rooms {
         let url = self
             .client
             .url(&format!("/rooms/digital_signage?{}", query_), None);
-        let resp: crate::types::ListDigitalSignageContentResponse = self
+        let resp: crate::Response<crate::types::ListDigitalSignageContentResponse> = self
             .client
             .get(
                 &url,
@@ -553,7 +576,11 @@ impl Rooms {
             .await?;
 
         // Return our response data.
-        Ok(resp.contents.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.contents.to_vec(),
+        ))
     }
     /**
      * List digital signage contents.
@@ -575,7 +602,7 @@ impl Rooms {
         &self,
         type_: &str,
         folder_id: &str,
-    ) -> ClientResult<Vec<crate::types::Site>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Site>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(("folder_id".to_string(), folder_id.to_string()));
@@ -587,7 +614,11 @@ impl Rooms {
         let url = self
             .client
             .url(&format!("/rooms/digital_signage?{}", query_), None);
-        let mut resp: crate::types::ListDigitalSignageContentResponse = self
+        let crate::Response::<crate::types::ListDigitalSignageContentResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -598,14 +629,18 @@ impl Rooms {
             )
             .await?;
 
-        let mut contents = resp.contents;
-        let mut page = resp.next_page_token;
+        let mut contents = body.contents;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListDigitalSignageContentResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -616,7 +651,11 @@ impl Rooms {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListDigitalSignageContentResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -628,17 +667,17 @@ impl Rooms {
                     .await?;
             }
 
-            contents.append(&mut resp.contents);
+            contents.append(&mut body.contents);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(contents)
+        Ok(crate::Response::new(status, headers, contents))
     }
     /**
      * Update E911 digital signage.
@@ -656,7 +695,7 @@ impl Rooms {
      */
     pub async fn manage_e_91_1signage(
         &self,
-    ) -> ClientResult<crate::types::ManageE911SignageResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ManageE911SignageResponse>> {
         let url = self.client.url("/rooms/events", None);
         self.client
             .patch(

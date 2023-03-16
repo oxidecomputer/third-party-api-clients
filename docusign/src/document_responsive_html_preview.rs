@@ -36,7 +36,7 @@ impl DocumentResponsiveHtmlPreview {
         document_id: &str,
         envelope_id: &str,
         body: &crate::types::DocumentHtmlDefinition,
-    ) -> ClientResult<crate::types::DocumentHtmlDefinitions> {
+    ) -> ClientResult<crate::Response<crate::types::DocumentHtmlDefinitions>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/envelopes/{}/documents/{}/responsive_html_preview",

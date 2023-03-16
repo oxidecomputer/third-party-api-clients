@@ -22,7 +22,7 @@ impl AdminUsersSession {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn invalidate(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn invalidate(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.session.invalidate", None);
         self.client
             .post(
@@ -45,7 +45,7 @@ impl AdminUsersSession {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn reset(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn reset(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.session.reset", None);
         self.client
             .post(

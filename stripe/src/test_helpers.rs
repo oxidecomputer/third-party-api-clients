@@ -23,7 +23,7 @@ impl TestHelpers {
     pub async fn post_terminal_readers_reader_present_payment_method(
         &self,
         reader: &str,
-    ) -> ClientResult<crate::types::TerminalReader> {
+    ) -> ClientResult<crate::Response<crate::types::TerminalReader>> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/terminal/readers/{}/present_payment_method",
@@ -58,7 +58,7 @@ impl TestHelpers {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::TestClock>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TestClock>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -73,7 +73,7 @@ impl TestHelpers {
         let url = self
             .client
             .url(&format!("/v1/test_helpers/test_clocks?{}", query_), None);
-        let resp: crate::types::GetTestHelpersClocksResponse = self
+        let resp: crate::Response<crate::types::GetTestHelpersClocksResponse> = self
             .client
             .get(
                 &url,
@@ -85,7 +85,11 @@ impl TestHelpers {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/test_helpers/test_clocks` endpoint.
@@ -94,9 +98,15 @@ impl TestHelpers {
      *
      * <p>Returns a list of your test clocks.</p>
      */
-    pub async fn get_all_clocks(&self) -> ClientResult<Vec<crate::types::TestClock>> {
+    pub async fn get_all_clocks(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::TestClock>>> {
         let url = self.client.url("/v1/test_helpers/test_clocks", None);
-        let mut resp: crate::types::GetTestHelpersClocksResponse = self
+        let crate::Response::<crate::types::GetTestHelpersClocksResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -107,8 +117,8 @@ impl TestHelpers {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -124,7 +134,11 @@ impl TestHelpers {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetTestHelpersClocksResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -135,7 +149,11 @@ impl TestHelpers {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetTestHelpersClocksResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -147,20 +165,20 @@ impl TestHelpers {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `POST` to the `/v1/test_helpers/test_clocks` endpoint.
      *
      * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
      */
-    pub async fn post_clock(&self) -> ClientResult<crate::types::TestClock> {
+    pub async fn post_clock(&self) -> ClientResult<crate::Response<crate::types::TestClock>> {
         let url = self.client.url("/v1/test_helpers/test_clocks", None);
         self.client
             .post(
@@ -185,7 +203,7 @@ impl TestHelpers {
     pub async fn get_clocks_clock(
         &self,
         test_clock: &str,
-    ) -> ClientResult<crate::types::TestClock> {
+    ) -> ClientResult<crate::Response<crate::types::TestClock>> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
@@ -215,7 +233,7 @@ impl TestHelpers {
     pub async fn delete_clocks_clock(
         &self,
         test_clock: &str,
-    ) -> ClientResult<crate::types::DeletedTestClock> {
+    ) -> ClientResult<crate::Response<crate::types::DeletedTestClock>> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}",
@@ -245,7 +263,7 @@ impl TestHelpers {
     pub async fn post_clocks_clock_advance(
         &self,
         test_clock: &str,
-    ) -> ClientResult<crate::types::TestClock> {
+    ) -> ClientResult<crate::Response<crate::types::TestClock>> {
         let url = self.client.url(
             &format!(
                 "/v1/test_helpers/test_clocks/{}/advance",

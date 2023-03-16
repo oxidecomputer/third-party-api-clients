@@ -27,7 +27,7 @@ impl Orgunits {
         customer_id: &str,
         org_unit_path: &str,
         type_: crate::types::DirectoryOrgunitsListType,
-    ) -> ClientResult<crate::types::OrgUnits> {
+    ) -> ClientResult<crate::Response<crate::types::OrgUnits>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
             query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
@@ -67,7 +67,7 @@ impl Orgunits {
         &self,
         customer_id: &str,
         body: &crate::types::OrgUnit,
-    ) -> ClientResult<crate::types::OrgUnit> {
+    ) -> ClientResult<crate::Response<crate::types::OrgUnit>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits",
@@ -99,7 +99,7 @@ impl Orgunits {
         &self,
         customer_id: &str,
         org_unit_path: &str,
-    ) -> ClientResult<crate::types::OrgUnit> {
+    ) -> ClientResult<crate::Response<crate::types::OrgUnit>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
@@ -133,7 +133,7 @@ impl Orgunits {
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
-    ) -> ClientResult<crate::types::OrgUnit> {
+    ) -> ClientResult<crate::Response<crate::types::OrgUnit>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
@@ -162,7 +162,11 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn delete(&self, customer_id: &str, org_unit_path: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        customer_id: &str,
+        org_unit_path: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",
@@ -196,7 +200,7 @@ impl Orgunits {
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
-    ) -> ClientResult<crate::types::OrgUnit> {
+    ) -> ClientResult<crate::Response<crate::types::OrgUnit>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/orgunits/{}",

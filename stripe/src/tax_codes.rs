@@ -28,7 +28,7 @@ impl TaxCodes {
         ending_before: &str,
         limit: i64,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::TaxCode>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::TaxCode>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -41,7 +41,7 @@ impl TaxCodes {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v1/tax_codes?{}", query_), None);
-        let resp: crate::types::TaxProductResourceCodeList = self
+        let resp: crate::Response<crate::types::TaxProductResourceCodeList> = self
             .client
             .get(
                 &url,
@@ -53,7 +53,11 @@ impl TaxCodes {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/tax_codes` endpoint.
@@ -62,9 +66,13 @@ impl TaxCodes {
      *
      * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::TaxCode>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::TaxCode>>> {
         let url = self.client.url("/v1/tax_codes", None);
-        let mut resp: crate::types::TaxProductResourceCodeList = self
+        let crate::Response::<crate::types::TaxProductResourceCodeList> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -75,8 +83,8 @@ impl TaxCodes {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -92,7 +100,11 @@ impl TaxCodes {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::TaxProductResourceCodeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -103,7 +115,11 @@ impl TaxCodes {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::TaxProductResourceCodeList> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -115,13 +131,13 @@ impl TaxCodes {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/tax_codes/{id}` endpoint.
@@ -133,7 +149,7 @@ impl TaxCodes {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::TaxCode> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::TaxCode>> {
         let url = self.client.url(
             &format!(
                 "/v1/tax_codes/{}",

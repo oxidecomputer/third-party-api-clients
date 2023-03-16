@@ -28,7 +28,7 @@ impl Departments {
         &self,
         start: &str,
         page_size: f64,
-    ) -> ClientResult<Vec<crate::types::Department>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Department>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
@@ -38,7 +38,7 @@ impl Departments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/departments?{}", query_), None);
-        let resp: crate::types::GetDepartmentsResponse = self
+        let resp: crate::Response<crate::types::GetDepartmentsResponse> = self
             .client
             .get(
                 &url,
@@ -50,7 +50,11 @@ impl Departments {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * List departments.
@@ -61,9 +65,13 @@ impl Departments {
      *
      * Retrieve all departments.
      */
-    pub async fn get_all(&self) -> ClientResult<Vec<crate::types::Department>> {
+    pub async fn get_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Department>>> {
         let url = self.client.url("/departments", None);
-        let resp: crate::types::GetDepartmentsResponse = self
+        let crate::Response::<crate::types::GetDepartmentsResponse> {
+            mut status,
+            mut headers,
+            body,
+        } = self
             .client
             .get(
                 &url,
@@ -74,8 +82,8 @@ impl Departments {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut page = resp.page.next.to_string();
+        let mut data = body.data;
+        let mut page = body.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -91,10 +99,12 @@ impl Departments {
                 .await
             {
                 Ok(mut resp) => {
-                    data.append(&mut resp.data);
+                    data.append(&mut resp.body.data);
+                    status = resp.status;
+                    headers = resp.headers;
 
-                    page = if resp.page.next != page {
-                        resp.page.next.to_string()
+                    page = if body.page.next != page {
+                        body.page.next.to_string()
                     } else {
                         "".to_string()
                     };
@@ -110,7 +120,7 @@ impl Departments {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(crate::Response::new(status, headers, data))
     }
     /**
      * Create department.
@@ -122,7 +132,7 @@ impl Departments {
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
-    ) -> ClientResult<crate::types::Department> {
+    ) -> ClientResult<crate::Response<crate::types::Department>> {
         let url = self.client.url("/departments", None);
         self.client
             .post(
@@ -145,7 +155,7 @@ impl Departments {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get(&self, id: &str) -> ClientResult<crate::types::Department> {
+    pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Department>> {
         let url = self.client.url(
             &format!(
                 "/departments/{}",
@@ -174,7 +184,7 @@ impl Departments {
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,
-    ) -> ClientResult<crate::types::Department> {
+    ) -> ClientResult<crate::Response<crate::types::Department>> {
         let url = self.client.url(
             &format!(
                 "/departments/{}",

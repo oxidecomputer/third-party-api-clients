@@ -34,7 +34,7 @@ impl Bitcoin {
         limit: i64,
         starting_after: &str,
         uncaptured_funds: bool,
-    ) -> ClientResult<Vec<crate::types::BitcoinReceiver>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinReceiver>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -58,7 +58,7 @@ impl Bitcoin {
         let url = self
             .client
             .url(&format!("/v1/bitcoin/receivers?{}", query_), None);
-        let resp: crate::types::GetBitcoinReceiversResponse = self
+        let resp: crate::Response<crate::types::GetBitcoinReceiversResponse> = self
             .client
             .get(
                 &url,
@@ -70,7 +70,11 @@ impl Bitcoin {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
@@ -84,7 +88,7 @@ impl Bitcoin {
         active: bool,
         filled: bool,
         uncaptured_funds: bool,
-    ) -> ClientResult<Vec<crate::types::BitcoinReceiver>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinReceiver>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -99,7 +103,11 @@ impl Bitcoin {
         let url = self
             .client
             .url(&format!("/v1/bitcoin/receivers?{}", query_), None);
-        let mut resp: crate::types::GetBitcoinReceiversResponse = self
+        let crate::Response::<crate::types::GetBitcoinReceiversResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -110,8 +118,8 @@ impl Bitcoin {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -127,7 +135,11 @@ impl Bitcoin {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::GetBitcoinReceiversResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -138,7 +150,11 @@ impl Bitcoin {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::GetBitcoinReceiversResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -150,13 +166,13 @@ impl Bitcoin {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/bitcoin/receivers/{id}` endpoint.
@@ -168,7 +184,10 @@ impl Bitcoin {
      * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
      * * `id: &str` -- The account's country.
      */
-    pub async fn get_receiver(&self, id: &str) -> ClientResult<crate::types::BitcoinReceiver> {
+    pub async fn get_receiver(
+        &self,
+        id: &str,
+    ) -> ClientResult<crate::Response<crate::types::BitcoinReceiver>> {
         let url = self.client.url(
             &format!(
                 "/v1/bitcoin/receivers/{}",
@@ -207,7 +226,7 @@ impl Bitcoin {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -230,7 +249,7 @@ impl Bitcoin {
             ),
             None,
         );
-        let resp: crate::types::Transactions = self
+        let resp: crate::Response<crate::types::Transactions> = self
             .client
             .get(
                 &url,
@@ -242,7 +261,11 @@ impl Bitcoin {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
@@ -255,7 +278,7 @@ impl Bitcoin {
         &self,
         customer: &str,
         receiver: &str,
-    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -269,7 +292,11 @@ impl Bitcoin {
             ),
             None,
         );
-        let mut resp: crate::types::Transactions = self
+        let crate::Response::<crate::types::Transactions> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -280,8 +307,8 @@ impl Bitcoin {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -297,7 +324,11 @@ impl Bitcoin {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Transactions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -308,7 +339,11 @@ impl Bitcoin {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Transactions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -320,13 +355,13 @@ impl Bitcoin {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
     /**
      * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
@@ -349,7 +384,7 @@ impl Bitcoin {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -370,7 +405,7 @@ impl Bitcoin {
         let url = self
             .client
             .url(&format!("/v1/bitcoin/transactions?{}", query_), None);
-        let resp: crate::types::Transactions = self
+        let resp: crate::Response<crate::types::Transactions> = self
             .client
             .get(
                 &url,
@@ -382,7 +417,11 @@ impl Bitcoin {
             .await?;
 
         // Return our response data.
-        Ok(resp.data.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.data.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
@@ -395,7 +434,7 @@ impl Bitcoin {
         &self,
         customer: &str,
         receiver: &str,
-    ) -> ClientResult<Vec<crate::types::BitcoinTransaction>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BitcoinTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -407,7 +446,11 @@ impl Bitcoin {
         let url = self
             .client
             .url(&format!("/v1/bitcoin/transactions?{}", query_), None);
-        let mut resp: crate::types::Transactions = self
+        let crate::Response::<crate::types::Transactions> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -418,8 +461,8 @@ impl Bitcoin {
             )
             .await?;
 
-        let mut data = resp.data;
-        let mut has_more = resp.has_more;
+        let mut data = body.data;
+        let mut has_more = body.has_more;
         let mut page = "".to_string();
 
         // Paginate if we should.
@@ -435,7 +478,11 @@ impl Bitcoin {
             }
 
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::Transactions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?startng_after={}", url, page),
@@ -446,7 +493,11 @@ impl Bitcoin {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::Transactions> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&starting_after={}", url, page),
@@ -458,12 +509,12 @@ impl Bitcoin {
                     .await?;
             }
 
-            data.append(&mut resp.data);
+            data.append(&mut body.data);
 
-            has_more = resp.has_more;
+            has_more = body.has_more;
         }
 
         // Return our response data.
-        Ok(data.to_vec())
+        Ok(crate::Response::new(status, headers, data.to_vec()))
     }
 }

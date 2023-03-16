@@ -16,7 +16,7 @@ impl Features {
      *
      * Success
      */
-    pub async fn list(&self) -> ClientResult<Vec<crate::types::Feature>> {
+    pub async fn list(&self) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url("/api/v1/features", None);
         self.client
             .get(
@@ -35,7 +35,7 @@ impl Features {
      *
      * Success
      */
-    pub async fn list_all(&self) -> ClientResult<Vec<crate::types::Feature>> {
+    pub async fn list_all(&self) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url("/api/v1/features", None);
         self.client
             .get_all_pages(
@@ -56,7 +56,10 @@ impl Features {
      *
      * * `feature_id: &str`
      */
-    pub async fn get(&self, feature_id: &str) -> ClientResult<crate::types::Feature> {
+    pub async fn get(
+        &self,
+        feature_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}",
@@ -86,7 +89,7 @@ impl Features {
     pub async fn list_dependencies(
         &self,
         feature_id: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependencies",
@@ -114,7 +117,7 @@ impl Features {
     pub async fn list_all_dependencies(
         &self,
         feature_id: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependencies",
@@ -144,7 +147,7 @@ impl Features {
     pub async fn list_dependents(
         &self,
         feature_id: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependents",
@@ -172,7 +175,7 @@ impl Features {
     pub async fn list_all_dependents(
         &self,
         feature_id: &str,
-    ) -> ClientResult<Vec<crate::types::Feature>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Feature>>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/features/{}/dependents",
@@ -206,7 +209,7 @@ impl Features {
         feature_id: &str,
         lifecycle: &str,
         mode: &str,
-    ) -> ClientResult<crate::types::Feature> {
+    ) -> ClientResult<crate::Response<crate::types::Feature>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !mode.is_empty() {
             query_args.push(("mode".to_string(), mode.to_string()));

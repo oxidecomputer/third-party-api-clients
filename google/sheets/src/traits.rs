@@ -14,7 +14,7 @@ impl SpreadsheetOps for crate::spreadsheets::Spreadsheets {
     /// The `cell_name` is something like `A1` and what is returned is a string representation of
     /// the cell's value.
     async fn cell_get(&self, sheet_id: &str, cell_name: &str) -> ClientResult<String> {
-        let values = self
+        let resp = self
             .values_get(
                 sheet_id,
                 cell_name,
@@ -22,10 +22,9 @@ impl SpreadsheetOps for crate::spreadsheets::Spreadsheets {
                 crate::types::Dimension::Rows,
                 crate::types::ValueRenderOption::FormattedValue,
             )
-            .await
-            .unwrap();
+            .await?;
 
-        if let Some(v) = values.values.get(0) {
+        if let Some(v) = resp.body.values.get(0) {
             if let Some(v) = v.get(0) {
                 return Ok(v.to_string());
             }

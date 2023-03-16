@@ -27,7 +27,7 @@ impl Customer {
         customer_id: &str,
         device_id: &str,
         command_id: &str,
-    ) -> ClientResult<crate::types::DirectoryChromeosdevicesCommand> {
+    ) -> ClientResult<crate::Response<crate::types::DirectoryChromeosdevicesCommand>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
@@ -62,7 +62,8 @@ impl Customer {
         customer_id: &str,
         device_id: &str,
         body: &crate::types::DirectoryChromeosdevicesIssueCommandRequest,
-    ) -> ClientResult<crate::types::DirectoryChromeosdevicesIssueCommandResponse> {
+    ) -> ClientResult<crate::Response<crate::types::DirectoryChromeosdevicesIssueCommandResponse>>
+    {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",

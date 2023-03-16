@@ -145,7 +145,7 @@ impl Accounts {
     pub async fn post(
         &self,
         body: &crate::types::NewAccountDefinition,
-    ) -> ClientResult<crate::types::NewAccountSummary> {
+    ) -> ClientResult<crate::Response<crate::types::NewAccountSummary>> {
         let url = self.client.url("/v2.1/accounts", None);
         self.client
             .post(
@@ -164,7 +164,9 @@ impl Accounts {
      *
      * Retrieves the account provisioning information for the account.
      */
-    pub async fn get_provisioning(&self) -> ClientResult<crate::types::ProvisioningInformation> {
+    pub async fn get_provisioning(
+        &self,
+    ) -> ClientResult<crate::Response<crate::types::ProvisioningInformation>> {
         let url = self.client.url("/v2.1/accounts/provisioning", None);
         self.client
             .get(
@@ -196,7 +198,7 @@ impl Accounts {
         &self,
         account_id: &str,
         include_account_settings: &str,
-    ) -> ClientResult<crate::types::AccountInformation> {
+    ) -> ClientResult<crate::Response<crate::types::AccountInformation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_account_settings.is_empty() {
             query_args.push((
@@ -234,7 +236,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete(&self, account_id: &str) -> ClientResult<()> {
+    pub async fn delete(&self, account_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}",
@@ -275,7 +277,7 @@ impl Accounts {
         &self,
         account_id: &str,
         include_charges: &str,
-    ) -> ClientResult<crate::types::BillingChargeResponse> {
+    ) -> ClientResult<crate::Response<crate::types::BillingChargeResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_charges.is_empty() {
             query_args.push(("include_charges".to_string(), include_charges.to_string()));
@@ -316,7 +318,7 @@ impl Accounts {
         account_id: &str,
         recipient_part: &str,
         body: &crate::types::CaptiveRecipientInformation,
-    ) -> ClientResult<crate::types::CaptiveRecipientInformation> {
+    ) -> ClientResult<crate::Response<crate::types::CaptiveRecipientInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/captive_recipients/{}",
@@ -351,7 +353,7 @@ impl Accounts {
         &self,
         account_id: &str,
         email: &str,
-    ) -> ClientResult<crate::types::RecipientNamesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::RecipientNamesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -389,7 +391,7 @@ impl Accounts {
     pub async fn settings_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::AccountSettingsInformation> {
+    ) -> ClientResult<crate::Response<crate::types::AccountSettingsInformation>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings",
@@ -422,7 +424,7 @@ impl Accounts {
         &self,
         account_id: &str,
         body: &crate::types::AccountSettingsInformation,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings",
@@ -456,7 +458,7 @@ impl Accounts {
     pub async fn envelope_purge_configuration_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::EnvelopePurgeConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopePurgeConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/envelope_purge_configuration",
@@ -493,7 +495,7 @@ impl Accounts {
         &self,
         account_id: &str,
         body: &crate::types::EnvelopePurgeConfiguration,
-    ) -> ClientResult<crate::types::EnvelopePurgeConfiguration> {
+    ) -> ClientResult<crate::Response<crate::types::EnvelopePurgeConfiguration>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/envelope_purge_configuration",
@@ -525,7 +527,7 @@ impl Accounts {
     pub async fn notification_defaults_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::NotificationDefaultsData> {
+    ) -> ClientResult<crate::Response<crate::types::NotificationDefaultsData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/notification_defaults",
@@ -558,7 +560,7 @@ impl Accounts {
         &self,
         account_id: &str,
         body: &crate::types::NotificationDefaultsData,
-    ) -> ClientResult<crate::types::NotificationDefaultsData> {
+    ) -> ClientResult<crate::Response<crate::types::NotificationDefaultsData>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/settings/notification_defaults",
@@ -628,7 +630,7 @@ impl Accounts {
         shared: &str,
         start_position: &str,
         user_ids: &str,
-    ) -> ClientResult<crate::types::AccountSharedAccess> {
+    ) -> ClientResult<crate::Response<crate::types::AccountSharedAccess>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -713,7 +715,7 @@ impl Accounts {
         preserve_existing_shared_access: &str,
         user_ids: &str,
         body: &crate::types::AccountSharedAccess,
-    ) -> ClientResult<crate::types::AccountSharedAccess> {
+    ) -> ClientResult<crate::Response<crate::types::AccountSharedAccess>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !item_type.is_empty() {
             query_args.push(("item_type".to_string(), item_type.to_string()));
@@ -766,7 +768,7 @@ impl Accounts {
     pub async fn supported_languages_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::SupportedLanguages> {
+    ) -> ClientResult<crate::Response<crate::types::SupportedLanguages>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/supported_languages",
@@ -798,7 +800,7 @@ impl Accounts {
     pub async fn unsupported_file_types_get(
         &self,
         account_id: &str,
-    ) -> ClientResult<crate::types::FileTypeList> {
+    ) -> ClientResult<crate::Response<crate::types::FileTypeList>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/unsupported_file_types",
@@ -832,7 +834,7 @@ impl Accounts {
         &self,
         organization_id: &str,
         result_id: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/organization_exports/{}/account_settings/{}",

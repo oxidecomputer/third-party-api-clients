@@ -33,7 +33,7 @@ impl PhoneBlockedList {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::BlockedList>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::BlockedList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -45,7 +45,7 @@ impl PhoneBlockedList {
         let url = self
             .client
             .url(&format!("/phone/blocked_list?{}", query_), None);
-        let resp: crate::types::ListBlockedResponse = self
+        let resp: crate::Response<crate::types::ListBlockedResponse> = self
             .client
             .get(
                 &url,
@@ -57,7 +57,11 @@ impl PhoneBlockedList {
             .await?;
 
         // Return our response data.
-        Ok(resp.blocked_list.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.blocked_list.to_vec(),
+        ))
     }
     /**
      * List blocked lists.
@@ -74,9 +78,15 @@ impl PhoneBlockedList {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn list_all_blocked(&self) -> ClientResult<Vec<crate::types::BlockedList>> {
+    pub async fn list_all_blocked(
+        &self,
+    ) -> ClientResult<crate::Response<Vec<crate::types::BlockedList>>> {
         let url = self.client.url("/phone/blocked_list", None);
-        let mut resp: crate::types::ListBlockedResponse = self
+        let crate::Response::<crate::types::ListBlockedResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -87,14 +97,18 @@ impl PhoneBlockedList {
             )
             .await?;
 
-        let mut blocked_list = resp.blocked_list;
-        let mut page = resp.next_page_token;
+        let mut blocked_list = body.blocked_list;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListBlockedResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -105,7 +119,11 @@ impl PhoneBlockedList {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListBlockedResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -117,17 +135,17 @@ impl PhoneBlockedList {
                     .await?;
             }
 
-            blocked_list.append(&mut resp.blocked_list);
+            blocked_list.append(&mut body.blocked_list);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(blocked_list)
+        Ok(crate::Response::new(status, headers, blocked_list))
     }
     /**
      * Create a blocked list.
@@ -145,7 +163,7 @@ impl PhoneBlockedList {
     pub async fn add_anumber_blocked_list(
         &self,
         body: &crate::types::UpdateBlockedListRequest,
-    ) -> ClientResult<crate::types::Groups> {
+    ) -> ClientResult<crate::Response<crate::types::Groups>> {
         let url = self.client.url("/phone/blocked_list", None);
         self.client
             .post(
@@ -176,7 +194,7 @@ impl PhoneBlockedList {
     pub async fn get_blocked_list(
         &self,
         blocked_list_id: &str,
-    ) -> ClientResult<crate::types::BlockedList> {
+    ) -> ClientResult<crate::Response<crate::types::BlockedList>> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
@@ -212,7 +230,10 @@ impl PhoneBlockedList {
      *
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
-    pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> ClientResult<()> {
+    pub async fn delete_blocked_list(
+        &self,
+        blocked_list_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",
@@ -251,7 +272,7 @@ impl PhoneBlockedList {
         &self,
         blocked_list_id: &str,
         body: &crate::types::UpdateBlockedListRequest,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/phone/blocked_list/{}",

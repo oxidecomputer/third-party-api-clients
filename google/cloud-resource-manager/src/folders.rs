@@ -29,7 +29,7 @@ impl Folders {
         page_token: &str,
         parent: &str,
         show_deleted: bool,
-    ) -> ClientResult<Vec<crate::types::Folder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Folder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
             query_args.push(("pageSize".to_string(), page_size.to_string()));
@@ -45,7 +45,7 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v2/folders?{}", query_), None);
-        let resp: crate::types::ListFoldersResponse = self
+        let resp: crate::Response<crate::types::ListFoldersResponse> = self
             .client
             .get(
                 &url,
@@ -57,7 +57,11 @@ impl Folders {
             .await?;
 
         // Return our response data.
-        Ok(resp.folders.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.folders.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v2/folders` endpoint.
@@ -70,7 +74,7 @@ impl Folders {
         &self,
         parent: &str,
         show_deleted: bool,
-    ) -> ClientResult<Vec<crate::types::Folder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Folder>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent.is_empty() {
             query_args.push(("parent".to_string(), parent.to_string()));
@@ -80,7 +84,11 @@ impl Folders {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(&format!("/v2/folders?{}", query_), None);
-        let mut resp: crate::types::ListFoldersResponse = self
+        let crate::Response::<crate::types::ListFoldersResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -91,13 +99,17 @@ impl Folders {
             )
             .await?;
 
-        let mut folders = resp.folders;
-        let mut page = resp.next_page_token;
+        let mut folders = body.folders;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListFoldersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -108,7 +120,11 @@ impl Folders {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListFoldersResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -120,17 +136,17 @@ impl Folders {
                     .await?;
             }
 
-            folders.append(&mut resp.folders);
+            folders.append(&mut body.folders);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(folders)
+        Ok(crate::Response::new(status, headers, folders))
     }
     /**
      * This function performs a `POST` to the `/v2/folders` endpoint.
@@ -145,7 +161,7 @@ impl Folders {
         &self,
         parent: &str,
         body: &crate::types::Folder,
-    ) -> ClientResult<crate::types::Operation> {
+    ) -> ClientResult<crate::Response<crate::types::Operation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent.is_empty() {
             query_args.push(("parent".to_string(), parent.to_string()));
@@ -170,9 +186,9 @@ impl Folders {
     pub async fn search(
         &self,
         body: &crate::types::SearchFoldersRequest,
-    ) -> ClientResult<Vec<crate::types::Folder>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::Folder>>> {
         let url = self.client.url("/v2/folders:search", None);
-        let resp: crate::types::SearchFoldersResponse = self
+        let resp: crate::Response<crate::types::SearchFoldersResponse> = self
             .client
             .post(
                 &url,
@@ -184,7 +200,11 @@ impl Folders {
             .await?;
 
         // Return our response data.
-        Ok(resp.folders.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.folders.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/v2/{name}` endpoint.
@@ -195,7 +215,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn get(&self, name: &str) -> ClientResult<crate::types::Folder> {
+    pub async fn get(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
             &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
@@ -219,7 +239,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn delete(&self, name: &str) -> ClientResult<crate::types::Folder> {
+    pub async fn delete(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
             &format!("/v2/{}", crate::progenitor_support::encode_path(name),),
             None,
@@ -249,7 +269,7 @@ impl Folders {
         name: &str,
         update_mask: &str,
         body: &crate::types::Folder,
-    ) -> ClientResult<crate::types::Folder> {
+    ) -> ClientResult<crate::Response<crate::types::Folder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !update_mask.is_empty() {
             query_args.push(("updateMask".to_string(), update_mask.to_string()));
@@ -286,7 +306,7 @@ impl Folders {
         &self,
         name: &str,
         body: &crate::types::MoveFolderRequest,
-    ) -> ClientResult<crate::types::Operation> {
+    ) -> ClientResult<crate::Response<crate::types::Operation>> {
         let url = self.client.url(
             &format!("/v2/{}/move", crate::progenitor_support::encode_path(name),),
             None,
@@ -314,7 +334,7 @@ impl Folders {
         &self,
         name: &str,
         body: &crate::types::MoveProjectMetadata,
-    ) -> ClientResult<crate::types::Folder> {
+    ) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/undelete",
@@ -345,7 +365,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::GetIamPolicyRequest,
-    ) -> ClientResult<crate::types::Policy> {
+    ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/getIamPolicy",
@@ -376,7 +396,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::SetIamPolicyRequest,
-    ) -> ClientResult<crate::types::Policy> {
+    ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/setIamPolicy",
@@ -407,7 +427,7 @@ impl Folders {
         &self,
         resource: &str,
         body: &crate::types::TestIamPermissionsRequest,
-    ) -> ClientResult<crate::types::TestIamPermissionsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::TestIamPermissionsResponse>> {
         let url = self.client.url(
             &format!(
                 "/v2/{}/testIamPermissions",

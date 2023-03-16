@@ -33,7 +33,7 @@ impl DeprecatedApiEndpoints {
     pub async fn list_past_meeting_files(
         &self,
         meeting_id: &str,
-    ) -> ClientResult<crate::types::ListPastMeetingFilesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListPastMeetingFilesResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_meetings/{}/files",
@@ -73,7 +73,7 @@ impl DeprecatedApiEndpoints {
     pub async fn list_past_webinar_files(
         &self,
         webinar_id: &str,
-    ) -> ClientResult<crate::types::ListPastMeetingFilesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListPastMeetingFilesResponse>> {
         let url = self.client.url(
             &format!(
                 "/past_webinars/{}/files",

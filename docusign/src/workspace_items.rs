@@ -43,7 +43,7 @@ impl WorkspaceItems {
         include_user_detail: &str,
         start_position: &str,
         workspace_user_id: &str,
-    ) -> ClientResult<crate::types::WorkspaceFolderContents> {
+    ) -> ClientResult<crate::Response<crate::types::WorkspaceFolderContents>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));
@@ -120,7 +120,7 @@ impl WorkspaceItems {
         folder_id: &str,
         workspace_id: &str,
         body: &crate::types::WorkspaceItemList,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}",
@@ -158,7 +158,7 @@ impl WorkspaceItems {
         account_id: &str,
         folder_id: &str,
         workspace_id: &str,
-    ) -> ClientResult<crate::types::WorkspaceItem> {
+    ) -> ClientResult<crate::Response<crate::types::WorkspaceItem>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files",
@@ -202,7 +202,7 @@ impl WorkspaceItems {
         workspace_id: &str,
         is_download: &str,
         pdf_version: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !is_download.is_empty() {
             query_args.push(("is_download".to_string(), is_download.to_string()));
@@ -252,7 +252,7 @@ impl WorkspaceItems {
         file_id: &str,
         folder_id: &str,
         workspace_id: &str,
-    ) -> ClientResult<crate::types::WorkspaceItem> {
+    ) -> ClientResult<crate::Response<crate::types::WorkspaceItem>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}",
@@ -303,7 +303,7 @@ impl WorkspaceItems {
         max_height: &str,
         max_width: &str,
         start_position: &str,
-    ) -> ClientResult<crate::types::PageImages> {
+    ) -> ClientResult<crate::Response<crate::types::PageImages>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
             query_args.push(("count".to_string(), count.to_string()));

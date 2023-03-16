@@ -51,7 +51,7 @@ impl Auths {
      *
      * * `authorization: &str` -- Basic \<base64-encoded client_id:client_secret\>.
      */
-    pub async fn post_token(&self) -> ClientResult<crate::types::OAuth2Token> {
+    pub async fn post_token(&self) -> ClientResult<crate::Response<crate::types::OAuth2Token>> {
         let url = self.client.url("/token", None);
         self.client
             .post(

@@ -69,7 +69,7 @@ impl Query {
         &self,
         query: &str,
         limit: f64,
-    ) -> ClientResult<crate::types::GetMessagesResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetMessagesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.to_string().is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -102,7 +102,10 @@ impl Query {
      *
      * * `authorization: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_messages_msg(&self, msg_id: &str) -> ClientResult<crate::types::Message> {
+    pub async fn get_messages_msg(
+        &self,
+        msg_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::Message>> {
         let url = self.client.url(
             &format!(
                 "/messages/{}",

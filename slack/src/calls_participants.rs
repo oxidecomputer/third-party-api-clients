@@ -22,7 +22,7 @@ impl CallsParticipants {
      *
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
-    pub async fn add(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.participants.add", None);
         self.client
             .post(
@@ -45,7 +45,7 @@ impl CallsParticipants {
      *
      * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
      */
-    pub async fn remove(&self) -> ClientResult<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.participants.remove", None);
         self.client
             .post(

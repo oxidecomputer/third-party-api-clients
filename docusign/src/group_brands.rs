@@ -27,7 +27,7 @@ impl GroupBrands {
         &self,
         account_id: &str,
         group_id: &str,
-    ) -> ClientResult<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::Response<crate::types::GroupBrands>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",
@@ -63,7 +63,7 @@ impl GroupBrands {
         account_id: &str,
         group_id: &str,
         body: &crate::types::BrandsRequest,
-    ) -> ClientResult<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::Response<crate::types::GroupBrands>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",
@@ -99,7 +99,7 @@ impl GroupBrands {
         account_id: &str,
         group_id: &str,
         body: &crate::types::BrandsRequest,
-    ) -> ClientResult<crate::types::GroupBrands> {
+    ) -> ClientResult<crate::Response<crate::types::GroupBrands>> {
         let url = self.client.url(
             &format!(
                 "/v2.1/accounts/{}/groups/{}/brands",

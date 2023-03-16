@@ -25,7 +25,7 @@ impl Templates {
     pub async fn list_sms(
         &self,
         template_type: &str,
-    ) -> ClientResult<Vec<crate::types::SmsTemplate>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SmsTemplate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !template_type.is_empty() {
             query_args.push(("templateType".to_string(), template_type.to_string()));
@@ -56,7 +56,7 @@ impl Templates {
     pub async fn list_all_sms(
         &self,
         template_type: &str,
-    ) -> ClientResult<Vec<crate::types::SmsTemplate>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::SmsTemplate>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !template_type.is_empty() {
             query_args.push(("templateType".to_string(), template_type.to_string()));
@@ -85,7 +85,7 @@ impl Templates {
     pub async fn create_sms(
         &self,
         body: &crate::types::SmsTemplate,
-    ) -> ClientResult<crate::types::SmsTemplate> {
+    ) -> ClientResult<crate::Response<crate::types::SmsTemplate>> {
         let url = self.client.url("/api/v1/templates/sms", None);
         self.client
             .post(
@@ -108,7 +108,10 @@ impl Templates {
      *
      * * `template_id: &str`
      */
-    pub async fn get_sm(&self, template_id: &str) -> ClientResult<crate::types::SmsTemplate> {
+    pub async fn get_sm(
+        &self,
+        template_id: &str,
+    ) -> ClientResult<crate::Response<crate::types::SmsTemplate>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
@@ -141,7 +144,7 @@ impl Templates {
         &self,
         template_id: &str,
         body: &crate::types::SmsTemplate,
-    ) -> ClientResult<crate::types::SmsTemplate> {
+    ) -> ClientResult<crate::Response<crate::types::SmsTemplate>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
@@ -174,7 +177,7 @@ impl Templates {
         &self,
         template_id: &str,
         body: &crate::types::SmsTemplate,
-    ) -> ClientResult<crate::types::SmsTemplate> {
+    ) -> ClientResult<crate::Response<crate::types::SmsTemplate>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",
@@ -203,7 +206,7 @@ impl Templates {
      *
      * * `template_id: &str`
      */
-    pub async fn delete_sms(&self, template_id: &str) -> ClientResult<()> {
+    pub async fn delete_sms(&self, template_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/api/v1/templates/sms/{}",

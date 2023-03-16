@@ -35,7 +35,7 @@ impl Mobiledevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> ClientResult<Vec<crate::types::MobileDevice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MobileDevice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
             query_args.push(("maxResults".to_string(), max_results.to_string()));
@@ -64,7 +64,7 @@ impl Mobiledevices {
             ),
             None,
         );
-        let resp: crate::types::MobileDevices = self
+        let resp: crate::Response<crate::types::MobileDevices> = self
             .client
             .get(
                 &url,
@@ -76,7 +76,11 @@ impl Mobiledevices {
             .await?;
 
         // Return our response data.
-        Ok(resp.mobiledevices.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.mobiledevices.to_vec(),
+        ))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
@@ -92,7 +96,7 @@ impl Mobiledevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> ClientResult<Vec<crate::types::MobileDevice>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::MobileDevice>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
             query_args.push(("orderBy".to_string(), order_by.to_string()));
@@ -115,7 +119,11 @@ impl Mobiledevices {
             ),
             None,
         );
-        let mut resp: crate::types::MobileDevices = self
+        let crate::Response::<crate::types::MobileDevices> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -126,13 +134,17 @@ impl Mobiledevices {
             )
             .await?;
 
-        let mut mobiledevices = resp.mobiledevices;
-        let mut page = resp.next_page_token;
+        let mut mobiledevices = body.mobiledevices;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::MobileDevices> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?pageToken={}", url, page),
@@ -143,7 +155,11 @@ impl Mobiledevices {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::MobileDevices> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&pageToken={}", url, page),
@@ -155,17 +171,17 @@ impl Mobiledevices {
                     .await?;
             }
 
-            mobiledevices.append(&mut resp.mobiledevices);
+            mobiledevices.append(&mut body.mobiledevices);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(mobiledevices)
+        Ok(crate::Response::new(status, headers, mobiledevices))
     }
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
@@ -183,7 +199,7 @@ impl Mobiledevices {
         customer_id: &str,
         resource_id: &str,
         projection: crate::types::Projection,
-    ) -> ClientResult<crate::types::MobileDevice> {
+    ) -> ClientResult<crate::Response<crate::types::MobileDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -218,7 +234,11 @@ impl Mobiledevices {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      */
-    pub async fn delete(&self, customer_id: &str, resource_id: &str) -> ClientResult<()> {
+    pub async fn delete(
+        &self,
+        customer_id: &str,
+        resource_id: &str,
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}",
@@ -252,7 +272,7 @@ impl Mobiledevices {
         customer_id: &str,
         resource_id: &str,
         body: &crate::types::MobileDeviceAction,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/admin/directory/v1/customer/{}/devices/mobile/{}/action",

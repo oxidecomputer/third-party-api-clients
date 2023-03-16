@@ -28,7 +28,7 @@ impl ContractorPayments {
         company_id: &str,
         start_date: &str,
         end_date: &str,
-    ) -> ClientResult<crate::types::ContractorPaymentSummary> {
+    ) -> ClientResult<crate::Response<crate::types::ContractorPaymentSummary>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
@@ -82,7 +82,7 @@ impl ContractorPayments {
         hours: f64,
         bonus: f64,
         reimbursement: f64,
-    ) -> ClientResult<crate::types::ContractorPayment> {
+    ) -> ClientResult<crate::Response<crate::types::ContractorPayment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !bonus.to_string().is_empty() {
             query_args.push(("bonus".to_string(), bonus.to_string()));
@@ -132,7 +132,7 @@ impl ContractorPayments {
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
-    ) -> ClientResult<crate::types::ContractorPayment> {
+    ) -> ClientResult<crate::Response<crate::types::ContractorPayment>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractor_payments/{}",
@@ -164,7 +164,7 @@ impl ContractorPayments {
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/v1/companies/{}/contractor_payments/{}",

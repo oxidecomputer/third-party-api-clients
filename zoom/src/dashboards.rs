@@ -41,7 +41,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::IncludeFields,
-    ) -> ClientResult<crate::types::DashboardMeetingsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardMeetingsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -99,7 +99,7 @@ impl Dashboards {
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
-    ) -> ClientResult<crate::types::MeetingMetric> {
+    ) -> ClientResult<crate::Response<crate::types::MeetingMetric>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -154,7 +154,8 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> ClientResult<crate::types::DashboardMeetingParticipantsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardMeetingParticipantsResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -214,7 +215,7 @@ impl Dashboards {
         meeting_id: &str,
         participant_id: &str,
         type_: crate::types::DashboardMeetingsType,
-    ) -> ClientResult<crate::types::ParticipantQos> {
+    ) -> ClientResult<crate::Response<crate::types::ParticipantQos>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -267,7 +268,7 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -325,7 +326,8 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardMeetingParticipantShareResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardMeetingParticipantShareResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -384,7 +386,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardWebinarsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardWebinarsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -439,7 +441,7 @@ impl Dashboards {
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
-    ) -> ClientResult<crate::types::Webinars> {
+    ) -> ClientResult<crate::Response<crate::types::Webinars>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -493,7 +495,8 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> ClientResult<crate::types::DashboardWebinarParticipantsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardWebinarParticipantsResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.to_string().is_empty() {
             query_args.push(("include_fields".to_string(), include_fields.to_string()));
@@ -551,7 +554,7 @@ impl Dashboards {
         webinar_id: &str,
         participant_id: &str,
         type_: crate::types::DashboardWebinarsType,
-    ) -> ClientResult<crate::types::ParticipantQos> {
+    ) -> ClientResult<crate::Response<crate::types::ParticipantQos>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -604,7 +607,7 @@ impl Dashboards {
         type_: crate::types::DashboardWebinarsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -662,7 +665,8 @@ impl Dashboards {
         type_: crate::types::DashboardWebinarsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardMeetingParticipantShareResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardMeetingParticipantShareResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -718,7 +722,7 @@ impl Dashboards {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -772,7 +776,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -828,7 +832,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -876,7 +880,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardImResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardImResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -932,7 +936,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardChatResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardChatResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -982,7 +986,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<crate::types::DashboardClientFeedbackResponse> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardClientFeedbackResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1027,7 +1031,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<crate::types::Domains> {
+    ) -> ClientResult<crate::Response<crate::types::Domains>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1070,7 +1074,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<crate::types::DashboardIssueZoomRoomResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardIssueZoomRoomResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1120,7 +1124,8 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardIssueDetailZoomRoomResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardIssueDetailZoomRoomResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1184,7 +1189,8 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::DashboardClientFeedbackDetailResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::DashboardClientFeedbackDetailResponseAllOf>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1237,7 +1243,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> ClientResult<crate::types::ListMeetingSatisfactionResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListMeetingSatisfactionResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1299,7 +1305,7 @@ impl Dashboards {
         quality_type: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::ListCallLogsMetricsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListCallLogsMetricsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1323,7 +1329,7 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/phone/metrics/call_logs?{}", query_), None);
-        let resp: crate::types::ListCallLogsMetricsResponseData = self
+        let resp: crate::Response<crate::types::ListCallLogsMetricsResponseData> = self
             .client
             .get(
                 &url,
@@ -1335,7 +1341,11 @@ impl Dashboards {
             .await?;
 
         // Return our response data.
-        Ok(resp.call_logs.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.call_logs.to_vec(),
+        ))
     }
     /**
      * List call logs.
@@ -1361,7 +1371,7 @@ impl Dashboards {
         to: &str,
         site_id: &str,
         quality_type: &str,
-    ) -> ClientResult<Vec<crate::types::ListCallLogsMetricsResponse>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListCallLogsMetricsResponse>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -1379,7 +1389,11 @@ impl Dashboards {
         let url = self
             .client
             .url(&format!("/phone/metrics/call_logs?{}", query_), None);
-        let mut resp: crate::types::ListCallLogsMetricsResponseData = self
+        let crate::Response::<crate::types::ListCallLogsMetricsResponseData> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1390,14 +1404,18 @@ impl Dashboards {
             )
             .await?;
 
-        let mut call_logs = resp.call_logs;
-        let mut page = resp.next_page_token;
+        let mut call_logs = body.call_logs;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListCallLogsMetricsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1408,7 +1426,11 @@ impl Dashboards {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListCallLogsMetricsResponseData> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1420,17 +1442,17 @@ impl Dashboards {
                     .await?;
             }
 
-            call_logs.append(&mut resp.call_logs);
+            call_logs.append(&mut body.call_logs);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(call_logs)
+        Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
      * Get call details from call log.
@@ -1456,7 +1478,7 @@ impl Dashboards {
     pub async fn get_call_log_metrics_details(
         &self,
         call_id: &str,
-    ) -> ClientResult<crate::types::ListCallLogsMetricsResponse> {
+    ) -> ClientResult<crate::Response<crate::types::ListCallLogsMetricsResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/metrics/call_logs/{}",
@@ -1494,7 +1516,7 @@ impl Dashboards {
     pub async fn get_call_qo(
         &self,
         call_id: &str,
-    ) -> ClientResult<crate::types::GetCallQoSResponse> {
+    ) -> ClientResult<crate::Response<crate::types::GetCallQoSResponse>> {
         let url = self.client.url(
             &format!(
                 "/phone/metrics/call_logs/{}/qos",
@@ -1544,7 +1566,8 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         next_page_token: &str,
         page_size: i64,
-    ) -> ClientResult<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ParticipantFeedbackResponseParticipants>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -1564,7 +1587,7 @@ impl Dashboards {
             ),
             None,
         );
-        let resp: crate::types::ParticipantFeedbackResponse = self
+        let resp: crate::Response<crate::types::ParticipantFeedbackResponse> = self
             .client
             .get(
                 &url,
@@ -1576,7 +1599,11 @@ impl Dashboards {
             .await?;
 
         // Return our response data.
-        Ok(resp.participants.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.participants.to_vec(),
+        ))
     }
     /**
      * Get post meeting feedback.
@@ -1599,7 +1626,8 @@ impl Dashboards {
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
-    ) -> ClientResult<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ParticipantFeedbackResponseParticipants>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -1613,7 +1641,11 @@ impl Dashboards {
             ),
             None,
         );
-        let mut resp: crate::types::ParticipantFeedbackResponse = self
+        let crate::Response::<crate::types::ParticipantFeedbackResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1624,14 +1656,18 @@ impl Dashboards {
             )
             .await?;
 
-        let mut participants = resp.participants;
-        let mut page = resp.next_page_token;
+        let mut participants = body.participants;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ParticipantFeedbackResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1642,7 +1678,11 @@ impl Dashboards {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ParticipantFeedbackResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1654,17 +1694,17 @@ impl Dashboards {
                     .await?;
             }
 
-            participants.append(&mut resp.participants);
+            participants.append(&mut body.participants);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(participants)
+        Ok(crate::Response::new(status, headers, participants))
     }
     /**
      * Get post webinar feedback.
@@ -1699,7 +1739,8 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         webinar_id: &str,
-    ) -> ClientResult<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ParticipantFeedbackResponseParticipants>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -1719,7 +1760,7 @@ impl Dashboards {
             ),
             None,
         );
-        let resp: crate::types::ParticipantFeedbackResponse = self
+        let resp: crate::Response<crate::types::ParticipantFeedbackResponse> = self
             .client
             .get(
                 &url,
@@ -1731,7 +1772,11 @@ impl Dashboards {
             .await?;
 
         // Return our response data.
-        Ok(resp.participants.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.participants.to_vec(),
+        ))
     }
     /**
      * Get post webinar feedback.
@@ -1755,7 +1800,8 @@ impl Dashboards {
         &self,
         type_: crate::types::DashboardMeetingsType,
         webinar_id: &str,
-    ) -> ClientResult<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ParticipantFeedbackResponseParticipants>>>
+    {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));
@@ -1769,7 +1815,11 @@ impl Dashboards {
             ),
             None,
         );
-        let mut resp: crate::types::ParticipantFeedbackResponse = self
+        let crate::Response::<crate::types::ParticipantFeedbackResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -1780,14 +1830,18 @@ impl Dashboards {
             )
             .await?;
 
-        let mut participants = resp.participants;
-        let mut page = resp.next_page_token;
+        let mut participants = body.participants;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ParticipantFeedbackResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -1798,7 +1852,11 @@ impl Dashboards {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ParticipantFeedbackResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -1810,16 +1868,16 @@ impl Dashboards {
                     .await?;
             }
 
-            participants.append(&mut resp.participants);
+            participants.append(&mut body.participants);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(participants)
+        Ok(crate::Response::new(status, headers, participants))
     }
 }

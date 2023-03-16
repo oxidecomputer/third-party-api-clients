@@ -38,7 +38,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::ImChatSessionsResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ImChatSessionsResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -99,7 +99,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<crate::types::ImChatMessagesResponseAllOf> {
+    ) -> ClientResult<crate::Response<crate::types::ImChatMessagesResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
             query_args.push(("from".to_string(), from.to_string()));
@@ -161,7 +161,7 @@ impl ImChat {
         date: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> ClientResult<Vec<crate::types::ListimmessagesResponseMessages>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListimmessagesResponseMessages>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -187,7 +187,7 @@ impl ImChat {
             ),
             None,
         );
-        let resp: crate::types::ListimmessagesResponse = self
+        let resp: crate::Response<crate::types::ListimmessagesResponse> = self
             .client
             .get(
                 &url,
@@ -199,7 +199,11 @@ impl ImChat {
             .await?;
 
         // Return our response data.
-        Ok(resp.messages.to_vec())
+        Ok(crate::Response::new(
+            resp.status,
+            resp.headers,
+            resp.body.messages.to_vec(),
+        ))
     }
     /**
      * Get user’s IM messages.
@@ -221,7 +225,7 @@ impl ImChat {
         chat_user: &str,
         channel: &str,
         date: &str,
-    ) -> ClientResult<Vec<crate::types::ListimmessagesResponseMessages>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::ListimmessagesResponseMessages>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
@@ -241,7 +245,11 @@ impl ImChat {
             ),
             None,
         );
-        let mut resp: crate::types::ListimmessagesResponse = self
+        let crate::Response::<crate::types::ListimmessagesResponse> {
+            mut status,
+            mut headers,
+            mut body,
+        } = self
             .client
             .get(
                 &url,
@@ -252,14 +260,18 @@ impl ImChat {
             )
             .await?;
 
-        let mut messages = resp.messages;
-        let mut page = resp.next_page_token;
+        let mut messages = body.messages;
+        let mut page = body.next_page_token;
 
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
             if !url.contains('?') {
-                resp = self
+                crate::Response::<crate::types::ListimmessagesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}?next_page_token={}", url, page),
@@ -270,7 +282,11 @@ impl ImChat {
                     )
                     .await?;
             } else {
-                resp = self
+                crate::Response::<crate::types::ListimmessagesResponse> {
+                    status,
+                    headers,
+                    body,
+                } = self
                     .client
                     .get(
                         &format!("{}&next_page_token={}", url, page),
@@ -282,17 +298,17 @@ impl ImChat {
                     .await?;
             }
 
-            messages.append(&mut resp.messages);
+            messages.append(&mut body.messages);
 
-            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
-                page = resp.next_page_token.to_string();
+            if !body.next_page_token.is_empty() && body.next_page_token != page {
+                page = body.next_page_token.to_string();
             } else {
                 page = "".to_string();
             }
         }
 
         // Return our response data.
-        Ok(messages)
+        Ok(crate::Response::new(status, headers, messages))
     }
     /**
      * Send IM messages.
@@ -311,7 +327,7 @@ impl ImChat {
         &self,
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
-    ) -> ClientResult<crate::types::Groups> {
+    ) -> ClientResult<crate::Response<crate::types::Groups>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !chat_user.is_empty() {
             query_args.push(("chat_user".to_string(), chat_user.to_string()));

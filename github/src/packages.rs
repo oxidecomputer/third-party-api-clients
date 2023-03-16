@@ -34,7 +34,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
-    ) -> ClientResult<crate::types::Package> {
+    ) -> ClientResult<crate::Response<crate::types::Package>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/packages/{}/{}",
@@ -78,7 +78,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/packages/{}/{}",
@@ -128,7 +128,7 @@ impl Packages {
         package_name: &str,
         org: &str,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !token.is_empty() {
             query_args.push(("token".to_string(), token.to_string()));
@@ -183,7 +183,7 @@ impl Packages {
         page: i64,
         per_page: i64,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -235,7 +235,7 @@ impl Packages {
         package_name: &str,
         org: &str,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -286,7 +286,7 @@ impl Packages {
         package_name: &str,
         org: &str,
         package_version_id: i64,
-    ) -> ClientResult<crate::types::PackageVersion> {
+    ) -> ClientResult<crate::Response<crate::types::PackageVersion>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/packages/{}/{}/versions/{}",
@@ -333,7 +333,7 @@ impl Packages {
         package_name: &str,
         org: &str,
         package_version_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/packages/{}/{}/versions/{}",
@@ -384,7 +384,7 @@ impl Packages {
         package_name: &str,
         org: &str,
         package_version_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/orgs/{}/packages/{}/{}/versions/{}/restore",
@@ -426,7 +426,7 @@ impl Packages {
         &self,
         package_type: crate::types::PackageType,
         package_name: &str,
-    ) -> ClientResult<crate::types::Package> {
+    ) -> ClientResult<crate::Response<crate::types::Package>> {
         let url = self.client.url(
             &format!(
                 "/user/packages/{}/{}",
@@ -466,7 +466,7 @@ impl Packages {
         &self,
         package_type: crate::types::PackageType,
         package_name: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/packages/{}/{}",
@@ -511,7 +511,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         token: &str,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !token.is_empty() {
             query_args.push(("token".to_string(), token.to_string()));
@@ -563,7 +563,7 @@ impl Packages {
         page: i64,
         per_page: i64,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
@@ -613,7 +613,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -661,7 +661,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
-    ) -> ClientResult<crate::types::PackageVersion> {
+    ) -> ClientResult<crate::Response<crate::types::PackageVersion>> {
         let url = self.client.url(
             &format!(
                 "/user/packages/{}/{}/versions/{}",
@@ -704,7 +704,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/packages/{}/{}/versions/{}",
@@ -750,7 +750,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
-    ) -> ClientResult<()> {
+    ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
             &format!(
                 "/user/packages/{}/{}/versions/{}/restore",
@@ -793,7 +793,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         username: &str,
-    ) -> ClientResult<crate::types::Package> {
+    ) -> ClientResult<crate::Response<crate::types::Package>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/packages/{}/{}",
@@ -836,7 +836,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/packages/{}/{}/versions",
@@ -875,7 +875,7 @@ impl Packages {
         package_type: crate::types::PackageType,
         package_name: &str,
         username: &str,
-    ) -> ClientResult<Vec<crate::types::PackageVersion>> {
+    ) -> ClientResult<crate::Response<Vec<crate::types::PackageVersion>>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/packages/{}/{}/versions",
@@ -920,7 +920,7 @@ impl Packages {
         package_name: &str,
         package_version_id: i64,
         username: &str,
-    ) -> ClientResult<crate::types::PackageVersion> {
+    ) -> ClientResult<crate::Response<crate::types::PackageVersion>> {
         let url = self.client.url(
             &format!(
                 "/users/{}/packages/{}/{}/versions/{}",

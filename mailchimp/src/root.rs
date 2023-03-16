@@ -27,7 +27,7 @@ impl Root {
         &self,
         fields: &[String],
         exclude_fields: &[String],
-    ) -> ClientResult<crate::types::ApiRoot> {
+    ) -> ClientResult<crate::Response<crate::types::ApiRoot>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_fields.is_empty() {
             query_args.push(("exclude_fields".to_string(), exclude_fields.join(" ")));
