@@ -2314,8 +2314,7 @@ fn gen(
         a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
         a("pub mod http_cache;");
     }
-    if proper_name == "GitHub"
-        || proper_name == "Google Drive"
+    if proper_name == "Google Drive"
         || proper_name == "Google Sheets"
         || proper_name == "SendGrid"
         || proper_name == "Rev.ai"

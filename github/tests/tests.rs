@@ -305,9 +305,7 @@ async fn test_ratelimit_error() {
 }
 
 #[tokio::test]
-async fn test_downloads_artifact() {
-    use octorust::traits::ActionsExt;
-
+async fn test_does_not_follow_redirects() {
     let installation_id = installation_id();
     let jwt = JWTCredentials::new(app_id(), private_key()).expect("JWT creation should succeed");
 
@@ -358,18 +356,6 @@ async fn test_downloads_artifact() {
         .mount(&server)
         .await;
 
-    Mock::given(method("GET"))
-        .and(path(download_path.to_string()))
-        .respond_with(
-            ResponseTemplate::new(200)
-                .set_delay(Duration::from_secs(1))
-                .set_body_bytes(vec![1, 1, 1, 1, 1, 1, 1, 1]),
-        )
-        .expect(1)
-        .named("Download location")
-        .mount(&server)
-        .await;
-
     let token_generator = InstallationTokenGenerator::new(installation_id, jwt);
     let mut client = Client::new(
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
@@ -380,10 +366,17 @@ async fn test_downloads_artifact() {
 
     let res = client
         .actions()
-        .download_contents("test_owner", "test_repo", 12345, "test_fmt")
+        .download_artifact("test_owner", "test_repo", 12345, "test_fmt")
         .await;
 
     mem::drop(server);
 
-    assert_eq!(res.unwrap().body.len(), 8)
+    assert!(res
+        .unwrap()
+        .headers
+        .get("Location")
+        .unwrap()
+        .to_str()
+        .unwrap()
+        .ends_with("/fake-download-path"));
 }
