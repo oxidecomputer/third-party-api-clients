@@ -151,7 +151,7 @@ pub mod date_time_format {
                                     Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
                                         chrono::NaiveDateTime::new(
                                             d,
-                                            chrono::NaiveTime::from_hms(0, 0, 0),
+                                            chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
                                         ),
                                         Utc,
                                     ))),
