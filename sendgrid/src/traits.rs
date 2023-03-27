@@ -64,11 +64,12 @@ impl MailOps for crate::mail_send::MailSend {
         }
         mail.personalizations = vec![p];
 
+        let url = self.client.url("/mail/send", None);
         let resp = self
             .client
             .request_raw(
                 reqwest::Method::POST,
-                "/mail/send",
+                &url,
                 crate::Message {
                     body: Some(reqwest::Body::from(serde_json::to_vec(&mail).unwrap())),
                     content_type: None,
