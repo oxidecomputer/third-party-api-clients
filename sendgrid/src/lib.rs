@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sendgrid-api = "0.4.0"
+//! sendgrid-api = "0.4.1"
 //! ```
 //!
 //! ## Basic example
