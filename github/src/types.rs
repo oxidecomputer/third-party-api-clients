@@ -254,7 +254,6 @@ pub struct GitHubApp {
     /**
      * The set of permissions for the GitHub app
      */
-    #[serde()]
     pub permissions: Permissions,
     #[serde(
         default,
@@ -759,9 +758,7 @@ pub struct HookDelivery {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub repository_id: i64,
-    #[serde()]
     pub request: Request,
-    #[serde()]
     pub response: Response,
     #[serde(
         default,
@@ -1217,7 +1214,6 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub access_tokens_url: String,
-    #[serde()]
     pub account: AccountAnyOf,
     #[serde(
         default,
@@ -1275,7 +1271,6 @@ pub struct Installation {
     /**
      * The permissions granted to the user-to-server access token.
      */
-    #[serde()]
     pub permissions: AppPermissions,
     #[serde(
         default,
@@ -2620,7 +2615,6 @@ pub struct App {
 /// The authorization associated with an OAuth Access.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApplicationGrant {
-    #[serde()]
     pub app: App,
     #[serde(
         default,
@@ -2674,7 +2668,6 @@ pub struct ScopedInstallation {
     /**
      * The permissions granted to the user-to-server access token.
      */
-    #[serde()]
     pub permissions: AppPermissions,
     #[serde(
         default,
@@ -2704,7 +2697,6 @@ pub struct ScopedInstallation {
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Authorization {
-    #[serde()]
     pub app: App,
     #[serde(
         default,
@@ -2908,7 +2900,6 @@ pub struct ActionsEnterprisePermissions {
     /**
      * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
-    #[serde()]
     pub enabled_organizations: EnabledRepositories,
     #[serde(
         default,
@@ -3539,7 +3530,6 @@ pub struct ActionsBillingUsage {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub included_minutes: i64,
-    #[serde()]
     pub minutes_used_breakdown: MinutesUsedBreakdown,
     #[serde(
         default,
@@ -3922,7 +3912,6 @@ pub struct IssueSimple {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -4139,7 +4128,6 @@ pub struct IssueComment {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -4306,7 +4294,6 @@ pub struct Event {
     /**
      * Actor
      */
-    #[serde()]
     pub actor: Actor,
     #[serde(
         default,
@@ -4325,7 +4312,6 @@ pub struct Event {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub org: Option<Actor>,
-    #[serde()]
     pub payload: Payload,
     #[serde(
         default,
@@ -4397,12 +4383,10 @@ pub struct Links {
     /**
      * Hypermedia Link with Type
      */
-    #[serde()]
     pub timeline: LinkWithType,
     /**
      * Hypermedia Link with Type
      */
-    #[serde()]
     pub user: LinkWithType,
 }
 
@@ -4532,7 +4516,6 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    #[serde()]
     pub files: Files,
     /**
      * Base Gist
@@ -5026,7 +5009,6 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    #[serde()]
     pub files: Files,
     /**
      * Gist
@@ -5297,7 +5279,6 @@ pub struct GistComment {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -5342,7 +5323,6 @@ pub struct GistComment {
 /// Gist Commit
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistCommit {
-    #[serde()]
     pub change_status: Stats,
     #[serde(
         default,
@@ -5490,7 +5470,6 @@ pub struct Issue {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -5922,7 +5901,6 @@ pub struct MarketplacePurchaseData {
     pub login: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub marketplace_pending_change: Option<MarketplacePendingChange>,
-    #[serde()]
     pub marketplace_purchase: MarketplacePurchase,
     #[serde(
         default,
@@ -6728,9 +6706,7 @@ pub struct Thread {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
-    #[serde()]
     pub subject: Subject,
     #[serde(
         default,
@@ -7158,7 +7134,6 @@ pub struct ActionsOrganizationPermissions {
     /**
      * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
-    #[serde()]
     pub enabled_repositories: EnabledRepositories,
     #[serde(
         default,
@@ -7533,7 +7508,6 @@ pub struct OrgHook {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    #[serde()]
     pub config: Config,
     #[serde(
         default,
@@ -7648,7 +7622,6 @@ pub struct InteractionLimits {
     /**
      * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
      */
-    #[serde()]
     pub limit: InteractionGroup,
     #[serde(
         default,
@@ -7716,7 +7689,6 @@ pub struct InteractionLimit {
     /**
      * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
      */
-    #[serde()]
     pub limit: InteractionGroup,
 }
 
@@ -7998,7 +7970,6 @@ pub struct OrgMembership {
     /**
      * Organization Simple
      */
-    #[serde()]
     pub organization: OrganizationSimple,
     #[serde(
         default,
@@ -8636,7 +8607,6 @@ pub struct FullTeam {
     /**
      * Organization Full
      */
-    #[serde()]
     pub organization: OrganizationFull,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parent: Option<TeamSimple>,
@@ -9091,7 +9061,6 @@ pub struct TeamProject {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub owner_url: String,
-    #[serde()]
     pub permissions: TeamProjectPermissions,
     /**
      * A team's access to a project.
@@ -9829,13 +9798,11 @@ pub struct RateLimit {
 pub struct Resources {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_scanning_upload: Option<RateLimit>,
-    #[serde()]
     pub core: RateLimit,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub graphql: Option<RateLimit>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub integration_manifest: Option<RateLimit>,
-    #[serde()]
     pub search: RateLimit,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source_import: Option<RateLimit>,
@@ -9844,9 +9811,7 @@ pub struct Resources {
 /// Rate Limit Overview
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RateLimitOverview {
-    #[serde()]
     pub rate: RateLimit,
-    #[serde()]
     pub resources: Resources,
 }
 
@@ -10776,9 +10741,7 @@ pub struct Head {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PullRequestMinimal {
-    #[serde()]
     pub base: Head,
-    #[serde()]
     pub head: Head,
     #[serde(
         default,
@@ -10914,7 +10877,6 @@ pub struct WorkflowRun {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub head_repository: MinimalRepository,
     /**
      * An invocation of a workflow
@@ -10976,7 +10938,6 @@ pub struct WorkflowRun {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -11246,7 +11207,6 @@ pub struct PendingDeployment {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub current_user_can_approve: bool,
-    #[serde()]
     pub environment: Environment,
     /**
      * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
@@ -11354,7 +11314,6 @@ pub struct Deployment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub original_environment: String,
-    #[serde()]
     pub payload: PayloadOneOf,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
@@ -11448,7 +11407,6 @@ pub struct Billable {
 /// Workflow Run Usage
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowRunUsage {
-    #[serde()]
     pub billable: Billable,
     /**
      * Workflow Run Usage
@@ -11621,7 +11579,6 @@ pub struct WorkflowUsageBillable {
 /// Workflow Usage
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowUsage {
-    #[serde()]
     pub billable: WorkflowUsageBillable,
 }
 
@@ -12239,7 +12196,6 @@ pub struct Tree {
 /// Short Branch
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShortBranch {
-    #[serde()]
     pub commit: Tree,
     #[serde(
         default,
@@ -12332,7 +12288,6 @@ pub struct CommitData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    #[serde()]
     pub tree: Tree,
     #[serde(
         default,
@@ -12447,7 +12402,6 @@ pub struct CommitDataType {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde()]
     pub commit: CommitData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<SimpleUser>,
@@ -12522,7 +12476,6 @@ pub struct BranchWithProtection {
     /**
      * Commit
      */
-    #[serde()]
     pub commit: CommitDataType,
     #[serde(
         default,
@@ -12544,7 +12497,6 @@ pub struct BranchWithProtection {
     /**
      * Branch Protection
      */
-    #[serde()]
     pub protection: BranchProtection,
     #[serde(
         default,
@@ -12970,7 +12922,6 @@ pub struct CheckRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde()]
     pub output: Output,
     #[serde(
         default,
@@ -13102,7 +13053,6 @@ pub struct CheckSuiteData {
     /**
      * Simple Commit
      */
-    #[serde()]
     pub head_commit: SimpleCommit,
     #[serde(
         default,
@@ -13137,7 +13087,6 @@ pub struct CheckSuiteData {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     /**
      * The phase of the lifecycle that the job is currently in.
@@ -13186,12 +13135,10 @@ pub struct Preferences {
 /// Check suite configuration preferences for a repository.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CheckSuitePreference {
-    #[serde()]
     pub preferences: Preferences,
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
 }
 
@@ -13567,7 +13514,6 @@ pub struct CodeScanningAlertItems {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub instances_url: String,
-    #[serde()]
     pub most_recent_instance: CodeScanningAlertInstance,
     #[serde(
         default,
@@ -13575,14 +13521,11 @@ pub struct CodeScanningAlertItems {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub number: i64,
-    #[serde()]
     pub rule: CodeScanningAlertRuleSummary,
     /**
      * State of a code scanning alert.
      */
-    #[serde()]
     pub state: CodeScanningAlertState,
-    #[serde()]
     pub tool: CodeScanningAnalysisTool,
     #[serde(
         default,
@@ -13727,7 +13670,6 @@ pub struct CodeScanningAlert {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub instances_url: String,
-    #[serde()]
     pub most_recent_instance: CodeScanningAlertInstance,
     #[serde(
         default,
@@ -13735,14 +13677,11 @@ pub struct CodeScanningAlert {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub number: i64,
-    #[serde()]
     pub rule: CodeScanningAlertRule,
     /**
      * State of a code scanning alert.
      */
-    #[serde()]
     pub state: CodeScanningAlertState,
-    #[serde()]
     pub tool: CodeScanningAnalysisTool,
     #[serde(
         default,
@@ -13864,7 +13803,6 @@ pub struct CodeScanningAnalysis {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sarif_id: String,
-    #[serde()]
     pub tool: CodeScanningAnalysisTool,
     #[serde(
         default,
@@ -14199,7 +14137,6 @@ pub struct RepositoryInvitation {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -14215,7 +14152,6 @@ pub struct CommitComment {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -14295,7 +14231,6 @@ pub struct CommitComment {
 /// Branch Short
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BranchShort {
-    #[serde()]
     pub commit: Tree,
     #[serde(
         default,
@@ -14454,32 +14389,26 @@ pub struct PullRequestSimpleLinks {
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub comments: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub commits: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub html: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub issue: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub review_comment: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub review_comments: Link,
     /**
      * Hypermedia Link
@@ -14489,7 +14418,6 @@ pub struct PullRequestSimpleLinks {
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub statuses: Link,
 }
 
@@ -14515,14 +14443,12 @@ pub struct PullRequestSimple {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     /**
      * The status of auto merging a pull request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
-    #[serde()]
     pub base: Base,
     #[serde(
         default,
@@ -14568,7 +14494,6 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub draft: bool,
-    #[serde()]
     pub head: PullRequestSimpleHead,
     #[serde(
         default,
@@ -14773,7 +14698,6 @@ pub struct CombinedCommitStatus {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -14937,7 +14861,6 @@ pub struct CommunityProfile {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation: String,
-    #[serde()]
     pub files: CommunityProfileFiles,
     #[serde(
         default,
@@ -15077,7 +15000,6 @@ pub struct CommitComparison {
     /**
      * Commit
      */
-    #[serde()]
     pub base_commit: CommitDataType,
     #[serde(
         default,
@@ -15115,7 +15037,6 @@ pub struct CommitComparison {
     /**
      * Commit
      */
-    #[serde()]
     pub merge_base_commit: CommitDataType,
     #[serde(
         default,
@@ -15696,7 +15617,6 @@ pub struct FileCommit {
 /// File Commit
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileCommitData {
-    #[serde()]
     pub commit: FileCommit,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content: Option<FileCommitContent>,
@@ -16230,12 +16150,10 @@ pub struct GitCommit {
     /**
      * Identifying information for the git-user
      */
-    #[serde()]
     pub author: Committer,
     /**
      * Identifying information for the git-user
      */
-    #[serde()]
     pub committer: Committer,
     #[serde(
         default,
@@ -16267,7 +16185,6 @@ pub struct GitCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    #[serde()]
     pub tree: Tree,
     #[serde(
         default,
@@ -16275,7 +16192,6 @@ pub struct GitCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    #[serde()]
     pub verification: Verification,
 }
 
@@ -16311,7 +16227,6 @@ pub struct GitRef {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde()]
     pub object: Object,
     #[serde(
         default,
@@ -16343,7 +16258,6 @@ pub struct GitTag {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde()]
     pub object: Object,
     #[serde(
         default,
@@ -16357,7 +16271,6 @@ pub struct GitTag {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub tag: String,
-    #[serde()]
     pub tagger: Tagger,
     #[serde(
         default,
@@ -16534,7 +16447,6 @@ pub struct Hook {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    #[serde()]
     pub config: HookConfig,
     #[serde(
         default,
@@ -16563,7 +16475,6 @@ pub struct Hook {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    #[serde()]
     pub last_response: HookResponse,
     #[serde(
         default,
@@ -17202,7 +17113,6 @@ pub struct LabeledIssueEvent {
     /**
      * Issue Event Label
      */
-    #[serde()]
     pub label: IssueEventLabel,
     #[serde(
         default,
@@ -17331,7 +17241,6 @@ pub struct MilestonedIssueEvent {
     /**
      * Issue Event Milestone
      */
-    #[serde()]
     pub milestone: IssueEventMilestone,
     #[serde(
         default,
@@ -17401,7 +17310,6 @@ pub struct RenamedIssueEvent {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub performed_via_github_app: Option<GitHubApp>,
-    #[serde()]
     pub rename: Rename,
     #[serde(
         default,
@@ -17581,7 +17489,6 @@ pub struct ReviewDismissedIssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub created_at: String,
-    #[serde()]
     pub dismissed_review: DismissedReview,
     #[serde(
         default,
@@ -18018,7 +17925,6 @@ pub struct TimelineCommentEvent {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -18139,7 +18045,6 @@ pub struct TimelineCrossReferencedEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub event: String,
-    #[serde()]
     pub source: Source,
     #[serde(
         default,
@@ -18155,12 +18060,10 @@ pub struct TimelineCommittedEvent {
     /**
      * Identifying information for the git-user
      */
-    #[serde()]
     pub author: Committer,
     /**
      * Identifying information for the git-user
      */
-    #[serde()]
     pub committer: Committer,
     #[serde(
         default,
@@ -18198,7 +18101,6 @@ pub struct TimelineCommittedEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    #[serde()]
     pub tree: Tree,
     #[serde(
         default,
@@ -18206,7 +18108,6 @@ pub struct TimelineCommittedEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    #[serde()]
     pub verification: Verification,
 }
 
@@ -18215,12 +18116,10 @@ pub struct TimelineReviewedEventLinks {
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub html: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub pull_request: Link,
 }
 
@@ -18232,7 +18131,6 @@ pub struct TimelineReviewedEvent {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -18315,12 +18213,10 @@ pub struct PullRequestReviewCommentLinks {
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub html: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub pull_request: Link,
     /**
      * Hypermedia Link
@@ -18367,7 +18263,6 @@ pub struct PullRequestReviewComment {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -18948,7 +18843,6 @@ pub struct Page {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    #[serde()]
     pub https_certificate: PagesHttpsCertificate,
     #[serde(
         default,
@@ -18960,7 +18854,6 @@ pub struct Page {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    #[serde()]
     pub source: PagesSourceHash,
     /**
      * The status of the most recent build of the Page.
@@ -19006,7 +18899,6 @@ pub struct PageBuild {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub duration: i64,
-    #[serde()]
     pub error: Error,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pusher: Option<SimpleUser>,
@@ -19800,7 +19692,6 @@ pub struct PullRequestHeadRepo {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues_count: i64,
-    #[serde()]
     pub owner: User,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
@@ -19954,7 +19845,6 @@ pub struct PullRequestHead {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    #[serde()]
     pub user: User,
 }
 
@@ -20287,7 +20177,6 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues_count: i64,
-    #[serde()]
     pub owner: User,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
@@ -20444,7 +20333,6 @@ pub struct PullRequestBase {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    #[serde()]
     pub user: User,
 }
 
@@ -20476,14 +20364,12 @@ pub struct PullRequestData {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     /**
      * The status of auto merging a pull request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_merge: Option<AutoMerge>,
-    #[serde()]
     pub base: PullRequestBase,
     #[serde(
         default,
@@ -20553,7 +20439,6 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub draft: bool,
-    #[serde()]
     pub head: PullRequestHead,
     #[serde(
         default,
@@ -20760,7 +20645,6 @@ pub struct PullRequestReviewData {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -20834,12 +20718,10 @@ pub struct ReviewCommentLinks {
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub html: Link,
     /**
      * Hypermedia Link
      */
-    #[serde()]
     pub pull_request: Link,
     /**
      * Hypermedia Link
@@ -20856,7 +20738,6 @@ pub struct ReviewComment {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -21575,7 +21456,6 @@ pub struct RepositorySubscription {
 /// Tag
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tag {
-    #[serde()]
     pub commit: Tree,
     #[serde(
         default,
@@ -22250,9 +22130,7 @@ pub struct ScimUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde()]
     pub meta: ScimUserMeta,
-    #[serde()]
     pub name: ScimUserName,
     /**
      * SCIM /Users provisioning endpoints
@@ -22448,7 +22326,6 @@ pub struct CodeSearchResultItem {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -22484,7 +22361,6 @@ pub struct CommitSearchResultItem {
     /**
      * Identifying information for the git-user
      */
-    #[serde()]
     pub author: Committer,
     #[serde(
         default,
@@ -22500,7 +22376,6 @@ pub struct CommitSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    #[serde()]
     pub tree: Tree,
     #[serde(
         default,
@@ -22523,7 +22398,6 @@ pub struct CommitSearchResultItemData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde()]
     pub commit: CommitSearchResultItem,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub committer: Option<Tagger>,
@@ -22548,7 +22422,6 @@ pub struct CommitSearchResultItemData {
     /**
      * Minimal Repository
      */
-    #[serde()]
     pub repository: MinimalRepository,
     #[serde(
         default,
@@ -22599,7 +22472,6 @@ pub struct IssueSearchResultItem {
     /**
      * How the author is associated with the repository.
      */
-    #[serde()]
     pub author_association: AuthorAssociation,
     #[serde(
         default,
@@ -24268,7 +24140,6 @@ pub struct MarketplaceAccount {
 /// User Marketplace Purchase
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserMarketplacePurchase {
-    #[serde()]
     pub account: MarketplaceAccount,
     #[serde(
         default,
@@ -24296,7 +24167,6 @@ pub struct UserMarketplacePurchase {
     /**
      * Marketplace Listing Plan
      */
-    #[serde()]
     pub plan: MarketplaceListingPlan,
     #[serde(
         default,
@@ -25244,7 +25114,6 @@ pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     /**
      * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
-    #[serde()]
     pub enabled_organizations: EnabledRepositories,
 }
 
@@ -25477,7 +25346,6 @@ pub struct GistsCreateRequest {
     /**
      * Names and content for the files that make up the gist
      */
-    #[serde()]
     pub files: FilesAdditionalPropertiesData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
@@ -25901,7 +25769,6 @@ pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
      * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
-    #[serde()]
     pub enabled_repositories: EnabledRepositories,
 }
 
@@ -26152,7 +26019,6 @@ pub struct OrgsCreateWebhookRequest {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
      */
-    #[serde()]
     pub config: OrgsCreateWebhookRequestConfig,
     /**
      * The list of events for the GitHub app
@@ -28559,7 +28425,6 @@ pub struct CodeScanningUpdateAlertRequest {
     /**
      * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
      */
-    #[serde()]
     pub state: CodeScanningAlertSetState,
 }
 
@@ -29785,7 +29650,6 @@ pub struct IssuesCreateRequest {
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
-    #[serde()]
     pub title: TitleOneOf,
 }
 
@@ -30262,7 +30126,6 @@ pub struct ReposCreatePagesSiteRequest {
     /**
      * The source branch and directory used to publish your Pages site.
      */
-    #[serde()]
     pub source: ReposCreatePagesSiteRequestSource,
 }
 
@@ -30957,7 +30820,6 @@ pub struct SecretScanningUpdateAlertRequest {
     /**
      * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
      */
-    #[serde()]
     pub state: SecretScanningAlertState,
 }
 
@@ -31247,7 +31109,6 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
-    #[serde()]
     pub name: Name,
     /**
      * The list of events for the GitHub app
@@ -31323,7 +31184,6 @@ pub struct ScimProvisionInviteUserRequest {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub groups: Vec<String>,
-    #[serde()]
     pub name: ScimUserName,
     /**
      * The list of events for the GitHub app
