@@ -33710,7 +33710,7 @@
     },
     "servers": [
         {
-            "url": "http://api.sendgrid.com/v3"
+            "url": "https://api.sendgrid.com/v3"
         }
     ],
     "components": {
