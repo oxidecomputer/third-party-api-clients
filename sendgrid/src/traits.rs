@@ -32,18 +32,22 @@ impl MailOps for crate::mail_send::MailSend {
         bccs: &[String],
         from: &str,
     ) -> ClientResult<()> {
-        let mut mail: crate::types::PostMailSendRequest = Default::default();
-        mail.subject = subject.to_string();
-        mail.from = crate::types::FromEmailObject {
-            email: from.to_string(),
-            name: String::new(),
+        let mut mail = crate::types::PostMailSendRequest {
+            subject: subject.to_string(),
+            from: crate::types::FromEmailObject {
+                email: from.to_string(),
+                name: String::new(),
+            },
+            content: vec![crate::types::Content {
+                value: message.to_string(),
+                type_: "text/plain".to_string(),
+            }],
+            ..Default::default()
         };
-        mail.content = vec![crate::types::Content {
-            value: message.to_string(),
-            type_: "text/plain".to_string(),
-        }];
-        let mut p: crate::types::Personalizations = Default::default();
-        p.from = Some(mail.from.clone());
+        let mut p = crate::types::Personalizations {
+            from: Some(mail.from.clone()),
+            ..Default::default()
+        };
         for to in tos {
             p.to.push(crate::types::ReplyTo {
                 email: to.to_string(),
