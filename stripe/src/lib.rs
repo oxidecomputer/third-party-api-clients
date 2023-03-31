@@ -168,7 +168,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://api.stripe.com/"
+        "https://api.stripe.com/v1"
     }
 }
 
