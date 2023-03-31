@@ -270,7 +270,10 @@ impl FileOps for crate::files::Files {
             .client
             .request_raw(
                 reqwest::Method::GET,
-                &self.client.url(&format!("/files/{}?supportsAllDrives=true&alt=media", id), None),
+                &self.client.url(
+                    &format!("/files/{}?supportsAllDrives=true&alt=media", id),
+                    None,
+                ),
                 crate::Message::default(),
             )
             .await?;
@@ -325,7 +328,10 @@ impl FileOps for crate::files::Files {
         let folder: crate::types::File = self
             .client
             .post(
-                &self.client.url("/files?supportsAllDrives=true&includeItemsFromAllDrives=true", None),
+                &self.client.url(
+                    "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
+                    None,
+                ),
                 crate::Message {
                     body: Some(reqwest::Body::from(serde_json::to_vec(&file)?)),
                     content_type: None,
@@ -347,11 +353,14 @@ impl FileOps for crate::files::Files {
             }
             query_.push_str(n);
         }
-        let url = self.client.url(&format!(
-            "/files/{}/export?{}",
-            crate::progenitor_support::encode_path(id),
-            query_
-        ), None);
+        let url = self.client.url(
+            &format!(
+                "/files/{}/export?{}",
+                crate::progenitor_support::encode_path(id),
+                query_
+            ),
+            None,
+        );
         let resp = self
             .client
             .request_raw(reqwest::Method::GET, &url, crate::Message::default())
