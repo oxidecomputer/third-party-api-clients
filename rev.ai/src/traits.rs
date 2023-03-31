@@ -12,6 +12,7 @@ pub trait JobOps {
 impl JobOps for crate::jobs::Jobs {
     /// Create a job.
     async fn post(&self, b: bytes::Bytes) -> Result<crate::types::Job> {
+        let url = self.client.url("/jobs", None);
         let form = reqwest::multipart::Form::new()
             .part(
                 "media",
@@ -22,6 +23,6 @@ impl JobOps for crate::jobs::Jobs {
             )
             .text("options", "{}");
 
-        self.client.post_form("/jobs", form).await
+        self.client.post_form(&url, form).await
     }
 }
