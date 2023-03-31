@@ -595,6 +595,7 @@ pub fn generate_docs_generic_token(
     proper_name: &str,
     spec_link: &str,
     add_post_header: &str,
+    server_args: &str,
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
 
@@ -612,6 +613,9 @@ pub fn generate_docs_generic_token(
     } else {
         String::new()
     };
+
+    let server_args_nl = format!(",\n//!     {}", server_args);
+    let server_args_flat = format!(", {}", server_args);
 
     format!(
         r#"{}
@@ -636,7 +640,7 @@ pub fn generate_docs_generic_token(
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token"){}
+//!     String::from("refresh-token"){}{}
 //! );
 //! ```
 //!
@@ -654,7 +658,7 @@ pub fn generate_docs_generic_token(
 //!
 //! let {} = Client::new_from_env(
 //!     String::from("token"),
-//!     String::from("refresh-token"){}
+//!     String::from("refresh-token"){}{}
 //! );
 //! ```
 //!
@@ -667,7 +671,7 @@ pub fn generate_docs_generic_token(
 //! use {}::Client;
 //!
 //! async fn do_call() {{
-//!     let mut {} = Client::new_from_env("", ""{});
+//!     let mut {} = Client::new_from_env("", ""{}{});
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
@@ -692,15 +696,18 @@ pub fn generate_docs_generic_token(
         name,
         proper_name.to_lowercase(),
         add_post_header_args,
+        server_args_nl,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         name,
         proper_name.to_lowercase(),
         add_post_header_args,
+        server_args_nl,
         name,
         proper_name.to_lowercase(),
         add_post_header_var,
+        server_args_flat,
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),

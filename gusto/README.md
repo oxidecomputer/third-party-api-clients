@@ -47,7 +47,8 @@ let gusto = Client::new(
     String::from("client-secret"),
     String::from("redirect-uri"),
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    gusto_api::RootProductionServer
 );
 ```
 
@@ -65,7 +66,8 @@ use gusto_api::Client;
 
 let gusto = Client::new_from_env(
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    gusto_api::RootProductionServer
 );
 ```
 
@@ -78,7 +80,7 @@ To start off a fresh client and get a `token` and `refresh_token`, use the follo
 use gusto_api::Client;
 
 async fn do_call() {
-    let mut gusto = Client::new_from_env("", "");
+    let mut gusto = Client::new_from_env("", "", gusto_api::RootProductionServer);
 
     // Get the URL to request consent from the user.
     // You can optionally pass in scopes. If none are provided, then the

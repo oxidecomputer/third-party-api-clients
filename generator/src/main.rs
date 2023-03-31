@@ -3335,6 +3335,16 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &proper_name,
                     &spec_link,
                 )
+            } else if proper_name == "Gusto" {
+                template::generate_docs_generic_token(
+                    &api,
+                    &to_snake_case(&name),
+                    &version,
+                    &proper_name,
+                    &spec_link,
+                    &add_post_header,
+                    &format!("{}::RootProductionServer", to_snake_case(&name)),
+                )
             } else {
                 template::generate_docs_generic_token(
                     &api,
@@ -3343,6 +3353,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &proper_name,
                     &spec_link,
                     &add_post_header,
+                    "",
                 )
             };
             let mut readme = root.clone();
