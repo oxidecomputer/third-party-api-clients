@@ -5376,12 +5376,10 @@ pub struct PostPartnerManagedCompaniesRequestCompany {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostPartnerManagedCompaniesRequest {
-    #[serde()]
     pub company: PostPartnerManagedCompaniesRequestCompany,
     /**
      * Information for the user who will be the primary payroll administrator for the new company.
      */
-    #[serde()]
     pub user: User,
 }
 
@@ -5545,12 +5543,10 @@ pub struct PostProvisionRequestCompany {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostProvisionRequest {
-    #[serde()]
     pub company: PostProvisionRequestCompany,
     /**
      * Information for the user who will be the primary payroll administrator for the new company.
      */
-    #[serde()]
     pub user: User,
 }
 

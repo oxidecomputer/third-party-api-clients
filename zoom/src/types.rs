@@ -426,7 +426,6 @@ pub struct AccountPlans {
     /**
      * Account base plan object.
      */
-    #[serde()]
     pub plan_base: PlanBase,
     /**
      * Account Plans object.
@@ -11381,7 +11380,6 @@ pub struct SetUpAccountRequest {
     /**
      * Specify emergency address for the account.
      */
-    #[serde()]
     pub emergency_address: EmergencyAddress,
     /**
      * User's first name.
@@ -14967,7 +14965,6 @@ pub struct AccountPlanAddonCreateRequest {
     /**
      * Phone Plan Object
      */
-    #[serde()]
     pub plan_details: PhonePlan,
     /**
      * User's first name.
@@ -21070,7 +21067,6 @@ pub struct SendchatbotRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_id: String,
-    #[serde()]
     pub content: Domains,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -21126,7 +21122,6 @@ pub struct EditChatbotMessageRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub account_id: String,
-    #[serde()]
     pub content: Domains,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -22403,7 +22398,6 @@ pub struct Locations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub elin: String,
-    #[serde()]
     pub emergency_address: BatchAddLocationsRequestEmergencyAddress,
     /**
      * User's first name.

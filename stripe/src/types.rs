@@ -133,7 +133,6 @@ pub struct ExternalAccounts {
     /**
      * The list contains all external accounts that have been attached to the Stripe account. These may be bank accounts or cards.
      */
-    #[serde()]
     pub data: Box<Vec<DataAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -547,12 +546,10 @@ pub struct AccountBrandingSettings {
     /**
      *
      */
-    #[serde()]
     pub icon: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub logo: Box<Option<IconAnyOf>>,
     /**
      *
@@ -1262,7 +1259,6 @@ pub struct AccountPayoutSettings {
     /**
      *
      */
-    #[serde()]
     pub schedule: TransferSchedule,
     /**
      *
@@ -1605,7 +1601,6 @@ pub struct AccountSettings {
     /**
      *
      */
-    #[serde()]
     pub branding: AccountBrandingSettings,
     /**
      *
@@ -1615,17 +1610,14 @@ pub struct AccountSettings {
     /**
      *
      */
-    #[serde()]
     pub card_payments: AccountCardPaymentsSettings,
     /**
      *
      */
-    #[serde()]
     pub dashboard: AccountDashboardSettings,
     /**
      *
      */
-    #[serde()]
     pub payments: AccountPaymentsSettings,
     /**
      *
@@ -1913,7 +1905,6 @@ pub struct AlipayAccount {
     /**
      *
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * The account's country.
@@ -2167,7 +2158,6 @@ pub struct ApiErrors {
     /**
      *
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntent>>,
     /**
      *
@@ -2191,7 +2181,6 @@ pub struct ApiErrors {
     /**
      *
      */
-    #[serde()]
     pub source: Box<Option<SourceAnyOf>>,
     /**
      * The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
@@ -2625,7 +2614,6 @@ pub struct Refunds {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlatformFee {
-    #[serde()]
     pub account: Box<AccountAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -2645,14 +2633,11 @@ pub struct PlatformFee {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount_refunded: i64,
-    #[serde()]
     pub application: Box<ApplicationAnyOf>,
     /**
      *
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
-    #[serde()]
     pub charge: Box<ChargeAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -2697,7 +2682,6 @@ pub struct PlatformFee {
     /**
      *
      */
-    #[serde()]
     pub originating_transaction: Box<Option<ChargeAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -2710,7 +2694,6 @@ pub struct PlatformFee {
     /**
      * A list of refunds that have been applied to the fee.
      */
-    #[serde()]
     pub refunds: Refunds,
 }
 
@@ -3551,7 +3534,6 @@ pub struct BalanceTransaction {
      *  
      *  Related guide: [Balance Transaction Types](https://stripe.com/docs/reports/balance-transaction-types).
      */
-    #[serde()]
     pub source: Box<Option<BalanceTransactionSourceAnyOf>>,
     /**
      * The account's country.
@@ -3661,7 +3643,6 @@ pub struct BankAccount {
      *  
      *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
      */
-    #[serde()]
     pub account: Box<Option<AccountAnyOf>>,
     /**
      * These bank accounts are payment methods on `Customer` objects.
@@ -3759,7 +3740,6 @@ pub struct BankAccount {
      *  
      *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * These bank accounts are payment methods on `Customer` objects.
@@ -3950,7 +3930,6 @@ pub struct PortalConfiguration {
     /**
      *
      */
-    #[serde()]
     pub business_profile: PortalBusinessProfile,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -3973,7 +3952,6 @@ pub struct PortalConfiguration {
     /**
      *
      */
-    #[serde()]
     pub features: PortalFeatures,
     /**
      * The account's country.
@@ -4297,7 +4275,6 @@ impl PortalSessionObject {
 /// Learn more in the [integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PortalSession {
-    #[serde()]
     pub configuration: Box<ConfigurationAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -4833,7 +4810,6 @@ impl CapabilityStatus {
 /// Related guide: [Account capabilities](https://stripe.com/docs/connect/account-capabilities).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capability {
-    #[serde()]
     pub account: Box<AccountAnyOf>,
     /**
      * This is an object representing a capability for a Stripe account.
@@ -4995,7 +4971,6 @@ pub struct Card {
      *  
      *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
      */
-    #[serde()]
     pub account: Box<Option<AccountAnyOf>>,
     /**
      * You can store multiple cards on a customer in order to charge the customer
@@ -5155,7 +5130,6 @@ pub struct Card {
      *  
      *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * You can store multiple cards on a customer in order to charge the customer
@@ -5293,7 +5267,6 @@ pub struct Card {
      *  
      *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
      */
-    #[serde()]
     pub recipient: Box<Option<RecipientAnyOf>>,
     /**
      * You can store multiple cards on a customer in order to charge the customer
@@ -5877,7 +5850,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub application: Box<Option<ApplicationAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -5886,7 +5858,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub application_fee: Box<Option<FeeAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -5908,12 +5879,10 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub billing_details: BillingDetails,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -5961,7 +5930,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -5991,7 +5959,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -6040,7 +6007,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -6071,7 +6037,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -6080,7 +6045,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub order: Box<Option<OrderAnyOf>>,
     /**
      * Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details.
@@ -6102,7 +6066,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -6172,7 +6135,6 @@ pub struct Charge {
     /**
      * A list of refunds that have been applied to the charge.
      */
-    #[serde()]
     pub refunds: RefundList,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -6181,7 +6143,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub review: Box<Option<ReviewAnyOf>>,
     /**
      * Shipping information for the charge.
@@ -6195,7 +6156,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub source_transfer: Box<Option<TransferAnyOf>>,
     /**
      * To charge a credit or a debit card, you create a `Charge` object. You can
@@ -6235,7 +6195,6 @@ pub struct Charge {
      *  
      *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
      */
-    #[serde()]
     pub transfer: Box<Option<TransferAnyOf>>,
     /**
      * An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
@@ -6370,7 +6329,6 @@ pub struct ChargeOutcome {
     /**
      *
      */
-    #[serde()]
     pub rule: Box<Option<RuleAnyOf>>,
     /**
      *
@@ -6405,7 +6363,6 @@ pub struct ChargeTransferData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -7191,7 +7148,6 @@ pub struct Session {
     /**
      *
      */
-    #[serde()]
     pub automatic_tax: AutomaticTax,
     /**
      * Describes whether Checkout should collect the customer's billing address.
@@ -7277,7 +7233,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
@@ -7408,7 +7363,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      * A Checkout Session represents your customer's session as they pay for
@@ -7426,7 +7380,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub payment_link: Box<Option<PaymentLinkAnyOf>>,
     /**
      * Payment-method-specific configuration for the PaymentIntent or SetupIntent of this CheckoutSession.
@@ -7504,7 +7457,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub setup_intent: Box<Option<SetupIntentAnyOf>>,
     /**
      * Shipping information for the charge.
@@ -7541,7 +7493,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub shipping_rate: Box<Option<ShippingRateAnyOf>>,
     /**
      * The status of the Checkout Session, one of `open`, `complete`, or `expired`.
@@ -7572,7 +7523,6 @@ pub struct Session {
      *  
      *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
      */
-    #[serde()]
     pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
      * The account's country.
@@ -8052,7 +8002,6 @@ pub struct ConnectCollectionTransfer {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
     /**
      * The account's country.
@@ -8186,7 +8135,6 @@ pub struct CountrySpec {
     /**
      *
      */
-    #[serde()]
     pub verification_fields: CountrySpecVerificationFields,
 }
 
@@ -8219,12 +8167,10 @@ pub struct CountrySpecVerificationFields {
     /**
      *
      */
-    #[serde()]
     pub company: CountrySpecVerificationFieldDetails,
     /**
      *
      */
-    #[serde()]
     pub individual: CountrySpecVerificationFieldDetails,
 }
 
@@ -8799,14 +8745,12 @@ pub struct CreditNote {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde()]
     pub customer: Box<CustomerAnyOf>,
     /**
      * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
      *  
      *  Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
      */
-    #[serde()]
     pub customer_balance_transaction: Box<Option<CustomerBalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -8835,12 +8779,10 @@ pub struct CreditNote {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde()]
     pub invoice: Box<InvoiceAnyOf>,
     /**
      * Line items that make up the credit note
      */
-    #[serde()]
     pub lines: Lines,
     /**
      * Whether the account can create live charges.
@@ -8916,7 +8858,6 @@ pub struct CreditNote {
      *  
      *  Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
      */
-    #[serde()]
     pub refund: Box<Option<RefundAnyOf>>,
     /**
      * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
@@ -9241,7 +9182,6 @@ pub struct InvoiceTaxAmount {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inclusive: bool,
-    #[serde()]
     pub tax_rate: Box<TaxRateAnyOf>,
 }
 
@@ -9484,7 +9424,6 @@ pub struct Sources {
     /**
      * Details about each object.
      */
-    #[serde()]
     pub data: Box<Vec<CustomerSourcesDataAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -9719,7 +9658,6 @@ pub struct Customer {
      *  
      *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
      */
-    #[serde()]
     pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
      * This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
@@ -9896,7 +9834,6 @@ pub struct Customer {
      *  
      *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
 }
 
@@ -10201,7 +10138,6 @@ pub struct CustomerBalanceTransaction {
      *  
      *  Related guide: [Customer Balance](https://stripe.com/docs/billing/customer/balance) to learn more.
      */
-    #[serde()]
     pub credit_note: Box<Option<CreditNoteAnyOf>>,
     /**
      * The account's country.
@@ -10212,7 +10148,6 @@ pub struct CustomerBalanceTransaction {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde()]
     pub customer: CustomerAnyOfData,
     /**
      * Each customer has a [`balance`](https://stripe.com/docs/api/customers/object#customer_object-balance) value,
@@ -10254,7 +10189,6 @@ pub struct CustomerBalanceTransaction {
      *  
      *  Related guide: [Customer Balance](https://stripe.com/docs/billing/customer/balance) to learn more.
      */
-    #[serde()]
     pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -10772,12 +10706,10 @@ pub struct DeletedDiscount {
      *  might want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or
      *  [orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).
      */
-    #[serde()]
     pub coupon: Coupon,
     /**
      *
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -10822,7 +10754,6 @@ pub struct DeletedDiscount {
     /**
      *
      */
-    #[serde()]
     pub promotion_code: Box<Option<PromotionCodeAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -12005,7 +11936,6 @@ pub struct DiscountData {
      *  might want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or
      *  [orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).
      */
-    #[serde()]
     pub coupon: Coupon,
     /**
      * A discount represents the actual application of a coupon to a particular
@@ -12014,7 +11944,6 @@ pub struct DiscountData {
      *  
      *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A discount represents the actual application of a coupon to a particular
@@ -12076,7 +12005,6 @@ pub struct DiscountData {
      *  
      *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
      */
-    #[serde()]
     pub promotion_code: Box<Option<PromotionCodeAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -12178,7 +12106,6 @@ pub struct DiscountsResourceDiscountAmount {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    #[serde()]
     pub discount: Box<DiscountAnyOf>,
 }
 
@@ -12300,7 +12227,6 @@ pub struct Dispute {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub balance_transactions: Vec<BalanceTransaction>,
-    #[serde()]
     pub charge: Box<ChargeAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -12323,12 +12249,10 @@ pub struct Dispute {
     /**
      *
      */
-    #[serde()]
     pub evidence: DisputeEvidence,
     /**
      *
      */
-    #[serde()]
     pub evidence_details: DisputeEvidenceDetails,
     /**
      * The account's country.
@@ -12378,7 +12302,6 @@ pub struct Dispute {
      *  
      *  Related guide: [Disputes and Fraud](https://stripe.com/docs/disputes).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      * The account's country.
@@ -12420,7 +12343,6 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub cancellation_policy: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12443,7 +12365,6 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub customer_communication: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12475,12 +12396,10 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub customer_signature: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub duplicate_charge_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12512,12 +12431,10 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub receipt: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub refund_policy: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12549,7 +12466,6 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub service_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12581,7 +12497,6 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub shipping_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12595,7 +12510,6 @@ pub struct DisputeEvidence {
     /**
      *
      */
-    #[serde()]
     pub uncategorized_file: Box<Option<IconAnyOf>>,
     /**
      *
@@ -12765,7 +12679,6 @@ pub struct Error {
     /**
      *
      */
-    #[serde()]
     pub error: ApiErrors,
 }
 
@@ -12921,7 +12834,6 @@ pub struct Event {
     /**
      *
      */
-    #[serde()]
     pub data: NotificationEventData,
     /**
      * The account's country.
@@ -13153,7 +13065,6 @@ pub struct FeeRefund {
      *  
      *  Related guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -13173,7 +13084,6 @@ pub struct FeeRefund {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde()]
     pub fee: Box<FeeAnyOf>,
     /**
      * The account's country.
@@ -13546,7 +13456,6 @@ pub struct FileLink {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub expires_at: i64,
-    #[serde()]
     pub file: Box<IconAnyOf>,
     /**
      * The account's country.
@@ -14713,7 +14622,6 @@ pub struct GelatoVerificationReport {
     /**
      *
      */
-    #[serde()]
     pub options: GelatoVerificationReportOptions,
     /**
      * A VerificationReport is the result of an attempt to collect and verify data from a user.
@@ -14967,7 +14875,6 @@ pub struct GelatoVerificationSession {
      *  
      *  Related guide: [The Verification Sessions API](https://stripe.com/docs/identity/verification-sessions)
      */
-    #[serde()]
     pub last_verification_report: Box<Option<LastVerificationReportAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -14997,7 +14904,6 @@ pub struct GelatoVerificationSession {
     /**
      *
      */
-    #[serde()]
     pub options: GelatoVerificationSessionOptions,
     /**
      * Redaction status of this VerificationSession. If the VerificationSession is not redacted, this field will be null.
@@ -15511,7 +15417,6 @@ pub struct Invoice {
     /**
      * The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
      */
-    #[serde()]
     pub account_tax_ids: Box<Vec<AccountTaxIdsAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -15639,7 +15544,6 @@ pub struct Invoice {
     /**
      *
      */
-    #[serde()]
     pub automatic_tax: AutomaticTax,
     /**
      * Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
@@ -15680,7 +15584,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub charge: Box<Option<ChargeAnyOf>>,
     /**
      * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
@@ -15748,7 +15651,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A publicly available mailing address for sending support issues to.
@@ -15928,7 +15830,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -15964,7 +15865,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
      * The tax rates which apply to the line item.
@@ -16023,7 +15923,6 @@ pub struct Invoice {
     /**
      * The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
      */
-    #[serde()]
     pub discounts: Box<Vec<DiscountAnyOf>>,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -16268,12 +16167,10 @@ pub struct Invoice {
     /**
      * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
      */
-    #[serde()]
     pub last_finalization_error: Box<Option<ApiErrors>>,
     /**
      * The individual line items that make up the invoice. `lines` is sorted as follows: invoice items in reverse chronological order, followed by the subscription, if any.
      */
-    #[serde()]
     pub lines: InvoiceLinesList,
     /**
      * Whether the account can create live charges.
@@ -16442,7 +16339,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -16494,12 +16390,10 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub payment_settings: InvoicesPaymentSettings,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -16571,7 +16465,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub quote: Box<Option<QuoteAnyOf>>,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -16670,7 +16563,6 @@ pub struct Invoice {
     /**
      *
      */
-    #[serde()]
     pub status_transitions: InvoicesStatusTransitions,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -16706,7 +16598,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -16831,7 +16722,6 @@ pub struct Invoice {
      *  
      *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
      * Invoices are statements of amounts owed by a customer, and are either
@@ -17326,7 +17216,6 @@ pub struct InvoiceSettingCustomer {
     /**
      *
      */
-    #[serde()]
     pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
@@ -17402,7 +17291,6 @@ pub struct InvoiceTransferDataType {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -17485,7 +17373,6 @@ pub struct InvoiceItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde()]
     pub customer: Box<CustomerAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -17522,7 +17409,6 @@ pub struct InvoiceItem {
     /**
      * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
      */
-    #[serde()]
     pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
      * The account's country.
@@ -17542,7 +17428,6 @@ pub struct InvoiceItem {
      *  
      *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
      */
-    #[serde()]
     pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -17575,7 +17460,6 @@ pub struct InvoiceItem {
     /**
      *
      */
-    #[serde()]
     pub period: InvoiceLineItemPeriod,
     /**
      * The price of the invoice item.
@@ -17608,7 +17492,6 @@ pub struct InvoiceItem {
      *  
      *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
      */
-    #[serde()]
     pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
      * Sometimes you want to add a charge or credit to a customer, but actually
@@ -17649,7 +17532,6 @@ pub struct InvoiceItem {
      *  
      *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
      * Sometimes you want to add a charge or credit to a customer, but actually
@@ -18132,7 +18014,6 @@ pub struct IssuerFraudRecord {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub actionable: bool,
-    #[serde()]
     pub charge: Box<ChargeAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -18412,7 +18293,6 @@ pub struct IssuingAuthorization {
     /**
      * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
      */
-    #[serde()]
     pub card: IssuingCard,
     /**
      * When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`
@@ -18421,7 +18301,6 @@ pub struct IssuingAuthorization {
      *  
      *  Related guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).
      */
-    #[serde()]
     pub cardholder: Box<Option<CardholderAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -18479,7 +18358,6 @@ pub struct IssuingAuthorization {
     /**
      *
      */
-    #[serde()]
     pub merchant_data: IssuingAuthorizationMerchantData,
     /**
      * Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -18526,7 +18404,6 @@ pub struct IssuingAuthorization {
     /**
      *
      */
-    #[serde()]
     pub verification_data: IssuingAuthorizationVerificationData,
     /**
      * When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`
@@ -18809,7 +18686,6 @@ pub struct IssuingCard {
      *  
      *  Related guide: [How to create a Cardholder](https://stripe.com/docs/issuing/cards#create-cardholder)
      */
-    #[serde()]
     pub cardholder: IssuingCardholder,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -18909,12 +18785,10 @@ pub struct IssuingCard {
     /**
      * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
      */
-    #[serde()]
     pub replaced_by: Box<Option<CardAnyOf>>,
     /**
      * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
      */
-    #[serde()]
     pub replacement_for: Box<Option<CardAnyOf>>,
     /**
      * The reason why the previous card needed to be replaced.
@@ -18929,7 +18803,6 @@ pub struct IssuingCard {
     /**
      *
      */
-    #[serde()]
     pub spending_controls: IssuingCardAuthorizationControls,
     /**
      * Whether authorizations can be approved on this card.
@@ -19074,7 +18947,6 @@ pub struct IssuingCardholder {
     /**
      *
      */
-    #[serde()]
     pub billing: IssuingCardholderAddress,
     /**
      * Additional information about a `company` cardholder.
@@ -19160,7 +19032,6 @@ pub struct IssuingCardholder {
     /**
      *
      */
-    #[serde()]
     pub requirements: IssuingCardholderRequirements,
     /**
      * Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
@@ -19363,7 +19234,6 @@ pub struct IssuingDispute {
     /**
      *
      */
-    #[serde()]
     pub evidence: IssuingDisputeEvidence,
     /**
      * The account's country.
@@ -19401,7 +19271,6 @@ pub struct IssuingDispute {
      */
     #[serde(default, skip_serializing_if = "IssuingDisputeStatus::is_noop")]
     pub status: IssuingDisputeStatus,
-    #[serde()]
     pub transaction: Box<TransactionAnyOf>,
 }
 
@@ -19859,7 +19728,6 @@ pub struct IssuingTransaction {
      *  
      *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
      */
-    #[serde()]
     pub authorization: Box<Option<AuthorizationAnyOf>>,
     /**
      * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
@@ -19868,9 +19736,7 @@ pub struct IssuingTransaction {
      *  
      *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
-    #[serde()]
     pub card: Box<CardAnyOf>,
     /**
      * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
@@ -19879,7 +19745,6 @@ pub struct IssuingTransaction {
      *  
      *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
      */
-    #[serde()]
     pub cardholder: Box<Option<CardholderAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -19906,7 +19771,6 @@ pub struct IssuingTransaction {
      *  
      *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
      */
-    #[serde()]
     pub dispute: Box<Option<DisputeAnyOf>>,
     /**
      * The account's country.
@@ -19946,7 +19810,6 @@ pub struct IssuingTransaction {
     /**
      *
      */
-    #[serde()]
     pub merchant_data: IssuingAuthorizationMerchantData,
     /**
      * Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -21576,7 +21439,6 @@ pub struct IssuingCardShippingData {
     /**
      *
      */
-    #[serde()]
     pub address: Address,
     /**
      * The delivery company that shipped a card.
@@ -21724,12 +21586,10 @@ pub struct IssuingCardWallets {
     /**
      *
      */
-    #[serde()]
     pub apple_pay: IssuingCardApplePay,
     /**
      *
      */
-    #[serde()]
     pub google_pay: IssuingCardApplePay,
     /**
      *
@@ -21748,7 +21608,6 @@ pub struct IssuingCardholderAddress {
     /**
      *
      */
-    #[serde()]
     pub address: Address,
 }
 
@@ -21812,12 +21671,10 @@ pub struct IssuingCardholderDocument {
     /**
      *
      */
-    #[serde()]
     pub back: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub front: Box<Option<IconAnyOf>>,
 }
 
@@ -22088,7 +21945,6 @@ pub struct IssuingDisputeCanceledEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22170,22 +22026,18 @@ pub struct IssuingDisputeDuplicateEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub card_statement: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub cash_receipt: Box<Option<IconAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub check_image: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22313,7 +22165,6 @@ pub struct IssuingDisputeFraudulentEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22332,7 +22183,6 @@ pub struct IssuingDisputeMerchandiseNotAsDescribedEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22383,7 +22233,6 @@ pub struct IssuingDisputeNotReceivedEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22425,7 +22274,6 @@ pub struct IssuingDisputeOtherEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -22458,7 +22306,6 @@ pub struct IssuingDisputeServiceNotAsDescribedEvidence {
     /**
      *
      */
-    #[serde()]
     pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
      *
@@ -23105,7 +22952,6 @@ pub struct LegalEntityCompanyVerificationData {
     /**
      *
      */
-    #[serde()]
     pub document: LegalEntityCompanyVerificationDocument,
 }
 
@@ -23115,7 +22961,6 @@ pub struct LegalEntityCompanyVerificationDocument {
     /**
      *
      */
-    #[serde()]
     pub back: Box<Option<IconAnyOf>>,
     /**
      *
@@ -23138,7 +22983,6 @@ pub struct LegalEntityCompanyVerificationDocument {
     /**
      *
      */
-    #[serde()]
     pub front: Box<Option<IconAnyOf>>,
 }
 
@@ -23292,7 +23136,6 @@ pub struct LegalEntityPersonVerificationDocument {
     /**
      *
      */
-    #[serde()]
     pub back: Box<Option<IconAnyOf>>,
     /**
      *
@@ -23315,7 +23158,6 @@ pub struct LegalEntityPersonVerificationDocument {
     /**
      *
      */
-    #[serde()]
     pub front: Box<Option<IconAnyOf>>,
 }
 
@@ -23474,7 +23316,6 @@ pub struct LineItem {
     /**
      * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
      */
-    #[serde()]
     pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
      * The account's country.
@@ -23519,7 +23360,6 @@ pub struct LineItem {
     /**
      *
      */
-    #[serde()]
     pub period: InvoiceLineItemPeriod,
     /**
      * The price of the invoice item.
@@ -23614,7 +23454,6 @@ pub struct LineItemsDiscountAmount {
      *  
      *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
      */
-    #[serde()]
     pub discount: DiscountData,
 }
 
@@ -23635,7 +23474,6 @@ pub struct LineItemsTaxAmount {
      *  
      *  Related guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).
      */
-    #[serde()]
     pub rate: TaxRate,
 }
 
@@ -23781,7 +23619,6 @@ pub struct Mandate {
     /**
      *
      */
-    #[serde()]
     pub customer_acceptance: CustomerAcceptance,
     /**
      * The account's country.
@@ -23810,12 +23647,10 @@ pub struct Mandate {
      */
     #[serde(default, skip_serializing_if = "MandateObject::is_noop")]
     pub object: MandateObject,
-    #[serde()]
     pub payment_method: Box<PaymentMethodAnyOf>,
     /**
      *
      */
-    #[serde()]
     pub payment_method_details: MandatePaymentMethodDetails,
     /**
      * A Mandate is a record of the permission a customer has given you to debit their payment method.
@@ -24073,7 +23908,6 @@ pub struct NotificationEventData {
     /**
      * When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
      */
-    #[serde()]
     pub object: UseStripeSdk,
     /**
      *
@@ -24261,7 +24095,6 @@ pub struct Order {
      *  
      *  Related guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders-legacy).
      */
-    #[serde()]
     pub charge: Box<Option<ChargeAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -24288,7 +24121,6 @@ pub struct Order {
      *  
      *  Related guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders-legacy).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * Order objects are created to handle end customers' purchases of previously
@@ -24566,7 +24398,6 @@ pub struct OrderItem {
      *  
      *  Related guide: [Orders](https://stripe.com/docs/orders/guide).
      */
-    #[serde()]
     pub parent: Box<Option<ParentAnyOf>>,
     /**
      * A representation of the constituent items of any given order. Can be used to
@@ -24697,7 +24528,6 @@ pub struct OrderReturn {
      *  
      *  Related guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).
      */
-    #[serde()]
     pub order: Box<Option<OrderAnyOf>>,
     /**
      * A return represents the full or partial return of a number of [order items](https://stripe.com/docs/api#order_items).
@@ -24705,7 +24535,6 @@ pub struct OrderReturn {
      *  
      *  Related guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).
      */
-    #[serde()]
     pub refund: Box<Option<RefundAnyOf>>,
 }
 
@@ -25157,7 +24986,6 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub application: Box<Option<ApplicationAnyOf>>,
     /**
      * A PaymentIntent guides you through the process of collecting a payment from your customer.
@@ -25282,7 +25110,6 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A PaymentIntent guides you through the process of collecting a payment from your customer.
@@ -25325,12 +25152,10 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
      * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
      */
-    #[serde()]
     pub last_payment_error: Box<Option<ApiErrors>>,
     /**
      * Whether the account can create live charges.
@@ -25382,7 +25207,6 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * A PaymentIntent guides you through the process of collecting a payment from your customer.
@@ -25397,7 +25221,6 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * Payment-method-specific configuration for this PaymentIntent.
@@ -25450,7 +25273,6 @@ pub struct PaymentIntent {
      *  
      *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
      */
-    #[serde()]
     pub review: Box<Option<ReviewAnyOf>>,
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -25781,7 +25603,6 @@ pub struct PaymentIntentNextActionKonbini {
     /**
      *
      */
-    #[serde()]
     pub stores: PaymentIntentNextActionKonbiniStores,
 }
 
@@ -27077,92 +26898,74 @@ pub struct PaymentIntentMethodOptionsData {
     /**
      *
      */
-    #[serde()]
     pub acss_debit: Box<Option<AcssDebitAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub afterpay_clearpay: Box<Option<AfterpayClearpayAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub alipay: Box<Option<AlipayAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub au_becs_debit: Box<Option<AuBecsDebitAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub bacs_debit: Box<Option<BacsDebitAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub bancontact: Box<Option<BancontactAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub boleto: Box<Option<BoletoAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub card: Box<Option<PaymentIntentMethodOptionsCardAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub card_present: Box<Option<CardPresentAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub eps: Box<Option<EpsAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub fpx: Box<Option<FpxAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub giropay: Box<Option<GiropayAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub grabpay: Box<Option<GrabpayAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub ideal: Box<Option<IdealAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub interac_present: Box<Option<InteracPresentAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub klarna: Box<Option<KlarnaAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub konbini: Box<Option<KonbiniAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub oxxo: Box<Option<OxxoAnyOf>>,
     /**
      *
@@ -27172,27 +26975,22 @@ pub struct PaymentIntentMethodOptionsData {
     /**
      *
      */
-    #[serde()]
     pub paynow: Box<Option<PaynowAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub sepa_debit: Box<Option<SepaDebitAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub sofort: Box<Option<SofortAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub us_bank_account: Box<Option<UsBankAccountAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub wechat_pay: Box<Option<WechatPayAnyOf>>,
 }
 
@@ -27674,7 +27472,6 @@ pub struct PaymentLink {
     /**
      *
      */
-    #[serde()]
     pub after_completion: PaymentLinksResourceAfterCompletion,
     /**
      * Whether the account can create live charges.
@@ -27709,7 +27506,6 @@ pub struct PaymentLink {
     /**
      *
      */
-    #[serde()]
     pub automatic_tax: PortalInvoiceList,
     /**
      * Describes whether Checkout should collect the customer's billing address.
@@ -27763,7 +27559,6 @@ pub struct PaymentLink {
      *  
      *  Related guide: [Payment Links API](https://stripe.com/docs/payments/payment-links/api)
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
@@ -27777,7 +27572,6 @@ pub struct PaymentLink {
     /**
      *
      */
-    #[serde()]
     pub phone_number_collection: PortalInvoiceList,
     /**
      * Configuration for collecting the customer's shipping address.
@@ -28661,7 +28455,6 @@ pub struct PaymentLinksResourceTransferData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -28868,7 +28661,6 @@ pub struct PaymentMethod {
     /**
      *
      */
-    #[serde()]
     pub billing_details: BillingDetails,
     /**
      * PaymentMethod objects represent your customer's payment instruments.
@@ -29425,7 +29217,6 @@ pub struct PaymentMethodCardGenerated {
     /**
      *
      */
-    #[serde()]
     pub setup_attempt: Box<Option<SetupAttemptAnyOf>>,
 }
 
@@ -30095,12 +29886,10 @@ pub struct PaymentMethodDetailsBancontact {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -31273,12 +31062,10 @@ pub struct PaymentMethodDetailsIdeal {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -31980,12 +31767,10 @@ pub struct PaymentMethodDetailsSofort {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -33068,7 +32853,6 @@ pub struct PaymentPagesCheckoutSessionShippingOption {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub shipping_amount: i64,
-    #[serde()]
     pub shipping_rate: Box<ShippingRateAnyOf>,
 }
 
@@ -33527,7 +33311,6 @@ pub struct Payout {
      *  
      *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -33573,7 +33356,6 @@ pub struct Payout {
      *  
      *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
      */
-    #[serde()]
     pub destination: Box<Option<DestinationAnyOf>>,
     /**
      * A `Payout` object is created when you receive funds from Stripe, or when you
@@ -33585,7 +33367,6 @@ pub struct Payout {
      *  
      *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
      */
-    #[serde()]
     pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * A `Payout` object is created when you receive funds from Stripe, or when you
@@ -33676,7 +33457,6 @@ pub struct Payout {
      *  
      *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
      */
-    #[serde()]
     pub original_payout: Box<Option<ReversedByAnyOf>>,
     /**
      * A `Payout` object is created when you receive funds from Stripe, or when you
@@ -33688,7 +33468,6 @@ pub struct Payout {
      *  
      *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
      */
-    #[serde()]
     pub reversed_by: Box<Option<ReversedByAnyOf>>,
     /**
      * The account's country.
@@ -34638,7 +34417,6 @@ pub struct PlanData {
      *  
      *  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) and more about [products and prices](https://stripe.com/docs/products-prices/overview).
      */
-    #[serde()]
     pub product: Box<Option<ProductAnyOf>>,
     /**
      * You can now model subscriptions more flexibly using the [Prices API](https://stripe.com/docs/api#prices). It replaces the Plans API and is backwards compatible to simplify your migration.
@@ -34925,32 +34703,26 @@ pub struct PortalFeatures {
     /**
      *
      */
-    #[serde()]
     pub customer_update: PortalCustomerUpdate,
     /**
      *
      */
-    #[serde()]
     pub invoice_history: PortalInvoiceList,
     /**
      *
      */
-    #[serde()]
     pub payment_method_update: PortalInvoiceList,
     /**
      *
      */
-    #[serde()]
     pub subscription_cancel: PortalSubscriptionCancel,
     /**
      *
      */
-    #[serde()]
     pub subscription_pause: PortalInvoiceList,
     /**
      *
      */
-    #[serde()]
     pub subscription_update: PortalSubscriptionUpdate,
 }
 
@@ -35039,7 +34811,6 @@ pub struct PortalSubscriptionCancel {
     /**
      *
      */
-    #[serde()]
     pub cancellation_reason: PortalSubscriptionCancellationReason,
     /**
      * Whether the account can create live charges.
@@ -35410,7 +35181,6 @@ pub struct PriceData {
      */
     #[serde(default, skip_serializing_if = "DeletedPriceObject::is_noop")]
     pub object: DeletedPriceObject,
-    #[serde()]
     pub product: Box<ProductAnyOf>,
     /**
      * The recurring components of a price such as `interval` and `usage_type`.
@@ -35712,7 +35482,6 @@ pub struct Product {
      *  [accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),
      *  and more about [Products and Prices](https://stripe.com/docs/products-prices/overview)
      */
-    #[serde()]
     pub tax_code: Box<Option<TaxCodeAnyOf>>,
     /**
      * Products describe the specific goods or services you offer to your customers.
@@ -35818,7 +35587,6 @@ pub struct PromotionCode {
      *  might want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or
      *  [orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).
      */
-    #[serde()]
     pub coupon: Coupon,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -35833,7 +35601,6 @@ pub struct PromotionCode {
      * A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
      *  create multiple codes for a single coupon.
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
@@ -35890,7 +35657,6 @@ pub struct PromotionCode {
     /**
      *
      */
-    #[serde()]
     pub restrictions: PromotionCodesResourceRestrictions,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -36198,7 +35964,6 @@ pub struct Quote {
     /**
      *
      */
-    #[serde()]
     pub automatic_tax: AutomaticTax,
     /**
      * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
@@ -36208,7 +35973,6 @@ pub struct Quote {
     /**
      *
      */
-    #[serde()]
     pub computed: QuotesResourceComputed,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -36233,13 +35997,11 @@ pub struct Quote {
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub default_tax_rates: Box<Vec<TaxRateAnyOf>>,
     /**
      * A Quote is a way to model prices that you'd like to provide to a customer.
@@ -36254,7 +36016,6 @@ pub struct Quote {
     /**
      * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
      */
-    #[serde()]
     pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -36303,7 +36064,6 @@ pub struct Quote {
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub invoice: Box<Option<QuoteInvoiceAnyOf>>,
     /**
      * All invoices will be billed using the specified settings.
@@ -36352,7 +36112,6 @@ pub struct Quote {
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * The status of the quote.
@@ -36362,35 +36121,29 @@ pub struct Quote {
     /**
      *
      */
-    #[serde()]
     pub status_transitions: QuotesResourceStatusTransitions,
     /**
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub subscription_data: QuotesResourceSubscriptionData,
     /**
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub subscription_schedule: Box<Option<ScheduleAnyOf>>,
     /**
      * A Quote is a way to model prices that you'd like to provide to a customer.
      *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub total_details: QuotesResourceTotalDetails,
     /**
      * The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the invoices.
@@ -36410,7 +36163,6 @@ pub struct QuotesResourceComputed {
     /**
      *
      */
-    #[serde()]
     pub upfront: QuotesResourceUpfront,
 }
 
@@ -36425,7 +36177,6 @@ pub struct QuotesResourceFromQuote {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_revision: bool,
-    #[serde()]
     pub quote: Box<QuoteAnyOf>,
 }
 
@@ -36467,7 +36218,6 @@ pub struct QuotesResourceRecurring {
     /**
      *
      */
-    #[serde()]
     pub total_details: QuotesResourceTotalDetails,
 }
 
@@ -36584,7 +36334,6 @@ pub struct QuotesResourceTransferData {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount_percent: f64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -36617,7 +36366,6 @@ pub struct QuotesResourceUpfront {
     /**
      *
      */
-    #[serde()]
     pub total_details: QuotesResourceTotalDetails,
 }
 
@@ -36670,7 +36418,6 @@ pub struct RadarEarlyFraudWarning {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub actionable: bool,
-    #[serde()]
     pub charge: Box<ChargeAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -36718,7 +36465,6 @@ pub struct RadarEarlyFraudWarning {
      *  
      *  Related guide: [Early Fraud Warnings](https://stripe.com/docs/disputes/measuring#early-fraud-warnings).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
 }
 
@@ -36863,7 +36609,6 @@ pub struct RadarList {
     /**
      * List of items contained within this value list.
      */
-    #[serde()]
     pub list_items: ListItems,
     /**
      * Whether the account can create live charges.
@@ -37182,7 +36927,6 @@ pub struct Recipient {
      *  recipients can no longer begin doing so. Please use `Account` objects
      *  instead.\*\*
      */
-    #[serde()]
     pub default_card: Box<Option<DefaultCardAnyOf>>,
     /**
      * With `Recipient` objects, you can transfer money from your Stripe account to a
@@ -37258,7 +37002,6 @@ pub struct Recipient {
      *  recipients can no longer begin doing so. Please use `Account` objects
      *  instead.\*\*
      */
-    #[serde()]
     pub migrated_to: Box<Option<AccountAnyOf>>,
     /**
      * With `Recipient` objects, you can transfer money from your Stripe account to a
@@ -37295,7 +37038,6 @@ pub struct Recipient {
      *  recipients can no longer begin doing so. Please use `Account` objects
      *  instead.\*\*
      */
-    #[serde()]
     pub rolled_back_from: Box<Option<AccountAnyOf>>,
     /**
      * The account's country.
@@ -37500,7 +37242,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * `Refund` objects allow you to refund a charge that has previously been created
@@ -37509,7 +37250,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub charge: Box<Option<ChargeAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -37549,7 +37289,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * `Refund` objects allow you to refund a charge that has previously been created
@@ -37607,7 +37346,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
@@ -37634,7 +37372,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub source_transfer_reversal: Box<Option<TransferReversalAnyOf>>,
     /**
      * `Refund` objects allow you to refund a charge that has previously been created
@@ -37656,7 +37393,6 @@ pub struct Refund {
      *  
      *  Related guide: [Refunds](https://stripe.com/docs/refunds).
      */
-    #[serde()]
     pub transfer_reversal: Box<Option<TransferReversalAnyOf>>,
 }
 
@@ -37686,7 +37422,6 @@ pub struct RefundNextActionDisplayDetails {
     /**
      *
      */
-    #[serde()]
     pub email_sent: EmailSent,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -37794,7 +37529,6 @@ pub struct ReportingReportRun {
     /**
      *
      */
-    #[serde()]
     pub parameters: FinancialReportingFinanceReportRunParameters,
     /**
      * The account's country.
@@ -38193,7 +37927,6 @@ pub struct Review {
      *  Learn more about [Radar](/radar) and reviewing payments
      *  [here](https://stripe.com/docs/radar/reviews).
      */
-    #[serde()]
     pub charge: Box<Option<ChargeAnyOf>>,
     /**
      * The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
@@ -38267,7 +38000,6 @@ pub struct Review {
      *  Learn more about [Radar](/radar) and reviewing payments
      *  [here](https://stripe.com/docs/radar/reviews).
      */
-    #[serde()]
     pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
      * The account's country.
@@ -38456,12 +38188,10 @@ pub struct SepaDebitGeneratedFrom {
     /**
      *
      */
-    #[serde()]
     pub charge: Box<Option<ChargeAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub setup_attempt: Box<Option<SetupAttemptAnyOf>>,
 }
 
@@ -38512,7 +38242,6 @@ pub struct SetupAttempt {
      *  SetupAttempts to inspect details of a specific attempt at setting up a
      *  payment method using a SetupIntent.
      */
-    #[serde()]
     pub application: Box<Option<ApplicationAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -38529,7 +38258,6 @@ pub struct SetupAttempt {
      *  SetupAttempts to inspect details of a specific attempt at setting up a
      *  payment method using a SetupIntent.
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * The account's country.
@@ -38559,21 +38287,16 @@ pub struct SetupAttempt {
      *  SetupAttempts to inspect details of a specific attempt at setting up a
      *  payment method using a SetupIntent.
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
-    #[serde()]
     pub payment_method: Box<PaymentMethodAnyOf>,
     /**
      *
      */
-    #[serde()]
     pub payment_method_details: SetupAttemptPaymentMethodDetails,
     /**
      * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
      */
-    #[serde()]
     pub setup_error: Box<Option<ApiErrors>>,
-    #[serde()]
     pub setup_intent: Box<SetupIntentAnyOf>,
     /**
      * The account's country.
@@ -38698,12 +38421,10 @@ pub struct SetupAttemptPaymentMethodDetailsBancontact {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -38747,7 +38468,6 @@ pub struct SetupAttemptPaymentMethodDetailsCardPresent {
     /**
      *
      */
-    #[serde()]
     pub generated_card: Box<Option<PaymentMethodAnyOf>>,
 }
 
@@ -38767,12 +38487,10 @@ pub struct SetupAttemptPaymentMethodDetailsIdeal {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -38828,12 +38546,10 @@ pub struct SetupAttemptPaymentMethodDetailsSofort {
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
      *
@@ -39035,7 +38751,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub application: Box<Option<ApplicationAnyOf>>,
     /**
      * Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
@@ -39105,7 +38820,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub customer: Box<Option<CustomerAnyOf>>,
     /**
      * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
@@ -39149,7 +38863,6 @@ pub struct SetupIntent {
     /**
      * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
      */
-    #[serde()]
     pub last_setup_error: Box<Option<ApiErrors>>,
     /**
      * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
@@ -39175,7 +38888,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub latest_attempt: Box<Option<SetupAttemptAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -39209,7 +38921,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub mandate: Box<Option<MandateAnyOf>>,
     /**
      * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
@@ -39275,7 +38986,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
      * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
@@ -39301,7 +39011,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * Payment-method-specific configuration for this SetupIntent.
@@ -39341,7 +39050,6 @@ pub struct SetupIntent {
      *  
      *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
      */
-    #[serde()]
     pub single_use_mandate: Box<Option<MandateAnyOf>>,
     /**
      * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
@@ -39544,7 +39252,6 @@ pub struct SetupIntentPaymentMethodOptionsData {
     /**
      *
      */
-    #[serde()]
     pub acss_debit: Box<Option<SetupIntentPaymentMethodOptionsAcssDebitAnyOf>>,
     /**
      *
@@ -39554,12 +39261,10 @@ pub struct SetupIntentPaymentMethodOptionsData {
     /**
      *
      */
-    #[serde()]
     pub sepa_debit: Box<Option<SetupIntentPaymentMethodOptionsSepaDebitAnyOf>>,
     /**
      *
      */
-    #[serde()]
     pub us_bank_account: Box<Option<SetupIntentPaymentMethodOptionsUsBankAccountAnyOf>>,
 }
 
@@ -40004,7 +39709,6 @@ pub struct ShippingRate {
      * Shipping rates describe the price of shipping presented to your customers and can be
      *  applied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.
      */
-    #[serde()]
     pub tax_code: Box<Option<TaxCodeAnyOf>>,
     /**
      * The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
@@ -40236,7 +39940,6 @@ pub struct Sku {
     /**
      *
      */
-    #[serde()]
     pub inventory: SkuInventory,
     /**
      * Whether the account can create live charges.
@@ -40274,7 +39977,6 @@ pub struct Sku {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub price: i64,
-    #[serde()]
     pub product: Box<SkuProductAnyOf>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -40971,7 +40673,6 @@ pub struct SourceMandateNotification {
      *  
      *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
      */
-    #[serde()]
     pub source: SourceData,
     /**
      * The account's country.
@@ -43451,7 +43152,6 @@ pub struct Subscription {
     /**
      *
      */
-    #[serde()]
     pub automatic_tax: PortalInvoiceList,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -43529,7 +43229,6 @@ pub struct Subscription {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub current_period_start: i64,
-    #[serde()]
     pub customer: Box<CustomerAnyOf>,
     /**
      * Subscriptions allow you to charge a customer on a recurring basis.
@@ -43547,14 +43246,12 @@ pub struct Subscription {
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * Subscriptions allow you to charge a customer on a recurring basis.
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
      * Subscriptions allow you to charge a customer on a recurring basis.
@@ -43595,14 +43292,12 @@ pub struct Subscription {
     /**
      * List of subscription items, each with an attached price.
      */
-    #[serde()]
     pub items: Items,
     /**
      * Subscriptions allow you to charge a customer on a recurring basis.
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub latest_invoice: Box<Option<InvoiceAnyOf>>,
     /**
      * Whether the account can create live charges.
@@ -43657,7 +43352,6 @@ pub struct Subscription {
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub pending_setup_intent: Box<Option<SetupIntentAnyOf>>,
     /**
      * If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates) that will be applied to the subscription once the `latest_invoice` has been paid.
@@ -43669,7 +43363,6 @@ pub struct Subscription {
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub schedule: Box<Option<ScheduleAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -43698,7 +43391,6 @@ pub struct Subscription {
      *  
      *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
      * The account (if any) the subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices.
@@ -43803,7 +43495,6 @@ pub struct SubscriptionItem {
      *  
      *  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).
      */
-    #[serde()]
     pub price: PriceData,
     /**
      * Subscription items allow you to create customer subscriptions with more than
@@ -44051,12 +43742,10 @@ pub struct SubscriptionSchedule {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_phase: Option<SubscriptionScheduleCurrentPhase>,
-    #[serde()]
     pub customer: Box<CustomerAnyOf>,
     /**
      *
      */
-    #[serde()]
     pub default_settings: SubscriptionSchedulesResourceDefaultSettings,
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` and `cancel`.
@@ -44137,14 +43826,12 @@ pub struct SubscriptionSchedule {
      *  
      *  Related guide: [Subscription Schedules](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
      */
-    #[serde()]
     pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
      * A subscription schedule allows you to create and manage the lifecycle of a subscription by predefining expected changes.
      *  
      *  Related guide: [Subscription Schedules](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
      */
-    #[serde()]
     pub test_clock: Box<Option<TestClockAnyOf>>,
 }
 
@@ -44216,7 +43903,6 @@ impl std::convert::From<PriceAnyOf> for String {
 /// An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriptionScheduleAddInvoiceItem {
-    #[serde()]
     pub price: Box<PriceAnyOf>,
     /**
      * An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.
@@ -44246,7 +43932,6 @@ pub struct SubscriptionScheduleConfigurationItem {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_thresholds: Option<SubscriptionItemBillingThresholdsData>,
-    #[serde()]
     pub price: Box<PriceAnyOf>,
     /**
      * A phase item describes the price and quantity of a phase.
@@ -44435,12 +44120,10 @@ pub struct SubscriptionSchedulePhaseConfiguration {
     /**
      * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
      */
-    #[serde()]
     pub coupon: Box<Option<CouponAnyOf>>,
     /**
      * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
      */
-    #[serde()]
     pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
@@ -44539,7 +44222,6 @@ pub struct SubscriptionSchedulesResourceDefaultSettings {
     /**
      *
      */
-    #[serde()]
     pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
      * The invoice settings applicable during this phase.
@@ -44565,7 +44247,6 @@ pub struct SubscriptionTransferDataType {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount_percent: f64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -45347,7 +45028,6 @@ pub struct TerminalLocation {
     /**
      *
      */
-    #[serde()]
     pub address: Address,
     /**
      * The account's country.
@@ -45559,7 +45239,6 @@ pub struct TerminalReader {
      *  
      *  Related guide: [Connecting to a Reader](https://stripe.com/docs/terminal/payments/connect-reader).
      */
-    #[serde()]
     pub location: Box<Option<LocationAnyOf>>,
     /**
      * Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -45673,7 +45352,6 @@ pub struct TerminalReaderResourceLineItem {
 /// Represents a reader action to process a payment intent
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TerminalReaderResourceProcessPaymentIntentAction {
-    #[serde()]
     pub payment_intent: Box<PaymentIntentAnyOf>,
 }
 
@@ -45689,7 +45367,6 @@ pub struct TerminalReaderResourceProcessSetupIntentAction {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub generated_card: String,
-    #[serde()]
     pub setup_intent: Box<SetupIntentAnyOf>,
 }
 
@@ -46061,7 +45738,6 @@ pub struct ThreeDSecure {
      *  
      *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
      */
-    #[serde()]
     pub card: Card,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -46643,7 +46319,6 @@ pub struct Topup {
      *  
      *  Related guide: [Topping Up your Platform Account](https://stripe.com/docs/connect/top-ups).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -46754,7 +46429,6 @@ pub struct Topup {
      *  
      *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
      */
-    #[serde()]
     pub source: SourceData,
     /**
      * To top up your Stripe balance, you create a top-up object. You can retrieve
@@ -46902,7 +46576,6 @@ pub struct Transfer {
      *  
      *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -46952,7 +46625,6 @@ pub struct Transfer {
      *  
      *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
      */
-    #[serde()]
     pub destination: Box<Option<AccountAnyOf>>,
     /**
      * A `Transfer` object is created when you move funds between Stripe accounts as
@@ -46966,7 +46638,6 @@ pub struct Transfer {
      *  
      *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
      */
-    #[serde()]
     pub destination_payment: Box<Option<ChargeAnyOf>>,
     /**
      * The account's country.
@@ -47002,7 +46673,6 @@ pub struct Transfer {
     /**
      * A list of reversals that have been applied to the transfer.
      */
-    #[serde()]
     pub reversals: Reversals,
     /**
      * Whether the account can create live charges.
@@ -47024,7 +46694,6 @@ pub struct Transfer {
      *  
      *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
      */
-    #[serde()]
     pub source_transaction: Box<Option<ChargeAnyOf>>,
     /**
      * A `Transfer` object is created when you move funds between Stripe accounts as
@@ -47076,7 +46745,6 @@ pub struct TransferData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub amount: i64,
-    #[serde()]
     pub destination: Box<AccountAnyOf>,
 }
 
@@ -47154,7 +46822,6 @@ pub struct TransferReversal {
      *  
      *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
      */
-    #[serde()]
     pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
      * Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -47189,7 +46856,6 @@ pub struct TransferReversal {
      *  
      *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
      */
-    #[serde()]
     pub destination_payment_refund: Box<Option<RefundAnyOf>>,
     /**
      * The account's country.
@@ -47241,9 +46907,7 @@ pub struct TransferReversal {
      *  
      *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
      */
-    #[serde()]
     pub source_refund: Box<Option<RefundAnyOf>>,
-    #[serde()]
     pub transfer: Box<TransferAnyOf>,
 }
 
@@ -47509,7 +47173,6 @@ pub struct UsageRecordSummary {
     /**
      *
      */
-    #[serde()]
     pub period: Period,
     /**
      * The account's country.
@@ -48418,7 +48081,6 @@ pub struct CreditNoteLineItemParams {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde()]
     pub tax_rates: Box<Option<TaxRatesAnyOf>>,
     /**
      * The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
@@ -49135,7 +48797,6 @@ impl AddressAnyOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomerShipping {
-    #[serde()]
     pub address: OptionalFieldsAddress,
     /**
      * The account's country.
@@ -49231,7 +48892,6 @@ impl std::convert::From<IpAddressAnyOf> for String {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tax {
-    #[serde()]
     pub ip_address: Box<Option<IpAddressAnyOf>>,
 }
 
@@ -49462,12 +49122,10 @@ pub struct CustomerDetails {
     /**
      * Details about the customer you want to invoice or overrides for an existing customer.
      */
-    #[serde()]
     pub address: Box<Option<AddressAnyOf>>,
     /**
      * Details about the customer you want to invoice or overrides for an existing customer.
      */
-    #[serde()]
     pub shipping: Box<Option<ShippingAnyOf>>,
     /**
      * Details about the customer you want to invoice or overrides for an existing customer.
@@ -49663,7 +49321,6 @@ pub struct InvoiceItems {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub discountable: bool,
-    #[serde()]
     pub discounts: Box<Option<GetInvoicesUpcomingDiscountsAnyOf>>,
     #[serde(
         default,
@@ -49671,7 +49328,6 @@ pub struct InvoiceItems {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub invoiceitem: String,
-    #[serde()]
     pub metadata: Box<Option<MetadataAnyOf>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub period: Option<InvoiceLineItemPeriod>,
@@ -49689,7 +49345,6 @@ pub struct InvoiceItems {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde()]
     pub tax_rates: Box<Option<TaxRatesAnyOf>>,
     #[serde(
         default,
@@ -49917,7 +49572,6 @@ pub struct RecurringPriceData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub product: String,
-    #[serde()]
     pub recurring: RecurringAdhoc,
     /**
      * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
@@ -49943,7 +49597,6 @@ pub struct RecurringPriceData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriptionItems {
-    #[serde()]
     pub billing_thresholds: Box<Option<BillingThresholdsAnyOf>>,
     #[serde(
         default,
@@ -49961,7 +49614,6 @@ pub struct SubscriptionItems {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde()]
     pub metadata: Box<Option<MetadataAnyOf>>,
     #[serde(
         default,
@@ -49977,7 +49629,6 @@ pub struct SubscriptionItems {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde()]
     pub tax_rates: Box<Option<TaxRatesAnyOf>>,
 }
 
@@ -50304,22 +49955,18 @@ pub struct OrderTimestampSpecs {
     /**
      * Filter orders based on when they were paid, fulfilled, canceled, or returned.
      */
-    #[serde()]
     pub canceled: Box<Option<PaidAnyOf>>,
     /**
      * Filter orders based on when they were paid, fulfilled, canceled, or returned.
      */
-    #[serde()]
     pub fulfilled: Box<Option<PaidAnyOf>>,
     /**
      * Filter orders based on when they were paid, fulfilled, canceled, or returned.
      */
-    #[serde()]
     pub paid: Box<Option<PaidAnyOf>>,
     /**
      * Filter orders based on when they were paid, fulfilled, canceled, or returned.
      */
-    #[serde()]
     pub returned: Box<Option<PaidAnyOf>>,
 }
 

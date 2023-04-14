@@ -441,7 +441,6 @@ pub struct ReverseDns {
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub a_record: Dkim,
     /**
      * The license key provided with your New Relic account.
@@ -802,7 +801,6 @@ pub struct Dns {
     /**
      * The DNS record generated to point to your link branding subdomain.
      */
-    #[serde()]
     pub domain_cname: DomainCname,
     /**
      * The DNS records generated for this link branding.
@@ -824,7 +822,6 @@ pub struct LinkBranding200Response {
     /**
      * The DNS records generated for this link branding.
      */
-    #[serde()]
     pub dns: Dns,
     /**
      * The license key provided with your New Relic account.
@@ -3925,7 +3922,6 @@ pub struct ContactResponse {
     /**
      * The user may choose to create up to 120 custom fields or none at all. This is not a reserved field.
      */
-    #[serde()]
     pub custom_fields: ContactResponseCustomFields,
     /**
      * The license key provided with your New Relic account.
@@ -5950,7 +5946,6 @@ pub struct SendersRequestBody {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    #[serde()]
     pub from: From,
     /**
      * The license key provided with your New Relic account.
@@ -6902,7 +6897,6 @@ pub struct AllSegmentsResponse {
     /**
      * Segment status indicates whether the segment's contacts will be updated periodically
      */
-    #[serde()]
     pub status: SegmentStatusResponse,
     /**
      * The license key provided with your New Relic account.
@@ -7018,7 +7012,6 @@ pub struct SegmentResponse {
     /**
      * Segment status indicates whether the segment's contacts will be updated periodically
      */
-    #[serde()]
     pub status: SegmentStatusResponse,
     /**
      * The license key provided with your New Relic account.
@@ -7471,12 +7464,10 @@ pub struct Message {
     /**
      * This is the IP of the user who sent the message.
      */
-    #[serde()]
     pub originating_ip: std::net::Ipv4Addr,
     /**
      * This is the IP of the user who sent the message.
      */
-    #[serde()]
     pub outbound_ip: std::net::Ipv4Addr,
     /**
      * Whether or not the outbound IP is dedicated vs shared
@@ -7544,22 +7535,18 @@ pub struct DomainAuthenticationDns {
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub dkim: Dkim,
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub domain_spf: Dkim,
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub mail_server: Dkim,
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub subdomain_spf: Dkim,
 }
 
@@ -7592,7 +7579,6 @@ pub struct DomainAuthentication {
     /**
      * The DNS records for this authenticated domain.
      */
-    #[serde()]
     pub dns: DomainAuthenticationDns,
     /**
      * The license key provided with your New Relic account.
@@ -7673,7 +7659,6 @@ pub struct AuthenticationDomainDns {
     /**
      * The DKIM record for messages sent using this authenticated domain.
      */
-    #[serde()]
     pub mail_cname: Dkim,
 }
 
@@ -7706,7 +7691,6 @@ pub struct AuthenticationDomain {
     /**
      * The DNS records used to authenticate the sending domain.
      */
-    #[serde()]
     pub dns: AuthenticationDomainDns,
     /**
      * The license key provided with your New Relic account.
@@ -8596,7 +8580,6 @@ pub struct PostMailSendRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub custom_args: String,
-    #[serde()]
     pub from: FromEmailObject,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub headers: Option<Help>,
@@ -10388,7 +10371,6 @@ pub struct ValidationResults {
     /**
      * The DNS record generated for the sending domain used for this branded link.
      */
-    #[serde()]
     pub domain_cname: PostWhitelabelLinksValidateResponseValidationResultsDomainCname,
     /**
      * The individual validation results for each of the DNS records associated with this branded link.
@@ -10416,7 +10398,6 @@ pub struct PostWhitelabelLinksValidateResponse {
     /**
      * The individual validation results for each of the DNS records associated with this branded link.
      */
-    #[serde()]
     pub validation_results: ValidationResults,
 }
 
@@ -10557,7 +10538,6 @@ pub struct PostWhitelabelIpsValidateResponse {
     /**
      * The specific results of the validation.
      */
-    #[serde()]
     pub validation_results: PostWhitelabelIpsValidateResponseValidationResults,
 }
 
@@ -10690,17 +10670,14 @@ pub struct Checks {
     /**
      * Additional checks on the email address.
      */
-    #[serde()]
     pub additional: Additional,
     /**
      * Checks on the domain portion of the email address.
      */
-    #[serde()]
     pub domain: Domain,
     /**
      * Checks on the local part of the email address.
      */
-    #[serde()]
     pub local_part: LocalPart,
 }
 
@@ -10709,7 +10686,6 @@ pub struct PostValidationsEmailResponseResult {
     /**
      * Granular checks for email address validity.
      */
-    #[serde()]
     pub checks: Checks,
     /**
      * The license key provided with your New Relic account.
@@ -10783,7 +10759,6 @@ pub struct PostValidationsEmailResponseResult {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostValidationsEmailResponse {
-    #[serde()]
     pub result: PostValidationsEmailResponseResult,
 }
 
@@ -11367,7 +11342,6 @@ pub struct GetVerifiedSendersDomainsResponseResults {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetVerifiedSendersDomainsResponse {
-    #[serde()]
     pub results: GetVerifiedSendersDomainsResponseResults,
 }
 
@@ -11607,7 +11581,6 @@ pub struct DeleteMcContactsResponse {
     /**
      * helper text or docs for troubleshooting
      */
-    #[serde()]
     pub job_id: Help,
 }
 
@@ -12209,7 +12182,6 @@ pub struct PostMarketingSendersRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
-    #[serde()]
     pub from: From,
     /**
      * The license key provided with your New Relic account.

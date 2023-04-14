@@ -7472,7 +7472,6 @@ pub struct AutomationWorkflow {
     /**
      * List settings for the Automation.
      */
-    #[serde()]
     pub recipients: Recipients,
     /**
      * A summary of an individual Automation workflow's settings and content.
@@ -7482,7 +7481,6 @@ pub struct AutomationWorkflow {
     /**
      * Trigger settings for the Automation.
      */
-    #[serde()]
     pub trigger_settings: AutomationTrigger,
 }
 
@@ -11252,7 +11250,6 @@ pub struct CampaignData {
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
-    #[serde()]
     pub settings: CampaignSettingsData,
     /**
      * A summary of an individual campaign's settings and content.
@@ -14161,12 +14158,10 @@ pub struct SubscriberList {
     /**
      * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
-    #[serde()]
     pub campaign_defaults: SubscriberListCampaignDefaults,
     /**
      * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
-    #[serde()]
     pub contact: SubscriberListContact,
     /**
      * Information about a specific list.
@@ -15031,12 +15026,10 @@ pub struct SubscriberListData {
     /**
      * [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.
      */
-    #[serde()]
     pub campaign_defaults: SubscriberListCampaignDefaults,
     /**
      * [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.
      */
-    #[serde()]
     pub contact: SubscriberListContactData,
     /**
      * Information about a specific list.
@@ -26234,7 +26227,6 @@ pub struct ECommerceCart {
     /**
      * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
-    #[serde()]
     pub customer: ECommerceCustomer,
     /**
      * The name of the folder.
@@ -27444,7 +27436,6 @@ pub struct ECommerceOrder {
     /**
      * Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.
      */
-    #[serde()]
     pub customer: ECommerceCustomer,
     /**
      * Information about a specific order.

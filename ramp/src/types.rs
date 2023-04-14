@@ -464,7 +464,6 @@ pub struct Data {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    #[serde()]
     pub card_holder: CardHolder,
     /**
      * The OAuth2 token header
@@ -1075,7 +1074,6 @@ pub struct Business {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    #[serde()]
     pub billing_address: BillingAddress,
     /**
      * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
@@ -1705,7 +1703,6 @@ pub struct PostResourcesCardProgramRequest {
     /**
      * Specifies the spend restrictions on a Ramp card.
      */
-    #[serde()]
     pub spending_restrictions: SpendingRestrictions,
 }
 

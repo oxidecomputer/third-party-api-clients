@@ -544,7 +544,6 @@ pub struct OrdersEstimateProductInfoModel {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrdersEstimateFulfillmentRequestModel {
-    #[serde()]
     pub address: OrdersEstimationAddress,
     /**
      * Products to be included in the order. Each product must include one of reference_id or id
@@ -775,7 +774,6 @@ pub struct OrdersRecipientInfo {
     /**
      * Address to used when creating a B2B/DropShip order.
      */
-    #[serde()]
     pub address: OrdersRetailerProgramDataAddress,
     /**
      * Name of the channel
@@ -2028,7 +2026,6 @@ pub struct OrdersCreateOrderModel {
     /**
      * Information about the recipient of an order
      */
-    #[serde()]
     pub recipient: OrdersRecipientInfo,
     /**
      * Name of the channel
@@ -3428,7 +3425,6 @@ pub struct ReceivingAddBoxOrderModel {
 /// Information to create a new receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingCreateOrderModel {
-    #[serde()]
     pub box_packaging_type: ReceivingPackingType,
     /**
      * Box shipments to be added to this receiving order
@@ -3451,9 +3447,7 @@ pub struct ReceivingCreateOrderModel {
     /**
      * Model containing information that assigns a receiving order to a fulfillment center
      */
-    #[serde()]
     pub fulfillment_center: ReceivingAssignOrderFulfillmentCenterModel,
-    #[serde()]
     pub package_type: ReceivingPackageType,
 }
 
@@ -3890,7 +3884,6 @@ pub struct ReturnsCreateReturn {
     /**
      * Information about a fulfillment center
      */
-    #[serde()]
     pub fulfillment_center: ReturnsFulfillmentCenter,
     /**
      * Array of inventory items being returned
@@ -4068,7 +4061,6 @@ pub struct WebhooksCreateWebhookSubscriptionModel {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subscription_url: String,
-    #[serde()]
     pub topic: WebhooksTopics,
 }
 

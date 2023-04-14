@@ -614,8 +614,16 @@ pub fn generate_docs_generic_token(
         String::new()
     };
 
-    let server_args_nl = format!(",\n//!     {}", server_args);
-    let server_args_flat = format!(", {}", server_args);
+    let server_args_nl = if !server_args.is_empty() {
+        format!(",\n//!     {}", server_args)
+    } else {
+        String::new()
+    };
+    let server_args_flat = if !server_args.is_empty() {
+        format!(", {}", server_args)
+    } else {
+        String::new()
+    };
 
     format!(
         r#"{}
