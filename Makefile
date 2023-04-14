@@ -196,7 +196,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.3.1 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.3.2 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -437,7 +437,7 @@ $(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
 		$(SENDGRID_SPEC_REMOTE)
 
 sendgrid: target/debug/generator $(SENDGRID_SPEC)
-	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.4.0 \
+	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.4.1 \
 		-o sendgrid \
 		-n sendgrid-api \
 		--proper-name SendGrid \

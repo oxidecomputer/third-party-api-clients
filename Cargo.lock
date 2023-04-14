@@ -1422,7 +1422,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2208,7 +2208,7 @@ dependencies = [
 
 [[package]]
 name = "sendgrid-api"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "async-recursion",
