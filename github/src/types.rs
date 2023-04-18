@@ -1,6 +1,7 @@
 //! The data types sent to and returned from the API client.
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 /// Simple User
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -25478,7 +25479,7 @@ pub struct GistsCreateRequest {
      * Names and content for the files that make up the gist
      */
     #[serde()]
-    pub files: FilesAdditionalPropertiesData,
+    pub files: HashMap<String, FilesAdditionalPropertiesData>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
 }
