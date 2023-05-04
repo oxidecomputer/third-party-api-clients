@@ -123,19 +123,19 @@ impl CustomTabs {
             .await
     }
     /**
-    * Updates custom tab information.
+     * Updates custom tab information.
 
     .
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
-    *
-    * Updates the information in a custom tab for the specified account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
-    */
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
+     *
+     * Updates the information in a custom tab for the specified account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+     */
     pub async fn tab_put_custom(
         &self,
         account_id: &str,

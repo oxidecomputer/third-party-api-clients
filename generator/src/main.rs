@@ -875,13 +875,13 @@ impl TypeSpace {
         if let Some(s) = schema {
             if let Some(description) = &s.description {
                 a(&format!(
-                    "* {}",
-                    description.replace('*', "\\*").replace('\n', "\n*  ")
+                    " * {}",
+                    description.replace('*', "\\*").replace('\n', "\n *  ")
                 ));
             }
             if let Some(external_docs) = &s.external_docs {
-                a("*");
-                a(&format!("* FROM: <{}>", external_docs.url));
+                a(" *");
+                a(&format!(" * FROM: <{}>", external_docs.url));
             }
         }
 
@@ -2175,8 +2175,8 @@ fn render_param(
 
     if !description.is_empty() {
         a("/**");
-        a(&format!("* {}", description.replace('\n', "\n*   ")));
-        a("*/");
+        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        a(" */");
     }
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");

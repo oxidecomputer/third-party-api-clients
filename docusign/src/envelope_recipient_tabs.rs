@@ -73,21 +73,21 @@ impl EnvelopeRecipientTabs {
             .await
     }
     /**
-    * Updates the tabs for a recipient.
+     * Updates the tabs for a recipient.
 
     .
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
-    *
-    * Updates one or more tabs for a recipient in a draft envelope.
-    * **Note**: The Update method can be used if the envelope is not yet complete. To update an existing tab, the request body must include the `tabId`.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-    */
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
+     *
+     * Updates one or more tabs for a recipient in a draft envelope.
+     * **Note**: The Update method can be used if the envelope is not yet complete. To update an existing tab, the request body must include the `tabId`.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     */
     pub async fn recipients_put_recipient_tabs(
         &self,
         account_id: &str,

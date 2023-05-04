@@ -48,18 +48,13 @@ pub fn get_header_values(
 
 /// GitHub defined Media types
 /// See [this doc](https://developer.github.com/v3/media/) for more for more information
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Default)]
 pub enum MediaType {
     /// Return json (the default)
+    #[default]
     Json,
     /// Return json in preview form
     Preview(&'static str),
-}
-
-impl Default for MediaType {
-    fn default() -> MediaType {
-        MediaType::Json
-    }
 }
 
 impl std::fmt::Display for MediaType {

@@ -1969,28 +1969,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -2460,28 +2460,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -2951,28 +2951,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -3442,28 +3442,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -3930,28 +3930,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -4421,28 +4421,28 @@ impl ShippingAndFulfillment {
     }
     /**
     * Create a fulfillment for the specified order and line items.
-              The fulfillment's status depends on the line items in the order:
+             The fulfillment's status depends on the line items in the order:
 
-              If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
-              If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
-
-
-              A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
-              If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
-              However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
-
-              All line items being fulfilled must have the same fulfillment service.
+             If the line items in the fulfillment use a manual or custom fulfillment service, then the status of the returned fulfillment will be set immediately.
+             If the line items use an external fulfillment service, then they will be queued for fulfillment and the status will be set to pending until the external fulfillment service has been invoked.
 
 
-                Note
-                If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+             A fulfillment might then transition to open, which implies it is being processed by the service, before transitioning to success when the items have shipped.
+             If you don't specify line item IDs, then all unfulfilled and partially fulfilled line items for the order will be fulfilled.
+             However, if an order is refunded or if any of its individual line items are refunded, then the order can't be fulfilled.
 
-              About tracking urls
-               If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+             All line items being fulfilled must have the same fulfillment service.
 
 
-                Note
-                If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
+               Note
+               If you are using this endpoint with a Partner development store or a trial store, then you can create no more than 5 new fulfillments per minute.
+
+             About tracking urls
+              If you're creating a fulfillment for a supported carrier, then you can send the tracking_company and tracking_numbers fields, and Shopify will generate the tracking_url for you. If you're creating a fulfillment for an unsupported carrier (not in the tracking_company list), then send the tracking_company, tracking_numbers, and tracking_urls fields.
+
+
+               Note
+               If you send an unsupported carrier without a tracking URL, then Shopify will still try to generate a valid tracking URL by using pattern matching on the tracking number. However, Shopify does not validate the tracking URL, so you should make sure that your tracking URL is correct for the order and fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments.json` endpoint.
     *
@@ -5839,7 +5839,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6020,7 +6020,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6201,7 +6201,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6382,7 +6382,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6563,7 +6563,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6646,7 +6646,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
-              This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
+             This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/open.json` endpoint.
     *
@@ -6680,7 +6680,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
-              This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
+             This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/reschedule.json` endpoint.
     *
@@ -6812,7 +6812,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Releases the fulfillment order holds for a specific order. Fulfillment orders are created
-              with an ON_HOLD status if the channel that created the order has a fulfillment hold policy.
+             with an ON_HOLD status if the channel that created the order has a fulfillment hold policy.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/release_hold.json` endpoint.
     *
@@ -6851,7 +6851,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks an in progress fulfillment order as incomplete, indicating the fulfillment service
-            is unable to ship any remaining items and intends to close the fulfillment order.
+           is unable to ship any remaining items and intends to close the fulfillment order.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/close.json` endpoint.
     *
@@ -6934,7 +6934,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Marks a scheduled fulfillment order as ready for fulfillment.
-              This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
+             This endpoint allows merchants to work on a scheduled fulfillment order before its expected fulfill_at datetime.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/open.json` endpoint.
     *
@@ -6968,7 +6968,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Updates the fulfill_at time of a scheduled fulfillment order.
-              This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
+             This endpoint is used to manage the time a scheduled fulfillment order will be marked as ready for fulfillment.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/reschedule.json` endpoint.
     *
@@ -7904,9 +7904,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_services.json` endpoint.
     *
@@ -8060,9 +8060,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_services.json` endpoint.
     *
@@ -8216,9 +8216,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_services.json` endpoint.
     *
@@ -8372,9 +8372,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_services.json` endpoint.
     *
@@ -8525,9 +8525,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_services.json` endpoint.
     *
@@ -8681,9 +8681,9 @@ impl ShippingAndFulfillment {
     }
     /**
     * To create a fulfillment service, you can also use a cURL request that uses that fulfillment_service.json payload:
-              Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
+             Copy  curl -X POST -d @fulfillment_service.json -H"Accept:application/json" -H"Content-Type:application/json" -H"X-Shopify-Access-Token:THE_TOKEN_GOES_HERE" https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services
 
-              Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
+             Where THE_TOKEN_GOES_HERE is replaced by the OAuth token given to you by Shopify and https://AUTHORIZED_SHOP.myshopify.com/admin/fulfillment_services is replaced by the authorized shop's URL.
     *
     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_services.json` endpoint.
     *
@@ -8805,7 +8805,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8839,7 +8839,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8873,7 +8873,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8907,7 +8907,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8941,7 +8941,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *
@@ -8975,7 +8975,7 @@ impl ShippingAndFulfillment {
     }
     /**
     * Retrieves a list of locations that a fulfillment order can potentially move to.
-              The resulting list is sorted alphabetically in ascending order by location name.
+             The resulting list is sorted alphabetically in ascending order by location name.
     *
     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/locations_for_move.json` endpoint.
     *

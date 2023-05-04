@@ -63,17 +63,17 @@ impl AccountSignatures {
             .await
     }
     /**
-    * Updates an account signature.
+     * Updates an account signature.
     .
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put_signature(
         &self,
         account_id: &str,
@@ -97,18 +97,18 @@ impl AccountSignatures {
             .await
     }
     /**
-    * Adds or updates one or more account signatures.
+     * Adds or updates one or more account signatures.
     This request may include images in multi-part format.
-    *
-    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `decode_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `decode_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn post(
         &self,
         account_id: &str,

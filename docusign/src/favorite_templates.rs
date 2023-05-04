@@ -42,17 +42,17 @@ impl FavoriteTemplates {
             .await
     }
     /**
-    * Sets a template as a favorite.
+     * Sets a template as a favorite.
     .
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put_template(
         &self,
         account_id: &str,

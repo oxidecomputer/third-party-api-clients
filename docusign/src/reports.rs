@@ -13,17 +13,17 @@ impl Reports {
     }
 
     /**
-    * Gets the descriptors for all of
+     * Gets the descriptors for all of
     an account's active reports (for listings).
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_get_list(
         &self,
         account_id: &str,

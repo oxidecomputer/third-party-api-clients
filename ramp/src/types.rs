@@ -43,7 +43,7 @@ pub struct TaskResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Role {
     #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
@@ -54,6 +54,7 @@ pub enum Role {
     #[serde(rename = "BUSINESS_USER")]
     BusinessUser,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -73,11 +74,6 @@ impl std::fmt::Display for Role {
     }
 }
 
-impl Default for Role {
-    fn default() -> Role {
-        Role::Noop
-    }
-}
 impl Role {
     pub fn is_noop(&self) -> bool {
         matches!(self, Role::Noop)
@@ -307,13 +303,14 @@ pub struct AccountingCategories {
     pub category_name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "POLICY_VIOLATION_FROM_ADMIN")]
     PolicyViolationFromAdmin,
     #[serde(rename = "POLICY_VIOLATION_FROM_USER")]
     PolicyViolationFromUser,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -331,11 +328,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -372,7 +364,7 @@ pub struct PolicyViolations {
     pub type_: Option<Type>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "DISPUTE_CANCELLED")]
     DisputeCancelled,
@@ -383,6 +375,7 @@ pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "UNRECOGNIZED_CHARGE")]
     UnrecognizedCharge,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -402,11 +395,6 @@ impl std::fmt::Display for GetTransactionResponseDataDisputesType {
     }
 }
 
-impl Default for GetTransactionResponseDataDisputesType {
-    fn default() -> GetTransactionResponseDataDisputesType {
-        GetTransactionResponseDataDisputesType::Noop
-    }
-}
 impl GetTransactionResponseDataDisputesType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetTransactionResponseDataDisputesType::Noop)
@@ -766,9 +754,9 @@ pub struct Fulfillment {
 }
 
 /**
-* Time interval to apply limit to.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Time interval to apply limit to.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Interval {
     #[serde(rename = "DAILY")]
     Daily,
@@ -779,6 +767,7 @@ pub enum Interval {
     #[serde(rename = "YEARLY")]
     Yearly,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -798,11 +787,6 @@ impl std::fmt::Display for Interval {
     }
 }
 
-impl Default for Interval {
-    fn default() -> Interval {
-        Interval::Noop
-    }
-}
 impl Interval {
     pub fn is_noop(&self) -> bool {
         matches!(self, Interval::Noop)
@@ -1273,11 +1257,12 @@ pub struct PostResourcesCardVirtualRequest {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TokenType {
     #[serde(rename = "Bearer")]
     Bearer,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1294,11 +1279,6 @@ impl std::fmt::Display for TokenType {
     }
 }
 
-impl Default for TokenType {
-    fn default() -> TokenType {
-        TokenType::Noop
-    }
-}
 impl TokenType {
     pub fn is_noop(&self) -> bool {
         matches!(self, TokenType::Noop)
@@ -1486,7 +1466,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     pub misc: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "ERROR")]
     Error,
@@ -1497,6 +1477,7 @@ pub enum Status {
     #[serde(rename = "SUCCESS")]
     Success,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1516,11 +1497,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -1544,7 +1520,7 @@ pub struct GetResourcesCardsDeferredResponse {
     pub status: Option<Status>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Icon {
     #[serde(rename = "AdvertisingIcon")]
     AdvertisingIcon,
@@ -1567,6 +1543,7 @@ pub enum Icon {
     #[serde(rename = "WellnessIcon")]
     WellnessIcon,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1592,11 +1569,6 @@ impl std::fmt::Display for Icon {
     }
 }
 
-impl Default for Icon {
-    fn default() -> Icon {
-        Icon::Noop
-    }
-}
 impl Icon {
     pub fn is_noop(&self) -> bool {
         matches!(self, Icon::Noop)

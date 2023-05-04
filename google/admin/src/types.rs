@@ -183,9 +183,9 @@ pub struct Asps {
 }
 
 /**
-* Message severity
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Message severity
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Severity {
     #[serde(rename = "SEVERITY_ERROR")]
     SeverityError,
@@ -196,6 +196,7 @@ pub enum Severity {
     #[serde(rename = "SEVERITY_WARNING")]
     SeverityWarning,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -215,11 +216,6 @@ impl std::fmt::Display for Severity {
     }
 }
 
-impl Default for Severity {
-    fn default() -> Severity {
-        Severity::Noop
-    }
-}
 impl Severity {
     pub fn is_noop(&self) -> bool {
         matches!(self, Severity::Noop)
@@ -1695,9 +1691,9 @@ pub struct CustomerPostalAddress {
 }
 
 /**
-* Indicates the command state.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Indicates the command state.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum State {
     #[serde(rename = "ACKED_BY_CLIENT")]
     AckedByClient,
@@ -1714,6 +1710,7 @@ pub enum State {
     #[serde(rename = "STATE_UNSPECIFIED")]
     StateUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1736,11 +1733,6 @@ impl std::fmt::Display for State {
     }
 }
 
-impl Default for State {
-    fn default() -> State {
-        State::Noop
-    }
-}
 impl State {
     pub fn is_noop(&self) -> bool {
         matches!(self, State::Noop)
@@ -1748,9 +1740,9 @@ impl State {
 }
 
 /**
-* The type of the command.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of the command.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "COMMAND_TYPE_UNSPECIFIED")]
     CommandTypeUnspecified,
@@ -1765,6 +1757,7 @@ pub enum Type {
     #[serde(rename = "WIPE_USERS")]
     WipeUsers,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1786,11 +1779,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -1861,9 +1849,9 @@ pub struct DirectoryChromeosdevicesCommand {
 }
 
 /**
-* The result of the command.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The result of the command.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Result {
     #[serde(rename = "COMMAND_RESULT_TYPE_UNSPECIFIED")]
     CommandResultTypeUnspecified,
@@ -1874,6 +1862,7 @@ pub enum Result {
     #[serde(rename = "SUCCESS")]
     Success,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1893,11 +1882,6 @@ impl std::fmt::Display for Result {
     }
 }
 
-impl Default for Result {
-    fn default() -> Result {
-        Result::Noop
-    }
-}
 impl Result {
     pub fn is_noop(&self) -> bool {
         matches!(self, Result::Noop)
@@ -2136,9 +2120,9 @@ pub struct Domains2 {
 pub struct Empty {}
 
 /**
-* Canonical code for why the update failed to apply.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Canonical code for why the update failed to apply.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ErrorCode {
     #[serde(rename = "ABORTED")]
     Aborted,
@@ -2175,6 +2159,7 @@ pub enum ErrorCode {
     #[serde(rename = "UNKNOWN")]
     Unknown,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2207,11 +2192,6 @@ impl std::fmt::Display for ErrorCode {
     }
 }
 
-impl Default for ErrorCode {
-    fn default() -> ErrorCode {
-        ErrorCode::Noop
-    }
-}
 impl ErrorCode {
     pub fn is_noop(&self) -> bool {
         matches!(self, ErrorCode::Noop)
@@ -5468,15 +5448,16 @@ pub struct VerificationCodes {
 }
 
 /**
-* V1 error format.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * V1 error format.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Xgafv {
     #[serde(rename = "1")]
     One,
     #[serde(rename = "2")]
     Two,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5494,11 +5475,6 @@ impl std::fmt::Display for Xgafv {
     }
 }
 
-impl Default for Xgafv {
-    fn default() -> Xgafv {
-        Xgafv::Noop
-    }
-}
 impl Xgafv {
     pub fn is_noop(&self) -> bool {
         matches!(self, Xgafv::Noop)
@@ -5506,9 +5482,9 @@ impl Xgafv {
 }
 
 /**
-* Data format for response.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Data format for response.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
@@ -5517,6 +5493,7 @@ pub enum Alt {
     #[serde(rename = "proto")]
     Proto,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5535,11 +5512,6 @@ impl std::fmt::Display for Alt {
     }
 }
 
-impl Default for Alt {
-    fn default() -> Alt {
-        Alt::Noop
-    }
-}
 impl Alt {
     pub fn is_noop(&self) -> bool {
         matches!(self, Alt::Noop)
@@ -5547,9 +5519,9 @@ impl Alt {
 }
 
 /**
-* Device property to use for sorting results.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Device property to use for sorting results.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OrderBy {
     #[serde(rename = "annotatedLocation")]
     AnnotatedLocation,
@@ -5566,6 +5538,7 @@ pub enum OrderBy {
     #[serde(rename = "supportEndDate")]
     SupportEndDate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5588,11 +5561,6 @@ impl std::fmt::Display for OrderBy {
     }
 }
 
-impl Default for OrderBy {
-    fn default() -> OrderBy {
-        OrderBy::Noop
-    }
-}
 impl OrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, OrderBy::Noop)
@@ -5600,15 +5568,16 @@ impl OrderBy {
 }
 
 /**
-* Restrict information returned to a set of selected fields.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Restrict information returned to a set of selected fields.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Projection {
     #[serde(rename = "BASIC")]
     Basic,
     #[serde(rename = "FULL")]
     Full,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5626,11 +5595,6 @@ impl std::fmt::Display for Projection {
     }
 }
 
-impl Default for Projection {
-    fn default() -> Projection {
-        Projection::Noop
-    }
-}
 impl Projection {
     pub fn is_noop(&self) -> bool {
         matches!(self, Projection::Noop)
@@ -5638,15 +5602,16 @@ impl Projection {
 }
 
 /**
-* Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortOrder {
     #[serde(rename = "ASCENDING")]
     Ascending,
     #[serde(rename = "DESCENDING")]
     Descending,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5664,11 +5629,6 @@ impl std::fmt::Display for SortOrder {
     }
 }
 
-impl Default for SortOrder {
-    fn default() -> SortOrder {
-        SortOrder::Noop
-    }
-}
 impl SortOrder {
     pub fn is_noop(&self) -> bool {
         matches!(self, SortOrder::Noop)
@@ -5676,9 +5636,9 @@ impl SortOrder {
 }
 
 /**
-* Device property to use for sorting results.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Device property to use for sorting results.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryMobiledevicesListOrderBy {
     #[serde(rename = "deviceId")]
     DeviceId,
@@ -5697,6 +5657,7 @@ pub enum DirectoryMobiledevicesListOrderBy {
     #[serde(rename = "type")]
     Type,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5720,11 +5681,6 @@ impl std::fmt::Display for DirectoryMobiledevicesListOrderBy {
     }
 }
 
-impl Default for DirectoryMobiledevicesListOrderBy {
-    fn default() -> DirectoryMobiledevicesListOrderBy {
-        DirectoryMobiledevicesListOrderBy::Noop
-    }
-}
 impl DirectoryMobiledevicesListOrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryMobiledevicesListOrderBy::Noop)
@@ -5732,15 +5688,16 @@ impl DirectoryMobiledevicesListOrderBy {
 }
 
 /**
-* Whether to return all sub-organizations or just immediate children.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Whether to return all sub-organizations or just immediate children.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryOrgunitsListType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "children")]
     Children,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5758,11 +5715,6 @@ impl std::fmt::Display for DirectoryOrgunitsListType {
     }
 }
 
-impl Default for DirectoryOrgunitsListType {
-    fn default() -> DirectoryOrgunitsListType {
-        DirectoryOrgunitsListType::Noop
-    }
-}
 impl DirectoryOrgunitsListType {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryOrgunitsListType::Noop)
@@ -5770,9 +5722,9 @@ impl DirectoryOrgunitsListType {
 }
 
 /**
-* Source from which Building.coordinates are derived.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Source from which Building.coordinates are derived.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum CoordinatesSource {
     #[serde(rename = "CLIENT_SPECIFIED")]
     ClientSpecified,
@@ -5781,6 +5733,7 @@ pub enum CoordinatesSource {
     #[serde(rename = "SOURCE_UNSPECIFIED")]
     SourceUnspecified,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5799,11 +5752,6 @@ impl std::fmt::Display for CoordinatesSource {
     }
 }
 
-impl Default for CoordinatesSource {
-    fn default() -> CoordinatesSource {
-        CoordinatesSource::Noop
-    }
-}
 impl CoordinatesSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, CoordinatesSource::Noop)
@@ -5811,13 +5759,14 @@ impl CoordinatesSource {
 }
 
 /**
-* Column to use for sorting results
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Column to use for sorting results
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryGroupsListOrderBy {
     #[serde(rename = "email")]
     Email,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5834,11 +5783,6 @@ impl std::fmt::Display for DirectoryGroupsListOrderBy {
     }
 }
 
-impl Default for DirectoryGroupsListOrderBy {
-    fn default() -> DirectoryGroupsListOrderBy {
-        DirectoryGroupsListOrderBy::Noop
-    }
-}
 impl DirectoryGroupsListOrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryGroupsListOrderBy::Noop)
@@ -5846,9 +5790,9 @@ impl DirectoryGroupsListOrderBy {
 }
 
 /**
-* Event on which subscription is intended (if subscribing)
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Event on which subscription is intended (if subscribing)
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Event {
     #[serde(rename = "add")]
     Add,
@@ -5861,6 +5805,7 @@ pub enum Event {
     #[serde(rename = "update")]
     Update,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5881,11 +5826,6 @@ impl std::fmt::Display for Event {
     }
 }
 
-impl Default for Event {
-    fn default() -> Event {
-        Event::Noop
-    }
-}
 impl Event {
     pub fn is_noop(&self) -> bool {
         matches!(self, Event::Noop)
@@ -5893,9 +5833,9 @@ impl Event {
 }
 
 /**
-* Property to use for sorting results.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Property to use for sorting results.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersListOrderBy {
     #[serde(rename = "email")]
     Email,
@@ -5904,6 +5844,7 @@ pub enum DirectoryUsersListOrderBy {
     #[serde(rename = "givenName")]
     GivenName,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5922,11 +5863,6 @@ impl std::fmt::Display for DirectoryUsersListOrderBy {
     }
 }
 
-impl Default for DirectoryUsersListOrderBy {
-    fn default() -> DirectoryUsersListOrderBy {
-        DirectoryUsersListOrderBy::Noop
-    }
-}
 impl DirectoryUsersListOrderBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryUsersListOrderBy::Noop)
@@ -5934,9 +5870,9 @@ impl DirectoryUsersListOrderBy {
 }
 
 /**
-* What subset of fields to fetch for this user.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * What subset of fields to fetch for this user.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersListProjection {
     #[serde(rename = "basic")]
     Basic,
@@ -5945,6 +5881,7 @@ pub enum DirectoryUsersListProjection {
     #[serde(rename = "full")]
     Full,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5963,11 +5900,6 @@ impl std::fmt::Display for DirectoryUsersListProjection {
     }
 }
 
-impl Default for DirectoryUsersListProjection {
-    fn default() -> DirectoryUsersListProjection {
-        DirectoryUsersListProjection::Noop
-    }
-}
 impl DirectoryUsersListProjection {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryUsersListProjection::Noop)
@@ -5975,15 +5907,16 @@ impl DirectoryUsersListProjection {
 }
 
 /**
-* Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ViewType {
     #[serde(rename = "admin_view")]
     AdminView,
     #[serde(rename = "domain_public")]
     DomainPublic,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6001,11 +5934,6 @@ impl std::fmt::Display for ViewType {
     }
 }
 
-impl Default for ViewType {
-    fn default() -> ViewType {
-        ViewType::Noop
-    }
-}
 impl ViewType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ViewType::Noop)
@@ -6013,15 +5941,16 @@ impl ViewType {
 }
 
 /**
-* Events to watch for.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Events to watch for.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum DirectoryUsersAliasesListEvent {
     #[serde(rename = "add")]
     Add,
     #[serde(rename = "delete")]
     Delete,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6039,11 +5968,6 @@ impl std::fmt::Display for DirectoryUsersAliasesListEvent {
     }
 }
 
-impl Default for DirectoryUsersAliasesListEvent {
-    fn default() -> DirectoryUsersAliasesListEvent {
-        DirectoryUsersAliasesListEvent::Noop
-    }
-}
 impl DirectoryUsersAliasesListEvent {
     pub fn is_noop(&self) -> bool {
         matches!(self, DirectoryUsersAliasesListEvent::Noop)

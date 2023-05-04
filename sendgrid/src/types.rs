@@ -173,7 +173,7 @@ pub struct CampaignResponseAllOf {
     pub campaign_response: CampaignResponse,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Operator {
     #[serde(rename = "contains")]
     Contains,
@@ -186,6 +186,7 @@ pub enum Operator {
     #[serde(rename = "ne")]
     Ne,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -206,24 +207,20 @@ impl std::fmt::Display for Operator {
     }
 }
 
-impl Default for Operator {
-    fn default() -> Operator {
-        Operator::Noop
-    }
-}
 impl Operator {
     pub fn is_noop(&self) -> bool {
         matches!(self, Operator::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AndOr {
     #[serde(rename = "and")]
     And,
     #[serde(rename = "or")]
     Or,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -241,11 +238,6 @@ impl std::fmt::Display for AndOr {
     }
 }
 
-impl Default for AndOr {
-    fn default() -> AndOr {
-        AndOr::Noop
-    }
-}
 impl AndOr {
     pub fn is_noop(&self) -> bool {
         matches!(self, AndOr::Noop)
@@ -572,9 +564,9 @@ pub struct SenderAllOf {
 }
 
 /**
-* The type of the field.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of the field.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "date")]
     Date,
@@ -583,6 +575,7 @@ pub enum Type {
     #[serde(rename = "text")]
     Text,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -601,11 +594,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -679,9 +667,9 @@ pub struct MailSettingsAddressWhitelabel {
 }
 
 /**
-* The type of DNS record that was generated.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of DNS record that was generated.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum LinkBranding200ResponseDnsDomainCnameType {
     #[serde(rename = "cname")]
     Cname,
@@ -690,6 +678,7 @@ pub enum LinkBranding200ResponseDnsDomainCnameType {
     #[serde(rename = "txt")]
     Txt,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -708,11 +697,6 @@ impl std::fmt::Display for LinkBranding200ResponseDnsDomainCnameType {
     }
 }
 
-impl Default for LinkBranding200ResponseDnsDomainCnameType {
-    fn default() -> LinkBranding200ResponseDnsDomainCnameType {
-        LinkBranding200ResponseDnsDomainCnameType::Noop
-    }
-}
 impl LinkBranding200ResponseDnsDomainCnameType {
     pub fn is_noop(&self) -> bool {
         matches!(self, LinkBranding200ResponseDnsDomainCnameType::Noop)
@@ -1842,15 +1826,16 @@ pub struct MailSettingsForwardSpam {
 }
 
 /**
-* The editor used in the UI.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The editor used in the UI.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Editor {
     #[serde(rename = "code")]
     Code,
     #[serde(rename = "design")]
     Design,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -1868,11 +1853,6 @@ impl std::fmt::Display for Editor {
     }
 }
 
-impl Default for Editor {
-    fn default() -> Editor {
-        Editor::Noop
-    }
-}
 impl Editor {
     pub fn is_noop(&self) -> bool {
         matches!(self, Editor::Noop)
@@ -2120,15 +2100,16 @@ pub struct SubuserStatsData {
 }
 
 /**
-* The status of the scheduled send.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The status of the scheduled send.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Status {
     #[serde(rename = "cancel")]
     Cancel,
     #[serde(rename = "pause")]
     Pause,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2146,11 +2127,6 @@ impl std::fmt::Display for Status {
     }
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Status::Noop
-    }
-}
 impl Status {
     pub fn is_noop(&self) -> bool {
         matches!(self, Status::Noop)
@@ -2603,15 +2579,16 @@ pub struct TransactionalTemplatesVersionOutputLean {
 }
 
 /**
-* Defines the generation of the template.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Defines the generation of the template.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Generation {
     #[serde(rename = "dynamic")]
     Dynamic,
     #[serde(rename = "legacy")]
     Legacy,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2629,11 +2606,6 @@ impl std::fmt::Display for Generation {
     }
 }
 
-impl Default for Generation {
-    fn default() -> Generation {
-        Generation::Noop
-    }
-}
 impl Generation {
     pub fn is_noop(&self) -> bool {
         matches!(self, Generation::Noop)
@@ -3015,9 +2987,9 @@ pub struct SingleContactRequest {
 }
 
 /**
-* The export job's status. Allowed values: `pending`, `ready`, or `failure`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The export job's status. Allowed values: `pending`, `ready`, or `failure`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ContactExportStatus {
     #[serde(rename = "failure")]
     Failure,
@@ -3026,6 +2998,7 @@ pub enum ContactExportStatus {
     #[serde(rename = "ready")]
     Ready,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3044,11 +3017,6 @@ impl std::fmt::Display for ContactExportStatus {
     }
 }
 
-impl Default for ContactExportStatus {
-    fn default() -> ContactExportStatus {
-        ContactExportStatus::Noop
-    }
-}
 impl ContactExportStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ContactExportStatus::Noop)
@@ -3522,7 +3490,7 @@ pub struct List {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FieldType {
     #[serde(rename = "Date")]
     Date,
@@ -3531,6 +3499,7 @@ pub enum FieldType {
     #[serde(rename = "Text")]
     Text,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -3549,11 +3518,6 @@ impl std::fmt::Display for FieldType {
     }
 }
 
-impl Default for FieldType {
-    fn default() -> FieldType {
-        FieldType::Noop
-    }
-}
 impl FieldType {
     pub fn is_noop(&self) -> bool {
         matches!(self, FieldType::Noop)
@@ -4444,11 +4408,12 @@ pub struct ErrorsDataType {
 }
 
 /**
-* This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * This is the A/B phase of the Single Send stat returned. If the `group_by` parameter doesn't include `ab_phase` in the request, then the value is "all".
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbPhase {
     #[serde(rename = "all")]
+    #[default]
     All,
     #[serde(rename = "send")]
     Send,
@@ -4467,12 +4432,6 @@ impl std::fmt::Display for AbPhase {
             AbPhase::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for AbPhase {
-    fn default() -> AbPhase {
-        AbPhase::All
     }
 }
 
@@ -4647,7 +4606,7 @@ pub struct MetricsData {
     pub unsubscribes: i64,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SinglesendSearchStatus {
     #[serde(rename = "draft")]
     Draft,
@@ -4656,6 +4615,7 @@ pub enum SinglesendSearchStatus {
     #[serde(rename = "triggered")]
     Triggered,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4674,11 +4634,6 @@ impl std::fmt::Display for SinglesendSearchStatus {
     }
 }
 
-impl Default for SinglesendSearchStatus {
-    fn default() -> SinglesendSearchStatus {
-        SinglesendSearchStatus::Noop
-    }
-}
 impl SinglesendSearchStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, SinglesendSearchStatus::Noop)
@@ -5312,15 +5267,16 @@ pub struct DomainAuthentication200ResponseAllOf {
 }
 
 /**
-* What differs between the A/B tests
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * What differs between the A/B tests
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbTestSummaryType {
     #[serde(rename = "content")]
     Content,
     #[serde(rename = "subject")]
     Subject,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5338,11 +5294,6 @@ impl std::fmt::Display for AbTestSummaryType {
     }
 }
 
-impl Default for AbTestSummaryType {
-    fn default() -> AbTestSummaryType {
-        AbTestSummaryType::Noop
-    }
-}
 impl AbTestSummaryType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbTestSummaryType::Noop)
@@ -5350,9 +5301,9 @@ impl AbTestSummaryType {
 }
 
 /**
-* How the winner will be decided
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * How the winner will be decided
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum WinnerCriteria {
     #[serde(rename = "click")]
     Click,
@@ -5361,6 +5312,7 @@ pub enum WinnerCriteria {
     #[serde(rename = "open")]
     Open,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -5379,11 +5331,6 @@ impl std::fmt::Display for WinnerCriteria {
     }
 }
 
-impl Default for WinnerCriteria {
-    fn default() -> WinnerCriteria {
-        WinnerCriteria::Noop
-    }
-}
 impl WinnerCriteria {
     pub fn is_noop(&self) -> bool {
         matches!(self, WinnerCriteria::Noop)
@@ -6098,9 +6045,9 @@ pub struct InvalidEmail {
 }
 
 /**
-* The message's status.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The message's status.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EmailActivityResponseCommonFieldsStatus {
     #[serde(rename = "delivered")]
     Delivered,
@@ -6109,6 +6056,7 @@ pub enum EmailActivityResponseCommonFieldsStatus {
     #[serde(rename = "processed")]
     Processed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6127,11 +6075,6 @@ impl std::fmt::Display for EmailActivityResponseCommonFieldsStatus {
     }
 }
 
-impl Default for EmailActivityResponseCommonFieldsStatus {
-    fn default() -> EmailActivityResponseCommonFieldsStatus {
-        EmailActivityResponseCommonFieldsStatus::Noop
-    }
-}
 impl EmailActivityResponseCommonFieldsStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, EmailActivityResponseCommonFieldsStatus::Noop)
@@ -6397,9 +6340,9 @@ pub struct SsoTeammateRequestAllOf {
 }
 
 /**
-* A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * A Teammate can be an “admin,” “owner,” or “teammate.” Each role is associated with the scope of the Teammate’s permissions.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum UserType {
     #[serde(rename = "admin")]
     Admin,
@@ -6408,6 +6351,7 @@ pub enum UserType {
     #[serde(rename = "teammate")]
     Teammate,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -6426,11 +6370,6 @@ impl std::fmt::Display for UserType {
     }
 }
 
-impl Default for UserType {
-    fn default() -> UserType {
-        UserType::Noop
-    }
-}
 impl UserType {
     pub fn is_noop(&self) -> bool {
         matches!(self, UserType::Noop)
@@ -7101,7 +7040,7 @@ pub struct SegmentUpdate {
     pub query_dsl: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbbvMessageStatus {
     #[serde(rename = "delivered")]
     Delivered,
@@ -7110,6 +7049,7 @@ pub enum AbbvMessageStatus {
     #[serde(rename = "processed")]
     Processed,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7128,11 +7068,6 @@ impl std::fmt::Display for AbbvMessageStatus {
     }
 }
 
-impl Default for AbbvMessageStatus {
-    fn default() -> AbbvMessageStatus {
-        AbbvMessageStatus::Noop
-    }
-}
 impl AbbvMessageStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbbvMessageStatus::Noop)
@@ -7203,9 +7138,9 @@ pub struct Messages {
 }
 
 /**
-* Name of event
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Name of event
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum EventName {
     #[serde(rename = "bounced")]
     Bounced,
@@ -7230,6 +7165,7 @@ pub enum EventName {
     #[serde(rename = "unsubscribe")]
     Unsubscribe,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7256,11 +7192,6 @@ impl std::fmt::Display for EventName {
     }
 }
 
-impl Default for EventName {
-    fn default() -> EventName {
-        EventName::Noop
-    }
-}
 impl EventName {
     pub fn is_noop(&self) -> bool {
         matches!(self, EventName::Noop)
@@ -7268,9 +7199,9 @@ impl EventName {
 }
 
 /**
-* Use to distinguish between types of bounces
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Use to distinguish between types of bounces
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum BounceType {
     #[serde(rename = "blocked")]
     Blocked,
@@ -7279,6 +7210,7 @@ pub enum BounceType {
     #[serde(rename = "expired")]
     Expired,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7297,11 +7229,6 @@ impl std::fmt::Display for BounceType {
     }
 }
 
-impl Default for BounceType {
-    fn default() -> BounceType {
-        BounceType::Noop
-    }
-}
 impl BounceType {
     pub fn is_noop(&self) -> bool {
         matches!(self, BounceType::Noop)
@@ -7371,15 +7298,16 @@ pub struct Event {
 }
 
 /**
-* Whether or not the outbound IP is dedicated vs shared
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Whether or not the outbound IP is dedicated vs shared
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum OutboundIpType {
     #[serde(rename = "dedicated")]
     Dedicated,
     #[serde(rename = "shared")]
     Shared,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7397,11 +7325,6 @@ impl std::fmt::Display for OutboundIpType {
     }
 }
 
-impl Default for OutboundIpType {
-    fn default() -> OutboundIpType {
-        OutboundIpType::Noop
-    }
-}
 impl OutboundIpType {
     pub fn is_noop(&self) -> bool {
         matches!(self, OutboundIpType::Noop)
@@ -7765,13 +7688,14 @@ pub struct AuthenticationDomain {
 }
 
 /**
-* Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AggregatedBy {
     #[serde(rename = "day")]
     Day,
     #[serde(rename = "total")]
+    #[default]
     Total,
     #[serde(other)]
     FallthroughString,
@@ -7788,19 +7712,14 @@ impl std::fmt::Display for AggregatedBy {
     }
 }
 
-impl Default for AggregatedBy {
-    fn default() -> AggregatedBy {
-        AggregatedBy::Total
-    }
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GroupBy {
     #[serde(rename = "ab_phase")]
     AbPhase,
     #[serde(rename = "ab_variation")]
     AbVariation,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7818,22 +7737,18 @@ impl std::fmt::Display for GroupBy {
     }
 }
 
-impl Default for GroupBy {
-    fn default() -> GroupBy {
-        GroupBy::Noop
-    }
-}
 impl GroupBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, GroupBy::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TraitAutomationQueryParamsGroupBy {
     #[serde(rename = "step_id")]
     StepId,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7850,24 +7765,20 @@ impl std::fmt::Display for TraitAutomationQueryParamsGroupBy {
     }
 }
 
-impl Default for TraitAutomationQueryParamsGroupBy {
-    fn default() -> TraitAutomationQueryParamsGroupBy {
-        TraitAutomationQueryParamsGroupBy::Noop
-    }
-}
 impl TraitAutomationQueryParamsGroupBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, TraitAutomationQueryParamsGroupBy::Noop)
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AbPhaseId {
     #[serde(rename = "send")]
     Send,
     #[serde(rename = "test")]
     Test,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7885,11 +7796,6 @@ impl std::fmt::Display for AbPhaseId {
     }
 }
 
-impl Default for AbPhaseId {
-    fn default() -> AbPhaseId {
-        AbPhaseId::Noop
-    }
-}
 impl AbPhaseId {
     pub fn is_noop(&self) -> bool {
         matches!(self, AbPhaseId::Noop)
@@ -7897,9 +7803,9 @@ impl AbPhaseId {
 }
 
 /**
-* How to group the statistics. Must be either "day", "week", or "month".
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * How to group the statistics. Must be either "day", "week", or "month".
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     #[serde(rename = "day")]
     Day,
@@ -7908,6 +7814,7 @@ pub enum TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     #[serde(rename = "week")]
     Week,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -7926,11 +7833,6 @@ impl std::fmt::Display for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     }
 }
 
-impl Default for TraitStatsAdvancedBaseQueryStringsAggregatedBy {
-    fn default() -> TraitStatsAdvancedBaseQueryStringsAggregatedBy {
-        TraitStatsAdvancedBaseQueryStringsAggregatedBy::Noop
-    }
-}
 impl TraitStatsAdvancedBaseQueryStringsAggregatedBy {
     pub fn is_noop(&self) -> bool {
         matches!(self, TraitStatsAdvancedBaseQueryStringsAggregatedBy::Noop)
@@ -8151,11 +8053,12 @@ pub struct Content {
 }
 
 /**
-* The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The attachment's content-disposition, specifying how you would like the attachment to be displayed. For example, `“inline”` results in the attached file are displayed automatically within the message while `“attachment”` results in the attached file require some action to be taken before it is displayed, such as opening or downloading the file.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Disposition {
     #[serde(rename = "attachment")]
+    #[default]
     Attachment,
     #[serde(rename = "inline")]
     Inline,
@@ -8171,12 +8074,6 @@ impl std::fmt::Display for Disposition {
             Disposition::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for Disposition {
-    fn default() -> Disposition {
-        Disposition::Attachment
     }
 }
 
@@ -9579,15 +9476,16 @@ pub struct PatchScopesRequestsApproveResponse {
 }
 
 /**
-* The type of alert.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of alert.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAlertsResponseType {
     #[serde(rename = "stats_notification")]
     StatsNotification,
     #[serde(rename = "usage_limit")]
     UsageLimit,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9605,11 +9503,6 @@ impl std::fmt::Display for GetAlertsResponseType {
     }
 }
 
-impl Default for GetAlertsResponseType {
-    fn default() -> GetAlertsResponseType {
-        GetAlertsResponseType::Noop
-    }
-}
 impl GetAlertsResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAlertsResponseType::Noop)
@@ -9762,15 +9655,16 @@ pub struct PostAlertsResponse {
 }
 
 /**
-* The type of alert.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of alert.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetAlertsAlertResponseType {
     #[serde(rename = "stats_notification")]
     StatsNotification,
     #[serde(rename = "usage_alert")]
     UsageAlert,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -9788,11 +9682,6 @@ impl std::fmt::Display for GetAlertsAlertResponseType {
     }
 }
 
-impl Default for GetAlertsAlertResponseType {
-    fn default() -> GetAlertsAlertResponseType {
-        GetAlertsAlertResponseType::Noop
-    }
-}
 impl GetAlertsAlertResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetAlertsAlertResponseType::Noop)
@@ -9978,15 +9867,16 @@ pub struct GetUserProfileResponse {
 }
 
 /**
-* The type of account for this user.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The type of account for this user.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum GetUserAccountResponseType {
     #[serde(rename = "free")]
     Free,
     #[serde(rename = "paid")]
     Paid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10004,11 +9894,6 @@ impl std::fmt::Display for GetUserAccountResponseType {
     }
 }
 
-impl Default for GetUserAccountResponseType {
-    fn default() -> GetUserAccountResponseType {
-        GetUserAccountResponseType::Noop
-    }
-}
 impl GetUserAccountResponseType {
     pub fn is_noop(&self) -> bool {
         matches!(self, GetUserAccountResponseType::Noop)
@@ -10242,13 +10127,14 @@ pub struct PutSubusersSubuserNameIpsResponse {
 }
 
 /**
-* The direction you want to sort.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The direction you want to sort.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortByDirection {
     #[serde(rename = "asc")]
     Asc,
     #[serde(rename = "desc")]
+    #[default]
     Desc,
     #[serde(other)]
     FallthroughString,
@@ -10265,16 +10151,10 @@ impl std::fmt::Display for SortByDirection {
     }
 }
 
-impl Default for SortByDirection {
-    fn default() -> SortByDirection {
-        SortByDirection::Desc
-    }
-}
-
 /**
-* The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SortByMetric {
     #[serde(rename = "blocks")]
     Blocks,
@@ -10283,6 +10163,7 @@ pub enum SortByMetric {
     #[serde(rename = "clicks")]
     Clicks,
     #[serde(rename = "delivered")]
+    #[default]
     Delivered,
     #[serde(rename = "opens")]
     Opens,
@@ -10313,12 +10194,6 @@ impl std::fmt::Display for SortByMetric {
             SortByMetric::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for SortByMetric {
-    fn default() -> SortByMetric {
-        SortByMetric::Delivered
     }
 }
 
@@ -10561,9 +10436,9 @@ pub struct PostValidationsEmailRequest {
 }
 
 /**
-* A generic classification of whether or not the email address is valid.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * A generic classification of whether or not the email address is valid.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Verdict {
     #[serde(rename = "Invalid")]
     Invalid,
@@ -10572,6 +10447,7 @@ pub enum Verdict {
     #[serde(rename = "Valid")]
     Valid,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -10590,11 +10466,6 @@ impl std::fmt::Display for Verdict {
     }
 }
 
-impl Default for Verdict {
-    fn default() -> Verdict {
-        Verdict::Noop
-    }
-}
 impl Verdict {
     pub fn is_noop(&self) -> bool {
         matches!(self, Verdict::Noop)
@@ -11837,11 +11708,12 @@ pub struct Notifications {
 }
 
 /**
-* File type for export file. Choose from `json` or `csv`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * File type for export file. Choose from `json` or `csv`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum FileType {
     #[serde(rename = "csv")]
+    #[default]
     Csv,
     #[serde(rename = "json")]
     Json,
@@ -11857,12 +11729,6 @@ impl std::fmt::Display for FileType {
             FileType::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for FileType {
-    fn default() -> FileType {
-        FileType::Csv
     }
 }
 
@@ -11951,13 +11817,14 @@ pub struct PostMcContactsSearchResponse {
 }
 
 /**
-* Upload file type.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Upload file type.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PutMcContactsImportsRequestFileType {
     #[serde(rename = "csv")]
     Csv,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -11974,11 +11841,6 @@ impl std::fmt::Display for PutMcContactsImportsRequestFileType {
     }
 }
 
-impl Default for PutMcContactsImportsRequestFileType {
-    fn default() -> PutMcContactsImportsRequestFileType {
-        PutMcContactsImportsRequestFileType::Noop
-    }
-}
 impl PutMcContactsImportsRequestFileType {
     pub fn is_noop(&self) -> bool {
         matches!(self, PutMcContactsImportsRequestFileType::Noop)
@@ -12488,13 +12350,14 @@ pub struct PostMarketingSinglesendsRequest {
 }
 
 /**
-* This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * This is the ISO 8601 time at which to send the Single Send; must be in future, or the string "now"
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum SendAt {
     #[serde(rename = "now")]
     Now,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12511,11 +12374,6 @@ impl std::fmt::Display for SendAt {
     }
 }
 
-impl Default for SendAt {
-    fn default() -> SendAt {
-        SendAt::Noop
-    }
-}
 impl SendAt {
     pub fn is_noop(&self) -> bool {
         matches!(self, SendAt::Noop)
@@ -12531,11 +12389,12 @@ pub struct PutMarketingSinglesendsScheduleRequest {
     pub send_at: SendAt,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PutMarketingSinglesendsScheduleResponseStatus {
     #[serde(rename = "scheduled")]
     Scheduled,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -12552,11 +12411,6 @@ impl std::fmt::Display for PutMarketingSinglesendsScheduleResponseStatus {
     }
 }
 
-impl Default for PutMarketingSinglesendsScheduleResponseStatus {
-    fn default() -> PutMarketingSinglesendsScheduleResponseStatus {
-        PutMarketingSinglesendsScheduleResponseStatus::Noop
-    }
-}
 impl PutMarketingSinglesendsScheduleResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PutMarketingSinglesendsScheduleResponseStatus::Noop)
@@ -13320,13 +13174,14 @@ pub struct ScheduleACampaignRequest {
 }
 
 /**
-* The status of your campaign.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The status of your campaign.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ScheduleACampaignResponseStatus {
     #[serde(rename = "Scheduled")]
     Scheduled,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13343,11 +13198,6 @@ impl std::fmt::Display for ScheduleACampaignResponseStatus {
     }
 }
 
-impl Default for ScheduleACampaignResponseStatus {
-    fn default() -> ScheduleACampaignResponseStatus {
-        ScheduleACampaignResponseStatus::Noop
-    }
-}
 impl ScheduleACampaignResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, ScheduleACampaignResponseStatus::Noop)
@@ -13417,13 +13267,14 @@ pub struct SendATestCampaignRequest {
 }
 
 /**
-* Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Comma-delimited list specifying which generations of templates to return. Options are `legacy`, `dynamic` or `legacy,dynamic`.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Generations {
     #[serde(rename = "dynamic")]
     Dynamic,
     #[serde(rename = "legacy")]
+    #[default]
     Legacy,
     #[serde(rename = "legacy,dynamic")]
     LegacyDynamic,
@@ -13440,12 +13291,6 @@ impl std::fmt::Display for Generations {
             Generations::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for Generations {
-    fn default() -> Generations {
-        Generations::Legacy
     }
 }
 
@@ -13680,11 +13525,12 @@ pub struct GetMessagesResponse {
     pub messages: Vec<Messages>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum PostMessagesDownloadResponseStatus {
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13701,11 +13547,6 @@ impl std::fmt::Display for PostMessagesDownloadResponseStatus {
     }
 }
 
-impl Default for PostMessagesDownloadResponseStatus {
-    fn default() -> PostMessagesDownloadResponseStatus {
-        PostMessagesDownloadResponseStatus::Noop
-    }
-}
 impl PostMessagesDownloadResponseStatus {
     pub fn is_noop(&self) -> bool {
         matches!(self, PostMessagesDownloadResponseStatus::Noop)
@@ -13836,15 +13677,16 @@ pub struct GetStatsResponseData {
 }
 
 /**
-* The country you would like to see statistics for. Currently only supported for US and CA.
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * The country you would like to see statistics for. Currently only supported for US and CA.
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Country {
     #[serde(rename = "CA")]
     Ca,
     #[serde(rename = "US")]
     Us,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -13862,11 +13704,6 @@ impl std::fmt::Display for Country {
     }
 }
 
-impl Default for Country {
-    fn default() -> Country {
-        Country::Noop
-    }
-}
 impl Country {
     pub fn is_noop(&self) -> bool {
         matches!(self, Country::Noop)
@@ -13971,9 +13808,9 @@ pub struct GetClientsStatsResponse {
 }
 
 /**
-* Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ClientType {
     #[serde(rename = "desktop")]
     Desktop,
@@ -13984,6 +13821,7 @@ pub enum ClientType {
     #[serde(rename = "webmail")]
     Webmail,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -14003,11 +13841,6 @@ impl std::fmt::Display for ClientType {
     }
 }
 
-impl Default for ClientType {
-    fn default() -> ClientType {
-        ClientType::Noop
-    }
-}
 impl ClientType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ClientType::Noop)
