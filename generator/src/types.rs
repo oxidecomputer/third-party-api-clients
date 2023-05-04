@@ -183,6 +183,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || rt.starts_with("Vec<")
                                 || rt.starts_with("Option<")
                                 || rt.starts_with("HashMap<")
+                                || rt.starts_with("std::collections::HashMap<")
                             {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {

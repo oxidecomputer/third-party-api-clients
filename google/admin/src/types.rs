@@ -4087,7 +4087,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(rename = "customSchemas")]
+    #[serde(
+        default,
+        skip_serializing_if = "std::collections::HashMap::is_empty",
+        rename = "customSchemas"
+    )]
     pub custom_schemas:
         std::collections::HashMap<String, std::collections::HashMap<String, serde_json::Value>>,
     /**
