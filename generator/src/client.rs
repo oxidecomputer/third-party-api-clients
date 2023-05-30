@@ -869,8 +869,10 @@ where
     T: ToString,
     R: ToString,
 {
+    use base64::{Engine, engine::general_purpose::STANDARD};
+
     let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
-    let decoded_google_key = base64::decode(google_key).unwrap();
+    let decoded_google_key = STANDARD.decode(google_key).unwrap();
     let secret = yup_oauth2::parse_application_secret(decoded_google_key)
         .expect("failed to read from google credential env var");
 
@@ -2058,7 +2060,7 @@ pub fn generate_servers(servers: &[openapiv3::Server], server_prefix: &str) -> G
                 )),
                 top_level_type: Some(server_enum),
             }
-        },
+        }
     }
 }
 

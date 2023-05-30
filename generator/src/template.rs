@@ -403,6 +403,7 @@ pub fn generate_docs_github(
 //! use {name}::{{Client, auth::{{Credentials, InstallationTokenGenerator, JWTCredentials}}}};
 //! #[cfg(feature = "httpcache")]
 //! use {name}::http_cache::FileBasedCache;
+//! use base64::{{Engine, engine::general_purpose::STANDARD}};
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -411,7 +412,7 @@ pub fn generate_docs_github(
 //! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-//! let private_key = base64::decode(encoded_private_key).unwrap();
+//! let private_key = STANDARD.decode(encoded_private_key).unwrap();
 //!
 //! // Decode the key.
 //! let key = nom_pem::decode_block(&private_key).unwrap();

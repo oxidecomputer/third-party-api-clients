@@ -454,8 +454,10 @@ impl Client {
         T: ToString,
         R: ToString,
     {
+        use base64::{engine::general_purpose::STANDARD, Engine};
+
         let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
-        let decoded_google_key = base64::decode(google_key).unwrap();
+        let decoded_google_key = STANDARD.decode(google_key).unwrap();
         let secret = yup_oauth2::parse_application_secret(decoded_google_key)
             .expect("failed to read from google credential env var");
 

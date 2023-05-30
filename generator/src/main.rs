@@ -2281,6 +2281,7 @@ fn render_param(
     out.to_string()
 }
 
+#[allow(clippy::too_many_arguments)]
 fn gen(
     api: &OpenAPI,
     proper_name: &str,
@@ -3400,7 +3401,7 @@ thiserror = "1"
 tokio = {{ version = "1.25.0", features = ["full"] }}
 
 [dev-dependencies]
-base64 = "^0.13"
+base64 = "^0.21"
 dirs = "^3.0.2"
 nom_pem = "4"
 rand = "0.8.5"

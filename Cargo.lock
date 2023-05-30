@@ -305,7 +305,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -343,7 +343,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -653,7 +653,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -691,7 +691,6 @@ version = "0.5.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -731,7 +730,6 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -771,7 +769,6 @@ version = "0.6.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -811,7 +808,6 @@ version = "0.5.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -851,7 +847,6 @@ version = "0.6.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -891,7 +886,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1214,7 +1209,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1426,7 +1421,7 @@ version = "0.3.2"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1464,7 +1459,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -1743,7 +1738,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2012,7 +2007,7 @@ version = "0.5.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2227,7 +2222,7 @@ version = "0.4.1"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2352,7 +2347,6 @@ version = "0.6.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
  "base64 0.21.0",
  "bytes",
  "chrono",
@@ -2392,7 +2386,7 @@ version = "0.3.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2430,7 +2424,7 @@ version = "0.3.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2505,7 +2499,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -2816,7 +2810,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
@@ -3294,7 +3288,7 @@ version = "0.4.0"
 dependencies = [
  "async-recursion",
  "async-trait",
- "base64 0.13.0",
+ "base64 0.21.0",
  "bytes",
  "chrono",
  "dirs",
