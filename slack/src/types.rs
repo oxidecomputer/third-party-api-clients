@@ -51,7 +51,6 @@ pub struct ObjsBotProfile {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub deleted: bool,
-    #[serde()]
     pub icons: Icons,
     #[serde(
         default,
@@ -265,9 +264,7 @@ pub struct ObjsChannel {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub priority: f64,
-    #[serde()]
     pub purpose: Topic,
-    #[serde()]
     pub topic: Topic,
     #[serde(
         default,
@@ -395,7 +392,6 @@ pub struct Shares {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_active: bool,
-    #[serde()]
     pub team: ObjsTeam,
     #[serde(
         default,
@@ -645,7 +641,6 @@ pub struct ObjsConversation {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub priority: f64,
-    #[serde()]
     pub purpose: Topic,
     #[serde(
         default,
@@ -665,7 +660,6 @@ pub struct ObjsConversation {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub timezone_count: i64,
-    #[serde()]
     pub topic: Topic,
     #[serde(
         default,
@@ -919,7 +913,6 @@ pub struct ConversationMpimObject {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub priority: f64,
-    #[serde()]
     pub purpose: Topic,
     #[serde(
         default,
@@ -939,7 +932,6 @@ pub struct ConversationMpimObject {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub timezone_count: i64,
-    #[serde()]
     pub topic: Topic,
     #[serde(
         default,
@@ -998,7 +990,6 @@ pub struct ConversationImChannelObjectFromConversationsMethodsShares {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde()]
     pub team: ObjsTeam,
 }
 
@@ -2129,11 +2120,12 @@ pub struct NewPagingStyle {
     pub next_cursor: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Warnings {
     #[serde(rename = "method_deprecated")]
     MethodDeprecated,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2150,11 +2142,6 @@ impl std::fmt::Display for Warnings {
     }
 }
 
-impl Default for Warnings {
-    fn default() -> Warnings {
-        Warnings::Noop
-    }
-}
 impl Warnings {
     pub fn is_noop(&self) -> bool {
         matches!(self, Warnings::Noop)
@@ -2215,13 +2202,14 @@ pub struct ObjsResponseMetadataAnyOf {
     pub objs_response_metadata: ObjsResponseMetadata,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum AutoType {
     #[serde(rename = "admin")]
     Admin,
     #[serde(rename = "owner")]
     Owner,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2239,11 +2227,6 @@ impl std::fmt::Display for AutoType {
     }
 }
 
-impl Default for AutoType {
-    fn default() -> AutoType {
-        AutoType::Noop
-    }
-}
 impl AutoType {
     pub fn is_noop(&self) -> bool {
         matches!(self, AutoType::Noop)
@@ -2386,7 +2369,6 @@ pub struct ObjsSubteam {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde()]
     pub prefs: Prefs,
     #[serde(
         default,
@@ -2427,7 +2409,7 @@ pub struct TzAnyOf {
     pub value: serde_json::Value,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Plan {
     #[serde(rename = "compliance")]
     Compliance,
@@ -2438,6 +2420,7 @@ pub enum Plan {
     #[serde(rename = "std")]
     Std,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2457,11 +2440,6 @@ impl std::fmt::Display for Plan {
     }
 }
 
-impl Default for Plan {
-    fn default() -> Plan {
-        Plan::Noop
-    }
-}
 impl Plan {
     pub fn is_noop(&self) -> bool {
         matches!(self, Plan::Noop)
@@ -2564,7 +2542,6 @@ pub struct ObjsTeam {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub has_compliance_export: bool,
-    #[serde()]
     pub icon: ObjsIcon,
     #[serde(
         default,
@@ -2655,7 +2632,7 @@ pub struct OptionsAnyOf {
     pub objs_team_profile_field_option: ObjsTeamProfileFieldOption,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "date")]
     Date,
@@ -2670,6 +2647,7 @@ pub enum Type {
     #[serde(rename = "user")]
     User,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -2691,11 +2669,6 @@ impl std::fmt::Display for Type {
     }
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Type::Noop
-    }
-}
 impl Type {
     pub fn is_noop(&self) -> bool {
         matches!(self, Type::Noop)
@@ -2934,7 +2907,6 @@ pub struct ObjsUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub presence: String,
-    #[serde()]
     pub profile: ObjsUserProfile,
     /**
      * user object for non enterprise type
@@ -3149,7 +3121,6 @@ pub struct ObjsUserData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub presence: String,
-    #[serde()]
     pub profile: ObjsUserProfile,
     /**
      * enterprise user
@@ -3331,7 +3302,6 @@ pub struct ObjsUserProfile {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    #[serde()]
     pub fields: FieldsOneOf,
     #[serde(
         default,
@@ -3752,7 +3722,6 @@ pub struct Im {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Team {
-    #[serde()]
     pub resources: ObjsResources,
     #[serde(
         default,
@@ -3764,24 +3733,17 @@ pub struct Team {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Info {
-    #[serde()]
     pub app_home: Im,
-    #[serde()]
     pub channel: Im,
-    #[serde()]
     pub group: Im,
-    #[serde()]
     pub im: Im,
-    #[serde()]
     pub mpim: Im,
-    #[serde()]
     pub team: Team,
 }
 
 /// Schema for successful response from apps.permissions.info method
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsPermissionsInfoSchema {
-    #[serde()]
     pub info: Info,
     #[serde(
         default,
@@ -3882,7 +3844,6 @@ pub struct ApiPermissionsScopesListSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub scopes: Scopes,
 }
 
@@ -3971,7 +3932,6 @@ pub struct Bot {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub deleted: bool,
-    #[serde()]
     pub icons: Icons,
     #[serde(
         default,
@@ -4002,7 +3962,6 @@ pub struct Bot {
 /// Schema for successful response from bots.info method
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BotsInfoSchema {
-    #[serde()]
     pub bot: Bot,
     #[serde(
         default,
@@ -4108,7 +4067,6 @@ pub struct ChatPostMessageSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub channel: String,
-    #[serde()]
     pub message: ObjsMessage,
     #[serde(
         default,
@@ -4175,7 +4133,6 @@ pub struct ChatScheduleMessageSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub channel: String,
-    #[serde()]
     pub message: Message,
     #[serde(
         default,
@@ -4238,7 +4195,6 @@ pub struct ChatScheduledMessagesListSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub response_metadata: NewPagingStyle,
     #[serde(
         default,
@@ -4275,7 +4231,6 @@ pub struct ChatUpdateSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub channel: String,
-    #[serde()]
     pub message: MessageObject,
     #[serde(
         default,
@@ -4483,7 +4438,6 @@ pub struct ConversationsMembersSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub response_metadata: NewPagingStyle,
 }
 
@@ -4740,7 +4694,6 @@ pub struct FilesInfoSchema {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub editor: String,
-    #[serde()]
     pub file: ObjsFile,
     #[serde(
         default,
@@ -4777,14 +4730,12 @@ pub struct FilesListSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub paging: ObjsPaging,
 }
 
 /// Schema for successful response files.upload method
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FilesUploadSchema {
-    #[serde()]
     pub file: ObjsFile,
     #[serde(
         default,
@@ -4829,11 +4780,12 @@ pub struct MigrationExchangeSuccessSchema {
     pub user_id_map: Option<Fields>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum ItemsType {
     #[serde(rename = "file")]
     File,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4850,11 +4802,6 @@ impl std::fmt::Display for ItemsType {
     }
 }
 
-impl Default for ItemsType {
-    fn default() -> ItemsType {
-        ItemsType::Noop
-    }
-}
 impl ItemsType {
     pub fn is_noop(&self) -> bool {
         matches!(self, ItemsType::Noop)
@@ -4881,11 +4828,12 @@ pub struct Items {
     pub type_: Option<ItemsType>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum MessagePinType {
     #[serde(rename = "message")]
     Message,
     #[serde(rename = "")]
+    #[default]
     Noop,
     #[serde(other)]
     FallthroughString,
@@ -4902,11 +4850,6 @@ impl std::fmt::Display for MessagePinType {
     }
 }
 
-impl Default for MessagePinType {
-    fn default() -> MessagePinType {
-        MessagePinType::Noop
-    }
-}
 impl MessagePinType {
     pub fn is_noop(&self) -> bool {
         matches!(self, MessagePinType::Noop)
@@ -5033,7 +4976,6 @@ pub struct RemindersAddSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub reminder: ObjsReminder,
 }
 
@@ -5101,7 +5043,6 @@ pub struct RtmConnectSchema {
     pub ok: bool,
     #[serde(rename = "self")]
     pub self_: SelfData,
-    #[serde()]
     pub team: RtmConnectSchemaTeam,
     #[serde(
         default,
@@ -5210,7 +5151,6 @@ pub struct TeamAccessLogsSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub paging: ObjsPaging,
 }
 
@@ -5222,7 +5162,6 @@ pub struct TeamInfoSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub team: ObjsTeam,
 }
 
@@ -5310,7 +5249,6 @@ pub struct TeamIntegrationLogsSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub paging: ObjsPaging,
 }
 
@@ -5322,7 +5260,6 @@ pub struct TeamProfileGetSuccessSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub profile: Profile,
 }
 
@@ -5334,7 +5271,6 @@ pub struct UsergroupsCreateSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub usergroup: ObjsSubteam,
 }
 
@@ -5467,9 +5403,7 @@ pub struct UsersIdentityResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub team: UsersIdentityResponseTeam,
-    #[serde()]
     pub user: SelfData,
 }
 
@@ -5503,9 +5437,7 @@ pub struct UsersIdentityResponseData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub team: UsersIdentityResponseTeam,
-    #[serde()]
     pub user: User,
 }
 
@@ -5569,9 +5501,7 @@ pub struct UsersIdentityResponseDataType {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub team: UsersIdentityResponseTeam,
-    #[serde()]
     pub user: UsersIdentityResponseUser,
 }
 
@@ -5652,9 +5582,7 @@ pub struct UsersIdentityResponseDataTypeLinks {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub team: UsersIdentityResponseTeamData,
-    #[serde()]
     pub user: SelfData,
 }
 
@@ -5744,7 +5672,6 @@ pub struct UsersProfileGetSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub profile: ObjsUserProfile,
 }
 
@@ -5765,7 +5692,6 @@ pub struct UsersProfileSetSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub profile: ObjsUserProfile,
     #[serde(
         default,
@@ -5841,6 +5767,5 @@ pub struct UsersSetPhotoSchema {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub ok: bool,
-    #[serde()]
     pub profile: UsersSetPhotoSchemaProfile,
 }

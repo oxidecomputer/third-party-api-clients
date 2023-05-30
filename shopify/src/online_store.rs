@@ -2343,8 +2343,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2390,7 +2390,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2477,8 +2477,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2524,7 +2524,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2611,8 +2611,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2658,7 +2658,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2745,8 +2745,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2792,7 +2792,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2879,8 +2879,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
     *
@@ -2926,7 +2926,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
     *
@@ -3013,8 +3013,8 @@ impl OnlineStore {
     }
     /**
     * Retrieves a single asset for a theme by its key.
-              To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-              For more information on the key property, see Asset properties.
+             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+             For more information on the key property, see Asset properties.
     *
     * This function performs a `GET` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
     *
@@ -3060,7 +3060,7 @@ impl OnlineStore {
     }
     /**
     * Creates or updates an asset for a theme.
-              In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
     *
     * This function performs a `PUT` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
     *
@@ -3849,7 +3849,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/2020-01/redirects.json` endpoint.
     *
@@ -4071,7 +4071,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/2020-04/redirects.json` endpoint.
     *
@@ -4293,7 +4293,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/2020-07/redirects.json` endpoint.
     *
@@ -4515,7 +4515,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/2020-10/redirects.json` endpoint.
     *
@@ -4737,7 +4737,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/2021-01/redirects.json` endpoint.
     *
@@ -4959,7 +4959,7 @@ impl OnlineStore {
     }
     /**
     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-              For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
     *
     * This function performs a `POST` to the `/admin/api/unstable/redirects.json` endpoint.
     *
@@ -6544,9 +6544,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/themes.json` endpoint.
     *
@@ -6707,9 +6707,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/themes.json` endpoint.
     *
@@ -6870,9 +6870,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/themes.json` endpoint.
     *
@@ -7030,9 +7030,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/themes.json` endpoint.
     *
@@ -7193,9 +7193,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/themes.json` endpoint.
     *
@@ -7356,9 +7356,9 @@ impl OnlineStore {
     }
     /**
     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-              A new theme is always unpublished by default. To publish a theme when you create it, include
-              "role": "main" in the POST request. The theme will be published only after all
-              of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+             A new theme is always unpublished by default. To publish a theme when you create it, include
+             "role": "main" in the POST request. The theme will be published only after all
+             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
     *
     * This function performs a `POST` to the `/admin/api/unstable/themes.json` endpoint.
     *

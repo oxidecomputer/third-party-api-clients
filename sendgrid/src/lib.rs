@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sendgrid-api = "0.4.0"
+//! sendgrid-api = "0.4.1"
 //! ```
 //!
 //! ## Basic example
@@ -212,7 +212,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "http://api.sendgrid.com/v3"
+        "https://api.sendgrid.com/v3"
     }
 }
 

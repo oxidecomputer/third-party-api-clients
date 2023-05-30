@@ -230,7 +230,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://admin.googleapis.com/"
+        "https://www.googleapis.com"
     }
 }
 

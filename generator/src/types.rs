@@ -170,7 +170,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             if !p.is_empty() && p != desc {
                                 a("/**");
                                 a(&p);
-                                a("*/");
+                                a(" */");
                             }
 
                             let te = ts.id_to_entry.get(tid).unwrap();
@@ -183,6 +183,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || rt.starts_with("Vec<")
                                 || rt.starts_with("Option<")
                                 || rt.starts_with("HashMap<")
+                                || rt.starts_with("std::collections::HashMap<")
                             {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
@@ -405,7 +406,7 @@ fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             if !p.is_empty() && p != description {
                 a("/**");
                 a(&p);
-                a("*/");
+                a(" */");
             }
 
             a(&format!("{}({}),", fn_name, name));
@@ -571,7 +572,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
             if !p.is_empty() && p != description {
                 a("/**");
                 a(&p);
-                a("*/");
+                a(" */");
             }
 
             a("#[serde(flatten)]");

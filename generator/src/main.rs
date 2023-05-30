@@ -895,13 +895,13 @@ impl TypeSpace {
         if let Some(s) = schema {
             if let Some(description) = &s.description {
                 a(&format!(
-                    "* {}",
-                    description.replace('*', "\\*").replace('\n', "\n*  ")
+                    " * {}",
+                    description.replace('*', "\\*").replace('\n', "\n *  ")
                 ));
             }
             if let Some(external_docs) = &s.external_docs {
-                a("*");
-                a(&format!("* FROM: <{}>", external_docs.url));
+                a(" *");
+                a(&format!(" * FROM: <{}>", external_docs.url));
             }
         }
 
@@ -2195,8 +2195,8 @@ fn render_param(
 
     if !description.is_empty() {
         a("/**");
-        a(&format!("* {}", description.replace('\n', "\n*   ")));
-        a("*/");
+        a(&format!(" * {}", description.replace('\n', "\n *   ")));
+        a(" */");
     }
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
@@ -3444,14 +3444,29 @@ rustdoc-args = ["--cfg", "docsrs"]
                         &spec_link,
                     )
                 }
-                TemplateType::GenericToken => template::generate_docs_generic_token(
-                    &api,
-                    &to_snake_case(&name),
-                    &version,
-                    &proper_name,
-                    &spec_link,
-                    &add_post_header,
-                ),
+                TemplateType::GenericToken => {
+                    if proper_name == "Gusto" {
+                        template::generate_docs_generic_token(
+                            &api,
+                            &to_snake_case(&name),
+                            &version,
+                            &proper_name,
+                            &spec_link,
+                            &add_post_header,
+                            &format!("{}::RootProductionServer", to_snake_case(&name)),
+                        )
+                    } else {
+                        template::generate_docs_generic_token(
+                            &api,
+                            &to_snake_case(&name),
+                            &version,
+                            &proper_name,
+                            &spec_link,
+                            &add_post_header,
+                            "",
+                        )
+                    }
+                }
             };
 
             let mut readme = root.clone();

@@ -520,29 +520,29 @@ impl Orders {
     }
     /**
     * Creates an order. By default, product inventory is not claimed.
-              When you create an order, you can include the following option parameters in the body of the request:
+             When you create an order, you can include the following option parameters in the body of the request:
 
-                inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
+               inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
 
-                    bypass: Do not claim inventory.
-                    decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
-                    decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
-
-
-                send_receipt: Whether to send an order confirmation to the customer.
+                   bypass: Do not claim inventory.
+                   decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
+                   decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
 
 
-                  Note
-                  If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
+               send_receipt: Whether to send an order confirmation to the customer.
 
 
-                send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+                 Note
+                 If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
 
 
-                Note
-                If you are including shipping_address or billing_address, make sure to pass both
-                  first_name and last_name. Otherwise both these addresses will be ignored.
-                If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
+               send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+
+
+               Note
+               If you are including shipping_address or billing_address, make sure to pass both
+                 first_name and last_name. Otherwise both these addresses will be ignored.
+               If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/orders.json` endpoint.
     *
@@ -822,28 +822,28 @@ impl Orders {
             .await
     }
     /**
-    * Caution
+     * Caution
       For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
     Cancels an order. Orders that have a fulfillment object can't be canceled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order#cancel-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
-    * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
-    * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
-    *                     (default: false).
-    * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
-    *                     (default: other).
-    * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
-    *                     (default: false).
-    * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#cancel-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
+     * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
+     * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
+      *                     (default: false).
+     * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
+      *                     (default: other).
+     * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
+      *                     (default: false).
+     * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
+     */
     pub async fn deprecated_202001_create_param_cancel(
         &self,
         order_id: &str,
@@ -1029,29 +1029,29 @@ impl Orders {
     }
     /**
     * Creates an order. By default, product inventory is not claimed.
-              When you create an order, you can include the following option parameters in the body of the request:
+             When you create an order, you can include the following option parameters in the body of the request:
 
-                inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
+               inventory_behaviour: The behaviour to use when updating inventory. (default: bypass)
 
-                    bypass: Do not claim inventory.
-                    decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
-                    decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
-
-
-                send_receipt: Whether to send an order confirmation to the customer.
+                   bypass: Do not claim inventory.
+                   decrement_ignoring_policy: Ignore the product's inventory policy and claim inventory.
+                   decrement_obeying_policy: Follow the product's inventory policy and claim inventory, if possible.
 
 
-                  Note
-                  If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
+               send_receipt: Whether to send an order confirmation to the customer.
 
 
-                send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+                 Note
+                 If you're working on a private app and order confirmations are still being sent to the customer when send_receipt is set to false, then you need to disable the Storefront API from the private app's page in the Shopify admin.
 
 
-                Note
-                If you are including shipping_address or billing_address, make sure to pass both
-                  first_name and last_name. Otherwise both these addresses will be ignored.
-                If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
+               send_fulfillment_receipt: Whether to send a shipping confirmation to the customer.
+
+
+               Note
+               If you are including shipping_address or billing_address, make sure to pass both
+                 first_name and last_name. Otherwise both these addresses will be ignored.
+               If you're using this endpoint with a trial or Partner development store, then you can create no more than 5 new orders per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/orders.json` endpoint.
     *
@@ -1331,28 +1331,28 @@ impl Orders {
             .await
     }
     /**
-    * Caution
+     * Caution
       For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
     Cancels an order. Orders that have a fulfillment object can't be canceled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/orders/order#cancel-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
-    * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
-    * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
-    *                     (default: false).
-    * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
-    *                     (default: other).
-    * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
-    *                     (default: false).
-    * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/orders/order#cancel-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `amount: &str` -- The amount to refund. If set, Shopify attempts to void or refund the payment, depending on its status. Shopify refunds through a manual gateway in cases where the original transaction was not made in Shopify. Refunds through a manual gateway are recorded as a refund on Shopify, but the customer is not refunded.
+     * * `currency: &str` -- The currency of the refund that's issued when the order is canceled. Required for multi-currency orders whenever the amount property is provided.
+     * * `restock_deprecated: &str` -- Whether to restock refunded items back to your store's inventory.
+      *                     (default: false).
+     * * `reason: &str` -- The reason for the order cancellation. Valid values: customer, inventory, fraud, declined, and other.)
+      *                     (default: other).
+     * * `email: &str` -- Whether to send an email to the customer notifying them of the cancellation.
+      *                     (default: false).
+     * * `refund: &str` -- The refund transactions to perform. Required for some more complex refund situations. For more information, see the Refund API.
+     */
     pub async fn deprecated_202004_create_param_cancel(
         &self,
         order_id: &str,
@@ -1640,8 +1640,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -1680,8 +1680,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -1819,8 +1819,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -1859,8 +1859,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-04/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -1998,8 +1998,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2038,8 +2038,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-07/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2174,8 +2174,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2214,8 +2214,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/2020-10/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2353,8 +2353,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2393,8 +2393,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/2021-01/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2532,8 +2532,8 @@ impl Orders {
     * Updates an order risk
 
 
-                Note
-                You cannot modify an order risk that was created by another application.
+               Note
+               You cannot modify an order risk that was created by another application.
     *
     * This function performs a `PUT` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2572,8 +2572,8 @@ impl Orders {
     * Deletes an order risk for an order
 
 
-                Note
-                You cannot delete an order risk that was created by another application.
+               Note
+               You cannot delete an order risk that was created by another application.
     *
     * This function performs a `DELETE` to the `/admin/api/unstable/orders/{order_id}/risks/{risk_id}.json` endpoint.
     *
@@ -2661,13 +2661,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds.json` endpoint.
     *
@@ -2681,32 +2681,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn deprecated_202001_create_param_refunds(
@@ -2828,15 +2828,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -2846,33 +2846,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn deprecated_202001_create_param_refunds_calculate(
         &self,
@@ -2968,13 +2968,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds.json` endpoint.
     *
@@ -2988,32 +2988,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn deprecated_202004_create_param_refunds(
@@ -3135,15 +3135,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -3153,33 +3153,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn deprecated_202004_create_param_refunds_calculate(
         &self,
@@ -3275,13 +3275,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds.json` endpoint.
     *
@@ -3295,32 +3295,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn deprecated_202007_create_param_refunds(
@@ -3442,15 +3442,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -3460,33 +3460,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn deprecated_202007_create_param_refunds_calculate(
         &self,
@@ -3582,13 +3582,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds.json` endpoint.
     *
@@ -3602,32 +3602,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn create_param_refunds(
@@ -3749,15 +3749,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -3767,33 +3767,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn create_param_refunds_calculate(
         &self,
@@ -3889,13 +3889,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds.json` endpoint.
     *
@@ -3909,32 +3909,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn deprecated_202101_create_param_refunds(
@@ -4056,15 +4056,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -4074,33 +4074,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn deprecated_202101_create_param_refunds_calculate(
         &self,
@@ -4196,13 +4196,13 @@ impl Orders {
     }
     /**
     * Caution
-                For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+               For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Creates a refund. Use the calculate endpoint to produce the transactions to submit.
+             Creates a refund. Use the calculate endpoint to produce the transactions to submit.
 
 
-                Note
-                When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
+               Note
+               When you use this endpoint with a Partner development store or a trial store, you can create only five refunds per minute.
     *
     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds.json` endpoint.
     *
@@ -4216,32 +4216,32 @@ impl Orders {
     * * `note: &str` -- An optional note attached to a refund.
     * * `discrepancy_reason: &str` -- An optional comment that explains a discrepancy between calculated and actual refund amounts. Used to populate the reason property of the resulting order adjustment object attached to the refund. Valid values: restock, damage, customer, and other.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled.
-    *               The canceled quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count. The number of fulfillable units for this
-    *               line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location where the items should be
-    *             restocked. This is required when the value of restock_type is return or cancel.
-    *             If the item is not already stocked at the location, then
-    *             the item is connected to the location. An error is returned when the item is connected to
-    *             a
-    *             fulfillment service location and a different location is provided.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled.
+     *               The canceled quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count. The number of fulfillable units for this
+     *               line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location where the items should be
+     *             restocked. This is required when the value of restock_type is return or cancel.
+     *             If the item is not already stocked at the location, then
+     *             the item is connected to the location. An error is returned when the item is connected to
+     *             a
+     *             fulfillment service location and a different location is provided.
     * * `transactions: &str` -- A list of transactions
-    *             to process as refunds.
+     *             to process as refunds.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the currency used for the refund.
     */
     pub async fn deprecated_unstable_create_param_refunds(
@@ -4363,15 +4363,15 @@ impl Orders {
     }
     /**
     * Caution
-              For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
+             For multi-currency orders, the currency property is required whenever the amount property is provided. For more information, see Migrating to support multiple currencies.
 
-              Calculates refund transactions based on line items and shipping. When you want to create a refund,
-              you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
-              that are being refunded, their quantity and restock instructions, and whether you intend to refund
-              shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
-              fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
-              The response includes a transactions object with "kind": "suggested_refund",
-              which must to be changed to "kind" : "refund" for the refund to be accepted.
+             Calculates refund transactions based on line items and shipping. When you want to create a refund,
+             you should first use the calculate endpoint to generate accurate refund transactions. Specify the line items
+             that are being refunded, their quantity and restock instructions, and whether you intend to refund
+             shipping costs. If the restock instructions can't be met—for example, because you try to return more items than have been
+             fulfilled—then the endpoint returns modified restock instructions. You can then use the response in the body of the request to create the actual refund.
+             The response includes a transactions object with "kind": "suggested_refund",
+             which must to be changed to "kind" : "refund" for the refund to be accepted.
     *
     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/refunds/calculate.json` endpoint.
     *
@@ -4381,33 +4381,33 @@ impl Orders {
     *
     * * `order_id: &str` -- storefront_access_token_id.
     * * `shipping: &str` -- Specify how much shipping to refund. It has the following properties:
-    *
-    *                           full_refund: Whether to refund all remaining shipping.
-    *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
+     *
+     *                           full_refund: Whether to refund all remaining shipping.
+     *                           amount: Set a specific amount to refund for shipping. Takes precedence over full_refund.
     * * `refund_line_items: &str` -- A list of line item IDs, quantities to refund, and restock instructions. Each entry has the following properties:
-    *
-    *                           line_item_id: The ID of a line item to refund.
-    *                           quantity: The quantity to refund.
-    *                           restock_type:           How this refund line item affects inventory levels. Valid values:
-    *
-    *               no_restock: Refunding these items won't affect inventory.
-    *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
-    *               back to the available count. The number of fulfillable units for this line item will decrease.
-    *               return: The items were already delivered but will be returned to the merchant.
-    *               The returned quantity will be added back to the available count.
-    *               The number of fulfillable units for this line item will remain unchanged.
-    *
-    *
-    *                           location_id:           The ID of the location
-    *             where the items should be restocked. If location_id is not provided and the value of
-    *             restock_type is return or cancel, then the endpoint returns a suitable
-    *             location ID.
-    *
-    *                           already_stocked:           Whether the item is already stocked at
-    *             the location. If this is false, then creating the refund will connect the item to the location and start
-    *             stocking it there.
+     *
+     *                           line_item_id: The ID of a line item to refund.
+     *                           quantity: The quantity to refund.
+     *                           restock_type:           How this refund line item affects inventory levels. Valid values:
+     *
+     *               no_restock: Refunding these items won't affect inventory.
+     *               cancel: The items have not yet been fulfilled. The canceled quantity will be added
+     *               back to the available count. The number of fulfillable units for this line item will decrease.
+     *               return: The items were already delivered but will be returned to the merchant.
+     *               The returned quantity will be added back to the available count.
+     *               The number of fulfillable units for this line item will remain unchanged.
+     *
+     *
+     *                           location_id:           The ID of the location
+     *             where the items should be restocked. If location_id is not provided and the value of
+     *             restock_type is return or cancel, then the endpoint returns a suitable
+     *             location ID.
+     *
+     *                           already_stocked:           Whether the item is already stocked at
+     *             the location. If this is false, then creating the refund will connect the item to the location and start
+     *             stocking it there.
     * * `currency: &str` -- The three-letter code (ISO 4217 format) for the
-    *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
+     *             currency used for the refund. Note: Required whenever the shipping amount property is provided.
     */
     pub async fn deprecated_unstable_create_param_refunds_calculate(
         &self,

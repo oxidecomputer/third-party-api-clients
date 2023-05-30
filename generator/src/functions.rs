@@ -1171,25 +1171,25 @@ fn get_fn_docs(
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!("* {}.", summary.trim_end_matches('.')));
-        a("*");
+        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        a(" *");
     }
     a(&format!(
-        "* This function performs a `{}` to the `{}` endpoint.",
+        " * This function performs a `{}` to the `{}` endpoint.",
         m, p
     ));
     if let Some(description) = &o.description {
-        a("*");
-        a(&format!("* {}", description.replace('\n', "\n* ")));
+        a(" *");
+        a(&format!(" * {}", description.replace('\n', "\n * ")));
     }
     if let Some(external_docs) = &o.external_docs {
-        a("*");
-        a(&format!("* FROM: <{}>", external_docs.url));
+        a(" *");
+        a(&format!(" * FROM: <{}>", external_docs.url));
     }
     if !o.parameters.is_empty() {
-        a("*");
-        a("* **Parameters:**");
-        a("*");
+        a(" *");
+        a(" * **Parameters:**");
+        a(" *");
     }
     // Iterate over the function parameters and add any data those had as well.
     for par in o.parameters.iter() {
@@ -1213,7 +1213,7 @@ fn get_fn_docs(
         let mut docs = ts.render_docs(&pid);
         if let Some(d) = &parameter_data.description {
             if !d.is_empty() && d.len() > docs.len() {
-                docs = format!(" -- {}.", d.trim_end_matches('.').replace('\n', "\n*   "));
+                docs = format!(" -- {}.", d.trim_end_matches('.').replace('\n', "\n  *   "));
             } else if !docs.is_empty() {
                 docs = format!(
                     " -- {}.",
@@ -1237,12 +1237,12 @@ fn get_fn_docs(
             || nam == "const"
             || nam == "use"
         {
-            a(&format!("* * `{}_: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{}_: {}`{}", nam, typ, docs));
         } else {
-            a(&format!("* * `{}: {}`{}", nam, typ, docs));
+            a(&format!(" * * `{}: {}`{}", nam, typ, docs));
         }
     }
-    a("*/");
+    a(" */");
 
     Ok(out.trim().to_string())
 }
@@ -1257,27 +1257,27 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
 
     a("/**");
     if let Some(summary) = &o.summary {
-        a(&format!("* {}.", summary.trim_end_matches('.')));
-        a("*");
+        a(&format!(" * {}.", summary.trim_end_matches('.')));
+        a(" *");
     }
     a(&format!(
-        "* This function performs a `{}` to the `{}` endpoint.",
+        " * This function performs a `{}` to the `{}` endpoint.",
         m, p
     ));
-    a("*");
+    a(" *");
     a(&format!(
-        "* As opposed to `{}`, this function returns all the pages of the request at once.",
+        " * As opposed to `{}`, this function returns all the pages of the request at once.",
         fn_name
     ));
     if let Some(description) = &o.description {
-        a("*");
-        a(&format!("* {}", description.replace('\n', "\n* ")));
+        a(" *");
+        a(&format!(" * {}", description.replace('\n', "\n * ")));
     }
     if let Some(external_docs) = &o.external_docs {
-        a("*");
-        a(&format!("* FROM: <{}>", external_docs.url));
+        a(" *");
+        a(&format!(" * FROM: <{}>", external_docs.url));
     }
-    a("*/");
+    a(" */");
 
     Ok(out.trim().to_string())
 }

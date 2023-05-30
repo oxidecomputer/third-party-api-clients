@@ -3446,10 +3446,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/2020-01/products.json` endpoint.
     *
@@ -3596,10 +3596,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/2020-01/products/{product_id}.json` endpoint.
     *
@@ -3798,10 +3798,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/2020-04/products.json` endpoint.
     *
@@ -3948,10 +3948,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/2020-04/products/{product_id}.json` endpoint.
     *
@@ -4150,10 +4150,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/2020-07/products.json` endpoint.
     *
@@ -4300,10 +4300,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/2020-07/products/{product_id}.json` endpoint.
     *
@@ -4502,10 +4502,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/2020-10/products.json` endpoint.
     *
@@ -4649,10 +4649,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/2020-10/products/{product_id}.json` endpoint.
     *
@@ -4848,10 +4848,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/2021-01/products.json` endpoint.
     *
@@ -4998,10 +4998,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/2021-01/products/{product_id}.json` endpoint.
     *
@@ -5200,10 +5200,10 @@ impl Products {
     }
     /**
     * Creates a new product.
-              If you want to set the product's SEO information, then you can use the following properties:
+             If you want to set the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `POST` to the `/admin/api/unstable/products.json` endpoint.
     *
@@ -5350,10 +5350,10 @@ impl Products {
     }
     /**
     * Updates a product and its variants and images.
-              If you want to update the product's SEO information, then you can use the following properties:
+             If you want to update the product's SEO information, then you can use the following properties:
 
-                metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-                metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
     *
     * This function performs a `PUT` to the `/admin/api/unstable/products/{product_id}.json` endpoint.
     *

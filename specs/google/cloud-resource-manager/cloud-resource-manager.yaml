@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://cloudresourcemanager.googleapis.com/
+  - url: https://cloudresourcemanager.googleapis.com/v2
 info:
   contact:
     name: Google

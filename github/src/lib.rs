@@ -474,7 +474,7 @@ impl Client {
             ) => creds,
             (
                 crate::auth::AuthenticationConstraint::JWT,
-                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+                Some(crate::auth::Credentials::InstallationToken(apptoken)),
             ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, _) => {
                 log::info!(
@@ -493,22 +493,22 @@ impl Client {
         let mut parsed_url = uri.parse::<reqwest::Url>()?;
 
         match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => {
+            Some(crate::auth::Credentials::Client(id, secret)) => {
                 parsed_url
                     .query_pairs_mut()
                     .append_pair("client_id", id)
                     .append_pair("client_secret", secret);
                 Ok((parsed_url, None))
             }
-            Some(&crate::auth::Credentials::Token(ref token)) => {
+            Some(crate::auth::Credentials::Token(token)) => {
                 let auth = format!("token {}", token);
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
+            Some(crate::auth::Credentials::JWT(jwt)) => {
                 let auth = format!("Bearer {}", jwt.token());
                 Ok((parsed_url, Some(auth)))
             }
-            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
+            Some(crate::auth::Credentials::InstallationToken(apptoken)) => {
                 let token = if let Some(token) = apptoken.token().await {
                     token
                 } else {

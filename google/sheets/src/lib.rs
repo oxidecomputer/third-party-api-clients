@@ -212,7 +212,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://sheets.googleapis.com/"
+        "https://sheets.googleapis.com"
     }
 }
 

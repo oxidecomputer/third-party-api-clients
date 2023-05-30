@@ -29,7 +29,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-sendgrid-api = "0.4.0"
+sendgrid-api = "0.4.1"
 ```
 
 ## Basic example

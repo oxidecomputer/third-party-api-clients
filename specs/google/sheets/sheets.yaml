@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://sheets.googleapis.com/
+  - url: https://sheets.googleapis.com
 info:
   contact:
     name: Google

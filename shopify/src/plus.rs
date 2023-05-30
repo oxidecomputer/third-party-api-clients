@@ -120,7 +120,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/2020-01/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -225,16 +225,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/gift_cards/search.json` endpoint.
     *
@@ -243,10 +243,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn deprecated_202001_get_gift_cards_search(
@@ -393,7 +393,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/2020-04/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -498,16 +498,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/gift_cards/search.json` endpoint.
     *
@@ -516,10 +516,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn deprecated_202004_get_gift_cards_search(
@@ -666,7 +666,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/2020-07/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -771,16 +771,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/gift_cards/search.json` endpoint.
     *
@@ -789,10 +789,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn deprecated_202007_get_gift_cards_search(
@@ -939,7 +939,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/2020-10/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -1041,16 +1041,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/gift_cards/search.json` endpoint.
     *
@@ -1059,10 +1059,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn get_gift_cards_search(
@@ -1209,7 +1209,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/2021-01/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -1314,16 +1314,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/gift_cards/search.json` endpoint.
     *
@@ -1332,10 +1332,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn deprecated_202101_get_gift_cards_search(
@@ -1482,7 +1482,7 @@ impl Plus {
     }
     /**
     * Updates an existing gift card.
-              The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
+             The gift card's balance can't be changed via the API. You can change only the expiry date, note, and template suffix.
     *
     * This function performs a `PUT` to the `/admin/api/unstable/gift_cards/{gift_card_id}.json` endpoint.
     *
@@ -1587,16 +1587,16 @@ impl Plus {
     /**
     * Searches for gift cards that match a supplied query. The following fields are indexed by search:
 
-                created_at
-                updated_at
-                disabled_at
-                balance
-                initial_value
-                amount_spent
-                email
-                last_characters
+               created_at
+               updated_at
+               disabled_at
+               balance
+               initial_value
+               amount_spent
+               email
+               last_characters
 
-              Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
     *
     * This function performs a `GET` to the `/admin/api/unstable/gift_cards/search.json` endpoint.
     *
@@ -1605,10 +1605,10 @@ impl Plus {
     * **Parameters:**
     *
     * * `order: &str` -- The field and direction to order results by.
-    *                     (default: disabled_at DESC).
+     *                     (default: disabled_at DESC).
     * * `query: &str` -- The text to search for.
     * * `limit: &str` -- The maximum number of results to retrieve.
-    *                     (default: 50, maximum: 250).
+     *                     (default: 50, maximum: 250).
     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
     */
     pub async fn deprecated_unstable_get_gift_cards_search(

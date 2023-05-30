@@ -124,11 +124,12 @@ pub struct Images {
 }
 
 /**
-* Type of the gif. By default, this is almost always gif
-*/
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+ * Type of the gif. By default, this is almost always gif
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema, Default)]
 pub enum Type {
     #[serde(rename = "gif")]
+    #[default]
     Gif,
     #[serde(other)]
     FallthroughString,
@@ -141,12 +142,6 @@ impl std::fmt::Display for Type {
             Type::FallthroughString => "*",
         }
         .fmt(f)
-    }
-}
-
-impl Default for Type {
-    fn default() -> Type {
-        Type::Gif
     }
 }
 

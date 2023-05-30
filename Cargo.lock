@@ -38,9 +38,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.44"
+version = "1.0.71"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61604a8f862e1d5c3229fdd78f8b02c68dcf73a4c4b05fd636d12240aaa242c1"
+checksum = "9c7d0618f0e0b7e8ff11427422b64564d5fb0be1940354bfe2e0529b18a9d9b8"
 dependencies = [
  "backtrace",
 ]
@@ -925,9 +925,9 @@ dependencies = [
 
 [[package]]
 name = "h2"
-version = "0.3.14"
+version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ca32592cf21ac7ccab1825cd87f6c9b3d9022c44d086172ed0966bec8af30be"
+checksum = "66b91535aa35fea1523ad1b86cb6b53c28e0ae566ba4a460f4457e936cad7c6f"
 dependencies = [
  "bytes",
  "fnv",
@@ -1955,9 +1955,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest-retry"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d5cb0170c4fa3f251c036ef482b35abc550afac6305cf875541c4b78dd76c6c"
+checksum = "ce246a729eaa6aff5e215aee42845bf5fed9893cc6cd51aeeb712f34e04dd9f3"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1975,9 +1975,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest-tracing"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e131e50dcd8f24b88ff964404b96ff38ad4217e3ca6963256856952fe76dc8ec"
+checksum = "64977f9a47fa7768cc88751e29026e569730ac1667c2eaeaac04b32624849fbe"
 dependencies = [
  "async-trait",
  "opentelemetry",
@@ -2223,7 +2223,7 @@ dependencies = [
 
 [[package]]
 name = "sendgrid-api"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-recursion",
  "async-trait",
@@ -2588,11 +2588,11 @@ dependencies = [
 
 [[package]]
 name = "task-local-extensions"
-version = "0.1.1"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36794203e10c86e5998179e260869d156e0674f02d5451b4a3fb9fd86d02aaab"
+checksum = "ba323866e5d033818e3240feeb9f7db2c4296674e4d9e16b97b7bf8f490434e8"
 dependencies = [
- "tokio",
+ "pin-utils",
 ]
 
 [[package]]

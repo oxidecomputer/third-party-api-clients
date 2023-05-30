@@ -1976,89 +1976,89 @@ impl GeneratedServers {
     }
 
     pub fn host_from_server(&self) -> String {
-        if self.count > 1 {
-            String::from("let host = server.into().default_url().to_string();")
-        } else if self.count == 1 {
-            format!(
+        match self.count {
+            0 => String::from("let host = FALLBACK_HOST.to_string();"),
+            1 => format!(
                 "let host = {}::default().default_url().to_string();",
                 self.top_level_type.as_ref().unwrap()
-            )
-        } else {
-            String::from("let host = FALLBACK_HOST.to_string();")
+            ),
+            _ => String::from("let host = server.into().default_url().to_string();"),
         }
     }
 }
 
 pub fn generate_servers(servers: &[openapiv3::Server], server_prefix: &str) -> GeneratedServers {
-    if servers.len() > 1 {
-        let mut server_variants = String::new();
-        let mut server_branches = String::new();
-        let mut server_structs = String::new();
-        let mut server_into = String::new();
+    match servers.len() {
+        0 => GeneratedServers::default(),
+        1 => {
+            let server = &servers[0];
+            let server_struct_name = format!("{server_prefix}DefaultServer");
+            let server_struct = generate_server(&server_struct_name, server);
 
-        let server_enum = format!("{server_prefix}DefaultServers");
-
-        for server in servers {
-            if let Some(description) = &server.description {
-                let server_name = struct_name(&format!("{server_prefix}{}Server", description));
-                let server_struct = generate_server(&server_name, server);
-
-                server_variants.push_str(&format!("{server_name}({server_name}),\n"));
-
-                server_branches.push_str(&format!(
-                    "Self::{server_name}(inner) => inner.default_url(),\n"
-                ));
-
-                server_structs.push_str(&format!("{server_struct}\n"));
-
-                server_into.push_str(&format!(
-                    r#"impl From<{server_name}> for {server_enum} {{
-    fn from(server: {server_name}) -> Self {{
-        Self::{server_name}(server)
-    }}
-}}
-"#
-                ));
-            } else {
-                panic!("If multiple servers are present, they must have descriptions")
+            GeneratedServers {
+                count: servers.len() as u64,
+                output: Some(server_struct),
+                top_level_type: Some(server_struct_name),
             }
         }
+        _ => {
+            let mut server_variants = String::new();
+            let mut server_branches = String::new();
+            let mut server_structs = String::new();
+            let mut server_into = String::new();
 
-        GeneratedServers {
-            count: servers.len() as u64,
-            output: Some(format!(
-                r#"
-pub enum {server_enum} {{
-    {server_variants}
-}}
+            let server_enum = format!("{server_prefix}DefaultServers");
 
-impl {server_enum} {{
-    pub fn default_url(&self) -> &str {{
-        match self {{
-            {server_branches}
+            for server in servers {
+                if let Some(description) = &server.description {
+                    let server_name = struct_name(&format!("{server_prefix}{}Server", description));
+                    let server_struct = generate_server(&server_name, server);
+
+                    server_variants.push_str(&format!("{server_name}({server_name}),\n"));
+
+                    server_branches.push_str(&format!(
+                        "Self::{server_name}(inner) => inner.default_url(),\n"
+                    ));
+
+                    server_structs.push_str(&format!("{server_struct}\n"));
+
+                    server_into.push_str(&format!(
+                        r#"impl From<{server_name}> for {server_enum} {{
+        fn from(server: {server_name}) -> Self {{
+            Self::{server_name}(server)
         }}
     }}
-}}
+    "#
+                    ));
+                } else {
+                    panic!("If multiple servers are present, they must have descriptions")
+                }
+            }
 
-{server_structs}
+            GeneratedServers {
+                count: servers.len() as u64,
+                output: Some(format!(
+                    r#"
+    pub enum {server_enum} {{
+        {server_variants}
+    }}
 
-{server_into}
-"#
-            )),
-            top_level_type: Some(server_enum),
-        }
-    } else if servers.len() == 1 {
-        let server = &servers[0];
-        let server_struct_name = format!("{server_prefix}DefaultServer");
-        let server_struct = generate_server(&server_struct_name, server);
+    impl {server_enum} {{
+        pub fn default_url(&self) -> &str {{
+            match self {{
+                {server_branches}
+            }}
+        }}
+    }}
 
-        GeneratedServers {
-            count: servers.len() as u64,
-            output: Some(server_struct),
-            top_level_type: Some(server_struct_name),
-        }
-    } else {
-        GeneratedServers::default()
+    {server_structs}
+
+    {server_into}
+    "#
+                )),
+                top_level_type: Some(server_enum),
+            }
+        },
     }
 }
 

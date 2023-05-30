@@ -51,15 +51,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-01
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-01
+     */
     pub async fn deprecated_202001_create_countries(
         &self,
         body: &serde_json::Value,
@@ -137,19 +137,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_countries_param_country(
         &self,
         country_id: &str,
@@ -244,15 +244,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-04
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-04
+     */
     pub async fn deprecated_202004_create_countries(
         &self,
         body: &serde_json::Value,
@@ -330,19 +330,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_countries_param_country(
         &self,
         country_id: &str,
@@ -437,15 +437,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-07
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-07
+     */
     pub async fn deprecated_202007_create_countries(
         &self,
         body: &serde_json::Value,
@@ -523,19 +523,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_countries_param_country(
         &self,
         country_id: &str,
@@ -630,15 +630,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-10
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2020-10
+     */
     pub async fn create_countries(
         &self,
         body: &serde_json::Value,
@@ -716,19 +716,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_countries_param_country(
         &self,
         country_id: &str,
@@ -823,15 +823,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2021-01
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-2021-01
+     */
     pub async fn deprecated_202101_create_countries(
         &self,
         body: &serde_json::Value,
@@ -909,19 +909,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_countries_param_country(
         &self,
         country_id: &str,
@@ -1016,15 +1016,15 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Creates a country.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/countries.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-unstable
-    */
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/countries.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#create-unstable
+     */
     pub async fn deprecated_unstable_create_countries(
         &self,
         body: &serde_json::Value,
@@ -1104,19 +1104,19 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing country.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/country#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_countries_param_country(
         &self,
         country_id: &str,
@@ -1520,20 +1520,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
@@ -1679,20 +1679,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
@@ -1838,20 +1838,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
@@ -1997,20 +1997,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
@@ -2156,20 +2156,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,
@@ -2315,20 +2315,20 @@ impl StoreProperties {
             .await
     }
     /**
-    * Caution
+     * Caution
       As of version 2020-10, the tax field is deprecated.
 
     Updates an existing province for a country.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `country_id: &str` -- storefront_access_token_id.
-    * * `province_id: &str` -- storefront_access_token_id.
-    */
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/store-properties/province#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `country_id: &str` -- storefront_access_token_id.
+     * * `province_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_countries_param_country_provinces_province(
         &self,
         country_id: &str,

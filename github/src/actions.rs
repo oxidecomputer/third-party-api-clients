@@ -3666,7 +3666,7 @@ impl Actions {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-        created: Option<chrono::DateTime<chrono::Utc>>,
+        created: &str,
     ) -> ClientResult<crate::Response<crate::types::ActionsListWorkflowRunsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !actor.is_empty() {

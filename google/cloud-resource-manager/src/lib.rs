@@ -212,7 +212,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://cloudresourcemanager.googleapis.com/"
+        "https://cloudresourcemanager.googleapis.com/v2"
     }
 }
 

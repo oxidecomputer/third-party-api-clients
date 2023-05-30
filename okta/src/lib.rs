@@ -182,7 +182,7 @@ pub struct RootDefaultServer {}
 
 impl RootDefaultServer {
     pub fn default_url(&self) -> &str {
-        "https://your-subdomain.okta.com"
+        "https://na4.okta.net"
     }
 }
 

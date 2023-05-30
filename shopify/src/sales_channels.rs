@@ -243,8 +243,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/shipping_rates.json` endpoint.
     *
@@ -375,8 +375,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/shipping_rates.json` endpoint.
     *
@@ -507,8 +507,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/shipping_rates.json` endpoint.
     *
@@ -639,8 +639,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/shipping_rates.json` endpoint.
     *
@@ -771,8 +771,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/shipping_rates.json` endpoint.
     *
@@ -903,8 +903,8 @@ impl SalesChannels {
     }
     /**
     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-        Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-        To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
     *
     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/shipping_rates.json` endpoint.
     *
