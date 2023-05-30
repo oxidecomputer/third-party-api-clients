@@ -95467,8 +95467,7 @@
         "in": "query",
         "required": false,
         "schema": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         }
       },
       "run-id": {
