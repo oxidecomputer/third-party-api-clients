@@ -9,7 +9,7 @@ edition = "2021"
 license = "MIT"
 
 [features]
-default = ["rustls-tls", "reqwest-tracing/opentelemetry_0_17"]
+default = ["rustls-tls"]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
 native-tls = ["reqwest/default-tls", "openssl"]
