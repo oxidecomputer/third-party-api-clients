@@ -2465,6 +2465,7 @@ pub enum ClientError {"#);
     #[error("HTTP Error. Code: {status}, message: {error}")]
     HttpError {
         status: http::StatusCode,
+        headers: reqwest::header::HeaderMap,
         error: String,
     },
 }

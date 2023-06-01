@@ -89,6 +89,7 @@ impl MailOps for crate::mail_send::MailSend {
             )),
             s => Err(ClientError::HttpError {
                 status: s,
+                headers: resp.headers().clone(),
                 error: "Posting to /mail/send".to_string(),
             }),
         }

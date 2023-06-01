@@ -340,9 +340,9 @@ impl Client {
                 },
                 _ => {
                     if response_body.is_empty() {
-                        ClientError::HttpError{status: status, error: "empty response".into()}
+                        ClientError::HttpError{status, headers, error: "empty response".into()}
                     } else {
-                        ClientError::HttpError{status: status, error: String::from_utf8_lossy(&response_body).into()}
+                        ClientError::HttpError{status, headers, error: String::from_utf8_lossy(&response_body).into()}
                     }
                 }
             };
@@ -1098,9 +1098,9 @@ async fn request<Out>(
         Ok(crate::Response::new(status, headers, parsed_response))
     }} else {{
         let error = if response_body.is_empty() {{
-            ClientError::HttpError{{status: status, error: "empty response".into()}}
+            ClientError::HttpError{{status, headers, error: "empty response".into()}}
         }} else {{
-            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
+            ClientError::HttpError{{status, headers, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1141,9 +1141,9 @@ where
         Ok((link, crate::Response::new(status, headers, parsed_response)))
     }} else {{
         let error = if response_body.is_empty() {{
-            ClientError::HttpError{{status: status, error: "empty response".into()}}
+            ClientError::HttpError{{status, headers, error: "empty response".into()}}
         }} else {{
-            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
+            ClientError::HttpError{{status, headers, error: String::from_utf8_lossy(&response_body).into()}}
         }};
         Err(error)
     }}
@@ -1198,9 +1198,9 @@ async fn post_form<Out>(
         Ok(crate::Response::new(status, headers, parsed_response))
     }} else {{
         let error = if response_body.is_empty() {{
-            ClientError::HttpError{{status: status, error: "empty response".into()}}
+            ClientError::HttpError{{status, headers, error: "empty response".into()}}
         }} else {{
-            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
+            ClientError::HttpError{{status, headers, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1255,9 +1255,9 @@ async fn request_with_accept_mime<Out>(
         Ok(crate::Response::new(status, headers, parsed_response))
     }} else {{
         let error = if response_body.is_empty() {{
-            ClientError::HttpError{{status: status, error: "empty response".into()}}
+            ClientError::HttpError{{status, headers, error: "empty response".into()}}
         }} else {{
-            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
+            ClientError::HttpError{{status, headers, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)
@@ -1328,9 +1328,9 @@ async fn request_with_mime<Out>(
         Ok(crate::Response::new(status, headers, parsed_response))
     }} else {{
         let error = if response_body.is_empty() {{
-            ClientError::HttpError{{status: status, error: "empty response".into()}}
+            ClientError::HttpError{{status, headers, error: "empty response".into()}}
         }} else {{
-            ClientError::HttpError{{status: status, error: String::from_utf8_lossy(&response_body).into()}}
+            ClientError::HttpError{{status, headers, error: String::from_utf8_lossy(&response_body).into()}}
         }};
 
         Err(error)

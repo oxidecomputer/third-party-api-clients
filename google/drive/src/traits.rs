@@ -269,6 +269,7 @@ impl FileOps for crate::files::Files {
             .get("Location")
             .ok_or(ClientError::HttpError {
                 status: resp.status(),
+                headers: resp.headers().clone(),
                 error: "Missing Location header".to_string(),
             })?
             .to_str()?;

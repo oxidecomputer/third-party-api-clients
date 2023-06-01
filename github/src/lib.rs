@@ -298,6 +298,7 @@ pub enum ClientError {
     #[error("HTTP Error. Code: {status}, message: {error}")]
     HttpError {
         status: http::StatusCode,
+        headers: reqwest::header::HeaderMap,
         error: String,
     },
 }
@@ -705,11 +706,13 @@ impl Client {
                     if response_body.is_empty() {
                         ClientError::HttpError {
                             status,
+                            headers,
                             error: "empty response".into(),
                         }
                     } else {
                         ClientError::HttpError {
                             status,
+                            headers,
                             error: String::from_utf8_lossy(&response_body).into(),
                         }
                     }
