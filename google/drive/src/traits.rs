@@ -150,8 +150,12 @@ pub trait FileOps {
     async fn get_contents_by_id(&self, id: &str) -> ClientResult<Response<String>>;
 
     /// Delete a file by its name.
-    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str)
-        -> ClientResult<Response<()>>;
+    async fn delete_by_name(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> ClientResult<Response<()>>;
 }
 
 #[async_trait::async_trait]
@@ -340,7 +344,11 @@ impl FileOps for crate::files::Files {
             .await?;
 
         if !resp.body.is_empty() {
-            return Ok(Response::new(resp.status, resp.headers, resp.body.into_iter().nth(0).unwrap()));
+            return Ok(Response::new(
+                resp.status,
+                resp.headers,
+                resp.body.into_iter().nth(0).unwrap(),
+            ));
         }
 
         // Make the request and return the ID.
