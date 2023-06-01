@@ -347,7 +347,7 @@ impl FileOps for crate::files::Files {
             return Ok(Response::new(
                 resp.status,
                 resp.headers,
-                resp.body.into_iter().nth(0).unwrap(),
+                resp.body.into_iter().next().unwrap(),
             ));
         }
 
