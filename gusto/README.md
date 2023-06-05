@@ -39,7 +39,7 @@ gusto-api = "0.7.0-rc.1"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use gusto_api::Client;
 
 let gusto = Client::new(
@@ -61,7 +61,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use gusto_api::Client;
 
 let gusto = Client::new_from_env(
@@ -76,7 +76,7 @@ the initial state of the client, you will not know these values.
 
 To start off a fresh client and get a `token` and `refresh_token`, use the following.
 
-```
+```rust
 use gusto_api::Client;
 
 async fn do_call() {

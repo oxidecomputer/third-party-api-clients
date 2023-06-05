@@ -43,7 +43,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use google_cloud_resource_manager::Client;
 //!
 //! let google cloud resource manager = Client::new(
@@ -64,7 +64,7 @@
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use google_cloud_resource_manager::Client;
 //!
 //! let google cloud resource manager = Client::new_from_env(
@@ -78,7 +78,7 @@
 //!
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
-//! ```
+//! ```rust
 //! use google_cloud_resource_manager::Client;
 //!
 //! async fn do_call() {

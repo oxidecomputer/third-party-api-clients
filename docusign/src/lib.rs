@@ -37,7 +37,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use docusign::Client;
 //!
 //! let docusign = Client::new(
@@ -58,7 +58,7 @@
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use docusign::Client;
 //!
 //! let docusign = Client::new_from_env(
@@ -72,7 +72,7 @@
 //!
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
-//! ```
+//! ```rust
 //! use docusign::Client;
 //!
 //! async fn do_call() {

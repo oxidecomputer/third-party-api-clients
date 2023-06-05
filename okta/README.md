@@ -45,7 +45,7 @@ okta = "0.7.0-rc.1"
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
-```
+```rust
 use okta::Client;
 
 let okta = Client::new(
@@ -60,7 +60,7 @@ the client in the environment:
 
 And then you can create a client from the environment.
 
-```
+```rust
 use okta::Client;
 
 let okta = Client::new_from_env();

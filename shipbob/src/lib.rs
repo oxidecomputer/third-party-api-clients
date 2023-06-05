@@ -35,7 +35,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use shipbob::Client;
 //!
 //! let shipbob = Client::new(
@@ -50,7 +50,7 @@
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use shipbob::Client;
 //!
 //! let shipbob = Client::new_from_env();

@@ -37,7 +37,7 @@
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of credentials.
 //!
-//! ```
+//! ```rust
 //! use gusto_api::Client;
 //!
 //! let gusto = Client::new(
@@ -59,7 +59,7 @@
 //!
 //! And then you can create a client from the environment.
 //!
-//! ```
+//! ```rust
 //! use gusto_api::Client;
 //!
 //! let gusto = Client::new_from_env(
@@ -74,7 +74,7 @@
 //!
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
-//! ```
+//! ```rust
 //! use gusto_api::Client;
 //!
 //! async fn do_call() {
