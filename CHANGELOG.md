@@ -8,6 +8,6 @@ This update refactors all of the clients and changes the way responses are handl
 
 * Methods now return `Result<Response<T>, ClientError>` instead of `anyhow::Result<T>`. The body can be accessed via `response.body`.
 * Structured errors are now returned instead of `anyhow::Error`.
-* Redirects are no longer followed by default. Previously if a 3xx response code was returned by a service, the inner client would follow it. This broke the ability for a service to specify a meaningful 3xx response. Methods that receive 3xx responses will now return them immediately and not attempt to resolve them.
+* Redirects are no longer followed by default. Previously if a 3xx response code was returned by a service, the inner client would follow it. This prevented services from returning meaningful 3xx responses. Methods that receive 3xx responses will now return them immediately and not attempt to follow them.
 * Updates to 0.2 `reqwest-middleware` ecosystem.
 * OpenTelemetry is no longer a default feature. To enable OpenTelemetry tracing `reqwest-tracing` with the appropriate feature should be added to target project.

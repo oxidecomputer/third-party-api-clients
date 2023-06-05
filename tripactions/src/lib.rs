@@ -229,7 +229,9 @@ impl Client {
         K: ToString,
         T: ToString,
     {
-        let client = reqwest::Client::builder().build();
+        let client = reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .build();
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {

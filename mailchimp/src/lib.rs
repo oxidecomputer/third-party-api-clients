@@ -318,7 +318,9 @@ impl Client {
         // Retry up to 3 times with increasing intervals between attempts.
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
-        let client = reqwest::Client::builder().build();
+        let client = reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .build();
         match client {
             Ok(c) => {
                 let client = reqwest_middleware::ClientBuilder::new(c)
