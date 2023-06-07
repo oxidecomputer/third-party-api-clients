@@ -127,6 +127,8 @@ pub mod users_api;
 pub mod utils;
 pub mod webhooks;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

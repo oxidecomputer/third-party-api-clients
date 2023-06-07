@@ -114,6 +114,8 @@ pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

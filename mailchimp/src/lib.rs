@@ -131,6 +131,8 @@ pub mod types;
 pub mod utils;
 pub mod verified_domains;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

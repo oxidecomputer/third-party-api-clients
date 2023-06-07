@@ -2374,6 +2374,8 @@ fn gen(
     a("");
 
     a(r#"
+pub use reqwest::{StatusCode, header::HeaderMap};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

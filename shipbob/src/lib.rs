@@ -154,6 +154,8 @@ pub mod utils;
 /// Use the Webhooks Resource to create, view or delete subscriptions for a user.
 pub mod webhooks;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

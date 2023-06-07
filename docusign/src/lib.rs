@@ -2181,6 +2181,8 @@ pub mod workspace_items;
 ///**Note**: Documents in a template are not individually listed as files.
 pub mod workspaces;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

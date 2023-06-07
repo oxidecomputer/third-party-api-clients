@@ -162,6 +162,8 @@ pub mod utils;
 pub mod views;
 pub mod workflows;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,

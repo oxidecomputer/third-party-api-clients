@@ -154,6 +154,8 @@ pub mod users;
 pub mod utils;
 pub mod webinars;
 
+pub use reqwest::{header::HeaderMap, StatusCode};
+
 #[derive(Debug)]
 pub struct Response<T> {
     pub status: reqwest::StatusCode,
