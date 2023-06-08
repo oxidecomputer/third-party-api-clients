@@ -3401,7 +3401,7 @@ serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
 thiserror = "1"
-tokio = {{ version = "1.25.0", features = ["full"] }}
+tokio = {{ version = "1.25.0", default-features = false }}
 
 [dev-dependencies]
 base64 = "^0.21"
@@ -3409,7 +3409,7 @@ dirs = "^3.0.2"
 nom_pem = "4"
 rand = "0.8.5"
 rsa = "0.8.1"
-tokio = {{ version = "1.25.0", features = ["test-util"] }}
+tokio = {{ version = "1.25.0", features = ["full", "test-util"] }}
 wiremock = "0.5.17"
 
 [package.metadata.docs.rs]
