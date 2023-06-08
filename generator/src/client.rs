@@ -824,6 +824,10 @@ fn basic_new_from_env(
 /// given a valid API key and your requests will work.
 /// We pass in the token and refresh token to the client so if you are storing
 /// it in a database, you can get it first.
+/// The following environment variables are expected to be set:
+///   * `{}_CLIENT_ID`
+///   * `{}_CLIENT_SECRET`
+///   * `{}_REDIRECT_URI`
 pub fn new_from_env<T, R{}>(token: T, refresh_token: R{}, {server_arg}) -> Self
 where
     T: ToString,
@@ -844,6 +848,9 @@ where
         {server_param}
     )
 }}"#,
+        proper_name.to_uppercase().replace('.', ""),
+        proper_name.to_uppercase().replace('.', ""),
+        proper_name.to_uppercase().replace('.', ""),
         add_post_header_type,
         add_post_header_args,
         add_post_header_args_where,
@@ -864,6 +871,8 @@ const GOOGLE_NEW_FROM_ENV_TEMPLATE: &str = r#"
 /// given a valid API key and your requests will work.
 /// We pass in the token and refresh token to the client so if you are storing
 /// it in a database, you can get it first.
+/// The following environment variables are expected to be set:
+///   * `GOOGLE_KEY_ENCODED` - A base64 encoded version of JSON formatted application secret
 pub async fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
 where
     T: ToString,
@@ -1009,12 +1018,9 @@ impl Client {{
         format!("{{}}{{}}", self.get_host_override().or(host).unwrap_or(self.host.as_str()), path)
     }}
 
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
+    /// Create a new Client struct from environment variables.
+    /// The following environment variables are expected to be set:
+    ///   * `{}_API_KEY`
     pub fn new_from_env() -> Self
     {{
         let token = env::var("{}_API_KEY").expect("must set {}_API_KEY");
@@ -1025,6 +1031,7 @@ impl Client {{
     }}
 
     {}"#,
+        proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
         get_shared_functions(proper_name, add_post_header)
@@ -1875,10 +1882,10 @@ impl Client {{
 
     /// Create a new Client struct from environment variables. It
     /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
+    /// an &str (`String` or `Vec<u8>` for example).
+    /// The following environment variables are expected to be set:
+    ///   * `{}_CLIENT_ID`
+    ///   * `{}_CLIENT_SECRET`
     pub fn new_from_env<T>(token: T) -> Self
     where
         T: ToString,
@@ -1898,6 +1905,8 @@ impl Client {{
     {}"#,
         token_endpoint.trim_start_matches("https://"),
         ACCESS_TOKEN_STRUCT_TEMPLATE,
+        proper_name.to_uppercase().replace('.', ""),
+        proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),

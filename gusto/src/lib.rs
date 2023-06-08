@@ -485,6 +485,10 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
+    /// The following environment variables are expected to be set:
+    ///   * `GUSTO_CLIENT_ID`
+    ///   * `GUSTO_CLIENT_SECRET`
+    ///   * `GUSTO_REDIRECT_URI`
     pub fn new_from_env<T, R>(
         token: T,
         refresh_token: R,

@@ -454,6 +454,8 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
+    /// The following environment variables are expected to be set:
+    ///   * `GOOGLE_KEY_ENCODED` - A base64 encoded version of JSON formatted application secret
     pub async fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
     where
         T: ToString,

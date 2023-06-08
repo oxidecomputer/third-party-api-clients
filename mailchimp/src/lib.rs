@@ -452,6 +452,10 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
+    /// The following environment variables are expected to be set:
+    ///   * `MAILCHIMP_CLIENT_ID`
+    ///   * `MAILCHIMP_CLIENT_SECRET`
+    ///   * `MAILCHIMP_REDIRECT_URI`
     pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
