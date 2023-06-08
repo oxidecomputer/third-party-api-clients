@@ -234,9 +234,11 @@ pub struct Client {
 }
 
 impl Client {
-    /// Create a new Client struct. It takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key your requests will work.
+    /// Create a new Client struct.
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the internal http client fails to create
     pub fn new<T>(token: T) -> Self
     where
         T: ToString,
@@ -302,8 +304,13 @@ impl Client {
     }
 
     /// Create a new Client struct from environment variables.
+    ///
     /// The following environment variables are expected to be set:
     ///   * `STRIPE_API_KEY`
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the expected environment variables can not be found
     pub fn new_from_env() -> Self {
         let token = env::var("STRIPE_API_KEY").expect("must set STRIPE_API_KEY");
 

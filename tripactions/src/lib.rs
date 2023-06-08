@@ -222,9 +222,12 @@ pub struct AccessToken {
 }
 
 impl Client {
-    /// Create a new Client struct. It takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key your requests will work.
+    /// Create a new Client struct. Requires OAuth2 configuration values as well as
+    /// an access token.
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the internal http client fails to create
     pub fn new<I, K, T>(client_id: I, client_secret: K, token: T) -> Self
     where
         I: ToString,
@@ -293,12 +296,15 @@ impl Client {
         )
     }
 
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example).
+    /// Create a new Client struct from environment variables.
+    ///
     /// The following environment variables are expected to be set:
     ///   * `TRIPACTIONS_CLIENT_ID`
     ///   * `TRIPACTIONS_CLIENT_SECRET`
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the expected environment variables can not be found
     pub fn new_from_env<T>(token: T) -> Self
     where
         T: ToString,

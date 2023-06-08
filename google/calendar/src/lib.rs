@@ -290,9 +290,11 @@ struct InnerToken {
 }
 
 impl Client {
-    /// Create a new Client struct. It takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key your requests will work.
+    /// Create a new Client struct. Requires OAuth2 configuration values as well as an access and refresh token.
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if the internal http client fails to create
     pub fn new<I, K, R, T, Q>(
         client_id: I,
         client_secret: K,
@@ -436,14 +438,16 @@ impl Client {
         )
     }
 
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
+    /// Create a new Client struct from environment variables. Requires an existing access and refresh token
+    ///
     /// The following environment variables are expected to be set:
     ///   * `GOOGLE_KEY_ENCODED` - A base64 encoded version of JSON formatted application secret
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if an application secret can not be parsed from the encoded key
+    ///
+    /// This function will panic if the internal http client fails to create
     pub async fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
