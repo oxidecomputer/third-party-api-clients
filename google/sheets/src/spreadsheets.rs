@@ -156,7 +156,7 @@ impl Spreadsheets {
     ) -> ClientResult<crate::Response<crate::types::SheetProperties>> {
         let url = self.client.url(
             &format!(
-                "/v4/spreadsheets/{}/sheets/{}/copyTo",
+                "/v4/spreadsheets/{}/sheets/{}:copyTo",
                 crate::progenitor_support::encode_path(spreadsheet_id),
                 crate::progenitor_support::encode_path(&sheet_id.to_string()),
             ),
@@ -358,7 +358,7 @@ impl Spreadsheets {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
             &format!(
-                "/v4/spreadsheets/{}/values/{}/append?{}",
+                "/v4/spreadsheets/{}/values/{}:append?{}",
                 crate::progenitor_support::encode_path(spreadsheet_id),
                 crate::progenitor_support::encode_path(range),
                 query_
@@ -393,7 +393,7 @@ impl Spreadsheets {
     ) -> ClientResult<crate::Response<crate::types::ClearValuesResponse>> {
         let url = self.client.url(
             &format!(
-                "/v4/spreadsheets/{}/values/{}/clear",
+                "/v4/spreadsheets/{}/values/{}:clear",
                 crate::progenitor_support::encode_path(spreadsheet_id),
                 crate::progenitor_support::encode_path(range),
             ),
@@ -639,7 +639,7 @@ impl Spreadsheets {
     ) -> ClientResult<crate::Response<crate::types::BatchUpdateSpreadsheetResponse>> {
         let url = self.client.url(
             &format!(
-                "/v4/spreadsheets/{}/batchUpdate",
+                "/v4/spreadsheets/{}:batchUpdate",
                 crate::progenitor_support::encode_path(spreadsheet_id),
             ),
             None,
@@ -670,7 +670,7 @@ impl Spreadsheets {
     ) -> ClientResult<crate::Response<crate::types::Spreadsheet>> {
         let url = self.client.url(
             &format!(
-                "/v4/spreadsheets/{}/getByDataFilter",
+                "/v4/spreadsheets/{}:getByDataFilter",
                 crate::progenitor_support::encode_path(spreadsheet_id),
             ),
             None,

@@ -308,7 +308,7 @@ impl Folders {
         body: &crate::types::MoveFolderRequest,
     ) -> ClientResult<crate::Response<crate::types::Operation>> {
         let url = self.client.url(
-            &format!("/v2/{}/move", crate::progenitor_support::encode_path(name),),
+            &format!("/v2/{}:move", crate::progenitor_support::encode_path(name),),
             None,
         );
         self.client
@@ -337,7 +337,7 @@ impl Folders {
     ) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
             &format!(
-                "/v2/{}/undelete",
+                "/v2/{}:undelete",
                 crate::progenitor_support::encode_path(name),
             ),
             None,
@@ -368,7 +368,7 @@ impl Folders {
     ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let url = self.client.url(
             &format!(
-                "/v2/{}/getIamPolicy",
+                "/v2/{}:getIamPolicy",
                 crate::progenitor_support::encode_path(resource),
             ),
             None,
@@ -399,7 +399,7 @@ impl Folders {
     ) -> ClientResult<crate::Response<crate::types::Policy>> {
         let url = self.client.url(
             &format!(
-                "/v2/{}/setIamPolicy",
+                "/v2/{}:setIamPolicy",
                 crate::progenitor_support::encode_path(resource),
             ),
             None,
@@ -430,7 +430,7 @@ impl Folders {
     ) -> ClientResult<crate::Response<crate::types::TestIamPermissionsResponse>> {
         let url = self.client.url(
             &format!(
-                "/v2/{}/testIamPermissions",
+                "/v2/{}:testIamPermissions",
                 crate::progenitor_support::encode_path(resource),
             ),
             None,

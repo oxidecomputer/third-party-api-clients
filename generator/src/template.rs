@@ -9,6 +9,15 @@ enum Component {
     Parameter(String),
 }
 
+impl Component {
+    fn is_command(&self) -> bool {
+        match self {
+            Self::Constant(c) => c.starts_with(':'),
+            _ => false,
+        }
+    }
+}
+
 #[derive(Eq, PartialEq, Clone, Debug)]
 pub struct Template {
     components: Vec<Component>,
@@ -121,7 +130,10 @@ impl Template {
 
         out.push_str("&format!(\"");
         for c in self.components.iter() {
-            out.push('/');
+            if !c.is_command() {
+                out.push('/');
+            }
+
             match c {
                 Component::Constant(n) => out.push_str(n),
                 Component::Parameter(_) => {
@@ -176,7 +188,7 @@ fn parse_inner(t: &str) -> Result<Template> {
         Start,
         ConstantOrParameter,
         Parameter,
-        ParameterSlash,
+        ParameterSlashOrCommand,
         Constant,
     }
 
@@ -218,19 +230,22 @@ fn parse_inner(t: &str) -> Result<Template> {
                 if c == '}' {
                     components.push(Component::Parameter(a));
                     a = String::new();
-                    s = State::ParameterSlash;
+                    s = State::ParameterSlashOrCommand;
                 } else if c == '/' || c == '{' {
                     bail!("expected parameter");
                 } else {
                     a.push(c);
                 }
             }
-            State::ParameterSlash => {
-                if c == '/' || c == ':' || c == '.' {
+            State::ParameterSlashOrCommand => {
+                if c == '/' || c == '.' {
                     // Google Admin API has ":issueCommand" so we want to allow that!
                     // Shopify sometimes ends after a parameter with ".json", so we want to allow
                     // that.
                     s = State::ConstantOrParameter;
+                } else if c == ':' {
+                    a.push(c);
+                    s = State::Constant;
                 } else {
                     bail!("expected a slash after parameter");
                 }
@@ -240,7 +255,7 @@ fn parse_inner(t: &str) -> Result<Template> {
 
     match s {
         State::Start => bail!("empty path"),
-        State::ConstantOrParameter | State::ParameterSlash => (),
+        State::ConstantOrParameter | State::ParameterSlashOrCommand => (),
         State::Constant => components.push(Component::Constant(a)),
         State::Parameter => bail!("unterminated parameter"),
     }
@@ -302,6 +317,17 @@ crate::progenitor_support::encode_path(&number.to_string()),), None);
 "#;
         assert_eq!(want, &out);
         Ok(())
+    }
+
+    #[test]
+    fn compile_with_command() -> Result<()> {
+        let t = parse("/path/{param}:command")?;
+        let out = t.compile(Default::default(), "None");
+        let want = r#"let url = self.client.url(
+&format!("/path/{}:command",
+crate::progenitor_support::encode_path(&param.to_string()),), None);
+"#;
+        Ok(assert_eq!(want, &out))
     }
 }
 

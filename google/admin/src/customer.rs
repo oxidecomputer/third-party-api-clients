@@ -66,7 +66,7 @@ impl Customer {
     {
         let url = self.client.url(
             &format!(
-                "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
+                "/admin/directory/v1/customer/{}/devices/chromeos/{}:issueCommand",
                 crate::progenitor_support::encode_path(customer_id),
                 crate::progenitor_support::encode_path(device_id),
             ),
